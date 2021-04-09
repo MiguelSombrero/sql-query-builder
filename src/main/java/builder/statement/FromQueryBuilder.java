@@ -8,5 +8,9 @@ public class FromQueryBuilder extends QueryBuilder {
         this.builder = builder;
     }
 
-
+    public FromQueryBuilder alias(String alias) {
+        appendBlank();
+        append(alias);
+        return this;
+    }
 }

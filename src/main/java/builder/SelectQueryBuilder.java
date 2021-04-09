@@ -33,14 +33,6 @@ public class SelectQueryBuilder extends QueryBuilder {
         return new FromQueryBuilder(this.builder);
     }
 
-    private void append(String text) {
-        this.builder = this.builder.append(text);
-    }
-
-    private void appendBlank() {
-        this.builder = this.builder.append(" ");
-    }
-
     private void appendComma() {
         this.builder = this.builder.append(",");
     }
