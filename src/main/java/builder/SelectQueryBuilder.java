@@ -1,12 +1,12 @@
 package builder;
 
-import builder.statement.FromQueryBuilder;
+import builder.statement.FromStatementBuilder;
 
 public class SelectQueryBuilder extends QueryBuilder {
     private boolean firstValue;
 
-    public SelectQueryBuilder() {
-        this.builder = new StringBuilder("SELECT ");
+    public SelectQueryBuilder(StringBuilder builder) {
+        this.builder = builder;
         this.firstValue = true;
     }
 
@@ -21,16 +21,16 @@ public class SelectQueryBuilder extends QueryBuilder {
         return this;
     }
 
-    public SelectQueryBuilder as(String alias) {
+    public SelectQueryBuilder as(String text) {
         appendAS();
-        append(alias);
+        append(text);
         return this;
     }
 
-    public FromQueryBuilder from(String table) {
+    public FromStatementBuilder from(String table) {
         append(" FROM ");
         append(table);
-        return new FromQueryBuilder(this.builder);
+        return new FromStatementBuilder(this.builder);
     }
 
     private void appendComma() {
