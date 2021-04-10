@@ -1,18 +1,18 @@
-package builder.statement;
+package builder.clause;
 
-import builder.QueryFactory;
+import factory.QueryFactory;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
 
-public class WhereStatementBuilderTest {
+public class ConditionTest {
 
     @Test
-    public void testSelectFromWhereStringEquals() {
+    public void testConditionStringEquals() {
         String query = QueryFactory
                 .select()
-                    .value("lastname")
-                    .value("firstname")
+                .value("lastname")
+                .value("firstname")
                 .from("persons")
                 .where("firstname").equals("Miika")
                 .build();
@@ -21,7 +21,7 @@ public class WhereStatementBuilderTest {
     }
 
     @Test
-    public void testSelectFromWhereIntegerEquals() {
+    public void testConditionIntegerEquals() {
         String query = QueryFactory
                 .select()
                 .value("lastname")
@@ -34,30 +34,54 @@ public class WhereStatementBuilderTest {
     }
 
     @Test
-    public void testSelectFromWhereDateTimeIsGreaterThan() {
+    public void testConditionStringGreaterThan() {
         String query = QueryFactory
                 .select()
                 .value("lastname")
                 .value("firstname")
                 .from("persons")
-                .where("birthdate").isGreaterThan("2020-02-28T21:00:00.000")
+                .where("birthdate").greaterThan("2020-02-28T21:00:00.000")
                 .build();
 
         assertEquals("SELECT lastname, firstname FROM persons WHERE birthdate > '2020-02-28T21:00:00.000';", query);
     }
 
     @Test
-    public void testSelectFromWhereIntegerIsGreaterThan() {
+    public void testConditionIntegerGreaterThan() {
         String query = QueryFactory
                 .select()
                 .value("lastname")
                 .value("firstname")
                 .from("persons")
-                .where("age").isGreaterThan(18)
+                .where("age").greaterThan(18)
                 .build();
 
         assertEquals("SELECT lastname, firstname FROM persons WHERE age > 18;", query);
     }
 
+    @Test
+    public void testConditionStringLesserThan() {
+        String query = QueryFactory
+                .select()
+                .value("lastname")
+                .value("firstname")
+                .from("persons")
+                .where("birthdate").lesserThan("2020-02-28T21:00:00.000")
+                .build();
 
+        assertEquals("SELECT lastname, firstname FROM persons WHERE birthdate < '2020-02-28T21:00:00.000';", query);
+    }
+
+    @Test
+    public void testConditionIntegerLesserThan() {
+        String query = QueryFactory
+                .select()
+                .value("lastname")
+                .value("firstname")
+                .from("persons")
+                .where("age").lesserThan(18)
+                .build();
+
+        assertEquals("SELECT lastname, firstname FROM persons WHERE age < 18;", query);
+    }
 }

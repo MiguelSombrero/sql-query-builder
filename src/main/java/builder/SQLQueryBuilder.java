@@ -1,6 +1,6 @@
 package builder;
 
-public class QueryBuilder implements Builder {
+public abstract class SQLQueryBuilder implements Builder {
     protected StringBuilder builder;
 
     public String build() {
@@ -15,9 +15,4 @@ public class QueryBuilder implements Builder {
     protected void append(Integer value) {
         this.builder = this.builder.append(value);
     }
-
-    protected void appendBlank() {
-        this.builder = this.builder.append(" ");
-    }
-
 }

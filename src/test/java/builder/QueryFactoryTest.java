@@ -1,5 +1,6 @@
 package builder;
 
+import factory.QueryFactory;
 import org.junit.Test;
 
 import static org.hamcrest.core.IsInstanceOf.instanceOf;
@@ -9,8 +10,8 @@ public class QueryFactoryTest {
 
     @Test
     public void testReturnSelect() {
-        SelectQueryBuilder queryBuilder = QueryFactory.select();
-        assertThat(queryBuilder, instanceOf(SelectQueryBuilder.class));
+        Select queryBuilder = QueryFactory.select();
+        assertThat(queryBuilder, instanceOf(Select.class));
     }
 
 }
