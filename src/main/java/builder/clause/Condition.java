@@ -9,43 +9,47 @@ public class Condition extends SQLQueryBuilder {
     }
 
     public Where equals(String value) {
-        append(" = ");
-        append("'");
-        append(value);
-        append("'");
-        return new Where(this.builder);
+        return appendConditionWithValue(" = ", value);
     }
 
     public Where equals(Integer value) {
-        append(" = ");
-        append(value);
-        return new Where(this.builder);
+        return appendConditionWithValue(" = ", value);
     }
 
     public Where greaterThan(String value) {
-        append(" > ");
-        append("'");
-        append(value);
-        append("'");
-        return new Where(this.builder);
+        return appendConditionWithValue(" > ", value);
     }
 
     public Where greaterThan(Integer value) {
-        append(" > ");
-        append(value);
-        return new Where(this.builder);
+        return appendConditionWithValue(" > ", value);
+    }
+
+    public Where greaterThanOrEqual(String value) {
+        return appendConditionWithValue(" >= ", value);
+    }
+
+    public Where greaterThanOrEqual(Integer value) {
+        return appendConditionWithValue(" >= ", value);
     }
 
     public Where lesserThan(String value) {
-        append(" < ");
+        return appendConditionWithValue(" < ", value);
+    }
+
+    public Where lesserThan(Integer value) {
+        return appendConditionWithValue(" < ", value);
+    }
+
+    private Where appendConditionWithValue(String condition, String value) {
+        append(condition);
         append("'");
         append(value);
         append("'");
         return new Where(this.builder);
     }
 
-    public Where lesserThan(Integer value) {
-        append(" < ");
+    private Where appendConditionWithValue(String condition, Integer value) {
+        append(condition);
         append(value);
         return new Where(this.builder);
     }
