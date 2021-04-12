@@ -8,8 +8,14 @@ public class From extends SQLQueryBuilder {
         this.builder = builder;
     }
 
+    public From from(String table) {
+        append(", ");
+        append(table);
+        return new From(this.builder);
+    }
+
     public From alias(String alias) {
-        append(" ");
+        append(" AS ");
         append(alias);
         return this;
     }
@@ -18,5 +24,11 @@ public class From extends SQLQueryBuilder {
         append(" WHERE ");
         append(value);
         return new Condition(this.builder);
+    }
+
+    public Join innerJoin(String table) {
+        append(" INNER JOIN ");
+        append(table);
+        return new Join(this.builder);
     }
 }

@@ -2,9 +2,9 @@ package builder.clause;
 
 import builder.SQLQueryBuilder;
 
-public class As extends SQLQueryBuilder {
+public class Alias extends SQLQueryBuilder {
 
-    public As(StringBuilder builder) {
+    public Alias(StringBuilder builder) {
         this.builder = builder;
     }
 

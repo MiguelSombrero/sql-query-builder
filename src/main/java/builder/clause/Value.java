@@ -1,14 +1,14 @@
 package builder.clause;
 
-public class Value extends As {
+public class Value extends Alias {
 
     public Value(StringBuilder builder) {
         super(builder);
     }
 
-    public As as(String text) {
+    public Alias alias(String text) {
         append(" AS ");
         append(text);
-        return new As(this.builder);
+        return new Alias(this.builder);
     }
 }

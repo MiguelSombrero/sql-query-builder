@@ -40,6 +40,14 @@ public class Condition extends SQLQueryBuilder {
         return appendConditionWithValue(" < ", value);
     }
 
+    public Where lesserThanOrEqual(String value) {
+        return appendConditionWithValue(" <= ", value);
+    }
+
+    public Where lesserThanOrEqual(Integer value) {
+        return appendConditionWithValue(" <= ", value);
+    }
+
     private Where appendConditionWithValue(String condition, String value) {
         append(condition);
         append("'");

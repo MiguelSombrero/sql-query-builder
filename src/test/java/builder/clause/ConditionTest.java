@@ -88,4 +88,22 @@ public class ConditionTest {
 
         assertEquals("SELECT firstname FROM persons WHERE age < 18;", query);
     }
+
+    @Test
+    public void testConditionStringLesserThanOrEqual() {
+        String query = this.from
+                .where("birthdate").lesserThanOrEqual("2020-02-28T21:00:00.000")
+                .build();
+
+        assertEquals("SELECT firstname FROM persons WHERE birthdate <= '2020-02-28T21:00:00.000';", query);
+    }
+
+    @Test
+    public void testConditionIntegerLesserThanOrEqual() {
+        String query = this.from
+                .where("age").lesserThanOrEqual(18)
+                .build();
+
+        assertEquals("SELECT firstname FROM persons WHERE age <= 18;", query);
+    }
 }
