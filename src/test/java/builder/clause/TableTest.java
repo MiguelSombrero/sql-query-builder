@@ -1,24 +1,25 @@
 package builder.clause;
 
+import builder.field.Field;
 import factory.QueryFactory;
 import org.junit.Before;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
 
-public class FromTest {
-    private Value value;
+public class TableTest {
+    private Field field;
 
     @Before
     public void setUp() {
-        this.value = QueryFactory
+        this.field = QueryFactory
                 .select()
-                .value("*");
+                .field("*");
     }
 
     @Test
     public void testFromOneTable() {
-        String query = this.value
+        String query = this.field
                 .from("persons")
                 .build();
 
@@ -27,10 +28,10 @@ public class FromTest {
 
     @Test
     public void testFromMultipleTables() {
-        String query = this.value
+        String query = this.field
                 .from("persons")
-                .from("addresses")
-                .from("houses")
+                .and("addresses")
+                .and("houses")
                 .build();
 
         assertEquals("SELECT * FROM persons, addresses, houses;", query);
@@ -38,10 +39,10 @@ public class FromTest {
 
     @Test
     public void testFromMultipleTablesWithAliases() {
-        String query = this.value
+        String query = this.field
                 .from("persons").alias("p")
-                .from("addresses").alias("a")
-                .from("houses").alias("h")
+                .and("addresses").alias("a")
+                .and("houses").alias("h")
                 .build();
 
         assertEquals("SELECT * FROM persons AS p, addresses AS a, houses AS h;", query);
@@ -49,11 +50,11 @@ public class FromTest {
 
     @Test
     public void testInnerJoin() {
-        String query = this.value
+        String query = this.field
                 .from("persons")
-                .innerJoin("addresses")
+                .innerJoin("addresses").on("persons.id = addresses.person_id")
                 .build();
 
-        assertEquals("SELECT * FROM persons INNER JOIN addresses;", query);
+        assertEquals("SELECT * FROM persons INNER JOIN addresses ON persons.id = addresses.person_id;", query);
     }
 }

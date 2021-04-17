@@ -1,26 +1,27 @@
 package builder.clause;
 
+import builder.field.Field;
 import factory.QueryFactory;
 import org.junit.Before;
 import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
 
-public class ValueTest {
-    private Value value;
+public class FieldTest {
+    private Field field;
 
     @Before
     public void setUp() {
-        this.value = QueryFactory
+        this.field = QueryFactory
                 .select()
-                .value("firstname");
+                .field("firstname");
     }
 
     @Test
     public void testValue() {
-        String query = this.value
-                .value("lastname")
-                .value("age")
+        String query = this.field
+                .field("lastname")
+                .field("age")
                 .from("persons")
                 .build();
 
@@ -31,9 +32,9 @@ public class ValueTest {
     public void testMultipleValuesWithAliases() {
         String query = QueryFactory
                 .select()
-                .value("lastname").alias("last")
-                .value("age")
-                .value("firstname").alias("first")
+                .field("lastname").alias("last")
+                .field("age")
+                .field("firstname").alias("first")
                 .from("persons")
                 .build();
 

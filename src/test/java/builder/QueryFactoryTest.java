@@ -1,5 +1,6 @@
 package builder;
 
+import builder.field.FirstField;
 import factory.QueryFactory;
 import org.junit.Test;
 
@@ -10,8 +11,8 @@ public class QueryFactoryTest {
 
     @Test
     public void testReturnSelect() {
-        Select queryBuilder = QueryFactory.select();
-        assertThat(queryBuilder, instanceOf(Select.class));
+        FirstField queryBuilder = QueryFactory.select();
+        assertThat(queryBuilder, instanceOf(FirstField.class));
     }
 
 }

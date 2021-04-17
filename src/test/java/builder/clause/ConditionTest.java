@@ -1,5 +1,6 @@
 package builder.clause;
 
+import builder.table.Table;
 import factory.QueryFactory;
 import org.junit.Before;
 import org.junit.Test;
@@ -7,19 +8,19 @@ import org.junit.Test;
 import static junit.framework.Assert.assertEquals;
 
 public class ConditionTest {
-    private From from;
+    private Table table;
 
     @Before
     public void setUp() {
-        this.from = QueryFactory
+        this.table = QueryFactory
                 .select()
-                .value("firstname")
+                .field("firstname")
                 .from("persons");
     }
 
     @Test
     public void testConditionStringEquals() {
-        String query = this.from
+        String query = this.table
                 .where("firstname").equals("Miika")
                 .build();
 
@@ -28,7 +29,7 @@ public class ConditionTest {
 
     @Test
     public void testConditionIntegerEquals() {
-        String query = this.from
+        String query = this.table
                 .where("age").equals(18)
                 .build();
 
@@ -37,7 +38,7 @@ public class ConditionTest {
 
     @Test
     public void testConditionStringGreaterThan() {
-        String query = this.from
+        String query = this.table
                 .where("birthdate").greaterThan("2020-02-28T21:00:00.000")
                 .build();
 
@@ -46,7 +47,7 @@ public class ConditionTest {
 
     @Test
     public void testConditionIntegerGreaterThan() {
-        String query = this.from
+        String query = this.table
                 .where("age").greaterThan(18)
                 .build();
 
@@ -55,7 +56,7 @@ public class ConditionTest {
 
     @Test
     public void testConditionStringGreaterThanOrEqual() {
-        String query = this.from
+        String query = this.table
                 .where("birthdate").greaterThanOrEqual("2020-02-28T21:00:00.000")
                 .build();
 
@@ -64,7 +65,7 @@ public class ConditionTest {
 
     @Test
     public void testConditionIntegerGreaterThanOrEqual() {
-        String query = this.from
+        String query = this.table
                 .where("age").greaterThanOrEqual(18)
                 .build();
 
@@ -73,7 +74,7 @@ public class ConditionTest {
 
     @Test
     public void testConditionStringLesserThan() {
-        String query = this.from
+        String query = this.table
                 .where("birthdate").lesserThan("2020-02-28T21:00:00.000")
                 .build();
 
@@ -82,7 +83,7 @@ public class ConditionTest {
 
     @Test
     public void testConditionIntegerLesserThan() {
-        String query = this.from
+        String query = this.table
                 .where("age").lesserThan(18)
                 .build();
 
@@ -91,7 +92,7 @@ public class ConditionTest {
 
     @Test
     public void testConditionStringLesserThanOrEqual() {
-        String query = this.from
+        String query = this.table
                 .where("birthdate").lesserThanOrEqual("2020-02-28T21:00:00.000")
                 .build();
 
@@ -100,7 +101,7 @@ public class ConditionTest {
 
     @Test
     public void testConditionIntegerLesserThanOrEqual() {
-        String query = this.from
+        String query = this.table
                 .where("age").lesserThanOrEqual(18)
                 .build();
 

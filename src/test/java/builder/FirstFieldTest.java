@@ -5,15 +5,15 @@ import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
 
-public class SelectTest {
+public class FirstFieldTest {
 
     @Test
     public void testSelectFromTable() {
         String query = QueryFactory
                 .select()
-                    .value("lastname")
-                    .value("age")
-                    .value("firstname")
+                    .field("lastname")
+                    .field("age")
+                    .field("firstname")
                 .from("persons")
                 .build();
 
@@ -23,10 +23,10 @@ public class SelectTest {
     @Test
     public void testSelectDistinctFromTable() {
         String query = QueryFactory
-                .select()
-                    .distinct("lastname")
-                    .value("age")
-                    .value("firstname")
+                .selectDistinct()
+                    .field("lastname")
+                    .field("age")
+                    .field("firstname")
                 .from("persons")
                 .build();
 
