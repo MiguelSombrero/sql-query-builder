@@ -4,9 +4,11 @@ import builder.SQLQueryBuilder;
 import builder.clause.Condition;
 
 public class JoinTable extends SQLQueryBuilder {
+    private On on;
 
     public JoinTable(StringBuilder builder) {
         this.builder = builder;
+        this.on = new On(this);
     }
 
     public Condition where(String value) {
@@ -27,6 +29,6 @@ public class JoinTable extends SQLQueryBuilder {
 
     private On join(String table) {
         append(table);
-        return new On(this.builder);
+        return on;
     }
 }

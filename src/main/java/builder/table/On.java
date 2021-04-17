@@ -1,16 +1,15 @@
 package builder.table;
 
-import builder.SQLQueryBuilder;
+public class On {
+    private JoinTable parent;
 
-public class On extends SQLQueryBuilder {
-
-    public On(StringBuilder builder) {
-        this.builder = builder;
+    public On(JoinTable parent) {
+        this.parent = parent;
     }
 
-    public Table on(String condition) {
-        append(" ON ");
-        append(condition);
-        return new Table(this.builder);
+    public JoinTable on(String condition) {
+        parent.append(" ON ");
+        parent.append(condition);
+        return parent;
     }
 }

@@ -8,11 +8,11 @@ public abstract class SQLQueryBuilder implements Builder {
         return builder.toString();
     }
 
-    protected void append(String text) {
+    public void append(String text) {
         this.builder = this.builder.append(text);
     }
 
-    protected void append(Integer value) {
+    public void append(Integer value) {
         this.builder = this.builder.append(value);
     }
 }
