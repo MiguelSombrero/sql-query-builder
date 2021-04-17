@@ -57,4 +57,25 @@ public class TableTest {
 
         assertEquals("SELECT * FROM persons INNER JOIN addresses ON persons.id = addresses.person_id;", query);
     }
+
+    @Test
+    public void testLeftJoin() {
+        String query = this.field
+                .from("persons")
+                .leftJoin("addresses").on("persons.id = addresses.person_id")
+                .build();
+
+        assertEquals("SELECT * FROM persons LEFT JOIN addresses ON persons.id = addresses.person_id;", query);
+    }
+
+    @Test
+    public void testMultipleJoins() {
+        String query = this.field
+                .from("persons")
+                .leftJoin("addresses").on("persons.id = addresses.person_id")
+                .innerJoin("accounts").on("persons.id = accounts.person_id")
+                .build();
+
+        assertEquals("SELECT * FROM persons LEFT JOIN addresses ON persons.id = addresses.person_id INNER JOIN accounts ON persons.id = accounts.person_id;", query);
+    }
 }
