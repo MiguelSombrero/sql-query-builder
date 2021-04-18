@@ -25,7 +25,33 @@ Above code prints out:
 
     "SELECT firstname AS first, lastname AS last, age FROM person WHERE age > 18;"
     
-## How to use
+## How to use this library
+
+### Add Maven dependency
+
+Add Maven dependency to your project:
+
+    <dependency>
+        <groupId>com.github.miguelsombrero</groupId>
+        <artifactId>sql-query-builder</artifactId>
+        <version>{version}-SNAPSHOT</version>
+    </dependency>
+
+Check the latest version from [GitHub](https://github.com/MiguelSombrero/sql-query-builder) 
+
+### Install dependency 
+
+    mvn install
+
+## Architecture
+
+I have used a lot the [builder pattern](https://en.wikipedia.org/wiki/Builder_pattern).
+
+### Class diagram
+
+Class diagram of SELECT statement builder is as follows:
+
+![Select_class_diagram](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/sql-query-builder-class-diagram.jpg)
 
 ## Not yet implemented
 
