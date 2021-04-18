@@ -1,5 +1,7 @@
 # sql-query-builder
 
+![GitHub Actions](https://github.com/MiguelSombrero/sql-query-builder/workflows/Java%20CI%20with%20Maven/badge.svg)
+
 **This app is under development**
 
 Sql query builder is Java-library to build SQL query strings more easily.
