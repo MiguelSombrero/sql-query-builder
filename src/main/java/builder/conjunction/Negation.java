@@ -1,15 +1,15 @@
 package builder.conjunction;
 
-public class Negation extends Condition {
+public class Negation extends Comparison {
 
     public Negation(StringBuilder builder) {
         super(builder);
     }
 
-    public Condition not() {
+    public Comparison not() {
         int indexOfLastBlank = this.builder.lastIndexOf(" ");
         insert(indexOfLastBlank, " NOT");
-        return new Condition(this.builder);
+        return new Comparison(this.builder);
     }
 
 }

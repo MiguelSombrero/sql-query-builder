@@ -2,9 +2,9 @@ package builder.conjunction;
 
 import builder.SQLQueryBuilder;
 
-public class Condition extends SQLQueryBuilder {
+public class Comparison extends SQLQueryBuilder {
 
-    public Condition(StringBuilder builder) {
+    public Comparison(StringBuilder builder) {
         this.builder = builder;
     }
 

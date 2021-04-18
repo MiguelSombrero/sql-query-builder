@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
 
-public class ConditionTest {
+public class ComparisonTest {
     private Table table;
 
     @Before
