@@ -1,4 +1,4 @@
-package builder.clause;
+package builder.conjunction;
 
 import builder.SQLQueryBuilder;
 
@@ -8,57 +8,57 @@ public class Condition extends SQLQueryBuilder {
         this.builder = builder;
     }
 
-    public Where equals(String value) {
+    public Conjunction equals(String value) {
         return appendConditionWithValue(" = ", value);
     }
 
-    public Where equals(Integer value) {
+    public Conjunction equals(Integer value) {
         return appendConditionWithValue(" = ", value);
     }
 
-    public Where greaterThan(String value) {
+    public Conjunction greaterThan(String value) {
         return appendConditionWithValue(" > ", value);
     }
 
-    public Where greaterThan(Integer value) {
+    public Conjunction greaterThan(Integer value) {
         return appendConditionWithValue(" > ", value);
     }
 
-    public Where greaterThanOrEqual(String value) {
+    public Conjunction greaterThanOrEqual(String value) {
         return appendConditionWithValue(" >= ", value);
     }
 
-    public Where greaterThanOrEqual(Integer value) {
+    public Conjunction greaterThanOrEqual(Integer value) {
         return appendConditionWithValue(" >= ", value);
     }
 
-    public Where lesserThan(String value) {
+    public Conjunction lesserThan(String value) {
         return appendConditionWithValue(" < ", value);
     }
 
-    public Where lesserThan(Integer value) {
+    public Conjunction lesserThan(Integer value) {
         return appendConditionWithValue(" < ", value);
     }
 
-    public Where lesserThanOrEqual(String value) {
+    public Conjunction lesserThanOrEqual(String value) {
         return appendConditionWithValue(" <= ", value);
     }
 
-    public Where lesserThanOrEqual(Integer value) {
+    public Conjunction lesserThanOrEqual(Integer value) {
         return appendConditionWithValue(" <= ", value);
     }
 
-    private Where appendConditionWithValue(String condition, String value) {
+    private Conjunction appendConditionWithValue(String condition, String value) {
         append(condition);
         append("'");
         append(value);
         append("'");
-        return new Where(this.builder);
+        return new Conjunction(this.builder);
     }
 
-    private Where appendConditionWithValue(String condition, Integer value) {
+    private Conjunction appendConditionWithValue(String condition, Integer value) {
         append(condition);
         append(value);
-        return new Where(this.builder);
+        return new Conjunction(this.builder);
     }
 }

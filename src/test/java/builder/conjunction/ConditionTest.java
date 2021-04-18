@@ -1,4 +1,4 @@
-package builder.clause;
+package builder.conjunction;
 
 import builder.table.Table;
 import factory.QueryFactory;

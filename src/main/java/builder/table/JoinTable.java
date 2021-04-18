@@ -1,7 +1,7 @@
 package builder.table;
 
 import builder.SQLQueryBuilder;
-import builder.clause.Condition;
+import builder.conjunction.Negation;
 
 public class JoinTable extends SQLQueryBuilder {
     private On on;
@@ -11,10 +11,10 @@ public class JoinTable extends SQLQueryBuilder {
         this.on = new On(this);
     }
 
-    public Condition where(String value) {
+    public Negation where(String fieldValue) {
         append(" WHERE ");
-        append(value);
-        return new Condition(this.builder);
+        append(fieldValue);
+        return new Negation(this.builder);
     }
 
     public On innerJoin(String table) {

@@ -1,4 +1,4 @@
-package builder.clause;
+package builder.conjunction;
 
 import builder.table.Table;
 import factory.QueryFactory;
@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import static junit.framework.Assert.assertEquals;
 
-public class WhereTest {
+public class ConjunctionTest {
     private Table table;
 
     @Before

@@ -1,4 +1,4 @@
-package builder;
+package builder.field;
 
 import factory.QueryFactory;
 import org.junit.Test;

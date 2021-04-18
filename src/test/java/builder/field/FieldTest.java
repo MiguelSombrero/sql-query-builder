@@ -1,4 +1,4 @@
-package builder.clause;
+package builder.field;
 
 import builder.field.Field;
 import factory.QueryFactory;

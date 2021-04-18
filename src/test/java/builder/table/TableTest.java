@@ -1,4 +1,4 @@
-package builder.clause;
+package builder.table;
 
 import builder.field.Field;
 import factory.QueryFactory;
