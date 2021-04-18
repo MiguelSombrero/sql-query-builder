@@ -56,7 +56,7 @@ Class diagram of SELECT statement builder is as follows:
 ## Not yet implemented
 
 In order to be implemented:
-- Null and like operators (IS NULL, IS NOT NULL, LIKE, NOT LIKE)
+- Like operators (LIKE, NOT LIKE)
 - Sorting results (ORDER BY, DESC, ASC, ...)
 - Limiting results (LIMIT)
 - Insert clauses (INSERT INTO, VALUES, )

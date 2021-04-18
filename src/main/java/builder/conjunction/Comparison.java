@@ -48,6 +48,16 @@ public class Comparison extends SQLQueryBuilder {
         return appendConditionWithValue(" <= ", value);
     }
 
+    public Conjunction isNull() {
+        append(" IS NULL");
+        return new Conjunction(this.builder);
+    }
+
+    public Conjunction isNotNull() {
+        append(" IS NOT NULL");
+        return new Conjunction(this.builder);
+    }
+
     private Conjunction appendConditionWithValue(String condition, String value) {
         append(condition);
         append("'");

@@ -107,4 +107,24 @@ public class ComparisonTest {
 
         assertEquals("SELECT firstname FROM persons WHERE age <= 18;", query);
     }
+
+    @Test
+    public void testConditionIsNull() {
+        String query = this.table
+                .where("age").isNull()
+                .and("name").isNull()
+                .build();
+
+        assertEquals("SELECT firstname FROM persons WHERE age IS NULL AND name IS NULL;", query);
+    }
+
+    @Test
+    public void testConditionIsNotNull() {
+        String query = this.table
+                .where("age").isNotNull()
+                .and("name").isNotNull()
+                .build();
+
+        assertEquals("SELECT firstname FROM persons WHERE age IS NOT NULL AND name IS NOT NULL;", query);
+    }
 }
