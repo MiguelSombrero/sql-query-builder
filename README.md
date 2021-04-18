@@ -51,7 +51,7 @@ I have used a lot the [builder pattern](https://en.wikipedia.org/wiki/Builder_pa
 
 Class diagram of SELECT statement builder is as follows:
 
-![Select_class_diagram](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/sql-query-builder-class-diagram.jpg)
+![Select_class_diagram](https://github.com/MiguelSombrero/sql-query-builder/blob/develop/docs/sql-query-builder-class-diagram.jpg)
 
 ## Not yet implemented
 
