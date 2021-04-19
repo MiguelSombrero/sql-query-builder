@@ -10,7 +10,7 @@ import static org.junit.Assert.assertTrue;
 
 public class PerformanceTest {
     private static Logger logger = LoggerFactory.getLogger(PerformanceTest.class);
-    private static final String complexQuery = "SELECT p.firstname AS first, p.lastname AS last, c.name AS course FROM person AS p, courses AS c LEFT JOIN addresses ON addresses.id = persons.address_id WHERE age > 18 AND age < 65 AND NOT firstname = 'Miika';";
+    private static final String complexQuery = "SELECT p.firstname AS first, p.lastname AS last, c.name AS course FROM persons AS p, courses AS c LEFT JOIN addresses ON addresses.id = persons.address_id WHERE age > 18 AND age < 65 AND NOT firstname = 'Miika';";
     private static final int times = 1_000_000;
 
     @Test
@@ -84,7 +84,7 @@ public class PerformanceTest {
                 .field("p.firstname").alias("first")
                 .field("p.lastname").alias("last")
                 .field("c.name").alias("course")
-                .from("person").alias("p")
+                .from("persons").alias("p")
                 .and("courses").alias("c")
                 .leftJoin("addresses").on("addresses.id = persons.address_id")
                 .where("age").greaterThan(18)
@@ -98,7 +98,7 @@ public class PerformanceTest {
                 "p.firstname AS first, " +
                 "p.lastname AS last, " +
                 "c.name AS course " +
-                "FROM person AS p, " +
+                "FROM persons AS p, " +
                 "courses AS c " +
                 "LEFT JOIN addresses " +
                 "ON addresses.id = persons.address_id " +
@@ -112,7 +112,7 @@ public class PerformanceTest {
                 .concat("p.firstname AS first, ")
                 .concat("p.lastname AS last, ")
                 .concat("c.name AS course ")
-                .concat("FROM person AS p, ")
+                .concat("FROM persons AS p, ")
                 .concat("courses AS c ")
                 .concat("LEFT JOIN addresses ")
                 .concat("ON addresses.id = persons.address_id ")
