@@ -56,15 +56,16 @@ Class diagram of SELECT statement builder is as follows:
 ## Not yet implemented
 
 In order to be implemented:
-- Like operators (LIKE, NOT LIKE)
 - Sorting results (ORDER BY, DESC, ASC, ...)
 - Limiting results (LIMIT)
 - Insert clauses (INSERT INTO, VALUES, )
 - Update clauses (UPDATE, SET, ...)
 - Delete clauses (DELETE, ...)
+- Create table clauses (CREATE TABLE, ...)
 - Grouping results (GROUP BY)
 - Between operator (BETWEEN x AND y)
 - Aggregate functions (MAX, MIN, AVG, SUM, COUNT, ...)
+- Better Like operator (giving patterns without "%" etc. symbols)
 - Filtering aggregate results (HAVING)
 - Exists operator (EXISTS)
 - In operator (IN (...), IN (SELECT), ...)

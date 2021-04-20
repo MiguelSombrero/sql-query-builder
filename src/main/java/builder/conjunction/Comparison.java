@@ -58,6 +58,10 @@ public class Comparison extends SQLQueryBuilder {
         return new Conjunction(this.builder);
     }
 
+    public Conjunction isLike(String pattern) {
+        return appendConditionWithValue(" LIKE ", pattern);
+    }
+
     private Conjunction appendConditionWithValue(String condition, String value) {
         append(condition);
         append("'");

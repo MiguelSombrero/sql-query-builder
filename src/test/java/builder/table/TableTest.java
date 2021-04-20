@@ -77,6 +77,17 @@ public class TableTest extends DatabaseTestBaseClass {
     }
 
     @Test
+    public void rightJoin() throws SQLException {
+        String query = this.field
+                .from("person")
+                .rightJoin("address").on("person.id = address.person_id")
+                .build();
+
+        assertEquals("SELECT * FROM person RIGHT JOIN address ON person.id = address.person_id;", query);
+        assertThatQueryIsValidSQL(query);
+    }
+
+    @Test
     public void testMultipleJoins() throws SQLException {
         String query = this.field
                 .from("person")

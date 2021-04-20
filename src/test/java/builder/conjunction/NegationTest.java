@@ -1,40 +1,45 @@
 package builder.conjunction;
 
 import builder.table.Table;
+import database.DatabaseTestBaseClass;
 import factory.QueryFactory;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.sql.SQLException;
+
 import static junit.framework.Assert.assertEquals;
 
-public class NegationTest {
+public class NegationTest extends DatabaseTestBaseClass {
     private Table table;
 
     @Before
-    public void setUp() {
+    public void setUpQuery() {
         this.table = QueryFactory
                 .select()
                 .field("firstname")
-                .from("persons");
+                .from("person");
     }
 
     @Test
-    public void testWhereNotCondition() {
+    public void testWhereNotCondition() throws SQLException {
         String query = this.table
                 .where("age").not().greaterThan(18)
                 .build();
 
-        assertEquals("SELECT firstname FROM persons WHERE NOT age > 18;", query);
+        assertEquals("SELECT firstname FROM person WHERE NOT age > 18;", query);
+        assertThatQueryIsValidSQL(query);
     }
 
     @Test
-    public void testWhereNotAndNotConditions() {
+    public void testWhereNotAndNotConditions() throws SQLException {
         String query = this.table
                 .where("age").not().greaterThan(18)
-                .and("name").not().equals("Miika")
+                .and("firstname").not().equals("Miika")
                 .build();
 
-        assertEquals("SELECT firstname FROM persons WHERE NOT age > 18 AND NOT name = 'Miika';", query);
+        assertEquals("SELECT firstname FROM person WHERE NOT age > 18 AND NOT firstname = 'Miika';", query);
+        assertThatQueryIsValidSQL(query);
     }
 
     @Test

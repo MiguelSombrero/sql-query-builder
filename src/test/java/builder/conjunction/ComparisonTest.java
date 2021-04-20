@@ -142,4 +142,14 @@ public class ComparisonTest extends DatabaseTestBaseClass {
         assertEquals("SELECT firstname FROM person WHERE age IS NOT NULL AND firstname IS NOT NULL;", query);
         assertThatQueryIsValidSQL(query);
     }
+
+    @Test
+    public void testConditionLike() throws SQLException {
+        String query = this.table
+                .where("firstname").isLike("%ika%")
+                .build();
+
+        assertEquals("SELECT firstname FROM person WHERE firstname LIKE '%ika%';", query);
+        assertThatQueryIsValidSQL(query);
+    }
 }
