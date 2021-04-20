@@ -55,33 +55,37 @@ public class TableTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testInnerJoin() {
+    public void testInnerJoin() throws SQLException {
         String query = this.field
-                .from("persons")
-                .innerJoin("addresses").on("persons.id = addresses.person_id")
+                .from("person")
+                .innerJoin("address").on("person.id = address.person_id")
                 .build();
 
-        assertEquals("SELECT * FROM persons INNER JOIN addresses ON persons.id = addresses.person_id;", query);
+        assertEquals("SELECT * FROM person INNER JOIN address ON person.id = address.person_id;", query);
+        assertThatQueryIsValidSQL(query);
     }
 
     @Test
-    public void testLeftJoin() {
+    public void testLeftJoin() throws SQLException {
         String query = this.field
-                .from("persons")
-                .leftJoin("addresses").on("persons.id = addresses.person_id")
+                .from("person")
+                .leftJoin("address").on("person.id = address.person_id")
                 .build();
 
-        assertEquals("SELECT * FROM persons LEFT JOIN addresses ON persons.id = addresses.person_id;", query);
+        assertEquals("SELECT * FROM person LEFT JOIN address ON person.id = address.person_id;", query);
+        assertThatQueryIsValidSQL(query);
     }
 
     @Test
-    public void testMultipleJoins() {
+    public void testMultipleJoins() throws SQLException {
         String query = this.field
-                .from("persons")
-                .leftJoin("addresses").on("persons.id = addresses.person_id")
-                .innerJoin("accounts").on("persons.id = accounts.person_id")
+                .from("person")
+                .leftJoin("address").on("person.id = address.person_id")
+                .innerJoin("course").on("person.id = course.person_id")
+                .rightJoin("school").on("course.school_id = school.id")
                 .build();
 
-        assertEquals("SELECT * FROM persons LEFT JOIN addresses ON persons.id = addresses.person_id INNER JOIN accounts ON persons.id = accounts.person_id;", query);
+        assertEquals("SELECT * FROM person LEFT JOIN address ON person.id = address.person_id INNER JOIN course ON person.id = course.person_id RIGHT JOIN school ON course.school_id = school.id;", query);
+        assertThatQueryIsValidSQL(query);
     }
 }

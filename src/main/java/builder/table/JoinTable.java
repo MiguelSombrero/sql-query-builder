@@ -27,6 +27,11 @@ public class JoinTable extends SQLQueryBuilder {
         return join(table);
     }
 
+    public On rightJoin(String table) {
+        append(" RIGHT JOIN ");
+        return join(table);
+    }
+
     private On join(String table) {
         append(table);
         return on;
