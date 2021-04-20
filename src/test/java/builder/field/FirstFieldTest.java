@@ -2,7 +2,6 @@ package builder.field;
 
 import database.DatabaseTestBaseClass;
 import factory.QueryFactory;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.sql.SQLException;
@@ -11,12 +10,6 @@ import static junit.framework.Assert.assertEquals;
 
 public class FirstFieldTest extends DatabaseTestBaseClass {
 
-    @BeforeClass
-    public static void setUp() {
-        createTestDatabase();
-        insertDataToTestDatabase();
-    }
-
     @Test
     public void testSelectFromTable() throws SQLException {
         String query = QueryFactory
@@ -24,10 +17,10 @@ public class FirstFieldTest extends DatabaseTestBaseClass {
                     .field("lastname")
                     .field("age")
                     .field("firstname")
-                .from("persons")
+                .from("person")
                 .build();
 
-        assertEquals("SELECT lastname, age, firstname FROM persons;", query);
+        assertEquals("SELECT lastname, age, firstname FROM person;", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -38,10 +31,10 @@ public class FirstFieldTest extends DatabaseTestBaseClass {
                     .field("lastname")
                     .field("age")
                     .field("firstname")
-                .from("persons")
+                .from("person")
                 .build();
 
-        assertEquals("SELECT DISTINCT lastname, age, firstname FROM persons;", query);
+        assertEquals("SELECT DISTINCT lastname, age, firstname FROM person;", query);
         assertThatQueryIsValidSQL(query);
     }
 }

@@ -1,43 +1,47 @@
 package builder.field;
 
-import builder.field.Field;
+import database.DatabaseTestBaseClass;
 import factory.QueryFactory;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.sql.SQLException;
+
 import static junit.framework.Assert.assertEquals;
 
-public class FieldTest {
+public class FieldTest extends DatabaseTestBaseClass {
     private Field field;
 
     @Before
-    public void setUp() {
+    public void setUpQuery() {
         this.field = QueryFactory
                 .select()
                 .field("firstname");
     }
 
     @Test
-    public void testValue() {
+    public void testValue() throws SQLException {
         String query = this.field
                 .field("lastname")
                 .field("age")
-                .from("persons")
+                .from("person")
                 .build();
 
-        assertEquals("SELECT firstname, lastname, age FROM persons;", query);
+        assertEquals("SELECT firstname, lastname, age FROM person;", query);
+        assertThatQueryIsValidSQL(query);
     }
 
     @Test
-    public void testMultipleValuesWithAliases() {
+    public void testMultipleValuesWithAliases() throws SQLException {
         String query = QueryFactory
                 .select()
                 .field("lastname").alias("last")
                 .field("age")
                 .field("firstname").alias("first")
-                .from("persons")
+                .from("person")
                 .build();
 
-        assertEquals("SELECT lastname AS last, age, firstname AS first FROM persons;", query);
+        assertEquals("SELECT lastname AS last, age, firstname AS first FROM person;", query);
+        assertThatQueryIsValidSQL(query);
     }
 }

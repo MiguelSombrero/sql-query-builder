@@ -1,5 +1,6 @@
 package database;
 
+import org.junit.BeforeClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,33 +10,50 @@ public class DatabaseTestBaseClass {
     private static Logger logger = LoggerFactory.getLogger(DatabaseTestBaseClass.class);
 
     private static final String dbDriver = "org.h2.Driver";
+    private static final String DROP_DB_SCRIPT = "src/test/resources/scripts/drop-db.sql";
+    private static final String CREATE_DB_SCRIPT = "src/test/resources/scripts/create-db.sql";
+    private static final String CREATE_DATA_SCRIPT = "src/test/resources/scripts/create-data.sql";
+
+    @BeforeClass
+    public static void setUp() {
+        initializeDatabase();
+    }
+
+    private static void initializeDatabase() {
+        dropTestDatabase();
+        createTestDatabase();
+        insertDataToTestDatabase();
+    }
+
+    private static void dropTestDatabase() {
+        runScriptFrom(DROP_DB_SCRIPT);
+    }
+
+    private static void createTestDatabase() {
+        runScriptFrom(CREATE_DB_SCRIPT);
+    }
+
+    private static void insertDataToTestDatabase() {
+        runScriptFrom(CREATE_DATA_SCRIPT);
+    }
+
+    private static void runScriptFrom(String path) {
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            String query = "RUNSCRIPT FROM '" + path + "';";
+            conn.prepareStatement(query).executeLargeUpdate();
+
+        } catch (Exception ex) {
+            logger.info(ex.getLocalizedMessage());
+        }
+    }
 
     protected void assertThatQueryIsValidSQL(String query) throws SQLException {
         executeQuery(query);
     }
 
-    protected static void createTestDatabase() {
+    private void executeQuery(String query) throws SQLException {
         try (Connection conn = DatabaseConnection.getConnection()) {
-            Class.forName (dbDriver);
-            conn.prepareStatement("RUNSCRIPT FROM 'src/test/resources/scripts/create-db.sql';").executeLargeUpdate();
-
-        } catch (Exception ex) {
-            logger.info(ex.getLocalizedMessage());
-        }
-    }
-
-    protected static void insertDataToTestDatabase() {
-        try (Connection conn = DatabaseConnection.getConnection()) {
-            conn.prepareStatement("INSERT INTO persons (id, firstname, lastname, age) VALUES (1, 'Miika', 'Somero', 39)").execute();
-
-        } catch (Exception ex) {
-            logger.info(ex.getLocalizedMessage());
-        }
-    }
-
-    protected void executeQuery(String query) throws SQLException {
-        try (Connection conn = DatabaseConnection.getConnection()) {
-            conn.prepareStatement(query).execute();
+            conn.prepareStatement(query).executeQuery();
         }
     }
 }
