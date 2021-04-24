@@ -1,7 +1,6 @@
 package builder.field;
 
 import builder.SQLQueryBuilder;
-import builder.field.Field;
 import builder.table.Table;
 
 public class AliasedField extends SQLQueryBuilder {

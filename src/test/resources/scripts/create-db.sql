@@ -7,7 +7,7 @@ CREATE TABLE person (
 );
 
 CREATE TABLE school (
-    id INT NOT NULL,
+    ID INT NOT NULL,
     name VARCHAR(255)
 );
 
@@ -17,15 +17,15 @@ CREATE TABLE address (
     postal_code INT,
     city VARCHAR(255),
     street VARCHAR(255),
-    foreign key (person_id) references person(id)
+    foreign key (person_id) references person(ID)
 );
 
 CREATE TABLE course (
-    id INT NOT NULL,
+    ID INT NOT NULL,
     person_id INT,
     school_id INT,
     name VARCHAR(255),
     difficulty INT,
-    foreign key (person_id) references person(id),
-    foreign key (school_id) references school(id)
+    foreign key (person_id) references person(ID),
+    foreign key (school_id) references school(ID)
 );

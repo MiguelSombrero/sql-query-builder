@@ -1,7 +1,7 @@
 package factory;
 
-import builder.Insert;
 import builder.field.FirstField;
+import builder.insert.FirstColumn;
 
 public class QueryFactory {
 
@@ -13,10 +13,11 @@ public class QueryFactory {
         return selectClause("SELECT DISTINCT ");
     }
 
-    public static Insert inserInto(String table) {
+    public static FirstColumn inserInto(String table) {
         StringBuilder builder = new StringBuilder("INSERT INTO ");
         builder.append(table);
-        return new Insert(builder);
+        builder.append(" () VALUES ()");
+        return new FirstColumn(builder);
     }
 
     private static FirstField selectClause(String clause) {

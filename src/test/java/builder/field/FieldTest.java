@@ -20,7 +20,7 @@ public class FieldTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testValue() throws SQLException {
+    public void testField() throws SQLException {
         String query = this.field
                 .field("lastname")
                 .field("age")
@@ -32,7 +32,7 @@ public class FieldTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testMultipleValuesWithAliases() throws SQLException {
+    public void testMultipleFieldsWithAliases() throws SQLException {
         String query = QueryFactory
                 .select()
                 .field("lastname").alias("last")

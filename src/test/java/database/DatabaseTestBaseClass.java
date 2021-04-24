@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import java.sql.*;
 
 public class DatabaseTestBaseClass {
-    private static Logger logger = LoggerFactory.getLogger(DatabaseTestBaseClass.class);
+    protected static Logger logger = LoggerFactory.getLogger(DatabaseTestBaseClass.class);
 
     private static final String dbDriver = "org.h2.Driver";
     private static final String DROP_DB_SCRIPT = "src/test/resources/scripts/drop-db.sql";

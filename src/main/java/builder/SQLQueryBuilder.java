@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public abstract class SQLQueryBuilder implements Builder {
-    private static Logger logger = LoggerFactory.getLogger(SQLQueryBuilder.class);
+    protected static Logger logger = LoggerFactory.getLogger(SQLQueryBuilder.class);
     protected StringBuilder builder;
 
     public String build() {
@@ -16,11 +16,15 @@ public abstract class SQLQueryBuilder implements Builder {
         this.builder = this.builder.append(text);
     }
 
-    public void append(Integer value) {
+    public void append(int value) {
         this.builder = this.builder.append(value);
     }
 
-    public void insert(Integer index, String text) {
+    public void insert(int index, String text) {
         this.builder = this.builder.insert(index, text);
+    }
+
+    public void insert(int index, int value) {
+        this.builder = this.builder.insert(index, value);
     }
 }
