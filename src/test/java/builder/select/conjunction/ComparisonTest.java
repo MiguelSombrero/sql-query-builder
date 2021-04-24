@@ -1,6 +1,6 @@
-package builder.conjunction;
+package builder.select.conjunction;
 
-import builder.table.Table;
+import builder.select.table.Table;
 import database.DatabaseTestBaseClass;
 import factory.QueryFactory;
 import org.junit.Before;

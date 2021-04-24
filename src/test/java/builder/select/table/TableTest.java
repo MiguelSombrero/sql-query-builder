@@ -1,6 +1,6 @@
-package builder.table;
+package builder.select.table;
 
-import builder.field.Field;
+import builder.select.field.Field;
 import database.DatabaseTestBaseClass;
 import factory.QueryFactory;
 import org.junit.Before;

@@ -12,7 +12,9 @@ public class InsertTest extends DatabaseTestBaseClass {
 
     @Before
     public void setUpQuery() {
-        this.column = QueryFactory.inserInto("person");
+        this.column = QueryFactory
+                .inserInto()
+                .table("person");
     }
 
     @Test
@@ -28,7 +30,8 @@ public class InsertTest extends DatabaseTestBaseClass {
     @Test
     public void testInsertOneValue() {
         String query = QueryFactory
-                .inserInto("person")
+                .inserInto()
+                .table("person")
                 .column("id").value(1)
                 .build();
 
@@ -40,7 +43,8 @@ public class InsertTest extends DatabaseTestBaseClass {
     @Test
     public void testInsertTwoValues() {
         String query = QueryFactory
-                .inserInto("person")
+                .inserInto()
+                .table("person")
                 .column("id").value(1)
                 .column("birthdate").value("1980-04-12")
                 .build();

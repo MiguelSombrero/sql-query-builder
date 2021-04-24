@@ -1,4 +1,4 @@
-package builder.field;
+package builder.select.field;
 
 import database.DatabaseTestBaseClass;
 import factory.QueryFactory;

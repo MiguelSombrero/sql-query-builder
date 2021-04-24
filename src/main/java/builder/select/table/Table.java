@@ -1,4 +1,4 @@
-package builder.table;
+package builder.select.table;
 
 public class Table extends AliasedTable {
 

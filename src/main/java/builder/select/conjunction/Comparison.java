@@ -1,4 +1,4 @@
-package builder.conjunction;
+package builder.select.conjunction;
 
 import builder.SQLQueryBuilder;
 

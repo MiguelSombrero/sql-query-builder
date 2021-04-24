@@ -1,7 +1,7 @@
-package builder.table;
+package builder.select.table;
 
 import builder.SQLQueryBuilder;
-import builder.conjunction.Negation;
+import builder.select.conjunction.Negation;
 
 public class JoinTable extends SQLQueryBuilder {
     private On on;

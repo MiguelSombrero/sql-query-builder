@@ -1,7 +1,7 @@
-package builder.field;
+package builder.select.field;
 
 import builder.SQLQueryBuilder;
-import builder.field.Field;
+import builder.select.field.Field;
 
 public class FirstField extends SQLQueryBuilder {
 

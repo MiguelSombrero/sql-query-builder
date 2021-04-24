@@ -1,6 +1,6 @@
 package factory;
 
-import builder.field.FirstField;
+import builder.select.field.FirstField;
 import org.hamcrest.core.IsInstanceOf;
 import org.junit.Test;
 

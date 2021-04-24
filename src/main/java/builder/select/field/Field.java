@@ -1,4 +1,4 @@
-package builder.field;
+package builder.select.field;
 
 public class Field extends AliasedField {
 

@@ -1,4 +1,4 @@
-package builder.table;
+package builder.select.table;
 
 public class On {
     private JoinTable parent;
