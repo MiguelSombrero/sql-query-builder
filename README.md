@@ -43,15 +43,9 @@ Check the latest version from [GitHub](https://github.com/MiguelSombrero/sql-que
 
     mvn install
 
-## Architecture
+## Documentation
 
-I have used a lot the [builder pattern](https://en.wikipedia.org/wiki/Builder_pattern).
-
-### Class diagram
-
-Class diagram of SELECT statement builder is as follows:
-
-![Select_class_diagram](https://github.com/MiguelSombrero/sql-query-builder/blob/develop/docs/sql-query-builder-class-diagram.jpg)
+[Design documents]()
 
 ## Not yet implemented
 
