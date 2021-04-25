@@ -1,9 +1,9 @@
 package builder.select.table;
 
-import builder.SQLQueryBuilder;
+import builder.TerminalOperation;
 import builder.select.conjunction.Negation;
 
-public class JoinTable extends SQLQueryBuilder {
+public class JoinTable extends TerminalOperation {
     private On on;
 
     public JoinTable(StringBuilder builder) {

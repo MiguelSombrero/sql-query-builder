@@ -1,9 +1,9 @@
 package builder.select.field;
 
-import builder.SQLQueryBuilder;
+import builder.SQLStringBuilder;
 import builder.select.table.Table;
 
-public class AliasedField extends SQLQueryBuilder {
+public class AliasedField extends SQLStringBuilder {
 
     public AliasedField(StringBuilder builder) {
         this.builder = builder;

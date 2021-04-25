@@ -1,8 +1,8 @@
 package builder.select.conjunction;
 
-import builder.SQLQueryBuilder;
+import builder.SQLStringBuilder;
 
-public class Comparison extends SQLQueryBuilder {
+public class Comparison extends SQLStringBuilder {
 
     public Comparison(StringBuilder builder) {
         this.builder = builder;

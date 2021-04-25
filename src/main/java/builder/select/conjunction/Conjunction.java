@@ -1,8 +1,8 @@
 package builder.select.conjunction;
 
-import builder.SQLQueryBuilder;
+import builder.TerminalOperation;
 
-public class Conjunction extends SQLQueryBuilder {
+public class Conjunction extends TerminalOperation {
 
     public Conjunction(StringBuilder builder) {
         this.builder = builder;

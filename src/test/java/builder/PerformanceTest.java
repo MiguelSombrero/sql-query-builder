@@ -21,7 +21,7 @@ public class PerformanceTest {
     }
 
     @Test
-    public void testThatBuilding1MillionQueriesStaysWithin2Seconds() {
+    public void testThatBuilding1MillionQueriesStaysWithin3Seconds() {
         long start = 0L;
         long end = 0L;
 
@@ -31,7 +31,7 @@ public class PerformanceTest {
         long builderMilliseconds = end - start;
 
         logger.info(builderMilliseconds + " milliseconds");
-        assertTrue(2000 > builderMilliseconds);
+        assertTrue(3000 > builderMilliseconds);
     }
 
     public void comparisonOfConcatenatingMethods() {

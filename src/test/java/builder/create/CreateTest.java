@@ -25,8 +25,6 @@ public class CreateTest extends DatabaseTestBaseClass {
                 .column("description").type(DataType.VARCHAR_255)
                 .build();
 
-        logger.info(query);
-
         assertEquals("CREATE TABLE cars (ID INT, age DOUBLE, created TIMESTAMP, country CHAR, model VARCHAR(32), brand VARCHAR(64), disclaimer VARCHAR(128), description VARCHAR(255));", query);
         assertThatQueryIsValidSQL(query);
     }

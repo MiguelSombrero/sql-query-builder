@@ -1,8 +1,8 @@
 package builder.insert;
 
-import builder.SQLQueryBuilder;
+import builder.TerminalOperation;
 
-public class Column extends SQLQueryBuilder {
+public class Column extends TerminalOperation {
 
     public Column(StringBuilder builder) {
         this.builder = builder;

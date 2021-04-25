@@ -1,8 +1,8 @@
 package builder.insert;
 
-import builder.SQLQueryBuilder;
+import builder.TerminalOperation;
 
-public abstract class ValueTemplate extends SQLQueryBuilder {
+public abstract class ValueTemplate extends TerminalOperation {
 
     public ValueTemplate(StringBuilder builder) {
         this.builder = builder;
