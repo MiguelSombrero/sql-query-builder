@@ -1,8 +1,8 @@
 package builder.create;
 
-import builder.SQLQueryBuilder;
+import builder.SQLStringBuilder;
 
-public class Table extends SQLQueryBuilder {
+public class Table extends SQLStringBuilder {
 
     public Table(StringBuilder builder) {
         this.builder = builder;

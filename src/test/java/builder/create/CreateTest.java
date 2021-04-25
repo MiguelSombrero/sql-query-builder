@@ -11,14 +11,23 @@ import static junit.framework.Assert.assertEquals;
 public class CreateTest extends DatabaseTestBaseClass {
 
     @Test
-    public void testField() throws SQLException {
+    public void testDataTypes() throws SQLException {
         String query = QueryFactory
                 .create()
                 .table("cars")
-                .column("age").type(DataType.INT)
+                .column("ID").type(DataType.INT)
+                .column("age").type(DataType.DOUBLE)
+                .column("created").type(DataType.TIMESTAMP)
+                .column("country").type(DataType.CHAR)
+                .column("model").type(DataType.VARCHAR_32)
+                .column("brand").type(DataType.VARCHAR_64)
+                .column("disclaimer").type(DataType.VARCHAR_128)
+                .column("description").type(DataType.VARCHAR_255)
                 .build();
 
-        assertEquals("CREATE TABLE cars (age INT);", query);
+        logger.info(query);
+
+        assertEquals("CREATE TABLE cars (ID INT, age DOUBLE, created TIMESTAMP, country CHAR, model VARCHAR(32), brand VARCHAR(64), disclaimer VARCHAR(128), description VARCHAR(255));", query);
         assertThatQueryIsValidSQL(query);
     }
 

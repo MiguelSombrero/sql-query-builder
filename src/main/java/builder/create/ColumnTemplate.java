@@ -1,15 +1,15 @@
 package builder.create;
 
-import builder.SQLQueryBuilder;
+import builder.TerminalOperation;
 
-public abstract class ColumnTemplate extends SQLQueryBuilder {
+public abstract class ColumnTemplate extends TerminalOperation {
 
     public ColumnTemplate(StringBuilder builder) {
         this.builder = builder;
     }
 
     public ColumnType column(String columns) {
-        int index = firstIndexOfRightBracket();
+        int index = lastIndexOfRightBracket();
         insert(index, columns);
         addCommaAfterFirstValue(index);
         return new ColumnType(this.builder);
