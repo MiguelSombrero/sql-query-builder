@@ -1,4 +1,4 @@
-package builder.insert;
+package builder.create;
 
 import builder.SQLQueryBuilder;
 

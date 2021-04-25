@@ -1,8 +1,8 @@
-package builder.insert;
+package builder.create;
 
-public class Value extends ValueTemplate {
+public class Column extends ColumnTemplate {
 
-    public Value(StringBuilder builder) {
+    public Column(StringBuilder builder) {
         super(builder);
     }
 

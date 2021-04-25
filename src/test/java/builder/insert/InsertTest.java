@@ -5,6 +5,8 @@ import factory.QueryFactory;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.sql.SQLException;
+
 import static org.junit.Assert.assertEquals;
 
 public class InsertTest extends DatabaseTestBaseClass {
@@ -13,44 +15,35 @@ public class InsertTest extends DatabaseTestBaseClass {
     @Before
     public void setUpQuery() {
         this.column = QueryFactory
-                .inserInto()
+                .insertInto()
                 .table("person");
     }
 
     @Test
-    public void testLastIndexOfRightBracket() {
-        assertEquals(39, column.column("firstname").lastIndexOfRightBracket());
-    }
-
-    @Test
-    public void testFirstIndexOfRightBracket() {
-        assertEquals(20, column.firstIndexOfRightBracket());
-    }
-
-    @Test
-    public void testInsertOneValue() {
+    public void testInsertOneValue() throws SQLException {
         String query = QueryFactory
-                .inserInto()
+                .insertInto()
                 .table("person")
-                .column("id").value(1)
+                .column("id").value(100)
                 .build();
 
-        logger.info(query);
-
-        assertEquals("INSERT INTO person (id) VALUES (1);", query);
+        assertEquals("INSERT INTO person (id) VALUES (100);", query);
+        assertThatQueryIsValidSQL(query);
     }
 
     @Test
-    public void testInsertTwoValues() {
+    public void testInsertMultipleValues() throws SQLException {
         String query = QueryFactory
-                .inserInto()
+                .insertInto()
                 .table("person")
-                .column("id").value(1)
+                .column("id").value(101)
                 .column("birthdate").value("1980-04-12")
+                .column("firstname").value("Miika")
+                .column("lastname").value("Somero")
+                .column("age").value(40)
                 .build();
 
-        logger.info(query);
-
-        assertEquals("INSERT INTO person (id, birthdate) VALUES (1, '1980-04-12');", query);
+        assertEquals("INSERT INTO person (id, birthdate, firstname, lastname, age) VALUES (101, '1980-04-12', 'Miika', 'Somero', 40);", query);
+        assertThatQueryIsValidSQL(query);
     }
 }

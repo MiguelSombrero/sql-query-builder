@@ -27,4 +27,17 @@ public abstract class SQLQueryBuilder implements Builder {
     public void insert(int index, int value) {
         this.builder = this.builder.insert(index, value);
     }
+
+    protected int firstIndexOfRightBracket() {
+        return this.builder.indexOf(")");
+    }
+
+    protected int firstIndexOfLeftBracket() {
+        return this.builder.indexOf("(");
+    }
+
+    protected int lastIndexOfRightBracket() {
+        return this.builder.lastIndexOf(")");
+    }
+
 }

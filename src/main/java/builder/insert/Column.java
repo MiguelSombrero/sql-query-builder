@@ -14,8 +14,4 @@ public class Column extends SQLQueryBuilder {
         insert(index, ", ");
         return new Value(this.builder);
     }
-
-    protected int firstIndexOfRightBracket() {
-        return this.builder.indexOf(")");
-    }
 }

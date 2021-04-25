@@ -53,7 +53,7 @@ public class DatabaseTestBaseClass {
 
     private void executeQuery(String query) throws SQLException {
         try (Connection conn = DatabaseConnection.getConnection()) {
-            conn.prepareStatement(query).executeQuery();
+            conn.prepareStatement(query).execute();
         }
     }
 }

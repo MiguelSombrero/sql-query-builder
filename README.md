@@ -56,12 +56,14 @@ Class diagram of SELECT statement builder is as follows:
 ## Not yet implemented
 
 In order to be implemented:
-- Create table clauses (CREATE TABLE, ...)
+- Create table clauses (CREATE TABLE, CREATE table x AS, ...)
+- Create table foreign key constraints and other (foreign key (person_id) references person(ID))
+- More database queries (CREATE DATABASE, DROP DATABASE, ...) 
+- Grouping results (GROUP BY)
 - Sorting results (ORDER BY, DESC, ASC, ...)
-- Limiting results (LIMIT)
+- Limiting results (LIMIT, TOP, ...)
 - Update clauses (UPDATE, SET, ...)
 - Delete clauses (DELETE, ...)
-- Grouping results (GROUP BY)
 - Between operator (BETWEEN x AND y)
 - Aggregate functions (MAX, MIN, AVG, SUM, COUNT, ...)
 - Better Like operator (giving patterns without "%" etc. symbols)

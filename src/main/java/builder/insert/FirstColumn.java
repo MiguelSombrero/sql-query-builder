@@ -13,8 +13,4 @@ public class FirstColumn extends SQLQueryBuilder {
         insert(index, columns);
         return new FirstValue(this.builder);
     }
-
-    protected int firstIndexOfRightBracket() {
-        return this.builder.indexOf(")");
-    }
 }
