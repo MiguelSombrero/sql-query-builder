@@ -1,5 +1,7 @@
 package builder;
 
+import builder.select.field.FirstField;
+import builder.select.table.Table;
 import factory.QueryFactory;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -30,6 +32,34 @@ public class PerformanceTest {
         end = System.currentTimeMillis();
         long builderMilliseconds = end - start;
 
+        logger.info(builderMilliseconds + " milliseconds");
+        assertTrue(3000 > builderMilliseconds);
+    }
+
+    @Test
+    public void testThatBuildingOverComplexQueryStaysWithin3Seconds() {
+        long start = 0L;
+        long end = 0L;
+
+        start = System.currentTimeMillis();
+        FirstField field = QueryFactory.select();
+
+        for (int i = 0; i < times; i++) {
+            field.field("test").alias("best");
+        }
+
+        Table table = field
+                .field("last")
+                .from("testing");
+
+        for (int i = 0; i < times; i++) {
+            table.leftJoin("test2").on("testing.id = test2.test_id");
+        }
+
+        table.where("test").isLike("yeah").build();
+
+        end = System.currentTimeMillis();
+        long builderMilliseconds = end - start;
         logger.info(builderMilliseconds + " milliseconds");
         assertTrue(3000 > builderMilliseconds);
     }

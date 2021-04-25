@@ -2,13 +2,13 @@ package builder.select.table;
 
 import builder.TerminalOperation;
 import builder.select.conjunction.Negation;
+import builder.select.order.FirstGroupBy;
+import builder.select.order.FirstOrderBy;
 
 public class JoinTable extends TerminalOperation {
-    private On on;
 
     public JoinTable(StringBuilder builder) {
         this.builder = builder;
-        this.on = new On(this);
     }
 
     public Negation where(String fieldValue) {
@@ -32,8 +32,18 @@ public class JoinTable extends TerminalOperation {
         return join(table);
     }
 
+    public FirstGroupBy groupBy() {
+        append(" GROUP BY ");
+        return new FirstGroupBy(this.builder);
+    }
+
+    public FirstOrderBy orderBy() {
+        append(" ORDER BY ");
+        return new FirstOrderBy(this.builder);
+    }
+
     private On join(String table) {
         append(table);
-        return on;
+        return new On(this.builder);
     }
 }

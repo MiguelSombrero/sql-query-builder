@@ -1,15 +1,16 @@
 package builder.select.table;
 
-public class On {
-    private JoinTable parent;
+import builder.SQLStringBuilder;
 
-    public On(JoinTable parent) {
-        this.parent = parent;
+public class On extends SQLStringBuilder {
+
+    public On(StringBuilder builder) {
+        this.builder = builder;
     }
 
     public JoinTable on(String condition) {
-        parent.append(" ON ");
-        parent.append(condition);
-        return parent;
+        append(" ON ");
+        append(condition);
+        return new JoinTable(this.builder);
     }
 }
