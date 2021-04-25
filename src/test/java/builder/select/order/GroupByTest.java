@@ -20,8 +20,9 @@ public class GroupByTest {
 
     @Test
     public void testGroupBy() {
-        String query = table.groupBy()
-                .column("age")
+        String query = table
+                .groupBy()
+                    .column("age")
                 .build();
 
         assertEquals("SELECT * FROM person GROUP BY age;", query);
@@ -29,10 +30,11 @@ public class GroupByTest {
 
     @Test
     public void testMultipleGroupBy() {
-        String query = table.groupBy()
-                .column("age")
-                .column("firstname")
-                .column("lastname")
+        String query = table
+                .groupBy()
+                    .column("age")
+                    .column("firstname")
+                    .column("lastname")
                 .build();
 
         assertEquals("SELECT * FROM person GROUP BY age, firstname, lastname;", query);

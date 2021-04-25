@@ -1,15 +1,12 @@
 package builder.select.order;
 
-import builder.TerminalOperation;
-
-public class FirstOrderBy extends TerminalOperation {
+public class FirstOrderBy extends OrderByTemplate {
 
     public FirstOrderBy(StringBuilder builder) {
-        this.builder = builder;
+        super(builder);
     }
 
-    public OrderBy column(String columnName) {
-        append(columnName);
-        return new OrderBy(this.builder);
+    @Override
+    protected void addCommaAfterFirstValue() {
     }
 }
