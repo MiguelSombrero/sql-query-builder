@@ -1,14 +1,12 @@
 package builder.select.table;
 
-import builder.TerminalOperation;
 import builder.select.conjunction.Negation;
-import builder.select.order.FirstGroupBy;
-import builder.select.order.FirstOrderBy;
+import builder.select.order.Grouper;
 
-public class JoinTable extends TerminalOperation {
+public class JoinTable extends Grouper {
 
     public JoinTable(StringBuilder builder) {
-        this.builder = builder;
+        super(builder);
     }
 
     public Negation where(String fieldValue) {
@@ -30,16 +28,6 @@ public class JoinTable extends TerminalOperation {
     public On rightJoin(String table) {
         append(" RIGHT JOIN ");
         return join(table);
-    }
-
-    public FirstGroupBy groupBy() {
-        append(" GROUP BY ");
-        return new FirstGroupBy(this.builder);
-    }
-
-    public FirstOrderBy orderBy() {
-        append(" ORDER BY ");
-        return new FirstOrderBy(this.builder);
     }
 
     private On join(String table) {

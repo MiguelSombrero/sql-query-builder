@@ -1,11 +1,9 @@
 package builder.select.order;
 
-import builder.TerminalOperation;
-
-public class GroupBy extends TerminalOperation {
+public class GroupBy extends Orderer {
 
     public GroupBy(StringBuilder builder) {
-        this.builder = builder;
+        super(builder);
     }
 
     public GroupBy column(String columnName) {
