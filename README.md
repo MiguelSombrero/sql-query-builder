@@ -45,7 +45,7 @@ Check the latest version from [GitHub](https://github.com/MiguelSombrero/sql-que
 
 ## Documentation
 
-[Design documents]()
+[Design documents](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/design.md)
 
 ## Not yet implemented
 
