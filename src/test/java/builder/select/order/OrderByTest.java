@@ -1,12 +1,15 @@
 package builder.select.order;
 
+import database.DatabaseTestBaseClass;
 import factory.QueryFactory;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.sql.SQLException;
+
 import static org.junit.Assert.assertEquals;
 
-public class OrderByTest {
+public class OrderByTest extends DatabaseTestBaseClass {
     private GroupByTemplate groupBy;
 
     @Before
@@ -20,17 +23,18 @@ public class OrderByTest {
     }
 
     @Test
-    public void testOrderBy() {
+    public void testOrderBy() throws SQLException {
         String query = groupBy
                 .orderBy()
                     .column("firstname")
                 .build();
 
         assertEquals("SELECT * FROM person GROUP BY age ORDER BY firstname;", query);
+        assertThatQueryIsValidSQL(query);
     }
 
     @Test
-    public void testMultipleOrderBy() {
+    public void testMultipleOrderBy() throws SQLException {
         String query = groupBy
                 .orderBy()
                     .column("firstname")
@@ -39,5 +43,19 @@ public class OrderByTest {
                 .build();
 
         assertEquals("SELECT * FROM person GROUP BY age ORDER BY firstname, lastname, age;", query);
+        assertThatQueryIsValidSQL(query);
+    }
+
+    @Test
+    public void testMultipleOrderByWithAscDesc() throws SQLException {
+        String query = groupBy
+                .orderBy()
+                    .column("firstname").asc()
+                    .column("lastname").desc()
+                    .column("age").asc()
+                .build();
+
+        assertEquals("SELECT * FROM person GROUP BY age ORDER BY firstname ASC, lastname DESC, age ASC;", query);
+        assertThatQueryIsValidSQL(query);
     }
 }

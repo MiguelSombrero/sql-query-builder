@@ -8,10 +8,10 @@ public abstract class OrderByTemplate extends TerminalOperation {
         this.builder = builder;
     }
 
-    public OrderBy column(String columnName) {
+    public Order column(String columnName) {
         addCommaAfterFirstValue();
         append(columnName);
-        return new OrderBy(this.builder);
+        return new Order(this.builder);
     }
 
     protected abstract void addCommaAfterFirstValue();

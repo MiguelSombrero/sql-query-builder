@@ -50,7 +50,6 @@ Check the latest version from [GitHub](https://github.com/MiguelSombrero/sql-que
 ## Not yet implemented
 
 In order to be implemented:
-- Sorting results (ORDER BY, DESC, ASC, ...)
 - Limiting results (LIMIT, TOP, ...)
 - Create table AS clauses (CREATE table x AS, ...)
 - Create table constraints (NOT NULL, foreign key, ...)

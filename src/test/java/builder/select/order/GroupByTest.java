@@ -1,13 +1,16 @@
 package builder.select.order;
 
 import builder.select.table.Table;
+import database.DatabaseTestBaseClass;
 import factory.QueryFactory;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.sql.SQLException;
+
 import static org.junit.Assert.assertEquals;
 
-public class GroupByTest {
+public class GroupByTest extends DatabaseTestBaseClass {
     private Table table;
 
     @Before
@@ -19,17 +22,18 @@ public class GroupByTest {
     }
 
     @Test
-    public void testGroupBy() {
+    public void testGroupBy() throws SQLException {
         String query = table
                 .groupBy()
                     .column("age")
                 .build();
 
         assertEquals("SELECT * FROM person GROUP BY age;", query);
+        assertThatQueryIsValidSQL(query);
     }
 
     @Test
-    public void testMultipleGroupBy() {
+    public void testMultipleGroupBy() throws SQLException {
         String query = table
                 .groupBy()
                     .column("age")
@@ -38,5 +42,6 @@ public class GroupByTest {
                 .build();
 
         assertEquals("SELECT * FROM person GROUP BY age, firstname, lastname;", query);
+        assertThatQueryIsValidSQL(query);
     }
 }
