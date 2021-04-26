@@ -44,4 +44,34 @@ public class GroupByTest extends DatabaseTestBaseClass {
         assertEquals("SELECT * FROM person GROUP BY age, firstname, lastname;", query);
         assertThatQueryIsValidSQL(query);
     }
+
+    @Test
+    public void testMultipleGroupByHaving() throws SQLException {
+        String query = table
+                .groupBy()
+                    .column("age")
+                    .column("firstname")
+                    .column("lastname")
+                .having("age > 20")
+                .build();
+
+        assertEquals("SELECT * FROM person GROUP BY age, firstname, lastname HAVING age > 20;", query);
+        assertThatQueryIsValidSQL(query);
+    }
+
+    @Test
+    public void testMultipleGroupByHavingAndOrdering() throws SQLException {
+        String query = table
+                .groupBy()
+                    .column("age")
+                    .column("firstname")
+                    .column("lastname")
+                .having("age > 20")
+                .orderBy()
+                    .column("age").asc()
+                .build();
+
+        assertEquals("SELECT * FROM person GROUP BY age, firstname, lastname HAVING age > 20 ORDER BY age ASC;", query);
+        assertThatQueryIsValidSQL(query);
+    }
 }
