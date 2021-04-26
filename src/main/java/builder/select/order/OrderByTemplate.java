@@ -1,11 +1,9 @@
 package builder.select.order;
 
-import builder.TerminalOperation;
-
-public abstract class OrderByTemplate extends TerminalOperation {
+public abstract class OrderByTemplate extends Limiter {
 
     public OrderByTemplate(StringBuilder builder) {
-        this.builder = builder;
+        super(builder);
     }
 
     public Order column(String columnName) {

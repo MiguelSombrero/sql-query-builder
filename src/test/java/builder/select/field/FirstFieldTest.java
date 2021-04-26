@@ -25,6 +25,20 @@ public class FirstFieldTest extends DatabaseTestBaseClass {
     }
 
     @Test
+    public void testSelectTopFromTable() throws SQLException {
+        String query = QueryFactory
+                .selectTop(100)
+                .field("lastname")
+                .field("age")
+                .field("firstname")
+                .from("person")
+                .build();
+
+        assertEquals("SELECT TOP 100 lastname, age, firstname FROM person;", query);
+        assertThatQueryIsValidSQL(query);
+    }
+
+    @Test
     public void testSelectDistinctFromTable() throws SQLException {
         String query = QueryFactory
                 .selectDistinct()

@@ -1,11 +1,9 @@
 package builder.select.order;
 
-import builder.TerminalOperation;
-
-public class Orderer extends TerminalOperation {
+public class Orderer extends Limiter {
 
     public Orderer(StringBuilder builder) {
-        this.builder = builder;
+        super(builder);
     }
 
     public FirstOrderBy orderBy() {

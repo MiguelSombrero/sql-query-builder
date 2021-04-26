@@ -1,6 +1,10 @@
 package builder;
 
-public abstract class TerminalOperation extends SQLStringBuilder implements Builder {
+public class TerminalOperation extends SQLStringBuilder implements Builder {
+
+    public TerminalOperation(StringBuilder builder) {
+        this.builder = builder;
+    }
 
     public String build() {
         this.builder.append(";");

@@ -8,6 +8,10 @@ public class QueryFactory {
         return selectClause("SELECT ");
     }
 
+    public static FirstField selectTop(int rows) {
+        return selectClause("SELECT TOP " + rows + " ");
+    }
+
     public static FirstField selectDistinct() {
         return selectClause("SELECT DISTINCT ");
     }

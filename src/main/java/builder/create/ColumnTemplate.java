@@ -5,7 +5,7 @@ import builder.TerminalOperation;
 public abstract class ColumnTemplate extends TerminalOperation {
 
     public ColumnTemplate(StringBuilder builder) {
-        this.builder = builder;
+        super(builder);
     }
 
     public ColumnType column(String columns) {

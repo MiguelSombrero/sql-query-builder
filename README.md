@@ -50,7 +50,6 @@ Check the latest version from [GitHub](https://github.com/MiguelSombrero/sql-que
 ## Not yet implemented
 
 In order to be implemented:
-- Limiting results (LIMIT, TOP, ...)
 - Create table AS clauses (CREATE table x AS, ...)
 - Create table constraints (NOT NULL, foreign key, ...)
 - More database queries (CREATE DATABASE, DROP DATABASE, ...) 
@@ -59,7 +58,7 @@ In order to be implemented:
 - Between operator (BETWEEN x AND y)
 - Aggregate functions (MAX, MIN, AVG, SUM, COUNT, ...)
 - Better Like operator (giving patterns without "%" etc. symbols)
-- Filtering aggregate results (HAVING)
+- Better HAVING clause (no need for giving condition by string)
 - Exists operator (EXISTS)
 - In operator (IN (...), IN (SELECT), ...)
 - Any and All operators (ANY, ALL)

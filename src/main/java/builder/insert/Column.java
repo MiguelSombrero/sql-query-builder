@@ -5,7 +5,7 @@ import builder.TerminalOperation;
 public class Column extends TerminalOperation {
 
     public Column(StringBuilder builder) {
-        this.builder = builder;
+        super(builder);
     }
 
     public Value column(String columns) {
