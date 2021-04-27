@@ -67,7 +67,3 @@ In order to be implemented:
 - Embedded SELECT and conditional clauses
 
 And propably many more special cases ...
-
-## Known issues
-
-- Cannot alias join table. Need to change table design
