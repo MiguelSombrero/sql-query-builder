@@ -5,12 +5,10 @@ CREATE TABLE person (
     lastname VARCHAR(255),
     age int
 );
-
 CREATE TABLE school (
     ID INT NOT NULL,
     name VARCHAR(255)
 );
-
 CREATE TABLE address (
     ID INT NOT NULL,
     person_id INT,
@@ -19,7 +17,6 @@ CREATE TABLE address (
     street VARCHAR(255),
     foreign key (person_id) references person(ID)
 );
-
 CREATE TABLE course (
     ID INT NOT NULL,
     person_id INT,

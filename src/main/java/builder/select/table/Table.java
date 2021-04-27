@@ -9,6 +9,6 @@ public class Table extends AliasedTable {
     public AliasedTable alias(String alias) {
         append(" AS ");
         append(alias);
-        return this;
+        return new AliasedTable(this.builder);
     }
 }

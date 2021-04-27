@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 import static junit.framework.Assert.assertEquals;
 
-public class CreateTest extends DatabaseTestBaseClass {
+public class TableTest extends DatabaseTestBaseClass {
     private Field field;
 
     @Before
@@ -51,6 +51,17 @@ public class CreateTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("SELECT * FROM person AS p, address AS a, course AS h;", query);
+        assertThatQueryIsValidSQL(query);
+    }
+
+    @Test
+    public void testFromOneJoinTableWithAlias() throws SQLException {
+        String query = this.field
+                .from("person")
+                .leftJoin("address").alias("a").on("person.id = a.person_id")
+                .build();
+
+        assertEquals("SELECT * FROM person LEFT JOIN address AS a ON person.id = a.person_id;", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -97,6 +108,19 @@ public class CreateTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("SELECT * FROM person LEFT JOIN address ON person.id = address.person_id INNER JOIN course ON person.id = course.person_id RIGHT JOIN school ON course.school_id = school.id;", query);
+        assertThatQueryIsValidSQL(query);
+    }
+
+    @Test
+    public void testFromMultipleTablesAndJoinWithAliases() throws SQLException {
+        String query = this.field
+                .from("person").alias("p")
+                .leftJoin("address").alias("a").on("p.id = a.person_id")
+                .innerJoin("course").alias("c").on("p.id = c.person_id")
+                .rightJoin("school").alias("s").on("c.school_id = s.id")
+                .build();
+
+        assertEquals("SELECT * FROM person AS p LEFT JOIN address AS a ON p.id = a.person_id INNER JOIN course AS c ON p.id = c.person_id RIGHT JOIN school AS s ON c.school_id = s.id;", query);
         assertThatQueryIsValidSQL(query);
     }
 }

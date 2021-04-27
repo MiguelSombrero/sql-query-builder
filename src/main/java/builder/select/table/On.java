@@ -1,16 +1,14 @@
 package builder.select.table;
 
-import builder.SQLStringBuilder;
-
-public class On extends SQLStringBuilder {
+public class On extends AliasedOn {
 
     public On(StringBuilder builder) {
-        this.builder = builder;
+        super(builder);
     }
 
-    public JoinTable on(String condition) {
-        append(" ON ");
-        append(condition);
-        return new JoinTable(this.builder);
+    public On alias(String alias) {
+        append(" AS ");
+        append(alias);
+        return this;
     }
 }
