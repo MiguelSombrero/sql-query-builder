@@ -1,5 +1,6 @@
 package factory;
 
+import builder.create.Create;
 import builder.select.field.FirstField;
 
 public class QueryFactory {
@@ -20,8 +21,8 @@ public class QueryFactory {
         return new builder.insert.Table(new StringBuilder("INSERT INTO () VALUES ()"));
     }
 
-    public static builder.create.Table create() {
-        return new builder.create.Table(new StringBuilder("CREATE TABLE ()"));
+    public static Create create() {
+        return new Create(new StringBuilder("CREATE "));
     }
 
     private static FirstField selectClause(String clause) {

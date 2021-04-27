@@ -54,15 +54,4 @@ public class ConjunctionTest extends DatabaseTestBaseClass {
         assertEquals("SELECT firstname FROM person WHERE age > 18 AND birthdate > '2020-02-28T21:00:00.000' OR birthdate < '2018-02-28T21:00:00.000';", query);
         assertThatQueryIsValidSQL(query);
     }
-
-    @Test
-    public void testGroupBy() throws SQLException {
-        String query = this.table
-                .where("age").greaterThan(18)
-                .groupBy().column("lastname")
-                .build();
-
-        assertEquals("SELECT firstname FROM person WHERE age > 18 GROUP BY lastname;", query);
-        assertThatQueryIsValidSQL(query);
-    }
 }

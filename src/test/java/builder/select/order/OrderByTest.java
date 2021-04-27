@@ -1,5 +1,6 @@
 package builder.select.order;
 
+import builder.select.table.Table;
 import database.DatabaseTestBaseClass;
 import factory.QueryFactory;
 import org.junit.Before;
@@ -10,21 +11,32 @@ import java.sql.SQLException;
 import static org.junit.Assert.assertEquals;
 
 public class OrderByTest extends DatabaseTestBaseClass {
-    private GroupByTemplate groupBy;
+    private Table table;
 
     @Before
     public void setUpQuery() {
-        this.groupBy = QueryFactory
+        this.table = QueryFactory
                 .select()
                     .field("*")
-                .from("person")
-                .groupBy()
-                    .column("age");
+                .from("person");
     }
 
     @Test
     public void testOrderBy() throws SQLException {
-        String query = groupBy
+        String query = table
+                .orderBy()
+                    .column("firstname")
+                .build();
+
+        assertEquals("SELECT * FROM person ORDER BY firstname;", query);
+        assertThatQueryIsValidSQL(query);
+    }
+
+    @Test
+    public void testOrderByGroupBy() throws SQLException {
+        String query = table
+                .groupBy()
+                    .column("age")
                 .orderBy()
                     .column("firstname")
                 .build();
@@ -34,8 +46,10 @@ public class OrderByTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testMultipleOrderBy() throws SQLException {
-        String query = groupBy
+    public void testMultipleOrderByGroupBy() throws SQLException {
+        String query = table
+                .groupBy()
+                    .column("age")
                 .orderBy()
                     .column("firstname")
                     .column("lastname")
@@ -47,8 +61,10 @@ public class OrderByTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testMultipleOrderByWithAscDesc() throws SQLException {
-        String query = groupBy
+    public void testMultipleOrderByGroupByWithAscDesc() throws SQLException {
+        String query = table
+                .groupBy()
+                    .column("age")
                 .orderBy()
                     .column("firstname").asc()
                     .column("lastname").desc()

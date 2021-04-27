@@ -11,7 +11,7 @@ import static junit.framework.Assert.assertEquals;
 public class CreateTest extends DatabaseTestBaseClass {
 
     @Test
-    public void testDataTypes() throws SQLException {
+    public void testCreateTableDataTypes() throws SQLException {
         String query = QueryFactory
                 .create()
                 .table("cars")
@@ -29,4 +29,15 @@ public class CreateTest extends DatabaseTestBaseClass {
         assertThatQueryIsValidSQL(query);
     }
 
+    @Test
+    public void testCreateDatabase() throws SQLException {
+        String query = QueryFactory
+                .create()
+                .database("test_db")
+                .build();
+
+        assertEquals("CREATE DATABASE test_db;", query);
+        // command not supported in H2?
+        //assertThatQueryIsValidSQL(query);
+    }
 }

@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 import static junit.framework.Assert.assertEquals;
 
-public class TableTest extends DatabaseTestBaseClass {
+public class CreateTest extends DatabaseTestBaseClass {
     private Field field;
 
     @Before

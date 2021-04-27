@@ -52,7 +52,7 @@ Check the latest version from [GitHub](https://github.com/MiguelSombrero/sql-que
 In order to be implemented:
 - Create table AS clauses (CREATE table x AS, ...)
 - Create table constraints (NOT NULL, foreign key, ...)
-- More database queries (CREATE DATABASE, DROP DATABASE, ...) 
+- Drop clause (DROP DATABASE, DROP TABLE, ...) 
 - Update clauses (UPDATE, SET, ...)
 - Delete clauses (DELETE, ...)
 - Between operator (BETWEEN x AND y)

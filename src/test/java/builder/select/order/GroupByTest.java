@@ -3,6 +3,7 @@ package builder.select.order;
 import builder.select.table.Table;
 import database.DatabaseTestBaseClass;
 import factory.QueryFactory;
+import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -42,6 +43,18 @@ public class GroupByTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("SELECT * FROM person GROUP BY age, firstname, lastname;", query);
+        assertThatQueryIsValidSQL(query);
+    }
+
+    @Test
+    public void testGroupByWhere() throws SQLException {
+        String query = this.table
+                .where("age").greaterThan(18)
+                .groupBy()
+                    .column("lastname")
+                .build();
+
+        Assert.assertEquals("SELECT * FROM person WHERE age > 18 GROUP BY lastname;", query);
         assertThatQueryIsValidSQL(query);
     }
 
