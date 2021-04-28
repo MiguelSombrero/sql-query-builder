@@ -50,7 +50,8 @@ public class PerformanceTest {
 
         Table table = field
                 .column("last")
-                .from("testing");
+                .from()
+                    .table("testing");
 
         for (int i = 0; i < times; i++) {
             table.leftJoin("test2").on("testing.id = test2.test_id");
@@ -114,8 +115,9 @@ public class PerformanceTest {
                 .column("p.firstname").alias("first")
                 .column("p.lastname").alias("last")
                 .column("c.name").alias("course")
-                .from("persons").alias("p")
-                .and("courses").alias("c")
+                .from()
+                    .table("persons").alias("p")
+                    .table("courses").alias("c")
                 .leftJoin("addresses").on("addresses.id = persons.address_id")
                 .where("age").greaterThan(18)
                 .and("age").lesserThan(65)

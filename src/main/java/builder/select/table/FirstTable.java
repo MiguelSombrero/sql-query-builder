@@ -1,13 +1,12 @@
 package builder.select.table;
 
-public class AliasedTable extends TableTemplate {
+public class FirstTable extends TableTemplate {
 
-    public AliasedTable(StringBuilder builder) {
+    public FirstTable(StringBuilder builder) {
         super(builder);
     }
 
     @Override
     protected void addCommaAfterFirstValue() {
-        append(", ");
     }
 }

@@ -18,7 +18,8 @@ public class NegationTest extends DatabaseTestBaseClass {
         this.table = QueryFactory
                 .select()
                 .column("firstname")
-                .from("person");
+                .from()
+                    .table("person");
     }
 
     @Test

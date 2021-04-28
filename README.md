@@ -56,7 +56,6 @@ In order to be implemented:
 - Update clauses (UPDATE, SET, ...)
 - Delete clauses (DELETE, ...)
 - Between operator (BETWEEN x AND y)
-- Aggregate functions (MAX, MIN, AVG, SUM, COUNT, ...)
 - Better Like operator (giving patterns without "%" etc. symbols)
 - Better HAVING clause (no need for giving condition by string)
 - Exists operator (EXISTS)

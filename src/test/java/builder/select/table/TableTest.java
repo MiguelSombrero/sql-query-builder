@@ -23,7 +23,8 @@ public class TableTest extends DatabaseTestBaseClass {
     @Test
     public void testFromOneTable() throws SQLException {
         String query = this.column
-                .from("person")
+                .from()
+                    .table("person")
                 .build();
 
         assertEquals("SELECT * FROM person;", query);
@@ -33,9 +34,10 @@ public class TableTest extends DatabaseTestBaseClass {
     @Test
     public void testFromMultipleTables() throws SQLException {
         String query = this.column
-                .from("person")
-                .and("address")
-                .and("course")
+                .from()
+                    .table("person")
+                    .table("address")
+                    .table("course")
                 .build();
 
         assertEquals("SELECT * FROM person, address, course;", query);
@@ -45,9 +47,10 @@ public class TableTest extends DatabaseTestBaseClass {
     @Test
     public void testFromMultipleTablesWithAliases() throws SQLException {
         String query = this.column
-                .from("person").alias("p")
-                .and("address").alias("a")
-                .and("course").alias("h")
+                .from()
+                    .table("person").alias("p")
+                    .table("address").alias("a")
+                    .table("course").alias("h")
                 .build();
 
         assertEquals("SELECT * FROM person AS p, address AS a, course AS h;", query);
@@ -57,7 +60,8 @@ public class TableTest extends DatabaseTestBaseClass {
     @Test
     public void testFromOneJoinTableWithAlias() throws SQLException {
         String query = this.column
-                .from("person")
+                .from()
+                    .table("person")
                 .leftJoin("address").alias("a").on("person.id = a.person_id")
                 .build();
 
@@ -68,7 +72,8 @@ public class TableTest extends DatabaseTestBaseClass {
     @Test
     public void testInnerJoin() throws SQLException {
         String query = this.column
-                .from("person")
+                .from()
+                    .table("person")
                 .innerJoin("address").on("person.id = address.person_id")
                 .build();
 
@@ -79,7 +84,8 @@ public class TableTest extends DatabaseTestBaseClass {
     @Test
     public void testLeftJoin() throws SQLException {
         String query = this.column
-                .from("person")
+                .from()
+                    .table("person")
                 .leftJoin("address").on("person.id = address.person_id")
                 .build();
 
@@ -90,7 +96,8 @@ public class TableTest extends DatabaseTestBaseClass {
     @Test
     public void rightJoin() throws SQLException {
         String query = this.column
-                .from("person")
+                .from()
+                    .table("person")
                 .rightJoin("address").on("person.id = address.person_id")
                 .build();
 
@@ -101,7 +108,8 @@ public class TableTest extends DatabaseTestBaseClass {
     @Test
     public void testMultipleJoins() throws SQLException {
         String query = this.column
-                .from("person")
+                .from()
+                    .table("person")
                 .leftJoin("address").on("person.id = address.person_id")
                 .innerJoin("course").on("person.id = course.person_id")
                 .rightJoin("school").on("course.school_id = school.id")
@@ -114,7 +122,8 @@ public class TableTest extends DatabaseTestBaseClass {
     @Test
     public void testFromMultipleTablesAndJoinWithAliases() throws SQLException {
         String query = this.column
-                .from("person").alias("p")
+                .from()
+                    .table("person").alias("p")
                 .leftJoin("address").alias("a").on("p.id = a.person_id")
                 .innerJoin("course").alias("c").on("p.id = c.person_id")
                 .rightJoin("school").alias("s").on("c.school_id = s.id")

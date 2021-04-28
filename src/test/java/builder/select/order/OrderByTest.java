@@ -18,7 +18,8 @@ public class OrderByTest extends DatabaseTestBaseClass {
         this.table = QueryFactory
                 .select()
                     .column("*")
-                .from("person");
+                .from()
+                    .table("person");
     }
 
     @Test

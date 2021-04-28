@@ -16,7 +16,8 @@ public class ColumnTest extends DatabaseTestBaseClass {
                 .select()
                     .column("lastname")
                     .column("age")
-                .from("person")
+                .from()
+                    .table("person")
                 .build();
 
         assertEquals("SELECT lastname, age FROM person;", query);
@@ -30,7 +31,8 @@ public class ColumnTest extends DatabaseTestBaseClass {
                     .column("lastname")
                     .column("age")
                     .column("firstname")
-                .from("person")
+                .from()
+                    .table("person")
                 .build();
 
         assertEquals("SELECT TOP 100 lastname, age, firstname FROM person;", query);
@@ -44,7 +46,8 @@ public class ColumnTest extends DatabaseTestBaseClass {
                     .column("lastname")
                     .column("age")
                     .column("firstname")
-                .from("person")
+                .from()
+                    .table("person")
                 .build();
 
         assertEquals("SELECT DISTINCT lastname, age, firstname FROM person;", query);
@@ -56,7 +59,8 @@ public class ColumnTest extends DatabaseTestBaseClass {
         String query = QueryFactory
                 .select()
                     .count("age")
-                .from("person")
+                .from()
+                    .table("person")
                 .build();
 
         assertEquals("SELECT COUNT(age) FROM person;", query);
@@ -68,7 +72,8 @@ public class ColumnTest extends DatabaseTestBaseClass {
         String query = QueryFactory
                 .select()
                     .min("age")
-                .from("person")
+                .from()
+                    .table("person")
                 .build();
 
         assertEquals("SELECT MIN(age) FROM person;", query);
@@ -80,7 +85,8 @@ public class ColumnTest extends DatabaseTestBaseClass {
         String query = QueryFactory
                 .select()
                     .max("age")
-                .from("person")
+                .from()
+                    .table("person")
                 .build();
 
         assertEquals("SELECT MAX(age) FROM person;", query);
@@ -91,8 +97,9 @@ public class ColumnTest extends DatabaseTestBaseClass {
     public void testSelectAvg() throws SQLException {
         String query = QueryFactory
                 .select()
-                .avg("age")
-                .from("person")
+                    .avg("age")
+                .from()
+                    .table("person")
                 .build();
 
         assertEquals("SELECT AVG(age) FROM person;", query);
@@ -103,8 +110,9 @@ public class ColumnTest extends DatabaseTestBaseClass {
     public void testSelectSum() throws SQLException {
         String query = QueryFactory
                 .select()
-                .sum("age")
-                .from("person")
+                    .sum("age")
+                .from()
+                    .table("person")
                 .build();
 
         assertEquals("SELECT SUM(age) FROM person;", query);
@@ -119,7 +127,8 @@ public class ColumnTest extends DatabaseTestBaseClass {
                     .min("age").alias("minAge")
                     .column("firstname").alias("first")
                     .count("*").alias("count")
-                .from("person")
+                .from()
+                    .table("person")
                 .groupBy().column("firstname")
                 .build();
 

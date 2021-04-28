@@ -1,18 +1,11 @@
 package builder.select.column;
 
 import builder.SQLStringBuilder;
-import builder.select.table.Table;
 
 public abstract class ColumnTemplate extends SQLStringBuilder {
 
     public ColumnTemplate(StringBuilder builder) {
         this.builder = builder;
-    }
-
-    public Table from(String table) {
-        append(" FROM ");
-        append(table);
-        return new Table(this.builder);
     }
 
     public Column column(String fieldName) {

@@ -18,7 +18,8 @@ public class ComparisonTest extends DatabaseTestBaseClass {
         this.table = QueryFactory
                 .select()
                 .column("firstname")
-                .from("person");
+                .from()
+                    .table("person");
     }
 
     @Test
