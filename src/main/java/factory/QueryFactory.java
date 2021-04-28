@@ -1,19 +1,19 @@
 package factory;
 
 import builder.create.Create;
-import builder.select.field.FirstField;
+import builder.select.column.FirstColumn;
 
 public class QueryFactory {
 
-    public static FirstField select() {
+    public static FirstColumn select() {
         return selectClause("SELECT ");
     }
 
-    public static FirstField selectTop(int rows) {
+    public static FirstColumn selectTop(int rows) {
         return selectClause("SELECT TOP " + rows + " ");
     }
 
-    public static FirstField selectDistinct() {
+    public static FirstColumn selectDistinct() {
         return selectClause("SELECT DISTINCT ");
     }
 
@@ -25,7 +25,7 @@ public class QueryFactory {
         return new Create(new StringBuilder("CREATE "));
     }
 
-    private static FirstField selectClause(String clause) {
-        return new FirstField(new StringBuilder(clause));
+    private static FirstColumn selectClause(String clause) {
+        return new FirstColumn(new StringBuilder(clause));
     }
 }

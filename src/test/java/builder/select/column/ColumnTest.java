@@ -1,4 +1,4 @@
-package builder.select.field;
+package builder.select.column;
 
 import database.DatabaseTestBaseClass;
 import factory.QueryFactory;
@@ -9,19 +9,19 @@ import java.sql.SQLException;
 
 import static junit.framework.Assert.assertEquals;
 
-public class FieldTest extends DatabaseTestBaseClass {
-    private Field field;
+public class ColumnTest extends DatabaseTestBaseClass {
+    private Column column;
 
     @Before
     public void setUpQuery() {
-        this.field = QueryFactory
+        this.column = QueryFactory
                 .select()
                 .field("firstname");
     }
 
     @Test
     public void testField() throws SQLException {
-        String query = this.field
+        String query = this.column
                 .field("lastname")
                 .field("age")
                 .from("person")
@@ -42,6 +42,20 @@ public class FieldTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("SELECT lastname AS last, age, firstname AS first FROM person;", query);
+        assertThatQueryIsValidSQL(query);
+    }
+
+    @Test
+    public void testSelectMin() throws SQLException {
+        String query = QueryFactory
+                .select()
+                .field("firstname")
+                .min("age")
+                .from("person")
+                .groupBy().column("firstname")
+                .build();
+
+        assertEquals("SELECT firstname, MIN(age) FROM person GROUP BY firstname;", query);
         assertThatQueryIsValidSQL(query);
     }
 }

@@ -1,4 +1,4 @@
-package builder.select.field;
+package builder.select.column;
 
 import database.DatabaseTestBaseClass;
 import factory.QueryFactory;
@@ -8,10 +8,10 @@ import java.sql.SQLException;
 
 import static junit.framework.Assert.assertEquals;
 
-public class FirstFieldTest extends DatabaseTestBaseClass {
+public class FirstColumnTest extends DatabaseTestBaseClass {
 
     @Test
-    public void testSelectFromTable() throws SQLException {
+    public void testSelect() throws SQLException {
         String query = QueryFactory
                 .select()
                     .field("lastname")
@@ -25,7 +25,7 @@ public class FirstFieldTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testSelectTopFromTable() throws SQLException {
+    public void testSelectTop() throws SQLException {
         String query = QueryFactory
                 .selectTop(100)
                 .field("lastname")
@@ -39,7 +39,7 @@ public class FirstFieldTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testSelectDistinctFromTable() throws SQLException {
+    public void testSelectDistinct() throws SQLException {
         String query = QueryFactory
                 .selectDistinct()
                     .field("lastname")
@@ -49,6 +49,18 @@ public class FirstFieldTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("SELECT DISTINCT lastname, age, firstname FROM person;", query);
+        assertThatQueryIsValidSQL(query);
+    }
+
+    @Test
+    public void testSelectMin() throws SQLException {
+        String query = QueryFactory
+                .select()
+                .min("age")
+                .from("person")
+                .build();
+
+        assertEquals("SELECT MIN(age) FROM person;", query);
         assertThatQueryIsValidSQL(query);
     }
 }

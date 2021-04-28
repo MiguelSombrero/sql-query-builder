@@ -1,6 +1,6 @@
 package builder;
 
-import builder.select.field.FirstField;
+import builder.select.column.FirstColumn;
 import builder.select.table.Table;
 import factory.QueryFactory;
 import org.junit.Test;
@@ -42,7 +42,7 @@ public class PerformanceTest {
         long end = 0L;
 
         start = System.currentTimeMillis();
-        FirstField field = QueryFactory.select();
+        FirstColumn field = QueryFactory.select();
 
         for (int i = 0; i < times; i++) {
             field.field("test").alias("best");

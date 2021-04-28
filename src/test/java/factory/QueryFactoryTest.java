@@ -1,6 +1,6 @@
 package factory;
 
-import builder.select.field.FirstField;
+import builder.select.column.FirstColumn;
 import org.hamcrest.core.IsInstanceOf;
 import org.junit.Test;
 
@@ -10,14 +10,14 @@ public class QueryFactoryTest {
 
     @Test
     public void testReturnSelect() {
-        FirstField queryBuilder = QueryFactory.select();
-        assertThat(queryBuilder, IsInstanceOf.instanceOf(FirstField.class));
+        FirstColumn queryBuilder = QueryFactory.select();
+        assertThat(queryBuilder, IsInstanceOf.instanceOf(FirstColumn.class));
     }
 
     @Test
     public void testReturnSelectDistinct() {
-        FirstField queryBuilder = QueryFactory.selectDistinct();
-        assertThat(queryBuilder, IsInstanceOf.instanceOf(FirstField.class));
+        FirstColumn queryBuilder = QueryFactory.selectDistinct();
+        assertThat(queryBuilder, IsInstanceOf.instanceOf(FirstColumn.class));
     }
 
 }
