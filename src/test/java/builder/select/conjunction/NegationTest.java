@@ -17,7 +17,7 @@ public class NegationTest extends DatabaseTestBaseClass {
     public void setUpQuery() {
         this.table = QueryFactory
                 .select()
-                .field("firstname")
+                .column("firstname")
                 .from("person");
     }
 

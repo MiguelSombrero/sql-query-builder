@@ -17,7 +17,7 @@ public class OrderByTest extends DatabaseTestBaseClass {
     public void setUpQuery() {
         this.table = QueryFactory
                 .select()
-                    .field("*")
+                    .column("*")
                 .from("person");
     }
 

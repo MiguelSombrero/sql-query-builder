@@ -45,11 +45,11 @@ public class PerformanceTest {
         FirstColumn field = QueryFactory.select();
 
         for (int i = 0; i < times; i++) {
-            field.field("test").alias("best");
+            field.column("test").alias("best");
         }
 
         Table table = field
-                .field("last")
+                .column("last")
                 .from("testing");
 
         for (int i = 0; i < times; i++) {
@@ -111,9 +111,9 @@ public class PerformanceTest {
 
     private String buildComplexQuery() {
         return QueryFactory.select()
-                .field("p.firstname").alias("first")
-                .field("p.lastname").alias("last")
-                .field("c.name").alias("course")
+                .column("p.firstname").alias("first")
+                .column("p.lastname").alias("last")
+                .column("c.name").alias("course")
                 .from("persons").alias("p")
                 .and("courses").alias("c")
                 .leftJoin("addresses").on("addresses.id = persons.address_id")

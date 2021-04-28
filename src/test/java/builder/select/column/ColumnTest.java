@@ -2,7 +2,6 @@ package builder.select.column;
 
 import database.DatabaseTestBaseClass;
 import factory.QueryFactory;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.SQLException;
@@ -10,38 +9,57 @@ import java.sql.SQLException;
 import static junit.framework.Assert.assertEquals;
 
 public class ColumnTest extends DatabaseTestBaseClass {
-    private Column column;
-
-    @Before
-    public void setUpQuery() {
-        this.column = QueryFactory
-                .select()
-                .field("firstname");
-    }
 
     @Test
-    public void testField() throws SQLException {
-        String query = this.column
-                .field("lastname")
-                .field("age")
+    public void testSelect() throws SQLException {
+        String query = QueryFactory
+                .select()
+                    .column("lastname")
+                    .column("age")
                 .from("person")
                 .build();
 
-        assertEquals("SELECT firstname, lastname, age FROM person;", query);
+        assertEquals("SELECT lastname, age FROM person;", query);
         assertThatQueryIsValidSQL(query);
     }
 
     @Test
-    public void testMultipleFieldsWithAliases() throws SQLException {
+    public void testSelectTop() throws SQLException {
         String query = QueryFactory
-                .select()
-                .field("lastname").alias("last")
-                .field("age")
-                .field("firstname").alias("first")
+                .selectTop(100)
+                    .column("lastname")
+                    .column("age")
+                    .column("firstname")
                 .from("person")
                 .build();
 
-        assertEquals("SELECT lastname AS last, age, firstname AS first FROM person;", query);
+        assertEquals("SELECT TOP 100 lastname, age, firstname FROM person;", query);
+        assertThatQueryIsValidSQL(query);
+    }
+
+    @Test
+    public void testSelectDistinct() throws SQLException {
+        String query = QueryFactory
+                .selectDistinct()
+                    .column("lastname")
+                    .column("age")
+                    .column("firstname")
+                .from("person")
+                .build();
+
+        assertEquals("SELECT DISTINCT lastname, age, firstname FROM person;", query);
+        assertThatQueryIsValidSQL(query);
+    }
+
+    @Test
+    public void testSelectCount() throws SQLException {
+        String query = QueryFactory
+                .select()
+                    .count("age")
+                .from("person")
+                .build();
+
+        assertEquals("SELECT COUNT(age) FROM person;", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -49,13 +67,63 @@ public class ColumnTest extends DatabaseTestBaseClass {
     public void testSelectMin() throws SQLException {
         String query = QueryFactory
                 .select()
-                .field("firstname")
-                .min("age")
+                    .min("age")
+                .from("person")
+                .build();
+
+        assertEquals("SELECT MIN(age) FROM person;", query);
+        assertThatQueryIsValidSQL(query);
+    }
+
+    @Test
+    public void testSelectMax() throws SQLException {
+        String query = QueryFactory
+                .select()
+                    .max("age")
+                .from("person")
+                .build();
+
+        assertEquals("SELECT MAX(age) FROM person;", query);
+        assertThatQueryIsValidSQL(query);
+    }
+
+    @Test
+    public void testSelectAvg() throws SQLException {
+        String query = QueryFactory
+                .select()
+                .avg("age")
+                .from("person")
+                .build();
+
+        assertEquals("SELECT AVG(age) FROM person;", query);
+        assertThatQueryIsValidSQL(query);
+    }
+
+    @Test
+    public void testSelectSum() throws SQLException {
+        String query = QueryFactory
+                .select()
+                .sum("age")
+                .from("person")
+                .build();
+
+        assertEquals("SELECT SUM(age) FROM person;", query);
+        assertThatQueryIsValidSQL(query);
+    }
+
+    @Test
+    public void testMultipleColumnsWithAliases() throws SQLException {
+        String query = QueryFactory
+                .select()
+                    .column("lastname").alias("last")
+                    .min("age").alias("minAge")
+                    .column("firstname").alias("first")
+                    .count("*").alias("count")
                 .from("person")
                 .groupBy().column("firstname")
                 .build();
 
-        assertEquals("SELECT firstname, MIN(age) FROM person GROUP BY firstname;", query);
+        assertEquals("SELECT lastname AS last, MIN(age) AS minAge, firstname AS first, COUNT(*) AS count FROM person GROUP BY firstname;", query);
         assertThatQueryIsValidSQL(query);
     }
 }
