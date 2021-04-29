@@ -58,11 +58,11 @@ In order to be implemented:
 - Between operator (BETWEEN x AND y)
 - Better Like operator (giving patterns without "%" etc. symbols)
 - Better HAVING clause (no need for giving condition by string)
-- Exists operator (EXISTS)
 - In operator (IN (...), IN (SELECT), ...)
 - Any and All operators (ANY, ALL)
 - Select into statement (SELECT INTO)
 - Case statements (CASE - WHEN, THEN)
-- Embedded SELECT and conditional clauses
+- Sub SELECT and conditional clauses
+- Exists operator (EXISTS)
 
 And propably many more special cases ...
