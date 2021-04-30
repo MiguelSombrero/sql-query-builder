@@ -1,12 +1,14 @@
 # Design document
 
-Starting point of the using program is static factory class `QueryFactory` found in package `/factory`. 
+## About the design
 
-SQL statements is created using [builder pattern](https://en.wikipedia.org/wiki/Builder_pattern): every class is responsible for adding its contribution to the SQL string and then passing it to the next class. Therefore there is a lot of classes with minimun functionality.
+Starting point of the using program is static factory class `QueryFactory` found in package `main/java/factory`. 
+
+I have used [builder pattern](https://en.wikipedia.org/wiki/Builder_pattern) to build SQL strings: every class is responsible for adding its contribution to the SQL string and then passing it to the next class.
+
+Therefore there is a lot of classes with minimun functionality.
 
 This design also ensures that query builder does not allow user to build invalid SQL, e.g. `QueryFactory.select().column("firstname).alias("f").alias("f").alias() ...`.  
-
-## Select statement
 
 I have used [template method pattern](https://en.wikipedia.org/wiki/Template_method_pattern) to reduce duplicate code in cases, where same functionality differs just a bit in different cases.
 
@@ -17,6 +19,12 @@ For example in clause `SELECT firstname, lastname, age FROM ...` you need to add
 That's why you will see lots of this kind of blocks in design:
 
 ![Select_class_diagram](https://github.com/MiguelSombrero/sql-query-builder/blob/develop/docs/select-only-columns-class-diagram.jpg)
+
+User starts building the SQL string by selecting statement to build in `QueryFactory`.
+
+`select()` method appends `SELECT ` to the query and returns class `FirstColumn`. 
+
+## Select statement
 
 ### Class diagram
 

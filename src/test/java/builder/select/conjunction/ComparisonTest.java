@@ -145,6 +145,17 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     }
 
     @Test
+    public void testConditionBetween() throws SQLException {
+        String query = this.table
+                .where("age").isBetween(18, 65)
+                .and("firstname").isBetween("miika", "siika")
+                .build();
+
+        assertEquals("SELECT firstname FROM person WHERE age BETWEEN 18 AND 65 AND firstname BETWEEN 'miika' AND 'siika';", query);
+        assertThatQueryIsValidSQL(query);
+    }
+
+    @Test
     public void testConditionLike() throws SQLException {
         String query = this.table
                 .where("firstname").isLike("%ika%")

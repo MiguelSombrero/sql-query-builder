@@ -55,7 +55,6 @@ In order to be implemented:
 - Drop clause (DROP DATABASE, DROP TABLE, ...) 
 - Update clauses (UPDATE, SET, ...)
 - Delete clauses (DELETE, ...)
-- Between operator (BETWEEN x AND y)
 - Better Like operator (giving patterns without "%" etc. symbols)
 - Better HAVING clause (no need for giving condition by string)
 - In operator (IN (...), IN (SELECT), ...)
@@ -66,3 +65,6 @@ In order to be implemented:
 - Exists operator (EXISTS)
 
 And propably many more special cases ...
+
+## Known issues
+

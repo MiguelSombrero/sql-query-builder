@@ -44,6 +44,16 @@ public class NegationTest extends DatabaseTestBaseClass {
     }
 
     @Test
+    public void testDoubleNot() throws SQLException {
+        String query = this.table
+                .where("age").not().isNotNull()
+                .build();
+
+        assertEquals("SELECT firstname FROM person WHERE NOT age IS NOT NULL;", query);
+        assertThatQueryIsValidSQL(query);
+    }
+
+    @Test
     public void testThatLastIndexOfReturnsIndexOfBlanksCorrectly() {
         StringBuilder builder = new StringBuilder("person WHERE NOT");
         int index = builder.lastIndexOf(" ");

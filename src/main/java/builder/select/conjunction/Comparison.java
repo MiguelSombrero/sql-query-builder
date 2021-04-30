@@ -48,6 +48,16 @@ public class Comparison extends SQLStringBuilder {
         return appendConditionWithValue(" <= ", value);
     }
 
+    public Conjunction isBetween(String lower, String higher) {
+        appendConditionWithValue(" BETWEEN ", lower);
+        return appendConditionWithValue(" AND ", higher);
+    }
+
+    public Conjunction isBetween(Integer lower, Integer higher) {
+        appendConditionWithValue(" BETWEEN ", lower);
+        return appendConditionWithValue(" AND ", higher);
+    }
+
     public Conjunction isNull() {
         append(" IS NULL");
         return new Conjunction(this.builder);
