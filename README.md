@@ -50,7 +50,6 @@ Check the latest version from [GitHub](https://github.com/MiguelSombrero/sql-que
 ## Not yet implemented
 
 In order to be implemented:
-- Create table AS clauses (CREATE table x AS, ...)
 - Create table constraints (NOT NULL, foreign key, ...)
 - Drop clause (DROP DATABASE, DROP TABLE, ...) 
 - Update clauses (UPDATE, SET, ...)
@@ -63,8 +62,10 @@ In order to be implemented:
 - Case statements (CASE - WHEN, THEN)
 - Sub SELECT and conditional clauses
 - Exists operator (EXISTS)
+- Create table AS clauses (CREATE table x AS, ...)
 
 And propably many more special cases ...
 
 ## Known issues
 
+- In CREATE TABLE statements you can chain constraints infinitely (e.g. CREATE TABLE person (id INT NOT NULL NOT NULL NOT NULL ...))

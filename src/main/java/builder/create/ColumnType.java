@@ -8,10 +8,10 @@ public class ColumnType extends SQLStringBuilder {
         this.builder = builder;
     }
 
-    public Column type(DataType dataType) {
+    public Constraint type(DataType dataType) {
         int index = lastIndexOfRightBracket();
         insert(index, dataType.getType());
         insert(index, " ");
-        return new Column(this.builder);
+        return new Constraint(this.builder);
     }
 }

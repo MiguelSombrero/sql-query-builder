@@ -30,6 +30,53 @@ public class CreateTest extends DatabaseTestBaseClass {
     }
 
     @Test
+    public void testCreateTableConstraintNotNull() throws SQLException {
+        String query = QueryFactory
+                .create()
+                .table("planes")
+                .column("ID").type(DataType.INT).notNull()
+                .column("age").type(DataType.DOUBLE)
+                .column("created").type(DataType.TIMESTAMP).notNull()
+                .build();
+
+        logger.info(query);
+
+        assertEquals("CREATE TABLE planes (ID INT NOT NULL, age DOUBLE, created TIMESTAMP NOT NULL);", query);
+        assertThatQueryIsValidSQL(query);
+    }
+
+    @Test
+    public void testCreateTableConstraintUnique() throws SQLException {
+        String query = QueryFactory
+                .create()
+                .table("bikes")
+                .column("ID").type(DataType.INT).unique()
+                .column("age").type(DataType.DOUBLE)
+                .column("created").type(DataType.TIMESTAMP).unique()
+                .build();
+
+        logger.info(query);
+
+        assertEquals("CREATE TABLE bikes (ID INT UNIQUE, age DOUBLE, created TIMESTAMP UNIQUE);", query);
+        assertThatQueryIsValidSQL(query);
+    }
+
+    @Test
+    public void testCreateTableConstraintPrimaryKey() throws SQLException {
+        String query = QueryFactory
+                .create()
+                .table("vehicles")
+                .column("ID").type(DataType.INT).primaryKey()
+                .column("age").type(DataType.DOUBLE)
+                .build();
+
+        logger.info(query);
+
+        assertEquals("CREATE TABLE vehicles (ID INT PRIMARY KEY, age DOUBLE);", query);
+        assertThatQueryIsValidSQL(query);
+    }
+
+    @Test
     public void testCreateDatabase() throws SQLException {
         String query = QueryFactory
                 .create()
