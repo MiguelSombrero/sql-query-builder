@@ -1,6 +1,6 @@
 package builder.update;
 
-import builder.delete.Negation;
+import builder.where.Negation;
 
 public class Column extends ColumnTemplate {
 

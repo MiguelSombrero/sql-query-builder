@@ -1,4 +1,4 @@
-package builder.delete;
+package builder.where;
 
 public class Negation extends Comparison {
 

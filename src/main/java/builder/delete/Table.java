@@ -1,6 +1,7 @@
 package builder.delete;
 
 import builder.SQLStringBuilder;
+import builder.where.Condition;
 
 public class Table extends SQLStringBuilder {
 

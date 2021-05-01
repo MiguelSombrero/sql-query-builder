@@ -1,4 +1,4 @@
-package builder.delete;
+package builder.where;
 
 import builder.TerminalOperation;
 
