@@ -36,6 +36,12 @@ User starts building the SQL string by selecting statement to build in `QueryFac
 
 ![Insert_class_diagram](https://github.com/MiguelSombrero/sql-query-builder/blob/develop/docs/insert-class-diagram.jpg)
 
+## Update statement
+
+### Class diagram
+
+![Update_class_diagram](https://github.com/MiguelSombrero/sql-query-builder/blob/develop/docs/update-class-diagram.jpg)
+
 ## Create statements
 
 ### Class diagram

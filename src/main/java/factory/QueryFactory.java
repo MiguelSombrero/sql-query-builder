@@ -21,6 +21,10 @@ public class QueryFactory {
         return new builder.insert.Table(new StringBuilder("INSERT INTO () VALUES ()"));
     }
 
+    public static builder.update.Table update() {
+        return new builder.update.Table(new StringBuilder("UPDATE "));
+    }
+
     public static Create create() {
         return new Create(new StringBuilder("CREATE "));
     }

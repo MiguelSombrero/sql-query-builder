@@ -58,9 +58,6 @@ Check the latest version from [GitHub](https://github.com/MiguelSombrero/sql-que
 - Exists operator (EXISTS)
 - Union operator (UNION)
 
-### UPDATE
-- Update clauses (UPDATE, SET, ...)
-
 ### INSERT
 - Insert into select clause (INSERT INTO table SELECT ...)
 
@@ -79,3 +76,4 @@ And propably many more special cases ...
 ## Known issues
 
 - In CREATE TABLE statements you can chain constraints infinitely (e.g. CREATE TABLE person (id INT NOT NULL NOT NULL NOT NULL ...))
+- In UPDATE table you can terminate query too soon (QueryFactory.update().table("person").build())
