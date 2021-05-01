@@ -1,4 +1,4 @@
-package builder.select.conjunction;
+package builder.delete;
 
 import builder.SQLStringBuilder;
 

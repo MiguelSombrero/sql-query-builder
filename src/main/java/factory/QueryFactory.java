@@ -25,6 +25,10 @@ public class QueryFactory {
         return new Create(new StringBuilder("CREATE "));
     }
 
+    public static builder.delete.Table deleteFrom() {
+        return new builder.delete.Table(new StringBuilder("DELETE FROM "));
+    }
+
     private static FirstColumn selectClause(String clause) {
         return new FirstColumn(new StringBuilder(clause));
     }

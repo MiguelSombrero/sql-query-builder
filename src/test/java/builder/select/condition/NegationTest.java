@@ -1,4 +1,4 @@
-package builder.select.conjunction;
+package builder.select.condition;
 
 import builder.select.table.Table;
 import database.DatabaseTestBaseClass;

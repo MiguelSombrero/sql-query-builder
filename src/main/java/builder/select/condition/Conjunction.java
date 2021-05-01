@@ -1,4 +1,4 @@
-package builder.select.conjunction;
+package builder.select.condition;
 
 import builder.select.order.Grouper;
 

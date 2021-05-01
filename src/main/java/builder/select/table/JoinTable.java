@@ -1,6 +1,6 @@
 package builder.select.table;
 
-import builder.select.conjunction.Negation;
+import builder.select.condition.Negation;
 import builder.select.order.Grouper;
 
 public class JoinTable extends Grouper {

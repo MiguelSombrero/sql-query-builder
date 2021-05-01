@@ -1,4 +1,4 @@
-package builder.select.conjunction;
+package builder.delete;
 
 public class Negation extends Comparison {
 

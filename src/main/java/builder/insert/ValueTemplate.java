@@ -1,11 +1,11 @@
 package builder.insert;
 
-import builder.TerminalOperation;
+import builder.SQLStringBuilder;
 
-public abstract class ValueTemplate extends TerminalOperation {
+public abstract class ValueTemplate extends SQLStringBuilder {
 
     public ValueTemplate(StringBuilder builder) {
-        super(builder);
+        this.builder = builder;
     }
 
     protected Column value(String value) {

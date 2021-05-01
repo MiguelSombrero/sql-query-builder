@@ -2,8 +2,6 @@
 
 ![GitHub Actions](https://github.com/MiguelSombrero/sql-query-builder/workflows/Java%20CI%20with%20Maven/badge.svg)
 
-**This app is under development**
-
 Sql query builder is Java-library to build SQL query strings more easily.
 
 ## Examples
@@ -50,10 +48,10 @@ Check the latest version from [GitHub](https://github.com/MiguelSombrero/sql-que
 ## Not yet implemented
 
 In order to be implemented:
-- Create table constraints (NOT NULL, foreign key, ...)
+- Create table constraints (foreign key, default, check, on delete, ...)
 - Drop clause (DROP DATABASE, DROP TABLE, ...) 
 - Update clauses (UPDATE, SET, ...)
-- Delete clauses (DELETE, ...)
+- Delete from multiple tables with joins (DELETE T1, T2, FROM T1 ... JOIN ...)
 - Better Like operator (giving patterns without "%" etc. symbols)
 - Better HAVING clause (no need for giving condition by string)
 - In operator (IN (...), IN (SELECT), ...)
