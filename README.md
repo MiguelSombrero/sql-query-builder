@@ -47,11 +47,7 @@ Check the latest version from [GitHub](https://github.com/MiguelSombrero/sql-que
 
 ## Not yet implemented
 
-In order to be implemented:
-- Create table constraints (foreign key, default, check, on delete, ...)
-- Drop clause (DROP DATABASE, DROP TABLE, ...) 
-- Update clauses (UPDATE, SET, ...)
-- Delete from multiple tables with joins (DELETE T1, T2, FROM T1 ... JOIN ...)
+### SELECT
 - Better Like operator (giving patterns without "%" etc. symbols)
 - Better HAVING clause (no need for giving condition by string)
 - In operator (IN (...), IN (SELECT), ...)
@@ -60,6 +56,22 @@ In order to be implemented:
 - Case statements (CASE - WHEN, THEN)
 - Sub SELECT and conditional clauses
 - Exists operator (EXISTS)
+- Union operator (UNION)
+
+### UPDATE
+- Update clauses (UPDATE, SET, ...)
+
+### INSERT
+- Insert into select clause (INSERT INTO table SELECT ...)
+
+### DROP
+- Drop clause (DROP DATABASE, DROP TABLE, ...) 
+
+### DELETE
+- Delete from multiple tables with joins (DELETE T1, T2, FROM T1 ... JOIN ...)
+
+### CREATE
+- Create table constraints (foreign key, default, check, on delete, ...)
 - Create table AS clauses (CREATE table x AS, ...)
 
 And propably many more special cases ...
