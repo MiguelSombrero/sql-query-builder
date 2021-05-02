@@ -1,7 +1,7 @@
 package builder;
 
-import builder.select.column.FirstColumn;
-import builder.select.table.Table;
+import builder.statement.select.column.FirstColumn;
+import builder.statement.select.table.Table;
 import factory.QueryFactory;
 import org.junit.Test;
 import org.slf4j.Logger;

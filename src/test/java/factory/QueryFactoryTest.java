@@ -1,6 +1,6 @@
 package factory;
 
-import builder.select.column.FirstColumn;
+import builder.statement.select.column.FirstColumn;
 import org.hamcrest.core.IsInstanceOf;
 import org.junit.Test;
 

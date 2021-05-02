@@ -1,7 +1,7 @@
 package factory;
 
-import builder.create.Create;
-import builder.select.column.FirstColumn;
+import builder.statement.create.Create;
+import builder.statement.select.column.FirstColumn;
 
 public class QueryFactory {
 
@@ -17,20 +17,20 @@ public class QueryFactory {
         return selectClause("SELECT DISTINCT ");
     }
 
-    public static builder.insert.Table insertInto() {
-        return new builder.insert.Table(new StringBuilder("INSERT INTO () VALUES ()"));
+    public static builder.statement.insert.Table insertInto() {
+        return new builder.statement.insert.Table(new StringBuilder("INSERT INTO () VALUES ()"));
     }
 
-    public static builder.update.Table update() {
-        return new builder.update.Table(new StringBuilder("UPDATE "));
+    public static builder.statement.update.Table update() {
+        return new builder.statement.update.Table(new StringBuilder("UPDATE "));
     }
 
     public static Create create() {
         return new Create(new StringBuilder("CREATE "));
     }
 
-    public static builder.delete.Table deleteFrom() {
-        return new builder.delete.Table(new StringBuilder("DELETE FROM "));
+    public static builder.statement.delete.Table deleteFrom() {
+        return new builder.statement.delete.Table(new StringBuilder("DELETE FROM "));
     }
 
     private static FirstColumn selectClause(String clause) {
