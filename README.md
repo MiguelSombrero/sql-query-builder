@@ -112,15 +112,16 @@ Check the latest version from [GitHub](https://github.com/MiguelSombrero/sql-que
 ## Not yet implemented
 
 ### SELECT
+- Doubles, booleans and other datatypes in WHERE clauses
 - Better Like operator (giving patterns without "%" etc. symbols)
 - Better HAVING clause (no need for giving condition by string)
-- In operator (IN (...), IN (SELECT), ...)
 - Any and All operators (ANY, ALL)
 - Select into statement (SELECT INTO)
 - Case statements (CASE - WHEN, THEN)
 - Sub SELECT and conditional clauses
 - Exists operator (EXISTS)
 - Union operator (UNION)
+- In select operator (IN (SELECT), ...)
 
 ### INSERT
 - Insert into select clause (INSERT INTO table SELECT ...)

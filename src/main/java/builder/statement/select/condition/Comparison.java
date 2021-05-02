@@ -2,6 +2,8 @@ package builder.statement.select.condition;
 
 import builder.SQLStringBuilder;
 
+import java.util.Arrays;
+
 public class Comparison extends SQLStringBuilder {
 
     public Comparison(StringBuilder builder) {
@@ -72,12 +74,35 @@ public class Comparison extends SQLStringBuilder {
         return appendConditionWithValue(" LIKE ", pattern);
     }
 
+    public Conjunction isIn(String ...listOfValue) {
+        append(" IN (");
+        appendValue(listOfValue[0]);
+
+        for (int i = 1; i < listOfValue.length; i++) {
+            append(", ");
+            appendValue(listOfValue[i]);
+        }
+
+        append(")");
+        return new Conjunction(this.builder);
+    }
+
+    public Conjunction isIn(int ...listOfValue) {
+        append(" IN (");
+        append(listOfValue[0]);
+
+        for (int i = 1; i < listOfValue.length; i++) {
+            append(", ");
+            append(listOfValue[i]);
+        }
+
+        append(")");
+        return new Conjunction(this.builder);
+    }
+
     private Conjunction appendConditionWithValue(String condition, String value) {
         append(condition);
-        append("'");
-        append(value);
-        append("'");
-        return new Conjunction(this.builder);
+        return appendValue(value);
     }
 
     private Conjunction appendConditionWithValue(String condition, Integer value) {
@@ -85,4 +110,12 @@ public class Comparison extends SQLStringBuilder {
         append(value);
         return new Conjunction(this.builder);
     }
+
+    private Conjunction appendValue(String value) {
+        append("'");
+        append(value);
+        append("'");
+        return new Conjunction(this.builder);
+    }
+
 }

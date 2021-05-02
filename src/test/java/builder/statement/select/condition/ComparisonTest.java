@@ -164,4 +164,24 @@ public class ComparisonTest extends DatabaseTestBaseClass {
         assertEquals("SELECT firstname FROM person WHERE firstname LIKE '%ika%';", query);
         assertThatQueryIsValidSQL(query);
     }
+
+    @Test
+    public void testConditionInListOfIntegers() throws SQLException {
+        String query = this.table
+                .where("age").isIn(18, 19, 20, 21)
+                .build();
+
+        assertEquals("SELECT firstname FROM person WHERE age IN (18, 19, 20, 21);", query);
+        assertThatQueryIsValidSQL(query);
+    }
+
+    @Test
+    public void testConditionInListOfStrings() throws SQLException {
+        String query = this.table
+                .where("lastname").isIn("Somero", "Testinen", "Komero")
+                .build();
+
+        assertEquals("SELECT firstname FROM person WHERE lastname IN ('Somero', 'Testinen', 'Komero');", query);
+        assertThatQueryIsValidSQL(query);
+    }
 }
