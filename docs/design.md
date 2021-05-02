@@ -4,21 +4,9 @@
 
 Starting point of the using program is static factory class `QueryFactory` found in package `main/java/factory`. 
 
-I have used [builder pattern](https://en.wikipedia.org/wiki/Builder_pattern) to build SQL strings: every class is responsible for adding its contribution to the SQL string and then passing it to the next class.
-
-This design also ensures that query builder does not allow user to build invalid SQL, e.g. `QueryFactory.select().column("firstname).alias("f").alias("f").alias() ...`.  
-
-I have used [template method pattern](https://en.wikipedia.org/wiki/Template_method_pattern) to reduce duplicate code in cases, where same functionality differs just a bit in different cases.
-
-Especially in creating list of values, when first value of the list does not need comma before and rest of the values need.
-
-For example in clause `SELECT firstname, lastname, age FROM ...` you need to add first value as `firstname` and the rest of the values as `, lastname`.
-
-That's why you will see lots of this kind of blocks in design:
-
-![Select_class_diagram](https://github.com/MiguelSombrero/sql-query-builder/blob/develop/docs/select-only-columns-class-diagram.jpg)
-
-Class `ColumnTemplate` implements functionality related to selecting columns to query. Classes `FirstColumn`, `Column` and `AliasedColumn` are just special cases.
+I have tried to use [builder pattern](https://en.wikipedia.org/wiki/Builder_pattern) to chain classes together. 
+This design also ensures that query builder does not allow user to build invalid SQL, e.g. `QueryFactory.select().column("firstname).alias("f").alias("f").alias() ...`.
+Therefore, there is relatively large amount of classes with minimum functionality.
 
 ## Select statement
 
