@@ -1,12 +1,16 @@
 package builder.statement.update;
 
-public class FirstColumn extends ColumnTemplate {
+import builder.SQLStringBuilder;
+
+public class FirstColumn extends SQLStringBuilder {
 
     public FirstColumn(StringBuilder builder) {
-        super(builder);
+        this.builder = builder;
     }
 
-    @Override
-    protected void addCommaAfterFirstValue() {
+    public Value column(String column) {
+        append(column);
+        append(" = ");
+        return new Value(this.builder);
     }
 }

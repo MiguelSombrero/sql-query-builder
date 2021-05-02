@@ -8,6 +8,9 @@ I have tried to use [builder pattern](https://en.wikipedia.org/wiki/Builder_patt
 This design also ensures that query builder does not allow user to build invalid SQL, e.g. `QueryFactory.select().column("firstname).alias("f").alias("f").alias() ...`.
 Therefore, there is relatively large amount of classes with minimum functionality.
 
+Arrows ----> in class diagrams represents direction the flow goes.
+For example `FirstTable` creates `Table`, but when you are in `Table`, you cannot go back to `FirstTable`.
+
 ## Select statement
 
 `SELECT` queries is implemented in package `/main/java/builder/statement/select`. 
