@@ -1,6 +1,7 @@
 package factory;
 
 import builder.statement.create.Create;
+import builder.statement.drop.Drop;
 import builder.statement.select.column.FirstColumn;
 
 public class QueryFactory {
@@ -31,6 +32,10 @@ public class QueryFactory {
 
     public static builder.statement.delete.Table deleteFrom() {
         return new builder.statement.delete.Table(new StringBuilder("DELETE FROM "));
+    }
+
+    public static Drop drop() {
+        return new Drop(new StringBuilder("DROP "));
     }
 
     private static FirstColumn selectClause(String clause) {

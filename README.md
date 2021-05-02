@@ -2,17 +2,19 @@
 
 ![GitHub Actions](https://github.com/MiguelSombrero/sql-query-builder/workflows/Java%20CI%20with%20Maven/badge.svg)
 
-Sql query builder is Java-library to build SQL query strings more easily.
+Sql query builder is Java-library used to build SQL query strings more easily.
 
 ## Examples
 
 ### SELECT
 
+Basic example:
+
     String query = QueryFactory
         .select()
-        .field("firstname").alias("first")
-        .field("lastname").alias("last")
-        .field("age")
+            .column("firstname").alias("first")
+            .column("lastname").alias("last")
+            .column("age")
         .from("person")
         .where("age").greaterThan(18)
         .build();
@@ -21,8 +23,70 @@ Sql query builder is Java-library to build SQL query strings more easily.
     
 Above code prints out:
 
-    "SELECT firstname AS first, lastname AS last, age FROM person WHERE age > 18;"
-    
+    SELECT firstname AS first, lastname AS last, age
+    FROM person
+    WHERE age > 18;
+
+More complex example with joins:
+
+    String query = QueryFactory
+                .select()
+                    .column("p.id")
+                    .column("p.age")
+                    .column("p.firstname").alias("name")
+                    .column("c.name").alias("course")
+                .from()
+                    .table("person").alias("p")
+                .leftJoin("course").alias("c")
+                    .on("p.id = c.person_id")
+                .where("p.age")
+                    .greaterThan(18)
+                .and("p.age")
+                    .lesserThan(65)
+                .and("c.name")
+                    .isNotNull()
+                .orderBy()
+                    .column("p.age").desc()
+                .limit(100)
+                .build();
+
+        logger.info(query);
+
+Above code prints out:
+
+    SELECT p.id, p.age, p.firstname AS name, c.name AS course
+    FROM person AS p
+    LEFT JOIN course AS c ON p.id = c.person_id
+    WHERE p.age > 18
+    AND p.age < 65
+    AND c.name IS NOT NULL
+    ORDER BY p.age DESC
+    LIMIT 100;
+
+Example with aggregate functions:
+
+    String query = QueryFactory
+                .select()
+                    .column("s.name").alias("school")
+                    .avg("c.difficulty").alias("avgDifficulty")
+                .from()
+                    .table("school").alias("s")
+                .innerJoin("course").alias("c").on("s.id = c.school_id")
+                .groupBy()
+                    .column("school")
+                .having("avgDifficulty > 1")
+                .build();
+
+        logger.info(query);
+
+Above code prints out:
+
+    SELECT s.name AS school, AVG(c.difficulty) AS avgDifficulty
+    FROM school AS s
+    INNER JOIN course AS c ON s.id = c.school_id
+    GROUP BY school
+    HAVING avgDifficulty > 1;
+
 ## How to use this library
 
 ### Add Maven dependency
@@ -61,9 +125,6 @@ Check the latest version from [GitHub](https://github.com/MiguelSombrero/sql-que
 ### INSERT
 - Insert into select clause (INSERT INTO table SELECT ...)
 
-### DROP
-- Drop clause (DROP DATABASE, DROP TABLE, ...) 
-
 ### DELETE
 - Delete from multiple tables with joins (DELETE T1, T2, FROM T1 ... JOIN ...)
 
@@ -75,5 +136,6 @@ And propably many more special cases ...
 
 ## Known issues
 
+- After calling `from()` you should be allowed only select `table()`. Now you can select other too. 
 - In CREATE TABLE statements you can chain constraints infinitely (e.g. CREATE TABLE person (id INT NOT NULL NOT NULL NOT NULL ...))
-- In UPDATE table you can terminate query too soon (QueryFactory.update().table("person").build())
+- In UPDATE table statement you can terminate query too soon (QueryFactory.update().table("person").build())

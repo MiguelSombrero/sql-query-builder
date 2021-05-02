@@ -71,7 +71,7 @@ public class DatabaseTestBaseClass {
         executeQuery(query);
     }
 
-    private void executeQuery(String query) throws SQLException {
+    protected void executeQuery(String query) throws SQLException {
         try (Connection conn = DatabaseConnection.getConnection()) {
             conn.prepareStatement(query).execute();
         }

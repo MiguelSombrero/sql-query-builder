@@ -1,6 +1,6 @@
 package builder.statement.create;
 
-enum DataType {
+public enum DataType {
     INT("INT"),
     DOUBLE("DOUBLE"),
     TIMESTAMP("TIMESTAMP"),
