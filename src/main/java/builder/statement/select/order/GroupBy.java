@@ -1,19 +1,15 @@
 package builder.statement.select.order;
 
-public class GroupBy extends GroupByTemplate {
+import builder.TerminalOperation;
+
+public class GroupBy extends TerminalOperation {
 
     public GroupBy(StringBuilder builder) {
         super(builder);
     }
 
-    public Orderer having(String condition) {
-        append(" HAVING ");
-        append(condition);
-        return new Orderer(this.builder);
-    }
-
-    @Override
-    protected void addCommaAfterFirstValue() {
-        append(", ");
+    public Having column(String columnName) {
+        append(columnName);
+        return new Having(this.builder);
     }
 }

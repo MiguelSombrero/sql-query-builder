@@ -6,8 +6,8 @@ public class Grouper extends Orderer {
         super(builder);
     }
 
-    public FirstGroupBy groupBy() {
+    public GroupBy groupBy() {
         append(" GROUP BY ");
-        return new FirstGroupBy(this.builder);
+        return new GroupBy(this.builder);
     }
 }

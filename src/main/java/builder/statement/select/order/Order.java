@@ -1,18 +1,20 @@
 package builder.statement.select.order;
 
 public class Order extends OrderBy {
+    private OrderBy parent;
 
-    public Order(StringBuilder builder) {
-        super(builder);
+    public Order(OrderBy parent, StringBuilder builder) {
+        this.parent = parent;
+        this.builder = builder;
     }
 
     public OrderBy desc() {
         append(" DESC");
-        return new OrderBy(this.builder);
+        return parent;
     }
 
     public OrderBy asc() {
         append(" ASC");
-        return new OrderBy(this.builder);
+        return parent;
     }
 }

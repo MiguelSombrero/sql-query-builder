@@ -2,9 +2,12 @@ package builder.statement.select.order;
 
 import builder.TerminalOperation;
 
-public class Limiter extends TerminalOperation {
+public class Limit extends TerminalOperation {
 
-    public Limiter(StringBuilder builder) {
+    public Limit() {
+    }
+
+    public Limit(StringBuilder builder) {
         super(builder);
     }
 
