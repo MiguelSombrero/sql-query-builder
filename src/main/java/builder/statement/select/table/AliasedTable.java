@@ -1,13 +1,14 @@
 package builder.statement.select.table;
 
-public class AliasedTable extends TableTemplate {
+public class AliasedTable extends JoinTable {
 
     public AliasedTable(StringBuilder builder) {
         super(builder);
     }
 
-    @Override
-    protected void addCommaAfterFirstValue() {
+    public Table table(String tableName) {
         append(", ");
+        append(tableName);
+        return new Table(this.builder);
     }
 }

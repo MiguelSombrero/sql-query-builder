@@ -1,12 +1,15 @@
 package builder.statement.select.table;
 
-public class FirstTable extends TableTemplate {
+import builder.SQLStringBuilder;
+
+public class FirstTable extends SQLStringBuilder {
 
     public FirstTable(StringBuilder builder) {
-        super(builder);
+        this.builder = builder;
     }
 
-    @Override
-    protected void addCommaAfterFirstValue() {
+    public Table table(String tableName) {
+        append(tableName);
+        return new Table(this.builder);
     }
 }

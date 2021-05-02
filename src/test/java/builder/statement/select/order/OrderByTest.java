@@ -34,6 +34,18 @@ public class OrderByTest extends DatabaseTestBaseClass {
     }
 
     @Test
+    public void testOrderByWhere() throws SQLException {
+        String query = table
+                .where("age").greaterThan(18)
+                .orderBy()
+                .column("firstname")
+                .build();
+
+        assertEquals("SELECT * FROM person WHERE age > 18 ORDER BY firstname;", query);
+        assertThatQueryIsValidSQL(query);
+    }
+
+    @Test
     public void testOrderByGroupBy() throws SQLException {
         String query = table
                 .groupBy()

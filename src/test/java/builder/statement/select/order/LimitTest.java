@@ -33,6 +33,17 @@ public class LimitTest extends DatabaseTestBaseClass {
     }
 
     @Test
+    public void testLimitFromTableWhere() throws SQLException {
+        String query = table
+                .where("age").greaterThan(18)
+                .limit(100)
+                .build();
+
+        assertEquals("SELECT * FROM person WHERE age > 18 LIMIT 100;", query);
+        assertThatQueryIsValidSQL(query);
+    }
+
+    @Test
     public void testLimitJoinTable() throws SQLException {
         String query = table
                 .leftJoin("course").on("person.id = course.person_id")
