@@ -18,7 +18,7 @@ public class UpdateTest extends DatabaseTestBaseClass {
                 .column("age").value(50)
                 .build();
 
-        assertEquals("UPDATE person SET age = 50;", query);
+        assertEquals("UPDATE person SET age = 50", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -30,7 +30,7 @@ public class UpdateTest extends DatabaseTestBaseClass {
                 .column("firstname").value("Miika")
                 .build();
 
-        assertEquals("UPDATE person SET firstname = 'Miika';", query);
+        assertEquals("UPDATE person SET firstname = 'Miika'", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -44,7 +44,7 @@ public class UpdateTest extends DatabaseTestBaseClass {
                 .column("age").value(50)
                 .build();
 
-        assertEquals("UPDATE person SET firstname = 'Miika', lastname = 'Somero', age = 50;", query);
+        assertEquals("UPDATE person SET firstname = 'Miika', lastname = 'Somero', age = 50", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -58,7 +58,7 @@ public class UpdateTest extends DatabaseTestBaseClass {
                 .or("id").equals(2)
                 .build();
 
-        assertEquals("UPDATE person SET age = 50 WHERE id = 1 OR id = 2;", query);
+        assertEquals("UPDATE person SET age = 50 WHERE id = 1 OR id = 2", query);
         assertThatQueryIsValidSQL(query);
     }
 }

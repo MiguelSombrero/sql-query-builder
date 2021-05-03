@@ -29,7 +29,7 @@ public class ConjunctionTest extends DatabaseTestBaseClass {
                 .and("birthdate").greaterThan("2020-02-28T21:00:00.000")
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE age > 18 AND birthdate > '2020-02-28T21:00:00.000';", query);
+        assertEquals("SELECT firstname FROM person WHERE age > 18 AND birthdate > '2020-02-28T21:00:00.000'", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -40,7 +40,7 @@ public class ConjunctionTest extends DatabaseTestBaseClass {
                 .or("birthdate").greaterThan("2020-02-28T21:00:00.000")
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE age > 18 OR birthdate > '2020-02-28T21:00:00.000';", query);
+        assertEquals("SELECT firstname FROM person WHERE age > 18 OR birthdate > '2020-02-28T21:00:00.000'", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -52,7 +52,7 @@ public class ConjunctionTest extends DatabaseTestBaseClass {
                 .or("birthdate").lesserThan("2018-02-28T21:00:00.000")
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE age > 18 AND birthdate > '2020-02-28T21:00:00.000' OR birthdate < '2018-02-28T21:00:00.000';", query);
+        assertEquals("SELECT firstname FROM person WHERE age > 18 AND birthdate > '2020-02-28T21:00:00.000' OR birthdate < '2018-02-28T21:00:00.000'", query);
         assertThatQueryIsValidSQL(query);
     }
 }

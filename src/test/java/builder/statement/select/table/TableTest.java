@@ -27,7 +27,7 @@ public class TableTest extends DatabaseTestBaseClass {
                     .table("person")
                 .build();
 
-        assertEquals("SELECT * FROM person;", query);
+        assertEquals("SELECT * FROM person", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -40,7 +40,28 @@ public class TableTest extends DatabaseTestBaseClass {
                     .table("course")
                 .build();
 
-        assertEquals("SELECT * FROM person, address, course;", query);
+        assertEquals("SELECT * FROM person, address, course", query);
+        assertThatQueryIsValidSQL(query);
+    }
+
+    @Test
+    public void testFromSubQuery() throws SQLException {
+        String query = QueryFactory
+                .select()
+                    .column("age")
+                .from()
+                    .sub(QueryFactory
+                            .select()
+                                .column("*")
+                            .from()
+                                .table("person")
+                            .where("age").greaterThan(20)
+                            .build()
+                    )
+                .alias("p")
+                .build();
+
+        assertEquals("SELECT age FROM (SELECT * FROM person WHERE age > 20) AS p", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -53,7 +74,7 @@ public class TableTest extends DatabaseTestBaseClass {
                     .table("course").alias("h")
                 .build();
 
-        assertEquals("SELECT * FROM person AS p, address AS a, course AS h;", query);
+        assertEquals("SELECT * FROM person AS p, address AS a, course AS h", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -65,7 +86,7 @@ public class TableTest extends DatabaseTestBaseClass {
                 .leftJoin("address").alias("a").on("person.id = a.person_id")
                 .build();
 
-        assertEquals("SELECT * FROM person LEFT JOIN address AS a ON person.id = a.person_id;", query);
+        assertEquals("SELECT * FROM person LEFT JOIN address AS a ON person.id = a.person_id", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -77,7 +98,7 @@ public class TableTest extends DatabaseTestBaseClass {
                 .innerJoin("address").on("person.id = address.person_id")
                 .build();
 
-        assertEquals("SELECT * FROM person INNER JOIN address ON person.id = address.person_id;", query);
+        assertEquals("SELECT * FROM person INNER JOIN address ON person.id = address.person_id", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -89,7 +110,7 @@ public class TableTest extends DatabaseTestBaseClass {
                 .leftJoin("address").on("person.id = address.person_id")
                 .build();
 
-        assertEquals("SELECT * FROM person LEFT JOIN address ON person.id = address.person_id;", query);
+        assertEquals("SELECT * FROM person LEFT JOIN address ON person.id = address.person_id", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -101,7 +122,7 @@ public class TableTest extends DatabaseTestBaseClass {
                 .rightJoin("address").on("person.id = address.person_id")
                 .build();
 
-        assertEquals("SELECT * FROM person RIGHT JOIN address ON person.id = address.person_id;", query);
+        assertEquals("SELECT * FROM person RIGHT JOIN address ON person.id = address.person_id", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -115,7 +136,7 @@ public class TableTest extends DatabaseTestBaseClass {
                 .rightJoin("school").on("course.school_id = school.id")
                 .build();
 
-        assertEquals("SELECT * FROM person LEFT JOIN address ON person.id = address.person_id INNER JOIN course ON person.id = course.person_id RIGHT JOIN school ON course.school_id = school.id;", query);
+        assertEquals("SELECT * FROM person LEFT JOIN address ON person.id = address.person_id INNER JOIN course ON person.id = course.person_id RIGHT JOIN school ON course.school_id = school.id", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -129,7 +150,7 @@ public class TableTest extends DatabaseTestBaseClass {
                 .rightJoin("school").alias("s").on("c.school_id = s.id")
                 .build();
 
-        assertEquals("SELECT * FROM person AS p LEFT JOIN address AS a ON p.id = a.person_id INNER JOIN course AS c ON p.id = c.person_id RIGHT JOIN school AS s ON c.school_id = s.id;", query);
+        assertEquals("SELECT * FROM person AS p LEFT JOIN address AS a ON p.id = a.person_id INNER JOIN course AS c ON p.id = c.person_id RIGHT JOIN school AS s ON c.school_id = s.id", query);
         assertThatQueryIsValidSQL(query);
     }
 }

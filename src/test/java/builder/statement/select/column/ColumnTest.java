@@ -20,7 +20,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
                     .table("person")
                 .build();
 
-        assertEquals("SELECT lastname, age FROM person;", query);
+        assertEquals("SELECT lastname, age FROM person", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -35,7 +35,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
                     .table("person")
                 .build();
 
-        assertEquals("SELECT TOP 100 lastname, age, firstname FROM person;", query);
+        assertEquals("SELECT TOP 100 lastname, age, firstname FROM person", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -50,7 +50,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
                     .table("person")
                 .build();
 
-        assertEquals("SELECT DISTINCT lastname, age, firstname FROM person;", query);
+        assertEquals("SELECT DISTINCT lastname, age, firstname FROM person", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -63,7 +63,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
                     .table("person")
                 .build();
 
-        assertEquals("SELECT COUNT(age) FROM person;", query);
+        assertEquals("SELECT COUNT(age) FROM person", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -76,7 +76,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
                     .table("person")
                 .build();
 
-        assertEquals("SELECT MIN(age) FROM person;", query);
+        assertEquals("SELECT MIN(age) FROM person", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -89,7 +89,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
                     .table("person")
                 .build();
 
-        assertEquals("SELECT MAX(age) FROM person;", query);
+        assertEquals("SELECT MAX(age) FROM person", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -102,7 +102,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
                     .table("person")
                 .build();
 
-        assertEquals("SELECT AVG(age) FROM person;", query);
+        assertEquals("SELECT AVG(age) FROM person", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -115,7 +115,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
                     .table("person")
                 .build();
 
-        assertEquals("SELECT SUM(age) FROM person;", query);
+        assertEquals("SELECT SUM(age) FROM person", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -132,7 +132,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
                 .groupBy().column("firstname")
                 .build();
 
-        assertEquals("SELECT lastname AS last, MIN(age) AS minAge, firstname AS first, COUNT(*) AS count FROM person GROUP BY firstname;", query);
+        assertEquals("SELECT lastname AS last, MIN(age) AS minAge, firstname AS first, COUNT(*) AS count FROM person GROUP BY firstname", query);
         assertThatQueryIsValidSQL(query);
     }
 }

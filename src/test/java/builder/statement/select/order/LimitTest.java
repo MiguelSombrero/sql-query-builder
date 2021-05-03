@@ -28,7 +28,7 @@ public class LimitTest extends DatabaseTestBaseClass {
                 .limit(100)
                 .build();
 
-        assertEquals("SELECT * FROM person LIMIT 100;", query);
+        assertEquals("SELECT * FROM person LIMIT 100", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -39,7 +39,7 @@ public class LimitTest extends DatabaseTestBaseClass {
                 .limit(100)
                 .build();
 
-        assertEquals("SELECT * FROM person WHERE age > 18 LIMIT 100;", query);
+        assertEquals("SELECT * FROM person WHERE age > 18 LIMIT 100", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -50,7 +50,7 @@ public class LimitTest extends DatabaseTestBaseClass {
                 .limit(100)
                 .build();
 
-        assertEquals("SELECT * FROM person LEFT JOIN course ON person.id = course.person_id LIMIT 100;", query);
+        assertEquals("SELECT * FROM person LEFT JOIN course ON person.id = course.person_id LIMIT 100", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -62,7 +62,7 @@ public class LimitTest extends DatabaseTestBaseClass {
                 .limit(100)
                 .build();
 
-        assertEquals("SELECT * FROM person GROUP BY age LIMIT 100;", query);
+        assertEquals("SELECT * FROM person GROUP BY age LIMIT 100", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -75,7 +75,7 @@ public class LimitTest extends DatabaseTestBaseClass {
                 .limit(100)
                 .build();
 
-        assertEquals("SELECT * FROM person GROUP BY age HAVING age = 20 LIMIT 100;", query);
+        assertEquals("SELECT * FROM person GROUP BY age HAVING age = 20 LIMIT 100", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -89,7 +89,7 @@ public class LimitTest extends DatabaseTestBaseClass {
                 .limit(100)
                 .build();
 
-        assertEquals("SELECT * FROM person GROUP BY age ORDER BY firstname LIMIT 100;", query);
+        assertEquals("SELECT * FROM person GROUP BY age ORDER BY firstname LIMIT 100", query);
         assertThatQueryIsValidSQL(query);
     }
 

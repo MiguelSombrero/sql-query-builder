@@ -12,7 +12,7 @@ import static org.junit.Assert.assertTrue;
 
 public class PerformanceTest {
     private static Logger logger = LoggerFactory.getLogger(PerformanceTest.class);
-    private static final String complexQuery = "SELECT p.firstname AS first, p.lastname AS last, c.name AS course FROM persons AS p, courses AS c LEFT JOIN addresses ON addresses.id = persons.address_id WHERE age > 18 AND age < 65 AND NOT firstname = 'Miika';";
+    private static final String complexQuery = "SELECT p.firstname AS first, p.lastname AS last, c.name AS course FROM persons AS p, courses AS c LEFT JOIN addresses ON addresses.id = persons.address_id WHERE age > 18 AND age < 65 AND NOT firstname = 'Miika'";
     private static final int times = 1_000_000;
 
     @Test
@@ -136,7 +136,7 @@ public class PerformanceTest {
                 "ON addresses.id = persons.address_id " +
                 "WHERE age > 18 " +
                 "AND age < 65 " +
-                "AND NOT firstname = 'Miika';";
+                "AND NOT firstname = 'Miika'";
     }
 
     private String concatComplexQuery() {
@@ -150,6 +150,6 @@ public class PerformanceTest {
                 .concat("ON addresses.id = persons.address_id ")
                 .concat("WHERE age > 18 ")
                 .concat("AND age < 65 ")
-                .concat("AND NOT firstname = 'Miika';");
+                .concat("AND NOT firstname = 'Miika'");
     }
 }

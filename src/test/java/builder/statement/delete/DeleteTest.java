@@ -17,7 +17,7 @@ public class DeleteTest extends DatabaseTestBaseClass {
                     .table("address")
                 .build();
 
-        assertEquals("DELETE FROM address;", query);
+        assertEquals("DELETE FROM address", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -29,7 +29,7 @@ public class DeleteTest extends DatabaseTestBaseClass {
                 .where("person_id").equals(1)
                 .build();
 
-        assertEquals("DELETE FROM address WHERE person_id = 1;", query);
+        assertEquals("DELETE FROM address WHERE person_id = 1", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -42,7 +42,7 @@ public class DeleteTest extends DatabaseTestBaseClass {
                 .and("city").equals("Oulu")
                 .build();
 
-        assertEquals("DELETE FROM address WHERE person_id = 1 AND city = 'Oulu';", query);
+        assertEquals("DELETE FROM address WHERE person_id = 1 AND city = 'Oulu'", query);
         assertThatQueryIsValidSQL(query);
     }
 }

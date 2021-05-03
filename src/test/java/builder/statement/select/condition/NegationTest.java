@@ -28,7 +28,7 @@ public class NegationTest extends DatabaseTestBaseClass {
                 .where("age").not().greaterThan(18)
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE NOT age > 18;", query);
+        assertEquals("SELECT firstname FROM person WHERE NOT age > 18", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -39,7 +39,7 @@ public class NegationTest extends DatabaseTestBaseClass {
                 .and("firstname").not().equals("Miika")
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE NOT age > 18 AND NOT firstname = 'Miika';", query);
+        assertEquals("SELECT firstname FROM person WHERE NOT age > 18 AND NOT firstname = 'Miika'", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -49,7 +49,7 @@ public class NegationTest extends DatabaseTestBaseClass {
                 .where("age").not().isNotNull()
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE NOT age IS NOT NULL;", query);
+        assertEquals("SELECT firstname FROM person WHERE NOT age IS NOT NULL", query);
         assertThatQueryIsValidSQL(query);
     }
 

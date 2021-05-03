@@ -28,7 +28,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
                 .where("firstname").equals("Miika")
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE firstname = 'Miika';", query);
+        assertEquals("SELECT firstname FROM person WHERE firstname = 'Miika'", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -38,7 +38,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
                 .where("age").equals(18)
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE age = 18;", query);
+        assertEquals("SELECT firstname FROM person WHERE age = 18", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -48,7 +48,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
                 .where("birthdate").greaterThan("2020-02-28T21:00:00.000")
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE birthdate > '2020-02-28T21:00:00.000';", query);
+        assertEquals("SELECT firstname FROM person WHERE birthdate > '2020-02-28T21:00:00.000'", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -58,7 +58,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
                 .where("age").greaterThan(18)
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE age > 18;", query);
+        assertEquals("SELECT firstname FROM person WHERE age > 18", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -68,7 +68,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
                 .where("birthdate").greaterThanOrEqual("2020-02-28T21:00:00.000")
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE birthdate >= '2020-02-28T21:00:00.000';", query);
+        assertEquals("SELECT firstname FROM person WHERE birthdate >= '2020-02-28T21:00:00.000'", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -78,7 +78,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
                 .where("age").greaterThanOrEqual(18)
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE age >= 18;", query);
+        assertEquals("SELECT firstname FROM person WHERE age >= 18", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -88,7 +88,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
                 .where("birthdate").lesserThan("2020-02-28T21:00:00.000")
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE birthdate < '2020-02-28T21:00:00.000';", query);
+        assertEquals("SELECT firstname FROM person WHERE birthdate < '2020-02-28T21:00:00.000'", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -98,7 +98,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
                 .where("age").lesserThan(18)
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE age < 18;", query);
+        assertEquals("SELECT firstname FROM person WHERE age < 18", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -108,7 +108,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
                 .where("birthdate").lesserThanOrEqual("2020-02-28T21:00:00.000")
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE birthdate <= '2020-02-28T21:00:00.000';", query);
+        assertEquals("SELECT firstname FROM person WHERE birthdate <= '2020-02-28T21:00:00.000'", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -118,7 +118,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
                 .where("age").lesserThanOrEqual(18)
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE age <= 18;", query);
+        assertEquals("SELECT firstname FROM person WHERE age <= 18", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -129,7 +129,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
                 .and("firstname").isNull()
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE age IS NULL AND firstname IS NULL;", query);
+        assertEquals("SELECT firstname FROM person WHERE age IS NULL AND firstname IS NULL", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -140,7 +140,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
                 .and("firstname").isNotNull()
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE age IS NOT NULL AND firstname IS NOT NULL;", query);
+        assertEquals("SELECT firstname FROM person WHERE age IS NOT NULL AND firstname IS NOT NULL", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -151,7 +151,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
                 .and("firstname").isBetween("miika", "siika")
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE age BETWEEN 18 AND 65 AND firstname BETWEEN 'miika' AND 'siika';", query);
+        assertEquals("SELECT firstname FROM person WHERE age BETWEEN 18 AND 65 AND firstname BETWEEN 'miika' AND 'siika'", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -161,7 +161,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
                 .where("firstname").isLike("%ika%")
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE firstname LIKE '%ika%';", query);
+        assertEquals("SELECT firstname FROM person WHERE firstname LIKE '%ika%'", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -171,7 +171,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
                 .where("age").isIn(18, 19, 20, 21)
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE age IN (18, 19, 20, 21);", query);
+        assertEquals("SELECT firstname FROM person WHERE age IN (18, 19, 20, 21)", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -181,7 +181,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
                 .where("lastname").isIn("Somero", "Testinen", "Komero")
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE lastname IN ('Somero', 'Testinen', 'Komero');", query);
+        assertEquals("SELECT firstname FROM person WHERE lastname IN ('Somero', 'Testinen', 'Komero')", query);
         assertThatQueryIsValidSQL(query);
     }
 }

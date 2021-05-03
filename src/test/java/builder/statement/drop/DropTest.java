@@ -26,7 +26,7 @@ public class DropTest extends DatabaseTestBaseClass {
                 .table("test_table")
                 .build();
 
-        assertEquals("DROP TABLE test_table;", query);
+        assertEquals("DROP TABLE test_table", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -45,7 +45,7 @@ public class DropTest extends DatabaseTestBaseClass {
                 .build();
 
         // command not supported in H2?
-        assertEquals("DROP DATABASE test_db;", query);
+        assertEquals("DROP DATABASE test_db", query);
         //assertThatQueryIsValidSQL(query);
     }
 }

@@ -25,7 +25,7 @@ public class CreateTest extends DatabaseTestBaseClass {
                 .column("description").type(DataType.VARCHAR_255)
                 .build();
 
-        assertEquals("CREATE TABLE cars (ID INT, age DOUBLE, created TIMESTAMP, country CHAR, model VARCHAR(32), brand VARCHAR(64), disclaimer VARCHAR(128), description VARCHAR(255));", query);
+        assertEquals("CREATE TABLE cars (ID INT, age DOUBLE, created TIMESTAMP, country CHAR, model VARCHAR(32), brand VARCHAR(64), disclaimer VARCHAR(128), description VARCHAR(255))", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -41,7 +41,7 @@ public class CreateTest extends DatabaseTestBaseClass {
 
         logger.info(query);
 
-        assertEquals("CREATE TABLE planes (ID INT NOT NULL, age DOUBLE, created TIMESTAMP NOT NULL);", query);
+        assertEquals("CREATE TABLE planes (ID INT NOT NULL, age DOUBLE, created TIMESTAMP NOT NULL)", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -57,7 +57,7 @@ public class CreateTest extends DatabaseTestBaseClass {
 
         logger.info(query);
 
-        assertEquals("CREATE TABLE bikes (ID INT UNIQUE, age DOUBLE, created TIMESTAMP UNIQUE);", query);
+        assertEquals("CREATE TABLE bikes (ID INT UNIQUE, age DOUBLE, created TIMESTAMP UNIQUE)", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -72,7 +72,7 @@ public class CreateTest extends DatabaseTestBaseClass {
 
         logger.info(query);
 
-        assertEquals("CREATE TABLE vehicles (ID INT PRIMARY KEY, age DOUBLE);", query);
+        assertEquals("CREATE TABLE vehicles (ID INT PRIMARY KEY, age DOUBLE)", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -83,7 +83,7 @@ public class CreateTest extends DatabaseTestBaseClass {
                 .database("test_db")
                 .build();
 
-        assertEquals("CREATE DATABASE test_db;", query);
+        assertEquals("CREATE DATABASE test_db", query);
         // command not supported in H2?
         //assertThatQueryIsValidSQL(query);
     }

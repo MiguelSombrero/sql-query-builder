@@ -1,6 +1,6 @@
 package builder.statement.select.column;
 
-import builder.statement.select.table.FirstTable;
+import builder.statement.select.table.From;
 
 public class AliasedColumn extends ColumnTemplate {
 
@@ -8,9 +8,9 @@ public class AliasedColumn extends ColumnTemplate {
         super(builder);
     }
 
-    public FirstTable from() {
+    public From from() {
         append(" FROM ");
-        return new FirstTable(this.builder);
+        return new From(this.builder);
     }
 
     @Override

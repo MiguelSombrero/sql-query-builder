@@ -27,7 +27,7 @@ public class InsertTest extends DatabaseTestBaseClass {
                 .column("id").value(100)
                 .build();
 
-        assertEquals("INSERT INTO person (id) VALUES (100);", query);
+        assertEquals("INSERT INTO person (id) VALUES (100)", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -43,7 +43,7 @@ public class InsertTest extends DatabaseTestBaseClass {
                 .column("age").value(40)
                 .build();
 
-        assertEquals("INSERT INTO person (id, birthdate, firstname, lastname, age) VALUES (101, '1980-04-12', 'Miika', 'Somero', 40);", query);
+        assertEquals("INSERT INTO person (id, birthdate, firstname, lastname, age) VALUES (101, '1980-04-12', 'Miika', 'Somero', 40)", query);
         assertThatQueryIsValidSQL(query);
     }
 }

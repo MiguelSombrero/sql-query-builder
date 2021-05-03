@@ -29,7 +29,7 @@ public class OrderByTest extends DatabaseTestBaseClass {
                     .column("firstname")
                 .build();
 
-        assertEquals("SELECT * FROM person ORDER BY firstname;", query);
+        assertEquals("SELECT * FROM person ORDER BY firstname", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -41,7 +41,7 @@ public class OrderByTest extends DatabaseTestBaseClass {
                 .column("firstname")
                 .build();
 
-        assertEquals("SELECT * FROM person WHERE age > 18 ORDER BY firstname;", query);
+        assertEquals("SELECT * FROM person WHERE age > 18 ORDER BY firstname", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -54,7 +54,7 @@ public class OrderByTest extends DatabaseTestBaseClass {
                     .column("firstname")
                 .build();
 
-        assertEquals("SELECT * FROM person GROUP BY age ORDER BY firstname;", query);
+        assertEquals("SELECT * FROM person GROUP BY age ORDER BY firstname", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -69,7 +69,7 @@ public class OrderByTest extends DatabaseTestBaseClass {
                     .column("age")
                 .build();
 
-        assertEquals("SELECT * FROM person GROUP BY age ORDER BY firstname, lastname, age;", query);
+        assertEquals("SELECT * FROM person GROUP BY age ORDER BY firstname, lastname, age", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -84,7 +84,7 @@ public class OrderByTest extends DatabaseTestBaseClass {
                     .column("age").asc()
                 .build();
 
-        assertEquals("SELECT * FROM person GROUP BY age ORDER BY firstname ASC, lastname DESC, age ASC;", query);
+        assertEquals("SELECT * FROM person GROUP BY age ORDER BY firstname ASC, lastname DESC, age ASC", query);
         assertThatQueryIsValidSQL(query);
     }
 }
