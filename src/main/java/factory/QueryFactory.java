@@ -19,7 +19,7 @@ public class QueryFactory {
     }
 
     public static builder.statement.insert.Table insertInto() {
-        return new builder.statement.insert.Table(new StringBuilder("INSERT INTO () VALUES ()"));
+        return new builder.statement.insert.Table(new StringBuilder("INSERT INTO "));
     }
 
     public static builder.statement.update.Table update() {

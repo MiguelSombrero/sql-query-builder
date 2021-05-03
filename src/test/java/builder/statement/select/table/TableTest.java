@@ -48,7 +48,7 @@ public class TableTest extends DatabaseTestBaseClass {
     public void testFromSubQuery() throws SQLException {
         String query = QueryFactory
                 .select()
-                    .column("age")
+                    .column("*")
                 .from()
                     .sub(QueryFactory
                             .select()
@@ -61,7 +61,7 @@ public class TableTest extends DatabaseTestBaseClass {
                 .alias("p")
                 .build();
 
-        assertEquals("SELECT age FROM (SELECT * FROM person WHERE age > 20) AS p", query);
+        assertEquals("SELECT * FROM (SELECT * FROM person WHERE age > 20) AS p", query);
         assertThatQueryIsValidSQL(query);
     }
 

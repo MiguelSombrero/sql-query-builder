@@ -1,17 +1,21 @@
 package builder.statement.insert;
 
+import builder.SQLStringBuilder;
 import builder.TerminalOperation;
 
-public class Column extends TerminalOperation {
+public class Column extends SQLStringBuilder {
 
     public Column(StringBuilder builder) {
-        super(builder);
+        this.builder = builder;
     }
 
-    public Value column(String columns) {
-        int index = firstIndexOfRightBracket();
-        insert(index, columns);
-        insert(index, ", ");
-        return new Value(this.builder);
+    public FirstValue values() {
+        append("VALUES ()");
+        return new FirstValue(this.builder);
+    }
+
+    public TerminalOperation sub(String query) {
+        append(query);
+        return new TerminalOperation(this.builder);
     }
 }

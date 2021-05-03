@@ -8,10 +8,9 @@ public class Table extends SQLStringBuilder {
         this.builder = builder;
     }
 
-    public FirstColumn table(String tableName) {
-        int index = firstIndexOfLeftBracket();
-        insert(index, " ");
-        insert(index, tableName);
-        return new FirstColumn(this.builder);
+    public Insert table(String tableName) {
+        append(tableName);
+        append(" ");
+        return new Insert(this.builder);
     }
 }

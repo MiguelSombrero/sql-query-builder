@@ -25,7 +25,7 @@ Above code prints out:
 
     SELECT firstname AS first, lastname AS last, age
     FROM person
-    WHERE age > 18;
+    WHERE age > 18
 
 More complex example with joins:
 
@@ -61,7 +61,7 @@ Above code prints out:
     AND p.age < 65
     AND c.name IS NOT NULL
     ORDER BY p.age DESC
-    LIMIT 100;
+    LIMIT 100
 
 Example with aggregate functions:
 
@@ -85,7 +85,33 @@ Above code prints out:
     FROM school AS s
     INNER JOIN course AS c ON s.id = c.school_id
     GROUP BY school
-    HAVING avgDifficulty > 1;
+    HAVING avgDifficulty > 1
+
+Sub-queries can be made by using `QueryFactory` to build sub-query:
+
+    String query = QueryFactory
+                .select()
+                    .column("*")
+                .from()
+                    .sub(QueryFactory
+                            .select()
+                                .column("*")
+                            .from()
+                                .table("person")
+                            .where("age").greaterThan(20)
+                            .build()
+                    )
+                .alias("p")
+                .build();
+
+This prints out:
+
+    SELECT *
+    FROM (
+        SELECT *
+        FROM person
+        WHERE age > 20
+    ) AS p
 
 ## How to use this library
 
@@ -112,7 +138,8 @@ Check the latest version from [GitHub](https://github.com/MiguelSombrero/sql-que
 ## Not yet implemented
 
 ### SELECT
-- Doubles, booleans and other datatypes in WHERE clauses
+- Sub-queries with where clauses (WHERE id IN (SELECT ...))
+- Doubles and other datatypes in WHERE clauses (greaterThan(4.5), ...)
 - Better Like operator (giving patterns without "%" etc. symbols)
 - Better HAVING clause (no need for giving condition by string)
 - Any and All operators (ANY, ALL)
@@ -125,9 +152,14 @@ Check the latest version from [GitHub](https://github.com/MiguelSombrero/sql-que
 
 ### INSERT
 - Insert into select clause (INSERT INTO table SELECT ...)
+- Sub-queries with where clauses (WHERE id IN (SELECT ...))
+
+### INSERT
+- Sub-queries with where clauses (WHERE id IN (SELECT ...))
 
 ### DELETE
 - Delete from multiple tables with joins (DELETE T1, T2, FROM T1 ... JOIN ...)
+- Sub-queries with where clauses (WHERE id IN (SELECT ...))
 
 ### CREATE
 - Create table constraints (foreign key, default, check, on delete, ...)
