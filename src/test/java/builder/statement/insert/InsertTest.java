@@ -53,9 +53,12 @@ public class InsertTest extends DatabaseTestBaseClass {
                 .sub(QueryFactory
                         .select()
                             .column("id")
+                            .column("birthdate")
+                            .column("firstname")
+                            .column("lastname")
                             .column("age")
                         .from()
-                            .table("person")
+                            .table("student")
                         .where("age").greaterThan(18)
                         .build()
                 )
@@ -63,7 +66,7 @@ public class InsertTest extends DatabaseTestBaseClass {
 
         logger.info(query);
 
-        assertEquals("INSERT INTO person (id, birthdate, firstname, lastname, age) SELECT id, age FROM person WHERE age > 18", query);
+        assertEquals("INSERT INTO person (id, birthdate, firstname, lastname, age) SELECT id, birthdate, firstname, lastname, age FROM student WHERE age > 18", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -73,7 +76,7 @@ public class InsertTest extends DatabaseTestBaseClass {
                 .insertInto()
                 .table("person")
                 .values()
-                    .value(101)
+                    .value(102)
                     .value("1980-04-12")
                     .value("Miika")
                     .value("Somero")
@@ -82,7 +85,7 @@ public class InsertTest extends DatabaseTestBaseClass {
 
         logger.info(query);
 
-        assertEquals("INSERT INTO person VALUES (101, '1980-04-12', 'Miika', 'Somero', 40)", query);
+        assertEquals("INSERT INTO person VALUES (102, '1980-04-12', 'Miika', 'Somero', 40)", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -93,18 +96,17 @@ public class InsertTest extends DatabaseTestBaseClass {
                 .table("person")
                 .sub(QueryFactory
                         .select()
-                            .column("id")
-                            .column("age")
+                            .column("*")
                         .from()
-                            .table("person")
-                        .where("age").greaterThan(18)
+                            .table("student")
+                        .where("age").lesserThan(18)
                         .build()
                 )
                 .build();
 
         logger.info(query);
 
-        assertEquals("INSERT INTO person SELECT id, age FROM person WHERE age > 18", query);
+        assertEquals("INSERT INTO person SELECT * FROM student WHERE age < 18", query);
         assertThatQueryIsValidSQL(query);
     }
 }

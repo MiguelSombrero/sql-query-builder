@@ -5,6 +5,13 @@ CREATE TABLE person (
     lastname VARCHAR(255),
     age int
 );
+CREATE TABLE student (
+    ID INT NOT NULL,
+    birthdate TIMESTAMP,
+    firstname VARCHAR(255),
+    lastname VARCHAR(255),
+    age int
+);
 CREATE TABLE school (
     ID INT NOT NULL,
     name VARCHAR(255)

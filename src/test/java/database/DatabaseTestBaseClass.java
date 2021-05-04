@@ -1,5 +1,6 @@
 package database;
 
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -18,8 +19,8 @@ public class DatabaseTestBaseClass {
     private static final String CREATE_DB_SCRIPT = "src/test/resources/scripts/create-db.sql";
     private static final String CREATE_DATA_SCRIPT = "src/test/resources/scripts/create-data.sql";
 
-    @BeforeClass
-    public static void setUp() {
+    @Before
+    public void setUp() {
         initializeDatabase();
     }
 
@@ -38,7 +39,7 @@ public class DatabaseTestBaseClass {
         conn.close();
     }
 
-    private static void initializeDatabase() {
+    private void initializeDatabase() {
         dropTestDatabase();
         createTestDatabase();
         insertDataToTestDatabase();

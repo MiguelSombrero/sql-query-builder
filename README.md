@@ -151,10 +151,9 @@ Check the latest version from [GitHub](https://github.com/MiguelSombrero/sql-que
 - In select operator (IN (SELECT), ...)
 
 ### INSERT
-- Insert into select clause (INSERT INTO table SELECT ...)
 - Sub-queries with where clauses (WHERE id IN (SELECT ...))
 
-### INSERT
+### UPDATE
 - Sub-queries with where clauses (WHERE id IN (SELECT ...))
 
 ### DELETE
