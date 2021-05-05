@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static factory.QueryFactory.valueOf;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -57,7 +58,7 @@ public class PerformanceTest {
             table.leftJoin("test2").on("testing.id = test2.test_id");
         }
 
-        table.where("test").isLike("yeah").build();
+        table.where(valueOf("test").isLike("yeah")).build();
 
         end = System.currentTimeMillis();
         long builderMilliseconds = end - start;
@@ -119,9 +120,7 @@ public class PerformanceTest {
                     .table("persons").alias("p")
                     .table("courses").alias("c")
                 .leftJoin("addresses").on("addresses.id = persons.address_id")
-                .where("age").greaterThan(18)
-                .and("age").lesserThan(65)
-                .and("firstname").not().equals("Miika")
+                .where(valueOf("age").greaterThan(18).and("age").lesserThan(65).and("firstname").not().equals("Miika"))
                 .build();
     }
 

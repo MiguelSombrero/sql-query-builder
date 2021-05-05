@@ -1,7 +1,7 @@
 package builder.statement.update;
 
 import builder.TerminalOperation;
-import builder.clause.where.Negation;
+import builder.clause.where.Conjunction;
 
 public class Column extends TerminalOperation {
 
@@ -16,9 +16,8 @@ public class Column extends TerminalOperation {
         return new Value(this.builder);
     }
 
-    public Negation where(String value) {
-        append(" WHERE ");
-        append(value);
-        return new Negation(this.builder);
+    public TerminalOperation where(Conjunction clause) {
+        append(clause.build());
+        return new TerminalOperation(this.builder);
     }
 }

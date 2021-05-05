@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import java.sql.SQLException;
 
+import static factory.QueryFactory.valueOf;
 import static org.junit.Assert.assertEquals;
 
 public class DeleteTest extends DatabaseTestBaseClass {
@@ -26,7 +27,7 @@ public class DeleteTest extends DatabaseTestBaseClass {
         String query = QueryFactory
                 .deleteFrom()
                 .table("address")
-                .where("person_id").equals(1)
+                .where(valueOf("person_id").equals(1))
                 .build();
 
         assertEquals("DELETE FROM address WHERE person_id = 1", query);
@@ -38,8 +39,8 @@ public class DeleteTest extends DatabaseTestBaseClass {
         String query = QueryFactory
                 .deleteFrom()
                 .table("address")
-                .where("person_id").equals(1)
-                .and("city").equals("Oulu")
+                .where(valueOf("person_id").equals(1)
+                        .and("city").equals("Oulu"))
                 .build();
 
         assertEquals("DELETE FROM address WHERE person_id = 1 AND city = 'Oulu'", query);

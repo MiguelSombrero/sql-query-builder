@@ -1,6 +1,6 @@
 package builder.statement.select.table;
 
-import builder.statement.select.condition.Negation;
+import builder.clause.where.Conjunction;
 import builder.statement.select.order.Grouper;
 
 public class JoinTable extends Grouper {
@@ -9,10 +9,9 @@ public class JoinTable extends Grouper {
         super(builder);
     }
 
-    public Negation where(String fieldValue) {
-        append(" WHERE ");
-        append(fieldValue);
-        return new Negation(this.builder);
+    public Grouper where(Conjunction clause) {
+        append(clause.build());
+        return new Grouper(this.builder);
     }
 
     public On innerJoin(String table) {

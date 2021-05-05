@@ -1,4 +1,4 @@
-package builder.statement.select.condition;
+package builder.statement.clause.where;
 
 import builder.statement.select.table.Table;
 import database.DatabaseTestBaseClass;
@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import java.sql.SQLException;
 
+import static factory.QueryFactory.valueOf;
 import static junit.framework.Assert.assertEquals;
 
 public class ConjunctionTest extends DatabaseTestBaseClass {
@@ -25,8 +26,7 @@ public class ConjunctionTest extends DatabaseTestBaseClass {
     @Test
     public void testWhereAndCondition() throws SQLException {
         String query = this.table
-                .where("age").greaterThan(18)
-                .and("birthdate").greaterThan("2020-02-28T21:00:00.000")
+                .where(valueOf("age").greaterThan(18).and("birthdate").greaterThan("2020-02-28T21:00:00.000"))
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE age > 18 AND birthdate > '2020-02-28T21:00:00.000'", query);
@@ -36,8 +36,7 @@ public class ConjunctionTest extends DatabaseTestBaseClass {
     @Test
     public void testWhereOrCondition() throws SQLException {
         String query = this.table
-                .where("age").greaterThan(18)
-                .or("birthdate").greaterThan("2020-02-28T21:00:00.000")
+                .where(valueOf("age").greaterThan(18).or("birthdate").greaterThan("2020-02-28T21:00:00.000"))
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE age > 18 OR birthdate > '2020-02-28T21:00:00.000'", query);
@@ -47,9 +46,7 @@ public class ConjunctionTest extends DatabaseTestBaseClass {
     @Test
     public void testWhereAndOrConditions() throws SQLException {
         String query = this.table
-                .where("age").greaterThan(18)
-                .and("birthdate").greaterThan("2020-02-28T21:00:00.000")
-                .or("birthdate").lesserThan("2018-02-28T21:00:00.000")
+                .where(valueOf("age").greaterThan(18).and("birthdate").greaterThan("2020-02-28T21:00:00.000").or("birthdate").lesserThan("2018-02-28T21:00:00.000"))
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE age > 18 AND birthdate > '2020-02-28T21:00:00.000' OR birthdate < '2018-02-28T21:00:00.000'", query);

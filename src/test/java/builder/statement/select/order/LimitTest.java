@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import java.sql.SQLException;
 
+import static factory.QueryFactory.valueOf;
 import static org.junit.Assert.assertEquals;
 
 public class LimitTest extends DatabaseTestBaseClass {
@@ -35,7 +36,7 @@ public class LimitTest extends DatabaseTestBaseClass {
     @Test
     public void testLimitFromTableWhere() throws SQLException {
         String query = table
-                .where("age").greaterThan(18)
+                .where(valueOf("age").greaterThan(18))
                 .limit(100)
                 .build();
 

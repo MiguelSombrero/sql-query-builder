@@ -19,6 +19,15 @@ For example `FirstTable` creates `Table`, but when you are in `Table`, you canno
 
 ![Select_class_diagram](https://github.com/MiguelSombrero/sql-query-builder/blob/develop/docs/select-class-diagram.jpg)
 
+
+## Where clause
+
+`WHERE` clause is implemented in package `/main/java/builder/clause/where`.
+
+### Class diagram
+
+![Select_class_diagram](https://github.com/MiguelSombrero/sql-query-builder/blob/develop/docs/where-class-diagram.jpg)
+
 ## Insert statement
 
 `INSERT INTO` queries is implemented in package `/main/java/builder/statement/insert`.

@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import java.sql.SQLException;
 
+import static factory.QueryFactory.valueOf;
 import static org.junit.Assert.assertEquals;
 
 public class OrderByTest extends DatabaseTestBaseClass {
@@ -36,7 +37,7 @@ public class OrderByTest extends DatabaseTestBaseClass {
     @Test
     public void testOrderByWhere() throws SQLException {
         String query = table
-                .where("age").greaterThan(18)
+                .where(valueOf("age").greaterThan(18))
                 .orderBy()
                 .column("firstname")
                 .build();

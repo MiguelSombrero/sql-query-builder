@@ -1,4 +1,4 @@
-package builder.statement.select.condition;
+package builder.statement.clause.where;
 
 import builder.statement.select.table.Table;
 import database.DatabaseTestBaseClass;
@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import java.sql.SQLException;
 
+import static factory.QueryFactory.valueOf;
 import static junit.framework.Assert.assertEquals;
 
 public class NegationTest extends DatabaseTestBaseClass {
@@ -25,7 +26,7 @@ public class NegationTest extends DatabaseTestBaseClass {
     @Test
     public void testWhereNotCondition() throws SQLException {
         String query = this.table
-                .where("age").not().greaterThan(18)
+                .where(valueOf("age").not().greaterThan(18))
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE NOT age > 18", query);
@@ -35,8 +36,7 @@ public class NegationTest extends DatabaseTestBaseClass {
     @Test
     public void testWhereNotAndNotConditions() throws SQLException {
         String query = this.table
-                .where("age").not().greaterThan(18)
-                .and("firstname").not().equals("Miika")
+                .where(valueOf("age").not().greaterThan(18).and("firstname").not().equals("Miika"))
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE NOT age > 18 AND NOT firstname = 'Miika'", query);
@@ -46,7 +46,7 @@ public class NegationTest extends DatabaseTestBaseClass {
     @Test
     public void testDoubleNot() throws SQLException {
         String query = this.table
-                .where("age").not().isNotNull()
+                .where(valueOf("age").not().isNotNull())
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE NOT age IS NOT NULL", query);

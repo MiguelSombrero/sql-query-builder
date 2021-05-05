@@ -60,12 +60,12 @@ public class Comparison extends SQLStringBuilder {
 
     public Conjunction isNull() {
         append(" IS NULL");
-        return new Conjunction(this.builder);
+        return getConjunction();
     }
 
     public Conjunction isNotNull() {
         append(" IS NOT NULL");
-        return new Conjunction(this.builder);
+        return getConjunction();
     }
 
     public Conjunction isLike(String pattern) {
@@ -82,7 +82,7 @@ public class Comparison extends SQLStringBuilder {
         }
 
         append(")");
-        return new Conjunction(this.builder);
+        return getConjunction();
     }
 
     public Conjunction isIn(int ...listOfValue) {
@@ -95,7 +95,7 @@ public class Comparison extends SQLStringBuilder {
         }
 
         append(")");
-        return new Conjunction(this.builder);
+        return getConjunction();
     }
 
     private Conjunction appendConditionWithValue(String condition, String value) {
@@ -103,19 +103,23 @@ public class Comparison extends SQLStringBuilder {
         append("'");
         append(value);
         append("'");
-        return new Conjunction(this.builder);
+        return getConjunction();
     }
 
     private Conjunction appendConditionWithValue(String condition, Integer value) {
         append(condition);
         append(value);
-        return new Conjunction(this.builder);
+        return getConjunction();
     }
 
     private Conjunction appendValue(String value) {
         append("'");
         append(value);
         append("'");
+        return getConjunction();
+    }
+
+    private Conjunction getConjunction() {
         return new Conjunction(this.builder);
     }
 }

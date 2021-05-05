@@ -1,4 +1,4 @@
-package builder.statement.select.condition;
+package builder.statement.clause.where;
 
 import builder.statement.select.table.Table;
 import database.DatabaseTestBaseClass;
@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import java.sql.SQLException;
 
+import static factory.QueryFactory.valueOf;
 import static junit.framework.Assert.assertEquals;
 
 public class ComparisonTest extends DatabaseTestBaseClass {
@@ -25,7 +26,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     @Test
     public void testConditionStringEquals() throws SQLException {
         String query = this.table
-                .where("firstname").equals("Miika")
+                .where(valueOf("firstname").equals("Miika"))
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE firstname = 'Miika'", query);
@@ -35,7 +36,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     @Test
     public void testConditionIntegerEquals() throws SQLException {
         String query = this.table
-                .where("age").equals(18)
+                .where(valueOf("age").equals(18))
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE age = 18", query);
@@ -45,7 +46,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     @Test
     public void testConditionStringGreaterThan() throws SQLException {
         String query = this.table
-                .where("birthdate").greaterThan("2020-02-28T21:00:00.000")
+                .where(valueOf("birthdate").greaterThan("2020-02-28T21:00:00.000"))
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE birthdate > '2020-02-28T21:00:00.000'", query);
@@ -55,7 +56,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     @Test
     public void testConditionIntegerGreaterThan() throws SQLException {
         String query = this.table
-                .where("age").greaterThan(18)
+                .where(valueOf("age").greaterThan(18))
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE age > 18", query);
@@ -65,7 +66,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     @Test
     public void testConditionStringGreaterThanOrEqual() throws SQLException {
         String query = this.table
-                .where("birthdate").greaterThanOrEqual("2020-02-28T21:00:00.000")
+                .where(valueOf("birthdate").greaterThanOrEqual("2020-02-28T21:00:00.000"))
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE birthdate >= '2020-02-28T21:00:00.000'", query);
@@ -75,7 +76,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     @Test
     public void testConditionIntegerGreaterThanOrEqual() throws SQLException {
         String query = this.table
-                .where("age").greaterThanOrEqual(18)
+                .where(valueOf("age").greaterThanOrEqual(18))
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE age >= 18", query);
@@ -85,7 +86,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     @Test
     public void testConditionStringLesserThan() throws SQLException {
         String query = this.table
-                .where("birthdate").lesserThan("2020-02-28T21:00:00.000")
+                .where(valueOf("birthdate").lesserThan("2020-02-28T21:00:00.000"))
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE birthdate < '2020-02-28T21:00:00.000'", query);
@@ -95,7 +96,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     @Test
     public void testConditionIntegerLesserThan() throws SQLException {
         String query = this.table
-                .where("age").lesserThan(18)
+                .where(valueOf("age").lesserThan(18))
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE age < 18", query);
@@ -105,7 +106,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     @Test
     public void testConditionStringLesserThanOrEqual() throws SQLException {
         String query = this.table
-                .where("birthdate").lesserThanOrEqual("2020-02-28T21:00:00.000")
+                .where(valueOf("birthdate").lesserThanOrEqual("2020-02-28T21:00:00.000"))
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE birthdate <= '2020-02-28T21:00:00.000'", query);
@@ -115,7 +116,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     @Test
     public void testConditionIntegerLesserThanOrEqual() throws SQLException {
         String query = this.table
-                .where("age").lesserThanOrEqual(18)
+                .where(valueOf("age").lesserThanOrEqual(18))
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE age <= 18", query);
@@ -125,8 +126,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     @Test
     public void testConditionIsNull() throws SQLException {
         String query = this.table
-                .where("age").isNull()
-                .and("firstname").isNull()
+                .where(valueOf("age").isNull().and("firstname").isNull())
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE age IS NULL AND firstname IS NULL", query);
@@ -136,8 +136,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     @Test
     public void testConditionIsNotNull() throws SQLException {
         String query = this.table
-                .where("age").isNotNull()
-                .and("firstname").isNotNull()
+                .where(valueOf("age").isNotNull().and("firstname").isNotNull())
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE age IS NOT NULL AND firstname IS NOT NULL", query);
@@ -147,8 +146,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     @Test
     public void testConditionBetween() throws SQLException {
         String query = this.table
-                .where("age").isBetween(18, 65)
-                .and("firstname").isBetween("miika", "siika")
+                .where(valueOf("age").isBetween(18, 65).and("firstname").isBetween("miika", "siika"))
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE age BETWEEN 18 AND 65 AND firstname BETWEEN 'miika' AND 'siika'", query);
@@ -158,7 +156,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     @Test
     public void testConditionLike() throws SQLException {
         String query = this.table
-                .where("firstname").isLike("%ika%")
+                .where(valueOf("firstname").isLike("%ika%"))
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE firstname LIKE '%ika%'", query);
@@ -168,7 +166,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     @Test
     public void testConditionInListOfIntegers() throws SQLException {
         String query = this.table
-                .where("age").isIn(18, 19, 20, 21)
+                .where(valueOf("age").isIn(18, 19, 20, 21))
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE age IN (18, 19, 20, 21)", query);
@@ -178,7 +176,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     @Test
     public void testConditionInListOfStrings() throws SQLException {
         String query = this.table
-                .where("lastname").isIn("Somero", "Testinen", "Komero")
+                .where(valueOf("lastname").isIn("Somero", "Testinen", "Komero"))
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE lastname IN ('Somero', 'Testinen', 'Komero')", query);

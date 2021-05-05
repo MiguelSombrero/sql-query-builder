@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import java.sql.SQLException;
 
+import static factory.QueryFactory.valueOf;
 import static org.junit.Assert.assertEquals;
 
 public class UpdateTest extends DatabaseTestBaseClass {
@@ -54,8 +55,7 @@ public class UpdateTest extends DatabaseTestBaseClass {
                 .update()
                 .table("person")
                 .column("age").value(50)
-                .where("id").equals(1)
-                .or("id").equals(2)
+                .where(valueOf("id").equals(1).or("id").equals(2))
                 .build();
 
         assertEquals("UPDATE person SET age = 50 WHERE id = 1 OR id = 2", query);

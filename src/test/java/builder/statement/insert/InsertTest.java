@@ -6,6 +6,7 @@ import org.junit.Test;
 
 import java.sql.SQLException;
 
+import static factory.QueryFactory.valueOf;
 import static org.junit.Assert.assertEquals;
 
 public class InsertTest extends DatabaseTestBaseClass {
@@ -59,7 +60,7 @@ public class InsertTest extends DatabaseTestBaseClass {
                             .column("age")
                         .from()
                             .table("student")
-                        .where("age").greaterThan(18)
+                        .where(valueOf("age").greaterThan(18))
                         .build()
                 )
                 .build();
@@ -99,7 +100,7 @@ public class InsertTest extends DatabaseTestBaseClass {
                             .column("*")
                         .from()
                             .table("student")
-                        .where("age").lesserThan(18)
+                        .where(valueOf("age").lesserThan(18))
                         .build()
                 )
                 .build();

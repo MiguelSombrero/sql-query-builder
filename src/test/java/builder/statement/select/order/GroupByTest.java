@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import java.sql.SQLException;
 
+import static factory.QueryFactory.valueOf;
 import static org.junit.Assert.assertEquals;
 
 public class GroupByTest extends DatabaseTestBaseClass {
@@ -50,7 +51,7 @@ public class GroupByTest extends DatabaseTestBaseClass {
     @Test
     public void testGroupByWhere() throws SQLException {
         String query = this.table
-                .where("age").greaterThan(18)
+                .where(valueOf("age").greaterThan(18))
                 .groupBy()
                     .column("lastname")
                 .build();

@@ -1,5 +1,6 @@
 package factory;
 
+import builder.clause.where.Negation;
 import builder.statement.create.Create;
 import builder.statement.drop.Drop;
 import builder.statement.select.column.FirstColumn;
@@ -36,6 +37,10 @@ public class QueryFactory {
 
     public static Drop drop() {
         return new Drop(new StringBuilder("DROP "));
+    }
+
+    public static Negation valueOf(String operand) {
+        return new Negation(new StringBuilder(" WHERE " + operand));
     }
 
     private static FirstColumn selectClause(String clause) {

@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import java.sql.SQLException;
 
+import static factory.QueryFactory.valueOf;
 import static junit.framework.Assert.assertEquals;
 
 public class TableTest extends DatabaseTestBaseClass {
@@ -55,7 +56,7 @@ public class TableTest extends DatabaseTestBaseClass {
                                 .column("*")
                             .from()
                                 .table("person")
-                            .where("age").greaterThan(20)
+                            .where(valueOf("age").greaterThan(20))
                             .build()
                     )
                 .alias("p")
