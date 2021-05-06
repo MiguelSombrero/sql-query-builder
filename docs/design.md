@@ -4,21 +4,25 @@
 
 Starting point of the using program is static factory class `QueryFactory` found in package `main/java/factory`. 
 
-I have tried to use [builder pattern](https://en.wikipedia.org/wiki/Builder_pattern) to chain classes together. 
-This design also ensures that query builder does not allow user to build invalid SQL, e.g. `QueryFactory.select().column("firstname).alias("f").alias("f").alias() ...`.
-Therefore, there is relatively large amount of classes with minimum functionality.
+I have used [builder pattern](https://en.wikipedia.org/wiki/Builder_pattern) to chain classes together. 
 
 Arrows ----> in class diagrams represents direction the flow goes.
 For example `FirstTable` creates `Table`, but when you are in `Table`, you cannot go back to `FirstTable`.
 
+This design also ensures that query builder does not allow user to build invalid SQL, e.g. `QueryFactory.select().column("firstname).alias("f").alias("f").alias("f) ...`.
+Therefore, there is relatively large amount of classes with minimum functionality.
+
 ## Select statement
 
-`SELECT` queries is implemented in package `/main/java/builder/statement/select`. 
+`SELECT` queries is implemented in package `/main/java/builder/statement/select`.
 
 ### Class diagram
 
 ![Select_class_diagram](https://github.com/MiguelSombrero/sql-query-builder/blob/develop/docs/select-class-diagram.jpg)
 
+`WHERE` clauses is implemented with embedded query builder. You need to give an instance of `Conjunction` class to `where(Conjunction clause)` method.
+
+For Example `where(QueryFactory.valueOf("age").greaterThan(30))`.
 
 ## Where clause
 
@@ -27,6 +31,8 @@ For example `FirstTable` creates `Table`, but when you are in `Table`, you canno
 ### Class diagram
 
 ![Select_class_diagram](https://github.com/MiguelSombrero/sql-query-builder/blob/develop/docs/where-class-diagram.jpg)
+
+Where clause and its builder is used in all the statements using `WHERE` conditions.
 
 ## Insert statement
 

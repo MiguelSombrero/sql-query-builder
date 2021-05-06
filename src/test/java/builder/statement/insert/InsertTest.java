@@ -61,7 +61,6 @@ public class InsertTest extends DatabaseTestBaseClass {
                         .from()
                             .table("student")
                         .where(valueOf("age").greaterThan(18))
-                        .build()
                 )
                 .build();
 
@@ -101,7 +100,6 @@ public class InsertTest extends DatabaseTestBaseClass {
                         .from()
                             .table("student")
                         .where(valueOf("age").lesserThan(18))
-                        .build()
                 )
                 .build();
 

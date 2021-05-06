@@ -1,5 +1,6 @@
 package builder.statement.insert;
 
+import builder.Builder;
 import builder.SQLStringBuilder;
 import builder.TerminalOperation;
 
@@ -14,8 +15,8 @@ public class Column extends SQLStringBuilder {
         return new FirstValue(this.builder);
     }
 
-    public TerminalOperation sub(String query) {
-        append(query);
+    public TerminalOperation sub(Builder query) {
+        append(query.build());
         return new TerminalOperation(this.builder);
     }
 }

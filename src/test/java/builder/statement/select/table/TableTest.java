@@ -57,7 +57,6 @@ public class TableTest extends DatabaseTestBaseClass {
                             .from()
                                 .table("person")
                             .where(valueOf("age").greaterThan(20))
-                            .build()
                     )
                 .alias("p")
                 .build();
