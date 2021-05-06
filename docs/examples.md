@@ -2,7 +2,7 @@
 
 ## SELECT
 
-Basic example:
+**Basic example:**
 
     String query = QueryFactory
         .select()
@@ -22,7 +22,7 @@ Above code prints out:
     FROM person
     WHERE age > 18
 
-More complex example with joins:
+**More complex example with joins:**
 
     String query = QueryFactory
         .select()
@@ -55,7 +55,7 @@ Above code prints out:
     ORDER BY p.age DESC
     LIMIT 100
 
-Example with aggregate functions:
+**Example with aggregate functions:**
 
     String query = QueryFactory
         .select()
@@ -79,7 +79,7 @@ Above code prints out:
     GROUP BY school
     HAVING avgDifficulty > 1
 
-Sub-queries can be made by using `QueryFactory` to build sub-query:
+**Sub-queries can be made by using `QueryFactory` to build sub-query:**
 
     String query = QueryFactory
         .select()
@@ -105,7 +105,7 @@ This prints out:
 
 ## INSERT INTO
 
-Basic example:
+**Basic example:**
 
     String query = QueryFactory
         .insertInto()
@@ -126,7 +126,7 @@ Prints out:
     INSERT INTO person (id, birthdate, firstname, lastname, age)
     VALUES (101, '1980-04-12', 'Miika', 'Somero', 40)
 
-Insert into select example:
+**Insert into select example:**
 
     String query = QueryFactory
         .insertInto()
@@ -146,4 +146,11 @@ Prints out:
     INSERT INTO person
     SELECT * FROM student
     WHERE age < 18
-        
+
+## UPDATE
+
+## CREATE
+
+## DELETE
+
+## DROP
