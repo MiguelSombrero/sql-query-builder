@@ -58,11 +58,18 @@ More examples can be found in [examples](https://github.com/MiguelSombrero/sql-q
 
 ## Not yet implemented
 
+### General 
+- Javadoc
+- Test coverage reports
+- Maven Gitflow plugin configurations
+
 ### SELECT
 - Doubles and other datatypes in WHERE clauses (greaterThan(4.5), ...)
 - Better Like operator (giving patterns without "%" etc. symbols)
 - Better HAVING clause (no need for giving condition by string)
-- Any and All operators (ANY, ALL)
+- Aggregate functions in HAVING clauses (HAVING COUNT(person.id) < 20)
+- All operator in SELECT, WHERE and HAVING statements (SELECT ALL, WHERE column operator ALL, ...)
+
 - Select into statement (SELECT INTO)
 - Case statements (CASE - WHEN, THEN)
 - Exists operator (EXISTS)
@@ -81,4 +88,3 @@ And propably many more special cases ...
 
 - You can pass other than `SELECT` statements in sub-select (`sub(Builder query)`) methods.
 - In CREATE TABLE statements you can chain constraints infinitely (e.g. CREATE TABLE person (id INT NOT NULL NOT NULL NOT NULL ...))
-- In UPDATE table statement you can terminate query too soon (QueryFactory.update().table("person").build())

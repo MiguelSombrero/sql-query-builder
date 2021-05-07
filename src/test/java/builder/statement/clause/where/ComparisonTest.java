@@ -196,4 +196,79 @@ public class ComparisonTest extends DatabaseTestBaseClass {
         assertEquals("SELECT firstname FROM person WHERE lastname IN (SELECT * FROM student WHERE age > 20)", query);
         assertThatQueryIsValidSQL(query);
     }
+
+    @Test
+    public void testConditionEqualsAny() throws SQLException {
+        String query = this.table
+                .where(valueOf("lastname")
+                        .equalsAny(QueryFactory
+                            .select()
+                                .column("lastname")
+                            .from().table("student")
+                            .where(valueOf("age").greaterThan(20))))
+                .build();
+
+        assertEquals("SELECT firstname FROM person WHERE lastname = ANY (SELECT lastname FROM student WHERE age > 20)", query);
+        assertThatQueryIsValidSQL(query);
+    }
+
+    @Test
+    public void testConditionGreaterThanAny() throws SQLException {
+        String query = this.table
+                .where(valueOf("lastname")
+                        .greaterThanAny(QueryFactory
+                                .select()
+                                .column("lastname")
+                                .from().table("student")
+                                .where(valueOf("age").greaterThan(20))))
+                .build();
+
+        assertEquals("SELECT firstname FROM person WHERE lastname > ANY (SELECT lastname FROM student WHERE age > 20)", query);
+        assertThatQueryIsValidSQL(query);
+    }
+
+    @Test
+    public void testConditionGreaterThanOrEqualAny() throws SQLException {
+        String query = this.table
+                .where(valueOf("lastname")
+                        .greaterThanOrEqualAny(QueryFactory
+                                .select()
+                                .column("lastname")
+                                .from().table("student")
+                                .where(valueOf("age").greaterThan(20))))
+                .build();
+
+        assertEquals("SELECT firstname FROM person WHERE lastname >= ANY (SELECT lastname FROM student WHERE age > 20)", query);
+        assertThatQueryIsValidSQL(query);
+    }
+
+    @Test
+    public void testConditionLesserThanAny() throws SQLException {
+        String query = this.table
+                .where(valueOf("lastname")
+                        .lesserThanAny(QueryFactory
+                                .select()
+                                .column("lastname")
+                                .from().table("student")
+                                .where(valueOf("age").greaterThan(20))))
+                .build();
+
+        assertEquals("SELECT firstname FROM person WHERE lastname < ANY (SELECT lastname FROM student WHERE age > 20)", query);
+        assertThatQueryIsValidSQL(query);
+    }
+
+    @Test
+    public void testConditionLesserThanOrEqualAny() throws SQLException {
+        String query = this.table
+                .where(valueOf("lastname")
+                        .lesserThanOrEqualAny(QueryFactory
+                                .select()
+                                .column("lastname")
+                                .from().table("student")
+                                .where(valueOf("age").greaterThan(20))))
+                .build();
+
+        assertEquals("SELECT firstname FROM person WHERE lastname <= ANY (SELECT lastname FROM student WHERE age > 20)", query);
+        assertThatQueryIsValidSQL(query);
+    }
 }
