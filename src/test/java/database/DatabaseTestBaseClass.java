@@ -69,13 +69,12 @@ public class DatabaseTestBaseClass {
     }
 
     protected void assertThatQueryIsValidSQL(String query) throws SQLException {
-        executeQuery(query);
+        execute(query);
     }
 
-    protected void executeQuery(String query) throws SQLException {
+    protected void execute(String query) throws SQLException {
         try (Connection conn = DatabaseConnection.getConnection()) {
             conn.prepareStatement(query).execute();
         }
     }
-
 }

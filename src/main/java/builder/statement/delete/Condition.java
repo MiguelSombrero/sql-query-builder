@@ -1,7 +1,6 @@
 package builder.statement.delete;
 
 import builder.TerminalOperation;
-import builder.clause.where.Conjunction;
 
 public class Condition extends TerminalOperation {
 
@@ -9,7 +8,7 @@ public class Condition extends TerminalOperation {
         super(builder);
     }
 
-    public TerminalOperation where(Conjunction clause) {
+    public TerminalOperation where(builder.clause.where.Condition clause) {
         append(clause.build());
         return new TerminalOperation(this.builder);
     }

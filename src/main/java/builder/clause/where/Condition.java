@@ -2,9 +2,9 @@ package builder.clause.where;
 
 import builder.TerminalOperation;
 
-public class Conjunction extends TerminalOperation {
+public class Condition extends TerminalOperation {
 
-    public Conjunction(StringBuilder builder) {
+    public Condition(StringBuilder builder) {
         super(builder);
     }
 

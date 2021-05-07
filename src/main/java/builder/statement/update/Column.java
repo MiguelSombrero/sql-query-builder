@@ -1,7 +1,7 @@
 package builder.statement.update;
 
 import builder.TerminalOperation;
-import builder.clause.where.Conjunction;
+import builder.clause.where.Condition;
 
 public class Column extends TerminalOperation {
 
@@ -16,7 +16,7 @@ public class Column extends TerminalOperation {
         return new Value(this.builder);
     }
 
-    public TerminalOperation where(Conjunction clause) {
+    public TerminalOperation where(Condition clause) {
         append(clause.build());
         return new TerminalOperation(this.builder);
     }

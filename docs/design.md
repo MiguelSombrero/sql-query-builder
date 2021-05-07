@@ -8,7 +8,7 @@ Starting point of using library is static factory class `QueryFactory` found in 
 
 I have used [builder pattern](https://en.wikipedia.org/wiki/Builder_pattern) to chain classes. 
 
-For example `FirstTable` creates `Table`, but when you are in `Table`, you cannot go back to `FirstTable`.
+For example `From.table(String tableName)` method returns `Table` class, and when you are in `Table`, you cannot go back to `From` class.
 
 This design ensures that query builder does not allow user to build invalid SQL, for example call same method infinitely: `QueryFactory.select().column("firstname).alias("f").alias("f").alias("f) ...`.
 

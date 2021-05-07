@@ -182,4 +182,18 @@ public class ComparisonTest extends DatabaseTestBaseClass {
         assertEquals("SELECT firstname FROM person WHERE lastname IN ('Somero', 'Testinen', 'Komero')", query);
         assertThatQueryIsValidSQL(query);
     }
+
+    @Test
+    public void testConditionInSubQuery() throws SQLException {
+        String query = this.table
+                .where(valueOf("lastname").isInSub(QueryFactory
+                    .select()
+                        .column("*")
+                    .from().table("student")
+                    .where(valueOf("age").greaterThan(20))))
+                .build();
+
+        assertEquals("SELECT firstname FROM person WHERE lastname IN (SELECT * FROM student WHERE age > 20)", query);
+        assertThatQueryIsValidSQL(query);
+    }
 }

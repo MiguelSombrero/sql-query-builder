@@ -1,6 +1,6 @@
 package builder.statement.select.table;
 
-import builder.clause.where.Conjunction;
+import builder.clause.where.Condition;
 import builder.statement.select.order.Grouper;
 
 public class JoinTable extends Grouper {
@@ -9,7 +9,7 @@ public class JoinTable extends Grouper {
         super(builder);
     }
 
-    public Grouper where(Conjunction clause) {
+    public Grouper where(Condition clause) {
         append(clause.build());
         return new Grouper(this.builder);
     }

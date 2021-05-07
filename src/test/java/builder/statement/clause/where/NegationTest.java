@@ -54,6 +54,52 @@ public class NegationTest extends DatabaseTestBaseClass {
     }
 
     @Test
+    public void testWhereNotBetween() throws SQLException {
+        String query = this.table
+                .where(valueOf("age").not().isBetween(18, 20))
+                .build();
+
+        assertEquals("SELECT firstname FROM person WHERE NOT age BETWEEN 18 AND 20", query);
+        assertThatQueryIsValidSQL(query);
+    }
+
+    @Test
+    public void testWhereNotLike() throws SQLException {
+        String query = this.table
+                .where(valueOf("firstname").not().isLike("%kka"))
+                .build();
+
+        assertEquals("SELECT firstname FROM person WHERE NOT firstname LIKE '%kka'", query);
+        assertThatQueryIsValidSQL(query);
+    }
+
+    @Test
+    public void testWhereNotIn() throws SQLException {
+        String query = this.table
+                .where(valueOf("age").not().isIn(30, 40, 50, 60))
+                .build();
+
+        assertEquals("SELECT firstname FROM person WHERE NOT age IN (30, 40, 50, 60)", query);
+        assertThatQueryIsValidSQL(query);
+    }
+
+    @Test
+    public void testWhereNotInSubQuery() throws SQLException {
+        String query = this.table
+                .where(valueOf("lastname")
+                        .not()
+                        .isInSub(QueryFactory
+                        .select()
+                        .column("*")
+                        .from().table("student")
+                        .where(valueOf("age").greaterThan(20))))
+                .build();
+
+        assertEquals("SELECT firstname FROM person WHERE NOT lastname IN (SELECT * FROM student WHERE age > 20)", query);
+        assertThatQueryIsValidSQL(query);
+    }
+
+    @Test
     public void testThatLastIndexOfReturnsIndexOfBlanksCorrectly() {
         StringBuilder builder = new StringBuilder("person WHERE NOT");
         int index = builder.lastIndexOf(" ");

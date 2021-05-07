@@ -19,7 +19,7 @@ public class DropTest extends DatabaseTestBaseClass {
                 .column("id").type(DataType.INT)
                 .build();
 
-        executeQuery(createTable);
+        execute(createTable);
 
         String query = QueryFactory
                 .drop()
@@ -37,7 +37,7 @@ public class DropTest extends DatabaseTestBaseClass {
                 .database("test_db")
                 .build();
 
-        executeQuery(createDatabase);
+        execute(createDatabase);
 */
         String query = QueryFactory
                 .drop()

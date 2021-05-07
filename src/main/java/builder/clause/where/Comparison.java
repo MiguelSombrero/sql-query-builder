@@ -1,5 +1,6 @@
 package builder.clause.where;
 
+import builder.Builder;
 import builder.SQLStringBuilder;
 
 public class Comparison extends SQLStringBuilder {
@@ -8,71 +9,71 @@ public class Comparison extends SQLStringBuilder {
         this.builder = builder;
     }
 
-    public Conjunction equals(String value) {
+    public Condition equals(String value) {
         return appendConditionWithValue(" = ", value);
     }
 
-    public Conjunction equals(Integer value) {
+    public Condition equals(Integer value) {
         return appendConditionWithValue(" = ", value);
     }
 
-    public Conjunction greaterThan(String value) {
+    public Condition greaterThan(String value) {
         return appendConditionWithValue(" > ", value);
     }
 
-    public Conjunction greaterThan(Integer value) {
+    public Condition greaterThan(Integer value) {
         return appendConditionWithValue(" > ", value);
     }
 
-    public Conjunction greaterThanOrEqual(String value) {
+    public Condition greaterThanOrEqual(String value) {
         return appendConditionWithValue(" >= ", value);
     }
 
-    public Conjunction greaterThanOrEqual(Integer value) {
+    public Condition greaterThanOrEqual(Integer value) {
         return appendConditionWithValue(" >= ", value);
     }
 
-    public Conjunction lesserThan(String value) {
+    public Condition lesserThan(String value) {
         return appendConditionWithValue(" < ", value);
     }
 
-    public Conjunction lesserThan(Integer value) {
+    public Condition lesserThan(Integer value) {
         return appendConditionWithValue(" < ", value);
     }
 
-    public Conjunction lesserThanOrEqual(String value) {
+    public Condition lesserThanOrEqual(String value) {
         return appendConditionWithValue(" <= ", value);
     }
 
-    public Conjunction lesserThanOrEqual(Integer value) {
+    public Condition lesserThanOrEqual(Integer value) {
         return appendConditionWithValue(" <= ", value);
     }
 
-    public Conjunction isBetween(String lower, String higher) {
+    public Condition isBetween(String lower, String higher) {
         appendConditionWithValue(" BETWEEN ", lower);
         return appendConditionWithValue(" AND ", higher);
     }
 
-    public Conjunction isBetween(Integer lower, Integer higher) {
+    public Condition isBetween(Integer lower, Integer higher) {
         appendConditionWithValue(" BETWEEN ", lower);
         return appendConditionWithValue(" AND ", higher);
     }
 
-    public Conjunction isNull() {
+    public Condition isNull() {
         append(" IS NULL");
-        return getConjunction();
+        return getCondition();
     }
 
-    public Conjunction isNotNull() {
+    public Condition isNotNull() {
         append(" IS NOT NULL");
-        return getConjunction();
+        return getCondition();
     }
 
-    public Conjunction isLike(String pattern) {
+    public Condition isLike(String pattern) {
         return appendConditionWithValue(" LIKE ", pattern);
     }
 
-    public Conjunction isIn(String ...listOfValue) {
+    public Condition isIn(String ...listOfValue) {
         append(" IN (");
         appendValue(listOfValue[0]);
 
@@ -82,10 +83,10 @@ public class Comparison extends SQLStringBuilder {
         }
 
         append(")");
-        return getConjunction();
+        return getCondition();
     }
 
-    public Conjunction isIn(int ...listOfValue) {
+    public Condition isIn(int ...listOfValue) {
         append(" IN (");
         append(listOfValue[0]);
 
@@ -95,31 +96,38 @@ public class Comparison extends SQLStringBuilder {
         }
 
         append(")");
-        return getConjunction();
+        return getCondition();
     }
 
-    private Conjunction appendConditionWithValue(String condition, String value) {
+    public Condition isInSub(Builder query) {
+        append(" IN (");
+        append(query.build());
+        append(")");
+        return getCondition();
+    }
+
+    private Condition appendConditionWithValue(String condition, String value) {
         append(condition);
         append("'");
         append(value);
         append("'");
-        return getConjunction();
+        return getCondition();
     }
 
-    private Conjunction appendConditionWithValue(String condition, Integer value) {
+    private Condition appendConditionWithValue(String condition, Integer value) {
         append(condition);
         append(value);
-        return getConjunction();
+        return getCondition();
     }
 
-    private Conjunction appendValue(String value) {
+    private Condition appendValue(String value) {
         append("'");
         append(value);
         append("'");
-        return getConjunction();
+        return getCondition();
     }
 
-    private Conjunction getConjunction() {
-        return new Conjunction(this.builder);
+    private Condition getCondition() {
+        return new Condition(this.builder);
     }
 }
