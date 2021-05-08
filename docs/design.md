@@ -32,7 +32,7 @@ Classes of `WHERE` clause is implemented in package `/main/java/builder/clause/w
 
 Where clause is used embedded in another SQL statement by `where(Conjunction clause)` method.
 
-Where clauses is build by its own builder initialized by `QueryFactory.valueOf(String operand)` method.
+Where clauses is build by its own factory initialized by `WhereClauseFactory`, for example `WhereClauseFactory.valueOf(String operand)`.
 
 #### Class diagram
 
@@ -42,7 +42,7 @@ For the convenience, showing in diagram only one overload of every method of `Co
 
 Where clause and its builder is used in all the statements that are using `WHERE` conditions.
 
-For Example `...from().table("person").where(QueryFactory.valueOf("age").greaterThan(30))`.
+For Example `...from().table("person").where(WhereClauseFactory.valueOf("age").greaterThan(30))`.
 
 ### Select statement
 

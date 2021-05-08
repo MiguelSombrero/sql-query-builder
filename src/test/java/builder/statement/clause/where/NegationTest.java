@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import java.sql.SQLException;
 
-import static factory.QueryFactory.valueOf;
+import static factory.WhereClauseFactory.valueOf;
 import static junit.framework.Assert.assertEquals;
 
 public class NegationTest extends DatabaseTestBaseClass {

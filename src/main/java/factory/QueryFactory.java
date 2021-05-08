@@ -39,10 +39,6 @@ public class QueryFactory {
         return new Drop(new StringBuilder("DROP "));
     }
 
-    public static Negation valueOf(String operand) {
-        return new Negation(new StringBuilder(" WHERE " + operand));
-    }
-
     private static FirstColumn selectClause(String clause) {
         return new FirstColumn(new StringBuilder(clause));
     }

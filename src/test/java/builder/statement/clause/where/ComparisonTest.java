@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import java.sql.SQLException;
 
-import static factory.QueryFactory.valueOf;
+import static factory.WhereClauseFactory.*;
 import static junit.framework.Assert.assertEquals;
 
 public class ComparisonTest extends DatabaseTestBaseClass {
@@ -424,6 +424,34 @@ public class ComparisonTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE lastname IN (SELECT * FROM student WHERE age > 20)", query);
+        assertThatQueryIsValidSQL(query);
+    }
+
+    @Test
+    public void testConditionExists() throws SQLException {
+        String query = this.table
+                .where(exists(QueryFactory
+                        .select()
+                        .column("*")
+                        .from().table("student")
+                        .where(valueOf("age").greaterThan(20))))
+                .build();
+
+        assertEquals("SELECT firstname FROM person WHERE EXISTS (SELECT * FROM student WHERE age > 20)", query);
+        assertThatQueryIsValidSQL(query);
+    }
+
+    @Test
+    public void testConditionNotExists() throws SQLException {
+        String query = this.table
+                .where(notExists(QueryFactory
+                        .select()
+                        .column("*")
+                        .from().table("student")
+                        .where(valueOf("age").greaterThan(20))))
+                .build();
+
+        assertEquals("SELECT firstname FROM person WHERE NOT EXISTS (SELECT * FROM student WHERE age > 20)", query);
         assertThatQueryIsValidSQL(query);
     }
 }
