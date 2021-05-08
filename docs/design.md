@@ -38,6 +38,8 @@ Where clauses is build by its own builder initialized by `QueryFactory.valueOf(S
 
 ![Select_class_diagram](https://github.com/MiguelSombrero/sql-query-builder/blob/develop/docs/where-class-diagram.jpg)
 
+For the convenience, showing in diagram only one overload of every method of `Comparison` class.
+
 Where clause and its builder is used in all the statements that are using `WHERE` conditions.
 
 For Example `...from().table("person").where(QueryFactory.valueOf("age").greaterThan(30))`.

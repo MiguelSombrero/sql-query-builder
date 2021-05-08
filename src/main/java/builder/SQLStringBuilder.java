@@ -12,11 +12,15 @@ public abstract class SQLStringBuilder {
         this.builder = this.builder.append(text);
     }
 
-    protected void append(int value) {
+    protected void append(Integer value) {
         this.builder = this.builder.append(value);
     }
 
-    protected void insert(int index, String text) {
+    protected void append(Double value) {
+        this.builder = this.builder.append(value);
+    }
+
+    protected void insert(Integer index, String text) {
         this.builder = this.builder.insert(index, text);
     }
 

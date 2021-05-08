@@ -64,12 +64,10 @@ More examples can be found in [examples](https://github.com/MiguelSombrero/sql-q
 - Maven Gitflow plugin configurations
 
 ### SELECT
-- Doubles and other datatypes in WHERE clauses (greaterThan(4.5), ...)
 - Better Like operator (giving patterns without "%" etc. symbols)
 - Better HAVING clause (no need for giving condition by string)
 - Aggregate functions in HAVING clauses (HAVING COUNT(person.id) < 20)
-- All operator in SELECT, WHERE and HAVING statements (SELECT ALL, WHERE column operator ALL, ...)
-
+- All operator in SELECT and HAVING statements (SELECT ALL, HAVING column = ALL (...))
 - Select into statement (SELECT INTO)
 - Case statements (CASE - WHEN, THEN)
 - Exists operator (EXISTS)

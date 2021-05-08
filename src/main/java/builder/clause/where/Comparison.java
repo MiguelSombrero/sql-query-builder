@@ -17,8 +17,16 @@ public class Comparison extends SQLStringBuilder {
         return appendConditionWithValue(" = ", value);
     }
 
+    public Condition equals(Double value) {
+        return appendConditionWithValue(" = ", value);
+    }
+
     public Condition equalsAny(Builder query) {
         return appendConditionWithSubQuery(" = ANY ", query);
+    }
+
+    public Condition equalsAll(Builder query) {
+        return appendConditionWithSubQuery(" = ALL ", query);
     }
 
     public Condition greaterThan(String value) {
@@ -29,8 +37,16 @@ public class Comparison extends SQLStringBuilder {
         return appendConditionWithValue(" > ", value);
     }
 
+    public Condition greaterThan(Double value) {
+        return appendConditionWithValue(" > ", value);
+    }
+
     public Condition greaterThanAny(Builder query) {
         return appendConditionWithSubQuery(" > ANY ", query);
+    }
+
+    public Condition greaterThanAll(Builder query) {
+        return appendConditionWithSubQuery(" > ALL ", query);
     }
 
     public Condition greaterThanOrEqual(String value) {
@@ -41,8 +57,16 @@ public class Comparison extends SQLStringBuilder {
         return appendConditionWithValue(" >= ", value);
     }
 
+    public Condition greaterThanOrEqual(Double value) {
+        return appendConditionWithValue(" >= ", value);
+    }
+
     public Condition greaterThanOrEqualAny(Builder query) {
         return appendConditionWithSubQuery(" >= ANY ", query);
+    }
+
+    public Condition greaterThanOrEqualAll(Builder query) {
+        return appendConditionWithSubQuery(" >= ALL ", query);
     }
 
     public Condition lesserThan(String value) {
@@ -53,8 +77,16 @@ public class Comparison extends SQLStringBuilder {
         return appendConditionWithValue(" < ", value);
     }
 
+    public Condition lesserThan(Double value) {
+        return appendConditionWithValue(" < ", value);
+    }
+
     public Condition lesserThanAny(Builder query) {
         return appendConditionWithSubQuery(" < ANY ", query);
+    }
+
+    public Condition lesserThanAll(Builder query) {
+        return appendConditionWithSubQuery(" < ALL ", query);
     }
 
     public Condition lesserThanOrEqual(String value) {
@@ -65,8 +97,24 @@ public class Comparison extends SQLStringBuilder {
         return appendConditionWithValue(" <= ", value);
     }
 
+    public Condition lesserThanOrEqual(Double value) {
+        return appendConditionWithValue(" <= ", value);
+    }
+
     public Condition lesserThanOrEqualAny(Builder query) {
         return appendConditionWithSubQuery(" <= ANY ", query);
+    }
+
+    public Condition lesserThanOrEqualAll(Builder query) {
+        return appendConditionWithSubQuery(" <= ALL ", query);
+    }
+
+    public Condition isLike(String pattern) {
+        return appendConditionWithValue(" LIKE ", pattern);
+    }
+
+    public Condition isInSub(Builder query) {
+        return appendConditionWithSubQuery(" IN ", query);
     }
 
     public Condition isBetween(String lower, String higher) {
@@ -79,6 +127,11 @@ public class Comparison extends SQLStringBuilder {
         return appendConditionWithValue(" AND ", higher);
     }
 
+    public Condition isBetween(Double lower, Double higher) {
+        appendConditionWithValue(" BETWEEN ", lower);
+        return appendConditionWithValue(" AND ", higher);
+    }
+
     public Condition isNull() {
         append(" IS NULL");
         return getCondition();
@@ -87,10 +140,6 @@ public class Comparison extends SQLStringBuilder {
     public Condition isNotNull() {
         append(" IS NOT NULL");
         return getCondition();
-    }
-
-    public Condition isLike(String pattern) {
-        return appendConditionWithValue(" LIKE ", pattern);
     }
 
     public Condition isIn(String ...listOfValue) {
@@ -119,8 +168,17 @@ public class Comparison extends SQLStringBuilder {
         return getCondition();
     }
 
-    public Condition isInSub(Builder query) {
-        return appendConditionWithSubQuery(" IN ", query);
+    public Condition isIn(double ...listOfValue) {
+        append(" IN (");
+        append(listOfValue[0]);
+
+        for (int i = 1; i < listOfValue.length; i++) {
+            append(", ");
+            append(listOfValue[i]);
+        }
+
+        append(")");
+        return getCondition();
     }
 
     private Condition appendConditionWithValue(String condition, String value) {
@@ -130,6 +188,12 @@ public class Comparison extends SQLStringBuilder {
     }
 
     private Condition appendConditionWithValue(String condition, Integer value) {
+        append(condition);
+        append(value);
+        return getCondition();
+    }
+
+    private Condition appendConditionWithValue(String condition, Double value) {
         append(condition);
         append(value);
         return getCondition();
