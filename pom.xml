@@ -14,7 +14,7 @@
     <url>https://github.com/MiguelSombrero/sql-query-builder</url>
 
     <scm>
-        <connection>scm:git:git://github.com/simpligility/ossrh-demo.git</connection>
+        <connection>scm:git:git://github.com/MiguelSombrero/sql-query-builder</connection>
         <developerConnection>scm:git:ssh://github.com:MiguelSombrero/sql-query-builder.git</developerConnection>
         <url>https://github.com/MiguelSombrero/sql-query-builder</url>
     </scm>
@@ -59,8 +59,23 @@
             <version>1.4.200</version>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.amashchenko.maven.plugin</groupId>
+                <artifactId>gitflow-maven-plugin</artifactId>
+                <version>1.14.0</version>
+                <configuration>
+                    <allowSnapshots>true</allowSnapshots>
+                    <gitFlowConfig>
+                        <versionTagPrefix>${project.artifactId}-</versionTagPrefix>
+                    </gitFlowConfig>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
     <distributionManagement>
         <repository>
