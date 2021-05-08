@@ -71,6 +71,7 @@
                     <allowSnapshots>true</allowSnapshots>
                     <gitFlowConfig>
                         <versionTagPrefix>${project.artifactId}-</versionTagPrefix>
+                        <productionBranch>main</productionBranch>
                     </gitFlowConfig>
                 </configuration>
             </plugin>
