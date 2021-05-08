@@ -40,7 +40,7 @@ public class DeleteTest extends DatabaseTestBaseClass {
                 .deleteFrom()
                 .table("address")
                 .where(valueOf("person_id").equals(1)
-                        .and("city").equals("Oulu"))
+                        .and(valueOf("city").equals("Oulu")))
                 .build();
 
         assertEquals("DELETE FROM address WHERE person_id = 1 AND city = 'Oulu'", query);

@@ -55,7 +55,8 @@ public class UpdateTest extends DatabaseTestBaseClass {
                 .update()
                 .table("person")
                 .column("age").value(50)
-                .where(valueOf("id").equals(1).or("id").equals(2))
+                .where(valueOf("id").equals(1)
+                        .or(valueOf("id").equals(2)))
                 .build();
 
         assertEquals("UPDATE person SET age = 50 WHERE id = 1 OR id = 2", query);

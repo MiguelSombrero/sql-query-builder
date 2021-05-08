@@ -26,7 +26,8 @@ public class ConditionTest extends DatabaseTestBaseClass {
     @Test
     public void testWhereAndCondition() throws SQLException {
         String query = this.table
-                .where(valueOf("age").greaterThan(18).and("birthdate").greaterThan("2020-02-28T21:00:00.000"))
+                .where(valueOf("age").greaterThan(18)
+                        .and(valueOf("birthdate").greaterThan("2020-02-28T21:00:00.000")))
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE age > 18 AND birthdate > '2020-02-28T21:00:00.000'", query);
@@ -36,7 +37,8 @@ public class ConditionTest extends DatabaseTestBaseClass {
     @Test
     public void testWhereOrCondition() throws SQLException {
         String query = this.table
-                .where(valueOf("age").greaterThan(18).or("birthdate").greaterThan("2020-02-28T21:00:00.000"))
+                .where(valueOf("age").greaterThan(18)
+                        .or(valueOf("birthdate").greaterThan("2020-02-28T21:00:00.000")))
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE age > 18 OR birthdate > '2020-02-28T21:00:00.000'", query);
@@ -46,10 +48,25 @@ public class ConditionTest extends DatabaseTestBaseClass {
     @Test
     public void testWhereAndOrConditions() throws SQLException {
         String query = this.table
-                .where(valueOf("age").greaterThan(18).and("birthdate").greaterThan("2020-02-28T21:00:00.000").or("birthdate").lesserThan("2018-02-28T21:00:00.000"))
+                .where(valueOf("age").greaterThan(18)
+                        .and(valueOf("birthdate").greaterThan("2020-02-28T21:00:00.000"))
+                        .or(valueOf("birthdate").lesserThan("2018-02-28T21:00:00.000")))
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE age > 18 AND birthdate > '2020-02-28T21:00:00.000' OR birthdate < '2018-02-28T21:00:00.000'", query);
         assertThatQueryIsValidSQL(query);
     }
+
+    // Inner conditions (OR (...)) not yet implemented:
+    /*@Test
+    public void testWhereOrAndConditions() throws SQLException {
+        String query = this.table
+                .where(valueOf("age").lesserThan(18)
+                        .or(valueOf("age").greaterThan(50)
+                                .and(valueOf("age").lesserThan(60))))
+                .build();
+
+        assertEquals("SELECT firstname FROM person WHERE age < 18 OR (age > 50 AND age < 60)", query);
+        assertThatQueryIsValidSQL(query);
+    }*/
 }

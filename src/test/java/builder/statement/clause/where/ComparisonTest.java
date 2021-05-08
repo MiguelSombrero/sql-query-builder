@@ -326,7 +326,8 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     @Test
     public void testConditionIsNull() throws SQLException {
         String query = this.table
-                .where(valueOf("age").isNull().and("firstname").isNull())
+                .where(valueOf("age").isNull()
+                        .and(valueOf("firstname").isNull()))
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE age IS NULL AND firstname IS NULL", query);
@@ -336,7 +337,8 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     @Test
     public void testConditionIsNotNull() throws SQLException {
         String query = this.table
-                .where(valueOf("age").isNotNull().and("firstname").isNotNull())
+                .where(valueOf("age").isNotNull()
+                        .and(valueOf("firstname").isNotNull()))
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE age IS NOT NULL AND firstname IS NOT NULL", query);
@@ -356,7 +358,8 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     @Test
     public void testConditionIntegerBetween() throws SQLException {
         String query = this.table
-                .where(valueOf("age").isBetween(18, 65).and("firstname").isBetween("miika", "siika"))
+                .where(valueOf("age").isBetween(18, 65)
+                        .and(valueOf("firstname").isBetween("miika", "siika")))
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE age BETWEEN 18 AND 65 AND firstname BETWEEN 'miika' AND 'siika'", query);

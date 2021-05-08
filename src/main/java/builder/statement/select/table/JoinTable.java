@@ -10,6 +10,7 @@ public class JoinTable extends Grouper {
     }
 
     public Grouper where(Condition clause) {
+        append(" WHERE ");
         append(clause.build());
         return new Grouper(this.builder);
     }

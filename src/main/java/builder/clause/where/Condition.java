@@ -1,5 +1,6 @@
 package builder.clause.where;
 
+import builder.Builder;
 import builder.TerminalOperation;
 
 public class Condition extends TerminalOperation {
@@ -8,18 +9,15 @@ public class Condition extends TerminalOperation {
         super(builder);
     }
 
-    public Negation and(String value) {
+    public Condition and(Builder condition) {
         append(" AND ");
-        return appendConjuntion(value);
+        append(condition.build());
+        return this;
     }
 
-    public Negation or(String value) {
+    public Condition or(Builder condition) {
         append(" OR ");
-        return appendConjuntion(value);
-    }
-
-    private Negation appendConjuntion(String value) {
-        append(value);
-        return new Negation(this.builder);
+        append(condition.build());
+        return this;
     }
 }

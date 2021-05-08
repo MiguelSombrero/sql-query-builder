@@ -7,8 +7,7 @@ public class Negation extends Comparison {
     }
 
     public Comparison not() {
-        int indexOfLastBlank = this.builder.lastIndexOf(" ");
-        insert(indexOfLastBlank, " NOT");
+        insert(0, "NOT ");
         return new Comparison(this.builder);
     }
 

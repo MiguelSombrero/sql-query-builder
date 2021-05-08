@@ -17,6 +17,7 @@ public class Column extends TerminalOperation {
     }
 
     public TerminalOperation where(Condition clause) {
+        append(" WHERE ");
         append(clause.build());
         return new TerminalOperation(this.builder);
     }
