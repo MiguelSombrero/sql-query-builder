@@ -1,13 +1,15 @@
 package builder.statement.create;
 
-public class Column extends ColumnTemplate {
+public class Column extends ForeignKey {
 
     public Column(StringBuilder builder) {
         super(builder);
     }
 
-    @Override
-    protected void addCommaAfterFirstValue(int index) {
+    public ColumnType column(String columns) {
+        int index = lastIndexOfRightBracket();
+        insert(index, columns);
         insert(index, ", ");
+        return new ColumnType(this.builder);
     }
 }

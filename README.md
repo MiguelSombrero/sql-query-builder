@@ -70,7 +70,6 @@ More examples can be found in [examples](https://github.com/MiguelSombrero/sql-q
 - All operator in SELECT and HAVING statements (SELECT ALL, HAVING column = ALL (...))
 - Select into statement (SELECT INTO)
 - Case statements (CASE - WHEN, THEN)
-- Exists operator (EXISTS)
 - Union operator (UNION)
 
 ### DELETE
@@ -85,4 +84,3 @@ And propably many more special cases ...
 ## Known issues
 
 - You can pass other than `SELECT` statements in sub-select (`sub(Builder query)`) methods.
-- In CREATE TABLE statements you can chain constraints infinitely (e.g. CREATE TABLE person (id INT NOT NULL NOT NULL NOT NULL ...))

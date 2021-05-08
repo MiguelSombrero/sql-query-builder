@@ -1,8 +1,6 @@
 package builder.statement.create;
 
-import builder.TerminalOperation;
-
-public abstract class ColumnTemplate extends TerminalOperation {
+public abstract class ColumnTemplate extends ForeignKey {
 
     public ColumnTemplate(StringBuilder builder) {
         super(builder);

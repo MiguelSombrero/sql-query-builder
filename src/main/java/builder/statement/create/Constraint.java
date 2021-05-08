@@ -6,21 +6,21 @@ public class Constraint extends Column {
         super(builder);
     }
 
-    public Constraint notNull() {
+    public Column notNull() {
         return insert(" NOT NULL");
     }
 
-    public Constraint unique() {
+    public Column unique() {
         return insert(" UNIQUE");
     }
 
-    public Constraint primaryKey() {
+    public Column primaryKey() {
         return insert(" PRIMARY KEY");
     }
 
-    private Constraint insert(String constraint) {
+    private Column insert(String Column) {
         int index = lastIndexOfRightBracket();
-        insert(index, constraint);
-        return new Constraint(this.builder);
+        insert(index, Column);
+        return new Column(this.builder);
     }
 }
