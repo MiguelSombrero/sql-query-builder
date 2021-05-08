@@ -2,53 +2,89 @@
 
 ![GitHub Actions](https://github.com/MiguelSombrero/sql-query-builder/workflows/Java%20CI%20with%20Maven/badge.svg)
 
-**This app is under development**
+Sql query builder is Java-library used to build SQL query strings more easily. Syntax of the query strings is intended to be compatible with MySQL.
 
-Sql query builder is Java-library to build SQL query strings more easily.
+## How to use this library
+
+### Add Maven dependency
+
+Add Maven dependency to your project:
+
+    <dependency>
+        <groupId>com.github.miguelsombrero</groupId>
+        <artifactId>sql-query-builder</artifactId>
+        <version>{version}-SNAPSHOT</version>
+    </dependency>
+
+Check the latest version from [GitHub](https://github.com/MiguelSombrero/sql-query-builder) 
+
+### Install dependency 
+
+    mvn install
+
+### Use
+
+Starting point of using library is static factory class `QueryFactory` found in package `main/java/factory`.
 
 ## Examples
 
-### SELECT
+Basic SELECT statement:
 
     String query = QueryFactory
         .select()
-        .field("firstname").alias("first")
-        .field("lastname").alias("last")
-        .field("age")
-        .from("person")
-        .where("age").greaterThan(18)
+            .column("firstname").alias("first")
+            .column("lastname").alias("last")
+            .column("age")
+        .from()
+            .table("person")
+        .where(valueOf("age").greaterThan(18))
         .build();
 
     logger.info(query)
-    
+
 Above code prints out:
 
-    "SELECT firstname AS first, lastname AS last, age FROM person WHERE age > 18;"
-    
-## How to use
+    SELECT firstname AS first, lastname AS last, age
+    FROM person
+    WHERE age > 18
+
+More examples can be found in [examples](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/examples.md) document.
+
+## Documentation
+
+[Design documents](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/design.md)
+
+[Examples](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/examples.md)
 
 ## Not yet implemented
 
-In order to be implemented:
-- Null and like operators (IS NULL, IS NOT NULL, LIKE, NOT LIKE)
-- Sorting results (ORDER BY, DESC, ASC, ...)
-- Limiting results (LIMIT)
-- Insert clauses (INSERT INTO, VALUES, )
-- Update clauses (UPDATE, SET, ...)
-- Delete clauses (DELETE, ...)
-- Grouping results (GROUP BY)
-- Between operator (BETWEEN x AND y)
-- Aggregate functions (MAX, MIN, AVG, SUM, COUNT, ...)
-- Filtering aggregate results (HAVING)
-- Exists operator (EXISTS)
-- In operator (IN (...), IN (SELECT), ...)
-- Any and All operators (ANY, ALL)
+### General 
+- Javadoc
+- Test coverage reports
+- Maven Gitflow plugin configurations
+
+### SELECT
+- Better Like operator (giving patterns without "%" etc. symbols)
+- Better HAVING clause (no need for giving condition by string)
+- Aggregate functions in HAVING clauses (HAVING COUNT(person.id) < 20)
+- All operator in SELECT and HAVING statements (SELECT ALL, HAVING column = ALL (...))
 - Select into statement (SELECT INTO)
 - Case statements (CASE - WHEN, THEN)
-- Embedded SELECT and conditional clauses
+- Union operator (UNION)
+
+### DELETE
+- Delete from multiple tables with joins (DELETE T1, T2, FROM T1 ... JOIN ...)
+
+### CREATE
+- Create table constraints (default, check, auto_increment, ...)
+- Foreign key constraints (on delete, on update, ...)
+- Create table AS clauses (CREATE table x AS, ...)
+
+### ALTER
+- ALTER TABLE statements
 
 And propably many more special cases ...
 
 ## Known issues
 
-- Cannot alias join table. Need to change table design
+- You can pass other than `SELECT` statements in sub-select (`sub(Builder query)`) methods.

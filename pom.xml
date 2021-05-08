@@ -6,7 +6,7 @@
 
     <groupId>com.github.miguelsombrero</groupId>
     <artifactId>sql-query-builder</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <packaging>jar</packaging>
 
     <name>sql-query-builder</name>
@@ -14,7 +14,7 @@
     <url>https://github.com/MiguelSombrero/sql-query-builder</url>
 
     <scm>
-        <connection>scm:git:git://github.com/simpligility/ossrh-demo.git</connection>
+        <connection>scm:git:git://github.com/MiguelSombrero/sql-query-builder</connection>
         <developerConnection>scm:git:ssh://github.com:MiguelSombrero/sql-query-builder.git</developerConnection>
         <url>https://github.com/MiguelSombrero/sql-query-builder</url>
     </scm>
@@ -51,7 +51,32 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.4.200</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.amashchenko.maven.plugin</groupId>
+                <artifactId>gitflow-maven-plugin</artifactId>
+                <version>1.14.0</version>
+                <configuration>
+                    <allowSnapshots>true</allowSnapshots>
+                    <gitFlowConfig>
+                        <versionTagPrefix>${project.artifactId}-</versionTagPrefix>
+                        <productionBranch>main</productionBranch>
+                    </gitFlowConfig>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
     <distributionManagement>
         <repository>

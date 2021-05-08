@@ -1,25 +1,45 @@
 package factory;
 
-import builder.Insert;
-import builder.field.FirstField;
+import builder.clause.where.Negation;
+import builder.statement.create.Create;
+import builder.statement.drop.Drop;
+import builder.statement.select.column.FirstColumn;
 
 public class QueryFactory {
 
-    public static FirstField select() {
+    public static FirstColumn select() {
         return selectClause("SELECT ");
     }
 
-    public static FirstField selectDistinct() {
+    public static FirstColumn selectTop(int rows) {
+        return selectClause("SELECT TOP " + rows + " ");
+    }
+
+    public static FirstColumn selectDistinct() {
         return selectClause("SELECT DISTINCT ");
     }
 
-    public static Insert inserInto(String table) {
-        StringBuilder builder = new StringBuilder("INSERT INTO ");
-        builder.append(table);
-        return new Insert(builder);
+    public static builder.statement.insert.Table insertInto() {
+        return new builder.statement.insert.Table(new StringBuilder("INSERT INTO "));
     }
 
-    private static FirstField selectClause(String clause) {
-        return new FirstField(new StringBuilder(clause));
+    public static builder.statement.update.Table update() {
+        return new builder.statement.update.Table(new StringBuilder("UPDATE "));
+    }
+
+    public static Create create() {
+        return new Create(new StringBuilder("CREATE "));
+    }
+
+    public static builder.statement.delete.Table deleteFrom() {
+        return new builder.statement.delete.Table(new StringBuilder("DELETE FROM "));
+    }
+
+    public static Drop drop() {
+        return new Drop(new StringBuilder("DROP "));
+    }
+
+    private static FirstColumn selectClause(String clause) {
+        return new FirstColumn(new StringBuilder(clause));
     }
 }
