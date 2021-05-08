@@ -20,6 +20,12 @@ public abstract class SQLStringBuilder {
         this.builder = this.builder.append(value);
     }
 
+    protected void appendStringValue(String value) {
+        append("'");
+        append(value);
+        append("'");
+    }
+
     protected void insert(Integer index, String text) {
         this.builder = this.builder.insert(index, text);
     }

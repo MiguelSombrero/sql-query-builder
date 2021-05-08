@@ -6,9 +6,9 @@ public class Column extends ForeignKey {
         super(builder);
     }
 
-    public ColumnType column(String columns) {
+    public ColumnType column(String column) {
         int index = lastIndexOfRightBracket();
-        insert(index, columns);
+        insert(index, column);
         insert(index, ", ");
         return new ColumnType(this.builder);
     }

@@ -21,4 +21,10 @@ public class Create extends SQLStringBuilder {
         append(databaseName);
         return new TerminalOperation(this.builder);
     }
+
+    public Index index(String indexName) {
+        append("INDEX ");
+        append(indexName);
+        return new Index(this.builder);
+    }
 }

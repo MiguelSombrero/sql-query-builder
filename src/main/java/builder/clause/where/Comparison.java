@@ -207,13 +207,6 @@ public class Comparison extends SQLStringBuilder {
         return getCondition();
     }
 
-    private Condition appendStringValue(String value) {
-        append("'");
-        append(value);
-        append("'");
-        return getCondition();
-    }
-
     private Condition getCondition() {
         return new Condition(this.builder);
     }

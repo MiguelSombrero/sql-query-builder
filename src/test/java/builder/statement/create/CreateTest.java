@@ -119,6 +119,19 @@ public class CreateTest extends DatabaseTestBaseClass {
 
         assertEquals("CREATE DATABASE test_db", query);
         // command not supported in H2?
-        //assertThatQueryIsValidSQL(query);
+        // assertThatQueryIsValidSQL(query);
+    }
+
+    @Test
+    public void testCreateIndex() throws SQLException {
+        String query = QueryFactory
+                .create()
+                .index("person_index")
+                .on("person")
+                .columns("id", "firstname", "lastname")
+                .build();
+
+        assertEquals("CREATE INDEX person_index ON person (id, firstname, lastname)", query);
+        assertThatQueryIsValidSQL(query);
     }
 }

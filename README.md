@@ -2,7 +2,7 @@
 
 ![GitHub Actions](https://github.com/MiguelSombrero/sql-query-builder/workflows/Java%20CI%20with%20Maven/badge.svg)
 
-Sql query builder is Java-library used to build SQL query strings more easily.
+Sql query builder is Java-library used to build SQL query strings more easily. Syntax of the query strings is intended to be compatible with MySQL.
 
 ## How to use this library
 
@@ -76,8 +76,12 @@ More examples can be found in [examples](https://github.com/MiguelSombrero/sql-q
 - Delete from multiple tables with joins (DELETE T1, T2, FROM T1 ... JOIN ...)
 
 ### CREATE
-- Create table constraints (foreign key, default, check, on delete, ...)
+- Create table constraints (default, check, auto_increment, ...)
+- Foreign key constraints (on delete, on update, ...)
 - Create table AS clauses (CREATE table x AS, ...)
+
+### ALTER
+- ALTER TABLE statements
 
 And propably many more special cases ...
 
