@@ -8,6 +8,10 @@ public abstract class SQLStringBuilder {
 
     protected StringBuilder builder;
 
+    public SQLStringBuilder(StringBuilder builder) {
+        this.builder = builder;
+    }
+
     protected void append(String text) {
         this.builder = this.builder.append(text);
     }

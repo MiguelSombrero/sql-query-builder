@@ -7,7 +7,7 @@ import builder.statement.select.SelectBuilder;
 public class Column extends SQLStringBuilder {
 
     public Column(StringBuilder builder) {
-        this.builder = builder;
+        super(builder);
     }
 
     public FirstValue values() {

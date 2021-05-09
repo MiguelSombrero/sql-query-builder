@@ -6,7 +6,7 @@ import builder.SQLStringBuilder;
 public class Comparison extends SQLStringBuilder {
 
     public Comparison(StringBuilder builder) {
-        this.builder = builder;
+        super(builder);
     }
 
     public Condition equals(String value) {

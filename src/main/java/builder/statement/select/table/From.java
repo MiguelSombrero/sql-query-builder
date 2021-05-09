@@ -6,7 +6,7 @@ import builder.statement.select.SelectBuilder;
 public class From extends SQLStringBuilder {
 
     public From(StringBuilder builder) {
-        this.builder = builder;
+        super(builder);
     }
 
     public Table table(String tableName) {

@@ -5,7 +5,7 @@ import builder.SQLStringBuilder;
 public class FirstColumn extends SQLStringBuilder {
 
     public FirstColumn(StringBuilder builder) {
-        this.builder = builder;
+        super(builder);
     }
 
     public Value column(String column) {

@@ -5,7 +5,7 @@ import builder.SQLStringBuilder;
 public class ColumnType extends SQLStringBuilder {
 
     public ColumnType(StringBuilder builder) {
-        this.builder = builder;
+        super(builder);
     }
 
     public Constraint type(DataType dataType) {

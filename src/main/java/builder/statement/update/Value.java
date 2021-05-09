@@ -5,7 +5,7 @@ import builder.SQLStringBuilder;
 public class Value extends SQLStringBuilder {
 
     public Value(StringBuilder builder) {
-        this.builder = builder;
+        super(builder);
     }
 
     protected Column value(String value) {

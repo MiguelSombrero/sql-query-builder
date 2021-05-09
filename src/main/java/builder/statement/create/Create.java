@@ -6,7 +6,7 @@ import builder.TerminalOperation;
 public class Create extends SQLStringBuilder {
 
     public Create(StringBuilder builder) {
-        this.builder = builder;
+        super(builder);
     }
 
     public FirstColumn table(String tableName) {

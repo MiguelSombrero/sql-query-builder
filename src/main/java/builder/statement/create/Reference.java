@@ -5,7 +5,7 @@ import builder.SQLStringBuilder;
 public class Reference extends SQLStringBuilder {
 
     public Reference(StringBuilder builder) {
-        this.builder = builder;
+        super(builder);
     }
 
     public ForeignKey references(String column, String ofTable) {

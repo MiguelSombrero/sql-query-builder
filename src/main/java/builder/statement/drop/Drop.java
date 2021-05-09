@@ -6,7 +6,7 @@ import builder.TerminalOperation;
 public class Drop extends SQLStringBuilder {
 
     public Drop(StringBuilder builder) {
-        this.builder = builder;
+        super(builder);
     }
 
     public TerminalOperation table(String tableName) {

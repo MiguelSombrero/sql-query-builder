@@ -6,7 +6,7 @@ import builder.TerminalOperation;
 public class IndexedColumn extends SQLStringBuilder {
 
     public IndexedColumn(StringBuilder builder) {
-        this.builder = builder;
+        super(builder);
     }
 
     public TerminalOperation columns(String ...listOfColumns) {

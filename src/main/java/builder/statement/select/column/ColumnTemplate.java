@@ -5,7 +5,7 @@ import builder.SQLStringBuilder;
 public abstract class ColumnTemplate extends SQLStringBuilder {
 
     public ColumnTemplate(StringBuilder builder) {
-        this.builder = builder;
+        super(builder);
     }
 
     public Column column(String fieldName) {

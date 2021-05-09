@@ -5,7 +5,7 @@ import builder.SQLStringBuilder;
 public class Table extends SQLStringBuilder {
 
     public Table(StringBuilder builder) {
-        this.builder = builder;
+        super(builder);
     }
 
     public FirstColumn table(String tableName) {

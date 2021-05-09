@@ -5,7 +5,7 @@ import builder.SQLStringBuilder;
 public class Index extends SQLStringBuilder {
 
     public Index(StringBuilder builder) {
-        this.builder = builder;
+        super(builder);
     }
 
     public IndexedColumn on(String table) {

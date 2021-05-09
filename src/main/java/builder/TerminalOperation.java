@@ -3,7 +3,7 @@ package builder;
 public class TerminalOperation extends SQLStringBuilder implements Builder {
 
     public TerminalOperation(StringBuilder builder) {
-        this.builder = builder;
+        super(builder);
     }
 
     public String build() {
