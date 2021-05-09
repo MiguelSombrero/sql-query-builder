@@ -1,13 +1,12 @@
 name: Publish package to GitHub Packages
 on:
-  release:
-    types: [created]
+  push:
+    tags:
+      - sql-query-builder-*
+
 jobs:
   publish:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-java@v2
@@ -16,8 +15,6 @@ jobs:
           distribution: 'adopt'
       - name: Publish package
         run: |
-          mvn clean deploy -s ../conf/settings.xml \
+          mvn --batch-mode deploy -s conf/settings.xml \
           -Dgithub.username=${{ secrets.PACKAGES_USER }} \
           -Dgithub.token=${{ secrets.PACKAGES_TOKEN }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
