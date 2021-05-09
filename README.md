@@ -2,7 +2,7 @@
 
 ![GitHub Actions](https://github.com/MiguelSombrero/sql-query-builder/workflows/Java%20CI%20with%20Maven/badge.svg)
 
-Sql query builder is Java-library used to build SQL query strings more easily. Syntax of the query strings is intended to be compatible with MySQL.
+Sql query builder is Java-library used to build SQL query strings more easily. Syntax of the query strings is intended to be compatible at least with MySQL.
 
 ## How to use this library
 
@@ -13,10 +13,10 @@ Add Maven dependency to your project:
     <dependency>
         <groupId>com.github.miguelsombrero</groupId>
         <artifactId>sql-query-builder</artifactId>
-        <version>{version}-SNAPSHOT</version>
+        <version>{version}</version>
     </dependency>
 
-Check the latest version from [GitHub](https://github.com/MiguelSombrero/sql-query-builder) 
+Check the latest version from [GitHub Packages](https://github.com/MiguelSombrero?tab=packages&repo_name=sql-query-builder)
 
 ### Install dependency 
 
