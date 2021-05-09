@@ -1,6 +1,6 @@
 package factory;
 
-import builder.clause.where.Negation;
+import builder.condition.Negation;
 
 public class HavingClauseFactory {
 

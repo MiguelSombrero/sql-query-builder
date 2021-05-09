@@ -1,4 +1,4 @@
-package builder.clause.where;
+package builder.condition;
 
 public class Negation extends Comparison {
 

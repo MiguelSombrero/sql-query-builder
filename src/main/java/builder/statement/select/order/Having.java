@@ -1,6 +1,6 @@
 package builder.statement.select.order;
 
-import builder.clause.where.Condition;
+import builder.condition.Condition;
 
 public class Having extends Orderer {
 

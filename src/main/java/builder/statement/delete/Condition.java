@@ -8,7 +8,7 @@ public class Condition extends TerminalOperation {
         super(builder);
     }
 
-    public TerminalOperation where(builder.clause.where.Condition clause) {
+    public TerminalOperation where(builder.condition.Condition clause) {
         append(" WHERE ");
         append(clause.build());
         return new TerminalOperation(this.builder);

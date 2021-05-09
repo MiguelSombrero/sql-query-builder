@@ -1,7 +1,7 @@
 package builder.statement.update;
 
 import builder.TerminalOperation;
-import builder.clause.where.Condition;
+import builder.condition.Condition;
 
 public class Column extends TerminalOperation {
 

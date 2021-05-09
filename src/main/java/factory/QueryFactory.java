@@ -1,6 +1,5 @@
 package factory;
 
-import builder.clause.where.Negation;
 import builder.statement.create.Create;
 import builder.statement.drop.Drop;
 import builder.statement.select.column.FirstColumn;

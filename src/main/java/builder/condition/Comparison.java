@@ -1,4 +1,4 @@
-package builder.clause.where;
+package builder.condition;
 
 import builder.Builder;
 import builder.SQLStringBuilder;

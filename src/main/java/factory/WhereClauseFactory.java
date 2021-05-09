@@ -1,8 +1,8 @@
 package factory;
 
 import builder.Builder;
-import builder.clause.where.Condition;
-import builder.clause.where.Negation;
+import builder.condition.Condition;
+import builder.condition.Negation;
 
 public class WhereClauseFactory {
 

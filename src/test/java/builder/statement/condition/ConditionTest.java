@@ -1,4 +1,4 @@
-package builder.statement.clause.where;
+package builder.statement.condition;
 
 import builder.statement.select.table.Table;
 import database.DatabaseTestBaseClass;
