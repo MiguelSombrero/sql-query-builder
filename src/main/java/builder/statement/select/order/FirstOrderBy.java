@@ -1,13 +1,12 @@
 package builder.statement.select.order;
 
-public class OrderBy extends Limit {
+public class FirstOrderBy extends Limit {
 
-    public OrderBy(StringBuilder builder) {
+    public FirstOrderBy(StringBuilder builder) {
         super(builder);
     }
 
     public Order column(String columnName) {
-        append(", ");
         append(columnName);
         return new Order(this.builder);
     }

@@ -6,8 +6,8 @@ public class Orderer extends Limit {
         super(builder);
     }
 
-    public OrderBy orderBy() {
+    public FirstOrderBy orderBy() {
         append(" ORDER BY ");
-        return new OrderBy(this.builder);
+        return new FirstOrderBy(this.builder);
     }
 }

@@ -2,9 +2,6 @@ package builder;
 
 public class TerminalOperation extends SQLStringBuilder implements Builder {
 
-    public TerminalOperation() {
-    }
-
     public TerminalOperation(StringBuilder builder) {
         this.builder = builder;
     }

@@ -26,9 +26,9 @@ For example in statement `SELECT firstname, lastname, age FROM ...` you need to 
 
 ## Class diagrams
 
-### Where clause
+### Where and Having clause
 
-Classes of `WHERE` clause is implemented in package `/main/java/builder/clause/where`.
+Classes of `WHERE` and `HAVING` clauses is implemented in package `/main/java/builder/clause/where`.
 
 Where clause is used embedded in another SQL statement by `where(Conjunction clause)` method.
 

@@ -2,6 +2,7 @@ package builder.statement.select.order;
 
 import builder.statement.select.table.Table;
 import database.DatabaseTestBaseClass;
+import factory.HavingClauseFactory;
 import factory.QueryFactory;
 import junit.framework.Assert;
 import org.junit.Before;
@@ -9,6 +10,7 @@ import org.junit.Test;
 
 import java.sql.SQLException;
 
+import static factory.HavingClauseFactory.count;
 import static factory.WhereClauseFactory.valueOf;
 import static org.junit.Assert.assertEquals;
 
@@ -67,10 +69,10 @@ public class GroupByTest extends DatabaseTestBaseClass {
                     .column("age")
                     .column("firstname")
                     .column("lastname")
-                .having("age > 20")
+                .having(count("age").equals(100))
                 .build();
 
-        assertEquals("SELECT * FROM person GROUP BY age, firstname, lastname HAVING age > 20", query);
+        assertEquals("SELECT * FROM person GROUP BY age, firstname, lastname HAVING COUNT(age) = 100", query);
         assertThatQueryIsValidSQL(query);
     }
 
@@ -81,12 +83,12 @@ public class GroupByTest extends DatabaseTestBaseClass {
                     .column("age")
                     .column("firstname")
                     .column("lastname")
-                .having("age > 20")
+                .having(count("age").equals(100))
                 .orderBy()
                     .column("age").asc()
                 .build();
 
-        assertEquals("SELECT * FROM person GROUP BY age, firstname, lastname HAVING age > 20 ORDER BY age ASC", query);
+        assertEquals("SELECT * FROM person GROUP BY age, firstname, lastname HAVING COUNT(age) = 100 ORDER BY age ASC", query);
         assertThatQueryIsValidSQL(query);
     }
 }

@@ -5,7 +5,7 @@ import builder.TerminalOperation;
 public abstract class ValueTemplate extends TerminalOperation {
 
     public ValueTemplate(StringBuilder builder) {
-        this.builder = builder;
+        super(builder);
     }
 
     public Value value(String value) {

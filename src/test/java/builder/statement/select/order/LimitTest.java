@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import java.sql.SQLException;
 
+import static factory.HavingClauseFactory.count;
 import static factory.WhereClauseFactory.valueOf;
 import static org.junit.Assert.assertEquals;
 
@@ -72,11 +73,11 @@ public class LimitTest extends DatabaseTestBaseClass {
         String query = table
                 .groupBy()
                     .column("age")
-                .having("age = 20")
+                .having(count("age").greaterThan(20))
                 .limit(100)
                 .build();
 
-        assertEquals("SELECT * FROM person GROUP BY age HAVING age = 20 LIMIT 100", query);
+        assertEquals("SELECT * FROM person GROUP BY age HAVING COUNT(age) > 20 LIMIT 100", query);
         assertThatQueryIsValidSQL(query);
     }
 

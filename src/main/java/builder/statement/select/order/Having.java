@@ -1,5 +1,7 @@
 package builder.statement.select.order;
 
+import builder.clause.where.Condition;
+
 public class Having extends Orderer {
 
     public Having(StringBuilder builder) {
@@ -12,9 +14,9 @@ public class Having extends Orderer {
         return this;
     }
 
-    public Orderer having(String condition) {
+    public Orderer having(Condition havingClause) {
         append(" HAVING ");
-        append(condition);
+        append(havingClause.build());
         return new Orderer(this.builder);
     }
 }

@@ -2,7 +2,7 @@
 
 ![GitHub Actions](https://github.com/MiguelSombrero/sql-query-builder/workflows/Java%20CI%20with%20Maven/badge.svg)
 
-Sql query builder is Java-library used to build SQL query strings more easily. Syntax of the query strings is intended to be compatible at least with MySQL.
+Sql query builder is Java-library used for building SQL query strings more easily. Syntax of the query strings is intended to be compatible at least with MySQL.
 
 ## How to use this library
 
@@ -58,16 +58,9 @@ More examples can be found in [examples](https://github.com/MiguelSombrero/sql-q
 
 ## Not yet implemented
 
-### General 
-- Javadoc
-- Test coverage reports
-- Maven Gitflow plugin configurations
-
 ### SELECT
 - Better Like operator (giving patterns without "%" etc. symbols)
-- Better HAVING clause (no need for giving condition by string)
-- Aggregate functions in HAVING clauses (HAVING COUNT(person.id) < 20)
-- All operator in SELECT and HAVING statements (SELECT ALL, HAVING column = ALL (...))
+- All operator in SELECT statements (SELECT ALL)
 - Select into statement (SELECT INTO)
 - Case statements (CASE - WHEN, THEN)
 - Union operator (UNION)
@@ -85,6 +78,27 @@ More examples can be found in [examples](https://github.com/MiguelSombrero/sql-q
 
 And propably many more special cases ...
 
-## Known issues
+## For developers
 
-- You can pass other than `SELECT` statements in sub-select (`sub(Builder query)`) methods.
+### Requirements
+
+- Java 8+
+- Maven 3.6.0+
+
+### Commands
+
+#### Build project
+
+    mvn clean install
+
+#### Run tests
+
+    mvn clean test
+
+#### Create release
+
+    mvn gitflow:release
+
+#### Deploy to GitHub packages
+
+GitHub Action for deploying release to GitHub packages triggers when new release is created with `mvn gitflow:release` command.

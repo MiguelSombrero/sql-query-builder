@@ -1,7 +1,7 @@
 package builder.statement.select.table;
 
-import builder.Builder;
 import builder.SQLStringBuilder;
+import builder.statement.select.SelectBuilder;
 
 public class From extends SQLStringBuilder {
 
@@ -14,7 +14,7 @@ public class From extends SQLStringBuilder {
         return new Table(this.builder);
     }
 
-    public SubQuery sub(Builder query) {
+    public SubQuery sub(SelectBuilder query) {
         append("(");
         append(query.build());
         append(")");
