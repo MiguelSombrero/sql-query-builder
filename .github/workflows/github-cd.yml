@@ -5,6 +5,9 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-java@v2
@@ -16,3 +19,5 @@ jobs:
           mvn clean deploy -s ../conf/settings.xml \
           -Dgithub.username=${{ secrets.PACKAGES_USER }} \
           -Dgithub.token=${{ secrets.PACKAGES_TOKEN }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
