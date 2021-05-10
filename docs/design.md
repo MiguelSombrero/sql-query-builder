@@ -28,11 +28,11 @@ For example in statement `SELECT firstname, lastname, age FROM ...` you need to 
 
 ### Where and Having clause
 
-Classes of `WHERE` and `HAVING` clauses is implemented in package `/main/java/builder/clause/where`.
+Classes of `WHERE` and `HAVING` clauses is implemented in package `/main/java/builder/condition`.
 
-Where clause is used embedded in another SQL statement by `where(Conjunction clause)` method.
+Where clause is used as embedded in another SQL statement by `where(Condition whereClause)` method. Having clause is used in a same way by calling `having(Condition havingClause)` method.
 
-Where clauses is build by its own factory initialized by `WhereClauseFactory`, for example `WhereClauseFactory.valueOf(String operand)`.
+Where clauses is build by its own factory initialized by `WhereClauseFactory`, for example `WhereClauseFactory.valueOf(String operand)`. Having is build by same way by `HavingClauseFactory`.
 
 #### Class diagram
 
@@ -40,9 +40,9 @@ Where clauses is build by its own factory initialized by `WhereClauseFactory`, f
 
 For the convenience, showing in diagram only one overload of every method of `Comparison` class.
 
-Where clause and its builder is used in all the statements that are using `WHERE` conditions.
+Example of where clause: `...from().table("person").where(WhereClauseFactory.valueOf("age").greaterThan(30))`.
 
-For Example `...from().table("person").where(WhereClauseFactory.valueOf("age").greaterThan(30))`.
+Example of having clause: `...from().table("person").groupBy().column("age").where(HavingClauseFactory.avg("age").greaterThan(30))`.
 
 ### Select statement
 

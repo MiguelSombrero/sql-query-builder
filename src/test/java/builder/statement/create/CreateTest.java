@@ -6,14 +6,14 @@ import org.junit.Test;
 
 import java.sql.SQLException;
 
+import static factory.QueryFactory.create;
 import static junit.framework.Assert.assertEquals;
 
 public class CreateTest extends DatabaseTestBaseClass {
 
     @Test
     public void testCreateTableDataTypes() throws SQLException {
-        String query = QueryFactory
-                .create()
+        String query = create()
                 .table("cars")
                 .column("ID").type(DataType.INT)
                 .column("age").type(DataType.DOUBLE)
@@ -31,8 +31,7 @@ public class CreateTest extends DatabaseTestBaseClass {
 
     @Test
     public void testCreateTableConstraintNotNull() throws SQLException {
-        String query = QueryFactory
-                .create()
+        String query = create()
                 .table("planes")
                 .column("ID").type(DataType.INT).notNull()
                 .column("age").type(DataType.DOUBLE)
@@ -47,8 +46,7 @@ public class CreateTest extends DatabaseTestBaseClass {
 
     @Test
     public void testCreateTableConstraintUnique() throws SQLException {
-        String query = QueryFactory
-                .create()
+        String query = create()
                 .table("bikes")
                 .column("ID").type(DataType.INT).unique()
                 .column("age").type(DataType.DOUBLE)
@@ -63,8 +61,7 @@ public class CreateTest extends DatabaseTestBaseClass {
 
     @Test
     public void testCreateTableConstraintPrimaryKey() throws SQLException {
-        String query = QueryFactory
-                .create()
+        String query = create()
                 .table("vehicles")
                 .column("ID").type(DataType.INT).primaryKey()
                 .column("age").type(DataType.DOUBLE)
@@ -78,8 +75,7 @@ public class CreateTest extends DatabaseTestBaseClass {
 
     @Test
     public void testCreateTableConstraintForeignKey() throws SQLException {
-        String query = QueryFactory
-                .create()
+        String query = create()
                 .table("vehicles")
                 .column("ID").type(DataType.INT).primaryKey()
                 .column("person_id").type(DataType.INT)
@@ -94,8 +90,7 @@ public class CreateTest extends DatabaseTestBaseClass {
 
     @Test
     public void testCreateTableConstraintMultipleForeignKey() throws SQLException {
-        String query = QueryFactory
-                .create()
+        String query = create()
                 .table("vehicles")
                 .column("ID").type(DataType.INT).primaryKey()
                 .column("person_id").type(DataType.INT)
@@ -112,8 +107,7 @@ public class CreateTest extends DatabaseTestBaseClass {
 
     @Test
     public void testCreateDatabase() throws SQLException {
-        String query = QueryFactory
-                .create()
+        String query = create()
                 .database("test_db")
                 .build();
 
@@ -124,14 +118,30 @@ public class CreateTest extends DatabaseTestBaseClass {
 
     @Test
     public void testCreateIndex() throws SQLException {
-        String query = QueryFactory
-                .create()
+        String query = create()
                 .index("person_index")
                 .on("person")
                 .columns("id", "firstname", "lastname")
                 .build();
 
         assertEquals("CREATE INDEX person_index ON person (id, firstname, lastname)", query);
+        assertThatQueryIsValidSQL(query);
+    }
+
+    @Test
+    public void testCreateTableConstraintMultipleForeignKeyss() throws SQLException {
+        String query = create()
+                .table("vehicles")
+                    .column("ID").type(DataType.INT).primaryKey()
+                    .column("name").type(DataType.VARCHAR_255).notNull()
+                    .column("model").type(DataType.VARCHAR_64)
+                    .column("manufacturer_id").type(DataType.INT)
+                .foreignKey("manufacturer_id").references("ID", "manufacturer")
+                .build();
+
+        logger.info(query);
+
+        assertEquals("CREATE TABLE vehicles (ID INT PRIMARY KEY, person_id INT, manufacturer_id INT, FOREIGN KEY (person_id) REFERENCES person(ID), FOREIGN KEY (manufacturer_id) REFERENCES manufacturer(ID))", query);
         assertThatQueryIsValidSQL(query);
     }
 }

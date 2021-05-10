@@ -22,10 +22,16 @@ Above code prints out:
     FROM person
     WHERE age > 18
 
+(line breaks are added for better readability)
+
 **More complex example with joins:**
 
-    String query = QueryFactory
-        .select()
+You can import static factory methods for queries to look more natural language like.
+
+    import static factory.QueryFactory.*;
+    import static factory.WhereClauseFactory.*;
+
+    String query = select()
             .column("p.id")
             .column("p.age")
             .column("p.firstname").alias("name")
@@ -57,8 +63,10 @@ Above code prints out:
 
 **Example with aggregate functions:**
 
-    String query = QueryFactory
-        .select()
+    ...
+    import static factory.HavingClauseFactory.*;
+
+    String query = select()
             .column("s.name").alias("school")
             .avg("c.difficulty").alias("avgDifficulty")
         .from()
@@ -66,7 +74,7 @@ Above code prints out:
         .innerJoin("course").alias("c").on("s.id = c.school_id")
         .groupBy()
             .column("school")
-        .having("avgDifficulty > 1")
+        .having(avg("c.difficulty").greaterThan(1))
         .build();
 
         logger.info(query);
@@ -81,12 +89,10 @@ Above code prints out:
 
 **Sub-queries can be made by using `QueryFactory` to build sub-query:**
 
-    String query = QueryFactory
-        .select()
+    String query = select()
             .column("*")
         .from()
-            .sub(QueryFactory
-                .select()
+            .sub(select()
                     .column("*")
                 .from()
                     .table("person")
@@ -107,8 +113,7 @@ This prints out:
 
 **Basic example:**
 
-    String query = QueryFactory
-        .insertInto()
+    String query = insertInto()
             .table("person")
                 .columns("id", "birthdate", "firstname", "lastname", "age")
             .values()
@@ -128,11 +133,9 @@ Prints out:
 
 **Insert into select example:**
 
-    String query = QueryFactory
-        .insertInto()
+    String query = insertInto()
             .table("person")
-            .sub(QueryFactory
-                .select()
+            .sub(select()
                     .column("*")
                 .from()
                     .table("student")
@@ -149,8 +152,78 @@ Prints out:
 
 ## UPDATE
 
-## CREATE
+**Basic example:**
 
-## DELETE
+    String query = update()
+        .table("person")
+            .column("age").value(50)
+        .where(valueOf("id").equals(1)
+            .or(valueOf("id").equals(2)))
+        .build();
+
+    logger.info(query);
+
+Prints out:
+
+    UPDATE person
+    SET age = 50
+    WHERE id = 1
+    OR id = 2
+
+
+## CREATE TABLE
+
+    String query = create()
+        .table("vehicles")
+            .column("ID").type(DataType.INT).primaryKey()
+            .column("name").type(DataType.VARCHAR_255).notNull()
+            .column("model").type(DataType.VARCHAR_64)
+            .column("manufacturer_id").type(DataType.INT)
+        .foreignKey("manufacturer_id").references("ID", "manufacturer")
+        .build();
+
+    logger.info(query);
+
+Prints out:
+
+    CREATE TABLE vehicles (
+        ID INT PRIMARY KEY,
+        name VARCHAR(255) NOT NULL,
+        model VARCHAR(64),
+        manufacturer_id INT,
+        FOREIGN KEY (manufacturer_id) REFERENCES manufacturer(ID)
+    )
+
+DELETE index and DELETE database are also supported, but examples are trivial.
+
+## DELETE TABLE
+
+**Basic example:**
+
+    String query = deleteFrom()
+        .table("address")
+        .where(valueOf("city").equals("Helsinki)
+            .or(valueOf("city").equals("Oulu")))
+        .build();
+
+    logger.info(query);
+
+Prints out:
+
+    DELETE FROM address
+    WHERE city = 'Helsinki'
+    OR city = 'Oulu'
 
 ## DROP
+
+**Basic example:**
+
+    String query = drop()
+        .table("test_table")
+        .build();
+
+    logger.info(query);
+
+Prints out:
+
+    DROP TABLE test_table

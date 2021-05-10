@@ -56,7 +56,12 @@ More examples can be found in [examples](https://github.com/MiguelSombrero/sql-q
 
 [Examples](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/examples.md)
 
+[Supported operations](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/supported.md)
+
 ## Not yet implemented
+
+## HAVING
+- Use aliased aggregate functions (`.having(valueOf("avgDifficulty").greaterThan(1))`)
 
 ### SELECT
 - Better Like operator (giving patterns without "%" etc. symbols)

@@ -16,7 +16,7 @@ public class UpdateTest extends DatabaseTestBaseClass {
         String query = QueryFactory
                 .update()
                 .table("person")
-                .column("age").value(50)
+                    .column("age").value(50)
                 .build();
 
         assertEquals("UPDATE person SET age = 50", query);
@@ -28,7 +28,7 @@ public class UpdateTest extends DatabaseTestBaseClass {
         String query = QueryFactory
                 .update()
                 .table("person")
-                .column("firstname").value("Miika")
+                    .column("firstname").value("Miika")
                 .build();
 
         assertEquals("UPDATE person SET firstname = 'Miika'", query);
@@ -40,9 +40,9 @@ public class UpdateTest extends DatabaseTestBaseClass {
         String query = QueryFactory
                 .update()
                 .table("person")
-                .column("firstname").value("Miika")
-                .column("lastname").value("Somero")
-                .column("age").value(50)
+                    .column("firstname").value("Miika")
+                    .column("lastname").value("Somero")
+                    .column("age").value(50)
                 .build();
 
         assertEquals("UPDATE person SET firstname = 'Miika', lastname = 'Somero', age = 50", query);
@@ -54,7 +54,7 @@ public class UpdateTest extends DatabaseTestBaseClass {
         String query = QueryFactory
                 .update()
                 .table("person")
-                .column("age").value(50)
+                    .column("age").value(50)
                 .where(valueOf("id").equals(1)
                         .or(valueOf("id").equals(2)))
                 .build();
