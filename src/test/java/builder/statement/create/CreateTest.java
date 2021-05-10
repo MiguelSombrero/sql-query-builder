@@ -127,21 +127,4 @@ public class CreateTest extends DatabaseTestBaseClass {
         assertEquals("CREATE INDEX person_index ON person (id, firstname, lastname)", query);
         assertThatQueryIsValidSQL(query);
     }
-
-    @Test
-    public void testCreateTableConstraintMultipleForeignKeyss() throws SQLException {
-        String query = create()
-                .table("vehicles")
-                    .column("ID").type(DataType.INT).primaryKey()
-                    .column("name").type(DataType.VARCHAR_255).notNull()
-                    .column("model").type(DataType.VARCHAR_64)
-                    .column("manufacturer_id").type(DataType.INT)
-                .foreignKey("manufacturer_id").references("ID", "manufacturer")
-                .build();
-
-        logger.info(query);
-
-        assertEquals("CREATE TABLE vehicles (ID INT PRIMARY KEY, person_id INT, manufacturer_id INT, FOREIGN KEY (person_id) REFERENCES person(ID), FOREIGN KEY (manufacturer_id) REFERENCES manufacturer(ID))", query);
-        assertThatQueryIsValidSQL(query);
-    }
 }
