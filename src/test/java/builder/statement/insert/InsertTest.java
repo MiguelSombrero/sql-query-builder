@@ -2,6 +2,7 @@ package builder.statement.insert;
 
 import database.DatabaseTestBaseClass;
 import factory.QueryFactory;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.SQLException;
@@ -10,6 +11,11 @@ import static factory.WhereClauseFactory.valueOf;
 import static org.junit.Assert.assertEquals;
 
 public class InsertTest extends DatabaseTestBaseClass {
+
+    @Before
+    public void setUp() {
+        initializeDatabase();
+    }
 
     @Test
     public void testInsertOneValue() throws SQLException {

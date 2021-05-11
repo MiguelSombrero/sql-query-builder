@@ -1,15 +1,9 @@
 package database;
 
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
-import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.*;
-
-import static org.junit.Assert.assertEquals;
 
 public class DatabaseTestBaseClass {
     protected static Logger logger = LoggerFactory.getLogger(DatabaseTestBaseClass.class);
@@ -19,27 +13,7 @@ public class DatabaseTestBaseClass {
     private static final String CREATE_DB_SCRIPT = "src/test/resources/scripts/create-db.sql";
     private static final String CREATE_DATA_SCRIPT = "src/test/resources/scripts/create-data.sql";
 
-    @Before
-    public void setUp() {
-        initializeDatabase();
-    }
-
-    @Ignore("No need for running constantly")
-    @Test
-    public void testThatDatabaseIsInitialized() throws SQLException {
-        Connection conn = DatabaseConnection.getConnection();
-        String query = "SELECT COUNT(person.id) AS personCount FROM person";
-        ResultSet result = conn.prepareStatement(query).executeQuery();
-
-        while(result.next()) {
-            assertEquals(2, result.getInt("personCount"));
-        }
-
-        result.close();
-        conn.close();
-    }
-
-    private void initializeDatabase() {
+    protected void initializeDatabase() {
         dropTestDatabase();
         createTestDatabase();
         insertDataToTestDatabase();

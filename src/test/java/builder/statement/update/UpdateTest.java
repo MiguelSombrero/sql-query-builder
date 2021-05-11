@@ -2,6 +2,7 @@ package builder.statement.update;
 
 import database.DatabaseTestBaseClass;
 import factory.QueryFactory;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.SQLException;
@@ -10,6 +11,11 @@ import static factory.WhereClauseFactory.valueOf;
 import static org.junit.Assert.assertEquals;
 
 public class UpdateTest extends DatabaseTestBaseClass {
+
+    @Before
+    public void setUp() {
+        initializeDatabase();
+    }
 
     @Test
     public void testUpdateIntegerValue() throws SQLException {

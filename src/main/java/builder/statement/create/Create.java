@@ -2,6 +2,8 @@ package builder.statement.create;
 
 import builder.SQLStringBuilder;
 import builder.TerminalOperation;
+import builder.statement.create.index.Index;
+import builder.statement.create.table.column.FirstColumn;
 
 public class Create extends SQLStringBuilder {
 
@@ -12,7 +14,7 @@ public class Create extends SQLStringBuilder {
     public FirstColumn table(String tableName) {
         append("TABLE ");
         append(tableName);
-        append(" ()");
+        append(" (");
         return new FirstColumn(this.builder);
     }
 

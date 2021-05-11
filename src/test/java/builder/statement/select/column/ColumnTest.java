@@ -2,6 +2,7 @@ package builder.statement.select.column;
 
 import database.DatabaseTestBaseClass;
 import factory.QueryFactory;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.SQLException;
@@ -9,6 +10,11 @@ import java.sql.SQLException;
 import static junit.framework.Assert.assertEquals;
 
 public class ColumnTest extends DatabaseTestBaseClass {
+
+    @Before
+    public void setUp() {
+        initializeDatabase();
+    }
 
     @Test
     public void testSelect() throws SQLException {

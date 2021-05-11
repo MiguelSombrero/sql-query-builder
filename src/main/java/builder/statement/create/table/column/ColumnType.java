@@ -1,4 +1,4 @@
-package builder.statement.create;
+package builder.statement.create.table.column;
 
 import builder.SQLStringBuilder;
 
@@ -9,9 +9,8 @@ public class ColumnType extends SQLStringBuilder {
     }
 
     public Constraint type(DataType dataType) {
-        int index = lastIndexOfRightBracket();
-        insert(index, dataType.getType());
-        insert(index, " ");
+        append(" ");
+        append(dataType.getType());
         return new Constraint(this.builder);
     }
 }

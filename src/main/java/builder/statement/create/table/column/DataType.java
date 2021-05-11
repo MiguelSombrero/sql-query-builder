@@ -1,4 +1,4 @@
-package builder.statement.create;
+package builder.statement.create.table.column;
 
 public enum DataType {
     INT("INT"),

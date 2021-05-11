@@ -1,7 +1,8 @@
-package builder.statement.create;
+package builder.statement.create.index;
 
 import builder.SQLStringBuilder;
 import builder.TerminalOperation;
+import builder.statement.create.TerminalCreateOperation;
 
 public class IndexedColumn extends SQLStringBuilder {
 
@@ -9,7 +10,7 @@ public class IndexedColumn extends SQLStringBuilder {
         super(builder);
     }
 
-    public TerminalOperation columns(String ...listOfColumns) {
+    public TerminalCreateOperation columns(String ...listOfColumns) {
         append(" (");
         append(listOfColumns[0]);
 
@@ -18,7 +19,6 @@ public class IndexedColumn extends SQLStringBuilder {
             append(listOfColumns[i]);
         }
 
-        append(")");
-        return new TerminalOperation(this.builder);
+        return new TerminalCreateOperation(this.builder);
     }
 }

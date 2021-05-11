@@ -1,4 +1,6 @@
-package builder.statement.create;
+package builder.statement.create.table.column;
+
+import builder.statement.create.table.foreignkey.ForeignKey;
 
 public class Column extends ForeignKey {
 
@@ -7,9 +9,8 @@ public class Column extends ForeignKey {
     }
 
     public ColumnType column(String column) {
-        int index = lastIndexOfRightBracket();
-        insert(index, column);
-        insert(index, ", ");
+        append(", ");
+        append(column);
         return new ColumnType(this.builder);
     }
 }

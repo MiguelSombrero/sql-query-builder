@@ -4,28 +4,6 @@
 
 Sql query builder is Java-library used for building SQL query strings more easily. Syntax of the query strings is intended to be compatible at least with MySQL.
 
-## How to use this library
-
-### Add Maven dependency
-
-Add Maven dependency to your project:
-
-    <dependency>
-        <groupId>com.github.miguelsombrero</groupId>
-        <artifactId>sql-query-builder</artifactId>
-        <version>{version}</version>
-    </dependency>
-
-Check the latest version from [GitHub Packages](https://github.com/MiguelSombrero?tab=packages&repo_name=sql-query-builder)
-
-### Install dependency 
-
-    mvn install
-
-### Use
-
-Starting point of using library is static factory class `QueryFactory` found in package `main/java/factory`.
-
 ## Examples
 
 Basic SELECT statement:
@@ -50,20 +28,46 @@ Above code prints out:
 
 More examples can be found in [examples](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/examples.md) document.
 
+## How to use this library
+
+### Add Maven dependency
+
+Add Maven dependency to your project:
+
+    <dependency>
+        <groupId>com.github.miguelsombrero</groupId>
+        <artifactId>sql-query-builder</artifactId>
+        <version>{version}</version>
+    </dependency>
+
+Check the latest version from [GitHub Packages](https://github.com/MiguelSombrero?tab=packages&repo_name=sql-query-builder)
+
+### Install dependency 
+
+    mvn install
+
+### Use
+
+Starting point of using library is static factory class `QueryFactory` found in package `main/java/factory`.
+
 ## Documentation
 
 [Design documents](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/design.md)
 
 [Examples](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/examples.md)
 
-## Not yet implemented
+[Supported operations](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/supported.md)
+
+## Features scheduled on next release
 
 ### CREATE
-- Create table constraints (default, check, auto_increment, ...)
-- Foreign key constraints (on delete, on update, ...)
-- Create table AS clauses (CREATE table x AS, ...)
+- Constraints 'default' and 'check'
+- Foreign key constraints for composite keys
 
-And propably many more special cases ...
+Something else missing?
+
+## Known issues
+- In CREATE TABLE user can chain same constraints infinitely (`...column("ID").type(DataType.INT).notNull().notNull().notNull() ...`) 
 
 ## For developers
 

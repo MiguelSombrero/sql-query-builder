@@ -15,6 +15,8 @@ public class HavingTest extends DatabaseTestBaseClass {
 
     @Before
     public void setUpQuery() {
+        initializeDatabase();
+
         this.having = QueryFactory
                 .select()
                 .column("*")

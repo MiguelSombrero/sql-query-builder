@@ -56,28 +56,6 @@ Create SELECT statement by calling `QueryFactory.select()...` or other select op
 
 ![Select_class_diagram](https://github.com/MiguelSombrero/sql-query-builder/blob/develop/docs/select-class-diagram.jpg)
 
-#### Supported operations
-
-- SELECT, SELECT DISTINCT, SELECT TOP
-    - column, min(column), max(column), avg(column), sum(column)
-- FROM
-    - table, sub-query
-- AS
-    - column, table, join table, sub-query
-- LEFT JOIN, RIGHT JOIN, INNER JOIN, FULL JOIN
-- WHERE
-    - condition
-    - =, <, >, <=, =>
-    - EXISTS, ALL, ANY, IS NULL, BETWEEN, LIKE
-    - IN
-        - sub-query, list of values
-    - AND, OR, NOT
-- GROUP BY column
-    - HAVING condition
-- ORDER BY column
-    - ASC, DESC
-- LIMIT
-
 ### Insert statement
 
 Classes of `INSERT INTO` queries is implemented in package `/main/java/builder/statement/insert`.
@@ -87,14 +65,6 @@ Create INSERT statement by calling `QueryFactory.inserInto()...`.
 #### Class diagram
 
 ![Insert_class_diagram](https://github.com/MiguelSombrero/sql-query-builder/blob/develop/docs/insert-class-diagram.jpg)
-
-#### Supported operations
-
-- INSERT INTO
-    - table (optional columns)
-- VALUES
-    - (optional values)
-    - sub-query
 
 ### Update statement
 
@@ -106,15 +76,6 @@ Create UPDATE statement by calling `QueryFactory.update()...`.
 
 ![Update_class_diagram](https://github.com/MiguelSombrero/sql-query-builder/blob/develop/docs/update-class-diagram.jpg)
 
-#### Supported operations
-
-- UPDATE
-    - table
-- SET
-    - columns = values
-- WHERE
-    - condition
-
 ### Create statements
 
 Classes of `CREATE` queries is implemented in package `/main/java/builder/statement/create`.
@@ -124,14 +85,6 @@ Create CREATE statement by calling `QueryFactory.create()...`.
 #### Class diagram
 
 ![Create_class_diagram](https://github.com/MiguelSombrero/sql-query-builder/blob/develop/docs/create-class-diagram.jpg)
-
-#### Supported operations
-
-- CREATE
-    - table, database, index
-- INT, DOUBLE, TIMESTAMP, CHAR, VARCHAR
-- NOT NULL, PRIMARY KEY, UNIQUE
-- FOREIGN KEY key REFERENCES table(key)
 
 ### Delete statements
 
@@ -143,13 +96,6 @@ Create DELETE statement by calling `QueryFactory.deleteFrom()...`.
 
 ![Delete_class_diagram](https://github.com/MiguelSombrero/sql-query-builder/blob/develop/docs/delete-class-diagram.jpg)
 
-#### Supported operations
-
-- DELETE FROM
-    - table
-- WHERE
-    - condition
-
 ### Drop statements
 
 Classes of `DROP` queries is implemented in package `/main/java/builder/statement/drop`.
@@ -159,8 +105,3 @@ Create DROP statement by calling `QueryFactory.drop()...`.
 #### Class diagram
 
 ![Drop_class_diagram](https://github.com/MiguelSombrero/sql-query-builder/blob/develop/docs/drop-class-diagram.jpg)
-
-#### Supported operations
-
-- DROP
-    - table, database

@@ -1,4 +1,4 @@
-package builder.statement.create;
+package builder.statement.create.index;
 
 import builder.SQLStringBuilder;
 

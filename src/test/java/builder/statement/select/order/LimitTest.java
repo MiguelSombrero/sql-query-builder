@@ -17,6 +17,8 @@ public class LimitTest extends DatabaseTestBaseClass {
 
     @Before
     public void setUpQuery() {
+        initializeDatabase();
+
         this.table = QueryFactory
                 .select()
                     .column("*")

@@ -16,6 +16,8 @@ public class ConditionTest extends DatabaseTestBaseClass {
 
     @Before
     public void setUpQuery() {
+        initializeDatabase();
+
         this.table = QueryFactory
                 .select()
                 .column("firstname")

@@ -1,4 +1,4 @@
-package builder.statement.create;
+package builder.statement.create.table.column;
 
 import builder.SQLStringBuilder;
 
@@ -8,9 +8,8 @@ public class FirstColumn extends SQLStringBuilder {
         super(builder);
     }
 
-    public ColumnType column(String columns) {
-        int index = lastIndexOfRightBracket();
-        insert(index, columns);
+    public ColumnType column(String column) {
+        append(column);
         return new ColumnType(this.builder);
     }
 }

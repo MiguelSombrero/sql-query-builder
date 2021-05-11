@@ -16,6 +16,8 @@ public class TableTest extends DatabaseTestBaseClass {
 
     @Before
     public void setUpQuery() {
+        initializeDatabase();
+
         this.column = QueryFactory
                 .select()
                 .column("*");
