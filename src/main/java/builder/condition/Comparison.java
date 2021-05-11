@@ -113,6 +113,21 @@ public class Comparison extends SQLStringBuilder {
         return appendConditionWithValue(" LIKE ", pattern);
     }
 
+    public Condition startsWith(String pattern) {
+        String startsWith = pattern.concat("%");
+        return appendConditionWithValue(" LIKE ", startsWith);
+    }
+
+    public Condition endsWith(String pattern) {
+        String endsWith = "%".concat(pattern);
+        return appendConditionWithValue(" LIKE ", endsWith);
+    }
+
+    public Condition contains(String pattern) {
+        String endsWith = "%".concat(pattern).concat("%");
+        return appendConditionWithValue(" LIKE ", endsWith);
+    }
+
     public Condition isInSub(Builder query) {
         return appendConditionWithSubQuery(" IN ", query);
     }

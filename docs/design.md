@@ -50,6 +50,8 @@ Example of having clause: `...from().table("person").groupBy().column("age").whe
 
 Classes of `SELECT` queries is implemented in package `/main/java/builder/statement/select`.
 
+Create SELECT statement by calling `QueryFactory.select()...` or other select options.
+
 #### Class diagram
 
 ![Select_class_diagram](https://github.com/MiguelSombrero/sql-query-builder/blob/develop/docs/select-class-diagram.jpg)
@@ -80,6 +82,8 @@ Classes of `SELECT` queries is implemented in package `/main/java/builder/statem
 
 Classes of `INSERT INTO` queries is implemented in package `/main/java/builder/statement/insert`.
 
+Create INSERT statement by calling `QueryFactory.inserInto()...`.
+
 #### Class diagram
 
 ![Insert_class_diagram](https://github.com/MiguelSombrero/sql-query-builder/blob/develop/docs/insert-class-diagram.jpg)
@@ -95,6 +99,8 @@ Classes of `INSERT INTO` queries is implemented in package `/main/java/builder/s
 ### Update statement
 
 Classes of `UPDATE` queries is implemented in package `/main/java/builder/statement/update`.
+
+Create UPDATE statement by calling `QueryFactory.update()...`.
 
 #### Class diagram
 
@@ -113,6 +119,8 @@ Classes of `UPDATE` queries is implemented in package `/main/java/builder/statem
 
 Classes of `CREATE` queries is implemented in package `/main/java/builder/statement/create`.
 
+Create CREATE statement by calling `QueryFactory.create()...`.
+
 #### Class diagram
 
 ![Create_class_diagram](https://github.com/MiguelSombrero/sql-query-builder/blob/develop/docs/create-class-diagram.jpg)
@@ -129,6 +137,8 @@ Classes of `CREATE` queries is implemented in package `/main/java/builder/statem
 
 Classes of `DELETE` queries is implemented in package `/main/java/builder/statement/delete`.
 
+Create DELETE statement by calling `QueryFactory.deleteFrom()...`.
+
 #### Class diagram
 
 ![Delete_class_diagram](https://github.com/MiguelSombrero/sql-query-builder/blob/develop/docs/delete-class-diagram.jpg)
@@ -143,6 +153,8 @@ Classes of `DELETE` queries is implemented in package `/main/java/builder/statem
 ### Drop statements
 
 Classes of `DROP` queries is implemented in package `/main/java/builder/statement/drop`.
+
+Create DROP statement by calling `QueryFactory.drop()...`.
 
 #### Class diagram
 

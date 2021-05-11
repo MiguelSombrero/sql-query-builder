@@ -57,16 +57,15 @@ public class ConditionTest extends DatabaseTestBaseClass {
         assertThatQueryIsValidSQL(query);
     }
 
-    // Inner conditions (OR (...)) not yet implemented:
-    /*@Test
-    public void testWhereOrAndConditions() throws SQLException {
+    @Test
+    public void testWhereOrSubCondition() throws SQLException {
         String query = this.table
                 .where(valueOf("age").lesserThan(18)
-                        .or(valueOf("age").greaterThan(50)
+                        .orSub(valueOf("age").greaterThan(50)
                                 .and(valueOf("age").lesserThan(60))))
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE age < 18 OR (age > 50 AND age < 60)", query);
         assertThatQueryIsValidSQL(query);
-    }*/
+    }
 }

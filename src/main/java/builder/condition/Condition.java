@@ -20,4 +20,11 @@ public class Condition extends TerminalOperation {
         append(condition.build());
         return this;
     }
+
+    public Condition orSub(Builder condition) {
+        append(" OR (");
+        append(condition.build());
+        append(")");
+        return this;
+    }
 }

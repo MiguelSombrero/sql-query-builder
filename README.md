@@ -58,29 +58,10 @@ More examples can be found in [examples](https://github.com/MiguelSombrero/sql-q
 
 ## Not yet implemented
 
-## HAVING
-- Use aliased aggregate functions (`.having(valueOf("avgDifficulty").greaterThan(1))`)
-
-## WHERE and HAVING
-- Embedded OR conditions (WHERE x OR (y AND z))
-
-### SELECT
-- Better Like operator (giving patterns without "%" etc. symbols)
-- All operator in SELECT statements (SELECT ALL)
-- Select into statement (SELECT INTO)
-- Case statements (CASE - WHEN, THEN)
-- Union operator (UNION)
-
-### DELETE
-- Delete from multiple tables with joins (DELETE T1, T2, FROM T1 ... JOIN ...)
-
 ### CREATE
 - Create table constraints (default, check, auto_increment, ...)
 - Foreign key constraints (on delete, on update, ...)
 - Create table AS clauses (CREATE table x AS, ...)
-
-### ALTER
-- ALTER TABLE statements
 
 And propably many more special cases ...
 

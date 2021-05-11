@@ -387,6 +387,36 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     }
 
     @Test
+    public void testConditionStartsWith() throws SQLException {
+        String query = this.table
+                .where(valueOf("firstname").startsWith("Mii"))
+                .build();
+
+        assertEquals("SELECT firstname FROM person WHERE firstname LIKE 'Mii%'", query);
+        assertThatQueryIsValidSQL(query);
+    }
+
+    @Test
+    public void testConditionEndsWith() throws SQLException {
+        String query = this.table
+                .where(valueOf("firstname").endsWith("ka"))
+                .build();
+
+        assertEquals("SELECT firstname FROM person WHERE firstname LIKE '%ka'", query);
+        assertThatQueryIsValidSQL(query);
+    }
+
+    @Test
+    public void testConditionContains() throws SQLException {
+        String query = this.table
+                .where(valueOf("firstname").contains("iik"))
+                .build();
+
+        assertEquals("SELECT firstname FROM person WHERE firstname LIKE '%iik%'", query);
+        assertThatQueryIsValidSQL(query);
+    }
+
+    @Test
     public void testConditionInListOfStrings() throws SQLException {
         String query = this.table
                 .where(valueOf("lastname").isIn("Somero", "Testinen", "Komero"))
