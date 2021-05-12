@@ -5,8 +5,8 @@ import builder.TerminalOperation;
 
 public class Condition extends TerminalOperation {
 
-    public Condition(StringBuilder builder) {
-        super(builder);
+    public Condition(StringBuilder queryString) {
+        super(queryString);
     }
 
     public Condition and(Builder condition) {

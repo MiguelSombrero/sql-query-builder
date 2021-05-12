@@ -4,14 +4,14 @@ import builder.statement.create.TerminalCreateOperation;
 
 public class ForeignKey extends TerminalCreateOperation {
 
-    public ForeignKey(StringBuilder builder) {
-        super(builder);
+    public ForeignKey(StringBuilder queryString) {
+        super(queryString);
     }
 
     public Reference foreignKey(String column) {
         append(", FOREIGN KEY (");
         append(column);
         append(")");
-        return new Reference(this.builder);
+        return new Reference(this.queryString);
     }
 }

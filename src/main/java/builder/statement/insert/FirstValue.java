@@ -2,11 +2,11 @@ package builder.statement.insert;
 
 public class FirstValue extends ValueTemplate {
 
-    public FirstValue(StringBuilder builder) {
-        super(builder);
+    public FirstValue(StringBuilder queryString) {
+        super(queryString);
     }
 
     @Override
-    protected void addCommaAfterFirstValue(int index) {
+    protected void addCommaAfterFirstValue() {
     }
 }

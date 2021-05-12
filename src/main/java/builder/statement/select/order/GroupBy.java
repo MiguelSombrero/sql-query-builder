@@ -4,12 +4,12 @@ import builder.TerminalOperation;
 
 public class GroupBy extends TerminalOperation {
 
-    public GroupBy(StringBuilder builder) {
-        super(builder);
+    public GroupBy(StringBuilder queryString) {
+        super(queryString);
     }
 
     public Having column(String columnName) {
         append(columnName);
-        return new Having(this.builder);
+        return new Having(this.queryString);
     }
 }

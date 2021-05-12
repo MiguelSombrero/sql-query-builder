@@ -2,8 +2,8 @@ package builder.statement.select.column;
 
 public class FirstColumn extends ColumnTemplate {
 
-    public FirstColumn(StringBuilder builder) {
-        super(builder);
+    public FirstColumn(StringBuilder queryString) {
+        super(queryString);
     }
 
     @Override

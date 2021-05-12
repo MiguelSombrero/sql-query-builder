@@ -2,8 +2,8 @@ package builder.statement.create.table.column;
 
 public class Constraint extends Column {
 
-    public Constraint(StringBuilder builder) {
-        super(builder);
+    public Constraint(StringBuilder queryString) {
+        super(queryString);
     }
 
     public Constraint notNull() {

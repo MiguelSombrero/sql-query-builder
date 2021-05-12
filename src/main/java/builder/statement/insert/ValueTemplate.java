@@ -1,28 +1,22 @@
 package builder.statement.insert;
 
-import builder.TerminalOperation;
+public abstract class ValueTemplate extends TerminalInsertOperation {
 
-public abstract class ValueTemplate extends TerminalOperation {
-
-    public ValueTemplate(StringBuilder builder) {
-        super(builder);
+    public ValueTemplate(StringBuilder queryString) {
+        super(queryString);
     }
 
     public Value value(String value) {
-        int index = lastIndexOfRightBracket();
-        insert(index, "'");
-        insert(index, value);
-        insert(index, "'");
-        addCommaAfterFirstValue(index);
-        return new Value(this.builder);
+        addCommaAfterFirstValue();
+        appendStringValue(value);
+        return new Value(this.queryString);
     }
 
     public Value value(int value) {
-        int index = lastIndexOfRightBracket();
-        insert(index, value);
-        addCommaAfterFirstValue(index);
-        return new Value(this.builder);
+        addCommaAfterFirstValue();
+        append(value);
+        return new Value(this.queryString);
     }
 
-    protected abstract void addCommaAfterFirstValue(int index);
+    protected abstract void addCommaAfterFirstValue();
 }

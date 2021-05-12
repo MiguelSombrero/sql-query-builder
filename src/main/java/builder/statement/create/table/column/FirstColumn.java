@@ -1,15 +1,15 @@
 package builder.statement.create.table.column;
 
-import builder.SQLStringBuilder;
+import builder.SQLStringAppender;
 
-public class FirstColumn extends SQLStringBuilder {
+public class FirstColumn extends SQLStringAppender {
 
-    public FirstColumn(StringBuilder builder) {
-        super(builder);
+    public FirstColumn(StringBuilder queryString) {
+        super(queryString);
     }
 
     public ColumnType column(String column) {
         append(column);
-        return new ColumnType(this.builder);
+        return new ColumnType(this.queryString);
     }
 }

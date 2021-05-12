@@ -4,8 +4,8 @@ import builder.condition.Condition;
 
 public class Having extends Orderer {
 
-    public Having(StringBuilder builder) {
-        super(builder);
+    public Having(StringBuilder queryString) {
+        super(queryString);
     }
 
     public Having column(String columnName) {
@@ -17,6 +17,6 @@ public class Having extends Orderer {
     public Orderer having(Condition havingClause) {
         append(" HAVING ");
         append(havingClause.build());
-        return new Orderer(this.builder);
+        return new Orderer(this.queryString);
     }
 }

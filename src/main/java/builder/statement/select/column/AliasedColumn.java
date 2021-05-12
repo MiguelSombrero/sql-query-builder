@@ -4,13 +4,13 @@ import builder.statement.select.table.From;
 
 public class AliasedColumn extends ColumnTemplate {
 
-    public AliasedColumn(StringBuilder builder) {
-        super(builder);
+    public AliasedColumn(StringBuilder queryString) {
+        super(queryString);
     }
 
     public From from() {
         append(" FROM ");
-        return new From(this.builder);
+        return new From(this.queryString);
     }
 
     @Override

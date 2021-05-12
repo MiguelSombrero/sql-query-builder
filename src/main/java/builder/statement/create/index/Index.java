@@ -1,16 +1,16 @@
 package builder.statement.create.index;
 
-import builder.SQLStringBuilder;
+import builder.SQLStringAppender;
 
-public class Index extends SQLStringBuilder {
+public class Index extends SQLStringAppender {
 
-    public Index(StringBuilder builder) {
-        super(builder);
+    public Index(StringBuilder queryString) {
+        super(queryString);
     }
 
     public IndexedColumn on(String table) {
         append(" ON ");
         append(table);
-        return new IndexedColumn(this.builder);
+        return new IndexedColumn(this.queryString);
     }
 }

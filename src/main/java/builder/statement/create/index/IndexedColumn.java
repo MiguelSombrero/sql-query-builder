@@ -1,24 +1,17 @@
 package builder.statement.create.index;
 
-import builder.SQLStringBuilder;
+import builder.SQLStringAppender;
 import builder.TerminalOperation;
-import builder.statement.create.TerminalCreateOperation;
 
-public class IndexedColumn extends SQLStringBuilder {
+public class IndexedColumn extends SQLStringAppender {
 
-    public IndexedColumn(StringBuilder builder) {
-        super(builder);
+    public IndexedColumn(StringBuilder queryString) {
+        super(queryString);
     }
 
-    public TerminalCreateOperation columns(String ...listOfColumns) {
-        append(" (");
-        append(listOfColumns[0]);
-
-        for (int i = 1; i < listOfColumns.length; i++) {
-            append(", ");
-            append(listOfColumns[i]);
-        }
-
-        return new TerminalCreateOperation(this.builder);
+    public TerminalOperation columns(String ...listOfColumns) {
+        append(" ");
+        appendList(listOfColumns);
+        return new TerminalOperation(this.queryString);
     }
 }

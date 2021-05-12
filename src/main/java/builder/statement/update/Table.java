@@ -1,16 +1,16 @@
 package builder.statement.update;
 
-import builder.SQLStringBuilder;
+import builder.SQLStringAppender;
 
-public class Table extends SQLStringBuilder {
+public class Table extends SQLStringAppender {
 
-    public Table(StringBuilder builder) {
-        super(builder);
+    public Table(StringBuilder queryString) {
+        super(queryString);
     }
 
     public FirstColumn table(String tableName) {
         append(tableName);
         append(" SET ");
-        return new FirstColumn(this.builder);
+        return new FirstColumn(this.queryString);
     }
 }

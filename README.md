@@ -4,6 +4,8 @@
 
 Sql query builder is Java-library used for building SQL query strings more easily. Syntax of the query strings is intended to be compatible at least with MySQL.
 
+**Note** that this is not an ORM and does not provide any data access methods. This library simply builds strings that are valid SQL and can be used as a query strings by some other framework/library.   
+
 ## Examples
 
 Basic SELECT statement:
@@ -30,19 +32,23 @@ More examples can be found in [examples](https://github.com/MiguelSombrero/sql-q
 
 ## How to use this library
 
-### Add Maven dependency
+### 1. Add repository information
+
+Add necessary [repository information](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry) to your pom-file to access and authenticate to GitHub packages.
+
+### 2. Add Maven dependency
 
 Add Maven dependency to your project:
 
     <dependency>
         <groupId>com.github.miguelsombrero</groupId>
         <artifactId>sql-query-builder</artifactId>
-        <version>{version}</version>
+        <version>1.0.4</version>
     </dependency>
 
 Check the latest version from [GitHub Packages](https://github.com/MiguelSombrero?tab=packages&repo_name=sql-query-builder)
 
-### Install dependency 
+### 3. Install dependency 
 
     mvn install
 
@@ -59,6 +65,9 @@ Starting point of using library is static factory class `QueryFactory` found in 
 [Supported operations](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/supported.md)
 
 ## Features scheduled on next release
+
+### General
+- Javadoc
 
 ### CREATE
 - Constraints 'default' and 'check'

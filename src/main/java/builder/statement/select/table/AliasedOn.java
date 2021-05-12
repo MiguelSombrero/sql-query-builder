@@ -1,16 +1,16 @@
 package builder.statement.select.table;
 
-import builder.SQLStringBuilder;
+import builder.SQLStringAppender;
 
-public class AliasedOn extends SQLStringBuilder {
+public class AliasedOn extends SQLStringAppender {
 
-    public AliasedOn(StringBuilder builder) {
-        super(builder);
+    public AliasedOn(StringBuilder queryString) {
+        super(queryString);
     }
 
     public JoinTable on(String condition) {
         append(" ON ");
         append(condition);
-        return new JoinTable(this.builder);
+        return new JoinTable(this.queryString);
     }
 }

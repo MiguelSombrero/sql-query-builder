@@ -2,13 +2,13 @@ package builder.statement.select.table;
 
 public class AliasedTable extends JoinTable {
 
-    public AliasedTable(StringBuilder builder) {
-        super(builder);
+    public AliasedTable(StringBuilder queryString) {
+        super(queryString);
     }
 
     public Table table(String tableName) {
         append(", ");
         append(tableName);
-        return new Table(this.builder);
+        return new Table(this.queryString);
     }
 }

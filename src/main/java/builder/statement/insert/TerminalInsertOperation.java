@@ -1,11 +1,11 @@
-package builder.statement.create;
+package builder.statement.insert;
 
 import builder.Builder;
 import builder.SQLStringAppender;
 
-public class TerminalCreateOperation extends SQLStringAppender implements Builder {
+public class TerminalInsertOperation extends SQLStringAppender implements Builder {
 
-    public TerminalCreateOperation(StringBuilder queryString) {
+    public TerminalInsertOperation(StringBuilder queryString) {
         super(queryString);
     }
 

@@ -5,13 +5,13 @@ import builder.statement.select.TerminalSelectOperation;
 
 public class Limit extends TerminalSelectOperation {
 
-    public Limit(StringBuilder builder) {
-        super(builder);
+    public Limit(StringBuilder queryString) {
+        super(queryString);
     }
 
     public TerminalOperation limit(int to) {
         append(" LIMIT ");
         append(to);
-        return new TerminalOperation(this.builder);
+        return new TerminalOperation(this.queryString);
     }
 }

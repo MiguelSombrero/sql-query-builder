@@ -1,11 +1,11 @@
 package builder.statement.create.table.foreignkey;
 
-import builder.SQLStringBuilder;
+import builder.SQLStringAppender;
 
-public class Reference extends SQLStringBuilder {
+public class Reference extends SQLStringAppender {
 
-    public Reference(StringBuilder builder) {
-        super(builder);
+    public Reference(StringBuilder queryString) {
+        super(queryString);
     }
 
     public OnAction references(String column, String ofTable) {
@@ -14,6 +14,6 @@ public class Reference extends SQLStringBuilder {
         append("(");
         append(column);
         append(")");
-        return new OnAction(this.builder);
+        return new OnAction(this.queryString);
     }
 }

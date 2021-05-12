@@ -2,13 +2,13 @@ package builder.condition;
 
 public class Negation extends Comparison {
 
-    public Negation(StringBuilder builder) {
-        super(builder);
+    public Negation(StringBuilder queryString) {
+        super(queryString);
     }
 
     public Comparison not() {
-        insert(0, "NOT ");
-        return new Comparison(this.builder);
+        this.queryString.insert(0, "NOT ");
+        return new Comparison(this.queryString);
     }
 
 }

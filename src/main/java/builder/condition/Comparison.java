@@ -1,12 +1,12 @@
 package builder.condition;
 
 import builder.Builder;
-import builder.SQLStringBuilder;
+import builder.SQLStringAppender;
 
-public class Comparison extends SQLStringBuilder {
+public class Comparison extends SQLStringAppender {
 
-    public Comparison(StringBuilder builder) {
-        super(builder);
+    public Comparison(StringBuilder queryString) {
+        super(queryString);
     }
 
     public Condition equals(String value) {
@@ -157,42 +157,21 @@ public class Comparison extends SQLStringBuilder {
         return getCondition();
     }
 
-    public Condition isIn(String ...listOfValue) {
-        append(" IN (");
-        appendStringValue(listOfValue[0]);
-
-        for (int i = 1; i < listOfValue.length; i++) {
-            append(", ");
-            appendStringValue(listOfValue[i]);
-        }
-
-        append(")");
+    public Condition isIn(String ...listOfValues) {
+        append(" IN ");
+        appendListOfValues(listOfValues);
         return getCondition();
     }
 
-    public Condition isIn(int ...listOfValue) {
-        append(" IN (");
-        append(listOfValue[0]);
-
-        for (int i = 1; i < listOfValue.length; i++) {
-            append(", ");
-            append(listOfValue[i]);
-        }
-
-        append(")");
+    public Condition isIn(int ...listOfValues) {
+        append(" IN ");
+        appendListOfValues(listOfValues);
         return getCondition();
     }
 
-    public Condition isIn(double ...listOfValue) {
-        append(" IN (");
-        append(listOfValue[0]);
-
-        for (int i = 1; i < listOfValue.length; i++) {
-            append(", ");
-            append(listOfValue[i]);
-        }
-
-        append(")");
+    public Condition isIn(double ...listOfValues) {
+        append(" IN ");
+        appendListOfValues(listOfValues);
         return getCondition();
     }
 
@@ -223,6 +202,6 @@ public class Comparison extends SQLStringBuilder {
     }
 
     private Condition getCondition() {
-        return new Condition(this.builder);
+        return new Condition(this.queryString);
     }
 }

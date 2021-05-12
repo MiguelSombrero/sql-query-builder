@@ -1,15 +1,15 @@
 package builder.statement.delete;
 
-import builder.SQLStringBuilder;
+import builder.SQLStringAppender;
 
-public class Table extends SQLStringBuilder {
+public class Table extends SQLStringAppender {
 
-    public Table(StringBuilder builder) {
-        super(builder);
+    public Table(StringBuilder queryString) {
+        super(queryString);
     }
 
     public Condition table(String tableName) {
         append(tableName);
-        return new Condition(this.builder);
+        return new Condition(this.queryString);
     }
 }

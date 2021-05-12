@@ -2,12 +2,12 @@ package builder.statement.select.order;
 
 public class Grouper extends Orderer {
 
-    public Grouper(StringBuilder builder) {
-        super(builder);
+    public Grouper(StringBuilder queryString) {
+        super(queryString);
     }
 
     public GroupBy groupBy() {
         append(" GROUP BY ");
-        return new GroupBy(this.builder);
+        return new GroupBy(this.queryString);
     }
 }

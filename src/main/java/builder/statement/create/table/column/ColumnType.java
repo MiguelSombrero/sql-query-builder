@@ -1,16 +1,16 @@
 package builder.statement.create.table.column;
 
-import builder.SQLStringBuilder;
+import builder.SQLStringAppender;
 
-public class ColumnType extends SQLStringBuilder {
+public class ColumnType extends SQLStringAppender {
 
-    public ColumnType(StringBuilder builder) {
-        super(builder);
+    public ColumnType(StringBuilder queryString) {
+        super(queryString);
     }
 
     public Constraint type(DataType dataType) {
         append(" ");
         append(dataType.getType());
-        return new Constraint(this.builder);
+        return new Constraint(this.queryString);
     }
 }

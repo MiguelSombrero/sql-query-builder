@@ -1,17 +1,17 @@
 package builder.statement.select.column;
 
-import builder.SQLStringBuilder;
+import builder.SQLStringAppender;
 
-public abstract class ColumnTemplate extends SQLStringBuilder {
+public abstract class ColumnTemplate extends SQLStringAppender {
 
-    public ColumnTemplate(StringBuilder builder) {
-        super(builder);
+    public ColumnTemplate(StringBuilder queryString) {
+        super(queryString);
     }
 
     public Column column(String fieldName) {
         addCommaAfterFirstValue();
         append(fieldName);
-        return new Column(this.builder);
+        return new Column(this.queryString);
     }
 
     public Column count(String columnName) {
@@ -40,7 +40,7 @@ public abstract class ColumnTemplate extends SQLStringBuilder {
         append("(");
         append(toColumn);
         append(")");
-        return new Column(this.builder);
+        return new Column(this.queryString);
     }
 
     protected abstract void addCommaAfterFirstValue();

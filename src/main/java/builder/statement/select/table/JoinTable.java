@@ -5,14 +5,14 @@ import builder.statement.select.order.Grouper;
 
 public class JoinTable extends Grouper {
 
-    public JoinTable(StringBuilder builder) {
-        super(builder);
+    public JoinTable(StringBuilder queryString) {
+        super(queryString);
     }
 
     public Grouper where(Condition clause) {
         append(" WHERE ");
         append(clause.build());
-        return new Grouper(this.builder);
+        return new Grouper(this.queryString);
     }
 
     public On innerJoin(String table) {
@@ -32,6 +32,6 @@ public class JoinTable extends Grouper {
 
     private On join(String table) {
         append(table);
-        return new On(this.builder);
+        return new On(this.queryString);
     }
 }

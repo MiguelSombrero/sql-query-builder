@@ -4,13 +4,13 @@ import builder.TerminalOperation;
 
 public class Condition extends TerminalOperation {
 
-    public Condition(StringBuilder builder) {
-        super(builder);
+    public Condition(StringBuilder queryString) {
+        super(queryString);
     }
 
     public TerminalOperation where(builder.condition.Condition clause) {
         append(" WHERE ");
         append(clause.build());
-        return new TerminalOperation(this.builder);
+        return new TerminalOperation(this.queryString);
     }
 }
