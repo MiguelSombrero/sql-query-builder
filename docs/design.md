@@ -4,6 +4,10 @@ Starting point of using library is static factory class `QueryFactory` found in 
 
 ## About the design
 
+All the classes extends - either directly or by some other class - `SQLStringAppender`, which contains methods of append string values to query string.
+
+If class is 'terminal operation', meaning that the query string is valid SQL and can be executed, class extends `TerminalOperation` class (or equivalent `TerminalSelectOperation` etc.).
+
 ### Builder pattern
 
 I have used [builder pattern](https://en.wikipedia.org/wiki/Builder_pattern) to chain classes. 

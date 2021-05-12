@@ -42,12 +42,12 @@ public class InsertTest extends DatabaseTestBaseClass {
                     .value("1980-04-12")
                     .value("Miika")
                     .value("Somero")
-                    .value(40)
+                    .value(40.5)
                 .build();
 
         logger.info(query);
 
-        assertEquals("INSERT INTO person (id, birthdate, firstname, lastname, age) VALUES (101, '1980-04-12', 'Miika', 'Somero', 40)", query);
+        assertEquals("INSERT INTO person (id, birthdate, firstname, lastname, age) VALUES (101, '1980-04-12', 'Miika', 'Somero', 40.5)", query);
         assertThatQueryIsValidSQL(query);
     }
 

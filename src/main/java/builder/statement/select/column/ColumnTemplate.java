@@ -2,36 +2,44 @@ package builder.statement.select.column;
 
 import builder.SQLStringAppender;
 
+/**
+ * Defines the methods for SELECTing columns or aggregate functions
+ */
 public abstract class ColumnTemplate extends SQLStringAppender {
 
     public ColumnTemplate(StringBuilder queryString) {
         super(queryString);
     }
 
-    public Column column(String fieldName) {
+    /**
+     *
+     * @param column Column name to be queried by SELECT
+     * @return Column class 
+     */
+    public Column column(String column) {
         addCommaAfterFirstValue();
-        append(fieldName);
+        append(column);
         return new Column(this.queryString);
     }
 
-    public Column count(String columnName) {
-        return applyAggregate("COUNT", columnName);
+    public Column count(String column) {
+        return applyAggregate("COUNT", column);
     }
 
-    public Column min(String columnName) {
-        return applyAggregate("MIN", columnName);
+    public Column min(String column) {
+        return applyAggregate("MIN", column);
     }
 
-    public Column max(String columnName) {
-        return applyAggregate("MAX", columnName);
+    public Column max(String column) {
+        return applyAggregate("MAX", column);
     }
 
-    public Column avg(String columnName) {
-        return applyAggregate("AVG", columnName);
+    public Column avg(String column) {
+        return applyAggregate("AVG", column);
     }
 
-    public Column sum(String columnName) {
-        return applyAggregate("SUM", columnName);
+    public Column sum(String column) {
+        return applyAggregate("SUM", column);
     }
 
     private Column applyAggregate(String function, String toColumn) {

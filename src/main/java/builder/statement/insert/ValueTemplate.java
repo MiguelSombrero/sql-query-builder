@@ -18,5 +18,11 @@ public abstract class ValueTemplate extends TerminalInsertOperation {
         return new Value(this.queryString);
     }
 
+    public Value value(double value) {
+        addCommaAfterFirstValue();
+        append(value);
+        return new Value(this.queryString);
+    }
+
     protected abstract void addCommaAfterFirstValue();
 }

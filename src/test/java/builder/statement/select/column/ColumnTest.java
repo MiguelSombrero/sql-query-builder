@@ -126,6 +126,23 @@ public class ColumnTest extends DatabaseTestBaseClass {
     }
 
     @Test
+    public void testMultipleAggregateFunctions() throws SQLException {
+        String query = QueryFactory
+                .select()
+                    .min("age")
+                    .max("birthdate")
+                    .count("*")
+                .from()
+                    .table("person")
+                .groupBy()
+                    .column("firstname")
+                .build();
+
+        assertEquals("SELECT MIN(age), MAX(birthdate), COUNT(*) FROM person GROUP BY firstname", query);
+        assertThatQueryIsValidSQL(query);
+    }
+
+    @Test
     public void testMultipleColumnsWithAliases() throws SQLException {
         String query = QueryFactory
                 .select()
