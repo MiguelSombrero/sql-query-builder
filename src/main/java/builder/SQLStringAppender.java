@@ -2,6 +2,9 @@ package builder;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import validation.StringValidator;
+
+import javax.xml.bind.ValidationException;
 
 public abstract class SQLStringAppender {
     protected static Logger logger = LoggerFactory.getLogger(SQLStringAppender.class);
@@ -12,8 +15,15 @@ public abstract class SQLStringAppender {
         this.queryString = queryString;
     }
 
-    protected void append(String text) {
-        this.queryString = this.queryString.append(text);
+    protected void append(String value) {
+        this.queryString = this.queryString.append(value);
+    }
+
+    protected void validateAndAppend(String value) throws ValidationException {
+        if (!StringValidator.validate(value)) {
+            throw new ValidationException(value + " is not a valid input!");
+        }
+        this.queryString = this.queryString.append(value);
     }
 
     protected void append(Integer value) {
