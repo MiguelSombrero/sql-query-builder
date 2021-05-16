@@ -4,9 +4,11 @@ import database.DatabaseTestBaseClass;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.xml.bind.ValidationException;
 import java.sql.SQLException;
 
 import static factory.QueryFactory.create;
+import static factory.WhereClauseFactory.valueOf;
 import static junit.framework.Assert.assertEquals;
 
 public class CreateTableTest extends DatabaseTestBaseClass {
@@ -17,7 +19,7 @@ public class CreateTableTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testCreateTableDataTypes() throws SQLException {
+    public void testCreateTableDataTypes() throws SQLException, ValidationException {
         String query = create()
                 .table("cars")
                 .column("ID").type(DataType.INT)
@@ -35,7 +37,7 @@ public class CreateTableTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testCreateTableConstraintNotNull() throws SQLException {
+    public void testCreateTableConstraintNotNull() throws SQLException, ValidationException {
         String query = create()
                 .table("planes")
                 .column("ID").type(DataType.INT).notNull()
@@ -50,7 +52,7 @@ public class CreateTableTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testCreateTableConstraintUnique() throws SQLException {
+    public void testCreateTableConstraintUnique() throws SQLException, ValidationException {
         String query = create()
                 .table("bikes")
                 .column("ID").type(DataType.INT).unique()
@@ -65,7 +67,7 @@ public class CreateTableTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testCreateTableConstraintPrimaryKey() throws SQLException {
+    public void testCreateTableConstraintPrimaryKey() throws SQLException, ValidationException {
         String query = create()
                 .table("vehicles")
                 .column("ID").type(DataType.INT).primaryKey()
@@ -79,7 +81,7 @@ public class CreateTableTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testCreateTableConstraintAutoIncrement() throws SQLException {
+    public void testCreateTableConstraintAutoIncrement() throws SQLException, ValidationException {
         String query = create()
                 .table("vehicles")
                 .column("ID").type(DataType.INT).autoIncrement()
@@ -94,7 +96,7 @@ public class CreateTableTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testCreateTableConstraintMultipleConstraint() throws SQLException {
+    public void testCreateTableConstraintMultipleConstraint() throws SQLException, ValidationException {
         String query = create()
                 .table("vehicles")
                 .column("ID").type(DataType.INT).primaryKey().autoIncrement()
@@ -106,6 +108,26 @@ public class CreateTableTest extends DatabaseTestBaseClass {
 
         assertEquals("CREATE TABLE vehicles (ID INT PRIMARY KEY AUTO_INCREMENT, person_id INT UNIQUE NOT NULL, FOREIGN KEY (person_id) REFERENCES person(ID))", query);
         assertThatQueryIsValidSQL(query);
+    }
+
+    @Test(expected = ValidationException.class)
+    public void testCreateTableWithSQLInjection() throws ValidationException {
+        create()
+                .table(";DROP")
+                .column("ID").type(DataType.INT).primaryKey().autoIncrement()
+                .column("person_id").type(DataType.INT).unique().notNull()
+                .foreignKey("person_id").references("ID", "person")
+                .build();
+    }
+
+    @Test(expected = ValidationException.class)
+    public void testCreateTableColumnWithSQLInjection() throws ValidationException {
+        create()
+                .table("vehicles")
+                .column("ID").type(DataType.INT).primaryKey().autoIncrement()
+                .column(";DROP").type(DataType.INT).unique().notNull()
+                .foreignKey("person_id").references("ID", "person")
+                .build();
     }
 
 }

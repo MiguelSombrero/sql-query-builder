@@ -1,14 +1,16 @@
 package builder.statement.select.table;
 
+import javax.xml.bind.ValidationException;
+
 public class AliasedTable extends JoinTable {
 
     public AliasedTable(StringBuilder queryString) {
         super(queryString);
     }
 
-    public Table table(String tableName) {
+    public Table table(String tableName) throws ValidationException {
         append(", ");
-        append(tableName);
+        validateAndAppend(tableName);
         return new Table(this.queryString);
     }
 }

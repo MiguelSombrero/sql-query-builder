@@ -2,6 +2,8 @@ package builder.statement.select.column;
 
 import builder.SQLStringAppender;
 
+import javax.xml.bind.ValidationException;
+
 /**
  * Defines the methods for appending columns or aggregate functions in
  * 'SELECT column(s), aggregate function(s)' statement.
@@ -19,9 +21,9 @@ public abstract class ColumnTemplate extends SQLStringAppender {
      * @return Column class which can be used to append more columns,
      * aggregate functions and alias selected columns or call 'FROM table'
      */
-    public Column column(String column) {
+    public Column column(String column) throws ValidationException {
         addCommaAfterFirstValue();
-        append(column);
+        validateAndAppend(column);
         return new Column(this.queryString);
     }
 
@@ -32,7 +34,7 @@ public abstract class ColumnTemplate extends SQLStringAppender {
      * @return Column class which can be used to append more columns,
      * aggregate functions and alias selected columns or call 'FROM table'
      */
-    public Column count(String column) {
+    public Column count(String column) throws ValidationException {
         return applyAggregate("COUNT", column);
     }
 
@@ -43,7 +45,7 @@ public abstract class ColumnTemplate extends SQLStringAppender {
      * @return Column class which can be used to append more columns,
      * aggregate functions and alias selected columns or call 'FROM table'
      */
-    public Column min(String column) {
+    public Column min(String column) throws ValidationException {
         return applyAggregate("MIN", column);
     }
 
@@ -54,7 +56,7 @@ public abstract class ColumnTemplate extends SQLStringAppender {
      * @return Column class which can be used to append more columns,
      * aggregate functions and alias selected columns or call 'FROM table'
      */
-    public Column max(String column) {
+    public Column max(String column) throws ValidationException {
         return applyAggregate("MAX", column);
     }
 
@@ -65,7 +67,7 @@ public abstract class ColumnTemplate extends SQLStringAppender {
      * @return Column class which can be used to append more columns,
      * aggregate functions and alias selected columns or call 'FROM table'
      */
-    public Column avg(String column) {
+    public Column avg(String column) throws ValidationException {
         return applyAggregate("AVG", column);
     }
 
@@ -76,15 +78,15 @@ public abstract class ColumnTemplate extends SQLStringAppender {
      * @return Column class which can be used to append more columns,
      * aggregate functions and alias selected columns or call 'FROM table'
      */
-    public Column sum(String column) {
+    public Column sum(String column) throws ValidationException {
         return applyAggregate("SUM", column);
     }
 
-    private Column applyAggregate(String function, String toColumn) {
+    private Column applyAggregate(String function, String toColumn) throws ValidationException {
         addCommaAfterFirstValue();
-        append(function);
+        validateAndAppend(function);
         append("(");
-        append(toColumn);
+        validateAndAppend(toColumn);
         append(")");
         return new Column(this.queryString);
     }

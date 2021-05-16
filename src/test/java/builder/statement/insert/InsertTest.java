@@ -5,6 +5,7 @@ import factory.QueryFactory;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.xml.bind.ValidationException;
 import java.sql.SQLException;
 
 import static factory.WhereClauseFactory.valueOf;
@@ -18,7 +19,7 @@ public class InsertTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testInsertOneValue() throws SQLException {
+    public void testInsertOneValue() throws SQLException, ValidationException {
         String query = QueryFactory
                 .insertInto()
                 .table("person")
@@ -32,7 +33,7 @@ public class InsertTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testInsertMultipleValues() throws SQLException {
+    public void testInsertMultipleValues() throws SQLException, ValidationException {
         String query = QueryFactory
                 .insertInto()
                 .table("person")
@@ -52,7 +53,7 @@ public class InsertTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testInsertQuery() throws SQLException {
+    public void testInsertQuery() throws SQLException, ValidationException {
         String query = QueryFactory
                 .insertInto()
                 .table("person")
@@ -77,7 +78,7 @@ public class InsertTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testInsertMultipleValuesWithoutSpecifyingColumns() throws SQLException {
+    public void testInsertMultipleValuesWithoutSpecifyingColumns() throws SQLException, ValidationException {
         String query = QueryFactory
                 .insertInto()
                 .table("person")
@@ -96,7 +97,7 @@ public class InsertTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testInsertQueryWithoutSpecifyingColumns() throws SQLException {
+    public void testInsertQueryWithoutSpecifyingColumns() throws SQLException, ValidationException {
         String query = QueryFactory
                 .insertInto()
                 .table("person")
@@ -113,5 +114,38 @@ public class InsertTest extends DatabaseTestBaseClass {
 
         assertEquals("INSERT INTO person SELECT * FROM student WHERE age < 18", query);
         assertThatQueryIsValidSQL(query);
+    }
+
+    @Test(expected = ValidationException.class)
+    public void testInsertWithSQLInjection() throws ValidationException {
+        String query = QueryFactory
+                .insertInto()
+                .table(";DROP")
+                    .columns("id")
+                .values()
+                    .value(100)
+                .build();
+    }
+
+    @Test(expected = ValidationException.class)
+    public void testInsertColumnsWithSQLInjection() throws ValidationException {
+        String query = QueryFactory
+                .insertInto()
+                .table("person")
+                    .columns("id", ";DROP")
+                .values()
+                    .value(100)
+                .build();
+    }
+
+    @Test(expected = ValidationException.class)
+    public void testInsertValuesWithSQLInjection() throws ValidationException {
+        String query = QueryFactory
+                .insertInto()
+                .table("person")
+                    .columns("firstname")
+                .values()
+                    .value(";DROP")
+                .build();
     }
 }

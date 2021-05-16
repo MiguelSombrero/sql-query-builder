@@ -68,6 +68,7 @@ Starting point of using library is static factory class `QueryFactory` found in 
 
 ### General
 - Javadoc
+- Parametrized queries (WHERE name = ?)
 
 ### CREATE
 - Constraints 'default' and 'check'

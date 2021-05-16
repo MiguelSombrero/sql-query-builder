@@ -1,4 +1,4 @@
-package builder;
+package performance;
 
 import builder.statement.select.column.FirstColumn;
 import builder.statement.select.table.Table;
@@ -7,6 +7,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.xml.bind.ValidationException;
+
 import static factory.WhereClauseFactory.valueOf;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -14,17 +16,17 @@ import static org.junit.Assert.assertTrue;
 public class PerformanceTest {
     private static Logger logger = LoggerFactory.getLogger(PerformanceTest.class);
     private static final String complexQuery = "SELECT p.firstname AS first, p.lastname AS last, c.name AS course FROM persons AS p, courses AS c LEFT JOIN addresses ON addresses.id = persons.address_id WHERE age > 18 AND age < 65 AND NOT firstname = 'Miika'";
-    private static final int times = 1_000_000;
+    private static final int times = 100_000;
 
     @Test
-    public void testThatQueriesMatch() {
+    public void testThatQueriesMatch() throws ValidationException {
         assertEquals(complexQuery, buildComplexQuery());
         assertEquals(complexQuery, appendComplexQuery());
         assertEquals(complexQuery, concatComplexQuery());
     }
 
     @Test
-    public void testThatBuilding1MillionQueriesStaysWithin3Seconds() {
+    public void testThatBuilding100KQueriesStaysWithin5Seconds() throws ValidationException {
         long start = 0L;
         long end = 0L;
 
@@ -34,11 +36,11 @@ public class PerformanceTest {
         long builderMilliseconds = end - start;
 
         logger.info(builderMilliseconds + " milliseconds");
-        assertTrue(3000 > builderMilliseconds);
+        assertTrue(5000 > builderMilliseconds);
     }
 
     @Test
-    public void testThatBuildingOverComplexQueryStaysWithin3Seconds() {
+    public void testThatBuildingOverComplexQueryStaysWithin5Seconds() throws ValidationException {
         long start = 0L;
         long end = 0L;
 
@@ -55,18 +57,18 @@ public class PerformanceTest {
                     .table("testing");
 
         for (int i = 0; i < times; i++) {
-            table.leftJoin("test2").on("testing.id = test2.test_id");
+            table.leftJoin("test2").on("testing.id", "test2.test_id");
         }
 
-        table.where(valueOf("test").isLike("yeah")).build();
+        table.where(valueOf("test").contains("yeah")).build();
 
         end = System.currentTimeMillis();
         long builderMilliseconds = end - start;
         logger.info(builderMilliseconds + " milliseconds");
-        assertTrue(3000 > builderMilliseconds);
+        assertTrue(5000 > builderMilliseconds);
     }
 
-    public void comparisonOfConcatenatingMethods() {
+    public void comparisonOfConcatenatingMethods() throws ValidationException {
         long start = 0L;
         long end = 0L;
 
@@ -93,7 +95,7 @@ public class PerformanceTest {
         logger.info( percent + " percent");
     }
 
-    private void buildComplexQueryN(int times) {
+    private void buildComplexQueryN(int times) throws ValidationException {
         for (int i = 0; i < times; i++) {
             String query = buildComplexQuery();
         }
@@ -111,7 +113,7 @@ public class PerformanceTest {
         }
     }
 
-    private String buildComplexQuery() {
+    private String buildComplexQuery() throws ValidationException {
         return QueryFactory.select()
                 .column("p.firstname").alias("first")
                 .column("p.lastname").alias("last")
@@ -119,7 +121,7 @@ public class PerformanceTest {
                 .from()
                     .table("persons").alias("p")
                     .table("courses").alias("c")
-                .leftJoin("addresses").on("addresses.id = persons.address_id")
+                .leftJoin("addresses").on("addresses.id", "persons.address_id")
                 .where(valueOf("age").greaterThan(18)
                         .and(valueOf("age").lesserThan(65))
                         .and(valueOf("firstname").not().equals("Miika")))

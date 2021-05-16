@@ -14,18 +14,48 @@ public class StringValidatorTest {
     }
 
     @Test
+    public void testDoesAcceptCapitalized() {
+        assertTrue(StringValidator.validate("PERSON"));
+    }
+
+    @Test
+    public void testDoesAcceptPercentAtStart() {
+        assertTrue(StringValidator.validate("%rson_id"));
+    }
+
+    @Test
+    public void testDoesAcceptPercentAtEnd() {
+        assertTrue(StringValidator.validate("person_i%"));
+    }
+
+    @Test
+    public void testDoesAcceptPercentAtStartAndEnd() {
+        assertTrue(StringValidator.validate("%erson_i%"));
+    }
+
+    @Test
+    public void testDoesAcceptOneDot() {
+        assertTrue(StringValidator.validate("p.id"));
+    }
+
+    @Test
+    public void testDoesNotAcceptDotInStart() {
+        assertFalse(StringValidator.validate(".id"));
+    }
+
+    @Test
+    public void testDoesNotAcceptTwoDots() {
+        assertFalse(StringValidator.validate("p.id.id"));
+    }
+
+    @Test
     public void testDoesAcceptStar() {
         assertTrue(StringValidator.validate("*"));
     }
 
     @Test
-    public void testDoesAcceptQuestionMark() {
-        assertTrue(StringValidator.validate("?"));
-    }
-
-    @Test
     public void testMaximumValue() {
-        assertTrue(StringValidator.validate(StringUtils.repeat("a", 65534)));
+        assertTrue(StringValidator.validate(StringUtils.repeat("a", 255)));
     }
 
     @Test
@@ -39,18 +69,8 @@ public class StringValidatorTest {
     }
 
     @Test
-    public void testDoesNotAcceptTwoQuestionMarksInARow() {
-        assertFalse(StringValidator.validate("??"));
-    }
-
-    @Test
-    public void testDoesNotAcceptStartAndQuestionMark() {
-        assertFalse(StringValidator.validate("*?"));
-    }
-
-    @Test
-    public void testDoesNotAcceptTwoQuestionMarksInASentence() {
-        assertFalse(StringValidator.validate("SELECT name FROM person WHERE age = ? AND birthdate = ?"));
+    public void testDoesNotAcceptPercentInsideSentence() {
+        assertFalse(StringValidator.validate("pers%n_id"));
     }
 
     @Test
@@ -80,6 +100,6 @@ public class StringValidatorTest {
 
     @Test
     public void testDoesNotAcceptTooLongValue() {
-        assertFalse(StringValidator.validate(StringUtils.repeat("a", 65535)));
+        assertFalse(StringValidator.validate(StringUtils.repeat("a", 256)));
     }
 }

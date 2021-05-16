@@ -2,6 +2,7 @@ package builder;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import validation.DateValidator;
 import validation.StringValidator;
 
 import javax.xml.bind.ValidationException;
@@ -20,10 +21,14 @@ public abstract class SQLStringAppender {
     }
 
     protected void validateAndAppend(String value) throws ValidationException {
-        if (!StringValidator.validate(value)) {
-            throw new ValidationException(value + " is not a valid input!");
+        if (!isValidInput(value)) {
+            throw new ValidationException(value + " is not valid input!");
         }
         this.queryString = this.queryString.append(value);
+    }
+
+    private boolean isValidInput(String value) {
+        return StringValidator.validate(value) || DateValidator.validate(value);
     }
 
     protected void append(Integer value) {
@@ -34,31 +39,31 @@ public abstract class SQLStringAppender {
         this.queryString = this.queryString.append(value);
     }
 
-    protected void appendStringValue(String value) {
+    protected void validateAndAppendStringValue(String value) throws ValidationException {
         append("'");
-        append(value);
+        validateAndAppend(value);
         append("'");
     }
 
-    protected void appendList(String ...listOfValues) {
+    protected void validateAndAppendList(String ...listOfValues) throws ValidationException {
         append("(");
-        append(listOfValues[0]);
+        validateAndAppend(listOfValues[0]);
 
         for (int i = 1; i < listOfValues.length; i++) {
             append(", ");
-            append(listOfValues[i]);
+            validateAndAppend(listOfValues[i]);
         }
 
         append(")");
     }
 
-    protected void appendListOfValues(String ...listOfValues) {
+    protected void validateAndAppendListOfValues(String ...listOfValues) throws ValidationException {
         append("(");
-        appendStringValue(listOfValues[0]);
+        validateAndAppendStringValue(listOfValues[0]);
 
         for (int i = 1; i < listOfValues.length; i++) {
             append(", ");
-            appendStringValue(listOfValues[i]);
+            validateAndAppendStringValue(listOfValues[i]);
         }
 
         append(")");

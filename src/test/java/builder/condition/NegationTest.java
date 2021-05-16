@@ -6,6 +6,7 @@ import factory.QueryFactory;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.xml.bind.ValidationException;
 import java.sql.SQLException;
 
 import static factory.WhereClauseFactory.valueOf;
@@ -15,7 +16,7 @@ public class NegationTest extends DatabaseTestBaseClass {
     private Table table;
 
     @Before
-    public void setUpQuery() {
+    public void setUpQuery() throws ValidationException {
         initializeDatabase();
 
         this.table = QueryFactory
@@ -26,7 +27,7 @@ public class NegationTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testWhereNotCondition() throws SQLException {
+    public void testWhereNotCondition() throws SQLException, ValidationException {
         String query = this.table
                 .where(valueOf("age").not().greaterThan(18))
                 .build();
@@ -39,7 +40,7 @@ public class NegationTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testWhereNotAndNotConditions() throws SQLException {
+    public void testWhereNotAndNotConditions() throws SQLException, ValidationException {
         String query = this.table
                 .where(valueOf("age").not().greaterThan(18)
                         .and(valueOf("firstname").not().equals("Miika")))
@@ -50,7 +51,7 @@ public class NegationTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testDoubleNot() throws SQLException {
+    public void testDoubleNot() throws SQLException, ValidationException {
         String query = this.table
                 .where(valueOf("age").not().isNotNull())
                 .build();
@@ -60,7 +61,7 @@ public class NegationTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testWhereNotBetween() throws SQLException {
+    public void testWhereNotBetween() throws SQLException, ValidationException {
         String query = this.table
                 .where(valueOf("age").not().isBetween(18, 20))
                 .build();
@@ -70,17 +71,7 @@ public class NegationTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testWhereNotLike() throws SQLException {
-        String query = this.table
-                .where(valueOf("firstname").not().isLike("%kka"))
-                .build();
-
-        assertEquals("SELECT firstname FROM person WHERE NOT firstname LIKE '%kka'", query);
-        assertThatQueryIsValidSQL(query);
-    }
-
-    @Test
-    public void testWhereNotIn() throws SQLException {
+    public void testWhereNotIn() throws SQLException, ValidationException {
         String query = this.table
                 .where(valueOf("age").not().isIn(30, 40, 50, 60))
                 .build();
@@ -90,7 +81,7 @@ public class NegationTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testWhereNotInSubQuery() throws SQLException {
+    public void testWhereNotInSubQuery() throws SQLException, ValidationException {
         String query = this.table
                 .where(valueOf("lastname")
                         .not()

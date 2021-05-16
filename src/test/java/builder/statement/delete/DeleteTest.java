@@ -54,18 +54,6 @@ public class DeleteTest extends DatabaseTestBaseClass {
         assertThatQueryIsValidSQL(query);
     }
 
-    @Test
-    public void testDeleteWithParameter() throws ValidationException {
-        String query = QueryFactory
-                .deleteFrom()
-                    .table("?")
-                .where(valueOf("person_id").equals(1)
-                        .and(valueOf("city").equals("Oulu")))
-                .build();
-
-        assertEquals("DELETE FROM ? WHERE person_id = 1 AND city = 'Oulu'", query);
-    }
-
     @Test(expected = ValidationException.class)
     public void testDeleteTableWithSQLInjection() throws ValidationException {
         QueryFactory

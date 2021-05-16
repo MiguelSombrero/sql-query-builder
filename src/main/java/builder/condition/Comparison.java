@@ -3,13 +3,15 @@ package builder.condition;
 import builder.Builder;
 import builder.SQLStringAppender;
 
+import javax.xml.bind.ValidationException;
+
 public class Comparison extends SQLStringAppender {
 
     public Comparison(StringBuilder queryString) {
         super(queryString);
     }
 
-    public Condition equals(String value) {
+    public Condition equals(String value) throws ValidationException {
         return appendConditionWithValue(" = ", value);
     }
 
@@ -29,7 +31,7 @@ public class Comparison extends SQLStringAppender {
         return appendConditionWithSubQuery(" = ALL ", query);
     }
 
-    public Condition greaterThan(String value) {
+    public Condition greaterThan(String value) throws ValidationException {
         return appendConditionWithValue(" > ", value);
     }
 
@@ -49,7 +51,7 @@ public class Comparison extends SQLStringAppender {
         return appendConditionWithSubQuery(" > ALL ", query);
     }
 
-    public Condition greaterThanOrEqual(String value) {
+    public Condition greaterThanOrEqual(String value) throws ValidationException {
         return appendConditionWithValue(" >= ", value);
     }
 
@@ -69,7 +71,7 @@ public class Comparison extends SQLStringAppender {
         return appendConditionWithSubQuery(" >= ALL ", query);
     }
 
-    public Condition lesserThan(String value) {
+    public Condition lesserThan(String value) throws ValidationException {
         return appendConditionWithValue(" < ", value);
     }
 
@@ -89,7 +91,7 @@ public class Comparison extends SQLStringAppender {
         return appendConditionWithSubQuery(" < ALL ", query);
     }
 
-    public Condition lesserThanOrEqual(String value) {
+    public Condition lesserThanOrEqual(String value) throws ValidationException {
         return appendConditionWithValue(" <= ", value);
     }
 
@@ -109,21 +111,17 @@ public class Comparison extends SQLStringAppender {
         return appendConditionWithSubQuery(" <= ALL ", query);
     }
 
-    public Condition isLike(String pattern) {
-        return appendConditionWithValue(" LIKE ", pattern);
-    }
-
-    public Condition startsWith(String pattern) {
+    public Condition startsWith(String pattern) throws ValidationException {
         String startsWith = pattern.concat("%");
         return appendConditionWithValue(" LIKE ", startsWith);
     }
 
-    public Condition endsWith(String pattern) {
+    public Condition endsWith(String pattern) throws ValidationException {
         String endsWith = "%".concat(pattern);
         return appendConditionWithValue(" LIKE ", endsWith);
     }
 
-    public Condition contains(String pattern) {
+    public Condition contains(String pattern) throws ValidationException {
         String endsWith = "%".concat(pattern).concat("%");
         return appendConditionWithValue(" LIKE ", endsWith);
     }
@@ -132,7 +130,7 @@ public class Comparison extends SQLStringAppender {
         return appendConditionWithSubQuery(" IN ", query);
     }
 
-    public Condition isBetween(String lower, String higher) {
+    public Condition isBetween(String lower, String higher) throws ValidationException {
         appendConditionWithValue(" BETWEEN ", lower);
         return appendConditionWithValue(" AND ", higher);
     }
@@ -157,9 +155,9 @@ public class Comparison extends SQLStringAppender {
         return getCondition();
     }
 
-    public Condition isIn(String ...listOfValues) {
+    public Condition isIn(String ...listOfValues) throws ValidationException {
         append(" IN ");
-        appendListOfValues(listOfValues);
+        validateAndAppendListOfValues(listOfValues);
         return getCondition();
     }
 
@@ -175,9 +173,9 @@ public class Comparison extends SQLStringAppender {
         return getCondition();
     }
 
-    private Condition appendConditionWithValue(String condition, String value) {
+    private Condition appendConditionWithValue(String condition, String value) throws ValidationException {
         append(condition);
-        appendStringValue(value);
+        validateAndAppendStringValue(value);
         return getCondition();
     }
 

@@ -6,6 +6,7 @@ import database.DatabaseTestBaseClass;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.xml.bind.ValidationException;
 import java.sql.SQLException;
 
 import static factory.QueryFactory.create;
@@ -15,7 +16,7 @@ public class ForeignKeyTest extends DatabaseTestBaseClass {
     private Constraint column;
 
     @Before
-    public void setUp() {
+    public void setUp() throws ValidationException {
         initializeDatabase();
 
         this.column = create()
@@ -26,7 +27,7 @@ public class ForeignKeyTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testCreateTableConstraintForeignKey() throws SQLException {
+    public void testCreateTableConstraintForeignKey() throws SQLException, ValidationException {
         String query = this.column
                 .foreignKey("person_id")
                     .references("ID", "person")
@@ -39,7 +40,7 @@ public class ForeignKeyTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testCreateTableConstraintForeignKeyOnActionCascade() throws SQLException {
+    public void testCreateTableConstraintForeignKeyOnActionCascade() throws SQLException, ValidationException {
         String query = this.column
                 .foreignKey("person_id")
                     .references("ID", "person")
@@ -56,7 +57,7 @@ public class ForeignKeyTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testCreateTableConstraintForeignKeyOnActionRestrict() throws SQLException {
+    public void testCreateTableConstraintForeignKeyOnActionRestrict() throws SQLException, ValidationException {
         String query = this.column
                 .foreignKey("person_id")
                     .references("ID", "person")
@@ -73,7 +74,7 @@ public class ForeignKeyTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testCreateTableConstraintForeignKeyOnActionSetNull() throws SQLException {
+    public void testCreateTableConstraintForeignKeyOnActionSetNull() throws SQLException, ValidationException {
         String query = this.column
                 .foreignKey("person_id")
                     .references("ID", "person")
@@ -90,7 +91,7 @@ public class ForeignKeyTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testCreateTableConstraintForeignKeyOnActionSetDefault() throws SQLException {
+    public void testCreateTableConstraintForeignKeyOnActionSetDefault() throws SQLException, ValidationException {
         String query = this.column
                 .foreignKey("person_id")
                     .references("ID", "person")
@@ -104,5 +105,25 @@ public class ForeignKeyTest extends DatabaseTestBaseClass {
 
         assertEquals("CREATE TABLE vehicles (ID INT PRIMARY KEY, person_id INT, manufacturer_id INT, FOREIGN KEY (person_id) REFERENCES person(ID) ON DELETE SET DEFAULT, FOREIGN KEY (manufacturer_id) REFERENCES manufacturer(ID) ON UPDATE SET DEFAULT)", query);
         assertThatQueryIsValidSQL(query);
+    }
+
+    @Test(expected = ValidationException.class)
+    public void testCreateTableForeignKeyWithSQLInjection() throws ValidationException {
+        create()
+                .table("vehicles")
+                .column("ID").type(DataType.INT).primaryKey().autoIncrement()
+                .column("person_id").type(DataType.INT).unique().notNull()
+                .foreignKey(";DROP").references("ID", "person")
+                .build();
+    }
+
+    @Test(expected = ValidationException.class)
+    public void testCreateTableForeignKeyReferenceWithSQLInjection() throws ValidationException {
+        create()
+                .table("vehicles")
+                .column("ID").type(DataType.INT).primaryKey().autoIncrement()
+                .column("person_id").type(DataType.INT).unique().notNull()
+                .foreignKey("person_id").references(";DROP", "person")
+                .build();
     }
 }

@@ -1,14 +1,16 @@
 package builder.statement.select.table;
 
+import javax.xml.bind.ValidationException;
+
 public class SubQuery extends JoinTable {
 
     public SubQuery(StringBuilder queryString) {
         super(queryString);
     }
 
-    public JoinTable alias(String alias) {
+    public JoinTable alias(String alias) throws ValidationException {
         append(" AS ");
-        append(alias);
+        validateAndAppend(alias);
         return new JoinTable(this.queryString);
     }
 }

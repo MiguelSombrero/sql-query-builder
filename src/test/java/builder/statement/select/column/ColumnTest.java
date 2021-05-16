@@ -5,6 +5,7 @@ import factory.QueryFactory;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.xml.bind.ValidationException;
 import java.sql.SQLException;
 
 import static junit.framework.Assert.assertEquals;
@@ -17,7 +18,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testSelect() throws SQLException {
+    public void testSelect() throws SQLException, ValidationException {
         String query = QueryFactory
                 .select()
                     .column("lastname")
@@ -31,7 +32,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testSelectTop() throws SQLException {
+    public void testSelectTop() throws SQLException, ValidationException {
         String query = QueryFactory
                 .selectTop(100)
                     .column("lastname")
@@ -46,7 +47,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testSelectDistinct() throws SQLException {
+    public void testSelectDistinct() throws SQLException, ValidationException {
         String query = QueryFactory
                 .selectDistinct()
                     .column("lastname")
@@ -61,7 +62,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testSelectCount() throws SQLException {
+    public void testSelectCount() throws SQLException, ValidationException {
         String query = QueryFactory
                 .select()
                     .count("age")
@@ -74,7 +75,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testSelectMin() throws SQLException {
+    public void testSelectMin() throws SQLException, ValidationException {
         String query = QueryFactory
                 .select()
                     .min("age")
@@ -87,7 +88,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testSelectMax() throws SQLException {
+    public void testSelectMax() throws SQLException, ValidationException {
         String query = QueryFactory
                 .select()
                     .max("age")
@@ -100,7 +101,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testSelectAvg() throws SQLException {
+    public void testSelectAvg() throws SQLException, ValidationException {
         String query = QueryFactory
                 .select()
                     .avg("age")
@@ -113,7 +114,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testSelectSum() throws SQLException {
+    public void testSelectSum() throws SQLException, ValidationException {
         String query = QueryFactory
                 .select()
                     .sum("age")
@@ -126,7 +127,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testMultipleAggregateFunctions() throws SQLException {
+    public void testMultipleAggregateFunctions() throws SQLException, ValidationException {
         String query = QueryFactory
                 .select()
                     .min("age")
@@ -143,7 +144,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testMultipleColumnsWithAliases() throws SQLException {
+    public void testMultipleColumnsWithAliases() throws SQLException, ValidationException {
         String query = QueryFactory
                 .select()
                     .column("lastname").alias("last")
@@ -157,5 +158,35 @@ public class ColumnTest extends DatabaseTestBaseClass {
 
         assertEquals("SELECT lastname AS last, MIN(age) AS minAge, firstname AS first, COUNT(*) AS count FROM person GROUP BY firstname", query);
         assertThatQueryIsValidSQL(query);
+    }
+
+    @Test(expected = ValidationException.class)
+    public void testSelectColumnWithSQLInjection() throws ValidationException {
+        QueryFactory
+                .select()
+                .column(";DROP")
+                .from()
+                    .table("person")
+                .build();
+    }
+
+    @Test(expected = ValidationException.class)
+    public void testSelectColumnAliasWithSQLInjection() throws ValidationException {
+        QueryFactory
+                .select()
+                .column("firstname").alias(";DROP")
+                .from()
+                .table("person")
+                .build();
+    }
+
+    @Test(expected = ValidationException.class)
+    public void testSelectAggregateFunctionWithSQLInjection() throws ValidationException {
+        QueryFactory
+                .select()
+                    .count(";DROP")
+                .from()
+                    .table("person")
+                .build();
     }
 }

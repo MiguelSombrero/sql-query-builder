@@ -5,28 +5,30 @@ import builder.TerminalOperation;
 import builder.statement.create.index.Index;
 import builder.statement.create.table.column.FirstColumn;
 
+import javax.xml.bind.ValidationException;
+
 public class Create extends SQLStringAppender {
 
     public Create(StringBuilder queryString) {
         super(queryString);
     }
 
-    public FirstColumn table(String tableName) {
+    public FirstColumn table(String tableName) throws ValidationException {
         append("TABLE ");
-        append(tableName);
+        validateAndAppend(tableName);
         append(" (");
         return new FirstColumn(this.queryString);
     }
 
-    public TerminalOperation database(String databaseName) {
+    public TerminalOperation database(String databaseName) throws ValidationException {
         append("DATABASE ");
-        append(databaseName);
+        validateAndAppend(databaseName);
         return new TerminalOperation(this.queryString);
     }
 
-    public Index index(String indexName) {
+    public Index index(String indexName) throws ValidationException {
         append("INDEX ");
-        append(indexName);
+        validateAndAppend(indexName);
         return new Index(this.queryString);
     }
 }
