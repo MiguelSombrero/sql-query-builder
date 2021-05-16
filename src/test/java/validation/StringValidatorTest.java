@@ -8,98 +8,100 @@ import static org.junit.Assert.assertTrue;
 
 public class StringValidatorTest {
 
+    private StringValidator stringValidator = new StringValidator();
+    
     @Test
     public void testDoesAcceptUnderScore() {
-        assertTrue(StringValidator.validate("person_id"));
+        assertTrue(stringValidator.validate("person_id"));
     }
 
     @Test
     public void testDoesAcceptCapitalized() {
-        assertTrue(StringValidator.validate("PERSON"));
+        assertTrue(stringValidator.validate("PERSON"));
     }
 
     @Test
     public void testDoesAcceptPercentAtStart() {
-        assertTrue(StringValidator.validate("%rson_id"));
+        assertTrue(stringValidator.validate("%rson_id"));
     }
 
     @Test
     public void testDoesAcceptPercentAtEnd() {
-        assertTrue(StringValidator.validate("person_i%"));
+        assertTrue(stringValidator.validate("person_i%"));
     }
 
     @Test
     public void testDoesAcceptPercentAtStartAndEnd() {
-        assertTrue(StringValidator.validate("%erson_i%"));
+        assertTrue(stringValidator.validate("%erson_i%"));
     }
 
     @Test
     public void testDoesAcceptOneDot() {
-        assertTrue(StringValidator.validate("p.id"));
+        assertTrue(stringValidator.validate("p.id"));
     }
 
     @Test
     public void testDoesNotAcceptDotInStart() {
-        assertFalse(StringValidator.validate(".id"));
+        assertFalse(stringValidator.validate(".id"));
     }
 
     @Test
     public void testDoesNotAcceptTwoDots() {
-        assertFalse(StringValidator.validate("p.id.id"));
+        assertFalse(stringValidator.validate("p.id.id"));
     }
 
     @Test
     public void testDoesAcceptStar() {
-        assertTrue(StringValidator.validate("*"));
+        assertTrue(stringValidator.validate("*"));
     }
 
     @Test
     public void testMaximumValue() {
-        assertTrue(StringValidator.validate(StringUtils.repeat("a", 255)));
+        assertTrue(stringValidator.validate(StringUtils.repeat("a", 255)));
     }
 
     @Test
     public void testDoesNotAcceptTwoStarsInARow() {
-        assertFalse(StringValidator.validate("**"));
+        assertFalse(stringValidator.validate("**"));
     }
 
     @Test
     public void testDoesNotAcceptTwoStarsInASentence() {
-        assertFalse(StringValidator.validate("SELECT * FROM (SELECT * FROM PERSON)"));
+        assertFalse(stringValidator.validate("SELECT * FROM (SELECT * FROM PERSON)"));
     }
 
     @Test
     public void testDoesNotAcceptPercentInsideSentence() {
-        assertFalse(StringValidator.validate("pers%n_id"));
+        assertFalse(stringValidator.validate("pers%n_id"));
     }
 
     @Test
     public void testDoesNotAcceptSingleQuotes() {
-        assertFalse(StringValidator.validate("'Miika'"));
+        assertFalse(stringValidator.validate("'Miika'"));
     }
 
     @Test
     public void testDoesNotAcceptSemicolon() {
-        assertFalse(StringValidator.validate(";DROP"));
+        assertFalse(stringValidator.validate(";DROP"));
     }
 
     @Test
     public void testDoesNotAcceptSQLComment() {
-        assertFalse(StringValidator.validate("--"));
+        assertFalse(stringValidator.validate("--"));
     }
 
     @Test
     public void testDoesNotAcceptEmptyString() {
-        assertFalse(StringValidator.validate(""));
+        assertFalse(stringValidator.validate(""));
     }
 
     @Test
     public void testDoesNotAcceptNull() {
-        assertFalse(StringValidator.validate(null));
+        assertFalse(stringValidator.validate(null));
     }
 
     @Test
     public void testDoesNotAcceptTooLongValue() {
-        assertFalse(StringValidator.validate(StringUtils.repeat("a", 256)));
+        assertFalse(stringValidator.validate(StringUtils.repeat("a", 256)));
     }
 }

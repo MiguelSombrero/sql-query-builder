@@ -5,12 +5,10 @@ import org.slf4j.LoggerFactory;
 
 import java.util.regex.Pattern;
 
-public class StringValidator {
-    protected static Logger logger = LoggerFactory.getLogger(StringValidator.class);
-
+public class StringValidator implements Validator{
     private static final String VALID_STRING_PATTERN = "^\\*|%?\\w+\\.?\\w*%?$";
 
-    public static boolean validate(String input){
+    public boolean validate(String input){
         if (input == null) {
             return false;
         }

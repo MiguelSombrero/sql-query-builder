@@ -3,12 +3,16 @@ package builder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import validation.DateValidator;
+import validation.InputValidator;
 import validation.StringValidator;
 
 import javax.xml.bind.ValidationException;
 
 public abstract class SQLStringAppender {
     protected static Logger logger = LoggerFactory.getLogger(SQLStringAppender.class);
+
+    private static InputValidator validator = new InputValidator(
+            new StringValidator(), new DateValidator());
 
     protected StringBuilder queryString;
 
@@ -20,22 +24,16 @@ public abstract class SQLStringAppender {
         this.queryString = this.queryString.append(value);
     }
 
-    protected void validateAndAppend(String value) throws ValidationException {
-        if (!isValidInput(value)) {
-            throw new ValidationException(value + " is not valid input!");
-        }
-        this.queryString = this.queryString.append(value);
-    }
-
-    private boolean isValidInput(String value) {
-        return StringValidator.validate(value) || DateValidator.validate(value);
-    }
-
     protected void append(int value) {
         this.queryString = this.queryString.append(value);
     }
 
     protected void append(double value) {
+        this.queryString = this.queryString.append(value);
+    }
+
+    protected void validateAndAppend(String value) throws ValidationException {
+        validator.validOrThrow(value);
         this.queryString = this.queryString.append(value);
     }
 

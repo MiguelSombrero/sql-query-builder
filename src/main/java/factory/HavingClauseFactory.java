@@ -1,12 +1,13 @@
 package factory;
 
 import builder.condition.Negation;
-import validation.DateValidator;
+import validation.InputValidator;
 import validation.StringValidator;
 
 import javax.xml.bind.ValidationException;
 
 public class HavingClauseFactory {
+    private static InputValidator validator = new InputValidator(new StringValidator());
 
     public static Negation count(String column) throws ValidationException {
         return appendOperationAndReturn("COUNT", column);
@@ -29,14 +30,9 @@ public class HavingClauseFactory {
     }
 
     private static Negation appendOperationAndReturn(String operation, String column) throws ValidationException {
-        if (!isValidInput(column)) {
-            throw new ValidationException(column + " is not valid input!");
-        }
+        validator.validOrThrow(column);
         StringBuilder builder = new StringBuilder(operation + "(" + column + ")");
         return new Negation(builder);
     }
 
-    private static boolean isValidInput(String value) {
-        return StringValidator.validate(value) || DateValidator.validate(value);
-    }
 }
