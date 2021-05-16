@@ -31,11 +31,11 @@ public abstract class SQLStringAppender {
         return StringValidator.validate(value) || DateValidator.validate(value);
     }
 
-    protected void append(Integer value) {
+    protected void append(int value) {
         this.queryString = this.queryString.append(value);
     }
 
-    protected void append(Double value) {
+    protected void append(double value) {
         this.queryString = this.queryString.append(value);
     }
 

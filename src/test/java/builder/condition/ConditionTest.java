@@ -49,6 +49,17 @@ public class ConditionTest extends DatabaseTestBaseClass {
     }
 
     @Test
+    public void testWhereNegativeCondition() throws SQLException, ValidationException {
+        String query = this.table
+                .where(valueOf("age").greaterThan(-100)
+                        .and(valueOf("age").lesserThan(-18)))
+                .build();
+
+        assertEquals("SELECT firstname FROM person WHERE age > -100 AND age < -18", query);
+        assertThatQueryIsValidSQL(query);
+    }
+
+    @Test
     public void testWhereAndOrConditions() throws SQLException, ValidationException {
         String query = this.table
                 .where(valueOf("age").greaterThan(18)
