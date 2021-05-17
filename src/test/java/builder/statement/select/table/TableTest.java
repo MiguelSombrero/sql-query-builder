@@ -6,7 +6,6 @@ import factory.QueryFactory;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.xml.bind.ValidationException;
 import java.sql.SQLException;
 
 import static factory.WhereClauseFactory.valueOf;
@@ -16,7 +15,7 @@ public class TableTest extends DatabaseTestBaseClass {
     private Column column;
 
     @Before
-    public void setUpQuery() throws ValidationException {
+    public void setUpQuery() {
         initializeDatabase();
 
         this.column = QueryFactory
@@ -25,7 +24,7 @@ public class TableTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testFromOneTable() throws SQLException, ValidationException {
+    public void testFromOneTable() throws SQLException {
         String query = this.column
                 .from()
                     .table("person")
@@ -36,7 +35,7 @@ public class TableTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testFromMultipleTables() throws SQLException, ValidationException {
+    public void testFromMultipleTables() throws SQLException {
         String query = this.column
                 .from()
                     .table("person")
@@ -49,7 +48,7 @@ public class TableTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testFromSubQuery() throws SQLException, ValidationException {
+    public void testFromSubQuery() throws SQLException {
         String query = QueryFactory
                 .select()
                     .column("*")
@@ -69,7 +68,7 @@ public class TableTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testFromMultipleTablesWithAliases() throws SQLException, ValidationException {
+    public void testFromMultipleTablesWithAliases() throws SQLException {
         String query = this.column
                 .from()
                     .table("person").alias("p")
@@ -82,7 +81,7 @@ public class TableTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testFromOneJoinTableWithAlias() throws SQLException, ValidationException {
+    public void testFromOneJoinTableWithAlias() throws SQLException {
         String query = this.column
                 .from()
                     .table("person")
@@ -94,7 +93,7 @@ public class TableTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testInnerJoin() throws SQLException, ValidationException {
+    public void testInnerJoin() throws SQLException {
         String query = this.column
                 .from()
                     .table("person")
@@ -106,7 +105,7 @@ public class TableTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testLeftJoin() throws SQLException, ValidationException {
+    public void testLeftJoin() throws SQLException {
         String query = this.column
                 .from()
                     .table("person")
@@ -118,7 +117,7 @@ public class TableTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void rightJoin() throws SQLException, ValidationException {
+    public void rightJoin() throws SQLException {
         String query = this.column
                 .from()
                     .table("person")
@@ -130,7 +129,7 @@ public class TableTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testMultipleJoins() throws SQLException, ValidationException {
+    public void testMultipleJoins() throws SQLException {
         String query = this.column
                 .from()
                     .table("person")
@@ -144,7 +143,7 @@ public class TableTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testFromMultipleTablesAndJoinWithAliases() throws SQLException, ValidationException {
+    public void testFromMultipleTablesAndJoinWithAliases() throws SQLException {
         String query = this.column
                 .from()
                     .table("person").alias("p")
@@ -157,8 +156,8 @@ public class TableTest extends DatabaseTestBaseClass {
         assertThatQueryIsValidSQL(query);
     }
 
-    @Test(expected = ValidationException.class)
-    public void testSelectTableWithSQLInjection() throws ValidationException {
+    @Test(expected = IllegalArgumentException.class)
+    public void testSelectTableWithSQLInjection() {
         this.column
                 .from()
                 .table(";DROP")
@@ -166,8 +165,8 @@ public class TableTest extends DatabaseTestBaseClass {
                 .build();
     }
 
-    @Test(expected = ValidationException.class)
-    public void testSelectJoinTableWithSQLInjection() throws ValidationException {
+    @Test(expected = IllegalArgumentException.class)
+    public void testSelectJoinTableWithSQLInjection() {
         this.column
                 .from()
                 .table("person")
@@ -175,8 +174,8 @@ public class TableTest extends DatabaseTestBaseClass {
                 .build();
     }
 
-    @Test(expected = ValidationException.class)
-    public void testSelectJoinTableAliasWithSQLInjection() throws ValidationException {
+    @Test(expected = IllegalArgumentException.class)
+    public void testSelectJoinTableAliasWithSQLInjection() {
         this.column
                 .from()
                 .table("person")
@@ -184,8 +183,8 @@ public class TableTest extends DatabaseTestBaseClass {
                 .build();
     }
 
-    @Test(expected = ValidationException.class)
-    public void testSelectJoinTableOnWithSQLInjection() throws ValidationException {
+    @Test(expected = IllegalArgumentException.class)
+    public void testSelectJoinTableOnWithSQLInjection() {
         this.column
                 .from()
                 .table("person")

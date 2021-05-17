@@ -1,11 +1,9 @@
 package builder.statement.create;
 
-import builder.statement.create.table.column.DataType;
 import database.DatabaseTestBaseClass;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.xml.bind.ValidationException;
 import java.sql.SQLException;
 
 import static factory.QueryFactory.create;
@@ -19,7 +17,7 @@ public class CreateTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testCreateDatabase() throws SQLException, ValidationException {
+    public void testCreateDatabase() {
         String query = create()
                 .database("test_db")
                 .build();
@@ -30,7 +28,7 @@ public class CreateTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testCreateIndex() throws SQLException, ValidationException {
+    public void testCreateIndex() throws SQLException {
         String query = create()
                 .index("person_index")
                 .on("person")
@@ -41,15 +39,15 @@ public class CreateTest extends DatabaseTestBaseClass {
         assertThatQueryIsValidSQL(query);
     }
 
-    @Test(expected = ValidationException.class)
-    public void testCreateDatabaseWithSQLInjection() throws ValidationException {
+    @Test(expected = IllegalArgumentException.class)
+    public void testCreateDatabaseWithSQLInjection() {
          create()
                 .database(";DROP")
                 .build();
     }
 
-    @Test(expected = ValidationException.class)
-    public void testCreateIndexWithSQLInjection() throws ValidationException {
+    @Test(expected = IllegalArgumentException.class)
+    public void testCreateIndexWithSQLInjection() {
         create()
                 .index(";DROP")
                 .on("person")
@@ -57,8 +55,8 @@ public class CreateTest extends DatabaseTestBaseClass {
                 .build();
     }
 
-    @Test(expected = ValidationException.class)
-    public void testCreateIndexOnWithSQLInjection() throws ValidationException {
+    @Test(expected = IllegalArgumentException.class)
+    public void testCreateIndexOnWithSQLInjection()  {
         create()
                 .index("person_index")
                 .on(";DROP")
@@ -66,8 +64,8 @@ public class CreateTest extends DatabaseTestBaseClass {
                 .build();
     }
 
-    @Test(expected = ValidationException.class)
-    public void testCreateIndexOnColumnsWithSQLInjection() throws ValidationException {
+    @Test(expected = IllegalArgumentException.class)
+    public void testCreateIndexOnColumnsWithSQLInjection()  {
         create()
                 .index("person_index")
                 .on("person")

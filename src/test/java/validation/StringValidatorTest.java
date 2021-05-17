@@ -41,16 +41,6 @@ public class StringValidatorTest {
     }
 
     @Test
-    public void testDoesNotAcceptDotInStart() {
-        assertFalse(stringValidator.validate(".id"));
-    }
-
-    @Test
-    public void testDoesNotAcceptTwoDots() {
-        assertFalse(stringValidator.validate("p.id.id"));
-    }
-
-    @Test
     public void testDoesAcceptStar() {
         assertTrue(stringValidator.validate("*"));
     }
@@ -58,6 +48,16 @@ public class StringValidatorTest {
     @Test
     public void testMaximumValue() {
         assertTrue(stringValidator.validate(StringUtils.repeat("a", 255)));
+    }
+
+    @Test
+    public void testDoesNotAcceptDotInStart(){
+        assertFalse(stringValidator.validate(".id"));
+    }
+
+    @Test
+    public void testDoesNotAcceptTwoDots() {
+        assertFalse(stringValidator.validate("p.id.id"));
     }
 
     @Test

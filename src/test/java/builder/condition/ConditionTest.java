@@ -6,7 +6,6 @@ import factory.QueryFactory;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.xml.bind.ValidationException;
 import java.sql.SQLException;
 
 import static factory.WhereClauseFactory.valueOf;
@@ -16,7 +15,7 @@ public class ConditionTest extends DatabaseTestBaseClass {
     private Table table;
 
     @Before
-    public void setUpQuery() throws ValidationException {
+    public void setUpQuery() {
         initializeDatabase();
 
         this.table = QueryFactory
@@ -27,7 +26,7 @@ public class ConditionTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testWhereAndCondition() throws SQLException, ValidationException {
+    public void testWhereAndCondition() throws SQLException {
         String query = this.table
                 .where(valueOf("age").greaterThan(18)
                         .and(valueOf("birthdate").greaterThan("2020-02-28 21:00:00")))
@@ -38,7 +37,7 @@ public class ConditionTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testWhereOrCondition() throws SQLException, ValidationException {
+    public void testWhereOrCondition() throws SQLException {
         String query = this.table
                 .where(valueOf("age").greaterThan(18)
                         .or(valueOf("birthdate").greaterThan("2020-02-28 21:00:00")))
@@ -49,7 +48,7 @@ public class ConditionTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testWhereNegativeCondition() throws SQLException, ValidationException {
+    public void testWhereNegativeCondition() throws SQLException {
         String query = this.table
                 .where(valueOf("age").greaterThan(-100)
                         .and(valueOf("age").lesserThan(-18)))
@@ -60,7 +59,7 @@ public class ConditionTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testWhereAndOrConditions() throws SQLException, ValidationException {
+    public void testWhereAndOrConditions() throws SQLException {
         String query = this.table
                 .where(valueOf("age").greaterThan(18)
                         .and(valueOf("birthdate").greaterThan("2020-02-28 21:00:00"))
@@ -72,7 +71,7 @@ public class ConditionTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testWhereOrSubCondition() throws SQLException, ValidationException {
+    public void testWhereOrSubCondition() throws SQLException {
         String query = this.table
                 .where(valueOf("age").lesserThan(18)
                         .orSub(valueOf("age").greaterThan(50)
@@ -83,8 +82,8 @@ public class ConditionTest extends DatabaseTestBaseClass {
         assertThatQueryIsValidSQL(query);
     }
 
-    @Test(expected = ValidationException.class)
-    public void testOrSubWithSQLInjection() throws ValidationException {
+    @Test(expected = IllegalArgumentException.class)
+    public void testOrSubWithSQLInjection() {
         this.table
                 .where(valueOf("age").lesserThan(18)
                         .orSub(valueOf(";DROP").greaterThan(50)

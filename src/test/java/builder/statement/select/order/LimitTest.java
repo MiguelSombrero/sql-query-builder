@@ -6,7 +6,6 @@ import factory.QueryFactory;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.xml.bind.ValidationException;
 import java.sql.SQLException;
 
 import static factory.HavingClauseFactory.count;
@@ -17,7 +16,7 @@ public class LimitTest extends DatabaseTestBaseClass {
     private Table table;
 
     @Before
-    public void setUpQuery() throws ValidationException {
+    public void setUpQuery() {
         initializeDatabase();
 
         this.table = QueryFactory
@@ -38,7 +37,7 @@ public class LimitTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testLimitFromTableWhere() throws SQLException, ValidationException {
+    public void testLimitFromTableWhere() throws SQLException {
         String query = table
                 .where(valueOf("age").greaterThan(18))
                 .limit(100)
@@ -49,7 +48,7 @@ public class LimitTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testLimitJoinTable() throws SQLException, ValidationException {
+    public void testLimitJoinTable() throws SQLException {
         String query = table
                 .leftJoin("course").on("person.id", "course.person_id")
                 .limit(100)
@@ -60,7 +59,7 @@ public class LimitTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testLimitGroupBy() throws SQLException, ValidationException {
+    public void testLimitGroupBy() throws SQLException {
         String query = table
                 .groupBy()
                     .column("age")
@@ -72,7 +71,7 @@ public class LimitTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testLimitGroupByHaving() throws SQLException, ValidationException {
+    public void testLimitGroupByHaving() throws SQLException {
         String query = table
                 .groupBy()
                     .column("age")
@@ -85,7 +84,7 @@ public class LimitTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testLimitOrderBy() throws SQLException, ValidationException {
+    public void testLimitOrderBy() throws SQLException {
         String query = table
                 .groupBy()
                     .column("age")

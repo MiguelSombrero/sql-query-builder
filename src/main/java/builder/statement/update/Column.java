@@ -3,15 +3,13 @@ package builder.statement.update;
 import builder.TerminalOperation;
 import builder.condition.Condition;
 
-import javax.xml.bind.ValidationException;
-
 public class Column extends TerminalOperation {
 
     public Column(StringBuilder queryString) {
         super(queryString);
     }
 
-    public Value column(String column) throws ValidationException {
+    public Value column(String column) {
         append(", ");
         validateAndAppend(column);
         append(" = ");

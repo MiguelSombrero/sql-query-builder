@@ -2,16 +2,17 @@ package builder.condition;
 
 import builder.Builder;
 import builder.SQLStringAppender;
-
-import javax.xml.bind.ValidationException;
+import factory.ValidatorFactory;
+import validation.Validator;
 
 public class Comparison extends SQLStringAppender {
+    private static Validator validator = ValidatorFactory.exceptionThrowingStringOrDateValidator();
 
     public Comparison(StringBuilder queryString) {
         super(queryString);
     }
 
-    public Condition equals(String value) throws ValidationException {
+    public Condition equals(String value) {
         return appendConditionWithValue(" = ", value);
     }
 
@@ -31,7 +32,7 @@ public class Comparison extends SQLStringAppender {
         return appendConditionWithSubQuery(" = ALL ", query);
     }
 
-    public Condition greaterThan(String value) throws ValidationException {
+    public Condition greaterThan(String value) {
         return appendConditionWithValue(" > ", value);
     }
 
@@ -51,7 +52,7 @@ public class Comparison extends SQLStringAppender {
         return appendConditionWithSubQuery(" > ALL ", query);
     }
 
-    public Condition greaterThanOrEqual(String value) throws ValidationException {
+    public Condition greaterThanOrEqual(String value) {
         return appendConditionWithValue(" >= ", value);
     }
 
@@ -71,7 +72,7 @@ public class Comparison extends SQLStringAppender {
         return appendConditionWithSubQuery(" >= ALL ", query);
     }
 
-    public Condition lesserThan(String value) throws ValidationException {
+    public Condition lesserThan(String value) {
         return appendConditionWithValue(" < ", value);
     }
 
@@ -91,7 +92,7 @@ public class Comparison extends SQLStringAppender {
         return appendConditionWithSubQuery(" < ALL ", query);
     }
 
-    public Condition lesserThanOrEqual(String value) throws ValidationException {
+    public Condition lesserThanOrEqual(String value) {
         return appendConditionWithValue(" <= ", value);
     }
 
@@ -111,17 +112,17 @@ public class Comparison extends SQLStringAppender {
         return appendConditionWithSubQuery(" <= ALL ", query);
     }
 
-    public Condition startsWith(String pattern) throws ValidationException {
+    public Condition startsWith(String pattern) {
         String startsWith = pattern.concat("%");
         return appendConditionWithValue(" LIKE ", startsWith);
     }
 
-    public Condition endsWith(String pattern) throws ValidationException {
+    public Condition endsWith(String pattern) {
         String endsWith = "%".concat(pattern);
         return appendConditionWithValue(" LIKE ", endsWith);
     }
 
-    public Condition contains(String pattern) throws ValidationException {
+    public Condition contains(String pattern) {
         String endsWith = "%".concat(pattern).concat("%");
         return appendConditionWithValue(" LIKE ", endsWith);
     }
@@ -130,7 +131,7 @@ public class Comparison extends SQLStringAppender {
         return appendConditionWithSubQuery(" IN ", query);
     }
 
-    public Condition isBetween(String lower, String higher) throws ValidationException {
+    public Condition isBetween(String lower, String higher) {
         appendConditionWithValue(" BETWEEN ", lower);
         return appendConditionWithValue(" AND ", higher);
     }
@@ -155,7 +156,7 @@ public class Comparison extends SQLStringAppender {
         return getCondition();
     }
 
-    public Condition isIn(String ...listOfValues) throws ValidationException {
+    public Condition isIn(String ...listOfValues) {
         append(" IN ");
         validateAndAppendListOfValues(listOfValues);
         return getCondition();
@@ -173,7 +174,7 @@ public class Comparison extends SQLStringAppender {
         return getCondition();
     }
 
-    private Condition appendConditionWithValue(String condition, String value) throws ValidationException {
+    private Condition appendConditionWithValue(String condition, String value) {
         append(condition);
         validateAndAppendStringValue(value);
         return getCondition();

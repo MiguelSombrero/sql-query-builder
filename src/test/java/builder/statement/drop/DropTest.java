@@ -6,10 +6,8 @@ import factory.QueryFactory;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.xml.bind.ValidationException;
 import java.sql.SQLException;
 
-import static factory.QueryFactory.create;
 import static junit.framework.Assert.assertEquals;
 
 public class DropTest extends DatabaseTestBaseClass {
@@ -20,7 +18,7 @@ public class DropTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testDropTable() throws SQLException, ValidationException {
+    public void testDropTable() throws SQLException {
         String createTable = QueryFactory
                 .create()
                 .table("test_table")
@@ -39,7 +37,7 @@ public class DropTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testDropDatabase() throws SQLException, ValidationException {
+    public void testDropDatabase() {
         /*String createDatabase = QueryFactory
                 .create()
                 .database("test_db")
@@ -57,16 +55,16 @@ public class DropTest extends DatabaseTestBaseClass {
         //assertThatQueryIsValidSQL(query);
     }
 
-    @Test(expected = ValidationException.class)
-    public void testDropTableWithSQLInjection() throws ValidationException {
+    @Test(expected = IllegalArgumentException.class)
+    public void testDropTableWithSQLInjection() {
         QueryFactory
                 .drop()
                 .table(";DROP")
                 .build();
     }
 
-    @Test(expected = ValidationException.class)
-    public void testDropDatabaseWithSQLInjection() throws ValidationException {
+    @Test(expected = IllegalArgumentException.class)
+    public void testDropDatabaseWithSQLInjection() {
         QueryFactory
                 .drop()
                 .database(";DROP")

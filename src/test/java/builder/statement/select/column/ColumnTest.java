@@ -5,7 +5,6 @@ import factory.QueryFactory;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.xml.bind.ValidationException;
 import java.sql.SQLException;
 
 import static junit.framework.Assert.assertEquals;
@@ -18,7 +17,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testSelect() throws SQLException, ValidationException {
+    public void testSelect() throws SQLException {
         String query = QueryFactory
                 .select()
                     .column("lastname")
@@ -32,7 +31,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testSelectTop() throws SQLException, ValidationException {
+    public void testSelectTop() throws SQLException {
         String query = QueryFactory
                 .selectTop(100)
                     .column("lastname")
@@ -47,7 +46,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testSelectDistinct() throws SQLException, ValidationException {
+    public void testSelectDistinct() throws SQLException {
         String query = QueryFactory
                 .selectDistinct()
                     .column("lastname")
@@ -62,7 +61,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testSelectCount() throws SQLException, ValidationException {
+    public void testSelectCount() throws SQLException {
         String query = QueryFactory
                 .select()
                     .count("age")
@@ -75,7 +74,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testSelectMin() throws SQLException, ValidationException {
+    public void testSelectMin() throws SQLException {
         String query = QueryFactory
                 .select()
                     .min("age")
@@ -88,7 +87,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testSelectMax() throws SQLException, ValidationException {
+    public void testSelectMax() throws SQLException {
         String query = QueryFactory
                 .select()
                     .max("age")
@@ -101,7 +100,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testSelectAvg() throws SQLException, ValidationException {
+    public void testSelectAvg() throws SQLException {
         String query = QueryFactory
                 .select()
                     .avg("age")
@@ -114,7 +113,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testSelectSum() throws SQLException, ValidationException {
+    public void testSelectSum() throws SQLException {
         String query = QueryFactory
                 .select()
                     .sum("age")
@@ -127,7 +126,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testMultipleAggregateFunctions() throws SQLException, ValidationException {
+    public void testMultipleAggregateFunctions() throws SQLException {
         String query = QueryFactory
                 .select()
                     .min("age")
@@ -144,7 +143,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testMultipleColumnsWithAliases() throws SQLException, ValidationException {
+    public void testMultipleColumnsWithAliases() throws SQLException {
         String query = QueryFactory
                 .select()
                     .column("lastname").alias("last")
@@ -160,8 +159,8 @@ public class ColumnTest extends DatabaseTestBaseClass {
         assertThatQueryIsValidSQL(query);
     }
 
-    @Test(expected = ValidationException.class)
-    public void testSelectColumnWithSQLInjection() throws ValidationException {
+    @Test(expected = IllegalArgumentException.class)
+    public void testSelectColumnWithSQLInjection() {
         QueryFactory
                 .select()
                 .column(";DROP")
@@ -170,8 +169,8 @@ public class ColumnTest extends DatabaseTestBaseClass {
                 .build();
     }
 
-    @Test(expected = ValidationException.class)
-    public void testSelectColumnAliasWithSQLInjection() throws ValidationException {
+    @Test(expected = IllegalArgumentException.class)
+    public void testSelectColumnAliasWithSQLInjection() {
         QueryFactory
                 .select()
                 .column("firstname").alias(";DROP")
@@ -180,8 +179,8 @@ public class ColumnTest extends DatabaseTestBaseClass {
                 .build();
     }
 
-    @Test(expected = ValidationException.class)
-    public void testSelectAggregateFunctionWithSQLInjection() throws ValidationException {
+    @Test(expected = IllegalArgumentException.class)
+    public void testSelectAggregateFunctionWithSQLInjection() {
         QueryFactory
                 .select()
                     .count(";DROP")

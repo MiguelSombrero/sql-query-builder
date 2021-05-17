@@ -3,8 +3,6 @@ package builder.statement.select.table;
 import builder.condition.Condition;
 import builder.statement.select.order.Grouper;
 
-import javax.xml.bind.ValidationException;
-
 public class JoinTable extends Grouper {
 
     public JoinTable(StringBuilder queryString) {
@@ -17,22 +15,22 @@ public class JoinTable extends Grouper {
         return new Grouper(this.queryString);
     }
 
-    public On innerJoin(String table) throws ValidationException {
+    public On innerJoin(String table) {
         append(" INNER JOIN ");
         return join(table);
     }
 
-    public On leftJoin(String table) throws ValidationException {
+    public On leftJoin(String table) {
         append(" LEFT JOIN ");
         return join(table);
     }
 
-    public On rightJoin(String table) throws ValidationException {
+    public On rightJoin(String table) {
         append(" RIGHT JOIN ");
         return join(table);
     }
 
-    private On join(String table) throws ValidationException {
+    private On join(String table) {
         validateAndAppend(table);
         return new On(this.queryString);
     }

@@ -6,10 +6,8 @@ import factory.QueryFactory;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.xml.bind.ValidationException;
 import java.sql.SQLException;
 
-import static factory.HavingClauseFactory.count;
 import static factory.WhereClauseFactory.valueOf;
 import static org.junit.Assert.assertEquals;
 
@@ -17,7 +15,7 @@ public class OrderByTest extends DatabaseTestBaseClass {
     private Table table;
 
     @Before
-    public void setUpQuery() throws ValidationException {
+    public void setUpQuery() {
         initializeDatabase();
 
         this.table = QueryFactory
@@ -28,7 +26,7 @@ public class OrderByTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testOrderBy() throws SQLException, ValidationException {
+    public void testOrderBy() throws SQLException {
         String query = table
                 .orderBy()
                     .column("firstname")
@@ -39,7 +37,7 @@ public class OrderByTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testOrderByWhere() throws SQLException, ValidationException {
+    public void testOrderByWhere() throws SQLException {
         String query = table
                 .where(valueOf("age").greaterThan(18))
                 .orderBy()
@@ -51,7 +49,7 @@ public class OrderByTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testOrderByGroupBy() throws SQLException, ValidationException {
+    public void testOrderByGroupBy() throws SQLException {
         String query = table
                 .groupBy()
                     .column("age")
@@ -64,7 +62,7 @@ public class OrderByTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testMultipleOrderByGroupBy() throws SQLException, ValidationException {
+    public void testMultipleOrderByGroupBy() throws SQLException {
         String query = table
                 .groupBy()
                     .column("age")
@@ -79,7 +77,7 @@ public class OrderByTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testMultipleOrderByGroupByWithAscDesc() throws SQLException, ValidationException {
+    public void testMultipleOrderByGroupByWithAscDesc() throws SQLException {
         String query = table
                 .groupBy()
                     .column("age")
@@ -93,8 +91,8 @@ public class OrderByTest extends DatabaseTestBaseClass {
         assertThatQueryIsValidSQL(query);
     }
 
-    @Test(expected = ValidationException.class)
-    public void testOrderByFirstColumnWithSQLInjection() throws ValidationException {
+    @Test(expected = IllegalArgumentException.class)
+    public void testOrderByFirstColumnWithSQLInjection() {
         table
                 .orderBy()
                     .column(";DROP").asc()
@@ -102,8 +100,8 @@ public class OrderByTest extends DatabaseTestBaseClass {
 
     }
 
-    @Test(expected = ValidationException.class)
-    public void testOrderByColumnWithSQLInjection() throws ValidationException {
+    @Test(expected = IllegalArgumentException.class)
+    public void testOrderByColumnWithSQLInjection() {
         table
                 .orderBy()
                     .column("age")

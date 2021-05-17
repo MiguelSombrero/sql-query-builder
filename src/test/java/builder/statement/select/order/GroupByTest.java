@@ -2,13 +2,11 @@ package builder.statement.select.order;
 
 import builder.statement.select.table.Table;
 import database.DatabaseTestBaseClass;
-import factory.HavingClauseFactory;
 import factory.QueryFactory;
 import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.xml.bind.ValidationException;
 import java.sql.SQLException;
 
 import static factory.HavingClauseFactory.count;
@@ -19,7 +17,7 @@ public class GroupByTest extends DatabaseTestBaseClass {
     private Table table;
 
     @Before
-    public void setUpQuery() throws ValidationException {
+    public void setUpQuery() {
         initializeDatabase();
 
         this.table = QueryFactory
@@ -30,7 +28,7 @@ public class GroupByTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testGroupBy() throws SQLException, ValidationException {
+    public void testGroupBy() throws SQLException {
         String query = table
                 .groupBy()
                     .column("age")
@@ -41,7 +39,7 @@ public class GroupByTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testMultipleGroupBy() throws SQLException, ValidationException {
+    public void testMultipleGroupBy() throws SQLException {
         String query = table
                 .groupBy()
                     .column("age")
@@ -54,7 +52,7 @@ public class GroupByTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testGroupByWhere() throws SQLException, ValidationException {
+    public void testGroupByWhere() throws SQLException {
         String query = this.table
                 .where(valueOf("age").greaterThan(18))
                 .groupBy()
@@ -66,7 +64,7 @@ public class GroupByTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testMultipleGroupByHaving() throws SQLException, ValidationException {
+    public void testMultipleGroupByHaving() throws SQLException {
         String query = table
                 .groupBy()
                     .column("age")
@@ -80,7 +78,7 @@ public class GroupByTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testMultipleGroupByHavingAndOrdering() throws SQLException, ValidationException {
+    public void testMultipleGroupByHavingAndOrdering() throws SQLException {
         String query = table
                 .groupBy()
                     .column("age")
@@ -95,8 +93,8 @@ public class GroupByTest extends DatabaseTestBaseClass {
         assertThatQueryIsValidSQL(query);
     }
 
-    @Test(expected = ValidationException.class)
-    public void testGroupByWithSQLInjection() throws ValidationException {
+    @Test(expected =IllegalArgumentException.class)
+    public void testGroupByWithSQLInjection() {
         table
                 .groupBy()
                 .column(";DROP")

@@ -5,7 +5,6 @@ import factory.QueryFactory;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.xml.bind.ValidationException;
 import java.sql.SQLException;
 
 import static factory.WhereClauseFactory.valueOf;
@@ -19,7 +18,7 @@ public class UpdateTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testUpdateIntegerValue() throws SQLException, ValidationException {
+    public void testUpdateIntegerValue() throws SQLException {
         String query = QueryFactory
                 .update()
                 .table("person")
@@ -31,7 +30,7 @@ public class UpdateTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testUpdateStringValue() throws SQLException, ValidationException {
+    public void testUpdateStringValue() throws SQLException {
         String query = QueryFactory
                 .update()
                 .table("person")
@@ -43,7 +42,7 @@ public class UpdateTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testUpdateMultipleValues() throws SQLException, ValidationException {
+    public void testUpdateMultipleValues() throws SQLException {
         String query = QueryFactory
                 .update()
                 .table("person")
@@ -57,7 +56,7 @@ public class UpdateTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testUpdateWithCondition() throws SQLException, ValidationException {
+    public void testUpdateWithCondition() throws SQLException {
         String query = QueryFactory
                 .update()
                 .table("person")
@@ -70,8 +69,8 @@ public class UpdateTest extends DatabaseTestBaseClass {
         assertThatQueryIsValidSQL(query);
     }
 
-    @Test(expected = ValidationException.class)
-    public void testUpdateTableWithSQLInjection() throws ValidationException {
+    @Test(expected = IllegalArgumentException.class)
+    public void testUpdateTableWithSQLInjection() {
         QueryFactory
                 .update()
                 .table(";DROP")
@@ -81,8 +80,8 @@ public class UpdateTest extends DatabaseTestBaseClass {
                 .build();
     }
 
-    @Test(expected = ValidationException.class)
-    public void testUpdateColumnWithSQLInjection() throws ValidationException {
+    @Test(expected = IllegalArgumentException.class)
+    public void testUpdateColumnWithSQLInjection() {
         QueryFactory
                 .update()
                 .table("person")
@@ -92,8 +91,8 @@ public class UpdateTest extends DatabaseTestBaseClass {
                 .build();
     }
 
-    @Test(expected = ValidationException.class)
-    public void testUpdateValueWithSQLInjection() throws ValidationException {
+    @Test(expected = IllegalArgumentException.class)
+    public void testUpdateValueWithSQLInjection() {
         QueryFactory
                 .update()
                 .table("person")

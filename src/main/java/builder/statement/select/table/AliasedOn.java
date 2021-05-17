@@ -2,15 +2,13 @@ package builder.statement.select.table;
 
 import builder.SQLStringAppender;
 
-import javax.xml.bind.ValidationException;
-
 public class AliasedOn extends SQLStringAppender {
 
     public AliasedOn(StringBuilder queryString) {
         super(queryString);
     }
 
-    public JoinTable on(String column, String joinColumn) throws ValidationException {
+    public JoinTable on(String column, String joinColumn) {
         append(" ON ");
         validateAndAppend(column);
         append(" = ");

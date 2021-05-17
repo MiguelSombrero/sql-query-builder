@@ -5,7 +5,6 @@ import factory.QueryFactory;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.xml.bind.ValidationException;
 import java.sql.SQLException;
 
 import static factory.HavingClauseFactory.*;
@@ -15,7 +14,7 @@ public class HavingTest extends DatabaseTestBaseClass {
     private Having having;
 
     @Before
-    public void setUpQuery() throws ValidationException {
+    public void setUpQuery() {
         initializeDatabase();
 
         this.having = QueryFactory
@@ -30,7 +29,7 @@ public class HavingTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testHavingCount() throws SQLException, ValidationException {
+    public void testHavingCount() throws SQLException {
         String query = this.having
                 .having(count("age").equals(100))
                 .build();
@@ -40,7 +39,7 @@ public class HavingTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testHavingSum() throws SQLException, ValidationException {
+    public void testHavingSum() throws SQLException {
         String query = this.having
                 .having(sum("age").equals(100))
                 .build();
@@ -50,7 +49,7 @@ public class HavingTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testHavingAvg() throws SQLException, ValidationException {
+    public void testHavingAvg() throws SQLException {
         String query = this.having
                 .having(avg("age").equals(100))
                 .build();
@@ -60,7 +59,7 @@ public class HavingTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testHavingMax() throws SQLException, ValidationException {
+    public void testHavingMax() throws SQLException {
         String query = this.having
                 .having(max("age").equals(100))
                 .build();
@@ -70,7 +69,7 @@ public class HavingTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testHavingMin() throws SQLException, ValidationException {
+    public void testHavingMin() throws SQLException {
         String query = this.having
                 .having(min("age").equals(100))
                 .build();
@@ -80,7 +79,7 @@ public class HavingTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testHavingMultipleConditions() throws SQLException, ValidationException {
+    public void testHavingMultipleConditions() throws SQLException {
         String query = this.having
                 .having(max("age").equals(100)
                     .and(min("age").equals(20))
@@ -91,8 +90,8 @@ public class HavingTest extends DatabaseTestBaseClass {
         assertThatQueryIsValidSQL(query);
     }
 
-    @Test(expected = ValidationException.class)
-    public void testGroupByHavingWithSQLInjection() throws ValidationException {
+    @Test(expected = IllegalArgumentException.class)
+    public void testGroupByHavingWithSQLInjection() {
         this.having
                 .having(count(";DROP").equals(100))
                 .build();

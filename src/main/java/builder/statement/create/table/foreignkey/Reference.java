@@ -2,15 +2,13 @@ package builder.statement.create.table.foreignkey;
 
 import builder.SQLStringAppender;
 
-import javax.xml.bind.ValidationException;
-
 public class Reference extends SQLStringAppender {
 
     public Reference(StringBuilder queryString) {
         super(queryString);
     }
 
-    public OnAction references(String column, String ofTable) throws ValidationException {
+    public OnAction references(String column, String ofTable) {
         append(" REFERENCES ");
         validateAndAppend(ofTable);
         append("(");

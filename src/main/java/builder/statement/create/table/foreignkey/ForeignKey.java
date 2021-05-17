@@ -2,15 +2,13 @@ package builder.statement.create.table.foreignkey;
 
 import builder.statement.create.TerminalCreateOperation;
 
-import javax.xml.bind.ValidationException;
-
 public class ForeignKey extends TerminalCreateOperation {
 
     public ForeignKey(StringBuilder queryString) {
         super(queryString);
     }
 
-    public Reference foreignKey(String column) throws ValidationException {
+    public Reference foreignKey(String column) {
         append(", FOREIGN KEY (");
         validateAndAppend(column);
         append(")");

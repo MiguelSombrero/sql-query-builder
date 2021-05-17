@@ -1,7 +1,5 @@
 package builder.statement.select.column;
 
-import javax.xml.bind.ValidationException;
-
 /**
  * represents column after first column to be appended in
  * 'SELECT column(s), aggregate function(s)' statement.
@@ -22,7 +20,7 @@ public class Column extends AliasedColumn {
      * @return AliasedColumn which has the same properties as Columns
      * except it cannot be aliased
      */
-    public AliasedColumn alias(String as) throws ValidationException {
+    public AliasedColumn alias(String as) {
         append(" AS ");
         validateAndAppend(as);
         return new AliasedColumn(this.queryString);

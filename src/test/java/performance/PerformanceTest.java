@@ -7,8 +7,6 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.xml.bind.ValidationException;
-
 import static factory.WhereClauseFactory.valueOf;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -19,14 +17,14 @@ public class PerformanceTest {
     private static final int times = 100_000;
 
     @Test
-    public void testThatQueriesMatch() throws ValidationException {
+    public void testThatQueriesMatch() {
         assertEquals(complexQuery, buildComplexQuery());
         assertEquals(complexQuery, appendComplexQuery());
         assertEquals(complexQuery, concatComplexQuery());
     }
 
     @Test
-    public void testThatBuilding100KQueriesStaysWithin5Seconds() throws ValidationException {
+    public void testThatBuilding100KQueriesStaysWithin5Seconds() {
         long start = 0L;
         long end = 0L;
 
@@ -40,7 +38,7 @@ public class PerformanceTest {
     }
 
     @Test
-    public void testThatBuildingOverComplexQueryStaysWithin5Seconds() throws ValidationException {
+    public void testThatBuildingOverComplexQueryStaysWithin5Seconds() {
         long start = 0L;
         long end = 0L;
 
@@ -68,7 +66,7 @@ public class PerformanceTest {
         assertTrue(5000 > builderMilliseconds);
     }
 
-    public void comparisonOfConcatenatingMethods() throws ValidationException {
+    public void comparisonOfConcatenatingMethods() {
         long start = 0L;
         long end = 0L;
 
@@ -95,7 +93,7 @@ public class PerformanceTest {
         logger.info( percent + " percent");
     }
 
-    private void buildComplexQueryN(int times) throws ValidationException {
+    private void buildComplexQueryN(int times) {
         for (int i = 0; i < times; i++) {
             String query = buildComplexQuery();
         }
@@ -113,7 +111,7 @@ public class PerformanceTest {
         }
     }
 
-    private String buildComplexQuery() throws ValidationException {
+    private String buildComplexQuery() {
         return QueryFactory.select()
                 .column("p.firstname").alias("first")
                 .column("p.lastname").alias("last")

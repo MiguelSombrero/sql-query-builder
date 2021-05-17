@@ -1,18 +1,14 @@
 package builder;
 
+import factory.ValidatorFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import validation.DateValidator;
-import validation.InputValidator;
-import validation.StringValidator;
-
-import javax.xml.bind.ValidationException;
+import validation.*;
 
 public abstract class SQLStringAppender {
     protected static Logger logger = LoggerFactory.getLogger(SQLStringAppender.class);
 
-    private static InputValidator validator = new InputValidator(
-            new StringValidator(), new DateValidator());
+    private Validator validator = ValidatorFactory.exceptionThrowingStringOrDateValidator();
 
     protected StringBuilder queryString;
 
@@ -32,18 +28,18 @@ public abstract class SQLStringAppender {
         this.queryString = this.queryString.append(value);
     }
 
-    protected void validateAndAppend(String value) throws ValidationException {
-        validator.validOrThrow(value);
+    protected void validateAndAppend(String value) {
+        validator.validate(value);
         this.queryString = this.queryString.append(value);
     }
 
-    protected void validateAndAppendStringValue(String value) throws ValidationException {
+    protected void validateAndAppendStringValue(String value) {
         append("'");
         validateAndAppend(value);
         append("'");
     }
 
-    protected void validateAndAppendList(String ...listOfValues) throws ValidationException {
+    protected void validateAndAppendList(String ...listOfValues) {
         append("(");
         validateAndAppend(listOfValues[0]);
 
@@ -55,7 +51,7 @@ public abstract class SQLStringAppender {
         append(")");
     }
 
-    protected void validateAndAppendListOfValues(String ...listOfValues) throws ValidationException {
+    protected void validateAndAppendListOfValues(String ...listOfValues) {
         append("(");
         validateAndAppendStringValue(listOfValues[0]);
 

@@ -5,7 +5,6 @@ import factory.QueryFactory;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.xml.bind.ValidationException;
 import java.sql.SQLException;
 
 import static factory.WhereClauseFactory.valueOf;
@@ -19,7 +18,7 @@ public class DeleteTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testDeleteFromOneTable() throws SQLException, ValidationException {
+    public void testDeleteFromOneTable() throws SQLException {
         String query = QueryFactory
                 .deleteFrom()
                     .table("address")
@@ -30,7 +29,7 @@ public class DeleteTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testDeleteWithCondition() throws SQLException, ValidationException {
+    public void testDeleteWithCondition() throws SQLException {
         String query = QueryFactory
                 .deleteFrom()
                     .table("address")
@@ -42,7 +41,7 @@ public class DeleteTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testDeleteWithMultipleCondition() throws SQLException, ValidationException {
+    public void testDeleteWithMultipleCondition() throws SQLException {
         String query = QueryFactory
                 .deleteFrom()
                     .table("address")
@@ -54,8 +53,8 @@ public class DeleteTest extends DatabaseTestBaseClass {
         assertThatQueryIsValidSQL(query);
     }
 
-    @Test(expected = ValidationException.class)
-    public void testDeleteTableWithSQLInjection() throws ValidationException {
+    @Test(expected = IllegalArgumentException.class)
+    public void testDeleteTableWithSQLInjection() {
         QueryFactory
                 .deleteFrom()
                     .table("; DROP TABLE address")

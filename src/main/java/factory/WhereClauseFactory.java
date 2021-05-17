@@ -3,17 +3,13 @@ package factory;
 import builder.Builder;
 import builder.condition.Condition;
 import builder.condition.Negation;
-import validation.DateValidator;
-import validation.InputValidator;
-import validation.StringValidator;
-
-import javax.xml.bind.ValidationException;
+import validation.Validator;
 
 public class WhereClauseFactory {
-    private static InputValidator validator = new InputValidator(new StringValidator());
+    private static Validator validator = ValidatorFactory.exceptionThrowingStringValidator();
 
-    public static Negation valueOf(String operand) throws ValidationException {
-        validator.validOrThrow(operand);
+    public static Negation valueOf(String operand) {
+        validator.validate(operand);
         return new Negation(new StringBuilder(operand));
     }
 
