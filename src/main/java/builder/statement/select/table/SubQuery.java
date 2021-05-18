@@ -7,8 +7,9 @@ public class SubQuery extends JoinTable {
     }
 
     public JoinTable alias(String alias) {
+        validator.validate(alias);
         append(" AS ");
-        validateAndAppend(alias);
+        append(alias);
         return new JoinTable(this.queryString);
     }
 }

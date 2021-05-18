@@ -161,7 +161,28 @@ public class TableTest extends DatabaseTestBaseClass {
         this.column
                 .from()
                 .table(";DROP")
-                .leftJoin("address").alias("a").on("person.id", "a.person_id")
+                .build();
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSelectTableAliasWithSQLInjection() {
+        this.column
+                .from()
+                .table("person").alias(";DROP")
+                .build();
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSelectSubQueryAliasWithSQLInjection() throws SQLException {
+        this.column
+                .from()
+                .sub(QueryFactory
+                        .select()
+                            .column("*")
+                        .from()
+                            .table("person")
+                )
+                .alias(";DROP")
                 .build();
     }
 
@@ -189,6 +210,15 @@ public class TableTest extends DatabaseTestBaseClass {
                 .from()
                 .table("person")
                 .leftJoin("address").alias("a").on(";DROP", "a.person_id")
+                .build();
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSelectJoinTableOnJoinWithSQLInjection() {
+        this.column
+                .from()
+                .table("person")
+                .leftJoin("address").alias("a").on("person.id", ";DROP")
                 .build();
     }
 }

@@ -1,14 +1,10 @@
 package builder;
 
-import factory.ValidatorFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import validation.*;
 
 public abstract class SQLStringAppender {
     protected static Logger logger = LoggerFactory.getLogger(SQLStringAppender.class);
-
-    private Validator validator = ValidatorFactory.exceptionThrowingStringOrDateValidator();
 
     protected StringBuilder queryString;
 
@@ -28,36 +24,31 @@ public abstract class SQLStringAppender {
         this.queryString = this.queryString.append(value);
     }
 
-    protected void validateAndAppend(String value) {
-        validator.validate(value);
-        this.queryString = this.queryString.append(value);
-    }
-
-    protected void validateAndAppendStringValue(String value) {
+    protected void appendStringValue(String value) {
         append("'");
-        validateAndAppend(value);
+        append(value);
         append("'");
     }
 
-    protected void validateAndAppendList(String ...listOfValues) {
+    protected void appendList(String ...listOfValues) {
         append("(");
-        validateAndAppend(listOfValues[0]);
+        append(listOfValues[0]);
 
         for (int i = 1; i < listOfValues.length; i++) {
             append(", ");
-            validateAndAppend(listOfValues[i]);
+            append(listOfValues[i]);
         }
 
         append(")");
     }
 
-    protected void validateAndAppendListOfValues(String ...listOfValues) {
+    protected void appendListOfValues(String ...listOfValues) {
         append("(");
-        validateAndAppendStringValue(listOfValues[0]);
+        appendStringValue(listOfValues[0]);
 
         for (int i = 1; i < listOfValues.length; i++) {
             append(", ");
-            validateAndAppendStringValue(listOfValues[i]);
+            appendStringValue(listOfValues[i]);
         }
 
         append(")");

@@ -4,7 +4,7 @@ import builder.condition.Negation;
 import validation.Validator;
 
 public class HavingClauseFactory {
-    private static Validator validator = ValidatorFactory.exceptionThrowingStringValidator();
+    private static Validator validator = ValidatorFactory.exceptionThrowingColumnValidator();
 
     public static Negation count(String column) {
         return appendOperationAndReturn("COUNT", column);

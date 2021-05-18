@@ -1,12 +1,15 @@
 package builder.statement.select.column;
 
 import builder.SQLStringAppender;
+import factory.ValidatorFactory;
+import validation.Validator;
 
 /**
  * Defines the methods for appending columns or aggregate functions in
  * 'SELECT column(s), aggregate function(s)' statement.
  */
 public abstract class ColumnTemplate extends SQLStringAppender {
+    private static Validator validator = ValidatorFactory.exceptionThrowingColumnValidator();
 
     public ColumnTemplate(StringBuilder queryString) {
         super(queryString);
@@ -20,8 +23,9 @@ public abstract class ColumnTemplate extends SQLStringAppender {
      * aggregate functions and alias selected columns or call 'FROM table'
      */
     public Column column(String column) {
+        validator.validate(column);
         addCommaAfterFirstValue();
-        validateAndAppend(column);
+        append(column);
         return new Column(this.queryString);
     }
 
@@ -81,10 +85,11 @@ public abstract class ColumnTemplate extends SQLStringAppender {
     }
 
     private Column applyAggregate(String function, String toColumn) {
+        validator.validate(toColumn);
         addCommaAfterFirstValue();
-        validateAndAppend(function);
+        append(function);
         append("(");
-        validateAndAppend(toColumn);
+        append(toColumn);
         append(")");
         return new Column(this.queryString);
     }

@@ -6,9 +6,10 @@ public class AliasedTable extends JoinTable {
         super(queryString);
     }
 
-    public Table table(String tableName) {
+    public Table table(String table) {
+        validator.validate(table);
         append(", ");
-        validateAndAppend(tableName);
+        append(table);
         return new Table(this.queryString);
     }
 }

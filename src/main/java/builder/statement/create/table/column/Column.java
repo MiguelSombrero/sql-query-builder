@@ -9,8 +9,9 @@ public class Column extends ForeignKey {
     }
 
     public ColumnType column(String column) {
+        validator.validate(column);
         append(", ");
-        validateAndAppend(column);
+        append(column);
         return new ColumnType(this.queryString);
     }
 }

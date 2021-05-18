@@ -30,6 +30,18 @@ public class UpdateTest extends DatabaseTestBaseClass {
     }
 
     @Test
+    public void testUpdateDoubleValue() throws SQLException {
+        String query = QueryFactory
+                .update()
+                .table("person")
+                .column("age").value(50.5)
+                .build();
+
+        assertEquals("UPDATE person SET age = 50.5", query);
+        assertThatQueryIsValidSQL(query);
+    }
+
+    @Test
     public void testUpdateStringValue() throws SQLException {
         String query = QueryFactory
                 .update()
@@ -75,6 +87,17 @@ public class UpdateTest extends DatabaseTestBaseClass {
                 .update()
                 .table(";DROP")
                 .column("firstname").value("Miika")
+                .column("lastname").value("Somero")
+                .column("age").value(50)
+                .build();
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testUpdateFirstColumnWithSQLInjection() {
+        QueryFactory
+                .update()
+                .table("person")
+                .column("--DROP").value("Miika")
                 .column("lastname").value("Somero")
                 .column("age").value(50)
                 .build();

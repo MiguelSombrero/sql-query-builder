@@ -2,8 +2,11 @@ package builder.statement.select.table;
 
 import builder.condition.Condition;
 import builder.statement.select.order.Grouper;
+import factory.ValidatorFactory;
+import validation.Validator;
 
 public class JoinTable extends Grouper {
+    protected static Validator validator = ValidatorFactory.exceptionThrowingNameValidator();
 
     public JoinTable(StringBuilder queryString) {
         super(queryString);
@@ -31,7 +34,8 @@ public class JoinTable extends Grouper {
     }
 
     private On join(String table) {
-        validateAndAppend(table);
+        validator.validate(table);
+        append(table);
         return new On(this.queryString);
     }
 }

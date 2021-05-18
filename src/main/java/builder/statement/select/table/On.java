@@ -7,8 +7,9 @@ public class On extends AliasedOn {
     }
 
     public On alias(String alias) {
+        validator.validate(alias);
         append(" AS ");
-        validateAndAppend(alias);
+        append(alias);
         return this;
     }
 }

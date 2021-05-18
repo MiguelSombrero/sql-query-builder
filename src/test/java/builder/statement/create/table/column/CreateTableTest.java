@@ -119,6 +119,16 @@ public class CreateTableTest extends DatabaseTestBaseClass {
     }
 
     @Test(expected = IllegalArgumentException.class)
+    public void testCreateTableFirstColumnWithSQLInjection() {
+        create()
+                .table("vehicles")
+                .column("--DROP").type(DataType.INT).primaryKey().autoIncrement()
+                .column("person_id").type(DataType.INT).unique().notNull()
+                .foreignKey("person_id").references("ID", "person")
+                .build();
+    }
+
+    @Test(expected = IllegalArgumentException.class)
     public void testCreateTableColumnWithSQLInjection() {
         create()
                 .table("vehicles")

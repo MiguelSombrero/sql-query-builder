@@ -5,8 +5,10 @@ import builder.SQLStringAppender;
 import factory.ValidatorFactory;
 import validation.Validator;
 
+import java.util.Arrays;
+
 public class Comparison extends SQLStringAppender {
-    private static Validator validator = ValidatorFactory.exceptionThrowingStringOrDateValidator();
+    private static Validator validator = ValidatorFactory.exceptionThrowingStringValueValidator();
 
     public Comparison(StringBuilder queryString) {
         super(queryString);
@@ -113,18 +115,27 @@ public class Comparison extends SQLStringAppender {
     }
 
     public Condition startsWith(String pattern) {
+        validator.validate(pattern);
         String startsWith = pattern.concat("%");
-        return appendConditionWithValue(" LIKE ", startsWith);
+        append(" LIKE ");
+        appendStringValue(startsWith);
+        return getCondition();
     }
 
     public Condition endsWith(String pattern) {
+        validator.validate(pattern);
         String endsWith = "%".concat(pattern);
-        return appendConditionWithValue(" LIKE ", endsWith);
+        append(" LIKE ");
+        appendStringValue(endsWith);
+        return getCondition();
     }
 
     public Condition contains(String pattern) {
-        String endsWith = "%".concat(pattern).concat("%");
-        return appendConditionWithValue(" LIKE ", endsWith);
+        validator.validate(pattern);
+        String contains = "%".concat(pattern).concat("%");
+        append(" LIKE ");
+        appendStringValue(contains);
+        return getCondition();
     }
 
     public Condition isInSub(Builder query) {
@@ -157,8 +168,9 @@ public class Comparison extends SQLStringAppender {
     }
 
     public Condition isIn(String ...listOfValues) {
+        validateList(listOfValues);
         append(" IN ");
-        validateAndAppendListOfValues(listOfValues);
+        appendListOfValues(listOfValues);
         return getCondition();
     }
 
@@ -175,8 +187,9 @@ public class Comparison extends SQLStringAppender {
     }
 
     private Condition appendConditionWithValue(String condition, String value) {
+        validator.validate(value);
         append(condition);
-        validateAndAppendStringValue(value);
+        appendStringValue(value);
         return getCondition();
     }
 
@@ -198,6 +211,10 @@ public class Comparison extends SQLStringAppender {
         append(query.build());
         append(")");
         return getCondition();
+    }
+
+    private void validateList(String[] columns) {
+        Arrays.stream(columns).forEach(column -> validator.validate(column));
     }
 
     private Condition getCondition() {

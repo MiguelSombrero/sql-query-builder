@@ -1,15 +1,19 @@
 package builder.statement.insert;
 
 import builder.SQLStringAppender;
+import factory.ValidatorFactory;
+import validation.Validator;
 
 public class Table extends SQLStringAppender {
+    private static Validator validator = ValidatorFactory.exceptionThrowingNameValidator();
 
     public Table(StringBuilder queryString) {
         super(queryString);
     }
 
     public Insert table(String tableName) {
-        validateAndAppend(tableName);
+        validator.validate(tableName);
+        append(tableName);
         append(" ");
         return new Insert(this.queryString);
     }

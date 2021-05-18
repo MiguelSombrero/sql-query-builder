@@ -1,5 +1,8 @@
 package builder.statement.select.column;
 
+import factory.ValidatorFactory;
+import validation.Validator;
+
 /**
  * represents column after first column to be appended in
  * 'SELECT column(s), aggregate function(s)' statement.
@@ -8,6 +11,7 @@ package builder.statement.select.column;
  * column in a list of columns
  */
 public class Column extends AliasedColumn {
+    private static Validator validator = ValidatorFactory.exceptionThrowingNameValidator();
 
     public Column(StringBuilder queryString) {
         super(queryString);
@@ -21,8 +25,9 @@ public class Column extends AliasedColumn {
      * except it cannot be aliased
      */
     public AliasedColumn alias(String as) {
+        validator.validate(as);
         append(" AS ");
-        validateAndAppend(as);
+        append(as);
         return new AliasedColumn(this.queryString);
     }
 }

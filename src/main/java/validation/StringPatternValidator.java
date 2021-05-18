@@ -1,6 +1,9 @@
 package validation;
 
-public abstract class ValidatorTemplate implements Validator {
+import java.util.regex.Pattern;
+
+public class StringPatternValidator implements Validator {
+    private static final String VALID_STRING_PATTERN = "^\\w+\\.?\\w*$";
 
     public boolean validate(String input) {
         if (input == null) {
@@ -18,5 +21,7 @@ public abstract class ValidatorTemplate implements Validator {
         return true;
     }
 
-    public abstract boolean matches(String input);
+    private boolean matches(String input) {
+        return Pattern.matches(VALID_STRING_PATTERN, input);
+    }
 }

@@ -160,12 +160,23 @@ public class ColumnTest extends DatabaseTestBaseClass {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testSelectColumnWithSQLInjection() {
+    public void testSelectFisrtColumnWithSQLInjection() {
         QueryFactory
                 .select()
                 .column(";DROP")
                 .from()
                     .table("person")
+                .build();
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSelectColumnWithSQLInjection() {
+        QueryFactory
+                .select()
+                    .column("firstname")
+                    .column(";DROP")
+                .from()
+                .table("person")
                 .build();
     }
 

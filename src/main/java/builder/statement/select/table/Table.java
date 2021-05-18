@@ -7,8 +7,9 @@ public class Table extends AliasedTable {
     }
 
     public AliasedTable alias(String alias) {
+        validator.validate(alias);
         append(" AS ");
-        validateAndAppend(alias);
+        append(alias);
         return new AliasedTable(this.queryString);
     }
 }

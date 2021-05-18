@@ -98,7 +98,15 @@ public class GroupByTest extends DatabaseTestBaseClass {
         table
                 .groupBy()
                 .column(";DROP")
-                .having(count("age").equals(100))
+                .build();
+    }
+
+    @Test(expected =IllegalArgumentException.class)
+    public void testGroupByWithHavingColumnSQLInjection() {
+        table
+                .groupBy()
+                    .column("firstname")
+                    .column(";DROP")
                 .build();
     }
 }

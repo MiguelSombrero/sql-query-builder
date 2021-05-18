@@ -7,8 +7,8 @@ import static org.junit.Assert.assertTrue;
 
 public class ExceptionThrowingValidatorTest {
 
-    private Validator dateValidator = new ExceptionThrowingValidator(new DateValidator());
-    private Validator stringValidator = new ExceptionThrowingValidator(new StringValidator());
+    private Validator dateValidator = new ExceptionThrowingValidator(new DatePatternValidator());
+    private Validator stringValidator = new ExceptionThrowingValidator(new StringPatternValidator());
 
     @Test
     public void testDoesAcceptDateWithTime() {

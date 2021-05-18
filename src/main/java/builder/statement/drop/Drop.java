@@ -2,22 +2,27 @@ package builder.statement.drop;
 
 import builder.SQLStringAppender;
 import builder.TerminalOperation;
+import factory.ValidatorFactory;
+import validation.Validator;
 
 public class Drop extends SQLStringAppender {
+    private static Validator validator = ValidatorFactory.exceptionThrowingNameValidator();
 
     public Drop(StringBuilder queryString) {
         super(queryString);
     }
 
     public TerminalOperation table(String tableName) {
+        validator.validate(tableName);
         append("TABLE ");
-        validateAndAppend(tableName);
+        append(tableName);
         return new TerminalOperation(this.queryString);
     }
 
     public TerminalOperation database(String databaseName) {
+        validator.validate(databaseName);
         append("DATABASE ");
-        validateAndAppend(databaseName);
+        append(databaseName);
         return new TerminalOperation(this.queryString);
     }
 }

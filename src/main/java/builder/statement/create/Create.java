@@ -4,8 +4,11 @@ import builder.SQLStringAppender;
 import builder.TerminalOperation;
 import builder.statement.create.index.Index;
 import builder.statement.create.table.column.FirstColumn;
+import factory.ValidatorFactory;
+import validation.Validator;
 
 public class Create extends SQLStringAppender {
+    private static Validator validator = ValidatorFactory.exceptionThrowingNameValidator();
 
     public Create(StringBuilder queryString) {
         super(queryString);
@@ -13,20 +16,25 @@ public class Create extends SQLStringAppender {
 
     public FirstColumn table(String tableName) {
         append("TABLE ");
-        validateAndAppend(tableName);
+        validateAndAppendName(tableName);
         append(" (");
         return new FirstColumn(this.queryString);
     }
 
     public TerminalOperation database(String databaseName) {
         append("DATABASE ");
-        validateAndAppend(databaseName);
+        validateAndAppendName(databaseName);
         return new TerminalOperation(this.queryString);
     }
 
     public Index index(String indexName) {
         append("INDEX ");
-        validateAndAppend(indexName);
+        validateAndAppendName(indexName);
         return new Index(this.queryString);
+    }
+
+    private void validateAndAppendName(String input) {
+        validator.validate(input);
+        append(input);
     }
 }
