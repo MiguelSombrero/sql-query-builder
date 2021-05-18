@@ -1,10 +1,10 @@
 package builder.statement.create.index;
 
-import builder.SQLStringAppender;
+import builder.SQLQuery;
 import factory.ValidatorFactory;
 import validation.Validator;
 
-public class Index extends SQLStringAppender {
+public class Index extends SQLQuery {
     private static Validator validator = ValidatorFactory.exceptionThrowingNameValidator();
 
     public Index(StringBuilder queryString) {

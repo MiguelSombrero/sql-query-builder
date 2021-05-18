@@ -1,10 +1,10 @@
 package builder.statement.select.table;
 
-import builder.SQLStringAppender;
+import builder.SQLQuery;
 import factory.ValidatorFactory;
 import validation.Validator;
 
-public class AliasedOn extends SQLStringAppender {
+public class AliasedOn extends SQLQuery {
     protected static Validator validator = ValidatorFactory.exceptionThrowingNameValidator();
 
     public AliasedOn(StringBuilder queryString) {

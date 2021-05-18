@@ -52,6 +52,25 @@ public class InsertTest extends DatabaseTestBaseClass {
     }
 
     @Test
+    public void testInsertMultipleValuesWithParameters() {
+        String query = QueryFactory
+                .insertInto()
+                .table("person")
+                    .columns("id", "birthdate", "firstname", "lastname", "age")
+                .values()
+                    .value("?")
+                    .value("?")
+                    .value("?")
+                    .value("?")
+                    .value("?")
+                .build();
+
+        logger.info(query);
+
+        assertEquals("INSERT INTO person (id, birthdate, firstname, lastname, age) VALUES (?, ?, ?, ?, ?)", query);
+    }
+
+    @Test
     public void testInsertQuery() throws SQLException {
         String query = QueryFactory
                 .insertInto()
@@ -145,6 +164,17 @@ public class InsertTest extends DatabaseTestBaseClass {
                     .columns("firstname")
                 .values()
                     .value(";DROP")
+                .build();
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testInsertValuesWithParameterInColumn() {
+        String query = QueryFactory
+                .insertInto()
+                .table("person")
+                    .columns("?")
+                .values()
+                    .value("Miika")
                 .build();
     }
 }

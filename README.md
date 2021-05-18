@@ -4,7 +4,8 @@
 
 Sql query builder is Java-library used for building SQL query strings more easily. Syntax of the query strings is intended to be compatible at least with MySQL.
 
-**Note** that this is not an ORM and does not provide any data access methods. This library simply builds strings that are valid SQL and can be used as a query strings by some other framework/library.   
+**Note that**
+- This is not an ORM and does not provide any data access methods. This library simply builds strings that are valid SQL and can be used as a query strings with some other framework/library.
 
 ## Examples
 
@@ -52,10 +53,6 @@ Check the latest version from [GitHub Packages](https://github.com/MiguelSombrer
 
     mvn install
 
-### Use
-
-Starting point of using library is static factory class `QueryFactory` found in package `main/java/factory`.
-
 ## Documentation
 
 [Design documents](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/design.md)
@@ -68,7 +65,6 @@ Starting point of using library is static factory class `QueryFactory` found in 
 
 ### General
 - Javadoc
-- Parametrized queries (WHERE name = ?)
 
 ### CREATE
 - Constraints 'default' and 'check'

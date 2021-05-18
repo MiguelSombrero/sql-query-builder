@@ -1,10 +1,10 @@
 package builder.statement.create.table.foreignkey;
 
-import builder.SQLStringAppender;
+import builder.SQLQuery;
 import factory.ValidatorFactory;
 import validation.Validator;
 
-public class Reference extends SQLStringAppender {
+public class Reference extends SQLQuery {
     private static Validator validator = ValidatorFactory.exceptionThrowingNameValidator();
 
     public Reference(StringBuilder queryString) {

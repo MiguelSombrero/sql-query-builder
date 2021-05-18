@@ -1,10 +1,10 @@
 package builder.statement.update;
 
-import builder.SQLStringAppender;
+import builder.SQLQuery;
 import factory.ValidatorFactory;
 import validation.Validator;
 
-public class Value extends SQLStringAppender {
+public class Value extends SQLQuery {
     private static Validator validator = ValidatorFactory.exceptionThrowingStringValueValidator();
 
     public Value(StringBuilder queryString) {

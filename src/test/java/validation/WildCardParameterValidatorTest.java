@@ -5,26 +5,26 @@ import org.junit.Test;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class WildCardAllColumnsValidatorTest {
+public class WildCardParameterValidatorTest {
 
-    private WildCardAllColumnsValidator validator = new WildCardAllColumnsValidator();
+    private WildCardParameterValidator validator = new WildCardParameterValidator();
 
     @Test
-    public void testDoesAcceptStar() {
-        assertTrue(validator.validate("*"));
+    public void testDoesAcceptQuestionMark() {
+        assertTrue(validator.validate("?"));
     }
 
     @Test
-    public void testDoesNotAcceptTwoStars() {
-        assertFalse(validator.validate("**"));
+    public void testDoesNotAcceptTwoQuestionMarks() {
+        assertFalse(validator.validate("??"));
     }
 
     @Test
-    public void testDoesNotAcceptAnyOtherASCIIThanStar() {
+    public void testDoesNotAcceptAnyOtherASCIIThanQuestionMark() {
         for (int i=0; i < 255; i++) {
             String character = Character.toString((char) i);
 
-            if (i == 42) {
+            if (i == 63) {
                 assertTrue(validator.validate(character));
             } else {
                 assertFalse(validator.validate(character));
@@ -36,4 +36,5 @@ public class WildCardAllColumnsValidatorTest {
     public void testDoesNotAcceptNull() {
         assertFalse(validator.validate(null));
     }
+
 }

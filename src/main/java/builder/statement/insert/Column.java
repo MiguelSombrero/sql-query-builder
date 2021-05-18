@@ -1,10 +1,10 @@
 package builder.statement.insert;
 
-import builder.SQLStringAppender;
+import builder.SQLQuery;
 import builder.TerminalOperation;
 import builder.statement.select.SelectBuilder;
 
-public class Column extends SQLStringAppender {
+public class Column extends SQLQuery {
 
     public Column(StringBuilder queryString) {
         super(queryString);

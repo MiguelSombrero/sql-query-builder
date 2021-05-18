@@ -81,6 +81,19 @@ public class UpdateTest extends DatabaseTestBaseClass {
         assertThatQueryIsValidSQL(query);
     }
 
+    @Test
+    public void testUpdateMultipleValuesWithParameters() {
+        String query = QueryFactory
+                .update()
+                .table("person")
+                .column("firstname").value("?")
+                .column("lastname").value("?")
+                .column("age").value("?")
+                .build();
+
+        assertEquals("UPDATE person SET firstname = ?, lastname = ?, age = ?", query);
+    }
+
     @Test(expected = IllegalArgumentException.class)
     public void testUpdateTableWithSQLInjection() {
         QueryFactory
@@ -122,6 +135,17 @@ public class UpdateTest extends DatabaseTestBaseClass {
                     .column("firstname").value("Miika")
                     .column("lastname").value(";DROP")
                     .column("age").value(50)
+                .build();
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testUpdateValueWithParameterInColumn() {
+        QueryFactory
+                .update()
+                .table("person")
+                .column("firstname").value("Miika")
+                .column("?").value("Somero")
+                .column("age").value(50)
                 .build();
     }
 }

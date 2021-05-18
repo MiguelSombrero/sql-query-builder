@@ -1,9 +1,9 @@
 package builder.statement.insert;
 
 import builder.Builder;
-import builder.SQLStringAppender;
+import builder.SQLQuery;
 
-public class TerminalInsertOperation extends SQLStringAppender implements Builder {
+public class TerminalInsertOperation extends SQLQuery implements Builder {
 
     public TerminalInsertOperation(StringBuilder queryString) {
         super(queryString);

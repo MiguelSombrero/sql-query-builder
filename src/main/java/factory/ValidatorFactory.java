@@ -6,7 +6,7 @@ public class ValidatorFactory {
 
     public static Validator exceptionThrowingStringValueValidator() {
         return new ExceptionThrowingValidator(
-                new OrValidator(stringValidator(), dateValidator()));
+                new OrValidator(stringValidator(), dateValidator(), wildCardParameterValidator()));
     }
 
     public static Validator exceptionThrowingNameValidator() {
@@ -28,5 +28,9 @@ public class ValidatorFactory {
 
     public static Validator wildCardAllColumnsValidator() {
         return new WildCardAllColumnsValidator();
+    }
+
+    public static Validator wildCardParameterValidator() {
+        return new WildCardParameterValidator();
     }
 }

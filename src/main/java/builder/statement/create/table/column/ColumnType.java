@@ -1,8 +1,8 @@
 package builder.statement.create.table.column;
 
-import builder.SQLStringAppender;
+import builder.SQLQuery;
 
-public class ColumnType extends SQLStringAppender {
+public class ColumnType extends SQLQuery {
 
     public ColumnType(StringBuilder queryString) {
         super(queryString);

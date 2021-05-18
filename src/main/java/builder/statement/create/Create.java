@@ -1,13 +1,13 @@
 package builder.statement.create;
 
-import builder.SQLStringAppender;
+import builder.SQLQuery;
 import builder.TerminalOperation;
 import builder.statement.create.index.Index;
 import builder.statement.create.table.column.FirstColumn;
 import factory.ValidatorFactory;
 import validation.Validator;
 
-public class Create extends SQLStringAppender {
+public class Create extends SQLQuery {
     private static Validator validator = ValidatorFactory.exceptionThrowingNameValidator();
 
     public Create(StringBuilder queryString) {

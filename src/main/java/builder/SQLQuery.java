@@ -3,12 +3,12 @@ package builder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public abstract class SQLStringAppender {
-    protected static Logger logger = LoggerFactory.getLogger(SQLStringAppender.class);
+public abstract class SQLQuery {
+    protected static Logger logger = LoggerFactory.getLogger(SQLQuery.class);
 
     protected StringBuilder queryString;
 
-    public SQLStringAppender(StringBuilder queryString) {
+    public SQLQuery(StringBuilder queryString) {
         this.queryString = queryString;
     }
 
@@ -25,18 +25,22 @@ public abstract class SQLStringAppender {
     }
 
     protected void appendStringValue(String value) {
-        append("'");
-        append(value);
-        append("'");
+        if (!value.equals("?")) {
+            append("'");
+            append(value);
+            append("'");
+        } else {
+            append(value);
+        }
     }
 
-    protected void appendList(String ...listOfValues) {
+    protected void appendList(String ...list) {
         append("(");
-        append(listOfValues[0]);
+        append(list[0]);
 
-        for (int i = 1; i < listOfValues.length; i++) {
+        for (int i = 1; i < list.length; i++) {
             append(", ");
-            append(listOfValues[i]);
+            append(list[i]);
         }
 
         append(")");

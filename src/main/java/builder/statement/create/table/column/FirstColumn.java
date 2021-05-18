@@ -1,10 +1,10 @@
 package builder.statement.create.table.column;
 
-import builder.SQLStringAppender;
+import builder.SQLQuery;
 import factory.ValidatorFactory;
 import validation.Validator;
 
-public class FirstColumn extends SQLStringAppender {
+public class FirstColumn extends SQLQuery {
     private static Validator validator = ValidatorFactory.exceptionThrowingNameValidator();
 
     public FirstColumn(StringBuilder queryString) {

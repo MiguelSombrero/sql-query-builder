@@ -1,8 +1,8 @@
 package builder.statement.create.table.foreignkey;
 
-import builder.SQLStringAppender;
+import builder.SQLQuery;
 
-public class Action extends SQLStringAppender {
+public class Action extends SQLQuery {
 
     public Action(StringBuilder queryString) {
         super(queryString);
