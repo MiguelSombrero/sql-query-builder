@@ -1,6 +1,6 @@
 package builder.statement.create.table.column;
 
-import builder.Query;
+import builder.query.Query;
 import builder.statement.create.table.foreignkey.ForeignKey;
 
 public class Column extends ForeignKey {

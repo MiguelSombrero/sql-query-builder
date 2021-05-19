@@ -1,6 +1,6 @@
 package builder.statement.select.table;
 
-import builder.Query;
+import builder.query.Query;
 import factory.ValidatorFactory;
 import validation.Validator;
 

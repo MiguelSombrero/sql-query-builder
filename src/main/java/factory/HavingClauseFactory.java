@@ -1,6 +1,6 @@
 package factory;
 
-import builder.Query;
+import builder.query.Query;
 import builder.condition.Negation;
 import validation.Validator;
 

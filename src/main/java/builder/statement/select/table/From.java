@@ -1,7 +1,7 @@
 package builder.statement.select.table;
 
-import builder.Query;
-import builder.statement.select.SelectBuilder;
+import builder.query.Query;
+import builder.statement.select.SelectQueryBuilder;
 import factory.ValidatorFactory;
 import validation.Validator;
 
@@ -20,7 +20,7 @@ public class From {
         return new Table(query);
     }
 
-    public SubQuery sub(SelectBuilder subQuery) {
+    public SubQuery sub(SelectQueryBuilder subQuery) {
         query.append("(");
         query.append(subQuery.build());
         query.append(")");

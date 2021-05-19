@@ -1,9 +1,9 @@
 package builder.statement.create;
 
-import builder.Builder;
-import builder.Query;
+import builder.QueryBuilder;
+import builder.query.Query;
 
-public class TerminalCreateOperation implements Builder {
+public class TerminalCreateOperation implements QueryBuilder {
 
     protected Query query;
 

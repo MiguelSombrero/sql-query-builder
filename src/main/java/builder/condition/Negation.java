@@ -1,6 +1,6 @@
 package builder.condition;
 
-import builder.Query;
+import builder.query.Query;
 
 public class Negation extends Comparison {
 

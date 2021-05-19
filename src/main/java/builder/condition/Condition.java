@@ -1,7 +1,7 @@
 package builder.condition;
 
-import builder.Builder;
-import builder.Query;
+import builder.QueryBuilder;
+import builder.query.Query;
 import builder.TerminalOperation;
 
 public class Condition extends TerminalOperation {
@@ -10,19 +10,19 @@ public class Condition extends TerminalOperation {
         super(query);
     }
 
-    public Condition and(Builder condition) {
+    public Condition and(QueryBuilder condition) {
         query.append(" AND ");
         query.append(condition.build());
         return this;
     }
 
-    public Condition or(Builder condition) {
+    public Condition or(QueryBuilder condition) {
         query.append(" OR ");
         query.append(condition.build());
         return this;
     }
 
-    public Condition orSub(Builder condition) {
+    public Condition orSub(QueryBuilder condition) {
         query.append(" OR (");
         query.append(condition.build());
         query.append(")");

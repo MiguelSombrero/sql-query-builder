@@ -1,6 +1,6 @@
 package builder.statement.update;
 
-import builder.Query;
+import builder.query.Query;
 import builder.TerminalOperation;
 import builder.condition.Condition;
 import factory.ValidatorFactory;

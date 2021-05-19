@@ -1,6 +1,6 @@
 package builder.statement.insert;
 
-import builder.Query;
+import builder.query.Query;
 
 public class FirstValue extends ValueTemplate {
 

@@ -1,8 +1,8 @@
 package builder.statement.insert;
 
-import builder.Query;
+import builder.query.Query;
 import builder.TerminalOperation;
-import builder.statement.select.SelectBuilder;
+import builder.statement.select.SelectQueryBuilder;
 
 public class Column {
 
@@ -17,7 +17,7 @@ public class Column {
         return new FirstValue(query);
     }
 
-    public TerminalOperation sub(SelectBuilder subQuery) {
+    public TerminalOperation sub(SelectQueryBuilder subQuery) {
         query.append(subQuery.build());
         return new TerminalOperation(query);
     }

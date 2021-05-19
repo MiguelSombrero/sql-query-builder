@@ -1,6 +1,6 @@
 package builder.statement.select.order;
 
-import builder.Query;
+import builder.query.Query;
 
 public class Orderer extends Limit {
 

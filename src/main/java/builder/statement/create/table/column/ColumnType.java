@@ -1,6 +1,6 @@
 package builder.statement.create.table.column;
 
-import builder.Query;
+import builder.query.Query;
 
 public class ColumnType {
 

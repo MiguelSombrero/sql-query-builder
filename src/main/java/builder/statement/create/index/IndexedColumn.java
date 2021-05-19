@@ -1,7 +1,8 @@
 package builder.statement.create.index;
 
-import builder.Query;
+import builder.query.Query;
 import builder.TerminalOperation;
+import builder.query.QueryAppender;
 import factory.ValidatorFactory;
 import validation.Validator;
 
@@ -19,7 +20,7 @@ public class IndexedColumn {
     public TerminalOperation columns(String ...listOfColumns) {
         validateList(listOfColumns);
         query.append(" ");
-        query.appendList(listOfColumns);
+        QueryAppender.appendList(query, listOfColumns);
         return new TerminalOperation(query);
     }
 

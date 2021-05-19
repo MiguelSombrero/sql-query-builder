@@ -1,7 +1,8 @@
 package builder.condition;
 
-import builder.Builder;
-import builder.Query;
+import builder.QueryBuilder;
+import builder.query.Query;
+import builder.query.QueryAppender;
 import factory.ValidatorFactory;
 import validation.Validator;
 
@@ -28,11 +29,11 @@ public class Comparison {
         return appendConditionWithValue(" = ", value);
     }
 
-    public Condition equalsAny(Builder query) {
+    public Condition equalsAny(QueryBuilder query) {
         return appendConditionWithSubQuery(" = ANY ", query);
     }
 
-    public Condition equalsAll(Builder query) {
+    public Condition equalsAll(QueryBuilder query) {
         return appendConditionWithSubQuery(" = ALL ", query);
     }
 
@@ -48,11 +49,11 @@ public class Comparison {
         return appendConditionWithValue(" > ", value);
     }
 
-    public Condition greaterThanAny(Builder query) {
+    public Condition greaterThanAny(QueryBuilder query) {
         return appendConditionWithSubQuery(" > ANY ", query);
     }
 
-    public Condition greaterThanAll(Builder query) {
+    public Condition greaterThanAll(QueryBuilder query) {
         return appendConditionWithSubQuery(" > ALL ", query);
     }
 
@@ -68,11 +69,11 @@ public class Comparison {
         return appendConditionWithValue(" >= ", value);
     }
 
-    public Condition greaterThanOrEqualAny(Builder query) {
+    public Condition greaterThanOrEqualAny(QueryBuilder query) {
         return appendConditionWithSubQuery(" >= ANY ", query);
     }
 
-    public Condition greaterThanOrEqualAll(Builder query) {
+    public Condition greaterThanOrEqualAll(QueryBuilder query) {
         return appendConditionWithSubQuery(" >= ALL ", query);
     }
 
@@ -88,11 +89,11 @@ public class Comparison {
         return appendConditionWithValue(" < ", value);
     }
 
-    public Condition lesserThanAny(Builder query) {
+    public Condition lesserThanAny(QueryBuilder query) {
         return appendConditionWithSubQuery(" < ANY ", query);
     }
 
-    public Condition lesserThanAll(Builder query) {
+    public Condition lesserThanAll(QueryBuilder query) {
         return appendConditionWithSubQuery(" < ALL ", query);
     }
 
@@ -108,11 +109,11 @@ public class Comparison {
         return appendConditionWithValue(" <= ", value);
     }
 
-    public Condition lesserThanOrEqualAny(Builder query) {
+    public Condition lesserThanOrEqualAny(QueryBuilder query) {
         return appendConditionWithSubQuery(" <= ANY ", query);
     }
 
-    public Condition lesserThanOrEqualAll(Builder query) {
+    public Condition lesserThanOrEqualAll(QueryBuilder query) {
         return appendConditionWithSubQuery(" <= ALL ", query);
     }
 
@@ -120,7 +121,7 @@ public class Comparison {
         validator.validate(pattern);
         String startsWith = pattern.concat("%");
         query.append(" LIKE ");
-        query.appendStringValue(startsWith);
+        QueryAppender.appendStringValue(query, startsWith);
         return getCondition();
     }
 
@@ -128,7 +129,7 @@ public class Comparison {
         validator.validate(pattern);
         String endsWith = "%".concat(pattern);
         query.append(" LIKE ");
-        query.appendStringValue(endsWith);
+        QueryAppender.appendStringValue(query, endsWith);
         return getCondition();
     }
 
@@ -136,11 +137,11 @@ public class Comparison {
         validator.validate(pattern);
         String contains = "%".concat(pattern).concat("%");
         query.append(" LIKE ");
-        query.appendStringValue(contains);
+        QueryAppender.appendStringValue(query, contains);
         return getCondition();
     }
 
-    public Condition isInSub(Builder query) {
+    public Condition isInSub(QueryBuilder query) {
         return appendConditionWithSubQuery(" IN ", query);
     }
 
@@ -172,26 +173,26 @@ public class Comparison {
     public Condition isIn(String ...listOfValues) {
         validateList(listOfValues);
         query.append(" IN ");
-        query.appendListOfValues(listOfValues);
+        QueryAppender.appendListOfValues(query, listOfValues);
         return getCondition();
     }
 
     public Condition isIn(int ...listOfValues) {
         query.append(" IN ");
-        query.appendListOfValues(listOfValues);
+        QueryAppender.appendListOfValues(query, listOfValues);
         return getCondition();
     }
 
     public Condition isIn(double ...listOfValues) {
         query.append(" IN ");
-        query.appendListOfValues(listOfValues);
+        QueryAppender.appendListOfValues(query, listOfValues);
         return getCondition();
     }
 
     private Condition appendConditionWithValue(String condition, String value) {
         validator.validate(value);
         query.append(condition);
-        query.appendStringValue(value);
+        QueryAppender.appendStringValue(query, value);
         return getCondition();
     }
 
@@ -207,7 +208,7 @@ public class Comparison {
         return getCondition();
     }
 
-    private Condition appendConditionWithSubQuery(String condition, Builder subQuery) {
+    private Condition appendConditionWithSubQuery(String condition, QueryBuilder subQuery) {
         query.append(condition);
         query.append("(");
         query.append(subQuery.build());

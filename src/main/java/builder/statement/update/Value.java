@@ -1,6 +1,7 @@
 package builder.statement.update;
 
-import builder.Query;
+import builder.query.Query;
+import builder.query.QueryAppender;
 import factory.ValidatorFactory;
 import validation.Validator;
 
@@ -14,7 +15,7 @@ public class Value {
 
     public Column value(String value) {
         validator.validate(value);
-        query.appendStringValue(value);
+        QueryAppender.appendStringValue(query, value);
         return new Column(query);
     }
 

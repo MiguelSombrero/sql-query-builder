@@ -1,7 +1,7 @@
 package factory;
 
-import builder.Builder;
-import builder.Query;
+import builder.QueryBuilder;
+import builder.query.Query;
 import builder.condition.Condition;
 import builder.condition.Negation;
 import validation.Validator;
@@ -14,11 +14,11 @@ public class WhereClauseFactory {
         return new Negation(createQuery(operand));
     }
 
-    public static Condition exists(Builder query) {
+    public static Condition exists(QueryBuilder query) {
         return new Condition(createQuery("EXISTS (" + query.build() + ")"));
     }
 
-    public static Condition notExists(Builder query) {
+    public static Condition notExists(QueryBuilder query) {
         return new Condition(createQuery("NOT EXISTS (" + query.build() + ")"));
     }
 

@@ -1,6 +1,7 @@
 package builder.statement.insert;
 
-import builder.Query;
+import builder.query.Query;
+import builder.query.QueryAppender;
 import factory.ValidatorFactory;
 import validation.Validator;
 
@@ -15,7 +16,7 @@ public class Insert extends Column {
 
     public Column columns(String ...listOfColumns) {
         validateList(listOfColumns);
-        query.appendList(listOfColumns);
+        QueryAppender.appendList(query, listOfColumns);
         query.append(" ");
         return new Column(query);
     }

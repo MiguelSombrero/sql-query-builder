@@ -1,6 +1,7 @@
 package builder.statement.insert;
 
-import builder.Query;
+import builder.query.Query;
+import builder.query.QueryAppender;
 import factory.ValidatorFactory;
 import validation.Validator;
 
@@ -14,7 +15,7 @@ public abstract class ValueTemplate extends TerminalInsertOperation {
     public Value value(String value) {
         validator.validate(value);
         addCommaAfterFirstValue();
-        query.appendStringValue(value);
+        QueryAppender.appendStringValue(query, value);
         return new Value(query);
     }
 

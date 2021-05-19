@@ -1,6 +1,6 @@
 package factory;
 
-import builder.Query;
+import builder.query.Query;
 import builder.statement.create.Create;
 import builder.statement.drop.Drop;
 import builder.statement.select.column.FirstColumn;

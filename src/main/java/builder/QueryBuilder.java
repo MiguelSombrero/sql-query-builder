@@ -1,5 +1,5 @@
 package builder;
 
-public interface Builder {
+public interface QueryBuilder {
     String build();
 }

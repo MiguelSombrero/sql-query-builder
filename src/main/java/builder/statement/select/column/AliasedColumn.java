@@ -1,6 +1,6 @@
 package builder.statement.select.column;
 
-import builder.Query;
+import builder.query.Query;
 import builder.statement.select.table.From;
 
 /**
