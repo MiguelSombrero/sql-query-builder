@@ -1,12 +1,14 @@
 package builder;
 
-public class TerminalOperation extends Query implements Builder {
+public class TerminalOperation implements Builder {
 
-    public TerminalOperation(StringBuilder builder) {
-        super(builder);
+    protected Query query;
+
+    public TerminalOperation(Query query) {
+        this.query = query;
     }
 
     public String build() {
-        return queryString.toString();
+        return query.build();
     }
 }

@@ -4,17 +4,19 @@ import builder.Query;
 import factory.ValidatorFactory;
 import validation.Validator;
 
-public class Index extends Query {
+public class Index {
     private static Validator validator = ValidatorFactory.exceptionThrowingNameValidator();
 
-    public Index(StringBuilder queryString) {
-        super(queryString);
+    private Query query;
+
+    public Index(Query query) {
+        this.query = query;
     }
 
     public IndexedColumn on(String table) {
         validator.validate(table);
-        append(" ON ");
-        append(table);
-        return new IndexedColumn(this.queryString);
+        query.append(" ON ");
+        query.append(table);
+        return new IndexedColumn(query);
     }
 }

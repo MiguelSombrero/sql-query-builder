@@ -5,23 +5,25 @@ import builder.statement.select.SelectBuilder;
 import factory.ValidatorFactory;
 import validation.Validator;
 
-public class From extends Query {
+public class From {
     private static Validator validator = ValidatorFactory.exceptionThrowingNameValidator();
 
-    public From(StringBuilder queryString) {
-        super(queryString);
-    }
+    private Query query;
 
+    public From(Query query) {
+        this.query = query;
+    }
+    
     public Table table(String table) {
         validator.validate(table);
-        append(table);
-        return new Table(this.queryString);
+        query.append(table);
+        return new Table(query);
     }
 
-    public SubQuery sub(SelectBuilder query) {
-        append("(");
-        append(query.build());
-        append(")");
-        return new SubQuery(this.queryString);
+    public SubQuery sub(SelectBuilder subQuery) {
+        query.append("(");
+        query.append(subQuery.build());
+        query.append(")");
+        return new SubQuery(query);
     }
 }

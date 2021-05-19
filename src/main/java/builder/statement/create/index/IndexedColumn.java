@@ -7,18 +7,20 @@ import validation.Validator;
 
 import java.util.Arrays;
 
-public class IndexedColumn extends Query {
+public class IndexedColumn {
     private static Validator validator = ValidatorFactory.exceptionThrowingNameValidator();
 
-    public IndexedColumn(StringBuilder queryString) {
-        super(queryString);
+    private Query query;
+
+    public IndexedColumn(Query query) {
+        this.query = query;
     }
 
     public TerminalOperation columns(String ...listOfColumns) {
         validateList(listOfColumns);
-        append(" ");
-        appendList(listOfColumns);
-        return new TerminalOperation(this.queryString);
+        query.append(" ");
+        query.appendList(listOfColumns);
+        return new TerminalOperation(query);
     }
 
     private void validateList(String[] columns) {

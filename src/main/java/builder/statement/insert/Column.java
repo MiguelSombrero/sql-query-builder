@@ -4,19 +4,21 @@ import builder.Query;
 import builder.TerminalOperation;
 import builder.statement.select.SelectBuilder;
 
-public class Column extends Query {
+public class Column {
 
-    public Column(StringBuilder queryString) {
-        super(queryString);
+    protected Query query;
+
+    public Column(Query query) {
+        this.query = query;
     }
 
     public FirstValue values() {
-        append("VALUES (");
-        return new FirstValue(this.queryString);
+        query.append("VALUES (");
+        return new FirstValue(query);
     }
 
-    public TerminalOperation sub(SelectBuilder query) {
-        append(query.build());
-        return new TerminalOperation(this.queryString);
+    public TerminalOperation sub(SelectBuilder subQuery) {
+        query.append(subQuery.build());
+        return new TerminalOperation(query);
     }
 }

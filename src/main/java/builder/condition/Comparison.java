@@ -7,11 +7,13 @@ import validation.Validator;
 
 import java.util.Arrays;
 
-public class Comparison extends Query {
+public class Comparison {
     private static Validator validator = ValidatorFactory.exceptionThrowingStringValueValidator();
 
-    public Comparison(StringBuilder queryString) {
-        super(queryString);
+    protected Query query;
+
+    public Comparison(Query query) {
+        this.query = query;
     }
 
     public Condition equals(String value) {
@@ -117,24 +119,24 @@ public class Comparison extends Query {
     public Condition startsWith(String pattern) {
         validator.validate(pattern);
         String startsWith = pattern.concat("%");
-        append(" LIKE ");
-        appendStringValue(startsWith);
+        query.append(" LIKE ");
+        query.appendStringValue(startsWith);
         return getCondition();
     }
 
     public Condition endsWith(String pattern) {
         validator.validate(pattern);
         String endsWith = "%".concat(pattern);
-        append(" LIKE ");
-        appendStringValue(endsWith);
+        query.append(" LIKE ");
+        query.appendStringValue(endsWith);
         return getCondition();
     }
 
     public Condition contains(String pattern) {
         validator.validate(pattern);
         String contains = "%".concat(pattern).concat("%");
-        append(" LIKE ");
-        appendStringValue(contains);
+        query.append(" LIKE ");
+        query.appendStringValue(contains);
         return getCondition();
     }
 
@@ -158,58 +160,58 @@ public class Comparison extends Query {
     }
 
     public Condition isNull() {
-        append(" IS NULL");
+        query.append(" IS NULL");
         return getCondition();
     }
 
     public Condition isNotNull() {
-        append(" IS NOT NULL");
+        query.append(" IS NOT NULL");
         return getCondition();
     }
 
     public Condition isIn(String ...listOfValues) {
         validateList(listOfValues);
-        append(" IN ");
-        appendListOfValues(listOfValues);
+        query.append(" IN ");
+        query.appendListOfValues(listOfValues);
         return getCondition();
     }
 
     public Condition isIn(int ...listOfValues) {
-        append(" IN ");
-        appendListOfValues(listOfValues);
+        query.append(" IN ");
+        query.appendListOfValues(listOfValues);
         return getCondition();
     }
 
     public Condition isIn(double ...listOfValues) {
-        append(" IN ");
-        appendListOfValues(listOfValues);
+        query.append(" IN ");
+        query.appendListOfValues(listOfValues);
         return getCondition();
     }
 
     private Condition appendConditionWithValue(String condition, String value) {
         validator.validate(value);
-        append(condition);
-        appendStringValue(value);
+        query.append(condition);
+        query.appendStringValue(value);
         return getCondition();
     }
 
     private Condition appendConditionWithValue(String condition, Integer value) {
-        append(condition);
-        append(value);
+        query.append(condition);
+        query.append(value);
         return getCondition();
     }
 
     private Condition appendConditionWithValue(String condition, Double value) {
-        append(condition);
-        append(value);
+        query.append(condition);
+        query.append(value);
         return getCondition();
     }
 
-    private Condition appendConditionWithSubQuery(String condition, Builder query) {
-        append(condition);
-        append("(");
-        append(query.build());
-        append(")");
+    private Condition appendConditionWithSubQuery(String condition, Builder subQuery) {
+        query.append(condition);
+        query.append("(");
+        query.append(subQuery.build());
+        query.append(")");
         return getCondition();
     }
 
@@ -218,6 +220,6 @@ public class Comparison extends Query {
     }
 
     private Condition getCondition() {
-        return new Condition(this.queryString);
+        return new Condition(query);
     }
 }

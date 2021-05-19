@@ -8,11 +8,13 @@ import validation.Validator;
  * Defines the methods for appending columns or aggregate functions in
  * 'SELECT column(s), aggregate function(s)' statement.
  */
-public abstract class ColumnTemplate extends Query {
+public abstract class ColumnTemplate {
     private static Validator validator = ValidatorFactory.exceptionThrowingColumnValidator();
 
-    public ColumnTemplate(StringBuilder queryString) {
-        super(queryString);
+    protected Query query;
+
+    public ColumnTemplate(Query query) {
+        this.query = query;
     }
 
     /**
@@ -25,8 +27,8 @@ public abstract class ColumnTemplate extends Query {
     public Column column(String column) {
         validator.validate(column);
         addCommaAfterFirstValue();
-        append(column);
-        return new Column(this.queryString);
+        query.append(column);
+        return new Column(query);
     }
 
     /**
@@ -87,11 +89,11 @@ public abstract class ColumnTemplate extends Query {
     private Column applyAggregate(String function, String toColumn) {
         validator.validate(toColumn);
         addCommaAfterFirstValue();
-        append(function);
-        append("(");
-        append(toColumn);
-        append(")");
-        return new Column(this.queryString);
+        query.append(function);
+        query.append("(");
+        query.append(toColumn);
+        query.append(")");
+        return new Column(query);
     }
 
     protected abstract void addCommaAfterFirstValue();

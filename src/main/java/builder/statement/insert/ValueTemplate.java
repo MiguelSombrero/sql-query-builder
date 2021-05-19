@@ -1,32 +1,33 @@
 package builder.statement.insert;
 
+import builder.Query;
 import factory.ValidatorFactory;
 import validation.Validator;
 
 public abstract class ValueTemplate extends TerminalInsertOperation {
     private static Validator validator = ValidatorFactory.exceptionThrowingStringValueValidator();
 
-    public ValueTemplate(StringBuilder queryString) {
-        super(queryString);
+    public ValueTemplate(Query query) {
+        super(query);
     }
 
     public Value value(String value) {
         validator.validate(value);
         addCommaAfterFirstValue();
-        appendStringValue(value);
-        return new Value(this.queryString);
+        query.appendStringValue(value);
+        return new Value(query);
     }
 
     public Value value(int value) {
         addCommaAfterFirstValue();
-        append(value);
-        return new Value(this.queryString);
+        query.append(value);
+        return new Value(query);
     }
 
     public Value value(double value) {
         addCommaAfterFirstValue();
-        append(value);
-        return new Value(this.queryString);
+        query.append(value);
+        return new Value(query);
     }
 
     protected abstract void addCommaAfterFirstValue();

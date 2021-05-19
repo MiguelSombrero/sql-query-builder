@@ -1,5 +1,6 @@
 package factory;
 
+import builder.Query;
 import builder.condition.Negation;
 import validation.Validator;
 
@@ -28,8 +29,10 @@ public class HavingClauseFactory {
 
     private static Negation appendOperationAndReturn(String operation, String column) {
         validator.validate(column);
-        StringBuilder builder = new StringBuilder(operation + "(" + column + ")");
-        return new Negation(builder);
+        return new Negation(createQuery(operation + "(" + column + ")"));
     }
 
+    private static Query createQuery(String clause) {
+        return new Query(new StringBuilder(clause));
+    }
 }

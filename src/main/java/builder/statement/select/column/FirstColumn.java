@@ -1,5 +1,7 @@
 package builder.statement.select.column;
 
+import builder.Query;
+
 /**
  * represents the first column to be appended in
  * 'SELECT column(s), aggregate function(s)' statement.
@@ -9,8 +11,8 @@ package builder.statement.select.column;
  */
 public class FirstColumn extends ColumnTemplate {
 
-    public FirstColumn(StringBuilder queryString) {
-        super(queryString);
+    public FirstColumn(Query query) {
+        super(query);
     }
 
     @Override

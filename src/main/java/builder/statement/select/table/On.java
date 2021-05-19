@@ -1,15 +1,17 @@
 package builder.statement.select.table;
 
+import builder.Query;
+
 public class On extends AliasedOn {
 
-    public On(StringBuilder queryString) {
-        super(queryString);
+    public On(Query query) {
+        super(query);
     }
 
     public On alias(String alias) {
         validator.validate(alias);
-        append(" AS ");
-        append(alias);
+        query.append(" AS ");
+        query.append(alias);
         return this;
     }
 }

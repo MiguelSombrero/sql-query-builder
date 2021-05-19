@@ -1,13 +1,15 @@
 package builder.statement.insert;
 
+import builder.Query;
+
 public class Value extends ValueTemplate {
 
-    public Value(StringBuilder queryString) {
-        super(queryString);
+    public Value(Query query) {
+        super(query);
     }
 
     @Override
     protected void addCommaAfterFirstValue() {
-        append(", ");
+        query.append(", ");
     }
 }

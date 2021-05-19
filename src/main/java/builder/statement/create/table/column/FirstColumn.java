@@ -4,16 +4,18 @@ import builder.Query;
 import factory.ValidatorFactory;
 import validation.Validator;
 
-public class FirstColumn extends Query {
+public class FirstColumn {
     private static Validator validator = ValidatorFactory.exceptionThrowingNameValidator();
 
-    public FirstColumn(StringBuilder queryString) {
-        super(queryString);
+    private Query query;
+
+    public FirstColumn(Query query) {
+        this.query = query;
     }
 
     public ColumnType column(String column) {
         validator.validate(column);
-        append(column);
-        return new ColumnType(this.queryString);
+        query.append(column);
+        return new ColumnType(query);
     }
 }

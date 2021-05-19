@@ -1,30 +1,31 @@
 package builder.condition;
 
 import builder.Builder;
+import builder.Query;
 import builder.TerminalOperation;
 
 public class Condition extends TerminalOperation {
 
-    public Condition(StringBuilder queryString) {
-        super(queryString);
+    public Condition(Query query) {
+        super(query);
     }
 
     public Condition and(Builder condition) {
-        append(" AND ");
-        append(condition.build());
+        query.append(" AND ");
+        query.append(condition.build());
         return this;
     }
 
     public Condition or(Builder condition) {
-        append(" OR ");
-        append(condition.build());
+        query.append(" OR ");
+        query.append(condition.build());
         return this;
     }
 
     public Condition orSub(Builder condition) {
-        append(" OR (");
-        append(condition.build());
-        append(")");
+        query.append(" OR (");
+        query.append(condition.build());
+        query.append(")");
         return this;
     }
 }

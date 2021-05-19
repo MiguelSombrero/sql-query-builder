@@ -4,20 +4,22 @@ import builder.Query;
 import factory.ValidatorFactory;
 import validation.Validator;
 
-public class AliasedOn extends Query {
+public class AliasedOn {
     protected static Validator validator = ValidatorFactory.exceptionThrowingNameValidator();
 
-    public AliasedOn(StringBuilder queryString) {
-        super(queryString);
+    protected Query query;
+
+    public AliasedOn(Query query) {
+        this.query = query;
     }
 
     public JoinTable on(String column, String joinColumn) {
         validator.validate(column);
         validator.validate(joinColumn);
-        append(" ON ");
-        append(column);
-        append(" = ");
-        append(joinColumn);
-        return new JoinTable(this.queryString);
+        query.append(" ON ");
+        query.append(column);
+        query.append(" = ");
+        query.append(joinColumn);
+        return new JoinTable(query);
     }
 }

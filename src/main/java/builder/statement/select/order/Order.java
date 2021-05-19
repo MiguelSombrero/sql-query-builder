@@ -1,18 +1,20 @@
 package builder.statement.select.order;
 
+import builder.Query;
+
 public class Order extends OrderBy {
 
-    public Order(StringBuilder queryString) {
-        super(queryString);
+    public Order(Query query) {
+        super(query);
     }
 
     public OrderBy desc() {
-        append(" DESC");
-        return new OrderBy(this.queryString);
+        query.append(" DESC");
+        return new OrderBy(query);
     }
 
     public OrderBy asc() {
-        append(" ASC");
-        return new OrderBy(this.queryString);
+        query.append(" ASC");
+        return new OrderBy(query);
     }
 }

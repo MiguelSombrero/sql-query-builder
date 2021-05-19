@@ -1,5 +1,6 @@
 package builder.statement.create.table.foreignkey;
 
+import builder.Query;
 import builder.statement.create.TerminalCreateOperation;
 import factory.ValidatorFactory;
 import validation.Validator;
@@ -7,15 +8,15 @@ import validation.Validator;
 public class ForeignKey extends TerminalCreateOperation {
     protected static Validator validator = ValidatorFactory.exceptionThrowingNameValidator();
 
-    public ForeignKey(StringBuilder queryString) {
-        super(queryString);
+    public ForeignKey(Query query) {
+        super(query);
     }
 
     public Reference foreignKey(String column) {
         validator.validate(column);
-        append(", FOREIGN KEY (");
-        append(column);
-        append(")");
-        return new Reference(this.queryString);
+        query.append(", FOREIGN KEY (");
+        query.append(column);
+        query.append(")");
+        return new Reference(query);
     }
 }

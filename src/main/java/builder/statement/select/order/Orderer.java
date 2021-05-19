@@ -1,13 +1,15 @@
 package builder.statement.select.order;
 
+import builder.Query;
+
 public class Orderer extends Limit {
 
-    public Orderer(StringBuilder queryString) {
-        super(queryString);
+    public Orderer(Query query) {
+        super(query);
     }
 
     public FirstOrderBy orderBy() {
-        append(" ORDER BY ");
-        return new FirstOrderBy(this.queryString);
+        query.append(" ORDER BY ");
+        return new FirstOrderBy(query);
     }
 }

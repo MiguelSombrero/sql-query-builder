@@ -1,5 +1,6 @@
 package builder.statement.select.column;
 
+import builder.Query;
 import factory.ValidatorFactory;
 import validation.Validator;
 
@@ -13,8 +14,8 @@ import validation.Validator;
 public class Column extends AliasedColumn {
     private static Validator validator = ValidatorFactory.exceptionThrowingNameValidator();
 
-    public Column(StringBuilder queryString) {
-        super(queryString);
+    public Column(Query query) {
+        super(query);
     }
 
     /**
@@ -26,8 +27,8 @@ public class Column extends AliasedColumn {
      */
     public AliasedColumn alias(String as) {
         validator.validate(as);
-        append(" AS ");
-        append(as);
-        return new AliasedColumn(this.queryString);
+        query.append(" AS ");
+        query.append(as);
+        return new AliasedColumn(query);
     }
 }

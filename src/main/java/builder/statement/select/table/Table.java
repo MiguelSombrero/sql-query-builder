@@ -1,15 +1,17 @@
 package builder.statement.select.table;
 
+import builder.Query;
+
 public class Table extends AliasedTable {
 
-    public Table(StringBuilder queryString) {
-        super(queryString);
+    public Table(Query query) {
+        super(query);
     }
 
     public AliasedTable alias(String alias) {
         validator.validate(alias);
-        append(" AS ");
-        append(alias);
-        return new AliasedTable(this.queryString);
+        query.append(" AS ");
+        query.append(alias);
+        return new AliasedTable(query);
     }
 }

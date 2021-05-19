@@ -4,21 +4,23 @@ import builder.Query;
 import factory.ValidatorFactory;
 import validation.Validator;
 
-public class Reference extends Query {
+public class Reference {
     private static Validator validator = ValidatorFactory.exceptionThrowingNameValidator();
 
-    public Reference(StringBuilder queryString) {
-        super(queryString);
+    private Query query;
+
+    public Reference(Query query) {
+        this.query = query;
     }
 
     public OnAction references(String column, String ofTable) {
         validator.validate(column);
         validator.validate(ofTable);
-        append(" REFERENCES ");
-        append(ofTable);
-        append("(");
-        append(column);
-        append(")");
-        return new OnAction(this.queryString);
+        query.append(" REFERENCES ");
+        query.append(ofTable);
+        query.append("(");
+        query.append(column);
+        query.append(")");
+        return new OnAction(query);
     }
 }

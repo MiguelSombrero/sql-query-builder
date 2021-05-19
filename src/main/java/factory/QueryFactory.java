@@ -1,5 +1,6 @@
 package factory;
 
+import builder.Query;
 import builder.statement.create.Create;
 import builder.statement.drop.Drop;
 import builder.statement.select.column.FirstColumn;
@@ -7,38 +8,38 @@ import builder.statement.select.column.FirstColumn;
 public class QueryFactory {
 
     public static FirstColumn select() {
-        return selectClause("SELECT ");
+        return new FirstColumn(createQuery("SELECT "));
     }
 
     public static FirstColumn selectTop(int rows) {
-        return selectClause("SELECT TOP " + rows + " ");
+        return new FirstColumn(createQuery("SELECT TOP " + rows + " "));
     }
 
     public static FirstColumn selectDistinct() {
-        return selectClause("SELECT DISTINCT ");
+        return new FirstColumn(createQuery("SELECT DISTINCT "));
     }
 
     public static builder.statement.insert.Table insertInto() {
-        return new builder.statement.insert.Table(new StringBuilder("INSERT INTO "));
+        return new builder.statement.insert.Table(createQuery("INSERT INTO "));
     }
 
     public static builder.statement.update.Table update() {
-        return new builder.statement.update.Table(new StringBuilder("UPDATE "));
+        return new builder.statement.update.Table(createQuery("UPDATE "));
     }
 
     public static Create create() {
-        return new Create(new StringBuilder("CREATE "));
+        return new Create(createQuery("CREATE "));
     }
 
     public static builder.statement.delete.Table deleteFrom() {
-        return new builder.statement.delete.Table(new StringBuilder("DELETE FROM "));
+        return new builder.statement.delete.Table(createQuery("DELETE FROM "));
     }
 
     public static Drop drop() {
-        return new Drop(new StringBuilder("DROP "));
+        return new Drop(createQuery("DROP "));
     }
 
-    private static FirstColumn selectClause(String clause) {
-        return new FirstColumn(new StringBuilder(clause));
+    private static Query createQuery(String clause) {
+        return new Query(new StringBuilder(clause));
     }
 }

@@ -7,34 +7,36 @@ import builder.statement.create.table.column.FirstColumn;
 import factory.ValidatorFactory;
 import validation.Validator;
 
-public class Create extends Query {
+public class Create {
     private static Validator validator = ValidatorFactory.exceptionThrowingNameValidator();
 
-    public Create(StringBuilder queryString) {
-        super(queryString);
+    private Query query;
+
+    public Create(Query query) {
+        this.query = query;
     }
 
     public FirstColumn table(String tableName) {
-        append("TABLE ");
+        query.append("TABLE ");
         validateAndAppendName(tableName);
-        append(" (");
-        return new FirstColumn(this.queryString);
+        query.append(" (");
+        return new FirstColumn(query);
     }
 
     public TerminalOperation database(String databaseName) {
-        append("DATABASE ");
+        query.append("DATABASE ");
         validateAndAppendName(databaseName);
-        return new TerminalOperation(this.queryString);
+        return new TerminalOperation(query);
     }
 
     public Index index(String indexName) {
-        append("INDEX ");
+        query.append("INDEX ");
         validateAndAppendName(indexName);
-        return new Index(this.queryString);
+        return new Index(query);
     }
 
     private void validateAndAppendName(String input) {
         validator.validate(input);
-        append(input);
+        query.append(input);
     }
 }

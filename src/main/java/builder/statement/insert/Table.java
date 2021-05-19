@@ -4,17 +4,19 @@ import builder.Query;
 import factory.ValidatorFactory;
 import validation.Validator;
 
-public class Table extends Query {
+public class Table {
     private static Validator validator = ValidatorFactory.exceptionThrowingNameValidator();
 
-    public Table(StringBuilder queryString) {
-        super(queryString);
+    private Query query;
+
+    public Table(Query query) {
+        this.query = query;
     }
 
     public Insert table(String tableName) {
         validator.validate(tableName);
-        append(tableName);
-        append(" ");
-        return new Insert(this.queryString);
+        query.append(tableName);
+        query.append(" ");
+        return new Insert(query);
     }
 }

@@ -1,5 +1,6 @@
 package builder.statement.select.order;
 
+import builder.Query;
 import builder.TerminalOperation;
 import factory.ValidatorFactory;
 import validation.Validator;
@@ -7,13 +8,13 @@ import validation.Validator;
 public class GroupBy extends TerminalOperation {
     private static Validator validator = ValidatorFactory.exceptionThrowingNameValidator();
 
-    public GroupBy(StringBuilder queryString) {
-        super(queryString);
+    public GroupBy(Query query) {
+        super(query);
     }
 
     public Having column(String column) {
         validator.validate(column);
-        append(column);
-        return new Having(this.queryString);
+        query.append(column);
+        return new Having(query);
     }
 }

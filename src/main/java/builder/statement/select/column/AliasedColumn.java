@@ -1,5 +1,6 @@
 package builder.statement.select.column;
 
+import builder.Query;
 import builder.statement.select.table.From;
 
 /**
@@ -11,8 +12,8 @@ import builder.statement.select.table.From;
  */
 public class AliasedColumn extends ColumnTemplate {
 
-    public AliasedColumn(StringBuilder queryString) {
-        super(queryString);
+    public AliasedColumn(Query query) {
+        super(query);
     }
 
     /**
@@ -22,12 +23,12 @@ public class AliasedColumn extends ColumnTemplate {
      *  or sub-queries in 'FROM table' statement.
      */
     public From from() {
-        append(" FROM ");
-        return new From(this.queryString);
+        query.append(" FROM ");
+        return new From(query);
     }
 
     @Override
     protected void addCommaAfterFirstValue() {
-        append(", ");
+        query.append(", ");
     }
 }

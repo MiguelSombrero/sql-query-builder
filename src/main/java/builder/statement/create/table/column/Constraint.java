@@ -1,9 +1,11 @@
 package builder.statement.create.table.column;
 
+import builder.Query;
+
 public class Constraint extends Column {
 
-    public Constraint(StringBuilder queryString) {
-        super(queryString);
+    public Constraint(Query query) {
+        super(query);
     }
 
     public Constraint notNull() {
@@ -23,7 +25,7 @@ public class Constraint extends Column {
     }
 
     private Constraint appendConstraint(String column) {
-        append(column);
+        query.append(column);
         return this;
     }
 }

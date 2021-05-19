@@ -2,29 +2,31 @@ package builder.statement.create.table.foreignkey;
 
 import builder.Query;
 
-public class Action extends Query {
+public class Action {
 
-    public Action(StringBuilder queryString) {
-        super(queryString);
+    private Query query;
+
+    public Action(Query query) {
+        this.query = query;
     }
 
     public ForeignKey cascade() {
-        append("CASCADE");
-        return new ForeignKey(this.queryString);
+        query.append("CASCADE");
+        return new ForeignKey(query);
     }
 
     public ForeignKey restrict() {
-        append("RESTRICT");
-        return new ForeignKey(this.queryString);
+        query.append("RESTRICT");
+        return new ForeignKey(query);
     }
 
     public ForeignKey setNull() {
-        append("SET NULL");
-        return new ForeignKey(this.queryString);
+        query.append("SET NULL");
+        return new ForeignKey(query);
     }
 
     public ForeignKey setDefault() {
-        append("SET DEFAULT");
-        return new ForeignKey(this.queryString);
+        query.append("SET DEFAULT");
+        return new ForeignKey(query);
     }
 }

@@ -1,13 +1,15 @@
 package builder.statement.select.order;
 
+import builder.Query;
+
 public class Grouper extends Orderer {
 
-    public Grouper(StringBuilder queryString) {
-        super(queryString);
+    public Grouper(Query query) {
+        super(query);
     }
 
     public GroupBy groupBy() {
-        append(" GROUP BY ");
-        return new GroupBy(this.queryString);
+        query.append(" GROUP BY ");
+        return new GroupBy(query);
     }
 }

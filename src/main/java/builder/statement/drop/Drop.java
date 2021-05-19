@@ -5,24 +5,26 @@ import builder.TerminalOperation;
 import factory.ValidatorFactory;
 import validation.Validator;
 
-public class Drop extends Query {
+public class Drop {
     private static Validator validator = ValidatorFactory.exceptionThrowingNameValidator();
 
-    public Drop(StringBuilder queryString) {
-        super(queryString);
+    private Query query;
+
+    public Drop(Query query) {
+        this.query = query;
     }
 
     public TerminalOperation table(String tableName) {
         validator.validate(tableName);
-        append("TABLE ");
-        append(tableName);
-        return new TerminalOperation(this.queryString);
+        query.append("TABLE ");
+        query.append(tableName);
+        return new TerminalOperation(query);
     }
 
     public TerminalOperation database(String databaseName) {
         validator.validate(databaseName);
-        append("DATABASE ");
-        append(databaseName);
-        return new TerminalOperation(this.queryString);
+        query.append("DATABASE ");
+        query.append(databaseName);
+        return new TerminalOperation(query);
     }
 }

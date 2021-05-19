@@ -1,17 +1,18 @@
 package builder.statement.create.table.column;
 
+import builder.Query;
 import builder.statement.create.table.foreignkey.ForeignKey;
 
 public class Column extends ForeignKey {
 
-    public Column(StringBuilder queryString) {
-        super(queryString);
+    public Column(Query query) {
+        super(query);
     }
 
     public ColumnType column(String column) {
         validator.validate(column);
-        append(", ");
-        append(column);
-        return new ColumnType(this.queryString);
+        query.append(", ");
+        query.append(column);
+        return new ColumnType(query);
     }
 }

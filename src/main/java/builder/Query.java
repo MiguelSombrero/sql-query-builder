@@ -3,28 +3,36 @@ package builder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public abstract class Query {
+public class Query {
     protected static Logger logger = LoggerFactory.getLogger(Query.class);
 
-    protected StringBuilder queryString;
+    private StringBuilder queryString;
 
     public Query(StringBuilder queryString) {
         this.queryString = queryString;
     }
 
-    protected void append(String value) {
+    public String build() {
+        return queryString.toString();
+    }
+
+    public void append(String value) {
         this.queryString = this.queryString.append(value);
     }
 
-    protected void append(int value) {
+    public void append(int value) {
         this.queryString = this.queryString.append(value);
     }
 
-    protected void append(double value) {
+    public void append(double value) {
         this.queryString = this.queryString.append(value);
     }
 
-    protected void appendStringValue(String value) {
+    public void insert(int index, String value) {
+        this.queryString = this.queryString.insert(index, value);
+    }
+
+    public void appendStringValue(String value) {
         if (!value.equals("?")) {
             append("'");
             append(value);
@@ -34,7 +42,7 @@ public abstract class Query {
         }
     }
 
-    protected void appendList(String ...list) {
+    public void appendList(String ...list) {
         append("(");
         append(list[0]);
 
@@ -46,7 +54,7 @@ public abstract class Query {
         append(")");
     }
 
-    protected void appendListOfValues(String ...listOfValues) {
+    public void appendListOfValues(String ...listOfValues) {
         append("(");
         appendStringValue(listOfValues[0]);
 
@@ -58,7 +66,7 @@ public abstract class Query {
         append(")");
     }
 
-    protected void appendListOfValues(int ...listOfValue) {
+    public void appendListOfValues(int ...listOfValue) {
         append("(");
         append(listOfValue[0]);
 
@@ -70,7 +78,7 @@ public abstract class Query {
         append(")");
     }
 
-    protected void appendListOfValues(double ...listOfValues) {
+    public void appendListOfValues(double ...listOfValues) {
         append("(");
         append(listOfValues[0]);
 
