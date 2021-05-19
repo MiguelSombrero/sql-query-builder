@@ -3,12 +3,12 @@ package builder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public abstract class SQLQuery {
-    protected static Logger logger = LoggerFactory.getLogger(SQLQuery.class);
+public abstract class Query {
+    protected static Logger logger = LoggerFactory.getLogger(Query.class);
 
     protected StringBuilder queryString;
 
-    public SQLQuery(StringBuilder queryString) {
+    public Query(StringBuilder queryString) {
         this.queryString = queryString;
     }
 

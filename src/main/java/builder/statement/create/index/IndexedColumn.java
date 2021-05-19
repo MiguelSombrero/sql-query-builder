@@ -1,13 +1,13 @@
 package builder.statement.create.index;
 
-import builder.SQLQuery;
+import builder.Query;
 import builder.TerminalOperation;
 import factory.ValidatorFactory;
 import validation.Validator;
 
 import java.util.Arrays;
 
-public class IndexedColumn extends SQLQuery {
+public class IndexedColumn extends Query {
     private static Validator validator = ValidatorFactory.exceptionThrowingNameValidator();
 
     public IndexedColumn(StringBuilder queryString) {

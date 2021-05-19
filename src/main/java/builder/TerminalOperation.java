@@ -1,6 +1,6 @@
 package builder;
 
-public class TerminalOperation extends SQLQuery implements Builder {
+public class TerminalOperation extends Query implements Builder {
 
     public TerminalOperation(StringBuilder builder) {
         super(builder);

@@ -1,11 +1,11 @@
 package builder.statement.drop;
 
-import builder.SQLQuery;
+import builder.Query;
 import builder.TerminalOperation;
 import factory.ValidatorFactory;
 import validation.Validator;
 
-public class Drop extends SQLQuery {
+public class Drop extends Query {
     private static Validator validator = ValidatorFactory.exceptionThrowingNameValidator();
 
     public Drop(StringBuilder queryString) {

@@ -1,13 +1,13 @@
 package builder.condition;
 
 import builder.Builder;
-import builder.SQLQuery;
+import builder.Query;
 import factory.ValidatorFactory;
 import validation.Validator;
 
 import java.util.Arrays;
 
-public class Comparison extends SQLQuery {
+public class Comparison extends Query {
     private static Validator validator = ValidatorFactory.exceptionThrowingStringValueValidator();
 
     public Comparison(StringBuilder queryString) {

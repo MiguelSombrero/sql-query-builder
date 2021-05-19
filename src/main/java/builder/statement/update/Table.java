@@ -1,10 +1,10 @@
 package builder.statement.update;
 
-import builder.SQLQuery;
+import builder.Query;
 import factory.ValidatorFactory;
 import validation.Validator;
 
-public class Table extends SQLQuery {
+public class Table extends Query {
     private static Validator validator = ValidatorFactory.exceptionThrowingNameValidator();
 
     public Table(StringBuilder queryString) {

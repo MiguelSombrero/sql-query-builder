@@ -1,11 +1,11 @@
 package builder.statement.select.table;
 
-import builder.SQLQuery;
+import builder.Query;
 import builder.statement.select.SelectBuilder;
 import factory.ValidatorFactory;
 import validation.Validator;
 
-public class From extends SQLQuery {
+public class From extends Query {
     private static Validator validator = ValidatorFactory.exceptionThrowingNameValidator();
 
     public From(StringBuilder queryString) {

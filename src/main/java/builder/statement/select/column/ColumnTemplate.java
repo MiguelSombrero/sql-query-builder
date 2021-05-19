@@ -1,6 +1,6 @@
 package builder.statement.select.column;
 
-import builder.SQLQuery;
+import builder.Query;
 import factory.ValidatorFactory;
 import validation.Validator;
 
@@ -8,7 +8,7 @@ import validation.Validator;
  * Defines the methods for appending columns or aggregate functions in
  * 'SELECT column(s), aggregate function(s)' statement.
  */
-public abstract class ColumnTemplate extends SQLQuery {
+public abstract class ColumnTemplate extends Query {
     private static Validator validator = ValidatorFactory.exceptionThrowingColumnValidator();
 
     public ColumnTemplate(StringBuilder queryString) {
