@@ -1,16 +1,22 @@
 package validation;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class WildCardAllColumnsValidatorTest {
+public class WildCardValidatorTest {
 
-    private WildCardAllColumnsValidator validator = new WildCardAllColumnsValidator();
+    private WildCardValidator validator;
+
+    @Before
+    public void setUp() {
+        this.validator = new WildCardValidator("*");
+    }
 
     @Test
-    public void testDoesAcceptStar() {
+    public void testDoesAcceptWildCard() {
         assertTrue(validator.validate("*"));
     }
 
@@ -20,7 +26,7 @@ public class WildCardAllColumnsValidatorTest {
     }
 
     @Test
-    public void testDoesNotAcceptAnyOtherASCIIThanStar() {
+    public void testDoesNotAcceptAnyOtherASCIIThanWildCard() {
         for (int i=0; i < 255; i++) {
             String character = Character.toString((char) i);
 

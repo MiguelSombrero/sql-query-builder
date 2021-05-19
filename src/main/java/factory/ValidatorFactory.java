@@ -27,10 +27,10 @@ public class ValidatorFactory {
     }
 
     public static Validator wildCardAllColumnsValidator() {
-        return new WildCardAllColumnsValidator();
+        return new WildCardValidator("*");
     }
 
     public static Validator wildCardParameterValidator() {
-        return new WildCardParameterValidator();
+        return new WildCardValidator("?");
     }
 }
