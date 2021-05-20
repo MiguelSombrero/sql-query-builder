@@ -227,3 +227,40 @@ Prints out:
 Prints out:
 
     DROP TABLE test_table
+
+## <a name="parametrized"></a>Parametrized queries
+
+You should always use parametrized queries in untrusted environments, if your SQL query takes user input as parameters.
+
+You can create parametrized `INSERT`, `UPDATE` and `WHERE` statements to use with prepared statements.
+
+### INSERT
+
+    String query = insertInto()
+            .table("person")
+                .columns("id", "birthdate", "firstname", "lastname", "age")
+            .values()
+                .value("?)
+                .value("?")
+                .value("?")
+                .value("?")
+                .value("?")
+            .build();
+
+        logger.info(query);
+
+Prints out:
+
+    INSERT INTO person (id, birthdate, firstname, lastname, age)
+    VALUES (?, ?, ?, ?, ?)
+
+Now you can use this query with prepared statement:
+
+    Connection conn = DriverManager.getConnection(path, user, password);  
+
+    PreparedStatement stmt = conn.prepareStatement(query);  
+    stmt.setInt(1, 1);  
+    stmt.setString(2, "2021-05-20");  
+    stmt.setString(3, "Miika");
+    stmt.setString(4, "Somero");
+    stmt.setInt(5, 40);

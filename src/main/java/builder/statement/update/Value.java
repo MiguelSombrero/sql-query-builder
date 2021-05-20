@@ -9,6 +9,7 @@ public class Value {
     private static Validator validator = ValidatorFactory.exceptionThrowingStringValueValidator();
 
     private Query query;
+
     public Value(Query query) {
         this.query = query;
     }
