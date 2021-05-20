@@ -18,7 +18,7 @@ Package contains validators for validating user input.
 
 **Note that** these simple validations is not enough for preventing SQL injection type attacks. If this library is used in untrusted environment, it is highly recommended to use parametrized queries.
 
-Check out examples of building parametrized queries in [Parametrized queries](#parametrized).
+Check out examples of building parametrized queries in [Parametrized queries](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/examples.md#parametrized).
 
 ## `/src/main/java/builder/condition`
 
