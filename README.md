@@ -5,8 +5,8 @@
 Sql query builder is Java-library used for building SQL query strings more easily. Syntax of the query strings is intended to be compatible at least with MySQL.
 
 **Note that**
-- This is not an ORM and does not provide any data access methods. This library simply builds strings that are valid SQL and can be used as a query strings with some other framework/library.
-- You should always use parametrized queries in untrusted environments, if your SQL query takes user input as parameters. Check out examples of building parametrized queries in [Parametrized queries](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/examples.md#parametrized) section.
+- This library does not provide any data access methods. It simply builds strings that are valid SQL and can be used as a query strings with some other framework/library.
+- You should always use parametrized queries in untrusted environments, if your SQL query takes user input as parameters. Check out examples of building [parametrized queries](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/examples.md#parametrized).
 
 ## Examples
 
@@ -56,7 +56,7 @@ Check the latest version from [GitHub Packages](https://github.com/MiguelSombrer
 
 ## Documentation
 
-[Design documents](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/design.md)
+[Design document](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/design.md)
 
 [Examples](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/examples.md)
 

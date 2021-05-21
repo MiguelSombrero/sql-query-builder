@@ -97,4 +97,14 @@ public class LimitTest extends DatabaseTestBaseClass {
         assertThatQueryIsValidSQL(query);
     }
 
+    @Test
+    public void testLimitOffset() throws SQLException {
+        String query = table
+                .limit(100)
+                .offset(20)
+                .build();
+
+        assertEquals("SELECT * FROM person LIMIT 100 OFFSET 20", query);
+        assertThatQueryIsValidSQL(query);
+    }
 }

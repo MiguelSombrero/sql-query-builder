@@ -1,8 +1,8 @@
 # Examples
 
-## SELECT
+## SELECT statement
 
-**Basic example:**
+### Basic example
 
     String query = QueryFactory
         .select()
@@ -24,7 +24,7 @@ Above code prints out:
 
 (line breaks are added for better readability)
 
-**More complex example with joins:**
+### More complex example with joins
 
 You can import static factory methods for queries to look more natural language like.
 
@@ -61,7 +61,7 @@ Above code prints out:
     ORDER BY p.age DESC
     LIMIT 100
 
-**Example with aggregate functions:**
+### Example with aggregate functions
 
     ...
     import static factory.HavingClauseFactory.*;
@@ -87,7 +87,7 @@ Above code prints out:
     GROUP BY school
     HAVING avgDifficulty > 1
 
-**Sub-queries can be made by using `QueryFactory` to build sub-query:**
+### Sub-queries can be made by using `QueryFactory` to build sub-query
 
     String query = select()
             .column("*")
@@ -109,9 +109,9 @@ This prints out:
         WHERE age > 20
     ) AS p
 
-## INSERT INTO
+## INSERT INTO statement
 
-**Basic example:**
+### Basic example
 
     String query = insertInto()
             .table("person")
@@ -131,7 +131,7 @@ Prints out:
     INSERT INTO person (id, birthdate, firstname, lastname, age)
     VALUES (101, '1980-04-12', 'Miika', 'Somero', 40)
 
-**Insert into select example:**
+### Insert into select example
 
     String query = insertInto()
             .table("person")
@@ -150,9 +150,9 @@ Prints out:
     SELECT * FROM student
     WHERE age < 18
 
-## UPDATE
+## UPDATE statement
 
-**Basic example:**
+### Basic example
 
     String query = update()
         .table("person")
@@ -171,7 +171,7 @@ Prints out:
     OR id = 2
 
 
-## CREATE TABLE
+## CREATE TABLE statement
 
     String query = create()
         .table("vehicles")
@@ -196,9 +196,9 @@ Prints out:
 
 DELETE index and DELETE database are also supported, but examples are trivial.
 
-## DELETE TABLE
+## DELETE TABLE statement
 
-**Basic example:**
+### Basic example
 
     String query = deleteFrom()
         .table("address")
@@ -214,9 +214,9 @@ Prints out:
     WHERE city = 'Helsinki'
     OR city = 'Oulu'
 
-## DROP
+## DROP statement
 
-**Basic example:**
+### Basic example
 
     String query = drop()
         .table("test_table")
@@ -232,20 +232,20 @@ Prints out:
 
 You should always use parametrized queries in untrusted environments, if your SQL query takes user input as parameters.
 
-You can create parametrized `INSERT`, `UPDATE` and `WHERE` statements to use with prepared statements.
+You can create parametrized `INSERT`, `UPDATE`, `WHERE` and `HAVING` statements to use with prepared statements.
 
-### INSERT
+### INSERT statement
 
     String query = insertInto()
-            .table("person")
-                .columns("id", "birthdate", "firstname", "lastname", "age")
-            .values()
-                .value("?)
-                .value("?")
-                .value("?")
-                .value("?")
-                .value("?")
-            .build();
+        .table("person")
+        .columns("id", "birthdate", "firstname", "lastname", "age")
+        .values()
+            .value("?)
+            .value("?")
+            .value("?")
+            .value("?")
+            .value("?")
+        .build();
 
         logger.info(query);
 
@@ -264,3 +264,36 @@ Now you can use this query with prepared statement:
     stmt.setString(3, "Miika");
     stmt.setString(4, "Somero");
     stmt.setInt(5, 40);
+
+### UPDATE statement
+
+    String query = update()
+        .table("person")
+        .column("firstname").value("?")
+        .column("lastname").value("?")
+        .column("age").value("?")
+        .build();
+
+        logger.info(query);
+
+Prints out:
+
+    UPDATE person
+    SET firstname = ?, lastname = ?, age = ?
+
+### WHERE clause in SELECT statement
+
+    String query = select()
+        .column("firstname")
+        .from()
+            .table("person");
+        .where(valueOf("firstname").isIn("?", "?", "?"))
+        .build();
+
+        logger.info(query);
+
+Prints out:
+
+    SELECT firstname
+    FROM person
+    WHERE firstname IN (?, ?, ?)
