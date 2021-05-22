@@ -2,10 +2,6 @@ package builder.statement.select.order;
 
 import builder.query.Query;
 
-/**
- * Defines method for appending 'GROUP BY' in
- * 'SELECT ... GROUP BY column(s)' statement.
- */
 public class Grouper extends Orderer {
 
     public Grouper(Query query) {

@@ -3,13 +3,6 @@ package builder.statement.select.column;
 import builder.query.Query;
 import builder.statement.select.table.From;
 
-/**
- * represents aliased column to be appended in
- * 'SELECT column(s) AS alias' statement.
- *
- * Adds comma before column name because it is not the first
- * column in a list of columns
- */
 public class AliasedColumn extends ColumnTemplate {
 
     public AliasedColumn(Query query) {
@@ -17,7 +10,7 @@ public class AliasedColumn extends ColumnTemplate {
     }
 
     /**
-     * Appends 'FROM' to a query string.
+     * Appends 'FROM' to a query string 'SELECT column(s) FROM'.
      *
      * @return From class which is used to append tables
      *  or sub-queries in 'FROM table' statement.

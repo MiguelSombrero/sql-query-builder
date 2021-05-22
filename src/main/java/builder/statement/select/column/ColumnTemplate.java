@@ -4,10 +4,6 @@ import builder.query.Query;
 import factory.ValidatorFactory;
 import validation.Validator;
 
-/**
- * Defines the methods for appending columns or aggregate functions in
- * 'SELECT column(s), aggregate function(s)' statement.
- */
 public abstract class ColumnTemplate {
     private static Validator validator = ValidatorFactory.exceptionThrowingColumnValidator();
 
@@ -21,6 +17,7 @@ public abstract class ColumnTemplate {
      * Appends 'column' into query string 'SELECT column(s)'
      *
      * @param column Column name to be appended in the query
+     *
      * @return Column class which can be used to append more columns,
      * aggregate functions and alias selected columns or call 'FROM table'
      */
@@ -35,6 +32,7 @@ public abstract class ColumnTemplate {
      * Appends 'COUNT(column)' into query string 'SELECT aggregate function(s)'
      *
      * @param column Column name to be appended in the COUNT() query
+     *
      * @return Column class which can be used to append more columns,
      * aggregate functions and alias selected columns or call 'FROM table'
      */
@@ -46,6 +44,7 @@ public abstract class ColumnTemplate {
      * Appends 'MIN(column)' into query string 'SELECT aggregate function(s)'
      *
      * @param column Column name to be appended in the MIN() query
+     *
      * @return Column class which can be used to append more columns,
      * aggregate functions and alias selected columns or call 'FROM table'
      */
@@ -57,6 +56,7 @@ public abstract class ColumnTemplate {
      * Appends 'MAX(column)' into query string 'SELECT aggregate function(s)'
      *
      * @param column Column name to be appended in the MAX() query
+     *
      * @return Column class which can be used to append more columns,
      * aggregate functions and alias selected columns or call 'FROM table'
      */
@@ -68,6 +68,7 @@ public abstract class ColumnTemplate {
      * Appends 'AVG(column)' into query string 'SELECT aggregate function(s)'
      *
      * @param column Column name to be appended in the AVG() query
+     *
      * @return Column class which can be used to append more columns,
      * aggregate functions and alias selected columns or call 'FROM table'
      */
@@ -79,6 +80,7 @@ public abstract class ColumnTemplate {
      * Appends 'SUM(column)' into query string 'SELECT aggregate function(s)'
      *
      * @param column Column name to be appended in the SUM() query
+     *
      * @return Column class which can be used to append more columns,
      * aggregate functions and alias selected columns or call 'FROM table'
      */

@@ -10,6 +10,11 @@ public class TerminalOperation implements QueryBuilder {
         this.query = query;
     }
 
+    /**
+     * Terminates query building.
+     *
+     * @return String presentation of query
+     */
     public String build() {
         return query.build();
     }

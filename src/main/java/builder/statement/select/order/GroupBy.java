@@ -4,10 +4,6 @@ import builder.query.Query;
 import factory.ValidatorFactory;
 import validation.Validator;
 
-/**
- * Defines method for appending column(s) in
- * 'SELECT ... GROUP BY column(s)' statement.
- */
 public class GroupBy {
     private static Validator validator = ValidatorFactory.exceptionThrowingNameValidator();
 
@@ -21,6 +17,7 @@ public class GroupBy {
      * Appends 'column' into query string 'SELECT ... GROUP BY column(s)'.
      *
      * @param column Column name to be appended in the query
+     *
      * @return Having class which can be used to append more columns
      * or defining HAVING condition to GROUP BY clause
      */

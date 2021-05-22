@@ -21,6 +21,7 @@
 - ORDER BY column
     - ASC, DESC
 - LIMIT
+- OFFSET
 
 ## INSERT
 

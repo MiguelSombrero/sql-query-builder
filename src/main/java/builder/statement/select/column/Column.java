@@ -22,6 +22,7 @@ public class Column extends AliasedColumn {
      * Appends 'AS' and user defined alias into 'SELECT column' statement
      *
      * @param as alias name to be appended after 'AS'
+     *
      * @return AliasedColumn which has the same properties as Columns
      * except it cannot be aliased
      */

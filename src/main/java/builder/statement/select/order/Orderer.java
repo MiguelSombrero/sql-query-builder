@@ -2,10 +2,6 @@ package builder.statement.select.order;
 
 import builder.query.Query;
 
-/**
- * Defines method for appending 'ORDER BY' in
- * 'SELECT ... ORDER BY column(s)' statement.
- */
 public class Orderer extends Limit {
 
     public Orderer(Query query) {
