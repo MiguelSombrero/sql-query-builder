@@ -8,7 +8,7 @@
     - table, sub-query
 - AS
     - column, table, join table, sub-query
-- LEFT JOIN, RIGHT JOIN, INNER JOIN, FULL JOIN
+- LEFT JOIN, RIGHT JOIN, INNER JOIN
 - WHERE
     - condition
     - =, <, >, <=, =>
