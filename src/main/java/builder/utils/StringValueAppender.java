@@ -27,12 +27,12 @@ public class StringValueAppender {
 
     public void validateAndAppendList(String ...listOfValues) {
         validateList(listOfValues);
-        QueryAppender.appendListOfValues(query, listOfValues);
+        appendListOfValues(listOfValues);
     }
 
     public void validateAndAppend(String value) {
         validate(value);
-        QueryAppender.appendStringValue(query, value);
+        appendStringValue(value);
     }
 
     public void validate(String value) {
@@ -41,5 +41,17 @@ public class StringValueAppender {
 
     private void validateList(String[] columns) {
         Arrays.stream(columns).forEach(column -> validator.validate(column));
+    }
+
+    public void appendListOfValues(String ...listOfValues) {
+        query.append("(");
+        appendStringValue(listOfValues[0]);
+
+        for (int i = 1; i < listOfValues.length; i++) {
+            query.append(", ");
+            appendStringValue(listOfValues[i]);
+        }
+
+        query.append(")");
     }
 }

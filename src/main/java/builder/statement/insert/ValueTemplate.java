@@ -1,21 +1,19 @@
 package builder.statement.insert;
 
 import builder.Query;
-import builder.utils.QueryAppender;
-import factory.ValidatorFactory;
-import validation.Validator;
+import builder.utils.StringValueAppender;
 
 public abstract class ValueTemplate extends TerminalInsertOperation {
-    private static Validator validator = ValidatorFactory.exceptionThrowingStringValueValidator();
+    private StringValueAppender stringValueAppender;
 
     public ValueTemplate(Query query) {
         super(query);
+        this.stringValueAppender = new StringValueAppender(query);
     }
 
     public Value value(String value) {
-        validator.validate(value);
         addCommaAfterFirstValue();
-        QueryAppender.appendStringValue(query, value);
+        stringValueAppender.validateAndAppend(value);
         return new Value(query);
     }
 

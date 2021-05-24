@@ -1,22 +1,19 @@
 package builder.statement.update;
 
 import builder.Query;
-import builder.utils.QueryAppender;
-import factory.ValidatorFactory;
-import validation.Validator;
+import builder.utils.StringValueAppender;
 
 public class Value {
-    private static Validator validator = ValidatorFactory.exceptionThrowingStringValueValidator();
-
+    private StringValueAppender stringValueAppender;
     private Query query;
 
     public Value(Query query) {
         this.query = query;
+        this.stringValueAppender = new StringValueAppender(query);
     }
 
     public Column value(String value) {
-        validator.validate(value);
-        QueryAppender.appendStringValue(query, value);
+        stringValueAppender.validateAndAppend(value);
         return new Column(query);
     }
 
