@@ -1,6 +1,6 @@
 package builder.statement.delete;
 
-import builder.query.Query;
+import builder.Query;
 import builder.TerminalOperation;
 
 public class Condition extends TerminalOperation {

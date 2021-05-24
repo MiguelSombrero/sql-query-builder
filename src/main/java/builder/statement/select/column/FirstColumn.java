@@ -1,6 +1,6 @@
 package builder.statement.select.column;
 
-import builder.query.Query;
+import builder.Query;
 
 /**
  * represents the first column to be appended in

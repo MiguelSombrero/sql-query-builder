@@ -1,6 +1,6 @@
 package builder.statement.insert;
 
-import builder.query.Query;
+import builder.Query;
 import builder.TerminalOperation;
 import builder.statement.select.SelectQueryBuilder;
 

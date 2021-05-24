@@ -1,7 +1,5 @@
 package builder;
 
-import builder.query.Query;
-
 public class TerminalOperation implements QueryBuilder {
 
     protected Query query;

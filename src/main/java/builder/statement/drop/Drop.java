@@ -1,6 +1,6 @@
 package builder.statement.drop;
 
-import builder.query.Query;
+import builder.Query;
 import builder.TerminalOperation;
 import factory.ValidatorFactory;
 import validation.Validator;

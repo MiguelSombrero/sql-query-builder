@@ -1,7 +1,7 @@
 package builder.condition;
 
 import builder.QueryBuilder;
-import builder.query.Query;
+import builder.Query;
 import builder.TerminalOperation;
 
 public class Condition extends TerminalOperation {

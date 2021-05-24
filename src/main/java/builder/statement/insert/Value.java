@@ -1,6 +1,6 @@
 package builder.statement.insert;
 
-import builder.query.Query;
+import builder.Query;
 
 public class Value extends ValueTemplate {
 

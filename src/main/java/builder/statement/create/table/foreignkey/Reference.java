@@ -1,6 +1,6 @@
 package builder.statement.create.table.foreignkey;
 
-import builder.query.Query;
+import builder.Query;
 import factory.ValidatorFactory;
 import validation.Validator;
 

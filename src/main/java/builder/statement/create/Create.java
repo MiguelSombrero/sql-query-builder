@@ -1,6 +1,6 @@
 package builder.statement.create;
 
-import builder.query.Query;
+import builder.Query;
 import builder.TerminalOperation;
 import builder.statement.create.index.Index;
 import builder.statement.create.table.column.FirstColumn;

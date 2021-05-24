@@ -1,6 +1,6 @@
 package builder.statement.select.order;
 
-import builder.query.Query;
+import builder.Query;
 import builder.condition.Condition;
 import factory.ValidatorFactory;
 import validation.Validator;

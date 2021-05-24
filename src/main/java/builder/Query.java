@@ -1,4 +1,4 @@
-package builder.query;
+package builder;
 
 public class Query {
     private StringBuilder queryString;

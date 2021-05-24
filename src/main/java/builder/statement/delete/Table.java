@@ -1,6 +1,6 @@
 package builder.statement.delete;
 
-import builder.query.Query;
+import builder.Query;
 import factory.ValidatorFactory;
 import validation.Validator;
 

@@ -1,8 +1,8 @@
 package builder.statement.create.index;
 
-import builder.query.Query;
+import builder.Query;
 import builder.TerminalOperation;
-import builder.query.QueryAppender;
+import builder.utils.QueryAppender;
 import factory.ValidatorFactory;
 import validation.Validator;
 

@@ -1,7 +1,6 @@
 package builder.statement.select.order;
 
-import builder.query.Query;
-import builder.TerminalOperation;
+import builder.Query;
 import builder.statement.select.TerminalSelectOperation;
 
 public class Limit extends TerminalSelectOperation {

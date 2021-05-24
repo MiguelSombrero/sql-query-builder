@@ -1,6 +1,6 @@
 package builder.statement.select.table;
 
-import builder.query.Query;
+import builder.Query;
 
 public class Table extends AliasedTable {
 

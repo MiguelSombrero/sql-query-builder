@@ -1,7 +1,7 @@
 package builder.statement.update;
 
-import builder.query.Query;
-import builder.query.QueryAppender;
+import builder.Query;
+import builder.utils.QueryAppender;
 import factory.ValidatorFactory;
 import validation.Validator;
 

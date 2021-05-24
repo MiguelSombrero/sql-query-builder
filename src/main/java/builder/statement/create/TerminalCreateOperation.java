@@ -1,7 +1,7 @@
 package builder.statement.create;
 
 import builder.QueryBuilder;
-import builder.query.Query;
+import builder.Query;
 
 public class TerminalCreateOperation implements QueryBuilder {
 

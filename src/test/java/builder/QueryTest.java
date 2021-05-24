@@ -1,4 +1,4 @@
-package builder.query;
+package builder;
 
 import org.junit.Test;
 

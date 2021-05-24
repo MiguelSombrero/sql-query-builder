@@ -1,4 +1,6 @@
-package builder.query;
+package builder.utils;
+
+import builder.Query;
 
 public class QueryAppender {
 

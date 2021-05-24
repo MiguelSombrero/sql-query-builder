@@ -1,6 +1,6 @@
 package builder.statement.select.table;
 
-import builder.query.Query;
+import builder.Query;
 import builder.condition.Condition;
 import builder.statement.select.order.Grouper;
 import factory.ValidatorFactory;

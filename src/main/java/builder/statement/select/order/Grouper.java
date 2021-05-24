@@ -1,6 +1,6 @@
 package builder.statement.select.order;
 
-import builder.query.Query;
+import builder.Query;
 
 public class Grouper extends Orderer {
 

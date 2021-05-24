@@ -1,6 +1,6 @@
 package builder.statement.create.table.column;
 
-import builder.query.Query;
+import builder.Query;
 
 public class Constraint extends Column {
 

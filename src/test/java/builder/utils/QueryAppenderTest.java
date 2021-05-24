@@ -1,5 +1,7 @@
-package builder.query;
+package builder.utils;
 
+import builder.Query;
+import builder.utils.QueryAppender;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

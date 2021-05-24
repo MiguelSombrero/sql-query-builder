@@ -1,6 +1,6 @@
 package builder.statement.select.column;
 
-import builder.query.Query;
+import builder.Query;
 import builder.statement.select.table.From;
 
 public class AliasedColumn extends ColumnTemplate {

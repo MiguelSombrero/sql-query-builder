@@ -1,6 +1,6 @@
 package builder.statement.select.order;
 
-import builder.query.Query;
+import builder.Query;
 import builder.statement.select.TerminalSelectOperation;
 
 public class Offset extends TerminalSelectOperation {
