@@ -1,0 +1,38 @@
+package builder.utils;
+
+import builder.Query;
+import factory.ValidatorFactory;
+import validation.Validator;
+
+import java.util.Arrays;
+
+public class StringAppender {
+    private static Validator validator = ValidatorFactory.exceptionThrowingNameValidator();
+
+    private Query query;
+
+    public StringAppender(Query query) {
+        this.query = query;
+    }
+
+    public void validateAndAppendList(String ...listOfValues) {
+        validateList(listOfValues);
+        appendList(listOfValues);
+    }
+
+    private void validateList(String[] columns) {
+        Arrays.stream(columns).forEach(column -> validator.validate(column));
+    }
+
+    private void appendList(String ...list) {
+        query.append("(");
+        query.append(list[0]);
+
+        for (int i = 1; i < list.length; i++) {
+            query.append(", ");
+            query.append(list[i]);
+        }
+
+        query.append(")");
+    }
+}

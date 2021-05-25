@@ -2,21 +2,15 @@ package builder.utils;
 
 import builder.Query;
 
-public class QueryAppender {
+public class NumberAppender {
 
-    public static void appendList(Query query, String ...list) {
-        query.append("(");
-        query.append(list[0]);
+    private Query query;
 
-        for (int i = 1; i < list.length; i++) {
-            query.append(", ");
-            query.append(list[i]);
-        }
-
-        query.append(")");
+    public NumberAppender(Query query) {
+        this.query = query;
     }
 
-    public static void appendListOfValues(Query query, int ...listOfValue) {
+    public void appendListOfValues(int ...listOfValue) {
         query.append("(");
         query.append(listOfValue[0]);
 
@@ -28,7 +22,7 @@ public class QueryAppender {
         query.append(")");
     }
 
-    public static void appendListOfValues(Query query, double ...listOfValues) {
+    public void appendListOfValues(double ...listOfValues) {
         query.append("(");
         query.append(listOfValues[0]);
 

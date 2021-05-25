@@ -1,27 +1,19 @@
 package builder.statement.insert;
 
 import builder.Query;
-import builder.utils.QueryAppender;
-import factory.ValidatorFactory;
-import validation.Validator;
-
-import java.util.Arrays;
+import builder.utils.StringAppender;
 
 public class Insert extends Column {
-    private static Validator validator = ValidatorFactory.exceptionThrowingNameValidator();
+    private StringAppender stringAppender;
 
     public Insert(Query query) {
         super(query);
+        this.stringAppender = new StringAppender(query);
     }
 
     public Column columns(String ...listOfColumns) {
-        validateList(listOfColumns);
-        QueryAppender.appendList(query, listOfColumns);
+        stringAppender.validateAndAppendList(listOfColumns);
         query.append(" ");
         return new Column(query);
-    }
-
-    private void validateList(String[] columns) {
-        Arrays.stream(columns).forEach(column -> validator.validate(column));
     }
 }

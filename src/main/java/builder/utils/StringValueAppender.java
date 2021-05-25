@@ -25,7 +25,7 @@ public class StringValueAppender {
         }
     }
 
-    public void validateAndAppendList(String ...listOfValues) {
+    public void validateAndAppendListOfValues(String ...listOfValues) {
         validateList(listOfValues);
         appendListOfValues(listOfValues);
     }
