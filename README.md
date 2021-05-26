@@ -69,7 +69,6 @@ Check the latest version from [GitHub Packages](https://github.com/MiguelSombrer
 
 ### CREATE
 - Constraints 'default' and 'check'
-- Foreign key constraints for composite keys
 
 Something else missing?
 
