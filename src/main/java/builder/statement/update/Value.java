@@ -13,7 +13,8 @@ public class Value {
     }
 
     /**
-     * Appends 'value' into 'UPDATE table SET column = value, ...' statement.
+     * Validates user input and appends string 'value' into
+     * 'UPDATE table SET column = value, ...' statement.
      *
      * @param value Value to be appended in selected column
      *
@@ -27,7 +28,8 @@ public class Value {
     }
 
     /**
-     * Appends 'value' into 'UPDATE table SET column = value, ...' statement.
+     * Validates user input and appends integer 'value' into
+     * 'UPDATE table SET column = value, ...' statement.
      *
      * @param value Value to be appended in selected column
      *
@@ -41,7 +43,8 @@ public class Value {
     }
 
     /**
-     * Appends 'value' into 'UPDATE table SET column = value, ...' statement.
+     * Validates user input and appends double 'value' into
+     * 'UPDATE table SET column = value, ...' statement.
      *
      * @param value Value to be appended in selected column
      *

@@ -16,7 +16,8 @@ public class Table {
     }
 
     /**
-     * Appends 'table SET' into 'UPDATE table SET column = ...' statements.
+     * Validates user input and appends 'table SET' into
+     * 'UPDATE table SET column = ...' statements.
      *
      * @param table Table name to be appended
      *

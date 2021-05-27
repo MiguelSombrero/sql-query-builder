@@ -1,6 +1,7 @@
 package builder.statement.select.column;
 
 import builder.Query;
+import builder.utils.StringAppender;
 import factory.ValidatorFactory;
 import validation.Validator;
 
@@ -12,14 +13,16 @@ import validation.Validator;
  * column in a list of columns
  */
 public class Column extends AliasedColumn {
-    private static Validator validator = ValidatorFactory.exceptionThrowingNameValidator();
+    private StringAppender stringAppender;
 
     public Column(Query query) {
         super(query);
+        this.stringAppender = new StringAppender(query);
     }
 
     /**
-     * Appends 'AS' and user defined alias into 'SELECT column' statement
+     * Validates user input and appends 'AS alias' into
+     * 'SELECT column AS alias' statement
      *
      * @param as alias name to be appended after 'AS'
      *
@@ -27,9 +30,8 @@ public class Column extends AliasedColumn {
      * except it cannot be aliased
      */
     public AliasedColumn alias(String as) {
-        validator.validate(as);
         query.append(" AS ");
-        query.append(as);
+        stringAppender.validateAndAppend(as);
         return new AliasedColumn(query);
     }
 }

@@ -1,21 +1,29 @@
 package builder.statement.insert;
 
 import builder.Query;
-import factory.ValidatorFactory;
-import validation.Validator;
+import builder.utils.StringAppender;
 
 public class Table {
-    private static Validator validator = ValidatorFactory.exceptionThrowingNameValidator();
+    private StringAppender stringAppender;
 
     private Query query;
 
     public Table(Query query) {
         this.query = query;
+        this.stringAppender = new StringAppender(query);
     }
 
-    public Insert table(String tableName) {
-        validator.validate(tableName);
-        query.append(tableName);
+    /**
+     * Validates user input and appends
+     * 'table' into 'INSERT INTO table' statement.
+     *
+     * @param table Table name to be appended
+     *
+     * @return Insert class which can be used to
+     * insert column(s) into INSERT INTO statement.
+     */
+    public Insert table(String table) {
+        stringAppender.validateAndAppend(table);
         query.append(" ");
         return new Insert(query);
     }

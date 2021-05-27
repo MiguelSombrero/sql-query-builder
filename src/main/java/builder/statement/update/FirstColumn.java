@@ -16,7 +16,8 @@ public class FirstColumn {
     }
 
     /**
-     * Appends 'column1 =' into 'UPDATE table SET column1 = value1, ...' statement.
+     * Validates user input and appends 'column1 =' into
+     * 'UPDATE table SET column1 = value1, ...' statement.
      *
      * @param column Column name to be appended into UPDATE query
      *

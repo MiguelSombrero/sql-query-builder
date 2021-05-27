@@ -16,8 +16,8 @@ public class Column extends TerminalOperation {
     }
 
     /**
-     * Appends ', column2 =' into 'UPDATE table SET column1 = value1,
-     * column2 = value2' statement.
+     * Validates user input and appends ', column2 =' into
+     * 'UPDATE table SET column1 = value1, column2 = value2' statement.
      *
      * @param column Column name to be appended into UPDATE query
      *
