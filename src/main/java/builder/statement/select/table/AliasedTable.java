@@ -9,7 +9,8 @@ public class AliasedTable extends JoinTable {
     }
 
     /**
-     * Appends 'table' into 'FROM table(s)' statement.
+     * Validates user input and appends
+     * 'table' into 'FROM table(s)' statement.
      *
      * @param table Table name to be queried from
      *
@@ -18,9 +19,8 @@ public class AliasedTable extends JoinTable {
      * to WHERE, JOIN, GROUP BY etc. statements
      */
     public Table table(String table) {
-        validator.validate(table);
         query.append(", ");
-        query.append(table);
+        stringAppender.validateAndAppend(table);
         return new Table(query);
     }
 }

@@ -4,8 +4,6 @@ import builder.Query;
 import builder.TerminalOperation;
 import builder.condition.Condition;
 import builder.utils.StringAppender;
-import factory.ValidatorFactory;
-import validation.Validator;
 
 public class Column extends TerminalOperation {
     private StringAppender stringAppender;

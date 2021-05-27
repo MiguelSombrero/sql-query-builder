@@ -2,20 +2,21 @@ package builder.statement.select.table;
 
 import builder.Query;
 import builder.statement.select.SelectQueryBuilder;
-import factory.ValidatorFactory;
-import validation.Validator;
+import builder.utils.StringAppender;
 
 public class From {
-    private static Validator validator = ValidatorFactory.exceptionThrowingNameValidator();
+    protected StringAppender stringAppender;
 
     private Query query;
 
     public From(Query query) {
         this.query = query;
+        this.stringAppender = new StringAppender(query);
     }
 
     /**
-     * Appends 'table' into 'FROM table' statement.
+     * Validates user input and appends
+     * 'table' into 'FROM table' statement.
      *
      * @param table Table name to be queried from
      *
@@ -24,8 +25,7 @@ public class From {
      * to WHERE, JOIN, GROUP BY etc. statements
      */
     public Table table(String table) {
-        validator.validate(table);
-        query.append(table);
+        stringAppender.validateAndAppend(table);
         return new Table(query);
     }
 

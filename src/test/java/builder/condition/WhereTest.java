@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import static factory.WhereClauseFactory.valueOf;
 import static junit.framework.Assert.assertEquals;
 
-public class ConditionTest extends DatabaseTestBaseClass {
+public class WhereTest extends DatabaseTestBaseClass {
     private Table table;
 
     @Before

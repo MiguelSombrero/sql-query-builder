@@ -62,16 +62,6 @@ Check the latest version from [GitHub Packages](https://github.com/MiguelSombrer
 
 [Supported operations](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/supported.md)
 
-## Features scheduled on next release
-
-### General
-- Javadoc
-
-### CREATE
-- Constraints 'default' and 'check'
-
-Something else missing?
-
 ## Known issues
 - In CREATE TABLE user can chain same constraints infinitely (`...column("ID").type(DataType.INT).notNull().notNull().notNull() ...`) 
 

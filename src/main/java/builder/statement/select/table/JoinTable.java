@@ -3,14 +3,14 @@ package builder.statement.select.table;
 import builder.Query;
 import builder.condition.Condition;
 import builder.statement.select.order.Grouper;
-import factory.ValidatorFactory;
-import validation.Validator;
+import builder.utils.StringAppender;
 
 public class JoinTable extends Grouper {
-    protected static Validator validator = ValidatorFactory.exceptionThrowingNameValidator();
+    protected StringAppender stringAppender;
 
     public JoinTable(Query query) {
         super(query);
+        this.stringAppender = new StringAppender(query);
     }
 
     /**
@@ -29,7 +29,8 @@ public class JoinTable extends Grouper {
     }
 
     /**
-     * Appends 'INNER JOIN table' into join statement.
+     * Validates user input and appends
+     * 'INNER JOIN table' into join statement.
      *
      * @param table Table name to be joined
      *
@@ -43,7 +44,8 @@ public class JoinTable extends Grouper {
     }
 
     /**
-     * Appends 'LEFT JOIN table' into join statement.
+     * Validates user input and appends
+     * 'LEFT JOIN table' into join statement.
      *
      * @param table Table name to be joined
      *
@@ -57,7 +59,8 @@ public class JoinTable extends Grouper {
     }
 
     /**
-     * Appends 'RIGHT JOIN table' into join statement.
+     * Validates user input and appends
+     * 'RIGHT JOIN table' into join statement.
      *
      * @param table Table name to be joined
      *
@@ -71,8 +74,7 @@ public class JoinTable extends Grouper {
     }
 
     private On join(String table) {
-        validator.validate(table);
-        query.append(table);
+        stringAppender.validateAndAppend(table);
         return new On(query);
     }
 }

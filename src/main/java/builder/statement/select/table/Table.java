@@ -9,7 +9,8 @@ public class Table extends AliasedTable {
     }
 
     /**
-     * Appends 'AS alias' into 'SELECT ... FROM table AS alias' statement.
+     * Validates user input and appends 'AS alias'
+     * into 'SELECT ... FROM table AS alias' statement.
      *
      * @param alias Alias name to table
      *
@@ -18,9 +19,8 @@ public class Table extends AliasedTable {
      * to WHERE, JOIN, GROUP BY etc. statements
      */
     public AliasedTable alias(String alias) {
-        validator.validate(alias);
         query.append(" AS ");
-        query.append(alias);
+        stringAppender.validateAndAppend(alias);
         return new AliasedTable(query);
     }
 }

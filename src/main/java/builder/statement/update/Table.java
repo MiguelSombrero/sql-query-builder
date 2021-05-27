@@ -2,8 +2,6 @@ package builder.statement.update;
 
 import builder.Query;
 import builder.utils.StringAppender;
-import factory.ValidatorFactory;
-import validation.Validator;
 
 public class Table {
     private StringAppender stringAppender;

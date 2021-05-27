@@ -2,8 +2,6 @@ package builder.statement.select.column;
 
 import builder.Query;
 import builder.utils.StringAppender;
-import factory.ValidatorFactory;
-import validation.Validator;
 
 /**
  * represents column after first column to be appended in

@@ -40,7 +40,7 @@ public class StringValueAppender {
     }
 
     private void validateList(String[] columns) {
-        Arrays.stream(columns).forEach(column -> validator.validate(column));
+        Arrays.stream(columns).forEach(this::validate);
     }
 
     public void appendListOfValues(String ...listOfValues) {

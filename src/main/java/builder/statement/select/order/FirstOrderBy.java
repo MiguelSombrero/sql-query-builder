@@ -1,18 +1,19 @@
 package builder.statement.select.order;
 
 import builder.Query;
-import factory.ValidatorFactory;
-import validation.Validator;
+import builder.utils.StringAppender;
 
 public class FirstOrderBy extends Limit {
-    private static Validator validator = ValidatorFactory.exceptionThrowingNameValidator();
+    private StringAppender stringAppender;
 
     public FirstOrderBy(Query query) {
         super(query);
+        this.stringAppender = new StringAppender(query);
     }
 
     /**
-     * Appends 'column' into query string 'SELECT ... ORDER BY column(s)'.
+     * Validates user input and appends 'column' into
+     * query string 'SELECT ... ORDER BY column(s)'.
      *
      * @param column Column name to be appended in the query
      *
@@ -20,8 +21,7 @@ public class FirstOrderBy extends Limit {
      * or append ASC / DESC to current column
      */
     public Order column(String column) {
-        validator.validate(column);
-        query.append(column);
+        stringAppender.validateAndAppend(column);
         return new Order(query);
     }
 }

@@ -1,8 +1,17 @@
 # Examples
 
-## SELECT statement
+## Table of contents
+1. [SELECT statement](#select)
+2. [INSERT statement](#insert)
+3. [UPDATE statement](#update)
+4. [CREATE statement](#create)
+5. [DELETE statement](#delete)
+6. [DROP statement](#drop)
+7. [Parametrized queries](#parametrized)
 
-### Basic example
+### <a name="select"></a>SELECT statement
+
+#### Basic example
 
     String query = QueryFactory
         .select()
@@ -24,7 +33,7 @@ Above code prints out:
 
 (line breaks are added for better readability)
 
-### More complex example with joins
+#### More complex example with joins
 
 You can import static factory methods for queries to look more natural language like.
 
@@ -61,7 +70,7 @@ Above code prints out:
     ORDER BY p.age DESC
     LIMIT 100
 
-### Example with aggregate functions
+#### Example with aggregate functions
 
     ...
     import static factory.HavingClauseFactory.*;
@@ -87,7 +96,7 @@ Above code prints out:
     GROUP BY school
     HAVING avgDifficulty > 1
 
-### Sub-queries can be made by using `QueryFactory` to build sub-query
+#### Sub-queries can be made by using `QueryFactory` to build sub-query
 
     String query = select()
             .column("*")
@@ -109,9 +118,9 @@ This prints out:
         WHERE age > 20
     ) AS p
 
-## INSERT INTO statement
+### <a name="insert"></a>INSERT INTO statement
 
-### Basic example
+#### Basic example
 
     String query = insertInto()
             .table("person")
@@ -131,7 +140,7 @@ Prints out:
     INSERT INTO person (id, birthdate, firstname, lastname, age)
     VALUES (101, '1980-04-12', 'Miika', 'Somero', 40)
 
-### Insert into select example
+#### Insert into select example
 
     String query = insertInto()
             .table("person")
@@ -150,9 +159,9 @@ Prints out:
     SELECT * FROM student
     WHERE age < 18
 
-## UPDATE statement
+### <a name="update"></a>UPDATE statement
 
-### Basic example
+#### Basic example
 
     String query = update()
         .table("person")
@@ -171,7 +180,7 @@ Prints out:
     OR id = 2
 
 
-## CREATE TABLE statement
+### <a name="create"></a>CREATE TABLE statement
 
     String query = create()
         .table("vehicles")
@@ -196,9 +205,9 @@ Prints out:
 
 DELETE index and DELETE database are also supported, but examples are trivial.
 
-## DELETE TABLE statement
+### <a name="delete"></a>DELETE TABLE statement
 
-### Basic example
+#### Basic example
 
     String query = deleteFrom()
         .table("address")
@@ -214,9 +223,9 @@ Prints out:
     WHERE city = 'Helsinki'
     OR city = 'Oulu'
 
-## DROP statement
+### <a name="drop"></a>DROP statement
 
-### Basic example
+#### Basic example
 
     String query = drop()
         .table("test_table")
@@ -228,13 +237,13 @@ Prints out:
 
     DROP TABLE test_table
 
-## <a name="parametrized"></a>Parametrized queries
+### <a name="parametrized"></a>Parametrized queries
 
 You should always use parametrized queries in untrusted environments, if your SQL query takes user input as parameters.
 
 You can create parametrized `INSERT`, `UPDATE`, `WHERE` and `HAVING` statements to use with prepared statements.
 
-### INSERT statement
+#### INSERT statement
 
     String query = insertInto()
         .table("person")
@@ -265,7 +274,7 @@ Now you can use this query with prepared statement:
     stmt.setString(4, "Somero");
     stmt.setInt(5, 40);
 
-### UPDATE statement
+#### UPDATE statement
 
     String query = update()
         .table("person")
@@ -281,7 +290,7 @@ Prints out:
     UPDATE person
     SET firstname = ?, lastname = ?, age = ?
 
-### WHERE clause in SELECT statement
+#### WHERE clause in SELECT statement
 
     String query = select()
         .column("firstname")

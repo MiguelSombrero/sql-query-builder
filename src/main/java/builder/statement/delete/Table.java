@@ -1,21 +1,30 @@
 package builder.statement.delete;
 
 import builder.Query;
-import factory.ValidatorFactory;
-import validation.Validator;
+import builder.utils.StringAppender;
 
 public class Table {
-    private static Validator validator = ValidatorFactory.exceptionThrowingNameValidator();
+    private StringAppender stringAppender;
 
     private Query query;
 
     public Table(Query query) {
         this.query = query;
+        this.stringAppender = new StringAppender(query);
     }
 
-    public Condition table(String tableName) {
-        validator.validate(tableName);
-        query.append(tableName);
-        return new Condition(query);
+    /**
+     * Validates user input and appends 'table'
+     * into 'DELETE TABLE table' statement.
+     *
+     * @param table Table name to be appended
+     *
+     * @return Condition class which can be used to append
+     * WHERE clause to the DELETE statement, or terminate
+     * query building
+     */
+    public Where table(String table) {
+        stringAppender.validateAndAppend(table);
+        return new Where(query);
     }
 }

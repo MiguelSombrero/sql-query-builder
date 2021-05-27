@@ -9,7 +9,8 @@ public class On extends AliasedOn {
     }
 
     /**
-     * Appends 'AS alias' into 'SELECT ... JOIN table AS alias' statement.
+     * Validates user input and appends 'AS alias' into
+     * 'SELECT ... JOIN table AS alias' statement.
      *
      * @param alias Alias name to join table
      *
@@ -18,9 +19,8 @@ public class On extends AliasedOn {
      * join statement and alias join table
      */
     public On alias(String alias) {
-        validator.validate(alias);
         query.append(" AS ");
-        query.append(alias);
+        stringAppender.validateAndAppend(alias);
         return this;
     }
 }

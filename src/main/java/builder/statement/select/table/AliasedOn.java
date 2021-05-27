@@ -1,21 +1,21 @@
 package builder.statement.select.table;
 
 import builder.Query;
-import factory.ValidatorFactory;
-import validation.Validator;
+import builder.utils.StringAppender;
 
 public class AliasedOn {
-    protected static Validator validator = ValidatorFactory.exceptionThrowingNameValidator();
+    protected StringAppender stringAppender;
 
     protected Query query;
 
     public AliasedOn(Query query) {
         this.query = query;
+        this.stringAppender = new StringAppender(query);
     }
 
     /**
-     * Appends 'ON column = joinColumn' into query string
-     * 'SELECT ... JOIN table ON column = joinColumn'.
+     * Validates user input and appends 'ON column = joinColumn' into
+     * query string 'SELECT ... JOIN table ON column = joinColumn'.
      *
      * @param column First column name used for join
      *
@@ -25,12 +25,10 @@ public class AliasedOn {
      * more joins or proceed to WHERE, GROUP BY, etc. clauses
      */
     public JoinTable on(String column, String joinColumn) {
-        validator.validate(column);
-        validator.validate(joinColumn);
         query.append(" ON ");
-        query.append(column);
+        stringAppender.validateAndAppend(column);
         query.append(" = ");
-        query.append(joinColumn);
+        stringAppender.validateAndAppend(joinColumn);
         return new JoinTable(query);
     }
 }

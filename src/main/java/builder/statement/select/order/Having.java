@@ -2,18 +2,19 @@ package builder.statement.select.order;
 
 import builder.Query;
 import builder.condition.Condition;
-import factory.ValidatorFactory;
-import validation.Validator;
+import builder.utils.StringAppender;
 
 public class Having extends Orderer {
-    private static Validator validator = ValidatorFactory.exceptionThrowingNameValidator();
+    private StringAppender stringAppender;
 
     public Having(Query query) {
         super(query);
+        this.stringAppender = new StringAppender(query);
     }
 
     /**
-     * Appends 'column' into query string 'SELECT ... GROUP BY column(s)'.
+     * Validates user input and appends 'column' into
+     * query string 'SELECT ... GROUP BY column(s)'.
      *
      * @param column Column name to be appended in the query
      *
@@ -21,9 +22,8 @@ public class Having extends Orderer {
      * or defining HAVING condition to GROUP BY clause
      */
     public Having column(String column) {
-        validator.validate(column);
         query.append(", ");
-        query.append(column);
+        stringAppender.validateAndAppend(column);
         return this;
     }
 

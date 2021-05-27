@@ -9,7 +9,8 @@ public class SubQuery extends JoinTable {
     }
 
     /**
-     * Appends 'AS alias' into 'SELECT ... FROM (SELECT ...) AS alias' statement.
+     * Validates user input and appends 'AS alias'
+     * into 'SELECT ... FROM (SELECT ...) AS alias' statement.
      *
      * @param alias Alias name to sub-query
      *
@@ -17,9 +18,8 @@ public class SubQuery extends JoinTable {
      * more joins or proceed to WHERE, GROUP BY, etc. clauses
      */
     public JoinTable alias(String alias) {
-        validator.validate(alias);
         query.append(" AS ");
-        query.append(alias);
+        stringAppender.validateAndAppend(alias);
         return new JoinTable(query);
     }
 }

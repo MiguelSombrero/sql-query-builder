@@ -1,20 +1,21 @@
 package builder.statement.select.column;
 
 import builder.Query;
-import factory.ValidatorFactory;
-import validation.Validator;
+import builder.utils.ColumnStringAppender;
 
 public abstract class ColumnTemplate {
-    private static Validator validator = ValidatorFactory.exceptionThrowingColumnValidator();
+    private ColumnStringAppender columnStringAppender;
 
     protected Query query;
 
     public ColumnTemplate(Query query) {
         this.query = query;
+        this.columnStringAppender = new ColumnStringAppender(query);
     }
 
     /**
-     * Appends 'column' into query string 'SELECT column(s)'
+     * Validates user input and appends 'column'
+     * into query string 'SELECT column(s)'
      *
      * @param column Column name to be appended in the query
      *
@@ -22,14 +23,14 @@ public abstract class ColumnTemplate {
      * aggregate functions and alias selected columns or call 'FROM table'
      */
     public Column column(String column) {
-        validator.validate(column);
         addCommaAfterFirstValue();
-        query.append(column);
+        columnStringAppender.validateAndAppend(column);
         return new Column(query);
     }
 
     /**
-     * Appends 'COUNT(column)' into query string 'SELECT aggregate function(s)'
+     * Validates user input and appends 'COUNT(column)' into
+     * query string 'SELECT aggregate function(s)'
      *
      * @param column Column name to be appended in the COUNT() query
      *
@@ -41,7 +42,8 @@ public abstract class ColumnTemplate {
     }
 
     /**
-     * Appends 'MIN(column)' into query string 'SELECT aggregate function(s)'
+     * Validates user input and appends 'MIN(column)' into
+     * query string 'SELECT aggregate function(s)'
      *
      * @param column Column name to be appended in the MIN() query
      *
@@ -53,7 +55,8 @@ public abstract class ColumnTemplate {
     }
 
     /**
-     * Appends 'MAX(column)' into query string 'SELECT aggregate function(s)'
+     * Validates user input and appends 'MAX(column)' into
+     * query string 'SELECT aggregate function(s)'
      *
      * @param column Column name to be appended in the MAX() query
      *
@@ -65,7 +68,8 @@ public abstract class ColumnTemplate {
     }
 
     /**
-     * Appends 'AVG(column)' into query string 'SELECT aggregate function(s)'
+     * Validates user input and appends 'AVG(column)' into
+     * query string 'SELECT aggregate function(s)'
      *
      * @param column Column name to be appended in the AVG() query
      *
@@ -77,7 +81,8 @@ public abstract class ColumnTemplate {
     }
 
     /**
-     * Appends 'SUM(column)' into query string 'SELECT aggregate function(s)'
+     * Validates user input and appends 'SUM(column)' into
+     * query string 'SELECT aggregate function(s)'
      *
      * @param column Column name to be appended in the SUM() query
      *
@@ -89,11 +94,10 @@ public abstract class ColumnTemplate {
     }
 
     private Column applyAggregate(String function, String toColumn) {
-        validator.validate(toColumn);
         addCommaAfterFirstValue();
         query.append(function);
         query.append("(");
-        query.append(toColumn);
+        columnStringAppender.validateAndAppend(toColumn);
         query.append(")");
         return new Column(query);
     }
