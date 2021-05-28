@@ -1,25 +1,34 @@
 package builder.statement.create.table.foreignkey;
 
 import builder.Query;
-import factory.ValidatorFactory;
-import validation.Validator;
+import builder.utils.StringAppender;
 
 public class Reference {
-    private static Validator validator = ValidatorFactory.exceptionThrowingNameValidator();
+    private StringAppender stringAppender;
 
     private Query query;
 
     public Reference(Query query) {
         this.query = query;
+        this.stringAppender = new StringAppender(query);
     }
 
+    /**
+     * Validates user input and appends 'REFERENCES Table(column)'
+     * into 'FOREIGN KEY (column) REFERENCES Table(column)' statement.
+     *
+     * @param column name foreign key is referencing
+     *
+     * @param ofTable name foreign key is referencing
+     *
+     * @return OnAction class which can be used to
+     * assing actions on foreign key
+     */
     public OnAction references(String column, String ofTable) {
-        validator.validate(column);
-        validator.validate(ofTable);
         query.append(" REFERENCES ");
-        query.append(ofTable);
+        stringAppender.validateAndAppend(ofTable);
         query.append("(");
-        query.append(column);
+        stringAppender.validateAndAppend(column);
         query.append(")");
         return new OnAction(query);
     }

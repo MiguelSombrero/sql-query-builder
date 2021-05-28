@@ -14,6 +14,15 @@ public class IndexedColumn {
         this.stringAppender = new StringAppender(query);
     }
 
+    /**
+     * Validates user input and appends 'column(s)'
+     * into 'CREATE INDEX index ON table (column(s))' statement.
+     *
+     * @param listOfColumns List of columns index is being created
+     *
+     * @return TerminalOperation which can be used only
+     * to terminate query building
+     */
     public TerminalOperation columns(String ...listOfColumns) {
         query.append(" ");
         stringAppender.validateAndAppendList(listOfColumns);

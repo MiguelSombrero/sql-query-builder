@@ -4,39 +4,62 @@ import builder.Query;
 import builder.TerminalOperation;
 import builder.statement.create.index.Index;
 import builder.statement.create.table.column.FirstColumn;
-import factory.ValidatorFactory;
-import validation.Validator;
+import builder.utils.StringAppender;
 
 public class Create {
-    private static Validator validator = ValidatorFactory.exceptionThrowingNameValidator();
+    private StringAppender stringAppender;
 
     private Query query;
 
     public Create(Query query) {
         this.query = query;
+        this.stringAppender = new StringAppender(query);
     }
 
-    public FirstColumn table(String tableName) {
+    /**
+     * Validates user input and appends 'TABLE name (' into
+     * 'CREATE TABLE name (column datatype, ...)' statement.
+     *
+     * @param name Table name to be created
+     *
+     * @return FirstColumn class which can be used to
+     * append column into 'CREATE TABLE name
+     * (column datatype, ...)' statement.
+     */
+    public FirstColumn table(String name) {
         query.append("TABLE ");
-        validateAndAppendName(tableName);
+        stringAppender.validateAndAppend(name);
         query.append(" (");
         return new FirstColumn(query);
     }
 
-    public TerminalOperation database(String databaseName) {
+    /**
+     * Validates user input and appends 'DATABASE name' into
+     * 'CREATE DATABASE name' statement.
+     *
+     * @param name database name to be created
+     *
+     * @return TerminalOperation which can be used only
+     * to terminate query building
+     */
+    public TerminalOperation database(String name) {
         query.append("DATABASE ");
-        validateAndAppendName(databaseName);
+        stringAppender.validateAndAppend(name);
         return new TerminalOperation(query);
     }
 
-    public Index index(String indexName) {
+    /**
+     * Validates user input and appends 'INDEX name' into
+     * 'CREATE INDEX name ON table (column(s))' statement.
+     *
+     * @param name Index name to be created
+     *
+     * @return Index class which can be used to
+     * select table and columns index is assigned to
+     */
+    public Index index(String name) {
         query.append("INDEX ");
-        validateAndAppendName(indexName);
+        stringAppender.validateAndAppend(name);
         return new Index(query);
-    }
-
-    private void validateAndAppendName(String input) {
-        validator.validate(input);
-        query.append(input);
     }
 }

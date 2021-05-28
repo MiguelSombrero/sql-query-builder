@@ -1,6 +1,18 @@
 # Design document
 
-## About the design
+## Table of contents
+1. [About the design](#about)
+2. [Factory classes](#factory)
+3. [User input validation](#validation)
+4. [WHERE and HAVING](#condition)
+5. [SELECT statement](#select)
+6. [INSERT statement](#insert)
+7. [UPDATE statement](#update)
+8. [CREATE statement](#create)
+9. [DELETE statement](#delete)
+10. [DROP statement](#drop)
+
+## <a name="about"></a>About the design
 
 Factory class `QueryFactory` is used to create different queries. Factory creates `Query` object, which represents SQL (or any other) query.
 
@@ -8,27 +20,27 @@ Factory class `QueryFactory` is used to create different queries. Factory create
 
 Classes are chained together using [builder pattern](https://en.wikipedia.org/wiki/Builder_pattern).
 
-## `/src/main/java/factory`
+## <a name="factory"></a>Factory classes
 
-Package contains all the factory classes to create queries and clauses.  
+Package `/src/main/java/factory` contains all the factory classes to create queries and clauses.  
 
 Use factory class `QueryFactory` to build SQL queries. Factory classes `WhereClauseFactory` and `HavingClauseFactory` is used to build `WHERE` and `HAVING` clauses, that can be embedded in SQL queries.
 
 See detailed examples in [Examples](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/examples.md) document.
 
-## `/src/main/java/validation`
+## <a name="validation"></a>User input validation
 
-Package contains validators for validating user input.
+Package `/src/main/java/validation` contains validators for validating user input.
 
-**Note that** these simple validations is not enough for preventing SQL injection type attacks.
+**Note that** these validations is not enough for preventing SQL injection type attacks.
 
 If this library is used in untrusted environment, it is highly recommended to use parametrized queries.
 
 Check out examples of building [parametrized queries](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/examples.md#parametrized).
 
-## `/src/main/java/builder/condition`
+## <a name="condition"></a>WHERE and HAVING conditions
 
-Package where classes of `WHERE` and `HAVING` clauses is implemented.
+Package `/src/main/java/builder/condition` contains classes of `WHERE` and `HAVING` clauses.
 
 Where and having clauses is used as embedded in another SQL statement by calling `where(Condition whereClause)` and `having(Condition havingClause)` methods.
 
@@ -38,9 +50,9 @@ Where and having clauses is used as embedded in another SQL statement by calling
 
 (For the convenience, diagram is showing only one overload of every method of `Comparison` class)
 
-## `/src/main/java/builder/statement/select`
+## <a name="select">SELECT statement
 
-Package contains classes of `SELECT` queries.
+Package `/src/main/java/builder/statement/select` contains classes of `SELECT` queries.
 
 ### Class diagram
 
@@ -48,9 +60,9 @@ Package contains classes of `SELECT` queries.
 
 Create SELECT statement by calling `QueryFactory.select()...` or other select options.
 
-## `/src/main/java/builder/statement/insert`
+## <a name="insert">INSERT statement
 
-Package contains classes of `INSERT INTO` queries.
+Package `/src/main/java/builder/statement/insert` contains classes of `INSERT INTO` queries.
 
 ### Class diagram
 
@@ -58,9 +70,9 @@ Package contains classes of `INSERT INTO` queries.
 
 Create INSERT statement by calling `QueryFactory.inserInto()...`.
 
-## `/src/main/java/builder/statement/update`
+## <a name="update">UPDATE statement
 
-Package contains classes of `UPDATE` queries.
+Package `/src/main/java/builder/statement/update` contains classes of `UPDATE` queries.
 
 ### Class diagram
 
@@ -68,9 +80,9 @@ Package contains classes of `UPDATE` queries.
 
 Create UPDATE statement by calling `QueryFactory.update()...`.
 
-## `/src/main/java/builder/statement/create`
+## <a name="create">CREATE statement
 
-Package contains classes of `CREATE` queries.
+Package `/src/main/java/builder/statement/create` contains classes of `CREATE` queries.
 
 ### Class diagram
 
@@ -78,9 +90,9 @@ Package contains classes of `CREATE` queries.
 
 Create CREATE statement by calling `QueryFactory.create()...`.
 
-## `/src/main/java/builder/statement/delete`
+## <a name="delete">DELETE statement
 
-Package contains classes of `DELETE` queries.
+Package `/src/main/java/builder/statement/delete` contains classes of `DELETE` queries.
 
 ### Class diagram
 
@@ -88,9 +100,9 @@ Package contains classes of `DELETE` queries.
 
 Create DELETE statement by calling `QueryFactory.deleteFrom()...`.
 
-## `/src/main/java/builder/statement/drop`
+## <a name="drop">DROP statement
 
-Package contains classes of `DROP` queries.
+Package `/src/main/java/builder/statement/drop` ontains classes of `DROP` queries.
 
 ### Class diagram
 
