@@ -30,7 +30,7 @@ public class StringValueAppender {
         appendListOfValues(listOfValues);
     }
 
-    public void validateAndAppend(String value) {
+    public void validateAndAppendStringValue(String value) {
         validate(value);
         appendStringValue(value);
     }

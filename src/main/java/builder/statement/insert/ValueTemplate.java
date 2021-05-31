@@ -23,7 +23,7 @@ public abstract class ValueTemplate extends TerminalInsertOperation {
      */
     public Value value(String value) {
         addCommaAfterFirstValue();
-        stringValueAppender.validateAndAppend(value);
+        stringValueAppender.validateAndAppendStringValue(value);
         return new Value(query);
     }
 

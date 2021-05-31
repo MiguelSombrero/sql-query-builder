@@ -37,7 +37,7 @@ public class Comparison {
      */
     public Condition equals(String value) {
         query.append(EQUALS);
-        stringValueAppender.validateAndAppend(value);
+        stringValueAppender.validateAndAppendStringValue(value);
         return getCondition();
     }
 
@@ -116,7 +116,7 @@ public class Comparison {
      */
     public Condition greaterThan(String value) {
         query.append(GREATER_THAN);
-        stringValueAppender.validateAndAppend(value);
+        stringValueAppender.validateAndAppendStringValue(value);
         return getCondition();
     }
 
@@ -195,7 +195,7 @@ public class Comparison {
      */
     public Condition greaterThanOrEqual(String value) {
         query.append(GREATER_THAN_OR_EQUAL);
-        stringValueAppender.validateAndAppend(value);
+        stringValueAppender.validateAndAppendStringValue(value);
         return getCondition();
     }
 
@@ -274,7 +274,7 @@ public class Comparison {
      */
     public Condition lesserThan(String value) {
         query.append(LESSER_THAN);
-        stringValueAppender.validateAndAppend(value);
+        stringValueAppender.validateAndAppendStringValue(value);
         return getCondition();
     }
 
@@ -353,7 +353,7 @@ public class Comparison {
      */
     public Condition lesserThanOrEqual(String value) {
         query.append(LESSER_THAN_OR_EQUAL);
-        stringValueAppender.validateAndAppend(value);
+        stringValueAppender.validateAndAppendStringValue(value);
         return getCondition();
     }
 
@@ -486,9 +486,9 @@ public class Comparison {
      */
     public Condition isBetween(String lower, String higher) {
         query.append(" BETWEEN ");
-        stringValueAppender.validateAndAppend(lower);
+        stringValueAppender.validateAndAppendStringValue(lower);
         query.append(" AND ");
-        stringValueAppender.validateAndAppend(higher);
+        stringValueAppender.validateAndAppendStringValue(higher);
         return getCondition();
     }
 
