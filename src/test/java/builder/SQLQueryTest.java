@@ -1,6 +1,7 @@
 package builder;
 
 import org.junit.Test;
+import query.Query;
 
 import static org.junit.Assert.assertEquals;
 
