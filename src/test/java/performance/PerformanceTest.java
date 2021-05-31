@@ -134,7 +134,8 @@ public class PerformanceTest {
                 .where(valueOf("age").greaterThan(18)
                         .and(valueOf("age").lesserThan(65))
                         .and(valueOf("firstname").not().equals("Miika")))
-                .build();
+                .build()
+                .toString();
     }
 
     private String appendComplexQuery() {

@@ -39,7 +39,7 @@ public class SelectQuery extends QueryTemplate {
         PreparedStatement statement = null;
 
         try {
-            String query = build();
+            String query = toString();
             statement = connection.prepareStatement(query);
         } catch (SQLException e) {
             logger.info("Creating of PreparedStatement failed");
@@ -47,5 +47,10 @@ public class SelectQuery extends QueryTemplate {
             throw e;
         }
         return statement;
+    }
+
+    @Override
+    public String toString() {
+        return queryString.toString();
     }
 }

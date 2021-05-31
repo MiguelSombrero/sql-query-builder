@@ -34,7 +34,7 @@ public class Column {
      * to terminate query building
      */
     public TerminalOperation sub(SelectQueryBuilder subQuery) {
-        SQLQuery.append(subQuery.build());
+        SQLQuery.append(subQuery.build().toString());
         return new TerminalOperation(SQLQuery);
     }
 }

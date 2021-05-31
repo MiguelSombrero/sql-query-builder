@@ -22,8 +22,4 @@ public class QueryTemplate implements Query {
     public void insert(int index, String value) {
         this.queryString = this.queryString.insert(index, value);
     }
-
-    public String build() {
-        return queryString.toString();
-    }
 }

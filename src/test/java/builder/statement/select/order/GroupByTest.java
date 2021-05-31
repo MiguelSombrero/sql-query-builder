@@ -8,6 +8,7 @@ import factory.SelectQueryFactory;
 import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import query.Query;
 
 import java.sql.SQLException;
 
@@ -33,43 +34,40 @@ public class GroupByTest extends DatabaseTestBaseClass {
 
     @Test
     public void testGroupBy() throws SQLException {
-        String query = table
+        Query query = table
                 .groupBy()
                     .column("age")
                 .build();
 
-        assertEquals("SELECT * FROM person GROUP BY age", query);
-        assertThatQueryIsValidSQL(query);
+        assertEquals("SELECT * FROM person GROUP BY age", query.toString());
     }
 
     @Test
     public void testMultipleGroupBy() throws SQLException {
-        String query = table
+        Query query = table
                 .groupBy()
                     .column("age")
                     .column("firstname")
                     .column("lastname")
                 .build();
 
-        assertEquals("SELECT * FROM person GROUP BY age, firstname, lastname", query);
-        assertThatQueryIsValidSQL(query);
+        assertEquals("SELECT * FROM person GROUP BY age, firstname, lastname", query.toString());
     }
 
     @Test
     public void testGroupByWhere() throws SQLException {
-        String query = this.table
+        Query query = this.table
                 .where(valueOf("age").greaterThan(18))
                 .groupBy()
                     .column("lastname")
                 .build();
 
-        Assert.assertEquals("SELECT * FROM person WHERE age > 18 GROUP BY lastname", query);
-        assertThatQueryIsValidSQL(query);
+        Assert.assertEquals("SELECT * FROM person WHERE age > 18 GROUP BY lastname", query.toString());
     }
 
     @Test
     public void testMultipleGroupByHaving() throws SQLException {
-        String query = table
+        Query query = table
                 .groupBy()
                     .column("age")
                     .column("firstname")
@@ -77,13 +75,12 @@ public class GroupByTest extends DatabaseTestBaseClass {
                 .having(count("age").equals(100))
                 .build();
 
-        assertEquals("SELECT * FROM person GROUP BY age, firstname, lastname HAVING COUNT(age) = 100", query);
-        assertThatQueryIsValidSQL(query);
+        assertEquals("SELECT * FROM person GROUP BY age, firstname, lastname HAVING COUNT(age) = 100", query.toString());
     }
 
     @Test
     public void testMultipleGroupByHavingAndOrdering() throws SQLException {
-        String query = table
+        Query query = table
                 .groupBy()
                     .column("age")
                     .column("firstname")
@@ -93,8 +90,7 @@ public class GroupByTest extends DatabaseTestBaseClass {
                     .column("age").asc()
                 .build();
 
-        assertEquals("SELECT * FROM person GROUP BY age, firstname, lastname HAVING COUNT(age) = 100 ORDER BY age ASC", query);
-        assertThatQueryIsValidSQL(query);
+        assertEquals("SELECT * FROM person GROUP BY age, firstname, lastname HAVING COUNT(age) = 100 ORDER BY age ASC", query.toString());
     }
 
     @Test(expected =IllegalArgumentException.class)

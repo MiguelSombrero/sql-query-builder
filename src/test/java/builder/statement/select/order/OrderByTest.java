@@ -7,6 +7,7 @@ import factory.QueryFactory;
 import factory.SelectQueryFactory;
 import org.junit.Before;
 import org.junit.Test;
+import query.Query;
 
 import java.sql.SQLException;
 
@@ -31,43 +32,40 @@ public class OrderByTest extends DatabaseTestBaseClass {
 
     @Test
     public void testOrderBy() throws SQLException {
-        String query = table
+        Query query = table
                 .orderBy()
                     .column("firstname")
                 .build();
 
-        assertEquals("SELECT * FROM person ORDER BY firstname", query);
-        assertThatQueryIsValidSQL(query);
+        assertEquals("SELECT * FROM person ORDER BY firstname", query.toString());
     }
 
     @Test
     public void testOrderByWhere() throws SQLException {
-        String query = table
+        Query query = table
                 .where(valueOf("age").greaterThan(18))
                 .orderBy()
                 .column("firstname")
                 .build();
 
-        assertEquals("SELECT * FROM person WHERE age > 18 ORDER BY firstname", query);
-        assertThatQueryIsValidSQL(query);
+        assertEquals("SELECT * FROM person WHERE age > 18 ORDER BY firstname", query.toString());
     }
 
     @Test
     public void testOrderByGroupBy() throws SQLException {
-        String query = table
+        Query query = table
                 .groupBy()
                     .column("age")
                 .orderBy()
                     .column("firstname")
                 .build();
 
-        assertEquals("SELECT * FROM person GROUP BY age ORDER BY firstname", query);
-        assertThatQueryIsValidSQL(query);
+        assertEquals("SELECT * FROM person GROUP BY age ORDER BY firstname", query.toString());
     }
 
     @Test
     public void testMultipleOrderByGroupBy() throws SQLException {
-        String query = table
+        Query query = table
                 .groupBy()
                     .column("age")
                 .orderBy()
@@ -76,13 +74,12 @@ public class OrderByTest extends DatabaseTestBaseClass {
                     .column("age")
                 .build();
 
-        assertEquals("SELECT * FROM person GROUP BY age ORDER BY firstname, lastname, age", query);
-        assertThatQueryIsValidSQL(query);
+        assertEquals("SELECT * FROM person GROUP BY age ORDER BY firstname, lastname, age", query.toString());
     }
 
     @Test
     public void testMultipleOrderByGroupByWithAscDesc() throws SQLException {
-        String query = table
+        Query query = table
                 .groupBy()
                     .column("age")
                 .orderBy()
@@ -91,8 +88,7 @@ public class OrderByTest extends DatabaseTestBaseClass {
                     .column("age").asc()
                 .build();
 
-        assertEquals("SELECT * FROM person GROUP BY age ORDER BY firstname ASC, lastname DESC, age ASC", query);
-        assertThatQueryIsValidSQL(query);
+        assertEquals("SELECT * FROM person GROUP BY age ORDER BY firstname ASC, lastname DESC, age ASC", query.toString());
     }
 
     @Test(expected = IllegalArgumentException.class)

@@ -1,9 +1,10 @@
 package factory;
 
-import builder.QueryBuilder;
+import builder.statement.select.SelectQueryBuilder;
 import query.SQLQuery;
 import builder.condition.Condition;
 import builder.condition.Negation;
+import query.SelectQuery;
 import validation.Validator;
 
 public class WhereClauseFactory {
@@ -14,15 +15,15 @@ public class WhereClauseFactory {
         return new Negation(createQuery(operand));
     }
 
-    public static Condition exists(QueryBuilder query) {
+    public static Condition exists(SelectQueryBuilder query) {
         return new Condition(createQuery("EXISTS (" + query.build() + ")"));
     }
 
-    public static Condition notExists(QueryBuilder query) {
+    public static Condition notExists(SelectQueryBuilder query) {
         return new Condition(createQuery("NOT EXISTS (" + query.build() + ")"));
     }
 
-    private static SQLQuery createQuery(String clause) {
-        return new SQLQuery(new StringBuilder(clause));
+    private static SelectQuery createQuery(String clause) {
+        return new SelectQuery(new StringBuilder(clause));
     }
 }

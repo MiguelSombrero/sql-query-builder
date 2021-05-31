@@ -1,6 +1,7 @@
 package builder.statement.select;
 
-import builder.QueryBuilder;
+import query.SelectQuery;
 
-public interface SelectQueryBuilder extends QueryBuilder {
+public interface SelectQueryBuilder {
+    SelectQuery build();
 }

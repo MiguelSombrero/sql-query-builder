@@ -14,7 +14,7 @@ public class SubQueryAppender {
     public void appendConditionWithSubQuery(String condition, SelectQueryBuilder subQuery) {
         query.append(condition);
         query.append("(");
-        query.append(subQuery.build());
+        query.append(subQuery.build().toString());
         query.append(")");
     }
 }

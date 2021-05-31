@@ -7,6 +7,7 @@ import factory.QueryFactory;
 import factory.SelectQueryFactory;
 import org.junit.Before;
 import org.junit.Test;
+import query.Query;
 
 import java.sql.SQLException;
 
@@ -32,61 +33,53 @@ public class NegationTest extends DatabaseTestBaseClass {
 
     @Test
     public void testWhereNotCondition() throws SQLException {
-        String query = this.table
+        Query query = this.table
                 .where(valueOf("age").not().greaterThan(18))
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE NOT age > 18", query);
-
-        logger.info(query);
-
-        assertThatQueryIsValidSQL(query);
+        assertEquals("SELECT firstname FROM person WHERE NOT age > 18", query.toString());
     }
 
     @Test
     public void testWhereNotAndNotConditions() throws SQLException {
-        String query = this.table
+        Query query = this.table
                 .where(valueOf("age").not().greaterThan(18)
                         .and(valueOf("firstname").not().equals("Miika")))
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE NOT age > 18 AND NOT firstname = 'Miika'", query);
-        assertThatQueryIsValidSQL(query);
+        assertEquals("SELECT firstname FROM person WHERE NOT age > 18 AND NOT firstname = 'Miika'", query.toString());
     }
 
     @Test
     public void testDoubleNot() throws SQLException {
-        String query = this.table
+        Query query = this.table
                 .where(valueOf("age").not().isNotNull())
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE NOT age IS NOT NULL", query);
-        assertThatQueryIsValidSQL(query);
+        assertEquals("SELECT firstname FROM person WHERE NOT age IS NOT NULL", query.toString());
     }
 
     @Test
     public void testWhereNotBetween() throws SQLException {
-        String query = this.table
+        Query query = this.table
                 .where(valueOf("age").not().isBetween(18, 20))
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE NOT age BETWEEN 18 AND 20", query);
-        assertThatQueryIsValidSQL(query);
+        assertEquals("SELECT firstname FROM person WHERE NOT age BETWEEN 18 AND 20", query.toString());
     }
 
     @Test
     public void testWhereNotIn() throws SQLException {
-        String query = this.table
+        Query query = this.table
                 .where(valueOf("age").not().isIn(30, 40, 50, 60))
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE NOT age IN (30, 40, 50, 60)", query);
-        assertThatQueryIsValidSQL(query);
+        assertEquals("SELECT firstname FROM person WHERE NOT age IN (30, 40, 50, 60)", query.toString());
     }
 
     @Test
     public void testWhereNotInSubQuery() throws SQLException {
-        String query = this.table
+        Query query = this.table
                 .where(valueOf("lastname")
                         .not()
                         .isInSub(selectQueryFactory
@@ -97,8 +90,7 @@ public class NegationTest extends DatabaseTestBaseClass {
                             .where(valueOf("age").greaterThan(20))))
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE NOT lastname IN (SELECT * FROM student WHERE age > 20)", query);
-        assertThatQueryIsValidSQL(query);
+        assertEquals("SELECT firstname FROM person WHERE NOT lastname IN (SELECT * FROM student WHERE age > 20)", query.toString());
     }
 
     @Test

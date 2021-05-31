@@ -6,17 +6,17 @@ public class TerminalSelectOperation implements SelectQueryBuilder {
 
     protected SelectQuery query;
 
-    /**
-     * Terminates query building.
-     *
-     * @return String presentation of query
-     */
     public TerminalSelectOperation(SelectQuery query) {
         this.query = query;
     }
 
-    public String build() {
-        return query.build();
+    /**
+     * Terminates query building.
+     *
+     * @return SelectQuery object which can be used to
+     * execute SELECT queries
+     */
+    public SelectQuery build() {
+        return query;
     }
-
 }
