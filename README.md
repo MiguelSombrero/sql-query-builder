@@ -1,18 +1,18 @@
-# sql-query-builder
+# sql-SQLQuery-builder
 
-![GitHub Actions](https://github.com/MiguelSombrero/sql-query-builder/workflows/Java%20CI%20with%20Maven/badge.svg)
+![GitHub Actions](https://github.com/MiguelSombrero/sql-SQLQuery-builder/workflows/Java%20CI%20with%20Maven/badge.svg)
 
-Sql query builder is Java-library used for building SQL query strings more easily. Syntax of the query strings is intended to be compatible at least with MySQL.
+Sql SQLQuery builder is Java-library used for building SQL SQLQuery strings more easily. Syntax of the SQLQuery strings is intended to be compatible at least with MySQL.
 
 **Note that**
-- This library does not provide any data access methods. It simply builds strings that are valid SQL and can be used as a query strings with some other framework/library.
-- You should always use parametrized queries in untrusted environments, if your SQL query takes user input as parameters. Check out examples of building [parametrized queries](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/examples.md#parametrized).
+- This library does not provide any data access methods. It simply builds strings that are valid SQL and can be used as a SQLQuery strings with some other framework/library.
+- You should always use parametrized queries in untrusted environments, if your SQL SQLQuery takes user input as parameters. Check out examples of building [parametrized queries](https://github.com/MiguelSombrero/sql-SQLQuery-builder/tree/develop/docs/examples.md#parametrized).
 
 ## Examples
 
 Basic SELECT statement:
 
-    String query = QueryFactory
+    String SQLQuery = QueryFactory
         .select()
             .column("firstname").alias("first")
             .column("lastname").alias("last")
@@ -22,7 +22,7 @@ Basic SELECT statement:
         .where(valueOf("age").greaterThan(18))
         .build();
 
-    logger.info(query)
+    logger.info(SQLQuery)
 
 Above code prints out:
 
@@ -30,7 +30,7 @@ Above code prints out:
     FROM person
     WHERE age > 18
 
-More examples can be found in [examples](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/examples.md) document.
+More examples can be found in [examples](https://github.com/MiguelSombrero/sql-SQLQuery-builder/tree/develop/docs/examples.md) document.
 
 ## How to use this library
 
@@ -44,11 +44,11 @@ Add Maven dependency to your project:
 
     <dependency>
         <groupId>com.github.miguelsombrero</groupId>
-        <artifactId>sql-query-builder</artifactId>
+        <artifactId>sql-SQLQuery-builder</artifactId>
         <version>1.0.4</version>
     </dependency>
 
-Check the latest version from [GitHub Packages](https://github.com/MiguelSombrero?tab=packages&repo_name=sql-query-builder)
+Check the latest version from [GitHub Packages](https://github.com/MiguelSombrero?tab=packages&repo_name=sql-SQLQuery-builder)
 
 ### 3. Install dependency 
 
@@ -56,11 +56,11 @@ Check the latest version from [GitHub Packages](https://github.com/MiguelSombrer
 
 ## Documentation
 
-[Design document](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/design.md)
+[Design document](https://github.com/MiguelSombrero/sql-SQLQuery-builder/tree/develop/docs/design.md)
 
-[Examples](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/examples.md)
+[Examples](https://github.com/MiguelSombrero/sql-SQLQuery-builder/tree/develop/docs/examples.md)
 
-[Supported operations](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/supported.md)
+[Supported operations](https://github.com/MiguelSombrero/sql-SQLQuery-builder/tree/develop/docs/supported.md)
 
 ## Known issues
 - In CREATE TABLE user can chain same constraints infinitely (`...column("ID").type(DataType.INT).notNull().notNull().notNull() ...`) 

@@ -1,10 +1,10 @@
 package builder.statement.select.table;
 
-import builder.Query;
+import query.SelectQuery;
 
 public class AliasedTable extends JoinTable {
 
-    public AliasedTable(Query query) {
+    public AliasedTable(SelectQuery query) {
         super(query);
     }
 

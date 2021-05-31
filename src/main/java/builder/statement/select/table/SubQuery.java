@@ -1,10 +1,10 @@
 package builder.statement.select.table;
 
-import builder.Query;
+import query.SelectQuery;
 
 public class SubQuery extends JoinTable {
 
-    public SubQuery(Query query) {
+    public SubQuery(SelectQuery query) {
         super(query);
     }
 

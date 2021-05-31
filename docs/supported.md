@@ -5,16 +5,16 @@
 - SELECT, SELECT DISTINCT, SELECT TOP
     - column, min(column), max(column), avg(column), sum(column)
 - FROM
-    - table, sub-query
+    - table, sub-SQLQuery
 - AS
-    - column, table, join table, sub-query
+    - column, table, join table, sub-SQLQuery
 - LEFT JOIN, RIGHT JOIN, INNER JOIN
 - WHERE
     - condition
     - =, <, >, <=, =>
     - EXISTS, ALL, ANY, IS NULL, BETWEEN, LIKE
     - IN
-        - sub-query, list of values
+        - sub-SQLQuery, list of values
     - AND, OR, NOT
 - GROUP BY column
     - HAVING condition
@@ -29,7 +29,7 @@
     - table (optional columns)
 - VALUES
     - (optional values)
-    - sub-query
+    - sub-SQLQuery
 
 ## UPDATE
 

@@ -1,9 +1,9 @@
-package builder;
+package query;
 
-public class Query {
-    private StringBuilder queryString;
+public class QueryTemplate implements Query {
+    protected StringBuilder queryString;
 
-    public Query(StringBuilder queryString) {
+    public QueryTemplate(StringBuilder queryString) {
         this.queryString = queryString;
     }
 

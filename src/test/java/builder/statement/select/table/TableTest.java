@@ -1,24 +1,29 @@
 package builder.statement.select.table;
 
 import builder.statement.select.column.Column;
+import database.DatabaseConnection;
 import database.DatabaseTestBaseClass;
 import factory.QueryFactory;
+import factory.SelectQueryFactory;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.SQLException;
 
 import static factory.WhereClauseFactory.valueOf;
-import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 public class TableTest extends DatabaseTestBaseClass {
+    private SelectQueryFactory selectQueryFactory;
     private Column column;
 
     @Before
-    public void setUpQuery() {
+    public void setUpQuery() throws SQLException {
         initializeDatabase();
 
-        this.column = QueryFactory
+        selectQueryFactory = new SelectQueryFactory(DatabaseConnection.getConnection());
+
+        this.column = selectQueryFactory
                 .select()
                 .column("*");
     }
@@ -49,11 +54,9 @@ public class TableTest extends DatabaseTestBaseClass {
 
     @Test
     public void testFromSubQuery() throws SQLException {
-        String query = QueryFactory
-                .select()
-                    .column("*")
+        String query = this.column
                 .from()
-                    .sub(QueryFactory
+                    .sub(selectQueryFactory
                             .select()
                                 .column("*")
                             .from()
@@ -176,7 +179,7 @@ public class TableTest extends DatabaseTestBaseClass {
     public void testSelectSubQueryAliasWithSQLInjection() throws SQLException {
         this.column
                 .from()
-                .sub(QueryFactory
+                .sub(selectQueryFactory
                         .select()
                             .column("*")
                         .from()

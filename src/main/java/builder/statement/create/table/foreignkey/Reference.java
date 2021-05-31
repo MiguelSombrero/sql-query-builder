@@ -1,16 +1,16 @@
 package builder.statement.create.table.foreignkey;
 
-import builder.Query;
+import query.SQLQuery;
 import builder.utils.StringAppender;
 
 public class Reference {
     private StringAppender stringAppender;
 
-    private Query query;
+    private SQLQuery SQLQuery;
 
-    public Reference(Query query) {
-        this.query = query;
-        this.stringAppender = new StringAppender(query);
+    public Reference(SQLQuery SQLQuery) {
+        this.SQLQuery = SQLQuery;
+        this.stringAppender = new StringAppender(SQLQuery);
     }
 
     /**
@@ -25,11 +25,11 @@ public class Reference {
      * assing actions on foreign key
      */
     public OnAction references(String column, String ofTable) {
-        query.append(" REFERENCES ");
+        SQLQuery.append(" REFERENCES ");
         stringAppender.validateAndAppend(ofTable);
-        query.append("(");
+        SQLQuery.append("(");
         stringAppender.validateAndAppend(column);
-        query.append(")");
-        return new OnAction(query);
+        SQLQuery.append(")");
+        return new OnAction(SQLQuery);
     }
 }

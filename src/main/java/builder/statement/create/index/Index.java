@@ -1,16 +1,16 @@
 package builder.statement.create.index;
 
-import builder.Query;
+import query.SQLQuery;
 import builder.utils.StringAppender;
 
 public class Index {
     private StringAppender stringAppender;
 
-    private Query query;
+    private SQLQuery SQLQuery;
 
-    public Index(Query query) {
-        this.query = query;
-        this.stringAppender = new StringAppender(query);
+    public Index(SQLQuery SQLQuery) {
+        this.SQLQuery = SQLQuery;
+        this.stringAppender = new StringAppender(SQLQuery);
     }
 
     /**
@@ -24,8 +24,8 @@ public class Index {
      * table (column(s))' statement
      */
     public IndexedColumn on(String table) {
-        query.append(" ON ");
+        SQLQuery.append(" ON ");
         stringAppender.validateAndAppend(table);
-        return new IndexedColumn(query);
+        return new IndexedColumn(SQLQuery);
     }
 }

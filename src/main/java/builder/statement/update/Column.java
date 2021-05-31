@@ -1,6 +1,6 @@
 package builder.statement.update;
 
-import builder.Query;
+import query.SQLQuery;
 import builder.TerminalOperation;
 import builder.condition.Condition;
 import builder.utils.StringAppender;
@@ -8,9 +8,9 @@ import builder.utils.StringAppender;
 public class Column extends TerminalOperation {
     private StringAppender stringAppender;
 
-    public Column(Query query) {
-        super(query);
-        this.stringAppender = new StringAppender(query);
+    public Column(SQLQuery SQLQuery) {
+        super(SQLQuery);
+        this.stringAppender = new StringAppender(SQLQuery);
     }
 
     /**
@@ -23,10 +23,10 @@ public class Column extends TerminalOperation {
      * into selected column
      */
     public Value column(String column) {
-        query.append(", ");
+        SQLQuery.append(", ");
         stringAppender.validateAndAppend(column);
-        query.append(" = ");
-        return new Value(query);
+        SQLQuery.append(" = ");
+        return new Value(SQLQuery);
     }
 
     /**
@@ -38,8 +38,8 @@ public class Column extends TerminalOperation {
      * to terminate query building
      */
     public TerminalOperation where(Condition condition) {
-        query.append(" WHERE ");
-        query.append(condition.build());
-        return new TerminalOperation(query);
+        SQLQuery.append(" WHERE ");
+        SQLQuery.append(condition.build());
+        return new TerminalOperation(SQLQuery);
     }
 }

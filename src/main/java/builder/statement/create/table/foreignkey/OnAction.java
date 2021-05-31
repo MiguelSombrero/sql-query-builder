@@ -1,11 +1,11 @@
 package builder.statement.create.table.foreignkey;
 
-import builder.Query;
+import query.SQLQuery;
 
 public class OnAction extends ForeignKey {
 
-    public OnAction(Query query) {
-        super(query);
+    public OnAction(SQLQuery SQLQuery) {
+        super(SQLQuery);
     }
 
     /**
@@ -16,8 +16,8 @@ public class OnAction extends ForeignKey {
      * action on ON DELETE statement
      */
     public Action onDelete() {
-        query.append(" ON DELETE ");
-        return new Action(query);
+        SQLQuery.append(" ON DELETE ");
+        return new Action(SQLQuery);
     }
 
     /**
@@ -28,7 +28,7 @@ public class OnAction extends ForeignKey {
      * action on ON UPDATE statement
      */
     public Action onUpdate() {
-        query.append(" ON UPDATE ");
-        return new Action(query);
+        SQLQuery.append(" ON UPDATE ");
+        return new Action(SQLQuery);
     }
 }

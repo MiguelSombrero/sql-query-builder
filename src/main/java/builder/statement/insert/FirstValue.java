@@ -1,11 +1,11 @@
 package builder.statement.insert;
 
-import builder.Query;
+import query.SQLQuery;
 
 public class FirstValue extends ValueTemplate {
 
-    public FirstValue(Query query) {
-        super(query);
+    public FirstValue(SQLQuery SQLQuery) {
+        super(SQLQuery);
     }
 
     @Override

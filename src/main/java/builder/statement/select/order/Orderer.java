@@ -1,10 +1,10 @@
 package builder.statement.select.order;
 
-import builder.Query;
+import query.SelectQuery;
 
 public class Orderer extends Limit {
 
-    public Orderer(Query query) {
+    public Orderer(SelectQuery query) {
         super(query);
     }
 

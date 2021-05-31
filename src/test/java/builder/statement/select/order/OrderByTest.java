@@ -1,8 +1,10 @@
 package builder.statement.select.order;
 
 import builder.statement.select.table.Table;
+import database.DatabaseConnection;
 import database.DatabaseTestBaseClass;
 import factory.QueryFactory;
+import factory.SelectQueryFactory;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,10 +17,12 @@ public class OrderByTest extends DatabaseTestBaseClass {
     private Table table;
 
     @Before
-    public void setUpQuery() {
+    public void setUpQuery() throws SQLException {
         initializeDatabase();
 
-        this.table = QueryFactory
+        SelectQueryFactory selectQueryFactory = new SelectQueryFactory(DatabaseConnection.getConnection());
+
+        this.table = selectQueryFactory
                 .select()
                     .column("*")
                 .from()

@@ -1,6 +1,6 @@
 package factory;
 
-import builder.Query;
+import query.SQLQuery;
 import builder.condition.Negation;
 import validation.Validator;
 
@@ -32,7 +32,7 @@ public class HavingClauseFactory {
         return new Negation(createQuery(operation + "(" + column + ")"));
     }
 
-    private static Query createQuery(String clause) {
-        return new Query(new StringBuilder(clause));
+    private static SQLQuery createQuery(String clause) {
+        return new SQLQuery(new StringBuilder(clause));
     }
 }

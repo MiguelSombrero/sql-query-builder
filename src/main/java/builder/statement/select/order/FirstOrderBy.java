@@ -1,12 +1,12 @@
 package builder.statement.select.order;
 
-import builder.Query;
 import builder.utils.StringAppender;
+import query.SelectQuery;
 
 public class FirstOrderBy extends Limit {
     private StringAppender stringAppender;
 
-    public FirstOrderBy(Query query) {
+    public FirstOrderBy(SelectQuery query) {
         super(query);
         this.stringAppender = new StringAppender(query);
     }

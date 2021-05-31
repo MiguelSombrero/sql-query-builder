@@ -1,6 +1,6 @@
 package builder.utils;
 
-import builder.Query;
+import query.Query;
 
 public class NumberAppender {
 

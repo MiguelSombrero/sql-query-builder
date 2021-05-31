@@ -1,14 +1,14 @@
 package builder.statement.select.table;
 
-import builder.Query;
 import builder.utils.StringAppender;
+import query.SelectQuery;
 
 public class AliasedOn {
     protected StringAppender stringAppender;
 
-    protected Query query;
+    protected SelectQuery query;
 
-    public AliasedOn(Query query) {
+    public AliasedOn(SelectQuery query) {
         this.query = query;
         this.stringAppender = new StringAppender(query);
     }

@@ -1,7 +1,9 @@
 package builder.statement.insert;
 
+import database.DatabaseConnection;
 import database.DatabaseTestBaseClass;
 import factory.QueryFactory;
+import factory.SelectQueryFactory;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,10 +13,12 @@ import static factory.WhereClauseFactory.valueOf;
 import static org.junit.Assert.assertEquals;
 
 public class InsertTest extends DatabaseTestBaseClass {
+    private SelectQueryFactory selectQueryFactory;
 
     @Before
-    public void setUp() {
+    public void setUp() throws SQLException {
         initializeDatabase();
+        selectQueryFactory = new SelectQueryFactory(DatabaseConnection.getConnection());
     }
 
     @Test
@@ -76,7 +80,7 @@ public class InsertTest extends DatabaseTestBaseClass {
                 .insertInto()
                 .table("person")
                 .columns("id", "birthdate", "firstname", "lastname", "age")
-                .sub(QueryFactory
+                .sub(selectQueryFactory
                         .select()
                             .column("id")
                             .column("birthdate")
@@ -119,7 +123,7 @@ public class InsertTest extends DatabaseTestBaseClass {
         String query = QueryFactory
                 .insertInto()
                 .table("person")
-                .sub(QueryFactory
+                .sub(selectQueryFactory
                         .select()
                             .column("*")
                         .from()

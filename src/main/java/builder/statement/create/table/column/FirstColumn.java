@@ -1,16 +1,16 @@
 package builder.statement.create.table.column;
 
-import builder.Query;
+import query.SQLQuery;
 import builder.utils.StringAppender;
 
 public class FirstColumn {
     private StringAppender stringAppender;
 
-    private Query query;
+    private SQLQuery SQLQuery;
 
-    public FirstColumn(Query query) {
-        this.query = query;
-        this.stringAppender = new StringAppender(query);
+    public FirstColumn(SQLQuery SQLQuery) {
+        this.SQLQuery = SQLQuery;
+        this.stringAppender = new StringAppender(SQLQuery);
     }
 
     /**
@@ -25,6 +25,6 @@ public class FirstColumn {
      */
     public ColumnType column(String column) {
         stringAppender.validateAndAppend(column);
-        return new ColumnType(query);
+        return new ColumnType(SQLQuery);
     }
 }

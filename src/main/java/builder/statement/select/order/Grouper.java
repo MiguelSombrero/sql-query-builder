@@ -1,10 +1,10 @@
 package builder.statement.select.order;
 
-import builder.Query;
+import query.SelectQuery;
 
 public class Grouper extends Orderer {
 
-    public Grouper(Query query) {
+    public Grouper(SelectQuery query) {
         super(query);
     }
 

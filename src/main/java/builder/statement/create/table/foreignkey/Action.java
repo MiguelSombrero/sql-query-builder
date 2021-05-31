@@ -1,13 +1,13 @@
 package builder.statement.create.table.foreignkey;
 
-import builder.Query;
+import query.SQLQuery;
 
 public class Action {
 
-    private Query query;
+    private SQLQuery SQLQuery;
 
-    public Action(Query query) {
-        this.query = query;
+    public Action(SQLQuery SQLQuery) {
+        this.SQLQuery = SQLQuery;
     }
 
     /**
@@ -19,8 +19,8 @@ public class Action {
      * query building
      */
     public ForeignKey cascade() {
-        query.append("CASCADE");
-        return new ForeignKey(query);
+        SQLQuery.append("CASCADE");
+        return new ForeignKey(SQLQuery);
     }
 
     /**
@@ -32,8 +32,8 @@ public class Action {
      * query building
      */
     public ForeignKey restrict() {
-        query.append("RESTRICT");
-        return new ForeignKey(query);
+        SQLQuery.append("RESTRICT");
+        return new ForeignKey(SQLQuery);
     }
 
     /**
@@ -45,8 +45,8 @@ public class Action {
      * query building
      */
     public ForeignKey setNull() {
-        query.append("SET NULL");
-        return new ForeignKey(query);
+        SQLQuery.append("SET NULL");
+        return new ForeignKey(SQLQuery);
     }
 
     /**
@@ -58,7 +58,7 @@ public class Action {
      * query building
      */
     public ForeignKey setDefault() {
-        query.append("SET DEFAULT");
-        return new ForeignKey(query);
+        SQLQuery.append("SET DEFAULT");
+        return new ForeignKey(SQLQuery);
     }
 }

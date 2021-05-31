@@ -1,7 +1,7 @@
 package builder.utils;
 
-import builder.Query;
 import factory.ValidatorFactory;
+import query.Query;
 import validation.Validator;
 
 public class ColumnStringAppender {

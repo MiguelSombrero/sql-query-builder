@@ -1,6 +1,6 @@
 package builder.utils;
 
-import builder.Query;
+import query.SQLQuery;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -9,9 +9,9 @@ public class StringAppenderTest {
 
     @Test
     public void testAppendList() {
-        Query query = new Query(new StringBuilder());
-        StringAppender stringAppender = new StringAppender(query);
+        SQLQuery SQLQuery = new SQLQuery(new StringBuilder());
+        StringAppender stringAppender = new StringAppender(SQLQuery);
         stringAppender.validateAndAppendList("miika", "liika", "siika", "riika");
-        assertEquals("(miika, liika, siika, riika)", query.build());
+        assertEquals("(miika, liika, siika, riika)", SQLQuery.build());
     }
 }

@@ -1,7 +1,7 @@
 package factory;
 
 import builder.QueryBuilder;
-import builder.Query;
+import query.SQLQuery;
 import builder.condition.Condition;
 import builder.condition.Negation;
 import validation.Validator;
@@ -22,7 +22,7 @@ public class WhereClauseFactory {
         return new Condition(createQuery("NOT EXISTS (" + query.build() + ")"));
     }
 
-    private static Query createQuery(String clause) {
-        return new Query(new StringBuilder(clause));
+    private static SQLQuery createQuery(String clause) {
+        return new SQLQuery(new StringBuilder(clause));
     }
 }

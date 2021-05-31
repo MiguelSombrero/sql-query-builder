@@ -1,8 +1,9 @@
 package builder.condition;
 
 import builder.statement.select.table.Table;
+import database.DatabaseConnection;
 import database.DatabaseTestBaseClass;
-import factory.QueryFactory;
+import factory.SelectQueryFactory;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,13 +13,16 @@ import static factory.WhereClauseFactory.*;
 import static junit.framework.Assert.assertEquals;
 
 public class ComparisonTest extends DatabaseTestBaseClass {
+    private SelectQueryFactory selectQueryFactory;
     private Table table;
 
     @Before
-    public void setUpQuery(){
+    public void setUpQuery() throws SQLException {
         initializeDatabase();
 
-        this.table = QueryFactory
+        selectQueryFactory = new SelectQueryFactory(DatabaseConnection.getConnection());
+
+        this.table = selectQueryFactory
                 .select()
                 .column("firstname")
                 .from()
@@ -59,7 +63,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     public void testConditionAnyEquals() throws SQLException {
         String query = this.table
                 .where(valueOf("lastname")
-                        .equalsAny(QueryFactory
+                        .equalsAny(selectQueryFactory
                                 .select()
                                 .column("lastname")
                                 .from().table("student")
@@ -74,7 +78,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     public void testConditionAllEquals() throws SQLException {
         String query = this.table
                 .where(valueOf("lastname")
-                        .equalsAll(QueryFactory
+                        .equalsAll(selectQueryFactory
                                 .select()
                                 .column("lastname")
                                 .from().table("student")
@@ -119,7 +123,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     public void testConditionAnyGreaterThan() throws SQLException {
         String query = this.table
                 .where(valueOf("lastname")
-                        .greaterThanAny(QueryFactory
+                        .greaterThanAny(selectQueryFactory
                                 .select()
                                 .column("lastname")
                                 .from().table("student")
@@ -134,7 +138,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     public void testConditionAllGreaterThan() throws SQLException {
         String query = this.table
                 .where(valueOf("lastname")
-                        .greaterThanAll(QueryFactory
+                        .greaterThanAll(selectQueryFactory
                                 .select()
                                 .column("lastname")
                                 .from().table("student")
@@ -179,7 +183,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     public void testConditionAnyGreaterThanOrEqual() throws SQLException {
         String query = this.table
                 .where(valueOf("lastname")
-                        .greaterThanOrEqualAny(QueryFactory
+                        .greaterThanOrEqualAny(selectQueryFactory
                                 .select()
                                 .column("lastname")
                                 .from().table("student")
@@ -194,7 +198,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     public void testConditionAllGreaterThanOrEqual() throws SQLException {
         String query = this.table
                 .where(valueOf("lastname")
-                        .greaterThanOrEqualAll(QueryFactory
+                        .greaterThanOrEqualAll(selectQueryFactory
                                 .select()
                                 .column("lastname")
                                 .from().table("student")
@@ -239,7 +243,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     public void testConditionAnyLesserThan() throws SQLException {
         String query = this.table
                 .where(valueOf("lastname")
-                        .lesserThanAny(QueryFactory
+                        .lesserThanAny(selectQueryFactory
                                 .select()
                                 .column("lastname")
                                 .from().table("student")
@@ -254,7 +258,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     public void testConditionAllLesserThan() throws SQLException {
         String query = this.table
                 .where(valueOf("lastname")
-                        .lesserThanAll(QueryFactory
+                        .lesserThanAll(selectQueryFactory
                                 .select()
                                 .column("lastname")
                                 .from().table("student")
@@ -299,7 +303,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     public void testConditionAnyLesserThanOrEqual() throws SQLException {
         String query = this.table
                 .where(valueOf("lastname")
-                        .lesserThanOrEqualAny(QueryFactory
+                        .lesserThanOrEqualAny(selectQueryFactory
                                 .select()
                                 .column("lastname")
                                 .from().table("student")
@@ -314,7 +318,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     public void testConditionAllLesserThanOrEqual() throws SQLException {
         String query = this.table
                 .where(valueOf("lastname")
-                        .lesserThanOrEqualAll(QueryFactory
+                        .lesserThanOrEqualAll(selectQueryFactory
                                 .select()
                                 .column("lastname")
                                 .from().table("student")
@@ -441,7 +445,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     @Test
     public void testConditionInSubQuery() throws SQLException {
         String query = this.table
-                .where(valueOf("lastname").isInSub(QueryFactory
+                .where(valueOf("lastname").isInSub(selectQueryFactory
                     .select()
                         .column("*")
                     .from().table("student")
@@ -455,7 +459,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     @Test
     public void testConditionExists() throws SQLException {
         String query = this.table
-                .where(exists(QueryFactory
+                .where(exists(selectQueryFactory
                         .select()
                         .column("*")
                         .from().table("student")
@@ -469,7 +473,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     @Test
     public void testConditionNotExists() throws SQLException {
         String query = this.table
-                .where(notExists(QueryFactory
+                .where(notExists(selectQueryFactory
                         .select()
                         .column("*")
                         .from().table("student")

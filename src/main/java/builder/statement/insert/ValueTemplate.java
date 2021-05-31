@@ -1,14 +1,14 @@
 package builder.statement.insert;
 
-import builder.Query;
+import query.SQLQuery;
 import builder.utils.StringValueAppender;
 
 public abstract class ValueTemplate extends TerminalInsertOperation {
     private StringValueAppender stringValueAppender;
 
-    public ValueTemplate(Query query) {
-        super(query);
-        this.stringValueAppender = new StringValueAppender(query);
+    public ValueTemplate(SQLQuery SQLQuery) {
+        super(SQLQuery);
+        this.stringValueAppender = new StringValueAppender(SQLQuery);
     }
 
     /**
@@ -24,7 +24,7 @@ public abstract class ValueTemplate extends TerminalInsertOperation {
     public Value value(String value) {
         addCommaAfterFirstValue();
         stringValueAppender.validateAndAppendStringValue(value);
-        return new Value(query);
+        return new Value(SQLQuery);
     }
 
     /**
@@ -39,8 +39,8 @@ public abstract class ValueTemplate extends TerminalInsertOperation {
      */
     public Value value(int value) {
         addCommaAfterFirstValue();
-        query.append(value);
-        return new Value(query);
+        SQLQuery.append(value);
+        return new Value(SQLQuery);
     }
 
     /**
@@ -55,8 +55,8 @@ public abstract class ValueTemplate extends TerminalInsertOperation {
      */
     public Value value(double value) {
         addCommaAfterFirstValue();
-        query.append(value);
-        return new Value(query);
+        SQLQuery.append(value);
+        return new Value(SQLQuery);
     }
 
     protected abstract void addCommaAfterFirstValue();

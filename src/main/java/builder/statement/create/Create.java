@@ -1,6 +1,6 @@
 package builder.statement.create;
 
-import builder.Query;
+import query.SQLQuery;
 import builder.TerminalOperation;
 import builder.statement.create.index.Index;
 import builder.statement.create.table.column.FirstColumn;
@@ -9,11 +9,11 @@ import builder.utils.StringAppender;
 public class Create {
     private StringAppender stringAppender;
 
-    private Query query;
+    private SQLQuery SQLQuery;
 
-    public Create(Query query) {
-        this.query = query;
-        this.stringAppender = new StringAppender(query);
+    public Create(SQLQuery SQLQuery) {
+        this.SQLQuery = SQLQuery;
+        this.stringAppender = new StringAppender(SQLQuery);
     }
 
     /**
@@ -27,10 +27,10 @@ public class Create {
      * (column datatype, ...)' statement.
      */
     public FirstColumn table(String name) {
-        query.append("TABLE ");
+        SQLQuery.append("TABLE ");
         stringAppender.validateAndAppend(name);
-        query.append(" (");
-        return new FirstColumn(query);
+        SQLQuery.append(" (");
+        return new FirstColumn(SQLQuery);
     }
 
     /**
@@ -43,9 +43,9 @@ public class Create {
      * to terminate query building
      */
     public TerminalOperation database(String name) {
-        query.append("DATABASE ");
+        SQLQuery.append("DATABASE ");
         stringAppender.validateAndAppend(name);
-        return new TerminalOperation(query);
+        return new TerminalOperation(SQLQuery);
     }
 
     /**
@@ -58,8 +58,8 @@ public class Create {
      * select table and columns index is assigned to
      */
     public Index index(String name) {
-        query.append("INDEX ");
+        SQLQuery.append("INDEX ");
         stringAppender.validateAndAppend(name);
-        return new Index(query);
+        return new Index(SQLQuery);
     }
 }

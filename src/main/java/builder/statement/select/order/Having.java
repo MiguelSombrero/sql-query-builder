@@ -1,13 +1,13 @@
 package builder.statement.select.order;
 
-import builder.Query;
 import builder.condition.Condition;
 import builder.utils.StringAppender;
+import query.SelectQuery;
 
 public class Having extends Orderer {
     private StringAppender stringAppender;
 
-    public Having(Query query) {
+    public Having(SelectQuery query) {
         super(query);
         this.stringAppender = new StringAppender(query);
     }

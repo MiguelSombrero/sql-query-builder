@@ -1,14 +1,14 @@
 package builder.statement.insert;
 
 import builder.QueryBuilder;
-import builder.Query;
+import query.SQLQuery;
 
 public class TerminalInsertOperation implements QueryBuilder {
 
-    protected Query query;
+    protected SQLQuery SQLQuery;
 
-    public TerminalInsertOperation(Query query) {
-        this.query = query;
+    public TerminalInsertOperation(SQLQuery SQLQuery) {
+        this.SQLQuery = SQLQuery;
     }
 
     /**
@@ -18,7 +18,7 @@ public class TerminalInsertOperation implements QueryBuilder {
      * that was build
      */
     public String build() {
-        query.append(")");
-        return query.build();
+        SQLQuery.append(")");
+        return SQLQuery.build();
     }
 }

@@ -1,11 +1,11 @@
 package builder.statement.select.column;
 
-import builder.Query;
 import builder.statement.select.table.From;
+import query.SelectQuery;
 
 public class AliasedColumn extends ColumnTemplate {
 
-    public AliasedColumn(Query query) {
+    public AliasedColumn(SelectQuery query) {
         super(query);
     }
 

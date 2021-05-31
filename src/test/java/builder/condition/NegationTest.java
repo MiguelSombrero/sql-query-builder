@@ -1,24 +1,29 @@
 package builder.condition;
 
 import builder.statement.select.table.Table;
+import database.DatabaseConnection;
 import database.DatabaseTestBaseClass;
 import factory.QueryFactory;
+import factory.SelectQueryFactory;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.SQLException;
 
 import static factory.WhereClauseFactory.valueOf;
-import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 public class NegationTest extends DatabaseTestBaseClass {
+    private SelectQueryFactory selectQueryFactory;
     private Table table;
 
     @Before
-    public void setUpQuery() {
+    public void setUpQuery() throws SQLException {
         initializeDatabase();
 
-        this.table = QueryFactory
+        selectQueryFactory = new SelectQueryFactory(DatabaseConnection.getConnection());
+
+        this.table = selectQueryFactory
                 .select()
                 .column("firstname")
                 .from()
@@ -84,11 +89,12 @@ public class NegationTest extends DatabaseTestBaseClass {
         String query = this.table
                 .where(valueOf("lastname")
                         .not()
-                        .isInSub(QueryFactory
-                        .select()
-                        .column("*")
-                        .from().table("student")
-                        .where(valueOf("age").greaterThan(20))))
+                        .isInSub(selectQueryFactory
+                            .select()
+                                .column("*")
+                            .from()
+                                .table("student")
+                            .where(valueOf("age").greaterThan(20))))
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE NOT lastname IN (SELECT * FROM student WHERE age > 20)", query);

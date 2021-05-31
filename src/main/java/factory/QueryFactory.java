@@ -1,23 +1,10 @@
 package factory;
 
-import builder.Query;
+import query.SQLQuery;
 import builder.statement.create.Create;
 import builder.statement.drop.Drop;
-import builder.statement.select.column.FirstColumn;
 
 public class QueryFactory {
-
-    public static FirstColumn select() {
-        return new FirstColumn(createQuery("SELECT "));
-    }
-
-    public static FirstColumn selectTop(int rows) {
-        return new FirstColumn(createQuery("SELECT TOP " + rows + " "));
-    }
-
-    public static FirstColumn selectDistinct() {
-        return new FirstColumn(createQuery("SELECT DISTINCT "));
-    }
 
     public static builder.statement.insert.Table insertInto() {
         return new builder.statement.insert.Table(createQuery("INSERT INTO "));
@@ -39,7 +26,7 @@ public class QueryFactory {
         return new Drop(createQuery("DROP "));
     }
 
-    private static Query createQuery(String clause) {
-        return new Query(new StringBuilder(clause));
+    private static SQLQuery createQuery(String clause) {
+        return new SQLQuery(new StringBuilder(clause));
     }
 }

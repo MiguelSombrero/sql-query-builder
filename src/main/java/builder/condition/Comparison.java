@@ -1,6 +1,6 @@
 package builder.condition;
 
-import builder.Query;
+import query.SQLQuery;
 import builder.utils.NumberAppender;
 import builder.statement.select.SelectQueryBuilder;
 import builder.utils.StringValueAppender;
@@ -17,13 +17,13 @@ public class Comparison {
     private SubQueryAppender subQueryAppender;
     private NumberAppender numberAppender;
 
-    protected Query query;
+    protected SQLQuery SQLQuery;
 
-    public Comparison(Query query) {
-        this.query = query;
-        this.stringValueAppender = new StringValueAppender(query);
-        this.subQueryAppender = new SubQueryAppender(query);
-        this.numberAppender = new NumberAppender(query);
+    public Comparison(SQLQuery SQLQuery) {
+        this.SQLQuery = SQLQuery;
+        this.stringValueAppender = new StringValueAppender(SQLQuery);
+        this.subQueryAppender = new SubQueryAppender(SQLQuery);
+        this.numberAppender = new NumberAppender(SQLQuery);
     }
 
     /**
@@ -36,7 +36,7 @@ public class Comparison {
      * or terminate query building
      */
     public Condition equals(String value) {
-        query.append(EQUALS);
+        SQLQuery.append(EQUALS);
         stringValueAppender.validateAndAppendStringValue(value);
         return getCondition();
     }
@@ -51,8 +51,8 @@ public class Comparison {
      * or terminate query building
      */
     public Condition equals(int value) {
-        query.append(EQUALS);
-        query.append(value);
+        SQLQuery.append(EQUALS);
+        SQLQuery.append(value);
         return getCondition();
     }
 
@@ -66,8 +66,8 @@ public class Comparison {
      * or terminate query building
      */
     public Condition equals(double value) {
-        query.append(EQUALS);
-        query.append(value);
+        SQLQuery.append(EQUALS);
+        SQLQuery.append(value);
         return getCondition();
     }
 
@@ -83,7 +83,7 @@ public class Comparison {
      * or terminate query building
      */
     public Condition equalsAny(SelectQueryBuilder subQuery) {
-        query.append(EQUALS);
+        SQLQuery.append(EQUALS);
         subQueryAppender.appendConditionWithSubQuery("ANY ", subQuery);
         return getCondition();
     }
@@ -100,7 +100,7 @@ public class Comparison {
      * or terminate query building
      */
     public Condition equalsAll(SelectQueryBuilder subQuery) {
-        query.append(EQUALS);
+        SQLQuery.append(EQUALS);
         subQueryAppender.appendConditionWithSubQuery("ALL ", subQuery);
         return getCondition();
     }
@@ -115,7 +115,7 @@ public class Comparison {
      * or terminate query building
      */
     public Condition greaterThan(String value) {
-        query.append(GREATER_THAN);
+        SQLQuery.append(GREATER_THAN);
         stringValueAppender.validateAndAppendStringValue(value);
         return getCondition();
     }
@@ -130,8 +130,8 @@ public class Comparison {
      * or terminate query building
      */
     public Condition greaterThan(int value) {
-        query.append(GREATER_THAN);
-        query.append(value);
+        SQLQuery.append(GREATER_THAN);
+        SQLQuery.append(value);
         return getCondition();
     }
 
@@ -145,8 +145,8 @@ public class Comparison {
      * or terminate query building
      */
     public Condition greaterThan(double value) {
-        query.append(GREATER_THAN);
-        query.append(value);
+        SQLQuery.append(GREATER_THAN);
+        SQLQuery.append(value);
         return getCondition();
     }
 
@@ -162,7 +162,7 @@ public class Comparison {
      * or terminate query building
      */
     public Condition greaterThanAny(SelectQueryBuilder subQuery) {
-        query.append(GREATER_THAN);
+        SQLQuery.append(GREATER_THAN);
         subQueryAppender.appendConditionWithSubQuery("ANY ", subQuery);
         return getCondition();
     }
@@ -179,7 +179,7 @@ public class Comparison {
      * or terminate query building
      */
     public Condition greaterThanAll(SelectQueryBuilder subQuery) {
-        query.append(GREATER_THAN);
+        SQLQuery.append(GREATER_THAN);
         subQueryAppender.appendConditionWithSubQuery("ALL ", subQuery);
         return getCondition();
     }
@@ -194,7 +194,7 @@ public class Comparison {
      * or terminate query building
      */
     public Condition greaterThanOrEqual(String value) {
-        query.append(GREATER_THAN_OR_EQUAL);
+        SQLQuery.append(GREATER_THAN_OR_EQUAL);
         stringValueAppender.validateAndAppendStringValue(value);
         return getCondition();
     }
@@ -209,8 +209,8 @@ public class Comparison {
      * or terminate query building
      */
     public Condition greaterThanOrEqual(int value) {
-        query.append(GREATER_THAN_OR_EQUAL);
-        query.append(value);
+        SQLQuery.append(GREATER_THAN_OR_EQUAL);
+        SQLQuery.append(value);
         return getCondition();
     }
 
@@ -224,8 +224,8 @@ public class Comparison {
      * or terminate query building
      */
     public Condition greaterThanOrEqual(double value) {
-        query.append(GREATER_THAN_OR_EQUAL);
-        query.append(value);
+        SQLQuery.append(GREATER_THAN_OR_EQUAL);
+        SQLQuery.append(value);
         return getCondition();
     }
 
@@ -241,7 +241,7 @@ public class Comparison {
      * or terminate query building
      */
     public Condition greaterThanOrEqualAny(SelectQueryBuilder subQuery) {
-        query.append(GREATER_THAN_OR_EQUAL);
+        SQLQuery.append(GREATER_THAN_OR_EQUAL);
         subQueryAppender.appendConditionWithSubQuery("ANY ", subQuery);
         return getCondition();
     }
@@ -258,7 +258,7 @@ public class Comparison {
      * or terminate query building
      */
     public Condition greaterThanOrEqualAll(SelectQueryBuilder subQuery) {
-        query.append(GREATER_THAN_OR_EQUAL);
+        SQLQuery.append(GREATER_THAN_OR_EQUAL);
         subQueryAppender.appendConditionWithSubQuery("ALL ", subQuery);
         return getCondition();
     }
@@ -273,7 +273,7 @@ public class Comparison {
      * or terminate query building
      */
     public Condition lesserThan(String value) {
-        query.append(LESSER_THAN);
+        SQLQuery.append(LESSER_THAN);
         stringValueAppender.validateAndAppendStringValue(value);
         return getCondition();
     }
@@ -288,8 +288,8 @@ public class Comparison {
      * or terminate query building
      */
     public Condition lesserThan(int value) {
-        query.append(LESSER_THAN);
-        query.append(value);
+        SQLQuery.append(LESSER_THAN);
+        SQLQuery.append(value);
         return getCondition();
     }
 
@@ -303,8 +303,8 @@ public class Comparison {
      * or terminate query building
      */
     public Condition lesserThan(double value) {
-        query.append(LESSER_THAN);
-        query.append(value);
+        SQLQuery.append(LESSER_THAN);
+        SQLQuery.append(value);
         return getCondition();
     }
 
@@ -320,7 +320,7 @@ public class Comparison {
      * or terminate query building
      */
     public Condition lesserThanAny(SelectQueryBuilder subQuery) {
-        query.append(LESSER_THAN);
+        SQLQuery.append(LESSER_THAN);
         subQueryAppender.appendConditionWithSubQuery("ANY ", subQuery);
         return getCondition();
     }
@@ -337,7 +337,7 @@ public class Comparison {
      * or terminate query building
      */
     public Condition lesserThanAll(SelectQueryBuilder subQuery) {
-        query.append(LESSER_THAN);
+        SQLQuery.append(LESSER_THAN);
         subQueryAppender.appendConditionWithSubQuery("ALL ", subQuery);
         return getCondition();
     }
@@ -352,7 +352,7 @@ public class Comparison {
      * or terminate query building
      */
     public Condition lesserThanOrEqual(String value) {
-        query.append(LESSER_THAN_OR_EQUAL);
+        SQLQuery.append(LESSER_THAN_OR_EQUAL);
         stringValueAppender.validateAndAppendStringValue(value);
         return getCondition();
     }
@@ -367,8 +367,8 @@ public class Comparison {
      * or terminate query building
      */
     public Condition lesserThanOrEqual(int value) {
-        query.append(LESSER_THAN_OR_EQUAL);
-        query.append(value);
+        SQLQuery.append(LESSER_THAN_OR_EQUAL);
+        SQLQuery.append(value);
         return getCondition();
     }
 
@@ -382,8 +382,8 @@ public class Comparison {
      * or terminate query building
      */
     public Condition lesserThanOrEqual(double value) {
-        query.append(LESSER_THAN_OR_EQUAL);
-        query.append(value);
+        SQLQuery.append(LESSER_THAN_OR_EQUAL);
+        SQLQuery.append(value);
         return getCondition();
     }
 
@@ -399,7 +399,7 @@ public class Comparison {
      * or terminate query building
      */
     public Condition lesserThanOrEqualAny(SelectQueryBuilder subQuery) {
-        query.append(LESSER_THAN_OR_EQUAL);
+        SQLQuery.append(LESSER_THAN_OR_EQUAL);
         subQueryAppender.appendConditionWithSubQuery("ANY ", subQuery);
         return getCondition();
     }
@@ -416,7 +416,7 @@ public class Comparison {
      * or terminate query building
      */
     public Condition lesserThanOrEqualAll(SelectQueryBuilder subQuery) {
-        query.append(LESSER_THAN_OR_EQUAL);
+        SQLQuery.append(LESSER_THAN_OR_EQUAL);
         subQueryAppender.appendConditionWithSubQuery("ALL ", subQuery);
         return getCondition();
     }
@@ -433,7 +433,7 @@ public class Comparison {
     public Condition startsWith(String pattern) {
         stringValueAppender.validate(pattern);
         String startsWith = pattern.concat("%");
-        query.append(" LIKE ");
+        SQLQuery.append(" LIKE ");
         stringValueAppender.appendStringValue(startsWith);
         return getCondition();
     }
@@ -450,7 +450,7 @@ public class Comparison {
     public Condition endsWith(String pattern) {
         stringValueAppender.validate(pattern);
         String endsWith = "%".concat(pattern);
-        query.append(" LIKE ");
+        SQLQuery.append(" LIKE ");
         stringValueAppender.appendStringValue(endsWith);
         return getCondition();
     }
@@ -467,7 +467,7 @@ public class Comparison {
     public Condition contains(String pattern) {
         stringValueAppender.validate(pattern);
         String contains = "%".concat(pattern).concat("%");
-        query.append(" LIKE ");
+        SQLQuery.append(" LIKE ");
         stringValueAppender.appendStringValue(contains);
         return getCondition();
     }
@@ -485,9 +485,9 @@ public class Comparison {
      * or terminate query building
      */
     public Condition isBetween(String lower, String higher) {
-        query.append(" BETWEEN ");
+        SQLQuery.append(" BETWEEN ");
         stringValueAppender.validateAndAppendStringValue(lower);
-        query.append(" AND ");
+        SQLQuery.append(" AND ");
         stringValueAppender.validateAndAppendStringValue(higher);
         return getCondition();
     }
@@ -505,10 +505,10 @@ public class Comparison {
      * or terminate query building
      */
     public Condition isBetween(int lower, int higher) {
-        query.append(" BETWEEN ");
-        query.append(lower);
-        query.append(" AND ");
-        query.append(higher);
+        SQLQuery.append(" BETWEEN ");
+        SQLQuery.append(lower);
+        SQLQuery.append(" AND ");
+        SQLQuery.append(higher);
         return getCondition();
     }
 
@@ -525,10 +525,10 @@ public class Comparison {
      * or terminate query building
      */
     public Condition isBetween(double lower, double higher) {
-        query.append(" BETWEEN ");
-        query.append(lower);
-        query.append(" AND ");
-        query.append(higher);
+        SQLQuery.append(" BETWEEN ");
+        SQLQuery.append(lower);
+        SQLQuery.append(" AND ");
+        SQLQuery.append(higher);
         return getCondition();
     }
 
@@ -540,7 +540,7 @@ public class Comparison {
      * or terminate query building
      */
     public Condition isNull() {
-        query.append(" IS NULL");
+        SQLQuery.append(" IS NULL");
         return getCondition();
     }
 
@@ -552,7 +552,7 @@ public class Comparison {
      * or terminate query building
      */
     public Condition isNotNull() {
-        query.append(" IS NOT NULL");
+        SQLQuery.append(" IS NOT NULL");
         return getCondition();
     }
 
@@ -566,7 +566,7 @@ public class Comparison {
      * or terminate query building
      */
     public Condition isIn(String ...listOfValues) {
-        query.append(" IN ");
+        SQLQuery.append(" IN ");
         stringValueAppender.validateAndAppendListOfValues(listOfValues);
         return getCondition();
     }
@@ -581,7 +581,7 @@ public class Comparison {
      * or terminate query building
      */
     public Condition isIn(int ...listOfValues) {
-        query.append(" IN ");
+        SQLQuery.append(" IN ");
         numberAppender.appendListOfValues(listOfValues);
         return getCondition();
     }
@@ -596,7 +596,7 @@ public class Comparison {
      * or terminate query building
      */
     public Condition isIn(double ...listOfValues) {
-        query.append(" IN ");
+        SQLQuery.append(" IN ");
         numberAppender.appendListOfValues(listOfValues);
         return getCondition();
     }
@@ -618,6 +618,6 @@ public class Comparison {
     }
 
     private Condition getCondition() {
-        return new Condition(query);
+        return new Condition(SQLQuery);
     }
 }

@@ -1,14 +1,15 @@
 package builder.statement.select.order;
 
-import builder.Query;
+import query.SQLQuery;
 import builder.utils.StringAppender;
+import query.SelectQuery;
 
 public class GroupBy {
     private StringAppender stringAppender;
 
-    private Query query;
+    private SelectQuery query;
 
-    public GroupBy(Query query) {
+    public GroupBy(SelectQuery query) {
         this.query = query;
         this.stringAppender = new StringAppender(query);
     }

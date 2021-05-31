@@ -1,7 +1,9 @@
 package builder.statement.select.order;
 
+import database.DatabaseConnection;
 import database.DatabaseTestBaseClass;
 import factory.QueryFactory;
+import factory.SelectQueryFactory;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,10 +16,12 @@ public class HavingTest extends DatabaseTestBaseClass {
     private Having having;
 
     @Before
-    public void setUpQuery() {
+    public void setUpQuery() throws SQLException {
         initializeDatabase();
 
-        this.having = QueryFactory
+        SelectQueryFactory selectQueryFactory = new SelectQueryFactory(DatabaseConnection.getConnection());
+
+        this.having = selectQueryFactory
                 .select()
                 .column("*")
                 .from()

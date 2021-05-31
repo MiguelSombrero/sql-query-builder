@@ -1,15 +1,15 @@
 package builder.statement.create.table.foreignkey;
 
-import builder.Query;
+import query.SQLQuery;
 import builder.statement.create.TerminalCreateOperation;
 import builder.utils.StringAppender;
 
 public class ForeignKey extends TerminalCreateOperation {
     protected StringAppender stringAppender;
 
-    public ForeignKey(Query query) {
-        super(query);
-        this.stringAppender = new StringAppender(query);
+    public ForeignKey(SQLQuery SQLQuery) {
+        super(SQLQuery);
+        this.stringAppender = new StringAppender(SQLQuery);
     }
 
     /**
@@ -22,9 +22,9 @@ public class ForeignKey extends TerminalCreateOperation {
      * REFERENCE to table and column
      */
     public Reference foreignKey(String column) {
-        query.append(", FOREIGN KEY (");
+        SQLQuery.append(", FOREIGN KEY (");
         stringAppender.validateAndAppend(column);
-        query.append(")");
-        return new Reference(query);
+        SQLQuery.append(")");
+        return new Reference(SQLQuery);
     }
 }

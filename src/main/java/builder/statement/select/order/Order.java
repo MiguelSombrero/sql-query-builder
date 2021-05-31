@@ -1,10 +1,10 @@
 package builder.statement.select.order;
 
-import builder.Query;
+import query.SelectQuery;
 
 public class Order extends OrderBy {
 
-    public Order(Query query) {
+    public Order(SelectQuery query) {
         super(query);
     }
 

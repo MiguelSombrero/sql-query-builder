@@ -1,17 +1,17 @@
 package builder.statement.create.index;
 
-import builder.Query;
+import query.SQLQuery;
 import builder.TerminalOperation;
 import builder.utils.StringAppender;
 
 public class IndexedColumn {
     private StringAppender stringAppender;
 
-    private Query query;
+    private SQLQuery SQLQuery;
 
-    public IndexedColumn(Query query) {
-        this.query = query;
-        this.stringAppender = new StringAppender(query);
+    public IndexedColumn(SQLQuery SQLQuery) {
+        this.SQLQuery = SQLQuery;
+        this.stringAppender = new StringAppender(SQLQuery);
     }
 
     /**
@@ -24,8 +24,8 @@ public class IndexedColumn {
      * to terminate query building
      */
     public TerminalOperation columns(String ...listOfColumns) {
-        query.append(" ");
+        SQLQuery.append(" ");
         stringAppender.validateAndAppendList(listOfColumns);
-        return new TerminalOperation(query);
+        return new TerminalOperation(SQLQuery);
     }
 }

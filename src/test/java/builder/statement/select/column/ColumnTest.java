@@ -1,24 +1,27 @@
 package builder.statement.select.column;
 
+import database.DatabaseConnection;
 import database.DatabaseTestBaseClass;
-import factory.QueryFactory;
+import factory.SelectQueryFactory;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.SQLException;
 
-import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 public class ColumnTest extends DatabaseTestBaseClass {
+    private SelectQueryFactory selectQueryFactory;
 
     @Before
-    public void setUp() {
+    public void setUp() throws SQLException {
         initializeDatabase();
+        selectQueryFactory = new SelectQueryFactory(DatabaseConnection.getConnection());
     }
 
     @Test
     public void testSelect() throws SQLException {
-        String query = QueryFactory
+        String query = selectQueryFactory
                 .select()
                     .column("lastname")
                     .column("age")
@@ -32,7 +35,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
 
     @Test
     public void testSelectTop() throws SQLException {
-        String query = QueryFactory
+        String query = selectQueryFactory
                 .selectTop(100)
                     .column("lastname")
                     .column("age")
@@ -47,7 +50,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
 
     @Test
     public void testSelectDistinct() throws SQLException {
-        String query = QueryFactory
+        String query = selectQueryFactory
                 .selectDistinct()
                     .column("lastname")
                     .column("age")
@@ -62,7 +65,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
 
     @Test
     public void testSelectCount() throws SQLException {
-        String query = QueryFactory
+        String query = selectQueryFactory
                 .select()
                     .count("age")
                 .from()
@@ -75,7 +78,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
 
     @Test
     public void testSelectMin() throws SQLException {
-        String query = QueryFactory
+        String query = selectQueryFactory
                 .select()
                     .min("age")
                 .from()
@@ -88,7 +91,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
 
     @Test
     public void testSelectMax() throws SQLException {
-        String query = QueryFactory
+        String query = selectQueryFactory
                 .select()
                     .max("age")
                 .from()
@@ -101,7 +104,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
 
     @Test
     public void testSelectAvg() throws SQLException {
-        String query = QueryFactory
+        String query = selectQueryFactory
                 .select()
                     .avg("age")
                 .from()
@@ -114,7 +117,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
 
     @Test
     public void testSelectSum() throws SQLException {
-        String query = QueryFactory
+        String query = selectQueryFactory
                 .select()
                     .sum("age")
                 .from()
@@ -127,7 +130,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
 
     @Test
     public void testMultipleAggregateFunctions() throws SQLException {
-        String query = QueryFactory
+        String query = selectQueryFactory
                 .select()
                     .min("age")
                     .max("birthdate")
@@ -144,7 +147,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
 
     @Test
     public void testMultipleColumnsWithAliases() throws SQLException {
-        String query = QueryFactory
+        String query = selectQueryFactory
                 .select()
                     .column("lastname").alias("last")
                     .min("age").alias("minAge")
@@ -161,7 +164,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
 
     @Test(expected = IllegalArgumentException.class)
     public void testSelectFisrtColumnWithSQLInjection() {
-        QueryFactory
+        selectQueryFactory
                 .select()
                 .column(";DROP")
                 .from()
@@ -171,7 +174,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
 
     @Test(expected = IllegalArgumentException.class)
     public void testSelectColumnWithSQLInjection() {
-        QueryFactory
+        selectQueryFactory
                 .select()
                     .column("firstname")
                     .column(";DROP")
@@ -182,7 +185,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
 
     @Test(expected = IllegalArgumentException.class)
     public void testSelectColumnAliasWithSQLInjection() {
-        QueryFactory
+        selectQueryFactory
                 .select()
                 .column("firstname").alias(";DROP")
                 .from()
@@ -192,7 +195,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
 
     @Test(expected = IllegalArgumentException.class)
     public void testSelectAggregateFunctionWithSQLInjection() {
-        QueryFactory
+        selectQueryFactory
                 .select()
                     .count(";DROP")
                 .from()

@@ -5,18 +5,18 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.github.miguelsombrero</groupId>
-    <artifactId>sql-query-builder</artifactId>
+    <artifactId>sql-SQLQuery-builder</artifactId>
     <version>1.0.5-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>sql-query-builder</name>
-    <description>Java-library for creating valid SQL query strings</description>
-    <url>https://github.com/MiguelSombrero/sql-query-builder</url>
+    <name>sql-SQLQuery-builder</name>
+    <description>Java-library for creating valid SQL SQLQuery strings</description>
+    <url>https://github.com/MiguelSombrero/sql-SQLQuery-builder</url>
 
     <scm>
-        <connection>scm:git:git://github.com/MiguelSombrero/sql-query-builder</connection>
-        <developerConnection>scm:git:ssh://github.com:MiguelSombrero/sql-query-builder.git</developerConnection>
-        <url>https://github.com/MiguelSombrero/sql-query-builder</url>
+        <connection>scm:git:git://github.com/MiguelSombrero/sql-SQLQuery-builder</connection>
+        <developerConnection>scm:git:ssh://github.com:MiguelSombrero/sql-SQLQuery-builder.git</developerConnection>
+        <url>https://github.com/MiguelSombrero/sql-SQLQuery-builder</url>
     </scm>
 
     <licenses>
@@ -104,9 +104,9 @@
 
     <distributionManagement>
         <repository>
-            <id>github-sql-query-builder</id>
+            <id>github-sql-SQLQuery-builder</id>
             <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/MiguelSombrero/sql-query-builder</url>
+            <url>https://maven.pkg.github.com/MiguelSombrero/sql-SQLQuery-builder</url>
             <layout>default</layout>
         </repository>
     </distributionManagement>

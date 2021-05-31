@@ -1,11 +1,11 @@
 package builder.statement.select.order;
 
-import builder.Query;
 import builder.statement.select.TerminalSelectOperation;
+import query.SelectQuery;
 
 public class Limit extends TerminalSelectOperation {
 
-    public Limit(Query query) {
+    public Limit(SelectQuery query) {
         super(query);
     }
 

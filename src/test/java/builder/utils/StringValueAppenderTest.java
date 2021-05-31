@@ -1,7 +1,6 @@
 package builder.utils;
 
-import builder.Query;
-import org.junit.Before;
+import query.SQLQuery;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -10,25 +9,25 @@ public class StringValueAppenderTest {
 
     @Test
     public void testAppendStringValue() {
-        Query query = new Query(new StringBuilder());
-        StringValueAppender stringValueAppender = new StringValueAppender(query);
+        SQLQuery SQLQuery = new SQLQuery(new StringBuilder());
+        StringValueAppender stringValueAppender = new StringValueAppender(SQLQuery);
         stringValueAppender.appendStringValue("miika");
-        assertEquals("'miika'", query.build());
+        assertEquals("'miika'", SQLQuery.build());
     }
 
     @Test
     public void testAppendStringValueQuestionMark() {
-        Query query = new Query(new StringBuilder());
-        StringValueAppender stringValueAppender = new StringValueAppender(query);
+        SQLQuery SQLQuery = new SQLQuery(new StringBuilder());
+        StringValueAppender stringValueAppender = new StringValueAppender(SQLQuery);
         stringValueAppender.appendStringValue("?");
-        assertEquals("?", query.build());
+        assertEquals("?", SQLQuery.build());
     }
 
     @Test
     public void testAppendListOfStringValues() {
-        Query query = new Query(new StringBuilder());
-        StringValueAppender stringValueAppender = new StringValueAppender(query);
+        SQLQuery SQLQuery = new SQLQuery(new StringBuilder());
+        StringValueAppender stringValueAppender = new StringValueAppender(SQLQuery);
         stringValueAppender.appendListOfValues("miika", "liika", "siika", "riika");
-        assertEquals("('miika', 'liika', 'siika', 'riika')", query.build());
+        assertEquals("('miika', 'liika', 'siika', 'riika')", SQLQuery.build());
     }
 }

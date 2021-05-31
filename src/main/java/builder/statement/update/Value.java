@@ -1,15 +1,15 @@
 package builder.statement.update;
 
-import builder.Query;
+import query.SQLQuery;
 import builder.utils.StringValueAppender;
 
 public class Value {
     private StringValueAppender stringValueAppender;
-    private Query query;
+    private SQLQuery SQLQuery;
 
-    public Value(Query query) {
-        this.query = query;
-        this.stringValueAppender = new StringValueAppender(query);
+    public Value(SQLQuery SQLQuery) {
+        this.SQLQuery = SQLQuery;
+        this.stringValueAppender = new StringValueAppender(SQLQuery);
     }
 
     /**
@@ -24,7 +24,7 @@ public class Value {
      */
     public Column value(String value) {
         stringValueAppender.validateAndAppendStringValue(value);
-        return new Column(query);
+        return new Column(SQLQuery);
     }
 
     /**
@@ -38,8 +38,8 @@ public class Value {
      * clause or terminate query building
      */
     public Column value(int value) {
-        query.append(value);
-        return new Column(query);
+        SQLQuery.append(value);
+        return new Column(SQLQuery);
     }
 
     /**
@@ -53,7 +53,7 @@ public class Value {
      * clause or terminate query building
      */
     public Column value(double value) {
-        query.append(value);
-        return new Column(query);
+        SQLQuery.append(value);
+        return new Column(SQLQuery);
     }
 }

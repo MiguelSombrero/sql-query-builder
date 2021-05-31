@@ -1,13 +1,13 @@
 package builder.statement.delete;
 
-import builder.Query;
+import query.SQLQuery;
 import builder.TerminalOperation;
 import builder.condition.Condition;
 
 public class Where extends TerminalOperation {
 
-    public Where(Query query) {
-        super(query);
+    public Where(SQLQuery SQLQuery) {
+        super(SQLQuery);
     }
 
     /**
@@ -20,8 +20,8 @@ public class Where extends TerminalOperation {
      * to terminate query building
      */
     public TerminalOperation where(Condition condition) {
-        query.append(" WHERE ");
-        query.append(condition.build());
-        return new TerminalOperation(query);
+        SQLQuery.append(" WHERE ");
+        SQLQuery.append(condition.build());
+        return new TerminalOperation(SQLQuery);
     }
 }

@@ -2,10 +2,14 @@ package performance;
 
 import builder.statement.select.column.FirstColumn;
 import builder.statement.select.table.Table;
-import factory.QueryFactory;
+import database.DatabaseConnection;
+import factory.SelectQueryFactory;
+import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.sql.SQLException;
 
 import static factory.WhereClauseFactory.valueOf;
 import static org.junit.Assert.assertEquals;
@@ -13,8 +17,14 @@ import static org.junit.Assert.assertTrue;
 
 public class PerformanceTest {
     private static Logger logger = LoggerFactory.getLogger(PerformanceTest.class);
+    private SelectQueryFactory selectQueryFactory;
     private static final String complexQuery = "SELECT p.firstname AS first, p.lastname AS last, c.name AS course FROM persons AS p, courses AS c LEFT JOIN addresses ON addresses.id = persons.address_id WHERE age > 18 AND age < 65 AND NOT firstname = 'Miika'";
     private static final int times = 100_000;
+
+    @Before
+    public void setUp() throws SQLException {
+        selectQueryFactory = new SelectQueryFactory(DatabaseConnection.getConnection());
+    }
 
     @Test
     public void testThatQueriesMatch() {
@@ -43,7 +53,7 @@ public class PerformanceTest {
         long end = 0L;
 
         start = System.currentTimeMillis();
-        FirstColumn field = QueryFactory.select();
+        FirstColumn field = selectQueryFactory.select();
 
         for (int i = 0; i < times; i++) {
             field.column("test").alias("best");
@@ -112,10 +122,11 @@ public class PerformanceTest {
     }
 
     private String buildComplexQuery() {
-        return QueryFactory.select()
-                .column("p.firstname").alias("first")
-                .column("p.lastname").alias("last")
-                .column("c.name").alias("course")
+        return selectQueryFactory
+                .select()
+                    .column("p.firstname").alias("first")
+                    .column("p.lastname").alias("last")
+                    .column("c.name").alias("course")
                 .from()
                     .table("persons").alias("p")
                     .table("courses").alias("c")

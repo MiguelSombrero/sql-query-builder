@@ -1,14 +1,14 @@
 package builder.statement.select.column;
 
-import builder.Query;
 import builder.utils.ColumnStringAppender;
+import query.SelectQuery;
 
 public abstract class ColumnTemplate {
     private ColumnStringAppender columnStringAppender;
 
-    protected Query query;
+    protected SelectQuery query;
 
-    public ColumnTemplate(Query query) {
+    public ColumnTemplate(SelectQuery query) {
         this.query = query;
         this.columnStringAppender = new ColumnStringAppender(query);
     }

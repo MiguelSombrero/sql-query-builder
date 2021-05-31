@@ -1,15 +1,15 @@
 package builder.statement.select.table;
 
-import builder.Query;
 import builder.statement.select.SelectQueryBuilder;
 import builder.utils.StringAppender;
+import query.SelectQuery;
 
 public class From {
     protected StringAppender stringAppender;
 
-    private Query query;
+    private SelectQuery query;
 
-    public From(Query query) {
+    public From(SelectQuery query) {
         this.query = query;
         this.stringAppender = new StringAppender(query);
     }

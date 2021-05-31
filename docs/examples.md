@@ -13,7 +13,7 @@
 
 #### Basic example
 
-    String query = QueryFactory
+    String SQLQuery = QueryFactory
         .select()
             .column("firstname").alias("first")
             .column("lastname").alias("last")
@@ -23,7 +23,7 @@
         .where(valueOf("age").greaterThan(18))
         .build();
 
-    logger.info(query)
+    logger.info(SQLQuery)
 
 Above code prints out:
 
@@ -40,7 +40,7 @@ You can import static factory methods for queries to look more natural language 
     import static factory.QueryFactory.*;
     import static factory.WhereClauseFactory.*;
 
-    String query = select()
+    String SQLQuery = select()
             .column("p.id")
             .column("p.age")
             .column("p.firstname").alias("name")
@@ -57,7 +57,7 @@ You can import static factory methods for queries to look more natural language 
         .limit(100)
         .build();
 
-        logger.info(query);
+        logger.info(SQLQuery);
 
 Above code prints out:
 
@@ -75,7 +75,7 @@ Above code prints out:
     ...
     import static factory.HavingClauseFactory.*;
 
-    String query = select()
+    String SQLQuery = select()
             .column("s.name").alias("school")
             .avg("c.difficulty").alias("avgDifficulty")
         .from()
@@ -86,7 +86,7 @@ Above code prints out:
         .having(avg("c.difficulty").greaterThan(1))
         .build();
 
-        logger.info(query);
+        logger.info(SQLQuery);
 
 Above code prints out:
 
@@ -96,9 +96,9 @@ Above code prints out:
     GROUP BY school
     HAVING avgDifficulty > 1
 
-#### Sub-queries can be made by using `QueryFactory` to build sub-query
+#### Sub-queries can be made by using `QueryFactory` to build sub-SQLQuery
 
-    String query = select()
+    String SQLQuery = select()
             .column("*")
         .from()
             .sub(select()
@@ -122,7 +122,7 @@ This prints out:
 
 #### Basic example
 
-    String query = insertInto()
+    String SQLQuery = insertInto()
             .table("person")
                 .columns("id", "birthdate", "firstname", "lastname", "age")
             .values()
@@ -133,7 +133,7 @@ This prints out:
                 .value(40)
             .build();
 
-        logger.info(query);
+        logger.info(SQLQuery);
 
 Prints out:
 
@@ -142,7 +142,7 @@ Prints out:
 
 #### Insert into select example
 
-    String query = insertInto()
+    String SQLQuery = insertInto()
             .table("person")
             .sub(select()
                     .column("*")
@@ -151,7 +151,7 @@ Prints out:
                 .where(valueOf("age").lesserThan(18)))
         .build();
 
-        logger.info(query);
+        logger.info(SQLQuery);
 
 Prints out:
 
@@ -163,14 +163,14 @@ Prints out:
 
 #### Basic example
 
-    String query = update()
+    String SQLQuery = update()
         .table("person")
             .column("age").value(50)
         .where(valueOf("id").equals(1)
             .or(valueOf("id").equals(2)))
         .build();
 
-    logger.info(query);
+    logger.info(SQLQuery);
 
 Prints out:
 
@@ -182,7 +182,7 @@ Prints out:
 
 ### <a name="create"></a>CREATE TABLE statement
 
-    String query = create()
+    String SQLQuery = create()
         .table("vehicles")
             .column("ID").type(DataType.INT).primaryKey()
             .column("name").type(DataType.VARCHAR_255).notNull()
@@ -191,7 +191,7 @@ Prints out:
         .foreignKey("manufacturer_id").references("ID", "manufacturer")
         .build();
 
-    logger.info(query);
+    logger.info(SQLQuery);
 
 Prints out:
 
@@ -209,13 +209,13 @@ DELETE index and DELETE database are also supported, but examples are trivial.
 
 #### Basic example
 
-    String query = deleteFrom()
+    String SQLQuery = deleteFrom()
         .table("address")
         .where(valueOf("city").equals("Helsinki)
             .or(valueOf("city").equals("Oulu")))
         .build();
 
-    logger.info(query);
+    logger.info(SQLQuery);
 
 Prints out:
 
@@ -227,11 +227,11 @@ Prints out:
 
 #### Basic example
 
-    String query = drop()
+    String SQLQuery = drop()
         .table("test_table")
         .build();
 
-    logger.info(query);
+    logger.info(SQLQuery);
 
 Prints out:
 
@@ -239,13 +239,13 @@ Prints out:
 
 ### <a name="parametrized"></a>Parametrized queries
 
-You should always use parametrized queries in untrusted environments, if your SQL query takes user input as parameters.
+You should always use parametrized queries in untrusted environments, if your SQL SQLQuery takes user input as parameters.
 
 You can create parametrized `INSERT`, `UPDATE`, `WHERE` and `HAVING` statements to use with prepared statements.
 
 #### INSERT statement
 
-    String query = insertInto()
+    String SQLQuery = insertInto()
         .table("person")
         .columns("id", "birthdate", "firstname", "lastname", "age")
         .values()
@@ -256,18 +256,18 @@ You can create parametrized `INSERT`, `UPDATE`, `WHERE` and `HAVING` statements 
             .value("?")
         .build();
 
-        logger.info(query);
+        logger.info(SQLQuery);
 
 Prints out:
 
     INSERT INTO person (id, birthdate, firstname, lastname, age)
     VALUES (?, ?, ?, ?, ?)
 
-Now you can use this query with prepared statement:
+Now you can use this SQLQuery with prepared statement:
 
     Connection conn = DriverManager.getConnection(path, user, password);  
 
-    PreparedStatement stmt = conn.prepareStatement(query);  
+    PreparedStatement stmt = conn.prepareStatement(SQLQuery);  
     stmt.setInt(1, 1);  
     stmt.setString(2, "2021-05-20");  
     stmt.setString(3, "Miika");
@@ -276,14 +276,14 @@ Now you can use this query with prepared statement:
 
 #### UPDATE statement
 
-    String query = update()
+    String SQLQuery = update()
         .table("person")
         .column("firstname").value("?")
         .column("lastname").value("?")
         .column("age").value("?")
         .build();
 
-        logger.info(query);
+        logger.info(SQLQuery);
 
 Prints out:
 
@@ -292,14 +292,14 @@ Prints out:
 
 #### WHERE clause in SELECT statement
 
-    String query = select()
+    String SQLQuery = select()
         .column("firstname")
         .from()
             .table("person");
         .where(valueOf("firstname").isIn("?", "?", "?"))
         .build();
 
-        logger.info(query);
+        logger.info(SQLQuery);
 
 Prints out:
 
