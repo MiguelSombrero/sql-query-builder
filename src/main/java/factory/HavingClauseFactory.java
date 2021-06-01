@@ -1,38 +1,47 @@
 package factory;
 
+import builder.statement.select.column.AggregateFunction;
 import query.SQLQuery;
 import builder.condition.Negation;
-import validation.Validator;
 
 public class HavingClauseFactory {
-    private static Validator validator = ValidatorFactory.exceptionThrowingColumnValidator();
 
     public static Negation count(String column) {
-        return appendOperationAndReturn("COUNT", column);
+        SQLQuery query = createQuery();
+        AggregateFunction aggregateFunction = new AggregateFunction(query);
+        aggregateFunction.count(column);
+        return new Negation(query);
     }
 
     public static Negation sum(String column) {
-        return appendOperationAndReturn("SUM", column);
+        SQLQuery query = createQuery();
+        AggregateFunction aggregateFunction = new AggregateFunction(query);
+        aggregateFunction.sum(column);
+        return new Negation(query);
     }
 
     public static Negation avg(String column) {
-        return appendOperationAndReturn("AVG", column);
+        SQLQuery query = createQuery();
+        AggregateFunction aggregateFunction = new AggregateFunction(query);
+        aggregateFunction.avg(column);
+        return new Negation(query);
     }
 
     public static Negation max(String column) {
-        return appendOperationAndReturn("MAX", column);
+        SQLQuery query = createQuery();
+        AggregateFunction aggregateFunction = new AggregateFunction(query);
+        aggregateFunction.max(column);
+        return new Negation(query);
     }
 
     public static Negation min(String column) {
-        return appendOperationAndReturn("MIN", column);
+        SQLQuery query = createQuery();
+        AggregateFunction aggregateFunction = new AggregateFunction(query);
+        aggregateFunction.min(column);
+        return new Negation(query);
     }
 
-    private static Negation appendOperationAndReturn(String operation, String column) {
-        validator.validate(column);
-        return new Negation(createQuery(operation + "(" + column + ")"));
-    }
-
-    private static SQLQuery createQuery(String clause) {
-        return new SQLQuery(new StringBuilder(clause));
+    private static SQLQuery createQuery() {
+        return new SQLQuery(new StringBuilder());
     }
 }

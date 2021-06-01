@@ -1,16 +1,16 @@
 package builder.statement.select.column;
 
-import builder.utils.ColumnStringAppender;
+import builder.utils.StringAppender;
 import query.SelectQuery;
 
 public abstract class ColumnTemplate {
-    private ColumnStringAppender columnStringAppender;
+    private StringAppender stringAppender;
     private AggregateFunction aggregateFunction;
     protected SelectQuery query;
 
     public ColumnTemplate(SelectQuery query) {
         this.query = query;
-        this.columnStringAppender = new ColumnStringAppender(query);
+        this.stringAppender = new StringAppender(query);
         this.aggregateFunction = new AggregateFunction(query);
     }
 
@@ -30,7 +30,7 @@ public abstract class ColumnTemplate {
      */
     public Column column(String column) {
         addCommaAfterFirstValue();
-        columnStringAppender.validateAndAppend(column);
+        stringAppender.validateAndAppend(column);
         return new Column(query);
     }
 

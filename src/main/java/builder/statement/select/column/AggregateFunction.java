@@ -1,15 +1,15 @@
 package builder.statement.select.column;
 
-import builder.utils.ColumnStringAppender;
-import query.SelectQuery;
+import builder.utils.StringAppender;
+import query.Query;
 
 public class AggregateFunction {
-    private ColumnStringAppender columnStringAppender;
-    private SelectQuery query;
+    private StringAppender stringAppender;
+    private Query query;
 
-    public AggregateFunction(SelectQuery query) {
+    public AggregateFunction(Query query) {
         this.query = query;
-        this.columnStringAppender = new ColumnStringAppender(query);
+        this.stringAppender = new StringAppender(query);
     }
 
     /**
@@ -23,7 +23,7 @@ public class AggregateFunction {
     }
 
     public void countAll() {
-        applyAll("COUNT");
+        query.append("COUNT(*)");
     }
 
     /**
@@ -69,13 +69,8 @@ public class AggregateFunction {
     private void applyAggregate(String function, String toColumn) {
         query.append(function);
         query.append("(");
-        columnStringAppender.validateAndAppend(toColumn);
+        stringAppender.validateAndAppend(toColumn);
         query.append(")");
-    }
-
-    private void applyAll(String function) {
-        query.append(function);
-        query.append("(*)");
     }
 
 }

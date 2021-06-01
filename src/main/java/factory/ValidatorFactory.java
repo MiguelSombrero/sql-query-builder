@@ -13,21 +13,12 @@ public class ValidatorFactory {
         return new ExceptionThrowingValidator(stringValidator());
     }
 
-    public static Validator exceptionThrowingColumnValidator() {
-        return new ExceptionThrowingValidator(
-                new OrValidator(stringValidator(), wildCardAllColumnsValidator()));
-    }
-
     public static Validator stringValidator() {
         return new StringPatternValidator();
     }
 
     public static Validator dateValidator() {
         return new DatePatternValidator();
-    }
-
-    public static Validator wildCardAllColumnsValidator() {
-        return new WildCardValidator("*");
     }
 
     public static Validator wildCardParameterValidator() {

@@ -79,6 +79,23 @@ public class ColumnTest extends DatabaseTestBaseClass {
     }
 
     @Test
+    public void testSelectAll() throws SQLException {
+        SelectQuery query = selectQueryFactory
+                .select()
+                    .all()
+                .from()
+                    .table("person")
+                .build();
+
+        assertEquals("SELECT * FROM person", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 3);
+        assertRowLength(result, 5);
+    }
+
+    @Test
     public void testSelectCount() throws SQLException {
         SelectQuery query = selectQueryFactory
                 .select()
@@ -88,6 +105,23 @@ public class ColumnTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("SELECT COUNT(age) FROM person", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 1);
+        assertRowLength(result, 1);
+    }
+
+    @Test
+    public void testSelectCountAll() throws SQLException {
+        SelectQuery query = selectQueryFactory
+                .select()
+                    .countAll()
+                .from()
+                    .table("person")
+                .build();
+
+        assertEquals("SELECT COUNT(*) FROM person", query.toString());
 
         List<Row> result = query.execute();
 
@@ -169,7 +203,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
                 .select()
                     .min("age")
                     .max("birthdate")
-                    .count("*")
+                    .countAll()
                 .from()
                     .table("person")
                 .groupBy()
@@ -191,7 +225,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
                     .column("lastname").alias("last")
                     .min("age").alias("minAge")
                     .column("firstname").alias("first")
-                    .count("*").alias("count")
+                    .countAll().alias("count")
                 .from()
                     .table("person")
                 .groupBy()
@@ -207,7 +241,17 @@ public class ColumnTest extends DatabaseTestBaseClass {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testSelectFisrtColumnWithSQLInjection() {
+    public void testSelectColumnWithParameter() {
+        selectQueryFactory
+                .select()
+                    .column("*")
+                .from()
+                    .table("person")
+                .build();
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testSelectFirstColumnWithSQLInjection() {
         selectQueryFactory
                 .select()
                 .column(";DROP")

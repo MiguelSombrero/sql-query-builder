@@ -23,7 +23,7 @@ public class HavingTest extends DatabaseTestBaseClass {
 
         this.having = selectQueryFactory
                 .select()
-                .column("*")
+                    .all()
                 .from()
                     .table("person")
                 .groupBy()

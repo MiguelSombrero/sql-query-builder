@@ -23,7 +23,7 @@ public class SubSQLQueryAppenderTest {
     public void testAppendSubQuery() {
         SQLQuery SQLQuery = new SQLQuery(new StringBuilder());
         SubQueryAppender subQueryAppender = new SubQueryAppender(SQLQuery);
-        Table table = selectQueryFactory.select().column("*").from().table("person");
+        Table table = selectQueryFactory.select().all().from().table("person");
         subQueryAppender.appendConditionWithSubQuery("ALL ", table);
         assertEquals("ALL (SELECT * FROM person)", SQLQuery.build());
     }

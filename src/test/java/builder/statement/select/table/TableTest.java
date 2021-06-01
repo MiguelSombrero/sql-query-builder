@@ -1,6 +1,7 @@
 package builder.statement.select.table;
 
 import builder.statement.select.column.Column;
+import builder.statement.select.column.ToFrom;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 import factory.SelectQueryFactory;
@@ -15,7 +16,7 @@ import static org.junit.Assert.assertEquals;
 
 public class TableTest extends DatabaseTestBaseClass {
     private SelectQueryFactory selectQueryFactory;
-    private Column column;
+    private ToFrom column;
 
     @Before
     public void setUpQuery() {
@@ -25,7 +26,7 @@ public class TableTest extends DatabaseTestBaseClass {
 
         this.column = selectQueryFactory
                 .select()
-                .column("*");
+                    .all();
     }
 
     @Test
@@ -56,7 +57,7 @@ public class TableTest extends DatabaseTestBaseClass {
                 .from()
                     .sub(selectQueryFactory
                             .select()
-                                .column("*")
+                                .all()
                             .from()
                                 .table("person")
                             .where(valueOf("age").greaterThan(20))

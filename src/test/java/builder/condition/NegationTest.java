@@ -83,7 +83,7 @@ public class NegationTest extends DatabaseTestBaseClass {
                         .not()
                         .isInSub(selectQueryFactory
                             .select()
-                                .column("*")
+                                .all()
                             .from()
                                 .table("student")
                             .where(valueOf("age").greaterThan(20))))

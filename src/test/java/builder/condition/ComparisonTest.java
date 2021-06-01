@@ -412,7 +412,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
         Query query = this.table
                 .where(valueOf("lastname").isInSub(selectQueryFactory
                     .select()
-                        .column("*")
+                        .all()
                     .from().table("student")
                     .where(valueOf("age").greaterThan(20))))
                 .build();
@@ -425,7 +425,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
         Query query = this.table
                 .where(exists(selectQueryFactory
                         .select()
-                        .column("*")
+                            .all()
                         .from().table("student")
                         .where(valueOf("age").greaterThan(20))))
                 .build();
@@ -438,7 +438,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
         Query query = this.table
                 .where(notExists(selectQueryFactory
                         .select()
-                        .column("*")
+                            .all()
                         .from().table("student")
                         .where(valueOf("age").greaterThan(20))))
                 .build();

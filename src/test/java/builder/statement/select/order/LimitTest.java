@@ -25,7 +25,7 @@ public class LimitTest extends DatabaseTestBaseClass {
 
         this.table = selectQueryFactory
                 .select()
-                    .column("*")
+                    .all()
                 .from()
                     .table("person");
     }

@@ -125,7 +125,7 @@ public class InsertTest extends DatabaseTestBaseClass {
                 .table("person")
                 .sub(selectQueryFactory
                         .select()
-                            .column("*")
+                            .all()
                         .from()
                             .table("student")
                         .where(valueOf("age").lesserThan(18))
