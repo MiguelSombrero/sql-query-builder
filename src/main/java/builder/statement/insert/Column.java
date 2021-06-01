@@ -1,15 +1,15 @@
 package builder.statement.insert;
 
-import query.SQLQuery;
+import query.DMLQuery;
 import builder.TerminalOperation;
 import builder.statement.select.SelectQueryBuilder;
 
 public class Column {
 
-    protected SQLQuery SQLQuery;
+    protected DMLQuery query;
 
-    public Column(SQLQuery SQLQuery) {
-        this.SQLQuery = SQLQuery;
+    public Column(DMLQuery query) {
+        this.query = query;
     }
 
     /**
@@ -20,8 +20,8 @@ public class Column {
      * statement
      */
     public FirstValue values() {
-        SQLQuery.append("VALUES (");
-        return new FirstValue(SQLQuery);
+        query.append("VALUES (");
+        return new FirstValue(query);
     }
 
     /**
@@ -34,7 +34,7 @@ public class Column {
      * to terminate query building
      */
     public TerminalOperation sub(SelectQueryBuilder subQuery) {
-        SQLQuery.append(subQuery.build().toString());
-        return new TerminalOperation(SQLQuery);
+        query.append(subQuery.build().toString());
+        return new TerminalOperation(query);
     }
 }

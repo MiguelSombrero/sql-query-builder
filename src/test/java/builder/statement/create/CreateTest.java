@@ -1,54 +1,56 @@
 package builder.statement.create;
 
+import factory.QueryFactory;
+import query.Query;
+import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.SQLException;
 
-import static factory.QueryFactory.create;
-import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
+
 
 public class CreateTest extends DatabaseTestBaseClass {
+    private QueryFactory queryFactory;
 
     @Before
     public void setUp() {
         initializeDatabase();
+        queryFactory = new QueryFactory(DatabaseConnection.getDataSource());
     }
 
     @Test
     public void testCreateDatabase() {
-        String query = create()
+        Query query = queryFactory.create()
                 .database("test_db")
                 .build();
 
-        assertEquals("CREATE DATABASE test_db", query);
-        // command not supported in H2?
-        // assertThatQueryIsValidSQL(query);
+        assertEquals("CREATE DATABASE test_db", query.toString());
     }
 
     @Test
     public void testCreateIndex() throws SQLException {
-        String query = create()
+        Query query = queryFactory.create()
                 .index("person_index")
                 .on("person")
                 .columns("id", "firstname", "lastname")
                 .build();
 
-        assertEquals("CREATE INDEX person_index ON person (id, firstname, lastname)", query);
-        assertThatQueryIsValidSQL(query);
+        assertEquals("CREATE INDEX person_index ON person (id, firstname, lastname)", query.toString());
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testCreateDatabaseWithSQLInjection() {
-         create()
+         queryFactory.create()
                 .database(";DROP")
                 .build();
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testCreateIndexWithSQLInjection() {
-        create()
+        queryFactory.create()
                 .index(";DROP")
                 .on("person")
                 .columns("id", "firstname", "lastname")
@@ -57,7 +59,7 @@ public class CreateTest extends DatabaseTestBaseClass {
 
     @Test(expected = IllegalArgumentException.class)
     public void testCreateIndexOnWithSQLInjection()  {
-        create()
+        queryFactory.create()
                 .index("person_index")
                 .on(";DROP")
                 .columns("id", "firstname", "lastname")
@@ -66,7 +68,7 @@ public class CreateTest extends DatabaseTestBaseClass {
 
     @Test(expected = IllegalArgumentException.class)
     public void testCreateIndexOnColumnsWithSQLInjection()  {
-        create()
+        queryFactory.create()
                 .index("person_index")
                 .on("person")
                 .columns("id", ";DROP", "lastname")

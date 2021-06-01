@@ -1,12 +1,12 @@
 package builder.statement.create.table.column;
 
-import query.SQLQuery;
+import query.DDLQuery;
 import builder.statement.create.table.foreignkey.ForeignKey;
 
 public class Column extends ForeignKey {
 
-    public Column(SQLQuery SQLQuery) {
-        super(SQLQuery);
+    public Column(DDLQuery query) {
+        super(query);
     }
 
     /**
@@ -20,8 +20,8 @@ public class Column extends ForeignKey {
      * append column type to selected column
      */
     public ColumnType column(String column) {
-        SQLQuery.append(", ");
+        query.append(", ");
         stringAppender.validateAndAppend(column);
-        return new ColumnType(SQLQuery);
+        return new ColumnType(query);
     }
 }

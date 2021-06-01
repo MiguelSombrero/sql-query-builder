@@ -1,16 +1,16 @@
 package builder.statement.update;
 
-import query.SQLQuery;
+import query.DMLQuery;
 import builder.utils.StringAppender;
 
 public class Table {
     private StringAppender stringAppender;
 
-    private SQLQuery SQLQuery;
+    private DMLQuery query;
 
-    public Table(SQLQuery SQLQuery) {
-        this.SQLQuery = SQLQuery;
-        this.stringAppender = new StringAppender(SQLQuery);
+    public Table(DMLQuery query) {
+        this.query = query;
+        this.stringAppender = new StringAppender(query);
     }
 
     /**
@@ -24,7 +24,7 @@ public class Table {
      */
     public FirstColumn table(String table) {
         stringAppender.validateAndAppend(table);
-        SQLQuery.append(" SET ");
-        return new FirstColumn(SQLQuery);
+        query.append(" SET ");
+        return new FirstColumn(query);
     }
 }

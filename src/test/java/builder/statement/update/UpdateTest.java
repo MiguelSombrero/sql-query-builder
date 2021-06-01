@@ -1,7 +1,9 @@
 package builder.statement.update;
 
-import testutils.DatabaseTestBaseClass;
 import factory.QueryFactory;
+import query.DMLQuery;
+import testutils.DatabaseConnection;
+import testutils.DatabaseTestBaseClass;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,51 +13,50 @@ import static factory.WhereClauseFactory.valueOf;
 import static org.junit.Assert.assertEquals;
 
 public class UpdateTest extends DatabaseTestBaseClass {
+    private QueryFactory queryFactory;
 
     @Before
     public void setUp() {
         initializeDatabase();
+        queryFactory = new QueryFactory(DatabaseConnection.getDataSource());
     }
 
     @Test
     public void testUpdateIntegerValue() throws SQLException {
-        String query = QueryFactory
+        DMLQuery query = queryFactory
                 .update()
                 .table("person")
                     .column("age").value(50)
                 .build();
 
-        assertEquals("UPDATE person SET age = 50", query);
-        assertThatQueryIsValidSQL(query);
+        assertEquals("UPDATE person SET age = 50", query.toString());
     }
 
     @Test
     public void testUpdateDoubleValue() throws SQLException {
-        String query = QueryFactory
+        DMLQuery query = queryFactory
                 .update()
                 .table("person")
                 .column("age").value(50.5)
                 .build();
 
-        assertEquals("UPDATE person SET age = 50.5", query);
-        assertThatQueryIsValidSQL(query);
+        assertEquals("UPDATE person SET age = 50.5", query.toString());
     }
 
     @Test
     public void testUpdateStringValue() throws SQLException {
-        String query = QueryFactory
+        DMLQuery query = queryFactory
                 .update()
                 .table("person")
                     .column("firstname").value("Miika")
                 .build();
 
-        assertEquals("UPDATE person SET firstname = 'Miika'", query);
-        assertThatQueryIsValidSQL(query);
+        assertEquals("UPDATE person SET firstname = 'Miika'", query.toString());
     }
 
     @Test
     public void testUpdateMultipleValues() throws SQLException {
-        String query = QueryFactory
+        DMLQuery query = queryFactory
                 .update()
                 .table("person")
                     .column("firstname").value("Miika")
@@ -63,13 +64,12 @@ public class UpdateTest extends DatabaseTestBaseClass {
                     .column("age").value(50)
                 .build();
 
-        assertEquals("UPDATE person SET firstname = 'Miika', lastname = 'Somero', age = 50", query);
-        assertThatQueryIsValidSQL(query);
+        assertEquals("UPDATE person SET firstname = 'Miika', lastname = 'Somero', age = 50", query.toString());
     }
 
     @Test
     public void testUpdateWithCondition() throws SQLException {
-        String query = QueryFactory
+        DMLQuery query = queryFactory
                 .update()
                 .table("person")
                     .column("age").value(50)
@@ -77,13 +77,12 @@ public class UpdateTest extends DatabaseTestBaseClass {
                         .or(valueOf("id").equals(2)))
                 .build();
 
-        assertEquals("UPDATE person SET age = 50 WHERE id = 1 OR id = 2", query);
-        assertThatQueryIsValidSQL(query);
+        assertEquals("UPDATE person SET age = 50 WHERE id = 1 OR id = 2", query.toString());
     }
 
     @Test
     public void testUpdateMultipleValuesWithParameters() {
-        String query = QueryFactory
+        DMLQuery query = queryFactory
                 .update()
                 .table("person")
                 .column("firstname").value("?")
@@ -91,12 +90,12 @@ public class UpdateTest extends DatabaseTestBaseClass {
                 .column("age").value("?")
                 .build();
 
-        assertEquals("UPDATE person SET firstname = ?, lastname = ?, age = ?", query);
+        assertEquals("UPDATE person SET firstname = ?, lastname = ?, age = ?", query.toString());
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testUpdateTableWithSQLInjection() {
-        QueryFactory
+        queryFactory
                 .update()
                 .table(";DROP")
                 .column("firstname").value("Miika")
@@ -107,7 +106,7 @@ public class UpdateTest extends DatabaseTestBaseClass {
 
     @Test(expected = IllegalArgumentException.class)
     public void testUpdateFirstColumnWithSQLInjection() {
-        QueryFactory
+        queryFactory
                 .update()
                 .table("person")
                 .column("--DROP").value("Miika")
@@ -118,7 +117,7 @@ public class UpdateTest extends DatabaseTestBaseClass {
 
     @Test(expected = IllegalArgumentException.class)
     public void testUpdateColumnWithSQLInjection() {
-        QueryFactory
+        queryFactory
                 .update()
                 .table("person")
                 .column("firstname").value("Miika")
@@ -129,7 +128,7 @@ public class UpdateTest extends DatabaseTestBaseClass {
 
     @Test(expected = IllegalArgumentException.class)
     public void testUpdateValueWithSQLInjection() {
-        QueryFactory
+        queryFactory
                 .update()
                 .table("person")
                     .column("firstname").value("Miika")
@@ -140,7 +139,7 @@ public class UpdateTest extends DatabaseTestBaseClass {
 
     @Test(expected = IllegalArgumentException.class)
     public void testUpdateValueWithParameterInColumn() {
-        QueryFactory
+        queryFactory
                 .update()
                 .table("person")
                 .column("firstname").value("Miika")

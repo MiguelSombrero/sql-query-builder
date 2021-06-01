@@ -1,13 +1,14 @@
 package builder.statement.delete;
 
-import query.SQLQuery;
+import builder.TerminalDMLOperation;
 import builder.TerminalOperation;
 import builder.condition.Condition;
+import query.DMLQuery;
 
-public class Where extends TerminalOperation {
+public class Where extends TerminalDMLOperation {
 
-    public Where(SQLQuery SQLQuery) {
-        super(SQLQuery);
+    public Where(DMLQuery query) {
+        super(query);
     }
 
     /**
@@ -20,8 +21,8 @@ public class Where extends TerminalOperation {
      * to terminate query building
      */
     public TerminalOperation where(Condition condition) {
-        SQLQuery.append(" WHERE ");
-        SQLQuery.append(condition.build());
-        return new TerminalOperation(SQLQuery);
+        query.append(" WHERE ");
+        query.append(condition.build().toString());
+        return new TerminalOperation(query);
     }
 }

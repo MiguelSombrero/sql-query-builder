@@ -14,9 +14,9 @@
 
 ## <a name="about"></a>About the design
 
-Factory class `QueryFactory` is used to create different queries. Factory creates `Query` object, which represents SQL (or any other) SQLQuery.
+Factory class `QueryFactory` is used to create different queries. Factory creates `Query` object, which represents SQL (or any other) query.
 
-`Query` is passed as a parameter to classes that defines methods for handling SQLQuery.  
+`Query` is passed as a parameter to classes that defines methods for handling query.  
 
 Classes are chained together using [builder pattern](https://en.wikipedia.org/wiki/Builder_pattern).
 
@@ -26,7 +26,7 @@ Package `/src/main/java/factory` contains all the factory classes to create quer
 
 Use factory class `QueryFactory` to build SQL queries. Factory classes `WhereClauseFactory` and `HavingClauseFactory` is used to build `WHERE` and `HAVING` clauses, that can be embedded in SQL queries.
 
-See detailed examples in [Examples](https://github.com/MiguelSombrero/sql-SQLQuery-builder/tree/develop/docs/examples.md) document.
+See detailed examples in [Examples](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/examples.md) document.
 
 ## <a name="validation"></a>User input validation
 
@@ -36,7 +36,7 @@ Package `/src/main/java/validation` contains validators for validating user inpu
 
 If this library is used in untrusted environment, it is highly recommended to use parametrized queries.
 
-Check out examples of building [parametrized queries](https://github.com/MiguelSombrero/sql-SQLQuery-builder/tree/develop/docs/examples.md#parametrized).
+Check out examples of building [parametrized queries](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/examples.md#parametrized).
 
 ## <a name="condition"></a>WHERE and HAVING conditions
 
@@ -46,7 +46,7 @@ Where and having clauses is used as embedded in another SQL statement by calling
 
 ### Class diagram
 
-![Condition_class_diagram](https://github.com/MiguelSombrero/sql-SQLQuery-builder/blob/develop/docs/where-class-diagram.jpg)
+![Condition_class_diagram](https://github.com/MiguelSombrero/sql-query-builder/blob/develop/docs/where-class-diagram.jpg)
 
 (For the convenience, diagram is showing only one overload of every method of `Comparison` class)
 
@@ -56,7 +56,7 @@ Package `/src/main/java/builder/statement/select` contains classes of `SELECT` q
 
 ### Class diagram
 
-![Select_class_diagram](https://github.com/MiguelSombrero/sql-SQLQuery-builder/blob/develop/docs/select-class-diagram.jpg)
+![Select_class_diagram](https://github.com/MiguelSombrero/sql-query-builder/blob/develop/docs/select-class-diagram.jpg)
 
 Create SELECT statement by calling `QueryFactory.select()...` or other select options.
 
@@ -66,7 +66,7 @@ Package `/src/main/java/builder/statement/insert` contains classes of `INSERT IN
 
 ### Class diagram
 
-![Insert_class_diagram](https://github.com/MiguelSombrero/sql-SQLQuery-builder/blob/develop/docs/insert-class-diagram.jpg)
+![Insert_class_diagram](https://github.com/MiguelSombrero/sql-query-builder/blob/develop/docs/insert-class-diagram.jpg)
 
 Create INSERT statement by calling `QueryFactory.inserInto()...`.
 
@@ -76,7 +76,7 @@ Package `/src/main/java/builder/statement/update` contains classes of `UPDATE` q
 
 ### Class diagram
 
-![Update_class_diagram](https://github.com/MiguelSombrero/sql-SQLQuery-builder/blob/develop/docs/update-class-diagram.jpg)
+![Update_class_diagram](https://github.com/MiguelSombrero/sql-query-builder/blob/develop/docs/update-class-diagram.jpg)
 
 Create UPDATE statement by calling `QueryFactory.update()...`.
 
@@ -86,7 +86,7 @@ Package `/src/main/java/builder/statement/create` contains classes of `CREATE` q
 
 ### Class diagram
 
-![Create_class_diagram](https://github.com/MiguelSombrero/sql-SQLQuery-builder/blob/develop/docs/create-class-diagram.jpg)
+![Create_class_diagram](https://github.com/MiguelSombrero/sql-query-builder/blob/develop/docs/create-class-diagram.jpg)
 
 Create CREATE statement by calling `QueryFactory.create()...`.
 
@@ -96,7 +96,7 @@ Package `/src/main/java/builder/statement/delete` contains classes of `DELETE` q
 
 ### Class diagram
 
-![Delete_class_diagram](https://github.com/MiguelSombrero/sql-SQLQuery-builder/blob/develop/docs/delete-class-diagram.jpg)
+![Delete_class_diagram](https://github.com/MiguelSombrero/sql-query-builder/blob/develop/docs/delete-class-diagram.jpg)
 
 Create DELETE statement by calling `QueryFactory.deleteFrom()...`.
 
@@ -106,6 +106,6 @@ Package `/src/main/java/builder/statement/drop` ontains classes of `DROP` querie
 
 ### Class diagram
 
-![Drop_class_diagram](https://github.com/MiguelSombrero/sql-SQLQuery-builder/blob/develop/docs/drop-class-diagram.jpg)
+![Drop_class_diagram](https://github.com/MiguelSombrero/sql-query-builder/blob/develop/docs/drop-class-diagram.jpg)
 
 Create DROP statement by calling `QueryFactory.drop()...`.

@@ -1,24 +1,24 @@
 package builder.statement.insert;
 
 import builder.QueryBuilder;
-import query.SQLQuery;
+import query.DMLQuery;
 
 public class TerminalInsertOperation implements QueryBuilder {
 
-    protected SQLQuery SQLQuery;
+    protected DMLQuery query;
 
-    public TerminalInsertOperation(SQLQuery SQLQuery) {
-        this.SQLQuery = SQLQuery;
+    public TerminalInsertOperation(DMLQuery query) {
+        this.query = query;
     }
 
     /**
      * Closes query by appending ')' into statement.
      *
-     * @return String presentation of a query
-     * that was build
+     * @return InsertQuery object which can be used to
+     * execute INSERT queries
      */
-    public String build() {
-        SQLQuery.append(")");
-        return SQLQuery.build();
+    public DMLQuery build() {
+        query.append(")");
+        return this.query;
     }
 }

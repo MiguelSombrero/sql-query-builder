@@ -1,6 +1,6 @@
 package factory;
 
-import builder.statement.select.column.AggregateFunction;
+import builder.utils.AggregateFunction;
 import query.SQLQuery;
 import builder.condition.Negation;
 

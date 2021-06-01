@@ -1,9 +1,10 @@
 package builder.statement.insert;
 
+import query.DMLQuery;
+import query.Query;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 import factory.QueryFactory;
-import factory.SelectQueryFactory;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,17 +14,17 @@ import static factory.WhereClauseFactory.valueOf;
 import static org.junit.Assert.assertEquals;
 
 public class InsertTest extends DatabaseTestBaseClass {
-    private SelectQueryFactory selectQueryFactory;
+    private QueryFactory queryFactory;
 
     @Before
     public void setUp() throws SQLException {
         initializeDatabase();
-        selectQueryFactory = new SelectQueryFactory(DatabaseConnection.getDataSource());
+        queryFactory = new QueryFactory(DatabaseConnection.getDataSource());
     }
 
     @Test
     public void testInsertOneValue() throws SQLException {
-        String query = QueryFactory
+        DMLQuery query = queryFactory
                 .insertInto()
                 .table("person")
                 .columns("id")
@@ -31,13 +32,12 @@ public class InsertTest extends DatabaseTestBaseClass {
                     .value(100)
                 .build();
 
-        assertEquals("INSERT INTO person (id) VALUES (100)", query);
-        assertThatQueryIsValidSQL(query);
+        assertEquals("INSERT INTO person (id) VALUES (100)", query.toString());
     }
 
     @Test
     public void testInsertMultipleValues() throws SQLException {
-        String query = QueryFactory
+        DMLQuery query = queryFactory
                 .insertInto()
                 .table("person")
                 .columns("id", "birthdate", "firstname", "lastname", "age")
@@ -49,15 +49,13 @@ public class InsertTest extends DatabaseTestBaseClass {
                     .value(40.5)
                 .build();
 
-        logger.info(query);
+        assertEquals("INSERT INTO person (id, birthdate, firstname, lastname, age) VALUES (101, '1980-04-12', 'Miika', 'Somero', 40.5)", query.toString());
 
-        assertEquals("INSERT INTO person (id, birthdate, firstname, lastname, age) VALUES (101, '1980-04-12', 'Miika', 'Somero', 40.5)", query);
-        assertThatQueryIsValidSQL(query);
     }
 
     @Test
     public void testInsertMultipleValuesWithParameters() {
-        String query = QueryFactory
+        DMLQuery query = queryFactory
                 .insertInto()
                 .table("person")
                     .columns("id", "birthdate", "firstname", "lastname", "age")
@@ -69,18 +67,16 @@ public class InsertTest extends DatabaseTestBaseClass {
                     .value("?")
                 .build();
 
-        logger.info(query);
-
-        assertEquals("INSERT INTO person (id, birthdate, firstname, lastname, age) VALUES (?, ?, ?, ?, ?)", query);
+        assertEquals("INSERT INTO person (id, birthdate, firstname, lastname, age) VALUES (?, ?, ?, ?, ?)", query.toString());
     }
 
     @Test
     public void testInsertQuery() throws SQLException {
-        String query = QueryFactory
+        Query query = queryFactory
                 .insertInto()
                 .table("person")
                 .columns("id", "birthdate", "firstname", "lastname", "age")
-                .sub(selectQueryFactory
+                .sub(queryFactory
                         .select()
                             .column("id")
                             .column("birthdate")
@@ -93,15 +89,13 @@ public class InsertTest extends DatabaseTestBaseClass {
                 )
                 .build();
 
-        logger.info(query);
+        assertEquals("INSERT INTO person (id, birthdate, firstname, lastname, age) SELECT id, birthdate, firstname, lastname, age FROM student WHERE age > 18", query.toString());
 
-        assertEquals("INSERT INTO person (id, birthdate, firstname, lastname, age) SELECT id, birthdate, firstname, lastname, age FROM student WHERE age > 18", query);
-        assertThatQueryIsValidSQL(query);
     }
 
     @Test
     public void testInsertMultipleValuesWithoutSpecifyingColumns() throws SQLException {
-        String query = QueryFactory
+        DMLQuery query = queryFactory
                 .insertInto()
                 .table("person")
                 .values()
@@ -112,18 +106,15 @@ public class InsertTest extends DatabaseTestBaseClass {
                     .value(40)
                 .build();
 
-        logger.info(query);
-
-        assertEquals("INSERT INTO person VALUES (102, '1980-04-12', 'Miika', 'Somero', 40)", query);
-        assertThatQueryIsValidSQL(query);
+        assertEquals("INSERT INTO person VALUES (102, '1980-04-12', 'Miika', 'Somero', 40)", query.toString());
     }
 
     @Test
     public void testInsertQueryWithoutSpecifyingColumns() throws SQLException {
-        String query = QueryFactory
+        Query query = queryFactory
                 .insertInto()
                 .table("person")
-                .sub(selectQueryFactory
+                .sub(queryFactory
                         .select()
                             .all()
                         .from()
@@ -132,15 +123,12 @@ public class InsertTest extends DatabaseTestBaseClass {
                 )
                 .build();
 
-        logger.info(query);
-
-        assertEquals("INSERT INTO person SELECT * FROM student WHERE age < 18", query);
-        assertThatQueryIsValidSQL(query);
+        assertEquals("INSERT INTO person SELECT * FROM student WHERE age < 18", query.toString());
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testInsertWithSQLInjection() {
-        String query = QueryFactory
+        queryFactory
                 .insertInto()
                 .table(";DROP")
                     .columns("id")
@@ -151,7 +139,7 @@ public class InsertTest extends DatabaseTestBaseClass {
 
     @Test(expected = IllegalArgumentException.class)
     public void testInsertColumnsWithSQLInjection() {
-        String query = QueryFactory
+        queryFactory
                 .insertInto()
                 .table("person")
                     .columns("id", ";DROP")
@@ -162,7 +150,7 @@ public class InsertTest extends DatabaseTestBaseClass {
 
     @Test(expected = IllegalArgumentException.class)
     public void testInsertValuesWithSQLInjection() {
-        String query = QueryFactory
+        queryFactory
                 .insertInto()
                 .table("person")
                     .columns("firstname")
@@ -173,7 +161,7 @@ public class InsertTest extends DatabaseTestBaseClass {
 
     @Test(expected = IllegalArgumentException.class)
     public void testInsertValuesWithParameterInColumn() {
-        String query = QueryFactory
+        queryFactory
                 .insertInto()
                 .table("person")
                     .columns("?")

@@ -1,13 +1,13 @@
 package builder.statement.create.table.column;
 
-import query.SQLQuery;
+import query.DDLQuery;
 
 public class ColumnType {
 
-    private SQLQuery SQLQuery;
+    private DDLQuery query;
 
-    public ColumnType(SQLQuery SQLQuery) {
-        this.SQLQuery = SQLQuery;
+    public ColumnType(DDLQuery query) {
+        this.query = query;
     }
 
     /**
@@ -20,8 +20,8 @@ public class ColumnType {
      * create constraints in selected column
      */
     public Constraint type(DataType dataType) {
-        SQLQuery.append(" ");
-        SQLQuery.append(dataType.getType());
-        return new Constraint(SQLQuery);
+        query.append(" ");
+        query.append(dataType.getType());
+        return new Constraint(query);
     }
 }

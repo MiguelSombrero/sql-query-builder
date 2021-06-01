@@ -3,7 +3,7 @@ package builder.condition;
 import builder.statement.select.table.Table;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
-import factory.SelectQueryFactory;
+import factory.QueryFactory;
 import org.junit.Before;
 import org.junit.Test;
 import query.Query;
@@ -14,16 +14,16 @@ import static factory.WhereClauseFactory.valueOf;
 import static org.junit.Assert.assertEquals;
 
 public class NegationTest extends DatabaseTestBaseClass {
-    private SelectQueryFactory selectQueryFactory;
+    private QueryFactory queryFactory;
     private Table table;
 
     @Before
     public void setUpQuery() throws SQLException {
         initializeDatabase();
 
-        selectQueryFactory = new SelectQueryFactory(DatabaseConnection.getDataSource());
+        queryFactory = new QueryFactory(DatabaseConnection.getDataSource());
 
-        this.table = selectQueryFactory
+        this.table = queryFactory
                 .select()
                 .column("firstname")
                 .from()
@@ -81,7 +81,7 @@ public class NegationTest extends DatabaseTestBaseClass {
         Query query = this.table
                 .where(valueOf("lastname")
                         .not()
-                        .isInSub(selectQueryFactory
+                        .isInSub(queryFactory
                             .select()
                                 .all()
                             .from()

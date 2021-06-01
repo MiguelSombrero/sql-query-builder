@@ -1,7 +1,10 @@
 package builder.statement.delete;
 
-import testutils.DatabaseTestBaseClass;
 import factory.QueryFactory;
+import query.DMLQuery;
+import query.Query;
+import testutils.DatabaseConnection;
+import testutils.DatabaseTestBaseClass;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,51 +14,51 @@ import static factory.WhereClauseFactory.valueOf;
 import static org.junit.Assert.assertEquals;
 
 public class DeleteTest extends DatabaseTestBaseClass {
+    private QueryFactory queryFactory;
 
     @Before
     public void setUp() {
         initializeDatabase();
+        queryFactory = new QueryFactory(DatabaseConnection.getDataSource());
     }
 
     @Test
     public void testDeleteFromOneTable() throws SQLException {
-        String query = QueryFactory
+        DMLQuery query = queryFactory
                 .deleteFrom()
                     .table("address")
                 .build();
 
-        assertEquals("DELETE FROM address", query);
-        assertThatQueryIsValidSQL(query);
+        assertEquals("DELETE FROM address", query.toString());
+
     }
 
     @Test
     public void testDeleteWithCondition() throws SQLException {
-        String query = QueryFactory
+        Query query = queryFactory
                 .deleteFrom()
                     .table("address")
                 .where(valueOf("person_id").equals(1))
                 .build();
 
-        assertEquals("DELETE FROM address WHERE person_id = 1", query);
-        assertThatQueryIsValidSQL(query);
+        assertEquals("DELETE FROM address WHERE person_id = 1", query.toString());
     }
 
     @Test
     public void testDeleteWithMultipleCondition() throws SQLException {
-        String query = QueryFactory
+        Query query = queryFactory
                 .deleteFrom()
                     .table("address")
                 .where(valueOf("person_id").equals(1)
                         .and(valueOf("city").equals("Oulu")))
                 .build();
 
-        assertEquals("DELETE FROM address WHERE person_id = 1 AND city = 'Oulu'", query);
-        assertThatQueryIsValidSQL(query);
+        assertEquals("DELETE FROM address WHERE person_id = 1 AND city = 'Oulu'", query.toString());
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testDeleteTableWithSQLInjection() {
-        QueryFactory
+        queryFactory
                 .deleteFrom()
                     .table("; DROP TABLE address")
                 .build();

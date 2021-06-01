@@ -1,16 +1,16 @@
 package builder.statement.update;
 
-import query.SQLQuery;
-import builder.TerminalOperation;
+import builder.TerminalDMLOperation;
+import query.DMLQuery;
 import builder.condition.Condition;
 import builder.utils.StringAppender;
 
-public class Column extends TerminalOperation {
+public class Column extends TerminalDMLOperation {
     private StringAppender stringAppender;
 
-    public Column(SQLQuery SQLQuery) {
-        super(SQLQuery);
-        this.stringAppender = new StringAppender(SQLQuery);
+    public Column(DMLQuery query) {
+        super(query);
+        this.stringAppender = new StringAppender(query);
     }
 
     /**
@@ -23,10 +23,10 @@ public class Column extends TerminalOperation {
      * into selected column
      */
     public Value column(String column) {
-        SQLQuery.append(", ");
+        query.append(", ");
         stringAppender.validateAndAppend(column);
-        SQLQuery.append(" = ");
-        return new Value(SQLQuery);
+        query.append(" = ");
+        return new Value(query);
     }
 
     /**
@@ -37,9 +37,9 @@ public class Column extends TerminalOperation {
      * @return TerminalOperation which can be used only
      * to terminate query building
      */
-    public TerminalOperation where(Condition condition) {
-        SQLQuery.append(" WHERE ");
-        SQLQuery.append(condition.build());
-        return new TerminalOperation(SQLQuery);
+    public TerminalDMLOperation where(Condition condition) {
+        query.append(" WHERE ");
+        query.append(condition.build().toString());
+        return new TerminalDMLOperation(query);
     }
 }

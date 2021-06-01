@@ -1,6 +1,5 @@
 package builder.statement.select.order;
 
-import query.SQLQuery;
 import builder.utils.StringAppender;
 import query.SelectQuery;
 

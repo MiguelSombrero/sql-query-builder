@@ -24,7 +24,7 @@ public class JoinTable extends Grouper {
      */
     public Grouper where(Condition clause) {
         query.append(" WHERE ");
-        query.append(clause.build());
+        query.append(clause.build().toString());
         return new Grouper(query);
     }
 

@@ -1,5 +1,7 @@
 package builder;
 
+import query.Query;
+
 public interface QueryBuilder {
-    String build();
+    Query build();
 }

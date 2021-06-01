@@ -1,11 +1,11 @@
 package builder.statement.insert;
 
-import query.SQLQuery;
+import query.DMLQuery;
 
 public class FirstValue extends ValueTemplate {
 
-    public FirstValue(SQLQuery SQLQuery) {
-        super(SQLQuery);
+    public FirstValue(DMLQuery query) {
+        super(query);
     }
 
     @Override

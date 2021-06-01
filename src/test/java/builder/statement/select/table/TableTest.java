@@ -1,10 +1,9 @@
 package builder.statement.select.table;
 
-import builder.statement.select.column.Column;
 import builder.statement.select.column.ToFrom;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
-import factory.SelectQueryFactory;
+import factory.QueryFactory;
 import org.junit.Before;
 import org.junit.Test;
 import query.Query;
@@ -15,16 +14,16 @@ import static factory.WhereClauseFactory.valueOf;
 import static org.junit.Assert.assertEquals;
 
 public class TableTest extends DatabaseTestBaseClass {
-    private SelectQueryFactory selectQueryFactory;
+    private QueryFactory queryFactory;
     private ToFrom column;
 
     @Before
     public void setUpQuery() {
         initializeDatabase();
 
-        selectQueryFactory = new SelectQueryFactory(DatabaseConnection.getDataSource());
+        queryFactory = new QueryFactory(DatabaseConnection.getDataSource());
 
-        this.column = selectQueryFactory
+        this.column = queryFactory
                 .select()
                     .all();
     }
@@ -55,7 +54,7 @@ public class TableTest extends DatabaseTestBaseClass {
     public void testFromSubQuery() throws SQLException {
         Query query = this.column
                 .from()
-                    .sub(selectQueryFactory
+                    .sub(queryFactory
                             .select()
                                 .all()
                             .from()
@@ -170,7 +169,7 @@ public class TableTest extends DatabaseTestBaseClass {
     public void testSelectSubQueryAliasWithSQLInjection() throws SQLException {
         this.column
                 .from()
-                .sub(selectQueryFactory
+                .sub(queryFactory
                         .select()
                             .column("*")
                         .from()

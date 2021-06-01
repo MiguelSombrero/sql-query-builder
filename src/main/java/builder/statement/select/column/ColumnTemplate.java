@@ -1,5 +1,6 @@
 package builder.statement.select.column;
 
+import builder.utils.AggregateFunction;
 import builder.utils.StringAppender;
 import query.SelectQuery;
 

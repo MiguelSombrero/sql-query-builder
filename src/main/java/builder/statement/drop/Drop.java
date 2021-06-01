@@ -1,17 +1,17 @@
 package builder.statement.drop;
 
-import query.SQLQuery;
+import query.Query;
 import builder.TerminalOperation;
 import builder.utils.StringAppender;
 
 public class Drop {
     private StringAppender stringAppender;
 
-    private SQLQuery SQLQuery;
+    private Query query;
 
-    public Drop(SQLQuery SQLQuery) {
-        this.SQLQuery = SQLQuery;
-        this.stringAppender = new StringAppender(SQLQuery);
+    public Drop(Query query) {
+        this.query = query;
+        this.stringAppender = new StringAppender(query);
     }
 
     /**
@@ -24,9 +24,9 @@ public class Drop {
      * to terminate query building
      */
     public TerminalOperation table(String table) {
-        SQLQuery.append("TABLE ");
+        query.append("TABLE ");
         stringAppender.validateAndAppend(table);
-        return new TerminalOperation(SQLQuery);
+        return new TerminalOperation(query);
     }
 
     /**
@@ -39,8 +39,8 @@ public class Drop {
      * to terminate query building
      */
     public TerminalOperation database(String database) {
-        SQLQuery.append("DATABASE ");
+        query.append("DATABASE ");
         stringAppender.validateAndAppend(database);
-        return new TerminalOperation(SQLQuery);
+        return new TerminalOperation(query);
     }
 }

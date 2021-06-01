@@ -1,11 +1,11 @@
 package builder.statement.create.table.column;
 
-import query.SQLQuery;
+import query.DDLQuery;
 
 public class Constraint extends Column {
 
-    public Constraint(SQLQuery SQLQuery) {
-        super(SQLQuery);
+    public Constraint(DDLQuery query) {
+        super(query);
     }
 
     /**
@@ -57,7 +57,7 @@ public class Constraint extends Column {
     }
 
     private Constraint appendConstraint(String column) {
-        SQLQuery.append(column);
+        query.append(column);
         return this;
     }
 }

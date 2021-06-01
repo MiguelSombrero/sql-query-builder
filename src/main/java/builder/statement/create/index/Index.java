@@ -1,16 +1,17 @@
 package builder.statement.create.index;
 
+import query.DDLQuery;
 import query.SQLQuery;
 import builder.utils.StringAppender;
 
 public class Index {
     private StringAppender stringAppender;
 
-    private SQLQuery SQLQuery;
+    private DDLQuery query;
 
-    public Index(SQLQuery SQLQuery) {
-        this.SQLQuery = SQLQuery;
-        this.stringAppender = new StringAppender(SQLQuery);
+    public Index(DDLQuery query) {
+        this.query = query;
+        this.stringAppender = new StringAppender(query);
     }
 
     /**
@@ -24,8 +25,8 @@ public class Index {
      * table (column(s))' statement
      */
     public IndexedColumn on(String table) {
-        SQLQuery.append(" ON ");
+        query.append(" ON ");
         stringAppender.validateAndAppend(table);
-        return new IndexedColumn(SQLQuery);
+        return new IndexedColumn(query);
     }
 }

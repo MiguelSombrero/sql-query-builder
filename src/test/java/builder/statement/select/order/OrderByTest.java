@@ -3,7 +3,7 @@ package builder.statement.select.order;
 import builder.statement.select.table.Table;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
-import factory.SelectQueryFactory;
+import factory.QueryFactory;
 import org.junit.Before;
 import org.junit.Test;
 import query.Query;
@@ -20,9 +20,9 @@ public class OrderByTest extends DatabaseTestBaseClass {
     public void setUpQuery() {
         initializeDatabase();
 
-        SelectQueryFactory selectQueryFactory = new SelectQueryFactory(DatabaseConnection.getDataSource());
+        QueryFactory queryFactory = new QueryFactory(DatabaseConnection.getDataSource());
 
-        this.table = selectQueryFactory
+        this.table = queryFactory
                 .select()
                     .all()
                 .from()

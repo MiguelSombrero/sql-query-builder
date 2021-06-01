@@ -1,6 +1,5 @@
-package builder.statement.select.column;
+package builder.utils;
 
-import builder.utils.StringAppender;
 import query.Query;
 
 public class AggregateFunction {

@@ -1,14 +1,14 @@
 package builder.statement.insert;
 
-import query.SQLQuery;
+import query.DMLQuery;
 import builder.utils.StringAppender;
 
 public class Insert extends Column {
     private StringAppender stringAppender;
 
-    public Insert(SQLQuery SQLQuery) {
-        super(SQLQuery);
-        this.stringAppender = new StringAppender(SQLQuery);
+    public Insert(DMLQuery query) {
+        super(query);
+        this.stringAppender = new StringAppender(query);
     }
 
     /**
@@ -22,7 +22,7 @@ public class Insert extends Column {
      */
     public Column columns(String ...listOfColumns) {
         stringAppender.validateAndAppendList(listOfColumns);
-        SQLQuery.append(" ");
-        return new Column(SQLQuery);
+        query.append(" ");
+        return new Column(query);
     }
 }

@@ -1,12 +1,8 @@
-# sql-SQLQuery-builder
+# sql-query-builder
 
-![GitHub Actions](https://github.com/MiguelSombrero/sql-SQLQuery-builder/workflows/Java%20CI%20with%20Maven/badge.svg)
+![GitHub Actions](https://github.com/MiguelSombrero/sql-query-builder/workflows/Java%20CI%20with%20Maven/badge.svg)
 
-Sql SQLQuery builder is Java-library used for building SQL SQLQuery strings more easily. Syntax of the SQLQuery strings is intended to be compatible at least with MySQL.
-
-**Note that**
-- This library does not provide any data access methods. It simply builds strings that are valid SQL and can be used as a SQLQuery strings with some other framework/library.
-- You should always use parametrized queries in untrusted environments, if your SQL SQLQuery takes user input as parameters. Check out examples of building [parametrized queries](https://github.com/MiguelSombrero/sql-SQLQuery-builder/tree/develop/docs/examples.md#parametrized).
+Sql query builder is Java-library used for building SQL query strings more easily. Syntax of the SQL query strings is intended to be compatible at least with MySQL.
 
 ## Examples
 
