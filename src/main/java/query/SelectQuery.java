@@ -1,8 +1,8 @@
 package query;
 
+import database.Row;
+import database.RowHandler;
 import org.apache.commons.dbutils.QueryRunner;
-import org.apache.commons.dbutils.ResultSetHandler;
-import org.apache.commons.dbutils.handlers.ArrayListHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,10 +20,10 @@ public class SelectQuery extends QueryTemplate {
         this.run = new QueryRunner(dataSource);
     }
 
-    public List<Object[]> execute() throws SQLException {
-        ResultSetHandler<List<Object[]>> handler = new ArrayListHandler();
+    public List<Row> execute() throws SQLException {
+        RowHandler handler = new RowHandler();
 
-        List<Object[]> result;
+        List<Row> result;
 
         try {
             result = run.query(this.toString(), handler);

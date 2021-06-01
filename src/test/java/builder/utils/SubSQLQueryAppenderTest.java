@@ -1,6 +1,6 @@
 package builder.utils;
 
-import database.DatabaseConnection;
+import testutils.DatabaseConnection;
 import factory.SelectQueryFactory;
 import org.junit.Before;
 import query.SQLQuery;

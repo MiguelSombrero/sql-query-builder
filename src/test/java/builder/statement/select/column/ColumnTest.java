@@ -1,11 +1,11 @@
 package builder.statement.select.column;
 
-import database.DatabaseConnection;
-import database.DatabaseTestBaseClass;
+import database.Row;
+import testutils.DatabaseConnection;
+import testutils.DatabaseTestBaseClass;
 import factory.SelectQueryFactory;
 import org.junit.Before;
 import org.junit.Test;
-import query.Query;
 import query.SelectQuery;
 
 import java.sql.SQLException;
@@ -34,15 +34,16 @@ public class ColumnTest extends DatabaseTestBaseClass {
 
         assertEquals("SELECT lastname, age FROM person", query.toString());
 
-        List<Object[]> result = query.execute();
+        List<Row> result = query.execute();
 
-        assertEquals(3, result.size());
+        assertRowCount(result, 3);
+        assertRowLength(result, 2);
     }
 
     @Test
     public void testSelectTop() throws SQLException {
-        Query query = selectQueryFactory
-                .selectTop(100)
+        SelectQuery query = selectQueryFactory
+                .selectTop(2)
                     .column("lastname")
                     .column("age")
                     .column("firstname")
@@ -50,12 +51,17 @@ public class ColumnTest extends DatabaseTestBaseClass {
                     .table("person")
                 .build();
 
-        assertEquals("SELECT TOP 100 lastname, age, firstname FROM person", query.toString());
+        assertEquals("SELECT TOP 2 lastname, age, firstname FROM person", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 2);
+        assertRowLength(result, 3);
     }
 
     @Test
     public void testSelectDistinct() throws SQLException {
-        Query query = selectQueryFactory
+        SelectQuery query = selectQueryFactory
                 .selectDistinct()
                     .column("lastname")
                     .column("age")
@@ -65,11 +71,16 @@ public class ColumnTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("SELECT DISTINCT lastname, age, firstname FROM person", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 3);
+        assertRowLength(result, 3);
     }
 
     @Test
     public void testSelectCount() throws SQLException {
-        Query query = selectQueryFactory
+        SelectQuery query = selectQueryFactory
                 .select()
                     .count("age")
                 .from()
@@ -77,11 +88,16 @@ public class ColumnTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("SELECT COUNT(age) FROM person", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 1);
+        assertRowLength(result, 1);
     }
 
     @Test
     public void testSelectMin() throws SQLException {
-        Query query = selectQueryFactory
+        SelectQuery query = selectQueryFactory
                 .select()
                     .min("age")
                 .from()
@@ -89,11 +105,16 @@ public class ColumnTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("SELECT MIN(age) FROM person", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 1);
+        assertRowLength(result, 1);
     }
 
     @Test
     public void testSelectMax() throws SQLException {
-        Query query = selectQueryFactory
+        SelectQuery query = selectQueryFactory
                 .select()
                     .max("age")
                 .from()
@@ -101,11 +122,16 @@ public class ColumnTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("SELECT MAX(age) FROM person", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 1);
+        assertRowLength(result, 1);
     }
 
     @Test
     public void testSelectAvg() throws SQLException {
-        Query query = selectQueryFactory
+        SelectQuery query = selectQueryFactory
                 .select()
                     .avg("age")
                 .from()
@@ -113,11 +139,16 @@ public class ColumnTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("SELECT AVG(age) FROM person", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 1);
+        assertRowLength(result, 1);
     }
 
     @Test
     public void testSelectSum() throws SQLException {
-        Query query = selectQueryFactory
+        SelectQuery query = selectQueryFactory
                 .select()
                     .sum("age")
                 .from()
@@ -125,11 +156,16 @@ public class ColumnTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("SELECT SUM(age) FROM person", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 1);
+        assertRowLength(result, 1);
     }
 
     @Test
     public void testMultipleAggregateFunctions() throws SQLException {
-        Query query = selectQueryFactory
+        SelectQuery query = selectQueryFactory
                 .select()
                     .min("age")
                     .max("birthdate")
@@ -141,11 +177,16 @@ public class ColumnTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("SELECT MIN(age), MAX(birthdate), COUNT(*) FROM person GROUP BY firstname", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 3);
+        assertRowLength(result, 3);
     }
 
     @Test
     public void testMultipleColumnsWithAliases() throws SQLException {
-        Query query = selectQueryFactory
+        SelectQuery query = selectQueryFactory
                 .select()
                     .column("lastname").alias("last")
                     .min("age").alias("minAge")
@@ -153,10 +194,16 @@ public class ColumnTest extends DatabaseTestBaseClass {
                     .count("*").alias("count")
                 .from()
                     .table("person")
-                .groupBy().column("firstname")
+                .groupBy()
+                    .column("firstname")
                 .build();
 
         assertEquals("SELECT lastname AS last, MIN(age) AS minAge, firstname AS first, COUNT(*) AS count FROM person GROUP BY firstname", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 3);
+        assertRowLength(result, 4);
     }
 
     @Test(expected = IllegalArgumentException.class)

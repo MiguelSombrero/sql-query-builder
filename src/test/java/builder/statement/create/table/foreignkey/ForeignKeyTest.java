@@ -2,7 +2,7 @@ package builder.statement.create.table.foreignkey;
 
 import builder.statement.create.table.column.Constraint;
 import builder.statement.create.table.column.DataType;
-import database.DatabaseTestBaseClass;
+import testutils.DatabaseTestBaseClass;
 import org.junit.Before;
 import org.junit.Test;
 

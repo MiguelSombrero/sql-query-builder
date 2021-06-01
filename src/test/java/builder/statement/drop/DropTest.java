@@ -1,7 +1,7 @@
 package builder.statement.drop;
 
 import builder.statement.create.table.column.DataType;
-import database.DatabaseTestBaseClass;
+import testutils.DatabaseTestBaseClass;
 import factory.QueryFactory;
 import org.junit.Before;
 import org.junit.Test;

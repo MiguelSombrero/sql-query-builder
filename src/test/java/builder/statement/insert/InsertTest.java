@@ -1,7 +1,7 @@
 package builder.statement.insert;
 
-import database.DatabaseConnection;
-import database.DatabaseTestBaseClass;
+import testutils.DatabaseConnection;
+import testutils.DatabaseTestBaseClass;
 import factory.QueryFactory;
 import factory.SelectQueryFactory;
 import org.junit.Before;

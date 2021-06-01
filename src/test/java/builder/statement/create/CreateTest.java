@@ -1,6 +1,6 @@
 package builder.statement.create;
 
-import database.DatabaseTestBaseClass;
+import testutils.DatabaseTestBaseClass;
 import org.junit.Before;
 import org.junit.Test;
 

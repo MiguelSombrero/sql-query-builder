@@ -1,14 +1,16 @@
 package builder.statement.select.order;
 
 import builder.statement.select.table.Table;
-import database.DatabaseConnection;
-import database.DatabaseTestBaseClass;
+import database.Row;
+import query.SelectQuery;
+import testutils.DatabaseConnection;
+import testutils.DatabaseTestBaseClass;
 import factory.SelectQueryFactory;
 import org.junit.Before;
 import org.junit.Test;
-import query.Query;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import static factory.HavingClauseFactory.count;
 import static factory.WhereClauseFactory.valueOf;
@@ -32,17 +34,22 @@ public class GroupByTest extends DatabaseTestBaseClass {
 
     @Test
     public void testGroupBy() throws SQLException {
-        Query query = table
+        SelectQuery query = table
                 .groupBy()
                     .column("age")
                 .build();
 
         assertEquals("SELECT * FROM person GROUP BY age", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 3);
+        assertRowLength(result, 5);
     }
 
     @Test
     public void testMultipleGroupBy() throws SQLException {
-        Query query = table
+        SelectQuery query = table
                 .groupBy()
                     .column("age")
                     .column("firstname")
@@ -50,22 +57,32 @@ public class GroupByTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("SELECT * FROM person GROUP BY age, firstname, lastname", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 3);
+        assertRowLength(result, 5);
     }
 
     @Test
     public void testGroupByWhere() throws SQLException {
-        Query query = this.table
+        SelectQuery query = this.table
                 .where(valueOf("age").greaterThan(18))
                 .groupBy()
                     .column("lastname")
                 .build();
 
         assertEquals("SELECT * FROM person WHERE age > 18 GROUP BY lastname", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 3);
+        assertRowLength(result, 5);
     }
 
     @Test
     public void testMultipleGroupByHaving() throws SQLException {
-        Query query = table
+        SelectQuery query = table
                 .groupBy()
                     .column("age")
                     .column("firstname")
@@ -74,11 +91,15 @@ public class GroupByTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("SELECT * FROM person GROUP BY age, firstname, lastname HAVING COUNT(age) = 100", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 0);
     }
 
     @Test
     public void testMultipleGroupByHavingAndOrdering() throws SQLException {
-        Query query = table
+        SelectQuery query = table
                 .groupBy()
                     .column("age")
                     .column("firstname")
@@ -89,6 +110,10 @@ public class GroupByTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("SELECT * FROM person GROUP BY age, firstname, lastname HAVING COUNT(age) = 100 ORDER BY age ASC", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 0);
     }
 
     @Test(expected =IllegalArgumentException.class)

@@ -1,6 +1,6 @@
 package builder.statement.create.table.column;
 
-import database.DatabaseTestBaseClass;
+import testutils.DatabaseTestBaseClass;
 import org.junit.Before;
 import org.junit.Test;
 

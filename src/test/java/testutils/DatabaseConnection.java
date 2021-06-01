@@ -1,4 +1,4 @@
-package database;
+package testutils;
 
 import org.h2.jdbcx.JdbcDataSource;
 

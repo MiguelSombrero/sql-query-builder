@@ -203,7 +203,7 @@ Prints out:
         FOREIGN KEY (manufacturer_id) REFERENCES manufacturer(ID)
     )
 
-DELETE index and DELETE database are also supported, but examples are trivial.
+DELETE index and DELETE testutils are also supported, but examples are trivial.
 
 ### <a name="delete"></a>DELETE TABLE statement
 

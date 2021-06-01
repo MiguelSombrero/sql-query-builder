@@ -1,9 +1,13 @@
-package database;
+package testutils;
 
+import database.Row;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.*;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 public class DatabaseTestBaseClass {
     protected static Logger logger = LoggerFactory.getLogger(DatabaseTestBaseClass.class);
@@ -40,6 +44,14 @@ public class DatabaseTestBaseClass {
         } catch (Exception ex) {
             logger.info(ex.getLocalizedMessage());
         }
+    }
+
+    protected void assertRowCount(List<Row> result, int rows) {
+        assertEquals(rows, result.size());
+    }
+
+    protected void assertRowLength(List<Row> result, int length) {
+        assertEquals(length, result.get(0).length());
     }
 
     protected void assertThatQueryIsValidSQL(String query) throws SQLException {

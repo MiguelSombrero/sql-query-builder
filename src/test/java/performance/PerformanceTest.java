@@ -2,7 +2,7 @@ package performance;
 
 import builder.statement.select.column.FirstColumn;
 import builder.statement.select.table.Table;
-import database.DatabaseConnection;
+import testutils.DatabaseConnection;
 import factory.SelectQueryFactory;
 import org.junit.Before;
 import org.junit.Test;

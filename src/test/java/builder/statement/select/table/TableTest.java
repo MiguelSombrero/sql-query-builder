@@ -1,8 +1,8 @@
 package builder.statement.select.table;
 
 import builder.statement.select.column.Column;
-import database.DatabaseConnection;
-import database.DatabaseTestBaseClass;
+import testutils.DatabaseConnection;
+import testutils.DatabaseTestBaseClass;
 import factory.SelectQueryFactory;
 import org.junit.Before;
 import org.junit.Test;

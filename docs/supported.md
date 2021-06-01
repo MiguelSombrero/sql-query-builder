@@ -43,7 +43,7 @@
 ## CREATE
 
 - CREATE
-    - table, database, index
+    - table, testutils, index
 - INT, DOUBLE, TIMESTAMP, CHAR, VARCHAR
 - NOT NULL, PRIMARY KEY, UNIQUE, AUTO_INCREMENT
 - FOREIGN KEY key REFERENCES table(key)
@@ -60,4 +60,4 @@
 ## DROP
 
 - DROP
-    - table, database
+    - table, testutils
