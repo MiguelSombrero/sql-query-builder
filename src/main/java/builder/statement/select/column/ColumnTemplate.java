@@ -5,12 +5,18 @@ import query.SelectQuery;
 
 public abstract class ColumnTemplate {
     private ColumnStringAppender columnStringAppender;
-
+    private AggregateFunction aggregateFunction;
     protected SelectQuery query;
 
     public ColumnTemplate(SelectQuery query) {
         this.query = query;
         this.columnStringAppender = new ColumnStringAppender(query);
+        this.aggregateFunction = new AggregateFunction(query);
+    }
+
+    public ToFrom all() {
+        query.append("*");
+        return new ToFrom(query);
     }
 
     /**
@@ -38,7 +44,15 @@ public abstract class ColumnTemplate {
      * aggregate functions and alias selected columns or call 'FROM table'
      */
     public Column count(String column) {
-        return applyAggregate("COUNT", column);
+        addCommaAfterFirstValue();
+        aggregateFunction.count(column);
+        return new Column(query);
+    }
+
+    public Column countAll() {
+        addCommaAfterFirstValue();
+        aggregateFunction.countAll();
+        return new Column(query);
     }
 
     /**
@@ -51,7 +65,9 @@ public abstract class ColumnTemplate {
      * aggregate functions and alias selected columns or call 'FROM table'
      */
     public Column min(String column) {
-        return applyAggregate("MIN", column);
+        addCommaAfterFirstValue();
+        aggregateFunction.min(column);
+        return new Column(query);
     }
 
     /**
@@ -64,7 +80,9 @@ public abstract class ColumnTemplate {
      * aggregate functions and alias selected columns or call 'FROM table'
      */
     public Column max(String column) {
-        return applyAggregate("MAX", column);
+        addCommaAfterFirstValue();
+        aggregateFunction.max(column);
+        return new Column(query);
     }
 
     /**
@@ -77,7 +95,9 @@ public abstract class ColumnTemplate {
      * aggregate functions and alias selected columns or call 'FROM table'
      */
     public Column avg(String column) {
-        return applyAggregate("AVG", column);
+        addCommaAfterFirstValue();
+        aggregateFunction.avg(column);
+        return new Column(query);
     }
 
     /**
@@ -90,15 +110,8 @@ public abstract class ColumnTemplate {
      * aggregate functions and alias selected columns or call 'FROM table'
      */
     public Column sum(String column) {
-        return applyAggregate("SUM", column);
-    }
-
-    private Column applyAggregate(String function, String toColumn) {
         addCommaAfterFirstValue();
-        query.append(function);
-        query.append("(");
-        columnStringAppender.validateAndAppend(toColumn);
-        query.append(")");
+        aggregateFunction.sum(column);
         return new Column(query);
     }
 

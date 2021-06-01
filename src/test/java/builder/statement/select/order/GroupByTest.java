@@ -27,7 +27,7 @@ public class GroupByTest extends DatabaseTestBaseClass {
 
         this.table = selectQueryFactory
                 .select()
-                .column("*")
+                    .all()
                 .from()
                     .table("person");
     }
