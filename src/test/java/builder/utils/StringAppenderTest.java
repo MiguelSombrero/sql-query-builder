@@ -9,9 +9,9 @@ public class StringAppenderTest {
 
     @Test
     public void testAppendList() {
-        SQLQuery SQLQuery = new SQLQuery(new StringBuilder());
-        StringAppender stringAppender = new StringAppender(SQLQuery);
+        SQLQuery query = new SQLQuery(new StringBuilder());
+        StringAppender stringAppender = new StringAppender(query);
         stringAppender.validateAndAppendList("miika", "liika", "siika", "riika");
-        assertEquals("(miika, liika, siika, riika)", SQLQuery.build());
+        assertEquals("(miika, liika, siika, riika)", query.toString());
     }
 }

@@ -1,6 +1,6 @@
 package builder.statement.delete;
 
-import factory.QueryFactory;
+import query.QueryFactory;
 import query.DMLQuery;
 import query.Query;
 import testutils.DatabaseConnection;
@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import java.sql.SQLException;
 
-import static factory.WhereClauseFactory.valueOf;
+import static builder.condition.WhereClauseFactory.valueOf;
 import static org.junit.Assert.assertEquals;
 
 public class DeleteTest extends DatabaseTestBaseClass {

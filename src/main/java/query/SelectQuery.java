@@ -10,7 +10,7 @@ import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.util.List;
 
-public class SelectQuery extends QueryTemplate {
+public class SelectQuery extends SQLQuery {
     private static Logger logger = LoggerFactory.getLogger(SelectQuery.class);
 
     private QueryRunner run;
@@ -34,10 +34,5 @@ public class SelectQuery extends QueryTemplate {
             throw e;
         }
         return result;
-    }
-
-    @Override
-    public String toString() {
-        return this.queryString.toString();
     }
 }

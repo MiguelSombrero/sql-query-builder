@@ -12,7 +12,7 @@ public class StringValueAppenderTest {
         SQLQuery SQLQuery = new SQLQuery(new StringBuilder());
         StringValueAppender stringValueAppender = new StringValueAppender(SQLQuery);
         stringValueAppender.appendStringValue("miika");
-        assertEquals("'miika'", SQLQuery.build());
+        assertEquals("'miika'", SQLQuery.toString());
     }
 
     @Test
@@ -20,7 +20,7 @@ public class StringValueAppenderTest {
         SQLQuery SQLQuery = new SQLQuery(new StringBuilder());
         StringValueAppender stringValueAppender = new StringValueAppender(SQLQuery);
         stringValueAppender.appendStringValue("?");
-        assertEquals("?", SQLQuery.build());
+        assertEquals("?", SQLQuery.toString());
     }
 
     @Test
@@ -28,6 +28,6 @@ public class StringValueAppenderTest {
         SQLQuery SQLQuery = new SQLQuery(new StringBuilder());
         StringValueAppender stringValueAppender = new StringValueAppender(SQLQuery);
         stringValueAppender.appendListOfValues("miika", "liika", "siika", "riika");
-        assertEquals("('miika', 'liika', 'siika', 'riika')", SQLQuery.build());
+        assertEquals("('miika', 'liika', 'siika', 'riika')", SQLQuery.toString());
     }
 }

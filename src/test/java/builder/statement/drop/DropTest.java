@@ -1,7 +1,7 @@
 package builder.statement.drop;
 
 import builder.statement.create.table.column.DataType;
-import factory.QueryFactory;
+import query.QueryFactory;
 import query.DDLQuery;
 import query.Query;
 import testutils.DatabaseConnection;

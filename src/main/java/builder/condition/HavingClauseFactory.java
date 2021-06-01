@@ -1,8 +1,7 @@
-package factory;
+package builder.condition;
 
 import builder.utils.AggregateFunction;
 import query.SQLQuery;
-import builder.condition.Negation;
 
 public class HavingClauseFactory {
 

@@ -5,15 +5,15 @@ import database.Row;
 import query.SelectQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
-import factory.QueryFactory;
+import query.QueryFactory;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.SQLException;
 import java.util.List;
 
-import static factory.HavingClauseFactory.count;
-import static factory.WhereClauseFactory.valueOf;
+import static builder.condition.HavingClauseFactory.count;
+import static builder.condition.WhereClauseFactory.valueOf;
 import static org.junit.Assert.assertEquals;
 
 public class LimitTest extends DatabaseTestBaseClass {

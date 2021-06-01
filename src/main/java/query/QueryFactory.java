@@ -1,11 +1,8 @@
-package factory;
+package query;
 
 import builder.statement.create.Create;
 import builder.statement.drop.Drop;
 import builder.statement.select.column.FirstColumn;
-import query.DDLQuery;
-import query.DMLQuery;
-import query.SelectQuery;
 
 import javax.sql.DataSource;
 

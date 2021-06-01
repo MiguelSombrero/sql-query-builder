@@ -1,6 +1,6 @@
 package builder.statement.create;
 
-import factory.QueryFactory;
+import query.QueryFactory;
 import query.Query;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;

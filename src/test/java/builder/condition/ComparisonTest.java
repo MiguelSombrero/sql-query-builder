@@ -3,14 +3,14 @@ package builder.condition;
 import builder.statement.select.table.Table;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
-import factory.QueryFactory;
+import query.QueryFactory;
 import org.junit.Before;
 import org.junit.Test;
 import query.Query;
 
 import java.sql.SQLException;
 
-import static factory.WhereClauseFactory.*;
+import static builder.condition.WhereClauseFactory.*;
 import static org.junit.Assert.assertEquals;
 
 public class ComparisonTest extends DatabaseTestBaseClass {

@@ -2,7 +2,7 @@ package builder.statement.create.table.foreignkey;
 
 import builder.statement.create.table.column.Constraint;
 import builder.statement.create.table.column.DataType;
-import factory.QueryFactory;
+import query.QueryFactory;
 import query.Query;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;

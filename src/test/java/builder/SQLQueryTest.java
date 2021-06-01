@@ -9,37 +9,37 @@ public class SQLQueryTest {
 
     @Test
     public void testAppendString() {
-        SQLQuery SQLQuery = new SQLQuery(new StringBuilder());
-        SQLQuery.append("miika");
-        SQLQuery.append(" ");
-        SQLQuery.append("Somero");
-        assertEquals("miika Somero", SQLQuery.build());
+        SQLQuery query = new SQLQuery(new StringBuilder());
+        query.append("miika");
+        query.append(" ");
+        query.append("Somero");
+        assertEquals("miika Somero", query.toString());
     }
 
     @Test
     public void testAppendInteger() {
-        SQLQuery SQLQuery = new SQLQuery(new StringBuilder());
-        SQLQuery.append(0);
-        SQLQuery.append(1);
-        SQLQuery.append(2);
-        assertEquals("012", SQLQuery.build());
+        SQLQuery query = new SQLQuery(new StringBuilder());
+        query.append(0);
+        query.append(1);
+        query.append(2);
+        assertEquals("012", query.toString());
     }
 
     @Test
     public void testAppendDouble() {
-        SQLQuery SQLQuery = new SQLQuery(new StringBuilder());
-        SQLQuery.append(0.0);
-        SQLQuery.append(1.1);
-        SQLQuery.append(2.2);
-        assertEquals("0.01.12.2", SQLQuery.build());
+        SQLQuery query = new SQLQuery(new StringBuilder());
+        query.append(0.0);
+        query.append(1.1);
+        query.append(2.2);
+        assertEquals("0.01.12.2", query.toString());
     }
 
     @Test
     public void testInsert() {
-        SQLQuery SQLQuery = new SQLQuery(new StringBuilder());
-        SQLQuery.insert(0, "somero");
-        SQLQuery.insert(0, "miika ");
-        SQLQuery.insert(6, "testaaja ");
-        assertEquals("miika testaaja somero", SQLQuery.build());
+        SQLQuery query = new SQLQuery(new StringBuilder());
+        query.insert(0, "somero");
+        query.insert(0, "miika ");
+        query.insert(6, "testaaja ");
+        assertEquals("miika testaaja somero", query.toString());
     }
 }

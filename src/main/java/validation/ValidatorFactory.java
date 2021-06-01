@@ -1,6 +1,4 @@
-package factory;
-
-import validation.*;
+package validation;
 
 public class ValidatorFactory {
 

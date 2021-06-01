@@ -3,7 +3,7 @@ package builder.statement.select.column;
 import database.Row;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
-import factory.QueryFactory;
+import query.QueryFactory;
 import org.junit.Before;
 import org.junit.Test;
 import query.SelectQuery;

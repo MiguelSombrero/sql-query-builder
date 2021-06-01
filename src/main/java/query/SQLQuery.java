@@ -1,13 +1,26 @@
 package query;
 
-public class SQLQuery extends QueryTemplate {
+public class SQLQuery implements Query {
+    protected StringBuilder queryString;
 
     public SQLQuery(StringBuilder queryString) {
-        super(queryString);
+        this.queryString = queryString;
     }
 
-    public String build() {
-        return queryString.toString();
+    public void append(String value) {
+        this.queryString = this.queryString.append(value);
+    }
+
+    public void append(int value) {
+        this.queryString = this.queryString.append(value);
+    }
+
+    public void append(double value) {
+        this.queryString = this.queryString.append(value);
+    }
+
+    public void insert(int index, String value) {
+        this.queryString = this.queryString.insert(index, value);
     }
 
     @Override

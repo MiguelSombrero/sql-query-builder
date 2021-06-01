@@ -4,14 +4,14 @@ import database.Row;
 import query.SelectQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
-import factory.QueryFactory;
+import query.QueryFactory;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.SQLException;
 import java.util.List;
 
-import static factory.HavingClauseFactory.*;
+import static builder.condition.HavingClauseFactory.*;
 import static org.junit.Assert.assertEquals;
 
 public class HavingTest extends DatabaseTestBaseClass {

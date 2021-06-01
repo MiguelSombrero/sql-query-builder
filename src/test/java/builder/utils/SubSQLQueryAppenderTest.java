@@ -1,7 +1,7 @@
 package builder.utils;
 
 import testutils.DatabaseConnection;
-import factory.QueryFactory;
+import query.QueryFactory;
 import org.junit.Before;
 import query.SQLQuery;
 import builder.statement.select.table.Table;
@@ -21,11 +21,11 @@ public class SubSQLQueryAppenderTest {
 
     @Test
     public void testAppendSubQuery() {
-        SQLQuery SQLQuery = new SQLQuery(new StringBuilder());
-        SubQueryAppender subQueryAppender = new SubQueryAppender(SQLQuery);
+        SQLQuery query = new SQLQuery(new StringBuilder());
+        SubQueryAppender subQueryAppender = new SubQueryAppender(query);
         Table table = queryFactory.select().all().from().table("person");
         subQueryAppender.appendConditionWithSubQuery("ALL ", table);
-        assertEquals("ALL (SELECT * FROM person)", SQLQuery.build());
+        assertEquals("ALL (SELECT * FROM person)", query.toString());
     }
 
 }

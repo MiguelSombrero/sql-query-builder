@@ -1,7 +1,7 @@
 package builder.utils;
 
 import query.Query;
-import factory.ValidatorFactory;
+import validation.ValidatorFactory;
 import validation.Validator;
 
 import java.util.Arrays;

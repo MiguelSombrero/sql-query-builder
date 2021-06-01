@@ -4,13 +4,13 @@ import query.DMLQuery;
 import query.Query;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
-import factory.QueryFactory;
+import query.QueryFactory;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.SQLException;
 
-import static factory.WhereClauseFactory.valueOf;
+import static builder.condition.WhereClauseFactory.valueOf;
 import static org.junit.Assert.assertEquals;
 
 public class InsertTest extends DatabaseTestBaseClass {

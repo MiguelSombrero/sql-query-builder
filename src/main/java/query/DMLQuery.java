@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import javax.sql.DataSource;
 import java.sql.SQLException;
 
-public class DMLQuery extends QueryTemplate {
+public class DMLQuery extends SQLQuery {
     private static Logger logger = LoggerFactory.getLogger(DMLQuery.class);
 
     private QueryRunner run;
@@ -29,10 +29,5 @@ public class DMLQuery extends QueryTemplate {
             throw e;
         }
         return inserts;
-    }
-
-    @Override
-    public String toString() {
-        return this.queryString.toString();
     }
 }

@@ -1,10 +1,9 @@
-package factory;
+package builder.condition;
 
 import builder.statement.select.SelectQueryBuilder;
 import query.SQLQuery;
-import builder.condition.Condition;
-import builder.condition.Negation;
 import validation.Validator;
+import validation.ValidatorFactory;
 
 public class WhereClauseFactory {
     private static Validator validator = ValidatorFactory.exceptionThrowingNameValidator();

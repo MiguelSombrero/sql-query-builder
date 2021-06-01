@@ -37,8 +37,8 @@ Above code prints out:
 
 You can import static factory methods for queries to look more natural language like.
 
-    import static factory.QueryFactory.*;
-    import static factory.WhereClauseFactory.*;
+    import static query.QueryFactory.*;
+    import static builder.condition.WhereClauseFactory.*;
 
     String SQLQuery = select()
             .column("p.id")
@@ -73,7 +73,7 @@ Above code prints out:
 #### Example with aggregate functions
 
     ...
-    import static factory.HavingClauseFactory.*;
+    import static builder.condition.HavingClauseFactory.*;
 
     String SQLQuery = select()
             .column("s.name").alias("school")
