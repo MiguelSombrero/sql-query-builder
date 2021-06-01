@@ -1,5 +1,7 @@
 package builder.statement.select.order;
 
+import database.Row;
+import query.SelectQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 import factory.SelectQueryFactory;
@@ -8,6 +10,7 @@ import org.junit.Test;
 import query.Query;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import static factory.HavingClauseFactory.*;
 import static org.junit.Assert.assertEquals;
@@ -34,58 +37,82 @@ public class HavingTest extends DatabaseTestBaseClass {
 
     @Test
     public void testHavingCount() throws SQLException {
-        Query query = this.having
+        SelectQuery query = this.having
                 .having(count("age").equals(100))
                 .build();
 
         assertEquals("SELECT * FROM person GROUP BY age, firstname, lastname HAVING COUNT(age) = 100", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 0);
     }
 
     @Test
     public void testHavingSum() throws SQLException {
-        Query query = this.having
+        SelectQuery query = this.having
                 .having(sum("age").equals(100))
                 .build();
 
         assertEquals("SELECT * FROM person GROUP BY age, firstname, lastname HAVING SUM(age) = 100", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 0);
     }
 
     @Test
     public void testHavingAvg() throws SQLException {
-        Query query = this.having
+        SelectQuery query = this.having
                 .having(avg("age").equals(100))
                 .build();
 
         assertEquals("SELECT * FROM person GROUP BY age, firstname, lastname HAVING AVG(age) = 100", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 0);
     }
 
     @Test
     public void testHavingMax() throws SQLException {
-        Query query = this.having
+        SelectQuery query = this.having
                 .having(max("age").equals(100))
                 .build();
 
         assertEquals("SELECT * FROM person GROUP BY age, firstname, lastname HAVING MAX(age) = 100", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 0);
     }
 
     @Test
     public void testHavingMin() throws SQLException {
-        Query query = this.having
+        SelectQuery query = this.having
                 .having(min("age").equals(100))
                 .build();
 
         assertEquals("SELECT * FROM person GROUP BY age, firstname, lastname HAVING MIN(age) = 100", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 0);
     }
 
     @Test
     public void testHavingMultipleConditions() throws SQLException {
-        Query query = this.having
+        SelectQuery query = this.having
                 .having(max("age").equals(100)
                     .and(min("age").equals(20))
                     .or(avg("age").equals(60)))
                 .build();
 
         assertEquals("SELECT * FROM person GROUP BY age, firstname, lastname HAVING MAX(age) = 100 AND MIN(age) = 20 OR AVG(age) = 60", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 0);
     }
 
     @Test(expected = IllegalArgumentException.class)

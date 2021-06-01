@@ -1,14 +1,16 @@
 package builder.statement.select.order;
 
 import builder.statement.select.table.Table;
+import database.Row;
+import query.SelectQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 import factory.SelectQueryFactory;
 import org.junit.Before;
 import org.junit.Test;
-import query.Query;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import static factory.HavingClauseFactory.count;
 import static factory.WhereClauseFactory.valueOf;
@@ -32,76 +34,111 @@ public class LimitTest extends DatabaseTestBaseClass {
 
     @Test
     public void testLimitFromTable() throws SQLException {
-        Query query = table
-                .limit(100)
+        SelectQuery query = table
+                .limit(2)
                 .build();
 
-        assertEquals("SELECT * FROM person LIMIT 100", query.toString());
+        assertEquals("SELECT * FROM person LIMIT 2", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 2);
+        assertRowLength(result, 5);
     }
 
     @Test
     public void testLimitFromTableWhere() throws SQLException {
-        Query query = table
+        SelectQuery query = table
                 .where(valueOf("age").greaterThan(18))
-                .limit(100)
+                .limit(2)
                 .build();
 
-        assertEquals("SELECT * FROM person WHERE age > 18 LIMIT 100", query.toString());
+        assertEquals("SELECT * FROM person WHERE age > 18 LIMIT 2", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 2);
+        assertRowLength(result, 5);
     }
 
     @Test
     public void testLimitJoinTable() throws SQLException {
-        Query query = table
+        SelectQuery query = table
                 .leftJoin("course").on("person.id", "course.person_id")
-                .limit(100)
+                .limit(2)
                 .build();
 
-        assertEquals("SELECT * FROM person LEFT JOIN course ON person.id = course.person_id LIMIT 100", query.toString());
+        assertEquals("SELECT * FROM person LEFT JOIN course ON person.id = course.person_id LIMIT 2", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 2);
+        assertRowLength(result, 10);
     }
 
     @Test
     public void testLimitGroupBy() throws SQLException {
-        Query query = table
+        SelectQuery query = table
                 .groupBy()
                     .column("age")
-                .limit(100)
+                .limit(2)
                 .build();
 
-        assertEquals("SELECT * FROM person GROUP BY age LIMIT 100", query.toString());
+        assertEquals("SELECT * FROM person GROUP BY age LIMIT 2", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 2);
+        assertRowLength(result, 5);
     }
 
     @Test
     public void testLimitGroupByHaving() throws SQLException {
-        Query query = table
+        SelectQuery query = table
                 .groupBy()
                     .column("age")
                 .having(count("age").greaterThan(20))
-                .limit(100)
+                .limit(2)
                 .build();
 
-        assertEquals("SELECT * FROM person GROUP BY age HAVING COUNT(age) > 20 LIMIT 100", query.toString());
+        assertEquals("SELECT * FROM person GROUP BY age HAVING COUNT(age) > 20 LIMIT 2", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 0);
     }
 
     @Test
     public void testLimitOrderBy() throws SQLException {
-        Query query = table
+        SelectQuery query = table
                 .groupBy()
                     .column("age")
                 .orderBy()
                     .column("firstname")
-                .limit(100)
+                .limit(2)
                 .build();
 
-        assertEquals("SELECT * FROM person GROUP BY age ORDER BY firstname LIMIT 100", query.toString());
+        assertEquals("SELECT * FROM person GROUP BY age ORDER BY firstname LIMIT 2", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 2);
+        assertRowLength(result, 5);
     }
 
     @Test
     public void testLimitOffset() throws SQLException {
-        Query query = table
-                .limit(100)
-                .offset(20)
+        SelectQuery query = table
+                .limit(2)
+                .offset(1)
                 .build();
 
-        assertEquals("SELECT * FROM person LIMIT 100 OFFSET 20", query.toString());
+        assertEquals("SELECT * FROM person LIMIT 2 OFFSET 1", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 2);
+        assertRowLength(result, 5);
+        assertEquals("Kultanen", result.get(1).getStringFrom(3));
     }
 }
