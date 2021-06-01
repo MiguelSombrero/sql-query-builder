@@ -17,6 +17,6 @@ public class TerminalSelectOperation implements SelectQueryBuilder {
      * execute SELECT queries
      */
     public SelectQuery build() {
-        return query;
+        return this.query;
     }
 }

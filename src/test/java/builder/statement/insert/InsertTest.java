@@ -18,7 +18,7 @@ public class InsertTest extends DatabaseTestBaseClass {
     @Before
     public void setUp() throws SQLException {
         initializeDatabase();
-        selectQueryFactory = new SelectQueryFactory(DatabaseConnection.getConnection());
+        selectQueryFactory = new SelectQueryFactory(DatabaseConnection.getDataSource());
     }
 
     @Test

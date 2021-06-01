@@ -18,10 +18,10 @@ public class OrderByTest extends DatabaseTestBaseClass {
     private Table table;
 
     @Before
-    public void setUpQuery() throws SQLException {
+    public void setUpQuery() {
         initializeDatabase();
 
-        SelectQueryFactory selectQueryFactory = new SelectQueryFactory(DatabaseConnection.getConnection());
+        SelectQueryFactory selectQueryFactory = new SelectQueryFactory(DatabaseConnection.getDataSource());
 
         this.table = selectQueryFactory
                 .select()

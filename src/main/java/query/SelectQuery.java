@@ -1,56 +1,43 @@
 package query;
 
+import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.ResultSetHandler;
+import org.apache.commons.dbutils.handlers.ArrayListHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import javax.sql.DataSource;
 import java.sql.SQLException;
+import java.util.List;
 
 public class SelectQuery extends QueryTemplate {
     private static Logger logger = LoggerFactory.getLogger(SelectQuery.class);
 
-    private StringBuilder queryString;
-    private Connection connection;
+    private QueryRunner run;
 
-    public SelectQuery(StringBuilder queryString, Connection connection) {
+    public SelectQuery(StringBuilder queryString, DataSource dataSource) {
         super(queryString);
-        this.connection = connection;
+        this.run = new QueryRunner(dataSource);
     }
 
-    public ResultSet execute() throws SQLException {
-        PreparedStatement statement = prepare();
-        ResultSet result = null;
+    public List<Object[]> execute() throws SQLException {
+        ResultSetHandler<List<Object[]>> handler = new ArrayListHandler();
+
+        List<Object[]> result;
 
         try {
-            result = statement.executeQuery();
+            result = run.query(this.toString(), handler);
+
         } catch (SQLException e) {
-            logger.info("Executing of SELECT query failed");
+            logger.info("Executing of query " + this + " failed");
             logger.debug(e.getLocalizedMessage());
             throw e;
-        } finally {
-            statement.close();
         }
         return result;
     }
 
-    private PreparedStatement prepare() throws SQLException {
-        PreparedStatement statement = null;
-
-        try {
-            String query = toString();
-            statement = connection.prepareStatement(query);
-        } catch (SQLException e) {
-            logger.info("Creating of PreparedStatement failed");
-            logger.debug(e.getLocalizedMessage());
-            throw e;
-        }
-        return statement;
-    }
-
     @Override
     public String toString() {
-        return queryString.toString();
+        return this.queryString.toString();
     }
 }

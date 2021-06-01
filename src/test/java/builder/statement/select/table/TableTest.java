@@ -18,10 +18,10 @@ public class TableTest extends DatabaseTestBaseClass {
     private Column column;
 
     @Before
-    public void setUpQuery() throws SQLException {
+    public void setUpQuery() {
         initializeDatabase();
 
-        selectQueryFactory = new SelectQueryFactory(DatabaseConnection.getConnection());
+        selectQueryFactory = new SelectQueryFactory(DatabaseConnection.getDataSource());
 
         this.column = selectQueryFactory
                 .select()

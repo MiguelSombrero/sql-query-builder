@@ -22,7 +22,7 @@ public class NegationTest extends DatabaseTestBaseClass {
     public void setUpQuery() throws SQLException {
         initializeDatabase();
 
-        selectQueryFactory = new SelectQueryFactory(DatabaseConnection.getConnection());
+        selectQueryFactory = new SelectQueryFactory(DatabaseConnection.getDataSource());
 
         this.table = selectQueryFactory
                 .select()

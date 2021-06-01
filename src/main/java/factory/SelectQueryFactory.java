@@ -3,13 +3,13 @@ package factory;
 import builder.statement.select.column.FirstColumn;
 import query.SelectQuery;
 
-import java.sql.Connection;
+import javax.sql.DataSource;
 
 public class SelectQueryFactory {
-    private Connection connection;
+    private DataSource dataSource;
 
-    public SelectQueryFactory(Connection connection) {
-        this.connection = connection;
+    public SelectQueryFactory(DataSource dataSource) {
+        this.dataSource = dataSource;
     }
 
     public FirstColumn select() {
@@ -25,6 +25,6 @@ public class SelectQueryFactory {
     }
 
     private SelectQuery createQuery(String clause) {
-        return new SelectQuery(new StringBuilder(clause), connection);
+        return new SelectQuery(new StringBuilder(clause), dataSource);
     }
 }

@@ -16,10 +16,10 @@ public class HavingTest extends DatabaseTestBaseClass {
     private Having having;
 
     @Before
-    public void setUpQuery() throws SQLException {
+    public void setUpQuery() {
         initializeDatabase();
 
-        SelectQueryFactory selectQueryFactory = new SelectQueryFactory(DatabaseConnection.getConnection());
+        SelectQueryFactory selectQueryFactory = new SelectQueryFactory(DatabaseConnection.getDataSource());
 
         this.having = selectQueryFactory
                 .select()

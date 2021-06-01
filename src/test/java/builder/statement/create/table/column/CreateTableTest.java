@@ -7,7 +7,7 @@ import org.junit.Test;
 import java.sql.SQLException;
 
 import static factory.QueryFactory.create;
-import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 public class CreateTableTest extends DatabaseTestBaseClass {
 

@@ -3,7 +3,6 @@ package builder.condition;
 import builder.statement.select.table.Table;
 import database.DatabaseConnection;
 import database.DatabaseTestBaseClass;
-import factory.QueryFactory;
 import factory.SelectQueryFactory;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,16 +11,16 @@ import query.Query;
 import java.sql.SQLException;
 
 import static factory.WhereClauseFactory.valueOf;
-import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 public class WhereTest extends DatabaseTestBaseClass {
     private Table table;
 
     @Before
-    public void setUpQuery() throws SQLException {
+    public void setUpQuery() {
         initializeDatabase();
 
-        SelectQueryFactory selectQueryFactory = new SelectQueryFactory(DatabaseConnection.getConnection());
+        SelectQueryFactory selectQueryFactory = new SelectQueryFactory(DatabaseConnection.getDataSource());
 
         this.table = selectQueryFactory
                 .select()

@@ -3,9 +3,7 @@ package builder.statement.select.order;
 import builder.statement.select.table.Table;
 import database.DatabaseConnection;
 import database.DatabaseTestBaseClass;
-import factory.QueryFactory;
 import factory.SelectQueryFactory;
-import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import query.Query;
@@ -20,10 +18,10 @@ public class GroupByTest extends DatabaseTestBaseClass {
     private Table table;
 
     @Before
-    public void setUpQuery() throws SQLException {
+    public void setUpQuery() {
         initializeDatabase();
 
-        SelectQueryFactory selectQueryFactory = new SelectQueryFactory(DatabaseConnection.getConnection());
+        SelectQueryFactory selectQueryFactory = new SelectQueryFactory(DatabaseConnection.getDataSource());
 
         this.table = selectQueryFactory
                 .select()
@@ -62,7 +60,7 @@ public class GroupByTest extends DatabaseTestBaseClass {
                     .column("lastname")
                 .build();
 
-        Assert.assertEquals("SELECT * FROM person WHERE age > 18 GROUP BY lastname", query.toString());
+        assertEquals("SELECT * FROM person WHERE age > 18 GROUP BY lastname", query.toString());
     }
 
     @Test

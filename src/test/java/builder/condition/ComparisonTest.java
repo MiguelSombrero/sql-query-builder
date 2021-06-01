@@ -11,7 +11,7 @@ import query.Query;
 import java.sql.SQLException;
 
 import static factory.WhereClauseFactory.*;
-import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 public class ComparisonTest extends DatabaseTestBaseClass {
     private SelectQueryFactory selectQueryFactory;
@@ -21,7 +21,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     public void setUpQuery() throws SQLException {
         initializeDatabase();
 
-        selectQueryFactory = new SelectQueryFactory(DatabaseConnection.getConnection());
+        selectQueryFactory = new SelectQueryFactory(DatabaseConnection.getDataSource());
 
         this.table = selectQueryFactory
                 .select()

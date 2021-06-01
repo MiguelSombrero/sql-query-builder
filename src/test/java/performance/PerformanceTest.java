@@ -23,7 +23,7 @@ public class PerformanceTest {
 
     @Before
     public void setUp() throws SQLException {
-        selectQueryFactory = new SelectQueryFactory(DatabaseConnection.getConnection());
+        selectQueryFactory = new SelectQueryFactory(DatabaseConnection.getDataSource());
     }
 
     @Test

@@ -8,8 +8,8 @@ import org.junit.Test;
 import query.Query;
 import query.SelectQuery;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -19,7 +19,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
     @Before
     public void setUp() throws SQLException {
         initializeDatabase();
-        selectQueryFactory = new SelectQueryFactory(DatabaseConnection.getConnection());
+        selectQueryFactory = new SelectQueryFactory(DatabaseConnection.getDataSource());
     }
 
     @Test
@@ -33,12 +33,10 @@ public class ColumnTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("SELECT lastname, age FROM person", query.toString());
-        
-        ResultSet result = query.execute();
-        result.last();
 
-        assertEquals(3, result.getRow());
+        List<Object[]> result = query.execute();
 
+        assertEquals(3, result.size());
     }
 
     @Test
