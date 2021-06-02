@@ -1,11 +1,11 @@
 package builder.statement.select.order;
 
-import builder.statement.select.TerminalSelectOperation;
-import query.SelectQuery;
+import builder.statement.select.TerminalDQLOperation;
+import query.dql.DQLQuery;
 
-public class Offset extends TerminalSelectOperation {
+public class Offset extends TerminalDQLOperation {
 
-    public Offset(SelectQuery query) {
+    public Offset(DQLQuery query) {
         super(query);
     }
 
@@ -17,9 +17,9 @@ public class Offset extends TerminalSelectOperation {
      * @return TerminalOperation class which terminates
      * query
      */
-    public TerminalSelectOperation offset(int rows) {
+    public TerminalDQLOperation offset(int rows) {
         query.append(" OFFSET ");
         query.append(rows);
-        return new TerminalSelectOperation(query);
+        return new TerminalDQLOperation(query);
     }
 }

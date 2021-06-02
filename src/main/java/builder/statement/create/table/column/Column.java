@@ -1,6 +1,6 @@
 package builder.statement.create.table.column;
 
-import query.DDLQuery;
+import query.ddl.DDLQuery;
 import builder.statement.create.table.foreignkey.ForeignKey;
 
 public class Column extends ForeignKey {

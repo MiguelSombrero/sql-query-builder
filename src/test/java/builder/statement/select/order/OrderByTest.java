@@ -1,14 +1,16 @@
 package builder.statement.select.order;
 
 import builder.statement.select.table.Table;
+import database.Row;
+import query.dql.DQLQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 import query.QueryFactory;
 import org.junit.Before;
 import org.junit.Test;
-import query.Query;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import static builder.condition.WhereClauseFactory.valueOf;
 import static org.junit.Assert.assertEquals;
@@ -31,28 +33,38 @@ public class OrderByTest extends DatabaseTestBaseClass {
 
     @Test
     public void testOrderBy() throws SQLException {
-        Query query = table
+        DQLQuery query = table
                 .orderBy()
                     .column("firstname")
                 .build();
 
         assertEquals("SELECT * FROM person ORDER BY firstname", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 3);
+        assertRowLength(result, 5);
     }
 
     @Test
     public void testOrderByWhere() throws SQLException {
-        Query query = table
+        DQLQuery query = table
                 .where(valueOf("age").greaterThan(18))
                 .orderBy()
                 .column("firstname")
                 .build();
 
         assertEquals("SELECT * FROM person WHERE age > 18 ORDER BY firstname", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 3);
+        assertRowLength(result, 5);
     }
 
     @Test
     public void testOrderByGroupBy() throws SQLException {
-        Query query = table
+        DQLQuery query = table
                 .groupBy()
                     .column("age")
                 .orderBy()
@@ -60,11 +72,16 @@ public class OrderByTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("SELECT * FROM person GROUP BY age ORDER BY firstname", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 3);
+        assertRowLength(result, 5);
     }
 
     @Test
     public void testMultipleOrderByGroupBy() throws SQLException {
-        Query query = table
+        DQLQuery query = table
                 .groupBy()
                     .column("age")
                 .orderBy()
@@ -74,11 +91,16 @@ public class OrderByTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("SELECT * FROM person GROUP BY age ORDER BY firstname, lastname, age", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 3);
+        assertRowLength(result, 5);
     }
 
     @Test
     public void testMultipleOrderByGroupByWithAscDesc() throws SQLException {
-        Query query = table
+        DQLQuery query = table
                 .groupBy()
                     .column("age")
                 .orderBy()
@@ -88,6 +110,11 @@ public class OrderByTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("SELECT * FROM person GROUP BY age ORDER BY firstname ASC, lastname DESC, age ASC", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 3);
+        assertRowLength(result, 5);
     }
 
     @Test(expected = IllegalArgumentException.class)

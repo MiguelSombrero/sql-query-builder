@@ -1,6 +1,7 @@
 package builder.statement.insert;
 
-import query.DMLQuery;
+import query.dml.DMLQuery;
+import query.dml.InsertQuery;
 import query.Query;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
@@ -33,6 +34,10 @@ public class InsertTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("INSERT INTO person (id) VALUES (100)", query.toString());
+
+        int result = query.execute();
+
+        assertEquals(100, result);
     }
 
     @Test
@@ -50,6 +55,10 @@ public class InsertTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("INSERT INTO person (id, birthdate, firstname, lastname, age) VALUES (101, '1980-04-12', 'Miika', 'Somero', 40.5)", query.toString());
+
+        int result = query.execute();
+
+        assertEquals(101, result);
 
     }
 
@@ -72,7 +81,7 @@ public class InsertTest extends DatabaseTestBaseClass {
 
     @Test
     public void testInsertQuery() throws SQLException {
-        Query query = queryFactory
+        DMLQuery query = queryFactory
                 .insertInto()
                 .table("person")
                 .columns("id", "birthdate", "firstname", "lastname", "age")
@@ -91,6 +100,9 @@ public class InsertTest extends DatabaseTestBaseClass {
 
         assertEquals("INSERT INTO person (id, birthdate, firstname, lastname, age) SELECT id, birthdate, firstname, lastname, age FROM student WHERE age > 18", query.toString());
 
+        int result = query.execute();
+
+        assertEquals(4, result);
     }
 
     @Test
@@ -107,11 +119,15 @@ public class InsertTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("INSERT INTO person VALUES (102, '1980-04-12', 'Miika', 'Somero', 40)", query.toString());
+
+        int result = query.execute();
+
+        assertEquals(102, result);
     }
 
     @Test
     public void testInsertQueryWithoutSpecifyingColumns() throws SQLException {
-        Query query = queryFactory
+        DMLQuery query = queryFactory
                 .insertInto()
                 .table("person")
                 .sub(queryFactory
@@ -124,6 +140,10 @@ public class InsertTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("INSERT INTO person SELECT * FROM student WHERE age < 18", query.toString());
+
+        int result = query.execute();
+
+        assertEquals(5, result);
     }
 
     @Test(expected = IllegalArgumentException.class)

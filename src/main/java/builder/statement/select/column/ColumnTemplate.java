@@ -2,14 +2,14 @@ package builder.statement.select.column;
 
 import builder.utils.AggregateFunction;
 import builder.utils.StringAppender;
-import query.SelectQuery;
+import query.dql.DQLQuery;
 
 public abstract class ColumnTemplate {
     private StringAppender stringAppender;
     private AggregateFunction aggregateFunction;
-    protected SelectQuery query;
+    protected DQLQuery query;
 
-    public ColumnTemplate(SelectQuery query) {
+    public ColumnTemplate(DQLQuery query) {
         this.query = query;
         this.stringAppender = new StringAppender(query);
         this.aggregateFunction = new AggregateFunction(query);

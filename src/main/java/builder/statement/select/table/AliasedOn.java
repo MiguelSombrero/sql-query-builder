@@ -1,14 +1,14 @@
 package builder.statement.select.table;
 
 import builder.utils.StringAppender;
-import query.SelectQuery;
+import query.dql.DQLQuery;
 
 public class AliasedOn {
     protected StringAppender stringAppender;
 
-    protected SelectQuery query;
+    protected DQLQuery query;
 
-    public AliasedOn(SelectQuery query) {
+    public AliasedOn(DQLQuery query) {
         this.query = query;
         this.stringAppender = new StringAppender(query);
     }

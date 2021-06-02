@@ -1,10 +1,10 @@
 package builder.statement.select.order;
 
-import query.SelectQuery;
+import query.dql.DQLQuery;
 
 public class Order extends OrderBy {
 
-    public Order(SelectQuery query) {
+    public Order(DQLQuery query) {
         super(query);
     }
 

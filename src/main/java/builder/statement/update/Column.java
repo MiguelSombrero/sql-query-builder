@@ -1,7 +1,7 @@
 package builder.statement.update;
 
 import builder.TerminalDMLOperation;
-import query.DMLQuery;
+import query.dml.DMLQuery;
 import builder.condition.Condition;
 import builder.utils.StringAppender;
 

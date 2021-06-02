@@ -1,7 +1,8 @@
 package builder.statement.delete;
 
 import query.QueryFactory;
-import query.DMLQuery;
+import query.dml.DMLQuery;
+import query.dml.InsertQuery;
 import query.Query;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
@@ -31,22 +32,29 @@ public class DeleteTest extends DatabaseTestBaseClass {
 
         assertEquals("DELETE FROM address", query.toString());
 
+        int result = query.execute();
+
+        assertEquals(1, result);
     }
 
     @Test
     public void testDeleteWithCondition() throws SQLException {
-        Query query = queryFactory
+        DMLQuery query = queryFactory
                 .deleteFrom()
                     .table("address")
                 .where(valueOf("person_id").equals(1))
                 .build();
 
         assertEquals("DELETE FROM address WHERE person_id = 1", query.toString());
+
+        int result = query.execute();
+
+        assertEquals(1, result);
     }
 
     @Test
     public void testDeleteWithMultipleCondition() throws SQLException {
-        Query query = queryFactory
+        DMLQuery query = queryFactory
                 .deleteFrom()
                     .table("address")
                 .where(valueOf("person_id").equals(1)
@@ -54,6 +62,10 @@ public class DeleteTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("DELETE FROM address WHERE person_id = 1 AND city = 'Oulu'", query.toString());
+
+        int result = query.execute();
+
+        assertEquals(0, result);
     }
 
     @Test(expected = IllegalArgumentException.class)

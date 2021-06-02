@@ -1,7 +1,7 @@
 package builder.statement.update;
 
 import query.QueryFactory;
-import query.DMLQuery;
+import query.dml.DMLQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 import org.junit.Before;
@@ -30,6 +30,10 @@ public class UpdateTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("UPDATE person SET age = 50", query.toString());
+
+        int result = query.execute();
+
+        assertEquals(3, result);
     }
 
     @Test
@@ -41,6 +45,10 @@ public class UpdateTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("UPDATE person SET age = 50.5", query.toString());
+
+        int result = query.execute();
+
+        assertEquals(3, result);
     }
 
     @Test
@@ -52,6 +60,10 @@ public class UpdateTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("UPDATE person SET firstname = 'Miika'", query.toString());
+
+        int result = query.execute();
+
+        assertEquals(3, result);
     }
 
     @Test
@@ -65,6 +77,10 @@ public class UpdateTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("UPDATE person SET firstname = 'Miika', lastname = 'Somero', age = 50", query.toString());
+
+        int result = query.execute();
+
+        assertEquals(3, result);
     }
 
     @Test
@@ -78,6 +94,10 @@ public class UpdateTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("UPDATE person SET age = 50 WHERE id = 1 OR id = 2", query.toString());
+
+        int result = query.execute();
+
+        assertEquals(2, result);
     }
 
     @Test
@@ -85,9 +105,9 @@ public class UpdateTest extends DatabaseTestBaseClass {
         DMLQuery query = queryFactory
                 .update()
                 .table("person")
-                .column("firstname").value("?")
-                .column("lastname").value("?")
-                .column("age").value("?")
+                    .column("firstname").value("?")
+                    .column("lastname").value("?")
+                    .column("age").value("?")
                 .build();
 
         assertEquals("UPDATE person SET firstname = ?, lastname = ?, age = ?", query.toString());

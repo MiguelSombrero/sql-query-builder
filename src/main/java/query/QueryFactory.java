@@ -3,6 +3,11 @@ package query;
 import builder.statement.create.Create;
 import builder.statement.drop.Drop;
 import builder.statement.select.column.FirstColumn;
+import query.ddl.DDLQuery;
+import query.dml.DeleteQuery;
+import query.dml.InsertQuery;
+import query.dml.UpdateQuery;
+import query.dql.SelectQuery;
 
 import javax.sql.DataSource;
 
@@ -29,17 +34,17 @@ public class QueryFactory {
     }
 
     public builder.statement.insert.Table insertInto() {
-        DMLQuery query = createDMLQuery("INSERT INTO ");
+        InsertQuery query = createInsertQuery("INSERT INTO ");
         return new builder.statement.insert.Table(query);
     }
 
     public builder.statement.delete.Table deleteFrom() {
-        DMLQuery query = createDMLQuery("DELETE FROM ");
+        DeleteQuery query = createDeleteQuery("DELETE FROM ");
         return new builder.statement.delete.Table(query);
     }
 
     public builder.statement.update.Table update() {
-        DMLQuery query = createDMLQuery("UPDATE ");
+        UpdateQuery query = createUpdateQuery("UPDATE ");
         return new builder.statement.update.Table(query);
     }
 
@@ -57,8 +62,16 @@ public class QueryFactory {
         return new SelectQuery(new StringBuilder(clause), dataSource);
     }
 
-    private DMLQuery createDMLQuery(String clause) {
-        return new DMLQuery(new StringBuilder(clause), dataSource);
+    private InsertQuery createInsertQuery(String clause) {
+        return new InsertQuery(new StringBuilder(clause), dataSource);
+    }
+
+    private UpdateQuery createUpdateQuery(String clause) {
+        return new UpdateQuery(new StringBuilder(clause), dataSource);
+    }
+
+    private DeleteQuery createDeleteQuery(String clause) {
+        return new DeleteQuery(new StringBuilder(clause), dataSource);
     }
 
     private DDLQuery createDDLQuery(String clause) {

@@ -1,18 +1,19 @@
-package query;
+package query.ddl;
 
 import org.apache.commons.dbutils.QueryRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import query.SQLQuery;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
 
-public class DMLQuery extends SQLQuery {
-    private static Logger logger = LoggerFactory.getLogger(DMLQuery.class);
+public class DDLQuery extends SQLQuery {
+    private static Logger logger = LoggerFactory.getLogger(DDLQuery.class);
 
     private QueryRunner run;
 
-    public DMLQuery(StringBuilder queryString, DataSource dataSource) {
+    public DDLQuery(StringBuilder queryString, DataSource dataSource) {
         super(queryString);
         this.run = new QueryRunner(dataSource);
     }

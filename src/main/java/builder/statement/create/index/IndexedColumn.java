@@ -1,6 +1,6 @@
 package builder.statement.create.index;
 
-import query.DDLQuery;
+import query.ddl.DDLQuery;
 import builder.TerminalOperation;
 import builder.utils.StringAppender;
 

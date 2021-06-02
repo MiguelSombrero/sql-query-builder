@@ -1,6 +1,6 @@
 package builder.statement.update;
 
-import query.DMLQuery;
+import query.dml.DMLQuery;
 import builder.utils.StringAppender;
 
 public class FirstColumn {

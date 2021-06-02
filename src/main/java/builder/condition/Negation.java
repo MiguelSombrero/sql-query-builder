@@ -1,11 +1,11 @@
 package builder.condition;
 
-import query.SQLQuery;
+import query.Query;
 
 public class Negation extends Comparison {
 
-    public Negation(SQLQuery SQLQuery) {
-        super(SQLQuery);
+    public Negation(Query query) {
+        super(query);
     }
 
     /**
@@ -16,8 +16,8 @@ public class Negation extends Comparison {
      * or terminate query building
      */
     public Comparison not() {
-        SQLQuery.insert(0, "NOT ");
-        return new Comparison(SQLQuery);
+        query.insert(0, "NOT ");
+        return new Comparison(query);
     }
 
 }

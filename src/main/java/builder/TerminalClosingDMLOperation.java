@@ -1,13 +1,12 @@
-package builder.statement.insert;
+package builder;
 
-import builder.QueryBuilder;
-import query.DMLQuery;
+import query.dml.DMLQuery;
 
-public class TerminalInsertOperation implements QueryBuilder {
+public class TerminalClosingDMLOperation implements QueryBuilder {
 
     protected DMLQuery query;
 
-    public TerminalInsertOperation(DMLQuery query) {
+    public TerminalClosingDMLOperation(DMLQuery query) {
         this.query = query;
     }
 

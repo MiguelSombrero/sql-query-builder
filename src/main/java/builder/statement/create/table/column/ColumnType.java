@@ -1,6 +1,6 @@
 package builder.statement.create.table.column;
 
-import query.DDLQuery;
+import query.ddl.DDLQuery;
 
 public class ColumnType {
 

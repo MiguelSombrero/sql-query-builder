@@ -1,14 +1,16 @@
 package builder.statement.select.table;
 
 import builder.statement.select.column.ToFrom;
+import database.Row;
+import query.dql.DQLQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 import query.QueryFactory;
 import org.junit.Before;
 import org.junit.Test;
-import query.Query;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import static builder.condition.WhereClauseFactory.valueOf;
 import static org.junit.Assert.assertEquals;
@@ -30,17 +32,22 @@ public class TableTest extends DatabaseTestBaseClass {
 
     @Test
     public void testFromOneTable() throws SQLException {
-        Query query = this.column
+        DQLQuery query = this.column
                 .from()
                     .table("person")
                 .build();
 
         assertEquals("SELECT * FROM person", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 3);
+        assertRowLength(result, 5);
     }
 
     @Test
     public void testFromMultipleTables() throws SQLException {
-        Query query = this.column
+        DQLQuery query = this.column
                 .from()
                     .table("person")
                     .table("address")
@@ -48,11 +55,16 @@ public class TableTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("SELECT * FROM person, address, course", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 3);
+        assertRowLength(result, 15);
     }
 
     @Test
     public void testFromSubQuery() throws SQLException {
-        Query query = this.column
+        DQLQuery query = this.column
                 .from()
                     .sub(queryFactory
                             .select()
@@ -65,11 +77,16 @@ public class TableTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("SELECT * FROM (SELECT * FROM person WHERE age > 20) AS p", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 3);
+        assertRowLength(result, 5);
     }
 
     @Test
     public void testFromMultipleTablesWithAliases() throws SQLException {
-        Query query = this.column
+        DQLQuery query = this.column
                 .from()
                     .table("person").alias("p")
                     .table("address").alias("a")
@@ -77,55 +94,80 @@ public class TableTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("SELECT * FROM person AS p, address AS a, course AS h", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 3);
+        assertRowLength(result, 15);
     }
 
     @Test
     public void testFromOneJoinTableWithAlias() throws SQLException {
-        Query query = this.column
+        DQLQuery query = this.column
                 .from()
                     .table("person")
                 .leftJoin("address").alias("a").on("person.id", "a.person_id")
                 .build();
 
         assertEquals("SELECT * FROM person LEFT JOIN address AS a ON person.id = a.person_id", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 3);
+        assertRowLength(result, 10);
     }
 
     @Test
     public void testInnerJoin() throws SQLException {
-        Query query = this.column
+        DQLQuery query = this.column
                 .from()
                     .table("person")
                 .innerJoin("address").on("person.id", "address.person_id")
                 .build();
 
         assertEquals("SELECT * FROM person INNER JOIN address ON person.id = address.person_id", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 1);
+        assertRowLength(result, 10);
     }
 
     @Test
     public void testLeftJoin() throws SQLException {
-        Query query = this.column
+        DQLQuery query = this.column
                 .from()
                     .table("person")
                 .leftJoin("address").on("person.id", "address.person_id")
                 .build();
 
         assertEquals("SELECT * FROM person LEFT JOIN address ON person.id = address.person_id", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 3);
+        assertRowLength(result, 10);
     }
 
     @Test
     public void rightJoin() throws SQLException {
-        Query query = this.column
+        DQLQuery query = this.column
                 .from()
                     .table("person")
                 .rightJoin("address").on("person.id", "address.person_id")
                 .build();
 
         assertEquals("SELECT * FROM person RIGHT JOIN address ON person.id = address.person_id", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 1);
+        assertRowLength(result, 10);
     }
 
     @Test
     public void testMultipleJoins() throws SQLException {
-        Query query = this.column
+        DQLQuery query = this.column
                 .from()
                     .table("person")
                 .leftJoin("address").on("person.id", "address.person_id")
@@ -134,11 +176,16 @@ public class TableTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("SELECT * FROM person LEFT JOIN address ON person.id = address.person_id INNER JOIN course ON person.id = course.person_id RIGHT JOIN school ON course.school_id = school.id", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 1);
+        assertRowLength(result, 17);
     }
 
     @Test
     public void testFromMultipleTablesAndJoinWithAliases() throws SQLException {
-        Query query = this.column
+        DQLQuery query = this.column
                 .from()
                     .table("person").alias("p")
                 .leftJoin("address").alias("a").on("p.id", "a.person_id")
@@ -147,6 +194,11 @@ public class TableTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("SELECT * FROM person AS p LEFT JOIN address AS a ON p.id = a.person_id INNER JOIN course AS c ON p.id = c.person_id RIGHT JOIN school AS s ON c.school_id = s.id", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 1);
+        assertRowLength(result, 17);
     }
 
     @Test(expected = IllegalArgumentException.class)

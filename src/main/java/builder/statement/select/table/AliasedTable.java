@@ -1,10 +1,10 @@
 package builder.statement.select.table;
 
-import query.SelectQuery;
+import query.dql.DQLQuery;
 
 public class AliasedTable extends JoinTable {
 
-    public AliasedTable(SelectQuery query) {
+    public AliasedTable(DQLQuery query) {
         super(query);
     }
 

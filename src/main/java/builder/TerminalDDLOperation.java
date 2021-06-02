@@ -1,13 +1,12 @@
-package builder.statement.create;
+package builder;
 
-import builder.QueryBuilder;
-import query.DDLQuery;
+import query.ddl.DDLQuery;
 
-public class TerminalCreateOperation implements QueryBuilder {
+public class TerminalDDLOperation implements QueryBuilder {
 
     protected DDLQuery query;
 
-    public TerminalCreateOperation(DDLQuery query) {
+    public TerminalDDLOperation(DDLQuery query) {
         this.query = query;
     }
 

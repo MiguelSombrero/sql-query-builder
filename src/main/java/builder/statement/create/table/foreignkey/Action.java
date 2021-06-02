@@ -1,6 +1,6 @@
 package builder.statement.create.table.foreignkey;
 
-import query.DDLQuery;
+import query.ddl.DDLQuery;
 
 public class Action {
 

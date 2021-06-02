@@ -1,8 +1,8 @@
 package builder.statement.insert;
 
-import query.DMLQuery;
-import builder.TerminalOperation;
-import builder.statement.select.SelectQueryBuilder;
+import builder.TerminalDMLOperation;
+import query.dml.DMLQuery;
+import builder.statement.select.DQLQueryBuilder;
 
 public class Column {
 
@@ -30,11 +30,11 @@ public class Column {
      *
      * @param subQuery SELECT sub-query to be appended
      *
-     * @return TerminalOperation class which can be used only
-     * to terminate query building
+     * @return TerminalDMLOperation class which can be used only
+     * to terminate DML type query building
      */
-    public TerminalOperation sub(SelectQueryBuilder subQuery) {
+    public TerminalDMLOperation sub(DQLQueryBuilder subQuery) {
         query.append(subQuery.build().toString());
-        return new TerminalOperation(query);
+        return new TerminalDMLOperation(query);
     }
 }

@@ -1,9 +1,8 @@
 package builder.statement.delete;
 
 import builder.TerminalDMLOperation;
-import builder.TerminalOperation;
 import builder.condition.Condition;
-import query.DMLQuery;
+import query.dml.DMLQuery;
 
 public class Where extends TerminalDMLOperation {
 
@@ -20,9 +19,9 @@ public class Where extends TerminalDMLOperation {
      * @return TerminalOperation class which can be used only
      * to terminate query building
      */
-    public TerminalOperation where(Condition condition) {
+    public TerminalDMLOperation where(Condition condition) {
         query.append(" WHERE ");
         query.append(condition.build().toString());
-        return new TerminalOperation(query);
+        return new TerminalDMLOperation(query);
     }
 }

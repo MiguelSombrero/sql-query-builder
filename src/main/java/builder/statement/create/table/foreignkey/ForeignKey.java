@@ -1,10 +1,10 @@
 package builder.statement.create.table.foreignkey;
 
-import query.DDLQuery;
-import builder.statement.create.TerminalCreateOperation;
+import query.ddl.DDLQuery;
+import builder.TerminalDDLOperation;
 import builder.utils.StringAppender;
 
-public class ForeignKey extends TerminalCreateOperation {
+public class ForeignKey extends TerminalDDLOperation {
     protected StringAppender stringAppender;
 
     public ForeignKey(DDLQuery query) {

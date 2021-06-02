@@ -2,12 +2,12 @@ package builder.statement.select.order;
 
 import builder.condition.Condition;
 import builder.utils.StringAppender;
-import query.SelectQuery;
+import query.dql.DQLQuery;
 
 public class Having extends Orderer {
     private StringAppender stringAppender;
 
-    public Having(SelectQuery query) {
+    public Having(DQLQuery query) {
         super(query);
         this.stringAppender = new StringAppender(query);
     }

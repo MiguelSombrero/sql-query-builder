@@ -1,6 +1,7 @@
 package builder.condition;
 
-import builder.statement.select.SelectQueryBuilder;
+import builder.statement.select.DQLQueryBuilder;
+import query.Query;
 import query.SQLQuery;
 import validation.Validator;
 import validation.ValidatorFactory;
@@ -13,15 +14,17 @@ public class WhereClauseFactory {
         return new Negation(createQuery(operand));
     }
 
-    public static Condition exists(SelectQueryBuilder query) {
-        return new Condition(createQuery("EXISTS (" + query.build() + ")"));
+    public static Condition exists(DQLQueryBuilder subQuery) {
+        Query query = createQuery("EXISTS (" + subQuery.build() + ")");
+        return new Condition(query);
     }
 
-    public static Condition notExists(SelectQueryBuilder query) {
-        return new Condition(createQuery("NOT EXISTS (" + query.build() + ")"));
+    public static Condition notExists(DQLQueryBuilder subQuery) {
+        Query query = createQuery("NOT EXISTS (" + subQuery.build() + ")");
+        return new Condition(query);
     }
 
-    private static SQLQuery createQuery(String clause) {
+    private static Query createQuery(String clause) {
         return new SQLQuery(new StringBuilder(clause));
     }
 }

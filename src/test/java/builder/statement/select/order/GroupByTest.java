@@ -2,7 +2,7 @@ package builder.statement.select.order;
 
 import builder.statement.select.table.Table;
 import database.Row;
-import query.SelectQuery;
+import query.dql.DQLQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 import query.QueryFactory;
@@ -34,7 +34,7 @@ public class GroupByTest extends DatabaseTestBaseClass {
 
     @Test
     public void testGroupBy() throws SQLException {
-        SelectQuery query = table
+        DQLQuery query = table
                 .groupBy()
                     .column("age")
                 .build();
@@ -49,7 +49,7 @@ public class GroupByTest extends DatabaseTestBaseClass {
 
     @Test
     public void testMultipleGroupBy() throws SQLException {
-        SelectQuery query = table
+        DQLQuery query = table
                 .groupBy()
                     .column("age")
                     .column("firstname")
@@ -66,7 +66,7 @@ public class GroupByTest extends DatabaseTestBaseClass {
 
     @Test
     public void testGroupByWhere() throws SQLException {
-        SelectQuery query = this.table
+        DQLQuery query = this.table
                 .where(valueOf("age").greaterThan(18))
                 .groupBy()
                     .column("lastname")
@@ -82,7 +82,7 @@ public class GroupByTest extends DatabaseTestBaseClass {
 
     @Test
     public void testMultipleGroupByHaving() throws SQLException {
-        SelectQuery query = table
+        DQLQuery query = table
                 .groupBy()
                     .column("age")
                     .column("firstname")
@@ -99,7 +99,7 @@ public class GroupByTest extends DatabaseTestBaseClass {
 
     @Test
     public void testMultipleGroupByHavingAndOrdering() throws SQLException {
-        SelectQuery query = table
+        DQLQuery query = table
                 .groupBy()
                     .column("age")
                     .column("firstname")

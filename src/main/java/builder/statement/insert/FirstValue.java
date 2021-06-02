@@ -1,6 +1,6 @@
 package builder.statement.insert;
 
-import query.DMLQuery;
+import query.dml.DMLQuery;
 
 public class FirstValue extends ValueTemplate {
 

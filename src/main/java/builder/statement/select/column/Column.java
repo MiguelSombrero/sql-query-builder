@@ -1,7 +1,7 @@
 package builder.statement.select.column;
 
 import builder.utils.StringAppender;
-import query.SelectQuery;
+import query.dql.DQLQuery;
 
 /**
  * represents column after first column to be appended in
@@ -13,7 +13,7 @@ import query.SelectQuery;
 public class Column extends AliasedColumn {
     private StringAppender stringAppender;
 
-    public Column(SelectQuery query) {
+    public Column(DQLQuery query) {
         super(query);
         this.stringAppender = new StringAppender(query);
     }

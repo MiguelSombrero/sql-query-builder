@@ -1,12 +1,12 @@
 package builder.statement.select.column;
 
 import builder.statement.select.table.From;
-import query.SelectQuery;
+import query.dql.DQLQuery;
 
 public class ToFrom {
-    private SelectQuery query;
+    private DQLQuery query;
 
-    public ToFrom(SelectQuery query) {
+    public ToFrom(DQLQuery query) {
         this.query = query;
     }
 

@@ -1,7 +1,7 @@
 package builder.utils;
 
 import query.Query;
-import builder.statement.select.SelectQueryBuilder;
+import builder.statement.select.DQLQueryBuilder;
 
 public class SubQueryAppender {
 
@@ -11,7 +11,7 @@ public class SubQueryAppender {
         this.query = query;
     }
 
-    public void appendConditionWithSubQuery(String condition, SelectQueryBuilder subQuery) {
+    public void appendConditionWithSubQuery(String condition, DQLQueryBuilder subQuery) {
         query.append(condition);
         query.append("(");
         query.append(subQuery.build().toString());

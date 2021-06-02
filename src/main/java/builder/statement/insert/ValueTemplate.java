@@ -1,9 +1,10 @@
 package builder.statement.insert;
 
-import query.DMLQuery;
+import builder.TerminalClosingDMLOperation;
+import query.dml.DMLQuery;
 import builder.utils.StringValueAppender;
 
-public abstract class ValueTemplate extends TerminalInsertOperation {
+public abstract class ValueTemplate extends TerminalClosingDMLOperation {
     private StringValueAppender stringValueAppender;
 
     public ValueTemplate(DMLQuery query) {

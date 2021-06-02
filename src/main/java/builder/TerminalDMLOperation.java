@@ -1,6 +1,6 @@
 package builder;
 
-import query.DMLQuery;
+import query.dml.DMLQuery;
 
 public class TerminalDMLOperation implements QueryBuilder {
 

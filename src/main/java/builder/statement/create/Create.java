@@ -1,6 +1,6 @@
 package builder.statement.create;
 
-import query.DDLQuery;
+import query.ddl.DDLQuery;
 import builder.TerminalOperation;
 import builder.statement.create.index.Index;
 import builder.statement.create.table.column.FirstColumn;
