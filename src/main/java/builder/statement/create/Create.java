@@ -1,10 +1,10 @@
 package builder.statement.create;
 
-import query.ddl.DDLQuery;
-import builder.TerminalOperation;
+import builder.TerminalDDLOperation;
 import builder.statement.create.index.Index;
 import builder.statement.create.table.column.FirstColumn;
 import builder.utils.StringAppender;
+import query.ddl.DDLQuery;
 
 public class Create {
     private StringAppender stringAppender;
@@ -42,10 +42,10 @@ public class Create {
      * @return TerminalOperation which can be used only
      * to terminate query building
      */
-    public TerminalOperation database(String name) {
+    public TerminalDDLOperation database(String name) {
         query.append("DATABASE ");
         stringAppender.validateAndAppend(name);
-        return new TerminalOperation(query);
+        return new TerminalDDLOperation(query);
     }
 
     /**

@@ -2,8 +2,9 @@ package builder.statement.drop;
 
 import builder.statement.create.table.column.DataType;
 import query.QueryFactory;
-import query.ddl.DDLQuery;
+import query.ddl.CreateQuery;
 import query.Query;
+import query.ddl.DDLQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 import org.junit.Before;

@@ -3,7 +3,7 @@ package query;
 import builder.statement.create.Create;
 import builder.statement.drop.Drop;
 import builder.statement.select.column.FirstColumn;
-import query.ddl.DDLQuery;
+import query.ddl.CreateQuery;
 import query.dml.DeleteQuery;
 import query.dml.InsertQuery;
 import query.dml.UpdateQuery;
@@ -49,12 +49,12 @@ public class QueryFactory {
     }
 
     public Create create() {
-        DDLQuery query = createDDLQuery("CREATE ");
+        CreateQuery query = createCreateQuery("CREATE ");
         return new Create(query);
     }
 
     public Drop drop() {
-        DDLQuery query = createDDLQuery("DROP ");
+        CreateQuery query = createDDLQuery("DROP ");
         return new Drop(query);
     }
 
@@ -74,7 +74,11 @@ public class QueryFactory {
         return new DeleteQuery(new StringBuilder(clause), dataSource);
     }
 
-    private DDLQuery createDDLQuery(String clause) {
-        return new DDLQuery(new StringBuilder(clause), dataSource);
+    private CreateQuery createCreateQuery(String clause) {
+        return new CreateQuery(new StringBuilder(clause), dataSource);
+    }
+
+    private CreateQuery createDDLQuery(String clause) {
+        return new CreateQuery(new StringBuilder(clause), dataSource);
     }
 }

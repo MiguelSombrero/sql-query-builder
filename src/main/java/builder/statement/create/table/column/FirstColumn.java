@@ -1,7 +1,7 @@
 package builder.statement.create.table.column;
 
-import query.ddl.DDLQuery;
 import builder.utils.StringAppender;
+import query.ddl.DDLQuery;
 
 public class FirstColumn {
     private StringAppender stringAppender;

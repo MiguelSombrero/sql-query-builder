@@ -2,6 +2,7 @@ package builder.statement.create.table.column;
 
 import query.QueryFactory;
 import query.Query;
+import query.ddl.DDLQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 import org.junit.Before;
@@ -22,7 +23,7 @@ public class CreateTableTest extends DatabaseTestBaseClass {
 
     @Test
     public void testCreateTableDataTypes() throws SQLException {
-        Query query = queryFactory.create()
+        DDLQuery query = queryFactory.create()
                 .table("cars")
                 .column("ID").type(DataType.INT)
                 .column("age").type(DataType.DOUBLE)
@@ -35,11 +36,15 @@ public class CreateTableTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("CREATE TABLE cars (ID INT, age DOUBLE, created TIMESTAMP, country CHAR, model VARCHAR(32), brand VARCHAR(64), disclaimer VARCHAR(128), description VARCHAR(255))", query.toString());
+
+        int result = query.execute();
+
+        assertEquals(1, result);
     }
 
     @Test
     public void testCreateTableConstraintNotNull() throws SQLException {
-        Query query = queryFactory.create()
+        DDLQuery query = queryFactory.create()
                 .table("planes")
                 .column("ID").type(DataType.INT).notNull()
                 .column("age").type(DataType.DOUBLE)
@@ -51,7 +56,7 @@ public class CreateTableTest extends DatabaseTestBaseClass {
 
     @Test
     public void testCreateTableConstraintUnique() throws SQLException {
-        Query query = queryFactory.create()
+        DDLQuery query = queryFactory.create()
                 .table("bikes")
                 .column("ID").type(DataType.INT).unique()
                 .column("age").type(DataType.DOUBLE)
@@ -63,7 +68,7 @@ public class CreateTableTest extends DatabaseTestBaseClass {
 
     @Test
     public void testCreateTableConstraintPrimaryKey() throws SQLException {
-        Query query = queryFactory.create()
+        DDLQuery query = queryFactory.create()
                 .table("vehicles")
                 .column("ID").type(DataType.INT).primaryKey()
                 .column("age").type(DataType.DOUBLE)
@@ -74,7 +79,7 @@ public class CreateTableTest extends DatabaseTestBaseClass {
 
     @Test
     public void testCreateTableConstraintAutoIncrement() throws SQLException {
-        Query query = queryFactory.create()
+        DDLQuery query = queryFactory.create()
                 .table("vehicles")
                 .column("ID").type(DataType.INT).autoIncrement()
                 .column("person_id").type(DataType.INT)
@@ -86,7 +91,7 @@ public class CreateTableTest extends DatabaseTestBaseClass {
 
     @Test
     public void testCreateTableConstraintMultipleConstraint() throws SQLException {
-        Query query = queryFactory.create()
+        DDLQuery query = queryFactory.create()
                 .table("vehicles")
                 .column("ID").type(DataType.INT).primaryKey().autoIncrement()
                 .column("person_id").type(DataType.INT).unique().notNull()

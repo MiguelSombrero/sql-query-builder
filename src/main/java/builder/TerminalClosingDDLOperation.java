@@ -2,11 +2,11 @@ package builder;
 
 import query.ddl.DDLQuery;
 
-public class TerminalDDLOperation implements QueryBuilder {
+public class TerminalClosingDDLOperation implements QueryBuilder {
 
     protected DDLQuery query;
 
-    public TerminalDDLOperation(DDLQuery query) {
+    public TerminalClosingDDLOperation(DDLQuery query) {
         this.query = query;
     }
 
@@ -17,6 +17,7 @@ public class TerminalDDLOperation implements QueryBuilder {
      * execute CREATE queries
      */
     public DDLQuery build() {
+        query.append(")");
         return this.query;
     }
 }
