@@ -13,7 +13,8 @@ public class DatabaseConnection {
     private static final String dbPassword = "";
 
     public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(dbPath, dbUser, dbPassword);
+        DataSource dataSource = getDataSource();
+        return dataSource.getConnection();
     }
 
     public static DataSource getDataSource() {

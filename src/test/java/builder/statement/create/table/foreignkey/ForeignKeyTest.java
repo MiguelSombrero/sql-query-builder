@@ -4,6 +4,7 @@ import builder.statement.create.table.column.Constraint;
 import builder.statement.create.table.column.DataType;
 import query.QueryFactory;
 import query.Query;
+import query.ddl.DDLQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 import org.junit.Before;
@@ -32,17 +33,19 @@ public class ForeignKeyTest extends DatabaseTestBaseClass {
 
     @Test
     public void testCreateTableConstraintForeignKey() throws SQLException {
-        Query query = this.column
+        DDLQuery query = this.column
                 .foreignKey("person_id")
                     .references("ID", "person")
                 .build();
 
         assertEquals("CREATE TABLE vehicles (ID INT PRIMARY KEY, person_id INT, manufacturer_id INT, FOREIGN KEY (person_id) REFERENCES person(ID))", query.toString());
+
+        query.execute();
     }
 
     @Test
     public void testCreateTableConstraintForeignKeyOnActionCascade() throws SQLException {
-        Query query = this.column
+        DDLQuery query = this.column
                 .foreignKey("person_id")
                     .references("ID", "person")
                     .onDelete().cascade()
@@ -52,11 +55,13 @@ public class ForeignKeyTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("CREATE TABLE vehicles (ID INT PRIMARY KEY, person_id INT, manufacturer_id INT, FOREIGN KEY (person_id) REFERENCES person(ID) ON DELETE CASCADE, FOREIGN KEY (manufacturer_id) REFERENCES manufacturer(ID) ON UPDATE CASCADE)", query.toString());
+
+        query.execute();
     }
 
     @Test
     public void testCreateTableConstraintForeignKeyOnActionRestrict() throws SQLException {
-        Query query = this.column
+        DDLQuery query = this.column
                 .foreignKey("person_id")
                     .references("ID", "person")
                     .onDelete().restrict()
@@ -67,11 +72,13 @@ public class ForeignKeyTest extends DatabaseTestBaseClass {
 
 
         assertEquals("CREATE TABLE vehicles (ID INT PRIMARY KEY, person_id INT, manufacturer_id INT, FOREIGN KEY (person_id) REFERENCES person(ID) ON DELETE RESTRICT, FOREIGN KEY (manufacturer_id) REFERENCES manufacturer(ID) ON UPDATE RESTRICT)", query.toString());
+
+        query.execute();
     }
 
     @Test
     public void testCreateTableConstraintForeignKeyOnActionSetNull() throws SQLException {
-        Query query = this.column
+        DDLQuery query = this.column
                 .foreignKey("person_id")
                     .references("ID", "person")
                     .onDelete().setNull()
@@ -81,11 +88,13 @@ public class ForeignKeyTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("CREATE TABLE vehicles (ID INT PRIMARY KEY, person_id INT, manufacturer_id INT, FOREIGN KEY (person_id) REFERENCES person(ID) ON DELETE SET NULL, FOREIGN KEY (manufacturer_id) REFERENCES manufacturer(ID) ON UPDATE SET NULL)", query.toString());
+
+        query.execute();
     }
 
     @Test
     public void testCreateTableConstraintForeignKeyOnActionSetDefault() throws SQLException {
-        Query query = this.column
+        DDLQuery query = this.column
                 .foreignKey("person_id")
                     .references("ID", "person")
                     .onDelete().setDefault()
@@ -95,6 +104,8 @@ public class ForeignKeyTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("CREATE TABLE vehicles (ID INT PRIMARY KEY, person_id INT, manufacturer_id INT, FOREIGN KEY (person_id) REFERENCES person(ID) ON DELETE SET DEFAULT, FOREIGN KEY (manufacturer_id) REFERENCES manufacturer(ID) ON UPDATE SET DEFAULT)", query.toString());
+
+        query.execute();
     }
 
     @Test(expected = IllegalArgumentException.class)

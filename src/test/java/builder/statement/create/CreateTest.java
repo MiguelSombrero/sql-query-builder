@@ -2,6 +2,7 @@ package builder.statement.create;
 
 import query.QueryFactory;
 import query.Query;
+import query.ddl.DDLQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 import org.junit.Before;
@@ -23,7 +24,7 @@ public class CreateTest extends DatabaseTestBaseClass {
 
     @Test
     public void testCreateDatabase() {
-        Query query = queryFactory.create()
+        DDLQuery query = queryFactory.create()
                 .database("test_db")
                 .build();
 
@@ -32,13 +33,15 @@ public class CreateTest extends DatabaseTestBaseClass {
 
     @Test
     public void testCreateIndex() throws SQLException {
-        Query query = queryFactory.create()
+        DDLQuery query = queryFactory.create()
                 .index("person_index")
                 .on("person")
                 .columns("id", "firstname", "lastname")
                 .build();
 
         assertEquals("CREATE INDEX person_index ON person (id, firstname, lastname)", query.toString());
+
+        query.execute();
     }
 
     @Test(expected = IllegalArgumentException.class)

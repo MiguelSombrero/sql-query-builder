@@ -1,4 +1,4 @@
-package database;
+package query.dql;
 
 import java.util.Date;
 

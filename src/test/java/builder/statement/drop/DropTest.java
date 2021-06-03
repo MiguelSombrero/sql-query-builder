@@ -33,32 +33,35 @@ public class DropTest extends DatabaseTestBaseClass {
 
         createTable.execute();
 
-        Query query = queryFactory
+        DDLQuery query = queryFactory
                 .drop()
                 .table("test_table")
                 .build();
+
+        query.execute();
 
         assertEquals("DROP TABLE test_table", query.toString());
 
     }
 
     @Test
-    public void testDropDatabase() {
-        /*String createDatabase = QueryFactory
+    public void testDropDatabase() throws SQLException {
+        /*DDLQuery createDatabase = queryFactory
                 .create()
                 .database("test_db")
                 .build();
 
-        execute(createDatabase);
-*/
-        Query query = queryFactory
+        createDatabase.execute();*/
+
+        DDLQuery query = queryFactory
                 .drop()
                 .database("test_db")
                 .build();
 
-        // command not supported in H2?
+        // DROP DATABASE not supported in H2?
+        //query.execute();
+
         assertEquals("DROP DATABASE test_db", query.toString());
-        //assertThatQueryIsValidSQL(query);
     }
 
     @Test(expected = IllegalArgumentException.class)

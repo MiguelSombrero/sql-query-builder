@@ -1,4 +1,4 @@
-package database;
+package query.dql;
 
 
 import org.apache.commons.dbutils.BasicRowProcessor;

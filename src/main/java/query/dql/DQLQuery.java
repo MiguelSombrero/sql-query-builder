@@ -1,6 +1,5 @@
 package query.dql;
 
-import database.Row;
 import query.Query;
 
 import java.sql.SQLException;

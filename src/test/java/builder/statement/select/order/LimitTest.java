@@ -1,7 +1,7 @@
 package builder.statement.select.order;
 
 import builder.statement.select.table.Table;
-import database.Row;
+import query.dql.Row;
 import query.dql.DQLQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;

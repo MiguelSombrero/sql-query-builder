@@ -1,6 +1,6 @@
 package builder.statement.select.order;
 
-import database.Row;
+import query.dql.Row;
 import query.dql.DQLQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;

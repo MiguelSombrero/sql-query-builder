@@ -1,14 +1,16 @@
 package builder.statement.create.table.column;
 
+import query.dql.Row;
 import query.QueryFactory;
-import query.Query;
 import query.ddl.DDLQuery;
+import query.dql.DQLQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -37,9 +39,35 @@ public class CreateTableTest extends DatabaseTestBaseClass {
 
         assertEquals("CREATE TABLE cars (ID INT, age DOUBLE, created TIMESTAMP, country CHAR, model VARCHAR(32), brand VARCHAR(64), disclaimer VARCHAR(128), description VARCHAR(255))", query.toString());
 
-        int result = query.execute();
+        query.execute();
 
-        assertEquals(1, result);
+        /*DMLQuery insert = queryFactory
+                .insertInto()
+                .table("cars")
+                .values()
+                    .value(105)
+                    .value(12)
+                    .value("2020-02-02")
+                    .value("Finland")
+                    .value("ADC12")
+                    .value("Opel")
+                    .value("Nodisclaimers")
+                    .value("Nodescriptions")
+                .build();
+
+        insert.execute();*/
+
+        DQLQuery select = queryFactory
+                .select()
+                    .all()
+                .from()
+                    .table("cars")
+                .build();
+
+        List<Row> selectResults = select.execute();
+
+        //assertEquals("Opel", selectResults.get(0).getStringFrom(5));
+        //assertEquals(1, result);
     }
 
     @Test
@@ -52,6 +80,8 @@ public class CreateTableTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("CREATE TABLE planes (ID INT NOT NULL, age DOUBLE, created TIMESTAMP NOT NULL)", query.toString());
+
+        query.execute();
     }
 
     @Test
@@ -64,6 +94,8 @@ public class CreateTableTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("CREATE TABLE bikes (ID INT UNIQUE, age DOUBLE, created TIMESTAMP UNIQUE)", query.toString());
+
+        query.execute();
     }
 
     @Test
@@ -75,6 +107,8 @@ public class CreateTableTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("CREATE TABLE vehicles (ID INT PRIMARY KEY, age DOUBLE)", query.toString());
+
+        query.execute();
     }
 
     @Test
@@ -87,6 +121,8 @@ public class CreateTableTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("CREATE TABLE vehicles (ID INT AUTO_INCREMENT, person_id INT, FOREIGN KEY (person_id) REFERENCES person(ID))", query.toString());
+
+        query.execute();
     }
 
     @Test
@@ -99,6 +135,8 @@ public class CreateTableTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("CREATE TABLE vehicles (ID INT PRIMARY KEY AUTO_INCREMENT, person_id INT UNIQUE NOT NULL, FOREIGN KEY (person_id) REFERENCES person(ID))", query.toString());
+
+        query.execute();
     }
 
     @Test(expected = IllegalArgumentException.class)

@@ -1,15 +1,15 @@
 package builder.statement.drop;
 
-import query.Query;
-import builder.TerminalOperation;
+import builder.TerminalDDLOperation;
 import builder.utils.StringAppender;
+import query.ddl.DDLQuery;
 
 public class Drop {
     private StringAppender stringAppender;
 
-    private Query query;
+    private DDLQuery query;
 
-    public Drop(Query query) {
+    public Drop(DDLQuery query) {
         this.query = query;
         this.stringAppender = new StringAppender(query);
     }
@@ -20,13 +20,13 @@ public class Drop {
      *
      * @param table Table name to be appended
      *
-     * @return TerminalOperation class which can be used only
-     * to terminate query building
+     * @return TerminalDDLOperation class which can be used
+     * to terminate CREATE and DROP query building
      */
-    public TerminalOperation table(String table) {
+    public TerminalDDLOperation table(String table) {
         query.append("TABLE ");
         stringAppender.validateAndAppend(table);
-        return new TerminalOperation(query);
+        return new TerminalDDLOperation(query);
     }
 
     /**
@@ -35,12 +35,12 @@ public class Drop {
      *
      * @param database Database name to be dropped
      *
-     * @return TerminalOperation class which can be used only
-     * to terminate query building
+     * @return TerminalDDLOperation class which can be used
+     * to terminate CREATE and DROP query building
      */
-    public TerminalOperation database(String database) {
+    public TerminalDDLOperation database(String database) {
         query.append("DATABASE ");
         stringAppender.validateAndAppend(database);
-        return new TerminalOperation(query);
+        return new TerminalDDLOperation(query);
     }
 }
