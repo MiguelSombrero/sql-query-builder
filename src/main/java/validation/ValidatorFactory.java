@@ -3,8 +3,8 @@ package validation;
 public class ValidatorFactory {
 
     public static Validator exceptionThrowingStringValueValidator() {
-        return new ExceptionThrowingValidator(
-                new OrValidator(stringValidator(), dateValidator(), wildCardParameterValidator()));
+        return new ExceptionThrowingValidator(new OrValidator(
+                stringValueValidator(), dateValidator(), wildCardParameterValidator()));
     }
 
     public static Validator exceptionThrowingNameValidator() {
@@ -13,6 +13,10 @@ public class ValidatorFactory {
 
     public static Validator stringValidator() {
         return new StringPatternValidator();
+    }
+
+    public static Validator stringValueValidator() {
+        return new StringValuePatternValidator();
     }
 
     public static Validator dateValidator() {

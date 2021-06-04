@@ -24,7 +24,7 @@ public class InsertTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testInsertOneValue() throws SQLException {
+    public void testInsertOneIntegerValue() throws SQLException {
         DMLQuery query = queryFactory
                 .insertInto()
                 .table("person")
@@ -38,6 +38,40 @@ public class InsertTest extends DatabaseTestBaseClass {
         int result = query.execute();
 
         assertEquals(100, result);
+    }
+
+    @Test
+    public void testInsertOneDoubleValue() throws SQLException {
+        DMLQuery query = queryFactory
+                .insertInto()
+                .table("person")
+                .columns("age")
+                .values()
+                    .value(19.5)
+                .build();
+
+        assertEquals("INSERT INTO person (age) VALUES (19.5)", query.toString());
+
+        int result = query.execute();
+
+        assertEquals(4, result);
+    }
+
+    @Test
+    public void testInsertOneStringValue() throws SQLException {
+        DMLQuery query = queryFactory
+                .insertInto()
+                .table("person")
+                .columns("firstname")
+                .values()
+                    .value("Miika-Lassi Kari")
+                .build();
+
+        assertEquals("INSERT INTO person (firstname) VALUES ('Miika-Lassi Kari')", query.toString());
+
+        int result = query.execute();
+
+        assertEquals(4, result);
     }
 
     @Test

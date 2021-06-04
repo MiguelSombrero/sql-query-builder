@@ -1,5 +1,5 @@
 CREATE TABLE person (
-    ID INT PRIMARY KEY,
+    ID INT PRIMARY KEY AUTO_INCREMENT,
     birthdate TIMESTAMP,
     firstname VARCHAR(255),
     lastname VARCHAR(255),

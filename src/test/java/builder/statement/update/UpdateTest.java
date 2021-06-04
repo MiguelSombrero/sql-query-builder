@@ -56,10 +56,10 @@ public class UpdateTest extends DatabaseTestBaseClass {
         DMLQuery query = queryFactory
                 .update()
                 .table("person")
-                    .column("firstname").value("Miika")
+                    .column("firstname").value("Miika-Lassi Kari")
                 .build();
 
-        assertEquals("UPDATE person SET firstname = 'Miika'", query.toString());
+        assertEquals("UPDATE person SET firstname = 'Miika-Lassi Kari'", query.toString());
 
         int result = query.execute();
 
