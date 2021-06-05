@@ -1,4 +1,4 @@
-package builder.utils;
+package utils;
 
 import query.Query;
 import validation.ValidatorFactory;

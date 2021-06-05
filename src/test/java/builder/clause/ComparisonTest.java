@@ -1,4 +1,4 @@
-package builder.condition;
+package builder.clause;
 
 import builder.statement.select.table.Table;
 import query.dql.Row;
@@ -12,7 +12,7 @@ import org.junit.Test;
 import java.sql.SQLException;
 import java.util.List;
 
-import static builder.condition.WhereClauseFactory.*;
+import static builder.clause.WhereClauseFactory.*;
 import static org.junit.Assert.assertEquals;
 
 public class ComparisonTest extends DatabaseTestBaseClass {

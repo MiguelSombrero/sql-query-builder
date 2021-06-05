@@ -1,4 +1,4 @@
-package builder.condition;
+package builder.clause;
 
 import query.SQLQuery;
 

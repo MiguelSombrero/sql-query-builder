@@ -1,9 +1,7 @@
 package builder.statement.select.column;
 
-import builder.utils.AggregateFunction;
-import builder.utils.StringAppender;
-import com.sun.org.apache.bcel.internal.generic.Select;
-import query.dql.DQLQuery;
+import utils.AggregateFunction;
+import utils.StringAppender;
 import query.dql.SelectQuery;
 
 public abstract class ColumnTemplate {

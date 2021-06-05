@@ -1,7 +1,7 @@
 package builder.statement.update;
 
-import builder.condition.Condition;
-import builder.utils.StringAppender;
+import builder.clause.Condition;
+import utils.StringAppender;
 import query.dml.UpdateQuery;
 
 public class Column extends TerminalUpdateOperation {
@@ -33,7 +33,7 @@ public class Column extends TerminalUpdateOperation {
      *
      * @param condition Condition to append in UPDATE statement
      *
-     * @return TerminalOperation which can be used only
+     * @return TerminalUpdateOperation which can be used only
      * to terminate query building
      */
     public TerminalUpdateOperation where(Condition condition) {

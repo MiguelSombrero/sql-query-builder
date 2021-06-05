@@ -1,6 +1,6 @@
 package builder.statement.create.index;
 
-import builder.utils.StringAppender;
+import utils.StringAppender;
 import query.ddl.CreateQuery;
 
 public class Index {

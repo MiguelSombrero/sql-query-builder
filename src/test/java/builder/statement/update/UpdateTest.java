@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import java.sql.SQLException;
 
-import static builder.condition.WhereClauseFactory.valueOf;
+import static builder.clause.WhereClauseFactory.valueOf;
 import static org.junit.Assert.assertEquals;
 
 public class UpdateTest extends DatabaseTestBaseClass {

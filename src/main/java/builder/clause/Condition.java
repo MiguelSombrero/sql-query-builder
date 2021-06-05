@@ -1,9 +1,8 @@
-package builder.condition;
+package builder.clause;
 
 import query.SQLQuery;
-import builder.TerminalOperation;
 
-public class Condition extends TerminalOperation {
+public class Condition extends TerminalSQLOperation {
 
     public Condition(SQLQuery query) {
         super(query);

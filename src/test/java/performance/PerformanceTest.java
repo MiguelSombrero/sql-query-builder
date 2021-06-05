@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import java.sql.SQLException;
 
-import static builder.condition.WhereClauseFactory.valueOf;
+import static builder.clause.WhereClauseFactory.valueOf;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 

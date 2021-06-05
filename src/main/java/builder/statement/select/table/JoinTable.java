@@ -1,8 +1,8 @@
 package builder.statement.select.table;
 
-import builder.condition.Condition;
+import builder.clause.Condition;
 import builder.statement.select.order.Grouper;
-import builder.utils.StringAppender;
+import utils.StringAppender;
 import query.dql.SelectQuery;
 
 public class JoinTable extends Grouper {

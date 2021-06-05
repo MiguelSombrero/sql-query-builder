@@ -1,4 +1,4 @@
-package builder.utils;
+package utils;
 
 import builder.statement.select.SelectQueryBuilder;
 import query.SQLQuery;

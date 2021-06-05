@@ -1,6 +1,6 @@
-package builder.condition;
+package builder.clause;
 
-import builder.utils.AggregateFunction;
+import utils.AggregateFunction;
 import query.SQLQuery;
 
 public class HavingClauseFactory {

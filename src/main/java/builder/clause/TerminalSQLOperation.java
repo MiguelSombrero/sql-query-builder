@@ -1,12 +1,13 @@
-package builder;
+package builder.clause;
 
+import builder.QueryBuilder;
 import query.SQLQuery;
 
-public class TerminalOperation implements QueryBuilder {
+public class TerminalSQLOperation implements QueryBuilder {
 
     protected SQLQuery query;
 
-    public TerminalOperation(SQLQuery query) {
+    public TerminalSQLOperation(SQLQuery query) {
         this.query = query;
     }
 

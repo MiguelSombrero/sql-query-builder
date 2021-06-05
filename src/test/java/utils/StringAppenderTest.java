@@ -1,7 +1,8 @@
-package builder.utils;
+package utils;
 
 import query.SQLQuery;
 import org.junit.Test;
+import utils.StringAppender;
 
 import static org.junit.Assert.assertEquals;
 

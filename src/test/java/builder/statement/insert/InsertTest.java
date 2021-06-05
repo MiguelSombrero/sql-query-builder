@@ -1,8 +1,6 @@
 package builder.statement.insert;
 
 import query.dml.DMLQuery;
-import query.dml.InsertQuery;
-import query.Query;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 import query.QueryFactory;
@@ -11,7 +9,7 @@ import org.junit.Test;
 
 import java.sql.SQLException;
 
-import static builder.condition.WhereClauseFactory.valueOf;
+import static builder.clause.WhereClauseFactory.valueOf;
 import static org.junit.Assert.assertEquals;
 
 public class InsertTest extends DatabaseTestBaseClass {

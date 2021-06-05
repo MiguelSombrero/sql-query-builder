@@ -14,7 +14,7 @@ public class Offset extends TerminalSelectOperation {
      *
      * @param rows row count to offset query results
      *
-     * @return TerminalOperation class which terminates
+     * @return TerminalSelectOperation class which terminates
      * query
      */
     public TerminalSelectOperation offset(int rows) {

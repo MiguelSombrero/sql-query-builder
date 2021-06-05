@@ -1,6 +1,6 @@
 package builder.statement.delete;
 
-import builder.condition.Condition;
+import builder.clause.Condition;
 import query.dml.DeleteQuery;
 
 public class Where extends TerminalDeleteOperation {
@@ -15,7 +15,7 @@ public class Where extends TerminalDeleteOperation {
      *
      * @param condition WHERE condition to append
      *
-     * @return TerminalOperation class which can be used only
+     * @return TerminalDeleteOperation class which can be used only
      * to terminate query building
      */
     public TerminalDeleteOperation where(Condition condition) {

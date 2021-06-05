@@ -11,7 +11,7 @@ import org.junit.Test;
 import java.sql.SQLException;
 import java.util.List;
 
-import static builder.condition.HavingClauseFactory.*;
+import static builder.clause.HavingClauseFactory.*;
 import static org.junit.Assert.assertEquals;
 
 public class HavingTest extends DatabaseTestBaseClass {

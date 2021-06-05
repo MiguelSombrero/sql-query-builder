@@ -1,7 +1,6 @@
-package builder.condition;
+package builder.clause;
 
 import builder.statement.select.SelectQueryBuilder;
-import query.Query;
 import query.SQLQuery;
 import validation.Validator;
 import validation.ValidatorFactory;

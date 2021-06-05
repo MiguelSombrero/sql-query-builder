@@ -1,6 +1,6 @@
 package builder.statement.select.column;
 
-import builder.utils.StringAppender;
+import utils.StringAppender;
 import query.dql.SelectQuery;
 
 /**

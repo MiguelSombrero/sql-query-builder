@@ -12,8 +12,8 @@ import org.junit.Test;
 import java.sql.SQLException;
 import java.util.List;
 
-import static builder.condition.HavingClauseFactory.count;
-import static builder.condition.WhereClauseFactory.valueOf;
+import static builder.clause.HavingClauseFactory.count;
+import static builder.clause.WhereClauseFactory.valueOf;
 import static org.junit.Assert.assertEquals;
 
 public class GroupByTest extends DatabaseTestBaseClass {

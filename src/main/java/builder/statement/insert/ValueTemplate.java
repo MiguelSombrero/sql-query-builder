@@ -1,6 +1,6 @@
 package builder.statement.insert;
 
-import builder.utils.StringValueAppender;
+import utils.StringValueAppender;
 import query.dml.InsertQuery;
 
 public abstract class ValueTemplate extends TerminalClosingInsertOperation {

@@ -1,9 +1,9 @@
-package builder.condition;
+package builder.clause;
 
-import builder.utils.NumberAppender;
+import utils.NumberAppender;
 import builder.statement.select.SelectQueryBuilder;
-import builder.utils.StringValueAppender;
-import builder.utils.SubQueryAppender;
+import utils.StringValueAppender;
+import utils.SubQueryAppender;
 import query.SQLQuery;
 
 public class Comparison {

@@ -1,4 +1,4 @@
-package builder.condition;
+package builder.clause;
 
 import builder.statement.select.table.Table;
 import testutils.DatabaseConnection;
@@ -10,7 +10,7 @@ import query.Query;
 
 import java.sql.SQLException;
 
-import static builder.condition.WhereClauseFactory.valueOf;
+import static builder.clause.WhereClauseFactory.valueOf;
 import static org.junit.Assert.assertEquals;
 
 public class WhereTest extends DatabaseTestBaseClass {

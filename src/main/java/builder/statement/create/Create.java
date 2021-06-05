@@ -2,7 +2,7 @@ package builder.statement.create;
 
 import builder.statement.create.index.Index;
 import builder.statement.create.table.column.FirstColumn;
-import builder.utils.StringAppender;
+import utils.StringAppender;
 import query.ddl.CreateQuery;
 
 public class Create {
@@ -38,7 +38,7 @@ public class Create {
      *
      * @param name database name to be created
      *
-     * @return TerminalOperation which can be used only
+     * @return TerminalCreateOperation which can be used only
      * to terminate query building
      */
     public TerminalCreateOperation database(String name) {
