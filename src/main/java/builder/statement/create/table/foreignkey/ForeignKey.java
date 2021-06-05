@@ -1,13 +1,13 @@
 package builder.statement.create.table.foreignkey;
 
-import builder.TerminalClosingDDLOperation;
+import builder.statement.create.TerminalClosingCreateOperation;
 import builder.utils.StringAppender;
-import query.ddl.DDLQuery;
+import query.ddl.CreateQuery;
 
-public class ForeignKey extends TerminalClosingDDLOperation {
+public class ForeignKey extends TerminalClosingCreateOperation {
     protected StringAppender stringAppender;
 
-    public ForeignKey(DDLQuery query) {
+    public ForeignKey(CreateQuery query) {
         super(query);
         this.stringAppender = new StringAppender(query);
     }

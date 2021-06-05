@@ -4,6 +4,7 @@ import builder.statement.create.table.column.Constraint;
 import builder.statement.create.table.column.DataType;
 import query.QueryFactory;
 import query.Query;
+import query.ddl.CreateQuery;
 import query.ddl.DDLQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
@@ -33,7 +34,7 @@ public class ForeignKeyTest extends DatabaseTestBaseClass {
 
     @Test
     public void testCreateTableConstraintForeignKey() throws SQLException {
-        DDLQuery query = this.column
+        CreateQuery query = this.column
                 .foreignKey("person_id")
                     .references("ID", "person")
                 .build();
@@ -45,7 +46,7 @@ public class ForeignKeyTest extends DatabaseTestBaseClass {
 
     @Test
     public void testCreateTableConstraintForeignKeyOnActionCascade() throws SQLException {
-        DDLQuery query = this.column
+        CreateQuery query = this.column
                 .foreignKey("person_id")
                     .references("ID", "person")
                     .onDelete().cascade()
@@ -61,7 +62,7 @@ public class ForeignKeyTest extends DatabaseTestBaseClass {
 
     @Test
     public void testCreateTableConstraintForeignKeyOnActionRestrict() throws SQLException {
-        DDLQuery query = this.column
+        CreateQuery query = this.column
                 .foreignKey("person_id")
                     .references("ID", "person")
                     .onDelete().restrict()
@@ -78,7 +79,7 @@ public class ForeignKeyTest extends DatabaseTestBaseClass {
 
     @Test
     public void testCreateTableConstraintForeignKeyOnActionSetNull() throws SQLException {
-        DDLQuery query = this.column
+        CreateQuery query = this.column
                 .foreignKey("person_id")
                     .references("ID", "person")
                     .onDelete().setNull()
@@ -94,7 +95,7 @@ public class ForeignKeyTest extends DatabaseTestBaseClass {
 
     @Test
     public void testCreateTableConstraintForeignKeyOnActionSetDefault() throws SQLException {
-        DDLQuery query = this.column
+        CreateQuery query = this.column
                 .foreignKey("person_id")
                     .references("ID", "person")
                     .onDelete().setDefault()

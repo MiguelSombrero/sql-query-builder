@@ -5,6 +5,7 @@ import query.QueryFactory;
 import query.ddl.CreateQuery;
 import query.Query;
 import query.ddl.DDLQuery;
+import query.ddl.DropQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 import org.junit.Before;
@@ -25,7 +26,7 @@ public class DropTest extends DatabaseTestBaseClass {
 
     @Test
     public void testDropTable() throws SQLException {
-        DDLQuery createTable = queryFactory
+        CreateQuery createTable = queryFactory
                 .create()
                 .table("test_table")
                 .column("id").type(DataType.INT)
@@ -33,7 +34,7 @@ public class DropTest extends DatabaseTestBaseClass {
 
         createTable.execute();
 
-        DDLQuery query = queryFactory
+        DropQuery query = queryFactory
                 .drop()
                 .table("test_table")
                 .build();
@@ -53,7 +54,7 @@ public class DropTest extends DatabaseTestBaseClass {
 
         createDatabase.execute();*/
 
-        DDLQuery query = queryFactory
+        DropQuery query = queryFactory
                 .drop()
                 .database("test_db")
                 .build();

@@ -1,11 +1,11 @@
 package builder.statement.create.table.column;
 
 import builder.statement.create.table.foreignkey.ForeignKey;
-import query.ddl.DDLQuery;
+import query.ddl.CreateQuery;
 
 public class Column extends ForeignKey {
 
-    public Column(DDLQuery query) {
+    public Column(CreateQuery query) {
         super(query);
     }
 

@@ -1,14 +1,14 @@
 package builder.statement.create.table.foreignkey;
 
 import builder.utils.StringAppender;
-import query.ddl.DDLQuery;
+import query.ddl.CreateQuery;
 
 public class Reference {
     private StringAppender stringAppender;
 
-    private DDLQuery query;
+    private CreateQuery query;
 
-    public Reference(DDLQuery query) {
+    public Reference(CreateQuery query) {
         this.query = query;
         this.stringAppender = new StringAppender(query);
     }

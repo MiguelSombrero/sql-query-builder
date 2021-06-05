@@ -1,10 +1,10 @@
 package builder.statement.create.table.foreignkey;
 
-import query.ddl.DDLQuery;
+import query.ddl.CreateQuery;
 
 public class OnAction extends ForeignKey {
 
-    public OnAction(DDLQuery query) {
+    public OnAction(CreateQuery query) {
         super(query);
     }
 

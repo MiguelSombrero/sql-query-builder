@@ -1,14 +1,14 @@
 package builder.statement.create.table.column;
 
 import builder.utils.StringAppender;
-import query.ddl.DDLQuery;
+import query.ddl.CreateQuery;
 
 public class FirstColumn {
     private StringAppender stringAppender;
 
-    private DDLQuery query;
+    private CreateQuery query;
 
-    public FirstColumn(DDLQuery query) {
+    public FirstColumn(CreateQuery query) {
         this.query = query;
         this.stringAppender = new StringAppender(query);
     }

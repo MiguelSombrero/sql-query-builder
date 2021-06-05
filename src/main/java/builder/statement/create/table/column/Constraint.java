@@ -1,10 +1,10 @@
 package builder.statement.create.table.column;
 
-import query.ddl.DDLQuery;
+import query.ddl.CreateQuery;
 
 public class Constraint extends Column {
 
-    public Constraint(DDLQuery query) {
+    public Constraint(CreateQuery query) {
         super(query);
     }
 

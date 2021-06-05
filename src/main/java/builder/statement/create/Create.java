@@ -1,17 +1,16 @@
 package builder.statement.create;
 
-import builder.TerminalDDLOperation;
 import builder.statement.create.index.Index;
 import builder.statement.create.table.column.FirstColumn;
 import builder.utils.StringAppender;
-import query.ddl.DDLQuery;
+import query.ddl.CreateQuery;
 
 public class Create {
     private StringAppender stringAppender;
 
-    private DDLQuery query;
+    private CreateQuery query;
 
-    public Create(DDLQuery query) {
+    public Create(CreateQuery query) {
         this.query = query;
         this.stringAppender = new StringAppender(query);
     }
@@ -42,10 +41,10 @@ public class Create {
      * @return TerminalOperation which can be used only
      * to terminate query building
      */
-    public TerminalDDLOperation database(String name) {
+    public TerminalCreateOperation database(String name) {
         query.append("DATABASE ");
         stringAppender.validateAndAppend(name);
-        return new TerminalDDLOperation(query);
+        return new TerminalCreateOperation(query);
     }
 
     /**

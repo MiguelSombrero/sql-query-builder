@@ -1,14 +1,14 @@
 package builder.statement.create.index;
 
 import builder.utils.StringAppender;
-import query.ddl.DDLQuery;
+import query.ddl.CreateQuery;
 
 public class Index {
     private StringAppender stringAppender;
 
-    private DDLQuery query;
+    private CreateQuery query;
 
-    public Index(DDLQuery query) {
+    public Index(CreateQuery query) {
         this.query = query;
         this.stringAppender = new StringAppender(query);
     }

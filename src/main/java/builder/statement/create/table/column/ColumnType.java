@@ -1,12 +1,12 @@
 package builder.statement.create.table.column;
 
-import query.ddl.DDLQuery;
+import query.ddl.CreateQuery;
 
 public class ColumnType {
 
-    private DDLQuery query;
+    private CreateQuery query;
 
-    public ColumnType(DDLQuery query) {
+    public ColumnType(CreateQuery query) {
         this.query = query;
     }
 

@@ -1,12 +1,12 @@
 package builder.statement.create.table.foreignkey;
 
-import query.ddl.DDLQuery;
+import query.ddl.CreateQuery;
 
 public class Action {
 
-    private DDLQuery query;
+    private CreateQuery query;
 
-    public Action(DDLQuery query) {
+    public Action(CreateQuery query) {
         this.query = query;
     }
 

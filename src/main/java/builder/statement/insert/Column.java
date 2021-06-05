@@ -1,6 +1,5 @@
 package builder.statement.insert;
 
-import builder.TerminalDMLOperation;
 import builder.statement.select.SelectQueryBuilder;
 import query.dml.InsertQuery;
 

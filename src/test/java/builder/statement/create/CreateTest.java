@@ -1,8 +1,7 @@
 package builder.statement.create;
 
 import query.QueryFactory;
-import query.Query;
-import query.ddl.DDLQuery;
+import query.ddl.CreateQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 import org.junit.Before;
@@ -24,7 +23,7 @@ public class CreateTest extends DatabaseTestBaseClass {
 
     @Test
     public void testCreateDatabase() {
-        DDLQuery query = queryFactory.create()
+        CreateQuery query = queryFactory.create()
                 .database("test_db")
                 .build();
 
@@ -33,7 +32,7 @@ public class CreateTest extends DatabaseTestBaseClass {
 
     @Test
     public void testCreateIndex() throws SQLException {
-        DDLQuery query = queryFactory.create()
+        CreateQuery query = queryFactory.create()
                 .index("person_index")
                 .on("person")
                 .columns("id", "firstname", "lastname")

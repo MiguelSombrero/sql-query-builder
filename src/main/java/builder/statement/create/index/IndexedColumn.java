@@ -1,15 +1,15 @@
 package builder.statement.create.index;
 
-import builder.TerminalDDLOperation;
+import builder.statement.create.TerminalCreateOperation;
 import builder.utils.StringAppender;
-import query.ddl.DDLQuery;
+import query.ddl.CreateQuery;
 
 public class IndexedColumn {
     private StringAppender stringAppender;
 
-    private DDLQuery query;
+    private CreateQuery query;
 
-    public IndexedColumn(DDLQuery query) {
+    public IndexedColumn(CreateQuery query) {
         this.query = query;
         this.stringAppender = new StringAppender(query);
     }
@@ -23,9 +23,9 @@ public class IndexedColumn {
      * @return TerminalDDLOperation which can be used only
      * to terminate query building
      */
-    public TerminalDDLOperation columns(String ...listOfColumns) {
+    public TerminalCreateOperation columns(String ...listOfColumns) {
         query.append(" ");
         stringAppender.validateAndAppendList(listOfColumns);
-        return new TerminalDDLOperation(query);
+        return new TerminalCreateOperation(query);
     }
 }

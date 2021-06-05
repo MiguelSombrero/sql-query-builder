@@ -1,6 +1,5 @@
 package builder.statement.delete;
 
-import builder.TerminalDMLOperation;
 import builder.condition.Condition;
 import query.dml.DeleteQuery;
 
