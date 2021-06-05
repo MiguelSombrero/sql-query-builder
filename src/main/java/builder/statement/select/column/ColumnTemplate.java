@@ -2,14 +2,16 @@ package builder.statement.select.column;
 
 import builder.utils.AggregateFunction;
 import builder.utils.StringAppender;
+import com.sun.org.apache.bcel.internal.generic.Select;
 import query.dql.DQLQuery;
+import query.dql.SelectQuery;
 
 public abstract class ColumnTemplate {
     private StringAppender stringAppender;
     private AggregateFunction aggregateFunction;
-    protected DQLQuery query;
+    protected SelectQuery query;
 
-    public ColumnTemplate(DQLQuery query) {
+    public ColumnTemplate(SelectQuery query) {
         this.query = query;
         this.stringAppender = new StringAppender(query);
         this.aggregateFunction = new AggregateFunction(query);

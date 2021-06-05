@@ -1,10 +1,10 @@
 package builder.statement.select.order;
 
-import query.dql.DQLQuery;
+import query.dql.SelectQuery;
 
 public class Orderer extends Limit {
 
-    public Orderer(DQLQuery query) {
+    public Orderer(SelectQuery query) {
         super(query);
     }
 

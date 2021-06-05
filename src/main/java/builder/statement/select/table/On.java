@@ -1,10 +1,10 @@
 package builder.statement.select.table;
 
-import query.dql.DQLQuery;
+import query.dql.SelectQuery;
 
 public class On extends AliasedOn {
 
-    public On(DQLQuery query) {
+    public On(SelectQuery query) {
         super(query);
     }
 

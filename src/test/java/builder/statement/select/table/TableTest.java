@@ -2,7 +2,7 @@ package builder.statement.select.table;
 
 import builder.statement.select.column.ToFrom;
 import query.dql.Row;
-import query.dql.DQLQuery;
+import query.dql.SelectQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 import query.QueryFactory;
@@ -32,7 +32,7 @@ public class TableTest extends DatabaseTestBaseClass {
 
     @Test
     public void testFromOneTable() throws SQLException {
-        DQLQuery query = this.column
+        SelectQuery query = this.column
                 .from()
                     .table("person")
                 .build();
@@ -47,7 +47,7 @@ public class TableTest extends DatabaseTestBaseClass {
 
     @Test
     public void testFromMultipleTables() throws SQLException {
-        DQLQuery query = this.column
+        SelectQuery query = this.column
                 .from()
                     .table("person")
                     .table("address")
@@ -64,7 +64,7 @@ public class TableTest extends DatabaseTestBaseClass {
 
     @Test
     public void testFromSubQuery() throws SQLException {
-        DQLQuery query = this.column
+        SelectQuery query = this.column
                 .from()
                     .sub(queryFactory
                             .select()
@@ -86,7 +86,7 @@ public class TableTest extends DatabaseTestBaseClass {
 
     @Test
     public void testFromMultipleTablesWithAliases() throws SQLException {
-        DQLQuery query = this.column
+        SelectQuery query = this.column
                 .from()
                     .table("person").alias("p")
                     .table("address").alias("a")
@@ -103,7 +103,7 @@ public class TableTest extends DatabaseTestBaseClass {
 
     @Test
     public void testFromOneJoinTableWithAlias() throws SQLException {
-        DQLQuery query = this.column
+        SelectQuery query = this.column
                 .from()
                     .table("person")
                 .leftJoin("address").alias("a").on("person.id", "a.person_id")
@@ -119,7 +119,7 @@ public class TableTest extends DatabaseTestBaseClass {
 
     @Test
     public void testInnerJoin() throws SQLException {
-        DQLQuery query = this.column
+        SelectQuery query = this.column
                 .from()
                     .table("person")
                 .innerJoin("address").on("person.id", "address.person_id")
@@ -135,7 +135,7 @@ public class TableTest extends DatabaseTestBaseClass {
 
     @Test
     public void testLeftJoin() throws SQLException {
-        DQLQuery query = this.column
+        SelectQuery query = this.column
                 .from()
                     .table("person")
                 .leftJoin("address").on("person.id", "address.person_id")
@@ -151,7 +151,7 @@ public class TableTest extends DatabaseTestBaseClass {
 
     @Test
     public void rightJoin() throws SQLException {
-        DQLQuery query = this.column
+        SelectQuery query = this.column
                 .from()
                     .table("person")
                 .rightJoin("address").on("person.id", "address.person_id")
@@ -167,7 +167,7 @@ public class TableTest extends DatabaseTestBaseClass {
 
     @Test
     public void testMultipleJoins() throws SQLException {
-        DQLQuery query = this.column
+        SelectQuery query = this.column
                 .from()
                     .table("person")
                 .leftJoin("address").on("person.id", "address.person_id")
@@ -185,7 +185,7 @@ public class TableTest extends DatabaseTestBaseClass {
 
     @Test
     public void testFromMultipleTablesAndJoinWithAliases() throws SQLException {
-        DQLQuery query = this.column
+        SelectQuery query = this.column
                 .from()
                     .table("person").alias("p")
                 .leftJoin("address").alias("a").on("p.id", "a.person_id")

@@ -1,11 +1,11 @@
 package builder.statement.select.order;
 
-import builder.statement.select.TerminalDQLOperation;
-import query.dql.DQLQuery;
+import builder.statement.select.TerminalSelectOperation;
+import query.dql.SelectQuery;
 
-public class Limit extends TerminalDQLOperation {
+public class Limit extends TerminalSelectOperation {
 
-    public Limit(DQLQuery query) {
+    public Limit(SelectQuery query) {
         super(query);
     }
 

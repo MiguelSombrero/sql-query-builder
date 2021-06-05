@@ -2,7 +2,7 @@ package builder.statement.insert;
 
 import builder.TerminalDMLOperation;
 import query.dml.DMLQuery;
-import builder.statement.select.DQLQueryBuilder;
+import builder.statement.select.SelectQueryBuilder;
 
 public class Column {
 
@@ -33,7 +33,7 @@ public class Column {
      * @return TerminalDMLOperation class which can be used only
      * to terminate DML type query building
      */
-    public TerminalDMLOperation sub(DQLQueryBuilder subQuery) {
+    public TerminalDMLOperation sub(SelectQueryBuilder subQuery) {
         query.append(subQuery.build().toString());
         return new TerminalDMLOperation(query);
     }

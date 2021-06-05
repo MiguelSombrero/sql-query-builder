@@ -1,7 +1,7 @@
 package builder.statement.select.column;
 
 import query.dql.Row;
-import query.dql.DQLQuery;
+import query.dql.SelectQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 import query.QueryFactory;
@@ -24,7 +24,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
 
     @Test
     public void testSelect() throws SQLException {
-        DQLQuery query = queryFactory
+        SelectQuery query = queryFactory
                 .select()
                     .column("lastname")
                     .column("age")
@@ -42,7 +42,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
 
     @Test
     public void testSelectTop() throws SQLException {
-        DQLQuery query = queryFactory
+        SelectQuery query = queryFactory
                 .selectTop(2)
                     .column("lastname")
                     .column("age")
@@ -61,7 +61,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
 
     @Test
     public void testSelectDistinct() throws SQLException {
-        DQLQuery query = queryFactory
+        SelectQuery query = queryFactory
                 .selectDistinct()
                     .column("lastname")
                     .column("age")
@@ -80,7 +80,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
 
     @Test
     public void testSelectAll() throws SQLException {
-        DQLQuery query = queryFactory
+        SelectQuery query = queryFactory
                 .select()
                     .all()
                 .from()
@@ -97,7 +97,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
 
     @Test
     public void testSelectCount() throws SQLException {
-        DQLQuery query = queryFactory
+        SelectQuery query = queryFactory
                 .select()
                     .count("age")
                 .from()
@@ -114,7 +114,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
 
     @Test
     public void testSelectCountAll() throws SQLException {
-        DQLQuery query = queryFactory
+        SelectQuery query = queryFactory
                 .select()
                     .countAll()
                 .from()
@@ -131,7 +131,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
 
     @Test
     public void testSelectMin() throws SQLException {
-        DQLQuery query = queryFactory
+        SelectQuery query = queryFactory
                 .select()
                     .min("age")
                 .from()
@@ -148,7 +148,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
 
     @Test
     public void testSelectMax() throws SQLException {
-        DQLQuery query = queryFactory
+        SelectQuery query = queryFactory
                 .select()
                     .max("age")
                 .from()
@@ -165,7 +165,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
 
     @Test
     public void testSelectAvg() throws SQLException {
-        DQLQuery query = queryFactory
+        SelectQuery query = queryFactory
                 .select()
                     .avg("age")
                 .from()
@@ -182,7 +182,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
 
     @Test
     public void testSelectSum() throws SQLException {
-        DQLQuery query = queryFactory
+        SelectQuery query = queryFactory
                 .select()
                     .sum("age")
                 .from()
@@ -199,7 +199,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
 
     @Test
     public void testMultipleAggregateFunctions() throws SQLException {
-        DQLQuery query = queryFactory
+        SelectQuery query = queryFactory
                 .select()
                     .min("age")
                     .max("birthdate")
@@ -220,7 +220,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
 
     @Test
     public void testMultipleColumnsWithAliases() throws SQLException {
-        DQLQuery query = queryFactory
+        SelectQuery query = queryFactory
                 .select()
                     .column("lastname").alias("last")
                     .min("age").alias("minAge")

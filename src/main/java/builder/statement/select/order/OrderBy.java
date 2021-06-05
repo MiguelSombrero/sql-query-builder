@@ -1,12 +1,12 @@
 package builder.statement.select.order;
 
 import builder.utils.StringAppender;
-import query.dql.DQLQuery;
+import query.dql.SelectQuery;
 
 public class OrderBy extends Limit {
     private StringAppender stringAppender;
 
-    public OrderBy(DQLQuery query) {
+    public OrderBy(SelectQuery query) {
         super(query);
         this.stringAppender = new StringAppender(query);
     }

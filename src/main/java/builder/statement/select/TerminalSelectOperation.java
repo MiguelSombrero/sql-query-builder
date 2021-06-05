@@ -1,12 +1,12 @@
 package builder.statement.select;
 
-import query.dql.DQLQuery;
+import query.dql.SelectQuery;
 
-public class TerminalDQLOperation implements DQLQueryBuilder {
+public class TerminalSelectOperation implements SelectQueryBuilder {
 
-    protected DQLQuery query;
+    protected SelectQuery query;
 
-    public TerminalDQLOperation(DQLQuery query) {
+    public TerminalSelectOperation(SelectQuery query) {
         this.query = query;
     }
 
@@ -16,7 +16,7 @@ public class TerminalDQLOperation implements DQLQueryBuilder {
      * @return DQLQuery object which can be used to
      * execute SELECT queries
      */
-    public DQLQuery build() {
+    public SelectQuery build() {
         return this.query;
     }
 }

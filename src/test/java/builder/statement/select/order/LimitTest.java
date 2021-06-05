@@ -2,7 +2,7 @@ package builder.statement.select.order;
 
 import builder.statement.select.table.Table;
 import query.dql.Row;
-import query.dql.DQLQuery;
+import query.dql.SelectQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 import query.QueryFactory;
@@ -34,7 +34,7 @@ public class LimitTest extends DatabaseTestBaseClass {
 
     @Test
     public void testLimitFromTable() throws SQLException {
-        DQLQuery query = table
+        SelectQuery query = table
                 .limit(2)
                 .build();
 
@@ -48,7 +48,7 @@ public class LimitTest extends DatabaseTestBaseClass {
 
     @Test
     public void testLimitFromTableWhere() throws SQLException {
-        DQLQuery query = table
+        SelectQuery query = table
                 .where(valueOf("age").greaterThan(18))
                 .limit(2)
                 .build();
@@ -63,7 +63,7 @@ public class LimitTest extends DatabaseTestBaseClass {
 
     @Test
     public void testLimitJoinTable() throws SQLException {
-        DQLQuery query = table
+        SelectQuery query = table
                 .leftJoin("course").on("person.id", "course.person_id")
                 .limit(2)
                 .build();
@@ -78,7 +78,7 @@ public class LimitTest extends DatabaseTestBaseClass {
 
     @Test
     public void testLimitGroupBy() throws SQLException {
-        DQLQuery query = table
+        SelectQuery query = table
                 .groupBy()
                     .column("age")
                 .limit(2)
@@ -94,7 +94,7 @@ public class LimitTest extends DatabaseTestBaseClass {
 
     @Test
     public void testLimitGroupByHaving() throws SQLException {
-        DQLQuery query = table
+        SelectQuery query = table
                 .groupBy()
                     .column("age")
                 .having(count("age").greaterThan(20))
@@ -110,7 +110,7 @@ public class LimitTest extends DatabaseTestBaseClass {
 
     @Test
     public void testLimitOrderBy() throws SQLException {
-        DQLQuery query = table
+        SelectQuery query = table
                 .groupBy()
                     .column("age")
                 .orderBy()
@@ -128,7 +128,7 @@ public class LimitTest extends DatabaseTestBaseClass {
 
     @Test
     public void testLimitOffset() throws SQLException {
-        DQLQuery query = table
+        SelectQuery query = table
                 .limit(2)
                 .offset(1)
                 .build();

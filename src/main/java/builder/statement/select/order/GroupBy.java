@@ -1,14 +1,14 @@
 package builder.statement.select.order;
 
 import builder.utils.StringAppender;
-import query.dql.DQLQuery;
+import query.dql.SelectQuery;
 
 public class GroupBy {
     private StringAppender stringAppender;
 
-    private DQLQuery query;
+    private SelectQuery query;
 
-    public GroupBy(DQLQuery query) {
+    public GroupBy(SelectQuery query) {
         this.query = query;
         this.stringAppender = new StringAppender(query);
     }

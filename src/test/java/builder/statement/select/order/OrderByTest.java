@@ -2,7 +2,7 @@ package builder.statement.select.order;
 
 import builder.statement.select.table.Table;
 import query.dql.Row;
-import query.dql.DQLQuery;
+import query.dql.SelectQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 import query.QueryFactory;
@@ -33,7 +33,7 @@ public class OrderByTest extends DatabaseTestBaseClass {
 
     @Test
     public void testOrderBy() throws SQLException {
-        DQLQuery query = table
+        SelectQuery query = table
                 .orderBy()
                     .column("firstname")
                 .build();
@@ -48,7 +48,7 @@ public class OrderByTest extends DatabaseTestBaseClass {
 
     @Test
     public void testOrderByWhere() throws SQLException {
-        DQLQuery query = table
+        SelectQuery query = table
                 .where(valueOf("age").greaterThan(18))
                 .orderBy()
                 .column("firstname")
@@ -64,7 +64,7 @@ public class OrderByTest extends DatabaseTestBaseClass {
 
     @Test
     public void testOrderByGroupBy() throws SQLException {
-        DQLQuery query = table
+        SelectQuery query = table
                 .groupBy()
                     .column("age")
                 .orderBy()
@@ -81,7 +81,7 @@ public class OrderByTest extends DatabaseTestBaseClass {
 
     @Test
     public void testMultipleOrderByGroupBy() throws SQLException {
-        DQLQuery query = table
+        SelectQuery query = table
                 .groupBy()
                     .column("age")
                 .orderBy()
@@ -100,7 +100,7 @@ public class OrderByTest extends DatabaseTestBaseClass {
 
     @Test
     public void testMultipleOrderByGroupByWithAscDesc() throws SQLException {
-        DQLQuery query = table
+        SelectQuery query = table
                 .groupBy()
                     .column("age")
                 .orderBy()

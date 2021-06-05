@@ -1,15 +1,15 @@
 package builder.statement.select.table;
 
-import builder.statement.select.DQLQueryBuilder;
+import builder.statement.select.SelectQueryBuilder;
 import builder.utils.StringAppender;
-import query.dql.DQLQuery;
+import query.dql.SelectQuery;
 
 public class From {
     protected StringAppender stringAppender;
 
-    private DQLQuery query;
+    private SelectQuery query;
 
-    public From(DQLQuery query) {
+    public From(SelectQuery query) {
         this.query = query;
         this.stringAppender = new StringAppender(query);
     }
@@ -38,7 +38,7 @@ public class From {
      * @return SubQuery class which can be used to
      * alias sub-query or proceed to WHERE and JOIN statements
      */
-    public SubQuery sub(DQLQueryBuilder subQuery) {
+    public SubQuery sub(SelectQueryBuilder subQuery) {
         query.append("(");
         query.append(subQuery.build().toString());
         query.append(")");

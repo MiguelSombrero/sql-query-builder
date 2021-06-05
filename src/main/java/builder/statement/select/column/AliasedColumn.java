@@ -1,11 +1,11 @@
 package builder.statement.select.column;
 
 import builder.statement.select.table.From;
-import query.dql.DQLQuery;
+import query.dql.SelectQuery;
 
 public class AliasedColumn extends ColumnTemplate {
 
-    public AliasedColumn(DQLQuery query) {
+    public AliasedColumn(SelectQuery query) {
         super(query);
     }
 

@@ -1,10 +1,10 @@
 package builder.statement.select.table;
 
-import query.dql.DQLQuery;
+import query.dql.SelectQuery;
 
 public class SubQuery extends JoinTable {
 
-    public SubQuery(DQLQuery query) {
+    public SubQuery(SelectQuery query) {
         super(query);
     }
 

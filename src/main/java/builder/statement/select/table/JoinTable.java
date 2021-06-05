@@ -3,12 +3,12 @@ package builder.statement.select.table;
 import builder.condition.Condition;
 import builder.statement.select.order.Grouper;
 import builder.utils.StringAppender;
-import query.dql.DQLQuery;
+import query.dql.SelectQuery;
 
 public class JoinTable extends Grouper {
     protected StringAppender stringAppender;
 
-    public JoinTable(DQLQuery query) {
+    public JoinTable(SelectQuery query) {
         super(query);
         this.stringAppender = new StringAppender(query);
     }

@@ -1,6 +1,6 @@
 package builder.statement.select.column;
 
-import query.dql.DQLQuery;
+import query.dql.SelectQuery;
 
 /**
  * represents the first column to be appended in
@@ -11,7 +11,7 @@ import query.dql.DQLQuery;
  */
 public class FirstColumn extends ColumnTemplate {
 
-    public FirstColumn(DQLQuery query) {
+    public FirstColumn(SelectQuery query) {
         super(query);
     }
 

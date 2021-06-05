@@ -1,7 +1,7 @@
 package builder.statement.select.order;
 
 import query.dql.Row;
-import query.dql.DQLQuery;
+import query.dql.SelectQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 import query.QueryFactory;
@@ -36,7 +36,7 @@ public class HavingTest extends DatabaseTestBaseClass {
 
     @Test
     public void testHavingCount() throws SQLException {
-        DQLQuery query = this.having
+        SelectQuery query = this.having
                 .having(count("age").equals(100))
                 .build();
 
@@ -49,7 +49,7 @@ public class HavingTest extends DatabaseTestBaseClass {
 
     @Test
     public void testHavingSum() throws SQLException {
-        DQLQuery query = this.having
+        SelectQuery query = this.having
                 .having(sum("age").equals(100))
                 .build();
 
@@ -62,7 +62,7 @@ public class HavingTest extends DatabaseTestBaseClass {
 
     @Test
     public void testHavingAvg() throws SQLException {
-        DQLQuery query = this.having
+        SelectQuery query = this.having
                 .having(avg("age").equals(100))
                 .build();
 
@@ -75,7 +75,7 @@ public class HavingTest extends DatabaseTestBaseClass {
 
     @Test
     public void testHavingMax() throws SQLException {
-        DQLQuery query = this.having
+        SelectQuery query = this.having
                 .having(max("age").equals(100))
                 .build();
 
@@ -88,7 +88,7 @@ public class HavingTest extends DatabaseTestBaseClass {
 
     @Test
     public void testHavingMin() throws SQLException {
-        DQLQuery query = this.having
+        SelectQuery query = this.having
                 .having(min("age").equals(100))
                 .build();
 
@@ -101,7 +101,7 @@ public class HavingTest extends DatabaseTestBaseClass {
 
     @Test
     public void testHavingMultipleConditions() throws SQLException {
-        DQLQuery query = this.having
+        SelectQuery query = this.having
                 .having(max("age").equals(100)
                     .and(min("age").equals(20))
                     .or(avg("age").equals(60)))

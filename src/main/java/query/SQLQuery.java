@@ -10,7 +10,7 @@ import java.util.List;
 public class SQLQuery implements Query {
     protected static Logger logger = LoggerFactory.getLogger(SQLQuery.class);
 
-    protected StringBuilder queryString;
+    private StringBuilder queryString;
     private List<Object> params;
 
     public SQLQuery(StringBuilder queryString) {
@@ -38,7 +38,7 @@ public class SQLQuery implements Query {
         this.params.add(param);
     }
 
-    public Object[] getParams() {
+    protected Object[] getParams() {
         return this.params.toArray();
     }
 

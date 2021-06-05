@@ -1,10 +1,10 @@
 package builder.statement.select.order;
 
-import query.dql.DQLQuery;
+import query.dql.SelectQuery;
 
 public class Grouper extends Orderer {
 
-    public Grouper(DQLQuery query) {
+    public Grouper(SelectQuery query) {
         super(query);
     }
 

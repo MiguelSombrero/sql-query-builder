@@ -2,7 +2,7 @@ package builder.condition;
 
 import query.Query;
 import builder.utils.NumberAppender;
-import builder.statement.select.DQLQueryBuilder;
+import builder.statement.select.SelectQueryBuilder;
 import builder.utils.StringValueAppender;
 import builder.utils.SubQueryAppender;
 
@@ -82,7 +82,7 @@ public class Comparison {
      * more conditions with AND, OR and OR (...) operators,
      * or terminate query building
      */
-    public Condition equalsAny(DQLQueryBuilder subQuery) {
+    public Condition equalsAny(SelectQueryBuilder subQuery) {
         query.append(EQUALS);
         subQueryAppender.appendConditionWithSubQuery("ANY ", subQuery);
         return getCondition();
@@ -99,7 +99,7 @@ public class Comparison {
      * more conditions with AND, OR and OR (...) operators,
      * or terminate query building
      */
-    public Condition equalsAll(DQLQueryBuilder subQuery) {
+    public Condition equalsAll(SelectQueryBuilder subQuery) {
         query.append(EQUALS);
         subQueryAppender.appendConditionWithSubQuery("ALL ", subQuery);
         return getCondition();
@@ -161,7 +161,7 @@ public class Comparison {
      * more conditions with AND, OR and OR (...) operators,
      * or terminate query building
      */
-    public Condition greaterThanAny(DQLQueryBuilder subQuery) {
+    public Condition greaterThanAny(SelectQueryBuilder subQuery) {
         query.append(GREATER_THAN);
         subQueryAppender.appendConditionWithSubQuery("ANY ", subQuery);
         return getCondition();
@@ -178,7 +178,7 @@ public class Comparison {
      * more conditions with AND, OR and OR (...) operators,
      * or terminate query building
      */
-    public Condition greaterThanAll(DQLQueryBuilder subQuery) {
+    public Condition greaterThanAll(SelectQueryBuilder subQuery) {
         query.append(GREATER_THAN);
         subQueryAppender.appendConditionWithSubQuery("ALL ", subQuery);
         return getCondition();
@@ -240,7 +240,7 @@ public class Comparison {
      * more conditions with AND, OR and OR (...) operators,
      * or terminate query building
      */
-    public Condition greaterThanOrEqualAny(DQLQueryBuilder subQuery) {
+    public Condition greaterThanOrEqualAny(SelectQueryBuilder subQuery) {
         query.append(GREATER_THAN_OR_EQUAL);
         subQueryAppender.appendConditionWithSubQuery("ANY ", subQuery);
         return getCondition();
@@ -257,7 +257,7 @@ public class Comparison {
      * more conditions with AND, OR and OR (...) operators,
      * or terminate query building
      */
-    public Condition greaterThanOrEqualAll(DQLQueryBuilder subQuery) {
+    public Condition greaterThanOrEqualAll(SelectQueryBuilder subQuery) {
         query.append(GREATER_THAN_OR_EQUAL);
         subQueryAppender.appendConditionWithSubQuery("ALL ", subQuery);
         return getCondition();
@@ -319,7 +319,7 @@ public class Comparison {
      * more conditions with AND, OR and OR (...) operators,
      * or terminate query building
      */
-    public Condition lesserThanAny(DQLQueryBuilder subQuery) {
+    public Condition lesserThanAny(SelectQueryBuilder subQuery) {
         query.append(LESSER_THAN);
         subQueryAppender.appendConditionWithSubQuery("ANY ", subQuery);
         return getCondition();
@@ -336,7 +336,7 @@ public class Comparison {
      * more conditions with AND, OR and OR (...) operators,
      * or terminate query building
      */
-    public Condition lesserThanAll(DQLQueryBuilder subQuery) {
+    public Condition lesserThanAll(SelectQueryBuilder subQuery) {
         query.append(LESSER_THAN);
         subQueryAppender.appendConditionWithSubQuery("ALL ", subQuery);
         return getCondition();
@@ -398,7 +398,7 @@ public class Comparison {
      * more conditions with AND, OR and OR (...) operators,
      * or terminate query building
      */
-    public Condition lesserThanOrEqualAny(DQLQueryBuilder subQuery) {
+    public Condition lesserThanOrEqualAny(SelectQueryBuilder subQuery) {
         query.append(LESSER_THAN_OR_EQUAL);
         subQueryAppender.appendConditionWithSubQuery("ANY ", subQuery);
         return getCondition();
@@ -415,7 +415,7 @@ public class Comparison {
      * more conditions with AND, OR and OR (...) operators,
      * or terminate query building
      */
-    public Condition lesserThanOrEqualAll(DQLQueryBuilder subQuery) {
+    public Condition lesserThanOrEqualAll(SelectQueryBuilder subQuery) {
         query.append(LESSER_THAN_OR_EQUAL);
         subQueryAppender.appendConditionWithSubQuery("ALL ", subQuery);
         return getCondition();
@@ -612,7 +612,7 @@ public class Comparison {
      * more conditions with AND, OR and OR (...) operators,
      * or terminate query building
      */
-    public Condition isInSub(DQLQueryBuilder subQuery) {
+    public Condition isInSub(SelectQueryBuilder subQuery) {
         subQueryAppender.appendConditionWithSubQuery(" IN ", subQuery);
         return getCondition();
     }
