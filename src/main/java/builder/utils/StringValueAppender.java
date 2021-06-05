@@ -15,16 +15,6 @@ public class StringValueAppender {
         this.query = query;
     }
 
-    public void appendStringValue(String value) {
-        if (!value.equals("?")) {
-            query.append("'");
-            query.append(value);
-            query.append("'");
-        } else {
-            query.append(value);
-        }
-    }
-
     public void validateAndAppendListOfValues(String ...listOfValues) {
         validateList(listOfValues);
         appendListOfValues(listOfValues);
@@ -33,6 +23,11 @@ public class StringValueAppender {
     public void validateAndAppendStringValue(String value) {
         validate(value);
         appendStringValue(value);
+    }
+
+    public void appendStringValue(String value) {
+        query.append("?");
+        query.addParam(value);
     }
 
     public void validate(String value) {

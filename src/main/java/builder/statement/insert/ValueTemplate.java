@@ -1,8 +1,8 @@
 package builder.statement.insert;
 
 import builder.TerminalClosingDMLOperation;
-import query.dml.DMLQuery;
 import builder.utils.StringValueAppender;
+import query.dml.DMLQuery;
 
 public abstract class ValueTemplate extends TerminalClosingDMLOperation {
     private StringValueAppender stringValueAppender;

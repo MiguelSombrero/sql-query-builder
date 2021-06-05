@@ -446,25 +446,6 @@ public class ComparisonTest extends DatabaseTestBaseClass {
         assertEquals("SELECT firstname FROM person WHERE NOT EXISTS (SELECT * FROM student WHERE age > 20)", query.toString());
     }
 
-    @Test
-    public void testMultipleConditionWithParameters() {
-        Query query = this.table
-                .where(valueOf("firstname").equals("?")
-                        .and(valueOf("age").lesserThan("?")))
-                .build();
-
-        assertEquals("SELECT firstname FROM person WHERE firstname = ? AND age < ?", query.toString());
-    }
-
-    @Test
-    public void testConditionInWithParameters() {
-        Query query = this.table
-                .where(valueOf("firstname").isIn("?", "?", "?"))
-                .build();
-
-        assertEquals("SELECT firstname FROM person WHERE firstname IN (?, ?, ?)", query.toString());
-    }
-
     @Test(expected = IllegalArgumentException.class)
     public void testValueOfWithSQLInjection(){
         this.table
@@ -483,6 +464,13 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     public void testConditionWithParameterInColumn(){
         this.table
                 .where(valueOf("?").contains("miika"))
+                .build();
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testConditionWithParameterInValue(){
+        this.table
+                .where(valueOf("firstname").contains("?"))
                 .build();
     }
 }

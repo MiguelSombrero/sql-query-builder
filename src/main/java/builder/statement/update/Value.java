@@ -1,13 +1,13 @@
 package builder.statement.update;
 
-import query.dml.DMLQuery;
 import builder.utils.StringValueAppender;
+import query.dml.UpdateQuery;
 
 public class Value {
     private StringValueAppender stringValueAppender;
-    private DMLQuery query;
+    private UpdateQuery query;
 
-    public Value(DMLQuery query) {
+    public Value(UpdateQuery query) {
         this.query = query;
         this.stringValueAppender = new StringValueAppender(query);
     }

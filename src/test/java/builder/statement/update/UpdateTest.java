@@ -1,7 +1,7 @@
 package builder.statement.update;
 
 import query.QueryFactory;
-import query.dml.DMLQuery;
+import query.dml.UpdateQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 import org.junit.Before;
@@ -23,7 +23,7 @@ public class UpdateTest extends DatabaseTestBaseClass {
 
     @Test
     public void testUpdateIntegerValue() throws SQLException {
-        DMLQuery query = queryFactory
+        UpdateQuery query = queryFactory
                 .update()
                 .table("person")
                     .column("age").value(50)
@@ -38,7 +38,7 @@ public class UpdateTest extends DatabaseTestBaseClass {
 
     @Test
     public void testUpdateDoubleValue() throws SQLException {
-        DMLQuery query = queryFactory
+        UpdateQuery query = queryFactory
                 .update()
                 .table("person")
                 .column("age").value(50.5)
@@ -53,7 +53,7 @@ public class UpdateTest extends DatabaseTestBaseClass {
 
     @Test
     public void testUpdateStringValue() throws SQLException {
-        DMLQuery query = queryFactory
+        UpdateQuery query = queryFactory
                 .update()
                 .table("person")
                     .column("firstname").value("Miika-Lassi Kari")
@@ -68,7 +68,7 @@ public class UpdateTest extends DatabaseTestBaseClass {
 
     @Test
     public void testUpdateMultipleValues() throws SQLException {
-        DMLQuery query = queryFactory
+        UpdateQuery query = queryFactory
                 .update()
                 .table("person")
                     .column("firstname").value("Miika")
@@ -85,7 +85,7 @@ public class UpdateTest extends DatabaseTestBaseClass {
 
     @Test
     public void testUpdateWithCondition() throws SQLException {
-        DMLQuery query = queryFactory
+        UpdateQuery query = queryFactory
                 .update()
                 .table("person")
                     .column("age").value(50)
@@ -98,19 +98,6 @@ public class UpdateTest extends DatabaseTestBaseClass {
         int result = query.execute();
 
         assertEquals(2, result);
-    }
-
-    @Test
-    public void testUpdateMultipleValuesWithParameters() {
-        DMLQuery query = queryFactory
-                .update()
-                .table("person")
-                    .column("firstname").value("?")
-                    .column("lastname").value("?")
-                    .column("age").value("?")
-                .build();
-
-        assertEquals("UPDATE person SET firstname = ?, lastname = ?, age = ?", query.toString());
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -165,6 +152,15 @@ public class UpdateTest extends DatabaseTestBaseClass {
                 .column("firstname").value("Miika")
                 .column("?").value("Somero")
                 .column("age").value(50)
+                .build();
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testUpdateValueWithParameterInValue() {
+        queryFactory
+                .update()
+                .table("person")
+                .column("firstname").value("?")
                 .build();
     }
 }

@@ -16,14 +16,6 @@ public class StringValueAppenderTest {
     }
 
     @Test
-    public void testAppendStringValueQuestionMark() {
-        SQLQuery SQLQuery = new SQLQuery(new StringBuilder());
-        StringValueAppender stringValueAppender = new StringValueAppender(SQLQuery);
-        stringValueAppender.appendStringValue("?");
-        assertEquals("?", SQLQuery.toString());
-    }
-
-    @Test
     public void testAppendListOfStringValues() {
         SQLQuery SQLQuery = new SQLQuery(new StringBuilder());
         StringValueAppender stringValueAppender = new StringValueAppender(SQLQuery);

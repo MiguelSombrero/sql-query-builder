@@ -1,14 +1,14 @@
 package builder.statement.update;
 
-import query.dml.DMLQuery;
 import builder.utils.StringAppender;
+import query.dml.UpdateQuery;
 
 public class FirstColumn {
     private StringAppender stringAppender;
 
-    private DMLQuery query;
+    private UpdateQuery query;
 
-    public FirstColumn(DMLQuery query) {
+    public FirstColumn(UpdateQuery query) {
         this.query = query;
         this.stringAppender = new StringAppender(query);
     }

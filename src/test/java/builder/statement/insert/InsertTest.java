@@ -79,7 +79,7 @@ public class InsertTest extends DatabaseTestBaseClass {
         DMLQuery query = queryFactory
                 .insertInto()
                 .table("person")
-                .columns("id", "birthdate", "firstname", "lastname", "age")
+                    .columns("id", "birthdate", "firstname", "lastname", "age")
                 .values()
                     .value(101)
                     .value("1980-04-12")
@@ -94,23 +94,6 @@ public class InsertTest extends DatabaseTestBaseClass {
 
         assertEquals(101, result);
 
-    }
-
-    @Test
-    public void testInsertMultipleValuesWithParameters() {
-        DMLQuery query = queryFactory
-                .insertInto()
-                .table("person")
-                    .columns("id", "birthdate", "firstname", "lastname", "age")
-                .values()
-                    .value("?")
-                    .value("?")
-                    .value("?")
-                    .value("?")
-                    .value("?")
-                .build();
-
-        assertEquals("INSERT INTO person (id, birthdate, firstname, lastname, age) VALUES (?, ?, ?, ?, ?)", query.toString());
     }
 
     @Test
@@ -221,6 +204,17 @@ public class InsertTest extends DatabaseTestBaseClass {
                     .columns("?")
                 .values()
                     .value("Miika")
+                .build();
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testInsertValuesWithParameterInValue() {
+        queryFactory
+                .insertInto()
+                .table("person")
+                .columns("lastname")
+                .values()
+                .value("?")
                 .build();
     }
 }

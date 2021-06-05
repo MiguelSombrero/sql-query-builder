@@ -1,14 +1,13 @@
 package builder.statement.update;
 
-import builder.TerminalDMLOperation;
-import query.dml.DMLQuery;
 import builder.condition.Condition;
 import builder.utils.StringAppender;
+import query.dml.UpdateQuery;
 
-public class Column extends TerminalDMLOperation {
+public class Column extends TerminalUpdateOperation {
     private StringAppender stringAppender;
 
-    public Column(DMLQuery query) {
+    public Column(UpdateQuery query) {
         super(query);
         this.stringAppender = new StringAppender(query);
     }
@@ -37,9 +36,9 @@ public class Column extends TerminalDMLOperation {
      * @return TerminalOperation which can be used only
      * to terminate query building
      */
-    public TerminalDMLOperation where(Condition condition) {
+    public TerminalUpdateOperation where(Condition condition) {
         query.append(" WHERE ");
         query.append(condition.build().toString());
-        return new TerminalDMLOperation(query);
+        return new TerminalUpdateOperation(query);
     }
 }

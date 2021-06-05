@@ -20,7 +20,7 @@ public class InsertQuery extends DMLBaseQuery {
      */
     @Override
     protected int run() throws SQLException {
-        return run.insert(this.toString(), new ScalarHandler<Integer>());
+        return run.insert(this.getQueryString(), new ScalarHandler<Integer>(), getParams());
     }
 
 }
