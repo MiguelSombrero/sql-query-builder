@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import utils.StringUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class SQLQuery implements Query {
@@ -44,6 +45,11 @@ public class SQLQuery implements Query {
 
     protected String getQueryString() {
         return this.queryString.toString();
+    }
+
+    public void mergeSubQuery(SQLQuery subQuery) {
+        append(subQuery.getQueryString());
+        this.params.addAll(Arrays.asList(subQuery.getParams()));
     }
 
     @Override

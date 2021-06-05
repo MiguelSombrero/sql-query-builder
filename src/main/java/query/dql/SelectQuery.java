@@ -25,7 +25,7 @@ public class SelectQuery extends SQLQuery implements DQLQuery {
         List<Row> result;
 
         try {
-            result = run.query(this.getQueryString(), handler);
+            result = run.query(this.getQueryString(), handler, getParams());
 
         } catch (SQLException e) {
             logger.info("Executing of query " + this + " failed");

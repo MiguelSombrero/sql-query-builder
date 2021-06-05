@@ -1,10 +1,10 @@
 package builder.statement.insert;
 
-import query.dml.DMLQuery;
+import query.dml.InsertQuery;
 
 public class FirstValue extends ValueTemplate {
 
-    public FirstValue(DMLQuery query) {
+    public FirstValue(InsertQuery query) {
         super(query);
     }
 

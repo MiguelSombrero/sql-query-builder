@@ -1,14 +1,14 @@
 package builder.statement.insert;
 
-import query.dml.DMLQuery;
 import builder.utils.StringAppender;
+import query.dml.InsertQuery;
 
 public class Table {
     private StringAppender stringAppender;
 
-    private DMLQuery query;
+    private InsertQuery query;
 
-    public Table(DMLQuery query) {
+    public Table(InsertQuery query) {
         this.query = query;
         this.stringAppender = new StringAppender(query);
     }

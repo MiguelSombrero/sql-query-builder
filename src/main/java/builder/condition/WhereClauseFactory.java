@@ -15,16 +15,16 @@ public class WhereClauseFactory {
     }
 
     public static Condition exists(SelectQueryBuilder subQuery) {
-        Query query = createQuery("EXISTS (" + subQuery.build() + ")");
+        SQLQuery query = createQuery("EXISTS (" + subQuery.build() + ")");
         return new Condition(query);
     }
 
     public static Condition notExists(SelectQueryBuilder subQuery) {
-        Query query = createQuery("NOT EXISTS (" + subQuery.build() + ")");
+        SQLQuery query = createQuery("NOT EXISTS (" + subQuery.build() + ")");
         return new Condition(query);
     }
 
-    private static Query createQuery(String clause) {
+    private static SQLQuery createQuery(String clause) {
         return new SQLQuery(new StringBuilder(clause));
     }
 }

@@ -20,7 +20,7 @@ public class DDLBaseQuery extends SQLQuery implements DDLQuery {
 
     public void execute() throws SQLException {
         try {
-            run.execute(this.getQueryString());
+            run.execute(this.getQueryString(), getParams());
 
         } catch (SQLException e) {
             logger.info("Executing of query " + this + " failed");

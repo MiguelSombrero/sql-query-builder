@@ -1,12 +1,12 @@
 package builder.statement.insert;
 
-import query.dml.DMLQuery;
 import builder.utils.StringAppender;
+import query.dml.InsertQuery;
 
 public class Insert extends Column {
     private StringAppender stringAppender;
 
-    public Insert(DMLQuery query) {
+    public Insert(InsertQuery query) {
         super(query);
         this.stringAppender = new StringAppender(query);
     }

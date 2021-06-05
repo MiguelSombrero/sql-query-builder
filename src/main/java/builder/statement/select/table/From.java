@@ -40,7 +40,7 @@ public class From {
      */
     public SubQuery sub(SelectQueryBuilder subQuery) {
         query.append("(");
-        query.append(subQuery.build().toString());
+        query.mergeSubQuery(subQuery.build());
         query.append(")");
         return new SubQuery(query);
     }

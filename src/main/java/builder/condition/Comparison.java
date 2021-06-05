@@ -1,10 +1,10 @@
 package builder.condition;
 
-import query.Query;
 import builder.utils.NumberAppender;
 import builder.statement.select.SelectQueryBuilder;
 import builder.utils.StringValueAppender;
 import builder.utils.SubQueryAppender;
+import query.SQLQuery;
 
 public class Comparison {
     private static final String EQUALS = " = ";
@@ -17,9 +17,9 @@ public class Comparison {
     private SubQueryAppender subQueryAppender;
     private NumberAppender numberAppender;
 
-    protected Query query;
+    protected SQLQuery query;
 
-    public Comparison(Query query) {
+    public Comparison(SQLQuery query) {
         this.query = query;
         this.stringValueAppender = new StringValueAppender(query);
         this.subQueryAppender = new SubQueryAppender(query);

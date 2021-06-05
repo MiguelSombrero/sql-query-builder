@@ -1,14 +1,14 @@
 package builder.statement.insert;
 
 import builder.TerminalDMLOperation;
-import query.dml.DMLQuery;
 import builder.statement.select.SelectQueryBuilder;
+import query.dml.InsertQuery;
 
 public class Column {
 
-    protected DMLQuery query;
+    protected InsertQuery query;
 
-    public Column(DMLQuery query) {
+    public Column(InsertQuery query) {
         this.query = query;
     }
 
@@ -33,8 +33,8 @@ public class Column {
      * @return TerminalDMLOperation class which can be used only
      * to terminate DML type query building
      */
-    public TerminalDMLOperation sub(SelectQueryBuilder subQuery) {
-        query.append(subQuery.build().toString());
-        return new TerminalDMLOperation(query);
+    public TerminalInsertOperation sub(SelectQueryBuilder subQuery) {
+        query.mergeSubQuery(subQuery.build());
+        return new TerminalInsertOperation(query);
     }
 }

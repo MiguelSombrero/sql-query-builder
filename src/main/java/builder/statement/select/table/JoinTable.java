@@ -16,15 +16,15 @@ public class JoinTable extends Grouper {
     /**
      * Appends 'WHERE' to 'SELECT ... FROM table WHERE condition' statement.
      *
-     * @param clause Where clause to be appended in the query. Where clause
+     * @param condition Where clause to be appended in the query. Where clause
      * is build with WhereClauseFactory factory class.
      *
      * @return Grouper class which can be used to create
      * GROUP BY statements or proceed further in SQL
      */
-    public Grouper where(Condition clause) {
+    public Grouper where(Condition condition) {
         query.append(" WHERE ");
-        query.append(clause.build().toString());
+        query.mergeSubQuery(condition.build());
         return new Grouper(query);
     }
 

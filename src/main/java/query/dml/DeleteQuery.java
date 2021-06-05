@@ -18,6 +18,6 @@ public class DeleteQuery extends DMLBaseQuery {
      */
     @Override
     protected int run() throws SQLException {
-        return run.update(this.getQueryString());
+        return run.update(this.getQueryString(), getParams());
     }
 }

@@ -38,7 +38,7 @@ public class Column extends TerminalUpdateOperation {
      */
     public TerminalUpdateOperation where(Condition condition) {
         query.append(" WHERE ");
-        query.append(condition.build().toString());
+        query.mergeSubQuery(condition.build());
         return new TerminalUpdateOperation(query);
     }
 }

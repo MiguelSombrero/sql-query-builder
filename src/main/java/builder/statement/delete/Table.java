@@ -1,14 +1,14 @@
 package builder.statement.delete;
 
-import query.dml.DMLQuery;
 import builder.utils.StringAppender;
+import query.dml.DeleteQuery;
 
 public class Table {
     private StringAppender stringAppender;
 
-    private DMLQuery query;
+    private DeleteQuery query;
 
-    public Table(DMLQuery query) {
+    public Table(DeleteQuery query) {
         this.query = query;
         this.stringAppender = new StringAppender(query);
     }

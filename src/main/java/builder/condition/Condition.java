@@ -1,13 +1,11 @@
 package builder.condition;
 
-import builder.QueryBuilder;
-import query.Query;
 import query.SQLQuery;
 import builder.TerminalOperation;
 
 public class Condition extends TerminalOperation {
 
-    public Condition(Query query) {
+    public Condition(SQLQuery query) {
         super(query);
     }
 
@@ -22,9 +20,9 @@ public class Condition extends TerminalOperation {
      * more conditions with AND, OR and OR (...) operators,
      * or terminate query building
      */
-    public Condition and(QueryBuilder condition) {
+    public Condition and(Condition condition) {
         query.append(" AND ");
-        query.append(condition.build().toString());
+        query.mergeSubQuery(condition.build());
         return this;
     }
 
@@ -39,9 +37,9 @@ public class Condition extends TerminalOperation {
      * more conditions with AND, OR and OR (...) operators,
      * or terminate query building
      */
-    public Condition or(QueryBuilder condition) {
+    public Condition or(Condition condition) {
         query.append(" OR ");
-        query.append(condition.build().toString());
+        query.mergeSubQuery(condition.build());
         return this;
     }
 
@@ -58,9 +56,9 @@ public class Condition extends TerminalOperation {
      * more conditions with AND, OR and OR (...) operators,
      * or terminate query building
      */
-    public Condition orSub(QueryBuilder condition) {
+    public Condition orSub(Condition condition) {
         query.append(" OR (");
-        query.append(condition.build().toString());
+        query.mergeSubQuery(condition.build());
         query.append(")");
         return this;
     }
