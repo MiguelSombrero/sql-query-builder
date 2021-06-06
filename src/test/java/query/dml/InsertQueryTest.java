@@ -1,7 +1,6 @@
 package query.dml;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
@@ -24,7 +23,7 @@ public class InsertQueryTest extends DatabaseTestBaseClass {
     @Test
     public void testExecuteInsert() throws SQLException {
         StringBuilder queryString = new StringBuilder("INSERT INTO person (firstname, lastname) VALUES (?, ?)");
-        DMLQuery query = new InsertQuery(queryString, dataSource);
+        InsertQuery query = new InsertQuery(queryString, dataSource);
 
         query.addParam("Miika");
         query.addParam("Kukkonen");

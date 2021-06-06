@@ -1,7 +1,7 @@
 package builder.statement.delete;
 
 import query.QueryFactory;
-import query.dml.DMLQuery;
+import query.dml.DeleteQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 import org.junit.Before;
@@ -16,14 +16,14 @@ public class DeleteTest extends DatabaseTestBaseClass {
     private QueryFactory queryFactory;
 
     @Before
-    public void setUp() {
+    public void setUp() throws SQLException {
         initializeDatabase();
         queryFactory = new QueryFactory(DatabaseConnection.getDataSource());
     }
 
     @Test
     public void testDeleteFromOneTable() throws SQLException {
-        DMLQuery query = queryFactory
+        DeleteQuery query = queryFactory
                 .deleteFrom()
                     .table("address")
                 .build();
@@ -37,7 +37,7 @@ public class DeleteTest extends DatabaseTestBaseClass {
 
     @Test
     public void testDeleteWithCondition() throws SQLException {
-        DMLQuery query = queryFactory
+        DeleteQuery query = queryFactory
                 .deleteFrom()
                     .table("address")
                 .where(valueOf("person_id").equals(1))
@@ -52,7 +52,7 @@ public class DeleteTest extends DatabaseTestBaseClass {
 
     @Test
     public void testDeleteWithMultipleCondition() throws SQLException {
-        DMLQuery query = queryFactory
+        DeleteQuery query = queryFactory
                 .deleteFrom()
                     .table("address")
                 .where(valueOf("person_id").equals(1)

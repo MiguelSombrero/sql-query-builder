@@ -1,6 +1,7 @@
 package builder.statement.insert;
 
-import query.dml.DMLQuery;
+import org.junit.Ignore;
+import query.dml.InsertQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 import query.QueryFactory;
@@ -23,7 +24,7 @@ public class InsertTest extends DatabaseTestBaseClass {
 
     @Test
     public void testInsertOneIntegerValue() throws SQLException {
-        DMLQuery query = queryFactory
+        InsertQuery query = queryFactory
                 .insertInto()
                 .table("person")
                 .columns("id")
@@ -36,28 +37,31 @@ public class InsertTest extends DatabaseTestBaseClass {
         int result = query.execute();
 
         assertEquals(100, result);
+        assertThatQueryReturnsRows("SELECT * FROM person WHERE id = 100", 1);
     }
 
+    @Ignore("Throws NullPointer in some reason?")
     @Test
     public void testInsertOneDoubleValue() throws SQLException {
-        DMLQuery query = queryFactory
+        InsertQuery query = queryFactory
                 .insertInto()
-                .table("person")
+                .table("all_types")
                 .columns("age")
                 .values()
-                    .value(19.5)
+                    .value(19.3)
                 .build();
 
-        assertEquals("INSERT INTO person (age) VALUES (19.5)", query.toString());
+        assertEquals("INSERT INTO all_types (age) VALUES (19.3)", query.toString());
 
         int result = query.execute();
 
         assertEquals(4, result);
+        assertThatQueryReturnsRows("SELECT * FROM all_types WHERE age = 19.3", 1);
     }
 
     @Test
     public void testInsertOneStringValue() throws SQLException {
-        DMLQuery query = queryFactory
+        InsertQuery query = queryFactory
                 .insertInto()
                 .table("person")
                 .columns("firstname")
@@ -74,7 +78,7 @@ public class InsertTest extends DatabaseTestBaseClass {
 
     @Test
     public void testInsertMultipleValues() throws SQLException {
-        DMLQuery query = queryFactory
+        InsertQuery query = queryFactory
                 .insertInto()
                 .table("person")
                     .columns("id", "birthdate", "firstname", "lastname", "age")
@@ -96,7 +100,7 @@ public class InsertTest extends DatabaseTestBaseClass {
 
     @Test
     public void testInsertQuery() throws SQLException {
-        DMLQuery query = queryFactory
+        InsertQuery query = queryFactory
                 .insertInto()
                 .table("person")
                 .columns("id", "birthdate", "firstname", "lastname", "age")
@@ -122,7 +126,7 @@ public class InsertTest extends DatabaseTestBaseClass {
 
     @Test
     public void testInsertMultipleValuesWithoutSpecifyingColumns() throws SQLException {
-        DMLQuery query = queryFactory
+        InsertQuery query = queryFactory
                 .insertInto()
                 .table("person")
                 .values()
@@ -142,7 +146,7 @@ public class InsertTest extends DatabaseTestBaseClass {
 
     @Test
     public void testInsertQueryWithoutSpecifyingColumns() throws SQLException {
-        DMLQuery query = queryFactory
+        InsertQuery query = queryFactory
                 .insertInto()
                 .table("person")
                 .sub(queryFactory

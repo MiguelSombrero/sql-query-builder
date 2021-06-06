@@ -3,8 +3,6 @@ package builder.statement.drop;
 import builder.statement.create.table.column.DataType;
 import query.QueryFactory;
 import query.ddl.CreateQuery;
-import query.Query;
-import query.ddl.DDLQuery;
 import query.ddl.DropQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
@@ -13,13 +11,13 @@ import org.junit.Test;
 
 import java.sql.SQLException;
 
-import static junit.framework.Assert.assertEquals;
+import static org.junit.Assert.assertEquals;
 
 public class DropTest extends DatabaseTestBaseClass {
     private QueryFactory queryFactory;
 
     @Before
-    public void setUp() {
+    public void setUp() throws SQLException {
         initializeDatabase();
         queryFactory = new QueryFactory(DatabaseConnection.getDataSource());
     }

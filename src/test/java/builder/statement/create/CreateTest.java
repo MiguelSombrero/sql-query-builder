@@ -16,7 +16,7 @@ public class CreateTest extends DatabaseTestBaseClass {
     private QueryFactory queryFactory;
 
     @Before
-    public void setUp() {
+    public void setUp() throws SQLException {
         initializeDatabase();
         queryFactory = new QueryFactory(DatabaseConnection.getDataSource());
     }

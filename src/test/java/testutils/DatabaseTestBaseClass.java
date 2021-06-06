@@ -51,16 +51,31 @@ public class DatabaseTestBaseClass {
     }
 
     protected void assertRowLength(List<Row> result, int length) {
-        assertEquals(length, result.get(0).length());
+        assertEquals(length, result.get(0).getColumnCount());
     }
 
-    protected void assertThatQueryIsValidSQL(String query) throws SQLException {
-        execute(query);
+    protected void assertThatQueryReturnsRows(String query, int rows) throws SQLException {
+        int resultRows = executeSelectAndReturnRows(query);
+        assertEquals(resultRows, rows);
     }
 
-    protected void execute(String query) throws SQLException {
+    protected int executeSelectAndReturnRows(String query) throws SQLException {
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+
+        int rows;
+
         try (Connection conn = DatabaseConnection.getConnection()) {
-            conn.prepareStatement(query).execute();
+            statement = conn.prepareStatement(query);
+            resultSet = statement.executeQuery();
+            resultSet.last();
+            rows = resultSet.getRow();
+
+        } finally {
+            resultSet.close();
+            statement.close();
         }
+
+        return rows;
     }
 }

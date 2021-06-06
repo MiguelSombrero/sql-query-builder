@@ -1,10 +1,8 @@
 package query.dql;
 
-import query.Query;
-
 import java.sql.SQLException;
 import java.util.List;
 
-public interface DQLQuery extends Query {
+public interface DQLQuery {
     List<Row> execute() throws SQLException;
 }

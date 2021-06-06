@@ -18,7 +18,7 @@ public class CreateTableTest extends DatabaseTestBaseClass {
     private QueryFactory queryFactory;
 
     @Before
-    public void setUp() {
+    public void setUp() throws SQLException {
         initializeDatabase();
         queryFactory = new QueryFactory(DatabaseConnection.getDataSource());
     }
@@ -28,16 +28,21 @@ public class CreateTableTest extends DatabaseTestBaseClass {
         CreateQuery query = queryFactory.create()
                 .table("cars")
                 .column("ID").type(DataType.INT)
+                .column("hash").type(DataType.BIGINT)
                 .column("age").type(DataType.DOUBLE)
+                .column("date").type(DataType.DATE)
+                .column("datetime").type(DataType.DATETIME)
                 .column("created").type(DataType.TIMESTAMP)
+                .column("active").type(DataType.BOOLEAN)
                 .column("country").type(DataType.CHAR)
                 .column("model").type(DataType.VARCHAR_32)
                 .column("brand").type(DataType.VARCHAR_64)
                 .column("disclaimer").type(DataType.VARCHAR_128)
                 .column("description").type(DataType.VARCHAR_255)
+                .column("contract").type(DataType.BLOB)
                 .build();
 
-        assertEquals("CREATE TABLE cars (ID INT, age DOUBLE, created TIMESTAMP, country CHAR, model VARCHAR(32), brand VARCHAR(64), disclaimer VARCHAR(128), description VARCHAR(255))", query.toString());
+        assertEquals("CREATE TABLE cars (ID INT, hash BIGINT, age DOUBLE, date DATE, datetime DATETIME, created TIMESTAMP, active BOOLEAN, country CHAR, model VARCHAR(32), brand VARCHAR(64), disclaimer VARCHAR(128), description VARCHAR(255), contract BLOB)", query.toString());
 
         query.execute();
 

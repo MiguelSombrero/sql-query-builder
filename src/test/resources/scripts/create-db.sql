@@ -37,3 +37,18 @@ CREATE TABLE course (
     foreign key (person_id) references person(ID),
     foreign key (school_id) references school(ID)
 );
+CREATE TABLE all_types (
+    ID INT,
+    hash BIGINT,
+    age DOUBLE,
+    newdate DATE,
+    newdatetime DATETIME,
+    created TIMESTAMP,
+    active BOOLEAN,
+    country CHAR,
+    model VARCHAR(32),
+    brand VARCHAR(64),
+    disclaimer VARCHAR(128),
+    description VARCHAR(255),
+    contract BLOB
+);
