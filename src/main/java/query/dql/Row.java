@@ -3,7 +3,9 @@ package query.dql;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Date;
+import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Row {
     protected static Logger logger = LoggerFactory.getLogger(Row.class);
@@ -43,40 +45,58 @@ public class Row {
     }
 
     public String getStringFrom(int index) {
-        String value;
-
-        try {
-            value = (String) getObjectFrom(index);
-        } catch (ClassCastException e) {
-            logger.info("Count not cast object to String");
-            logger.debug(e.getLocalizedMessage());
-            throw e;
-        } catch (IndexOutOfBoundsException e) {
-            logger.info("No value in given index");
-            logger.debug(e.getLocalizedMessage());
-            throw e;
-        }
-
+        Object object = getObjectFrom(index);
+        String value = ObjectCaster.castToString(object);
         return value;
     }
 
     public int getIntegerFrom(int index) {
-        return (int) getObjectFrom(index);
+        Object object = getObjectFrom(index);
+        int value = ObjectCaster.castToInteger(object);
+        return value;
     }
 
     public double getDoubleFrom(int index) {
-        return (double) getObjectFrom(index);
+        Object object = getObjectFrom(index);
+        double value = ObjectCaster.castToDouble(object);
+        return value;
     }
 
     public boolean getBooleanFrom(int index) {
-        return (boolean) getObjectFrom(index);
+        Object object = getObjectFrom(index);
+        boolean value = ObjectCaster.castToBoolean(object);
+        return value;
     }
 
-    public Date getDateFrom(int index) {
-        return (Date) getObjectFrom(index);
+    public LocalDate getLocalDateFrom(int index) {
+        Object object = getObjectFrom(index);
+        LocalDate value = ObjectCaster.castToLocalDate(object);
+        return value;
+    }
+
+    public LocalDateTime getLocalDateTimeFrom(int index) {
+        Object object = getObjectFrom(index);
+        LocalDateTime value = ObjectCaster.castToLocalDateTime(object);
+        return value;
+    }
+
+    public Timestamp getTimestampFrom(int index) {
+        Object object = getObjectFrom(index);
+        Timestamp value = ObjectCaster.castToTimestamp(object);
+        return value;
     }
 
     private Object getObjectFrom(int index) {
-        return this.columns[index];
+        Object object;
+
+        try {
+            object = this.columns[index];
+        } catch (IndexOutOfBoundsException e) {
+            logger.info("Tried to fetch object from illegal index");
+            logger.debug(e.getLocalizedMessage());
+            throw e;
+        }
+
+        return object;
     }
 }

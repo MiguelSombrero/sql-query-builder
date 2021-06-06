@@ -25,7 +25,7 @@ public class RowTest extends DatabaseTestBaseClass {
                 .select()
                 .all()
                 .from()
-                .table("person")
+                .table("all_types")
                 .build();
     }
 
@@ -35,7 +35,7 @@ public class RowTest extends DatabaseTestBaseClass {
 
         Row firstRow = result.get(0);
 
-        assertEquals("id, birthdate, firstname, lastname, age", firstRow.getColumnNames());
+        assertEquals("id, hash, age, newdate, newdatetime, created, active, country, model, brand, disclaimer, description, contract", firstRow.getColumnNames());
     }
 
     @Test
@@ -45,10 +45,10 @@ public class RowTest extends DatabaseTestBaseClass {
         Row firstRow = result.get(0);
 
         assertEquals("id", firstRow.getColumnName(0));
-        assertEquals("birthdate", firstRow.getColumnName(1));
-        assertEquals("firstname", firstRow.getColumnName(2));
-        assertEquals("lastname", firstRow.getColumnName(3));
-        assertEquals("age", firstRow.getColumnName(4));
+        assertEquals("hash", firstRow.getColumnName(1));
+        assertEquals("age", firstRow.getColumnName(2));
+        assertEquals("newdate", firstRow.getColumnName(3));
+        assertEquals("newdatetime", firstRow.getColumnName(4));
     }
 
     @Test
@@ -58,10 +58,15 @@ public class RowTest extends DatabaseTestBaseClass {
         Row firstRow = result.get(0);
 
         assertEquals(Types.INTEGER, firstRow.getColumnType(0));
-        assertEquals(Types.TIMESTAMP, firstRow.getColumnType(1));
-        assertEquals(Types.VARCHAR, firstRow.getColumnType(2));
-        assertEquals(Types.VARCHAR, firstRow.getColumnType(3));
-        assertEquals(Types.INTEGER, firstRow.getColumnType(4));
+        assertEquals(Types.BIGINT, firstRow.getColumnType(1));
+        assertEquals(Types.DOUBLE, firstRow.getColumnType(2));
+        assertEquals(Types.DATE, firstRow.getColumnType(3));
+        assertEquals(Types.TIMESTAMP, firstRow.getColumnType(4));
+        assertEquals(Types.TIMESTAMP, firstRow.getColumnType(5));
+        assertEquals(Types.BOOLEAN, firstRow.getColumnType(6));
+        assertEquals(Types.CHAR, firstRow.getColumnType(7));
+        assertEquals(Types.VARCHAR, firstRow.getColumnType(8));
+        assertEquals(Types.VARCHAR, firstRow.getColumnType(12));
     }
 
     @Test
@@ -70,7 +75,7 @@ public class RowTest extends DatabaseTestBaseClass {
 
         Row firstRow = result.get(0);
 
-        assertEquals(5, firstRow.getColumnCount());
+        assertEquals(13, firstRow.getColumnCount());
     }
 
     @Test
@@ -79,7 +84,7 @@ public class RowTest extends DatabaseTestBaseClass {
 
         Row firstRow = result.get(0);
 
-        assertEquals("Miika", firstRow.getStringFrom(2));
+        assertEquals("Taunus", firstRow.getStringFrom(9));
     }
 
     @Test
@@ -88,7 +93,7 @@ public class RowTest extends DatabaseTestBaseClass {
 
         Row firstRow = result.get(0);
 
-        assertEquals(1, firstRow.getIntegerFrom(0));
+        assertEquals(8, firstRow.getIntegerFrom(0));
     }
 
     @Test(expected = ClassCastException.class)

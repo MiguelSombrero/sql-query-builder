@@ -11,3 +11,5 @@ INSERT INTO address (id, person_id, postal_code, city, street) VALUES (7, 1, 864
 
 INSERT INTO course (id, person_id, school_id, name, difficulty) VALUES (8, 1, 6, 'Modern React', 4);
 
+INSERT INTO all_types VALUES (9, 47590283457092345, 25.6, '2020-02-02', '2020-02-02 22:02:01', '2020-02-02 22:02:01', true, 23, "Taunus", "Ford", "Does not work", "This is car", "soercerhicuehnsuhgcsidufhbsodiufhbsoidufgbh soidfh soif");
+
