@@ -139,6 +139,6 @@ public class LimitTest extends DatabaseTestBaseClass {
 
         assertRowCount(result, 2);
         assertRowLength(result, 5);
-        assertEquals("Kultanen", result.get(1).getStringFrom(3));
+        assertEquals("Kultanen", result.get(1).getString("lastname"));
     }
 }

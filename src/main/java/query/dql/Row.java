@@ -6,97 +6,66 @@ import org.slf4j.LoggerFactory;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Map;
 
 public class Row {
     protected static Logger logger = LoggerFactory.getLogger(Row.class);
 
-    private Object[] columns;
-    private String[] columnNames;
-    private int[] columnTypes;
+    private Map<String, Object> columns;
 
-    public Row() {}
-
-    public void setColumns(Object[] columns) {
+    public Row(Map<String, Object> columns) {
         this.columns = columns;
     }
 
-    public void setColumnNames(String[] columnNames) {
-        this.columnNames = columnNames;
-    }
-
-    public String getColumnNames() {
-        return String.join(", ", this.columnNames);
-    }
-
-    public String getColumnName(int index) {
-        return this.columnNames[index];
-    }
-
-    public void setColumnTypes(int[] columnTypes) {
-        this.columnTypes = columnTypes;
-    }
-
-    public int getColumnType(int index) {
-        return this.columnTypes[index];
+    public void setColumns(Map<String, Object> columns) {
+        this.columns = columns;
     }
 
     public int getColumnCount() {
-        return this.columns.length;
+
+        logger.info("columns are");
+
+        this.columns.values().stream().forEach(value -> logger.info(value.toString()));
+        return this.columns.size();
+
     }
 
-    public String getStringFrom(int index) {
-        Object object = getObjectFrom(index);
-        String value = ObjectCaster.castToString(object);
-        return value;
+    public String getString(String columnName) {
+        Object object = this.columns.get(columnName);
+        return castToType(String.class, object);
     }
 
-    public int getIntegerFrom(int index) {
-        Object object = getObjectFrom(index);
-        int value = ObjectCaster.castToInteger(object);
-        return value;
+    public int getInteger(String columnName) {
+        Object object = this.columns.get(columnName);
+        return castToType(Integer.class, object);
     }
 
-    public double getDoubleFrom(int index) {
-        Object object = getObjectFrom(index);
-        double value = ObjectCaster.castToDouble(object);
-        return value;
+    public double getDouble(String columnName) {
+        Object object = this.columns.get(columnName);
+        return castToType(Double.class, object);
     }
 
-    public boolean getBooleanFrom(int index) {
-        Object object = getObjectFrom(index);
-        boolean value = ObjectCaster.castToBoolean(object);
-        return value;
+    public boolean getBoolean(String columnName) {
+        Object object = this.columns.get(columnName);
+        return castToType(Boolean.class, object);
     }
 
-    public LocalDate getLocalDateFrom(int index) {
-        Object object = getObjectFrom(index);
-        LocalDate value = ObjectCaster.castToLocalDate(object);
-        return value;
+    public LocalDate getLocalDate(String columnName) {
+        Object object = this.columns.get(columnName);
+        return castToType(LocalDate.class, object);
     }
 
-    public LocalDateTime getLocalDateTimeFrom(int index) {
-        Object object = getObjectFrom(index);
-        LocalDateTime value = ObjectCaster.castToLocalDateTime(object);
-        return value;
+    public LocalDateTime getLocalDateTime(String columnName) {
+        Object object = this.columns.get(columnName);
+        return castToType(LocalDateTime.class, object);
     }
 
-    public Timestamp getTimestampFrom(int index) {
-        Object object = getObjectFrom(index);
-        Timestamp value = ObjectCaster.castToTimestamp(object);
-        return value;
+    public Timestamp getTimestamp(String columnName) {
+        Object object = this.columns.get(columnName);
+        return castToType(Timestamp.class, object);
     }
 
-    private Object getObjectFrom(int index) {
-        Object object;
-
-        try {
-            object = this.columns[index];
-        } catch (IndexOutOfBoundsException e) {
-            logger.info("Tried to fetch object from illegal index");
-            logger.debug(e.getLocalizedMessage());
-            throw e;
-        }
-
-        return object;
+    private <T> T castToType(Class<T> type, Object value) {
+        return type.cast(value);
     }
 }

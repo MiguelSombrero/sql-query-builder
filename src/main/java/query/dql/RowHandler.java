@@ -1,28 +1,23 @@
 package query.dql;
 
+import org.apache.commons.dbutils.BasicRowProcessor;
 import org.apache.commons.dbutils.handlers.AbstractListHandler;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Map;
 
 public class RowHandler extends AbstractListHandler<Row> {
-    private CustomRowProcessor convert;
+    private BasicRowProcessor convert;
 
     public RowHandler() {
-        convert = new CustomRowProcessor();
+        convert = new BasicRowProcessor();
     }
 
     @Override
     protected Row handleRow(ResultSet resultSet) throws SQLException {
-        Object[] columns = this.convert.toArray(resultSet);
-        String[] columnNames = this.convert.parseColumnNames(resultSet);
-        int[] columnTypes = this.convert.parseColumnTypes(resultSet);
-
-        Row row = new Row();
-        row.setColumns(columns);
-        row.setColumnNames(columnNames);
-        row.setColumnTypes(columnTypes);
-
+        Map<String, Object> columns = this.convert.toMap(resultSet);
+        Row row = new Row(columns);
         return row;
     }
 }
