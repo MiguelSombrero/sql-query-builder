@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 public class StringUtils {
+    protected static Logger logger = LoggerFactory.getLogger(StringUtils.class);
     private static final char QUESTION_MARK = 63;
 
     public static String replaceQuestionMarksWithParams(String text, List<Object> params) {
@@ -26,5 +27,4 @@ public class StringUtils {
 
         return replacedText.toString();
     }
-
 }

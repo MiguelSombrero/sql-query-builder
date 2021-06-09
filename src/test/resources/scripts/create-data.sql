@@ -11,5 +11,5 @@ INSERT INTO address VALUES (7, 1, 86400, 'Vihanti', 'Testitie');
 
 INSERT INTO course VALUES (8, 1, 6, 'Modern React', 4);
 
-INSERT INTO all_types VALUES (9, 47590283457092345, 25.6, '2020-02-02', '2020-02-02 22:02:01', '2020-02-02 22:02:01', true, 23, 'Taunus', 'Ford', 'Does not work', 'This is car', '74657374696e6720736f6d652076616c7565736f0a');
+INSERT INTO all_types VALUES (9, 9223372036854775806, 25.6, '2020-02-02', '2020-02-02 22:02:01', '2020-02-02 22:02:01', true, 23, 'Taunus', 'Ford', 'Does not work', 'This is car', '74657374696e6720736f6d652076616c7565736f0a');
 
