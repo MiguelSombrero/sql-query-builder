@@ -1,7 +1,7 @@
 package builder.statement.select.column;
 
-import utils.AggregateFunction;
-import utils.StringAppender;
+import builder.appender.AggregateFunction;
+import builder.appender.StringAppender;
 import query.dql.SelectQuery;
 
 public abstract class ColumnTemplate {

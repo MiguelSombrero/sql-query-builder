@@ -29,7 +29,7 @@ public class InsertTest extends DatabaseTestBaseClass {
                 .table("person")
                 .columns("id")
                 .values()
-                    .value(100)
+                    .setInt(100)
                 .build();
 
         assertEquals("INSERT INTO person (id) VALUES (100)", query.toString());
@@ -48,7 +48,7 @@ public class InsertTest extends DatabaseTestBaseClass {
                 .table("all_types")
                 .columns("age")
                 .values()
-                    .value(19.3)
+                    .setDouble(19.3)
                 .build();
 
         assertEquals("INSERT INTO all_types (age) VALUES (19.3)", query.toString());
@@ -66,7 +66,7 @@ public class InsertTest extends DatabaseTestBaseClass {
                 .table("person")
                 .columns("firstname")
                 .values()
-                    .value("Miika-Lassi Kari")
+                    .setString("Miika-Lassi Kari")
                 .build();
 
         assertEquals("INSERT INTO person (firstname) VALUES ('Miika-Lassi Kari')", query.toString());
@@ -83,11 +83,11 @@ public class InsertTest extends DatabaseTestBaseClass {
                 .table("person")
                     .columns("id", "birthdate", "firstname", "lastname", "age")
                 .values()
-                    .value(101)
-                    .value("1980-04-12")
-                    .value("Miika")
-                    .value("Somero")
-                    .value(40.5)
+                    .setInt(101)
+                    .setString("1980-04-12")
+                    .setString("Miika")
+                    .setString("Somero")
+                    .setDouble(40.5)
                 .build();
 
         assertEquals("INSERT INTO person (id, birthdate, firstname, lastname, age) VALUES (101, '1980-04-12', 'Miika', 'Somero', 40.5)", query.toString());
@@ -130,11 +130,11 @@ public class InsertTest extends DatabaseTestBaseClass {
                 .insertInto()
                 .table("person")
                 .values()
-                    .value(102)
-                    .value("1980-04-12")
-                    .value("Miika")
-                    .value("Somero")
-                    .value(40)
+                    .setInt(102)
+                    .setString("1980-04-12")
+                    .setString("Miika")
+                    .setString("Somero")
+                    .setInt(40)
                 .build();
 
         assertEquals("INSERT INTO person VALUES (102, '1980-04-12', 'Miika', 'Somero', 40)", query.toString());
@@ -172,7 +172,7 @@ public class InsertTest extends DatabaseTestBaseClass {
                 .table(";DROP")
                     .columns("id")
                 .values()
-                    .value(100)
+                    .setInt(100)
                 .build();
     }
 
@@ -183,7 +183,7 @@ public class InsertTest extends DatabaseTestBaseClass {
                 .table("person")
                     .columns("id", ";DROP")
                 .values()
-                    .value(100)
+                    .setInt(100)
                 .build();
     }
 
@@ -194,7 +194,7 @@ public class InsertTest extends DatabaseTestBaseClass {
                 .table("person")
                     .columns("firstname")
                 .values()
-                    .value(";DROP")
+                    .setString(";DROP")
                 .build();
     }
 
@@ -205,7 +205,7 @@ public class InsertTest extends DatabaseTestBaseClass {
                 .table("person")
                     .columns("?")
                 .values()
-                    .value("Miika")
+                    .setString("Miika")
                 .build();
     }
 
@@ -216,7 +216,7 @@ public class InsertTest extends DatabaseTestBaseClass {
                 .table("person")
                 .columns("lastname")
                 .values()
-                .value("?")
+                .setString("?")
                 .build();
     }
 }

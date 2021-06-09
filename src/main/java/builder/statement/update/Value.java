@@ -1,6 +1,6 @@
 package builder.statement.update;
 
-import utils.StringValueAppender;
+import builder.appender.StringValueAppender;
 import query.dml.UpdateQuery;
 
 public class Value {

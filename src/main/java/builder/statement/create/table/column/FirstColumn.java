@@ -1,6 +1,6 @@
 package builder.statement.create.table.column;
 
-import utils.StringAppender;
+import builder.appender.StringAppender;
 import query.ddl.CreateQuery;
 
 public class FirstColumn {

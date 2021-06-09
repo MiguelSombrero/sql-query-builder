@@ -1,7 +1,7 @@
 package builder.statement.select.table;
 
 import builder.statement.select.SelectQueryBuilder;
-import utils.StringAppender;
+import builder.appender.StringAppender;
 import query.dql.SelectQuery;
 
 public class From {

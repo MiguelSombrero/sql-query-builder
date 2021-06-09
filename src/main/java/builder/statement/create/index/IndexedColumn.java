@@ -1,7 +1,7 @@
 package builder.statement.create.index;
 
 import builder.statement.create.TerminalCreateOperation;
-import utils.StringAppender;
+import builder.appender.StringAppender;
 import query.ddl.CreateQuery;
 
 public class IndexedColumn {

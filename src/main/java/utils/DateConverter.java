@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 
 public class DateConverter {
+    private static final ZoneId TIMEZONE = ZoneId.systemDefault();
 
     public static LocalDate dateToLocalDate(Date date) {
         LocalDate result = date.toLocalDate();
@@ -16,7 +17,7 @@ public class DateConverter {
     public static LocalDateTime timestampToLocalDateTime(Timestamp timestamp) {
         LocalDateTime result = timestamp
                 .toInstant()
-                .atZone(ZoneId.systemDefault())
+                .atZone(TIMEZONE)
                 .toLocalDateTime();
 
         return result;

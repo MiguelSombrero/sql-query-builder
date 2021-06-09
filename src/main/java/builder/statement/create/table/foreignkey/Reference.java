@@ -1,6 +1,6 @@
 package builder.statement.create.table.foreignkey;
 
-import utils.StringAppender;
+import builder.appender.StringAppender;
 import query.ddl.CreateQuery;
 
 public class Reference {

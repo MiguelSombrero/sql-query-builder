@@ -1,6 +1,6 @@
 package builder.statement.update;
 
-import utils.StringAppender;
+import builder.appender.StringAppender;
 import query.dml.UpdateQuery;
 
 public class Table {

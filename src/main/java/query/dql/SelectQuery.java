@@ -12,16 +12,16 @@ import java.util.List;
 public class SelectQuery extends SQLQuery implements DQLQuery {
     private static Logger logger = LoggerFactory.getLogger(SelectQuery.class);
 
+    private RowHandler handler;
     private QueryRunner run;
 
     public SelectQuery(StringBuilder queryString, DataSource dataSource) {
         super(queryString);
         this.run = new QueryRunner(dataSource);
+        this.handler = new RowHandler();
     }
 
     public List<Row> execute() throws SQLException {
-        RowHandler handler = new RowHandler();
-
         List<Row> result;
 
         try {

@@ -1,6 +1,6 @@
 package builder.statement.select.order;
 
-import utils.StringAppender;
+import builder.appender.StringAppender;
 import query.dql.SelectQuery;
 
 public class OrderBy extends Limit {

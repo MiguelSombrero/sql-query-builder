@@ -1,6 +1,6 @@
 package builder.statement.delete;
 
-import utils.StringAppender;
+import builder.appender.StringAppender;
 import query.dml.DeleteQuery;
 
 public class Table {

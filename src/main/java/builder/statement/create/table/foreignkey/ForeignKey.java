@@ -1,7 +1,7 @@
 package builder.statement.create.table.foreignkey;
 
 import builder.statement.create.TerminalClosingCreateOperation;
-import utils.StringAppender;
+import builder.appender.StringAppender;
 import query.ddl.CreateQuery;
 
 public class ForeignKey extends TerminalClosingCreateOperation {

@@ -1,7 +1,7 @@
 package builder.statement.update;
 
 import builder.clause.Condition;
-import utils.StringAppender;
+import builder.appender.StringAppender;
 import query.dml.UpdateQuery;
 
 public class Column extends TerminalUpdateOperation {

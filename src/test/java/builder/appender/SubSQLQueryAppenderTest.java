@@ -1,4 +1,4 @@
-package utils;
+package builder.appender;
 
 import testutils.DatabaseConnection;
 import query.QueryFactory;
@@ -6,7 +6,7 @@ import org.junit.Before;
 import query.SQLQuery;
 import builder.statement.select.table.Table;
 import org.junit.Test;
-import utils.SubQueryAppender;
+import builder.appender.SubQueryAppender;
 
 import java.sql.SQLException;
 

@@ -1,14 +1,13 @@
 package builder.statement.insert;
 
-import utils.StringValueAppender;
+import builder.appender.ValueAppender;
 import query.dml.InsertQuery;
 
 public abstract class ValueTemplate extends TerminalClosingInsertOperation {
-    private StringValueAppender stringValueAppender;
+    private static ValueAppender valueAppender;
 
     public ValueTemplate(InsertQuery query) {
         super(query);
-        this.stringValueAppender = new StringValueAppender(query);
     }
 
     /**
@@ -21,9 +20,9 @@ public abstract class ValueTemplate extends TerminalClosingInsertOperation {
      * value (with comma in front) into 'VALUE (value(s))'
      * statement
      */
-    public Value value(String value) {
+    public Value setString(String value) {
         addCommaAfterFirstValue();
-        stringValueAppender.validateAndAppendStringValue(value);
+        valueAppender.validateAndAppendString(query, value);
         return new Value(query);
     }
 
@@ -37,9 +36,9 @@ public abstract class ValueTemplate extends TerminalClosingInsertOperation {
      * value (with comma in front) into 'VALUE (value(s))'
      * statement
      */
-    public Value value(int value) {
+    public Value setInt(int value) {
         addCommaAfterFirstValue();
-        query.append(value);
+        valueAppender.validateAndAppendInt(query, value);
         return new Value(query);
     }
 
@@ -53,7 +52,7 @@ public abstract class ValueTemplate extends TerminalClosingInsertOperation {
      * value (with comma in front) into 'VALUE (value(s))'
      * statement
      */
-    public Value value(double value) {
+    public Value setDouble(double value) {
         addCommaAfterFirstValue();
         query.append(value);
         return new Value(query);

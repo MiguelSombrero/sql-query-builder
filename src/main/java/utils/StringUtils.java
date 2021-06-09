@@ -17,7 +17,8 @@ public class StringUtils {
             Character character = text.charAt(i);
 
             if (character == QUESTION_MARK) {
-                String param = (String) params.get(count);
+                Object object = params.get(count);
+                String param = String.valueOf(object);
                 replacedText.append("'" + param + "'");
                 count++;
             } else {

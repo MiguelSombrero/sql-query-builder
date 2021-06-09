@@ -1,6 +1,6 @@
 package builder.statement.insert;
 
-import utils.StringAppender;
+import builder.appender.StringAppender;
 import query.dml.InsertQuery;
 
 public class Insert extends Column {

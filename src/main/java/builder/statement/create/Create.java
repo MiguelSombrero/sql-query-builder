@@ -2,7 +2,7 @@ package builder.statement.create;
 
 import builder.statement.create.index.Index;
 import builder.statement.create.table.column.FirstColumn;
-import utils.StringAppender;
+import builder.appender.StringAppender;
 import query.ddl.CreateQuery;
 
 public class Create {
