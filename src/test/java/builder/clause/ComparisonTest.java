@@ -43,7 +43,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
         List<Row> result = query.execute();
 
         assertRowCount(result, 1);
-        assertRowLength(result, 1);
+        assertColumnCount(result, 1);
     }
 
     @Test

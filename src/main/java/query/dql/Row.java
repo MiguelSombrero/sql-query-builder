@@ -22,47 +22,46 @@ public class Row {
     }
 
     public int getColumnCount() {
-
-        logger.info("columns are");
-
-        this.columns.values().stream().forEach(value -> logger.info(value.toString()));
         return this.columns.size();
-
     }
 
     public String getString(String columnName) {
-        Object object = this.columns.get(columnName);
+        Object object = getObject(columnName);
         return castToType(String.class, object);
     }
 
     public int getInteger(String columnName) {
-        Object object = this.columns.get(columnName);
+        Object object = getObject(columnName);
         return castToType(Integer.class, object);
     }
 
     public double getDouble(String columnName) {
-        Object object = this.columns.get(columnName);
+        Object object = getObject(columnName);
         return castToType(Double.class, object);
     }
 
     public boolean getBoolean(String columnName) {
-        Object object = this.columns.get(columnName);
+        Object object = getObject(columnName);
         return castToType(Boolean.class, object);
     }
 
     public LocalDate getLocalDate(String columnName) {
-        Object object = this.columns.get(columnName);
+        Object object = getObject(columnName);
         return castToType(LocalDate.class, object);
     }
 
     public LocalDateTime getLocalDateTime(String columnName) {
-        Object object = this.columns.get(columnName);
+        Object object = getObject(columnName);
         return castToType(LocalDateTime.class, object);
     }
 
     public Timestamp getTimestamp(String columnName) {
-        Object object = this.columns.get(columnName);
+        Object object = getObject(columnName);
         return castToType(Timestamp.class, object);
+    }
+
+    private Object getObject(String columnName) {
+        return this.columns.get(columnName.toLowerCase());
     }
 
     private <T> T castToType(Class<T> type, Object value) {

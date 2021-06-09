@@ -1,6 +1,5 @@
 package query.dql;
 
-import org.apache.commons.dbutils.BasicRowProcessor;
 import org.apache.commons.dbutils.handlers.AbstractListHandler;
 
 import java.sql.ResultSet;
@@ -8,10 +7,10 @@ import java.sql.SQLException;
 import java.util.Map;
 
 public class RowHandler extends AbstractListHandler<Row> {
-    private BasicRowProcessor convert;
+    private CustomRowProcessor convert;
 
     public RowHandler() {
-        convert = new BasicRowProcessor();
+        this.convert = new CustomRowProcessor();
     }
 
     @Override

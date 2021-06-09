@@ -17,7 +17,7 @@ import static org.junit.Assert.assertEquals;
 
 public class TableTest extends DatabaseTestBaseClass {
     private QueryFactory queryFactory;
-    private ToFrom column;
+    private ToFrom baseQuery;
 
     @Before
     public void setUpQuery() {
@@ -25,14 +25,14 @@ public class TableTest extends DatabaseTestBaseClass {
 
         queryFactory = new QueryFactory(DatabaseConnection.getDataSource());
 
-        this.column = queryFactory
+        this.baseQuery = queryFactory
                 .select()
                     .all();
     }
 
     @Test
     public void testFromOneTable() throws SQLException {
-        SelectQuery query = this.column
+        SelectQuery query = this.baseQuery
                 .from()
                     .table("person")
                 .build();
@@ -42,29 +42,33 @@ public class TableTest extends DatabaseTestBaseClass {
         List<Row> result = query.execute();
 
         assertRowCount(result, 3);
-        assertRowLength(result, 5);
+        assertColumnCount(result, 5);
     }
 
     @Test
     public void testFromMultipleTables() throws SQLException {
-        SelectQuery query = this.column
+        SelectQuery query = queryFactory
+                .select()
+                    .column("firstname")
+                    .column("street")
+                    .column("difficulty")
                 .from()
                     .table("person")
                     .table("address")
                     .table("course")
                 .build();
 
-        assertEquals("SELECT * FROM person, address, course", query.toString());
+        assertEquals("SELECT firstname, street, difficulty FROM person, address, course", query.toString());
 
         List<Row> result = query.execute();
 
         assertRowCount(result, 3);
-        assertRowLength(result, 15);
+        assertColumnCount(result, 3);
     }
 
     @Test
     public void testFromSubQuery() throws SQLException {
-        SelectQuery query = this.column
+        SelectQuery query = this.baseQuery
                 .from()
                     .sub(queryFactory
                             .select()
@@ -81,93 +85,111 @@ public class TableTest extends DatabaseTestBaseClass {
         List<Row> result = query.execute();
 
         assertRowCount(result, 3);
-        assertRowLength(result, 5);
+        assertColumnCount(result, 5);
     }
 
     @Test
     public void testFromMultipleTablesWithAliases() throws SQLException {
-        SelectQuery query = this.column
+        SelectQuery query = queryFactory
+                .select()
+                    .column("p.id")
+                    .column("a.city")
+                    .column("h.name")
                 .from()
                     .table("person").alias("p")
                     .table("address").alias("a")
                     .table("course").alias("h")
                 .build();
 
-        assertEquals("SELECT * FROM person AS p, address AS a, course AS h", query.toString());
+        assertEquals("SELECT p.id, a.city, h.name FROM person AS p, address AS a, course AS h", query.toString());
 
         List<Row> result = query.execute();
 
         assertRowCount(result, 3);
-        assertRowLength(result, 15);
+        assertColumnCount(result, 3);
     }
 
     @Test
     public void testFromOneJoinTableWithAlias() throws SQLException {
-        SelectQuery query = this.column
+        SelectQuery query = queryFactory
+                .select()
+                    .column("person.id")
                 .from()
                     .table("person")
                 .leftJoin("address").alias("a").on("person.id", "a.person_id")
                 .build();
 
-        assertEquals("SELECT * FROM person LEFT JOIN address AS a ON person.id = a.person_id", query.toString());
+        assertEquals("SELECT person.id FROM person LEFT JOIN address AS a ON person.id = a.person_id", query.toString());
 
         List<Row> result = query.execute();
 
         assertRowCount(result, 3);
-        assertRowLength(result, 10);
+        assertColumnCount(result, 1);
     }
 
     @Test
     public void testInnerJoin() throws SQLException {
-        SelectQuery query = this.column
+        SelectQuery query = queryFactory
+                .select()
+                    .count("person.id")
                 .from()
                     .table("person")
                 .innerJoin("address").on("person.id", "address.person_id")
                 .build();
 
-        assertEquals("SELECT * FROM person INNER JOIN address ON person.id = address.person_id", query.toString());
+        assertEquals("SELECT COUNT(person.id) FROM person INNER JOIN address ON person.id = address.person_id", query.toString());
 
         List<Row> result = query.execute();
 
         assertRowCount(result, 1);
-        assertRowLength(result, 10);
+        assertColumnCount(result, 1);
     }
 
     @Test
     public void testLeftJoin() throws SQLException {
-        SelectQuery query = this.column
+        SelectQuery query = this.queryFactory
+                .select()
+                    .column("person.id")
+                    .column("address.city")
                 .from()
                     .table("person")
                 .leftJoin("address").on("person.id", "address.person_id")
                 .build();
 
-        assertEquals("SELECT * FROM person LEFT JOIN address ON person.id = address.person_id", query.toString());
+        assertEquals("SELECT person.id, address.city FROM person LEFT JOIN address ON person.id = address.person_id", query.toString());
 
         List<Row> result = query.execute();
 
         assertRowCount(result, 3);
-        assertRowLength(result, 10);
+        assertColumnCount(result, 2);
     }
 
     @Test
-    public void rightJoin() throws SQLException {
-        SelectQuery query = this.column
+    public void testRightJoin() throws SQLException {
+        SelectQuery query = this.queryFactory
+                .select()
+                    .column("person.id")
+                    .column("address.city")
                 .from()
                     .table("person")
                 .rightJoin("address").on("person.id", "address.person_id")
                 .build();
 
-        assertEquals("SELECT * FROM person RIGHT JOIN address ON person.id = address.person_id", query.toString());
+        assertEquals("SELECT person.id, address.city FROM person RIGHT JOIN address ON person.id = address.person_id", query.toString());
 
         List<Row> result = query.execute();
 
         assertRowCount(result, 1);
-        assertRowLength(result, 10);
+        assertColumnCount(result, 2);
     }
 
     @Test
     public void testMultipleJoins() throws SQLException {
-        SelectQuery query = this.column
+        SelectQuery query = this.queryFactory
+                .select()
+                    .column("person.id")
+                    .column("address.city")
+                    .column("course.name")
                 .from()
                     .table("person")
                 .leftJoin("address").on("person.id", "address.person_id")
@@ -175,17 +197,21 @@ public class TableTest extends DatabaseTestBaseClass {
                 .rightJoin("school").on("course.school_id", "school.id")
                 .build();
 
-        assertEquals("SELECT * FROM person LEFT JOIN address ON person.id = address.person_id INNER JOIN course ON person.id = course.person_id RIGHT JOIN school ON course.school_id = school.id", query.toString());
+        assertEquals("SELECT person.id, address.city, course.name FROM person LEFT JOIN address ON person.id = address.person_id INNER JOIN course ON person.id = course.person_id RIGHT JOIN school ON course.school_id = school.id", query.toString());
 
         List<Row> result = query.execute();
 
         assertRowCount(result, 1);
-        assertRowLength(result, 17);
+        assertColumnCount(result, 3);
     }
 
     @Test
     public void testFromMultipleTablesAndJoinWithAliases() throws SQLException {
-        SelectQuery query = this.column
+        SelectQuery query = this.queryFactory
+                .select()
+                    .column("p.id")
+                    .column("a.city")
+                    .column("c.name")
                 .from()
                     .table("person").alias("p")
                 .leftJoin("address").alias("a").on("p.id", "a.person_id")
@@ -193,17 +219,17 @@ public class TableTest extends DatabaseTestBaseClass {
                 .rightJoin("school").alias("s").on("c.school_id", "s.id")
                 .build();
 
-        assertEquals("SELECT * FROM person AS p LEFT JOIN address AS a ON p.id = a.person_id INNER JOIN course AS c ON p.id = c.person_id RIGHT JOIN school AS s ON c.school_id = s.id", query.toString());
+        assertEquals("SELECT p.id, a.city, c.name FROM person AS p LEFT JOIN address AS a ON p.id = a.person_id INNER JOIN course AS c ON p.id = c.person_id RIGHT JOIN school AS s ON c.school_id = s.id", query.toString());
 
         List<Row> result = query.execute();
 
         assertRowCount(result, 1);
-        assertRowLength(result, 17);
+        assertColumnCount(result, 3);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testSelectTableWithSQLInjection() {
-        this.column
+        this.baseQuery
                 .from()
                 .table(";DROP")
                 .build();
@@ -211,15 +237,15 @@ public class TableTest extends DatabaseTestBaseClass {
 
     @Test(expected = IllegalArgumentException.class)
     public void testSelectTableAliasWithSQLInjection() {
-        this.column
+        this.baseQuery
                 .from()
                 .table("person").alias(";DROP")
                 .build();
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testSelectSubQueryAliasWithSQLInjection() throws SQLException {
-        this.column
+    public void testSelectSubQueryAliasWithSQLInjection() {
+        this.baseQuery
                 .from()
                 .sub(queryFactory
                         .select()
@@ -233,7 +259,7 @@ public class TableTest extends DatabaseTestBaseClass {
 
     @Test(expected = IllegalArgumentException.class)
     public void testSelectJoinTableWithSQLInjection() {
-        this.column
+        this.baseQuery
                 .from()
                 .table("person")
                 .leftJoin(";DROP").alias("a").on("person.id", "a.person_id")
@@ -242,7 +268,7 @@ public class TableTest extends DatabaseTestBaseClass {
 
     @Test(expected = IllegalArgumentException.class)
     public void testSelectJoinTableAliasWithSQLInjection() {
-        this.column
+        this.baseQuery
                 .from()
                 .table("person")
                 .leftJoin("address").alias(";DROP").on("person.id", "a.person_id")
@@ -251,7 +277,7 @@ public class TableTest extends DatabaseTestBaseClass {
 
     @Test(expected = IllegalArgumentException.class)
     public void testSelectJoinTableOnWithSQLInjection() {
-        this.column
+        this.baseQuery
                 .from()
                 .table("person")
                 .leftJoin("address").alias("a").on(";DROP", "a.person_id")
@@ -260,7 +286,7 @@ public class TableTest extends DatabaseTestBaseClass {
 
     @Test(expected = IllegalArgumentException.class)
     public void testSelectJoinTableOnJoinWithSQLInjection() {
-        this.column
+        this.baseQuery
                 .from()
                 .table("person")
                 .leftJoin("address").alias("a").on("person.id", ";DROP")

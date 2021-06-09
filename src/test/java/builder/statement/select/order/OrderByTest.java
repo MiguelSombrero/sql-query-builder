@@ -43,7 +43,7 @@ public class OrderByTest extends DatabaseTestBaseClass {
         List<Row> result = query.execute();
 
         assertRowCount(result, 3);
-        assertRowLength(result, 5);
+        assertColumnCount(result, 5);
     }
 
     @Test
@@ -59,7 +59,7 @@ public class OrderByTest extends DatabaseTestBaseClass {
         List<Row> result = query.execute();
 
         assertRowCount(result, 3);
-        assertRowLength(result, 5);
+        assertColumnCount(result, 5);
     }
 
     @Test
@@ -76,7 +76,7 @@ public class OrderByTest extends DatabaseTestBaseClass {
         List<Row> result = query.execute();
 
         assertRowCount(result, 3);
-        assertRowLength(result, 5);
+        assertColumnCount(result, 5);
     }
 
     @Test
@@ -95,7 +95,7 @@ public class OrderByTest extends DatabaseTestBaseClass {
         List<Row> result = query.execute();
 
         assertRowCount(result, 3);
-        assertRowLength(result, 5);
+        assertColumnCount(result, 5);
     }
 
     @Test
@@ -114,7 +114,7 @@ public class OrderByTest extends DatabaseTestBaseClass {
         List<Row> result = query.execute();
 
         assertRowCount(result, 3);
-        assertRowLength(result, 5);
+        assertColumnCount(result, 5);
     }
 
     @Test(expected = IllegalArgumentException.class)

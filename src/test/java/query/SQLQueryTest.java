@@ -2,8 +2,6 @@ package query;
 
 import org.junit.Before;
 import org.junit.Test;
-import query.dml.DMLQuery;
-import query.dml.InsertQuery;
 import query.dql.Row;
 import query.dql.SelectQuery;
 import testutils.DatabaseConnection;
@@ -40,6 +38,6 @@ public class SQLQueryTest extends DatabaseTestBaseClass {
         List<Row> result = selectQuery.execute();
 
         assertRowCount(result, 1);
-        assertRowLength(result, 5);
+        assertColumnCount(result, 5);
     }
 }

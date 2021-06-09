@@ -37,7 +37,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
         List<Row> result = query.execute();
 
         assertRowCount(result, 3);
-        assertRowLength(result, 2);
+        assertColumnCount(result, 2);
     }
 
     @Test
@@ -56,7 +56,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
         List<Row> result = query.execute();
 
         assertRowCount(result, 2);
-        assertRowLength(result, 3);
+        assertColumnCount(result, 3);
     }
 
     @Test
@@ -75,7 +75,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
         List<Row> result = query.execute();
 
         assertRowCount(result, 3);
-        assertRowLength(result, 3);
+        assertColumnCount(result, 3);
     }
 
     @Test
@@ -92,7 +92,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
         List<Row> result = query.execute();
 
         assertRowCount(result, 3);
-        assertRowLength(result, 5);
+        assertColumnCount(result, 5);
     }
 
     @Test
@@ -109,7 +109,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
         List<Row> result = query.execute();
 
         assertRowCount(result, 1);
-        assertRowLength(result, 1);
+        assertColumnCount(result, 1);
     }
 
     @Test
@@ -126,7 +126,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
         List<Row> result = query.execute();
 
         assertRowCount(result, 1);
-        assertRowLength(result, 1);
+        assertColumnCount(result, 1);
     }
 
     @Test
@@ -143,7 +143,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
         List<Row> result = query.execute();
 
         assertRowCount(result, 1);
-        assertRowLength(result, 1);
+        assertColumnCount(result, 1);
     }
 
     @Test
@@ -160,7 +160,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
         List<Row> result = query.execute();
 
         assertRowCount(result, 1);
-        assertRowLength(result, 1);
+        assertColumnCount(result, 1);
     }
 
     @Test
@@ -177,7 +177,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
         List<Row> result = query.execute();
 
         assertRowCount(result, 1);
-        assertRowLength(result, 1);
+        assertColumnCount(result, 1);
     }
 
     @Test
@@ -194,7 +194,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
         List<Row> result = query.execute();
 
         assertRowCount(result, 1);
-        assertRowLength(result, 1);
+        assertColumnCount(result, 1);
     }
 
     @Test
@@ -215,7 +215,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
         List<Row> result = query.execute();
 
         assertRowCount(result, 3);
-        assertRowLength(result, 3);
+        assertColumnCount(result, 3);
     }
 
     @Test
@@ -237,7 +237,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
         List<Row> result = query.execute();
 
         assertRowCount(result, 3);
-        assertRowLength(result, 4);
+        assertColumnCount(result, 4);
     }
 
     @Test(expected = IllegalArgumentException.class)

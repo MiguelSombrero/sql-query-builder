@@ -17,15 +17,16 @@ import static builder.clause.WhereClauseFactory.valueOf;
 import static org.junit.Assert.assertEquals;
 
 public class LimitTest extends DatabaseTestBaseClass {
-    private Table table;
+    private QueryFactory queryFactory;
+    private Table baseQuery;
 
     @Before
     public void setUpQuery() {
         initializeDatabase();
 
-        QueryFactory queryFactory = new QueryFactory(DatabaseConnection.getDataSource());
+        this.queryFactory = new QueryFactory(DatabaseConnection.getDataSource());
 
-        this.table = queryFactory
+        this.baseQuery = queryFactory
                 .select()
                     .all()
                 .from()
@@ -34,7 +35,7 @@ public class LimitTest extends DatabaseTestBaseClass {
 
     @Test
     public void testLimitFromTable() throws SQLException {
-        SelectQuery query = table
+        SelectQuery query = baseQuery
                 .limit(2)
                 .build();
 
@@ -43,12 +44,12 @@ public class LimitTest extends DatabaseTestBaseClass {
         List<Row> result = query.execute();
 
         assertRowCount(result, 2);
-        assertRowLength(result, 5);
+        assertColumnCount(result, 5);
     }
 
     @Test
     public void testLimitFromTableWhere() throws SQLException {
-        SelectQuery query = table
+        SelectQuery query = baseQuery
                 .where(valueOf("age").greaterThan(18))
                 .limit(2)
                 .build();
@@ -58,27 +59,33 @@ public class LimitTest extends DatabaseTestBaseClass {
         List<Row> result = query.execute();
 
         assertRowCount(result, 2);
-        assertRowLength(result, 5);
+        assertColumnCount(result, 5);
     }
 
     @Test
     public void testLimitJoinTable() throws SQLException {
-        SelectQuery query = table
+        SelectQuery query = queryFactory
+                .select()
+                    .column("person.id").alias("personId")
+                    .column("person.firstname")
+                    .column("course.id").alias("courseId")
+                .from()
+                    .table("person")
                 .leftJoin("course").on("person.id", "course.person_id")
                 .limit(2)
                 .build();
 
-        assertEquals("SELECT * FROM person LEFT JOIN course ON person.id = course.person_id LIMIT 2", query.toString());
+        assertEquals("SELECT person.id AS personId, person.firstname, course.id AS courseId FROM person LEFT JOIN course ON person.id = course.person_id LIMIT 2", query.toString());
 
         List<Row> result = query.execute();
 
         assertRowCount(result, 2);
-        assertRowLength(result, 10);
+        assertColumnCount(result, 3);
     }
 
     @Test
     public void testLimitGroupBy() throws SQLException {
-        SelectQuery query = table
+        SelectQuery query = baseQuery
                 .groupBy()
                     .column("age")
                 .limit(2)
@@ -89,12 +96,12 @@ public class LimitTest extends DatabaseTestBaseClass {
         List<Row> result = query.execute();
 
         assertRowCount(result, 2);
-        assertRowLength(result, 5);
+        assertColumnCount(result, 5);
     }
 
     @Test
     public void testLimitGroupByHaving() throws SQLException {
-        SelectQuery query = table
+        SelectQuery query = baseQuery
                 .groupBy()
                     .column("age")
                 .having(count("age").greaterThan(20))
@@ -110,7 +117,7 @@ public class LimitTest extends DatabaseTestBaseClass {
 
     @Test
     public void testLimitOrderBy() throws SQLException {
-        SelectQuery query = table
+        SelectQuery query = baseQuery
                 .groupBy()
                     .column("age")
                 .orderBy()
@@ -123,12 +130,12 @@ public class LimitTest extends DatabaseTestBaseClass {
         List<Row> result = query.execute();
 
         assertRowCount(result, 2);
-        assertRowLength(result, 5);
+        assertColumnCount(result, 5);
     }
 
     @Test
     public void testLimitOffset() throws SQLException {
-        SelectQuery query = table
+        SelectQuery query = baseQuery
                 .limit(2)
                 .offset(1)
                 .build();
@@ -138,7 +145,7 @@ public class LimitTest extends DatabaseTestBaseClass {
         List<Row> result = query.execute();
 
         assertRowCount(result, 2);
-        assertRowLength(result, 5);
+        assertColumnCount(result, 5);
         assertEquals("Kultanen", result.get(1).getString("lastname"));
     }
 }

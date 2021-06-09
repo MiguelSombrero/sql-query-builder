@@ -46,12 +46,12 @@ public class DatabaseTestBaseClass {
         }
     }
 
-    protected void assertRowCount(List<Row> result, int rows) {
-        assertEquals(rows, result.size());
+    protected void assertRowCount(List<Row> result, int count) {
+        assertEquals(count, result.size());
     }
 
-    protected void assertRowLength(List<Row> result, int length) {
-        assertEquals(length, result.get(0).getColumnCount());
+    protected void assertColumnCount(List<Row> result, int count) {
+        assertEquals(count, result.get(0).getColumnCount());
     }
 
     protected void assertThatQueryReturnsRows(String query, int rows) throws SQLException {
