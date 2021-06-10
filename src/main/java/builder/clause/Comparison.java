@@ -1,9 +1,9 @@
 package builder.clause;
 
 import builder.appender.ListValueAppender;
+import builder.appender.SubQueryAppender;
 import builder.appender.ValueAppender;
 import builder.statement.select.SelectQueryBuilder;
-import builder.appender.SubQueryAppender;
 import query.SQLQuery;
 
 public class Comparison {
@@ -12,14 +12,13 @@ public class Comparison {
     private static final String GREATER_THAN = " > ";
     private static final String LESSER_THAN_OR_EQUAL = " <= ";
     private static final String GREATER_THAN_OR_EQUAL = " >= ";
-
-    private SubQueryAppender subQueryAppender;
+    private static final String ANY = "ANY ";
+    private static final String ALL = "ALL ";
 
     protected SQLQuery query;
 
     public Comparison(SQLQuery query) {
         this.query = query;
-        this.subQueryAppender = new SubQueryAppender(query);
     }
 
     /**
@@ -80,7 +79,8 @@ public class Comparison {
      */
     public Condition equalsAny(SelectQueryBuilder subQuery) {
         query.append(EQUALS);
-        subQueryAppender.appendConditionWithSubQuery("ANY ", subQuery);
+        query.append(ANY);
+        SubQueryAppender.appendSubQuery(query, subQuery);
         return getCondition();
     }
 
@@ -97,7 +97,8 @@ public class Comparison {
      */
     public Condition equalsAll(SelectQueryBuilder subQuery) {
         query.append(EQUALS);
-        subQueryAppender.appendConditionWithSubQuery("ALL ", subQuery);
+        query.append(ALL);
+        SubQueryAppender.appendSubQuery(query, subQuery);
         return getCondition();
     }
 
@@ -159,7 +160,8 @@ public class Comparison {
      */
     public Condition greaterThanAny(SelectQueryBuilder subQuery) {
         query.append(GREATER_THAN);
-        subQueryAppender.appendConditionWithSubQuery("ANY ", subQuery);
+        query.append(ANY);
+        SubQueryAppender.appendSubQuery(query, subQuery);
         return getCondition();
     }
 
@@ -176,7 +178,8 @@ public class Comparison {
      */
     public Condition greaterThanAll(SelectQueryBuilder subQuery) {
         query.append(GREATER_THAN);
-        subQueryAppender.appendConditionWithSubQuery("ALL ", subQuery);
+        query.append(ALL);
+        SubQueryAppender.appendSubQuery(query, subQuery);
         return getCondition();
     }
 
@@ -238,7 +241,8 @@ public class Comparison {
      */
     public Condition greaterThanOrEqualAny(SelectQueryBuilder subQuery) {
         query.append(GREATER_THAN_OR_EQUAL);
-        subQueryAppender.appendConditionWithSubQuery("ANY ", subQuery);
+        query.append(ANY);
+        SubQueryAppender.appendSubQuery(query, subQuery);
         return getCondition();
     }
 
@@ -255,7 +259,8 @@ public class Comparison {
      */
     public Condition greaterThanOrEqualAll(SelectQueryBuilder subQuery) {
         query.append(GREATER_THAN_OR_EQUAL);
-        subQueryAppender.appendConditionWithSubQuery("ALL ", subQuery);
+        query.append(ALL);
+        SubQueryAppender.appendSubQuery(query, subQuery);
         return getCondition();
     }
 
@@ -317,7 +322,8 @@ public class Comparison {
      */
     public Condition lesserThanAny(SelectQueryBuilder subQuery) {
         query.append(LESSER_THAN);
-        subQueryAppender.appendConditionWithSubQuery("ANY ", subQuery);
+        query.append(ANY);
+        SubQueryAppender.appendSubQuery(query, subQuery);
         return getCondition();
     }
 
@@ -334,7 +340,8 @@ public class Comparison {
      */
     public Condition lesserThanAll(SelectQueryBuilder subQuery) {
         query.append(LESSER_THAN);
-        subQueryAppender.appendConditionWithSubQuery("ALL ", subQuery);
+        query.append(ALL);
+        SubQueryAppender.appendSubQuery(query, subQuery);
         return getCondition();
     }
 
@@ -396,7 +403,8 @@ public class Comparison {
      */
     public Condition lesserThanOrEqualAny(SelectQueryBuilder subQuery) {
         query.append(LESSER_THAN_OR_EQUAL);
-        subQueryAppender.appendConditionWithSubQuery("ANY ", subQuery);
+        query.append(ANY);
+        SubQueryAppender.appendSubQuery(query, subQuery);
         return getCondition();
     }
 
@@ -413,7 +421,8 @@ public class Comparison {
      */
     public Condition lesserThanOrEqualAll(SelectQueryBuilder subQuery) {
         query.append(LESSER_THAN_OR_EQUAL);
-        subQueryAppender.appendConditionWithSubQuery("ALL ", subQuery);
+        query.append(ALL);
+        SubQueryAppender.appendSubQuery(query, subQuery);
         return getCondition();
     }
 
@@ -606,7 +615,8 @@ public class Comparison {
      * or terminate query building
      */
     public Condition isInSub(SelectQueryBuilder subQuery) {
-        subQueryAppender.appendConditionWithSubQuery(" IN ", subQuery);
+        query.append(" IN ");
+        SubQueryAppender.appendSubQuery(query, subQuery);
         return getCondition();
     }
 

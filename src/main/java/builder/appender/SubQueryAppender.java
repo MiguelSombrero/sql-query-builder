@@ -5,14 +5,7 @@ import query.SQLQuery;
 
 public class SubQueryAppender {
 
-    private SQLQuery query;
-
-    public SubQueryAppender(SQLQuery query) {
-        this.query = query;
-    }
-
-    public void appendConditionWithSubQuery(String condition, SelectQueryBuilder subQuery) {
-        query.append(condition);
+    public static void appendSubQuery(SQLQuery query, SelectQueryBuilder subQuery) {
         query.append("(");
         query.mergeSubQuery(subQuery.build());
         query.append(")");

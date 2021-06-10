@@ -6,13 +6,12 @@ import org.junit.Before;
 import query.SQLQuery;
 import builder.statement.select.table.Table;
 import org.junit.Test;
-import builder.appender.SubQueryAppender;
 
 import java.sql.SQLException;
 
 import static org.junit.Assert.assertEquals;
 
-public class SubSQLQueryAppenderTest {
+public class SubQueryAppenderTest {
     private QueryFactory queryFactory;
 
     @Before
@@ -23,10 +22,9 @@ public class SubSQLQueryAppenderTest {
     @Test
     public void testAppendSubQuery() {
         SQLQuery query = new SQLQuery(new StringBuilder());
-        SubQueryAppender subQueryAppender = new SubQueryAppender(query);
         Table table = queryFactory.select().all().from().table("person");
-        subQueryAppender.appendConditionWithSubQuery("ALL ", table);
-        assertEquals("ALL (SELECT * FROM person)", query.toString());
+        SubQueryAppender.appendSubQuery(query, table);
+        assertEquals("(SELECT * FROM person)", query.toString());
     }
 
 }
