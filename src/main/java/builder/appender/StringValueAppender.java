@@ -1,5 +1,6 @@
 package builder.appender;
 
+import database.column.StringColumnValue;
 import query.Query;
 import validation.ValidatorFactory;
 import validation.Validator;
@@ -27,7 +28,8 @@ public class StringValueAppender {
 
     public void appendStringValue(String value) {
         query.append("?");
-        query.addParam(value);
+        StringColumnValue param = new StringColumnValue(value);
+        query.addParam(param);
     }
 
     public void validate(String value) {

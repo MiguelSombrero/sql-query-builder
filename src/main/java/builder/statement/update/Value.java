@@ -1,15 +1,14 @@
 package builder.statement.update;
 
-import builder.appender.StringValueAppender;
+import builder.appender.ValueAppender;
 import query.dml.UpdateQuery;
 
 public class Value {
-    private StringValueAppender stringValueAppender;
+    private static ValueAppender valueAppender;
     private UpdateQuery query;
 
     public Value(UpdateQuery query) {
         this.query = query;
-        this.stringValueAppender = new StringValueAppender(query);
     }
 
     /**
@@ -23,7 +22,7 @@ public class Value {
      * clause or terminate query building
      */
     public Column value(String value) {
-        stringValueAppender.validateAndAppendStringValue(value);
+        valueAppender.validateAndAppendString(query, value);
         return new Column(query);
     }
 

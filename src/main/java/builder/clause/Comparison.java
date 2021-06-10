@@ -1,6 +1,7 @@
 package builder.clause;
 
-import builder.appender.NumberAppender;
+import builder.appender.ListValueAppender;
+import builder.appender.ValueAppender;
 import builder.statement.select.SelectQueryBuilder;
 import builder.appender.StringValueAppender;
 import builder.appender.SubQueryAppender;
@@ -15,7 +16,6 @@ public class Comparison {
 
     private StringValueAppender stringValueAppender;
     private SubQueryAppender subQueryAppender;
-    private NumberAppender numberAppender;
 
     protected SQLQuery query;
 
@@ -23,7 +23,6 @@ public class Comparison {
         this.query = query;
         this.stringValueAppender = new StringValueAppender(query);
         this.subQueryAppender = new SubQueryAppender(query);
-        this.numberAppender = new NumberAppender(query);
     }
 
     /**
@@ -37,7 +36,7 @@ public class Comparison {
      */
     public Condition equals(String value) {
         query.append(EQUALS);
-        stringValueAppender.validateAndAppendStringValue(value);
+        ValueAppender.validateAndAppendString(query, value);
         return getCondition();
     }
 
@@ -116,7 +115,7 @@ public class Comparison {
      */
     public Condition greaterThan(String value) {
         query.append(GREATER_THAN);
-        stringValueAppender.validateAndAppendStringValue(value);
+        ValueAppender.validateAndAppendString(query, value);
         return getCondition();
     }
 
@@ -195,7 +194,7 @@ public class Comparison {
      */
     public Condition greaterThanOrEqual(String value) {
         query.append(GREATER_THAN_OR_EQUAL);
-        stringValueAppender.validateAndAppendStringValue(value);
+        ValueAppender.validateAndAppendString(query, value);
         return getCondition();
     }
 
@@ -274,7 +273,7 @@ public class Comparison {
      */
     public Condition lesserThan(String value) {
         query.append(LESSER_THAN);
-        stringValueAppender.validateAndAppendStringValue(value);
+        ValueAppender.validateAndAppendString(query, value);
         return getCondition();
     }
 
@@ -353,7 +352,7 @@ public class Comparison {
      */
     public Condition lesserThanOrEqual(String value) {
         query.append(LESSER_THAN_OR_EQUAL);
-        stringValueAppender.validateAndAppendStringValue(value);
+        ValueAppender.validateAndAppendString(query, value);
         return getCondition();
     }
 
@@ -486,9 +485,9 @@ public class Comparison {
      */
     public Condition isBetween(String lower, String higher) {
         query.append(" BETWEEN ");
-        stringValueAppender.validateAndAppendStringValue(lower);
+        ValueAppender.validateAndAppendString(query, lower);
         query.append(" AND ");
-        stringValueAppender.validateAndAppendStringValue(higher);
+        ValueAppender.validateAndAppendString(query, higher);
         return getCondition();
     }
 
@@ -582,7 +581,7 @@ public class Comparison {
      */
     public Condition isIn(int ...listOfValues) {
         query.append(" IN ");
-        numberAppender.appendListOfValues(listOfValues);
+        ListValueAppender.appendListOfValues(query, listOfValues);
         return getCondition();
     }
 
@@ -597,7 +596,7 @@ public class Comparison {
      */
     public Condition isIn(double ...listOfValues) {
         query.append(" IN ");
-        numberAppender.appendListOfValues(listOfValues);
+        ListValueAppender.appendListOfValues(query, listOfValues);
         return getCondition();
     }
 

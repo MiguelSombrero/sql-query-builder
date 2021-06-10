@@ -1,7 +1,7 @@
 package builder.statement.create.table.column;
 
 import query.ddl.CreateQuery;
-import query.dql.Row;
+import database.row.Row;
 import query.QueryFactory;
 import query.dql.DQLQuery;
 import testutils.DatabaseConnection;

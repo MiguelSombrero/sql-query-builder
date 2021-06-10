@@ -1,6 +1,7 @@
 package query.dql;
 
 import builder.clause.WhereClauseFactory;
+import database.row.Row;
 import org.junit.Before;
 import org.junit.Test;
 import query.QueryFactory;
@@ -9,8 +10,6 @@ import testutils.DatabaseTestBaseClass;
 
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
-import java.sql.Blob;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;

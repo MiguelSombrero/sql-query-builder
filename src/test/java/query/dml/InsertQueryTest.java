@@ -1,5 +1,6 @@
 package query.dml;
 
+import database.column.StringColumnValue;
 import org.junit.Before;
 import org.junit.Test;
 import testutils.DatabaseConnection;
@@ -25,8 +26,10 @@ public class InsertQueryTest extends DatabaseTestBaseClass {
         StringBuilder queryString = new StringBuilder("INSERT INTO person (firstname, lastname) VALUES (?, ?)");
         InsertQuery query = new InsertQuery(queryString, dataSource);
 
-        query.addParam("Miika");
-        query.addParam("Kukkonen");
+        StringColumnValue param1 = new StringColumnValue("Miika");
+        StringColumnValue param2 = new StringColumnValue("Kukkonen");
+        query.addParam(param1);
+        query.addParam(param2);
 
         assertEquals("INSERT INTO person (firstname, lastname) VALUES ('Miika', 'Kukkonen')", query.toString());
 

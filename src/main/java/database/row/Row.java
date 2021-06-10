@@ -1,4 +1,4 @@
-package query.dql;
+package database.row;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

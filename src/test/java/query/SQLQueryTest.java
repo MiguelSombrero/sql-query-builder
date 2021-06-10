@@ -1,8 +1,9 @@
 package query;
 
+import database.column.StringColumnValue;
 import org.junit.Before;
 import org.junit.Test;
-import query.dql.Row;
+import database.row.Row;
 import query.dql.SelectQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
@@ -23,13 +24,50 @@ public class SQLQueryTest extends DatabaseTestBaseClass {
     }
 
     @Test
+    public void testAppendString() {
+        SQLQuery query = new SQLQuery(new StringBuilder());
+        query.append("miika");
+        query.append(" ");
+        query.append("Somero");
+        assertEquals("miika Somero", query.toString());
+    }
+
+    @Test
+    public void testAppendInteger() {
+        SQLQuery query = new SQLQuery(new StringBuilder());
+        query.append(0);
+        query.append(1);
+        query.append(2);
+        assertEquals("012", query.toString());
+    }
+
+    @Test
+    public void testAppendDouble() {
+        SQLQuery query = new SQLQuery(new StringBuilder());
+        query.append(0.0);
+        query.append(1.1);
+        query.append(2.2);
+        assertEquals("0.01.12.2", query.toString());
+    }
+
+    @Test
+    public void testInsert() {
+        SQLQuery query = new SQLQuery(new StringBuilder());
+        query.insert(0, "somero");
+        query.insert(0, "miika ");
+        query.insert(6, "testaaja ");
+        assertEquals("miika testaaja somero", query.toString());
+    }
+
+    @Test
     public void testMergeSubQuery() throws SQLException {
         StringBuilder queryString = new StringBuilder("SELECT * FROM person WHERE ");
         StringBuilder subQueryString = new StringBuilder("firstname = ?");
 
         SelectQuery selectQuery = new SelectQuery(queryString, dataSource);
         SQLQuery subQuery = new SQLQuery(subQueryString);
-        subQuery.addParam("Miika");
+        StringColumnValue param = new StringColumnValue("Miika");
+        subQuery.addParam(param);
 
         selectQuery.mergeSubQuery(subQuery);
 

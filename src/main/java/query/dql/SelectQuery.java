@@ -1,5 +1,6 @@
 package query.dql;
 
+import database.row.Row;
 import org.apache.commons.dbutils.QueryRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

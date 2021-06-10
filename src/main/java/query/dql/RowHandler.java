@@ -1,5 +1,6 @@
 package query.dql;
 
+import database.row.Row;
 import org.apache.commons.dbutils.handlers.AbstractListHandler;
 
 import java.sql.ResultSet;
