@@ -5,13 +5,10 @@ import builder.appender.StringAppender;
 import query.ddl.CreateQuery;
 
 public class IndexedColumn {
-    private StringAppender stringAppender;
-
     private CreateQuery query;
 
     public IndexedColumn(CreateQuery query) {
         this.query = query;
-        this.stringAppender = new StringAppender(query);
     }
 
     /**
@@ -25,7 +22,7 @@ public class IndexedColumn {
      */
     public TerminalCreateOperation columns(String ...listOfColumns) {
         query.append(" ");
-        stringAppender.validateAndAppendList(listOfColumns);
+        StringAppender.validateAndAppendList(query, listOfColumns);
         return new TerminalCreateOperation(query);
     }
 }

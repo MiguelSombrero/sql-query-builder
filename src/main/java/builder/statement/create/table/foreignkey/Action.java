@@ -3,7 +3,6 @@ package builder.statement.create.table.foreignkey;
 import query.ddl.CreateQuery;
 
 public class Action {
-
     private CreateQuery query;
 
     public Action(CreateQuery query) {

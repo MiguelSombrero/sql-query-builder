@@ -4,13 +4,11 @@ import builder.appender.StringAppender;
 import query.dql.SelectQuery;
 
 public class AliasedOn {
-    protected StringAppender stringAppender;
 
     protected SelectQuery query;
 
     public AliasedOn(SelectQuery query) {
         this.query = query;
-        this.stringAppender = new StringAppender(query);
     }
 
     /**
@@ -26,9 +24,9 @@ public class AliasedOn {
      */
     public JoinTable on(String column, String joinColumn) {
         query.append(" ON ");
-        stringAppender.validateAndAppend(column);
+        StringAppender.validateAndAppend(query, column);
         query.append(" = ");
-        stringAppender.validateAndAppend(joinColumn);
+        StringAppender.validateAndAppend(query, joinColumn);
         return new JoinTable(query);
     }
 }

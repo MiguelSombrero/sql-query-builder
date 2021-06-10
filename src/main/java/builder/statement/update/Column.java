@@ -5,11 +5,9 @@ import builder.appender.StringAppender;
 import query.dml.UpdateQuery;
 
 public class Column extends TerminalUpdateOperation {
-    private StringAppender stringAppender;
 
     public Column(UpdateQuery query) {
         super(query);
-        this.stringAppender = new StringAppender(query);
     }
 
     /**
@@ -23,7 +21,7 @@ public class Column extends TerminalUpdateOperation {
      */
     public Value column(String column) {
         query.append(", ");
-        stringAppender.validateAndAppend(column);
+        StringAppender.validateAndAppend(query, column);
         query.append(" = ");
         return new Value(query);
     }

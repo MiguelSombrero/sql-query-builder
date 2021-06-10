@@ -5,13 +5,10 @@ import builder.appender.StringAppender;
 import query.dql.SelectQuery;
 
 public class From {
-    protected StringAppender stringAppender;
-
     private SelectQuery query;
 
     public From(SelectQuery query) {
         this.query = query;
-        this.stringAppender = new StringAppender(query);
     }
 
     /**
@@ -25,7 +22,7 @@ public class From {
      * to WHERE, JOIN, GROUP BY etc. statements
      */
     public Table table(String table) {
-        stringAppender.validateAndAppend(table);
+        StringAppender.validateAndAppend(query, table);
         return new Table(query);
     }
 

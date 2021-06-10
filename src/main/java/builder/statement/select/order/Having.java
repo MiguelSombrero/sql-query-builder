@@ -5,11 +5,9 @@ import builder.appender.StringAppender;
 import query.dql.SelectQuery;
 
 public class Having extends Orderer {
-    private StringAppender stringAppender;
 
     public Having(SelectQuery query) {
         super(query);
-        this.stringAppender = new StringAppender(query);
     }
 
     /**
@@ -23,7 +21,7 @@ public class Having extends Orderer {
      */
     public Having column(String column) {
         query.append(", ");
-        stringAppender.validateAndAppend(column);
+        StringAppender.validateAndAppend(query, column);
         return this;
     }
 

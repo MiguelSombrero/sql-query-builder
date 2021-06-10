@@ -2,13 +2,11 @@ package builder.appender;
 
 import query.Query;
 
-public class AggregateFunction {
-    private StringAppender stringAppender;
+public class AggregateFunctionAppender {
     private Query query;
 
-    public AggregateFunction(Query query) {
+    public AggregateFunctionAppender(Query query) {
         this.query = query;
-        this.stringAppender = new StringAppender(query);
     }
 
     /**
@@ -68,7 +66,7 @@ public class AggregateFunction {
     private void applyAggregate(String function, String toColumn) {
         query.append(function);
         query.append("(");
-        stringAppender.validateAndAppend(toColumn);
+        StringAppender.validateAndAppend(query, toColumn);
         query.append(")");
     }
 

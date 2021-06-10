@@ -4,11 +4,9 @@ import builder.appender.StringAppender;
 import query.dql.SelectQuery;
 
 public class OrderBy extends Limit {
-    private StringAppender stringAppender;
 
     public OrderBy(SelectQuery query) {
         super(query);
-        this.stringAppender = new StringAppender(query);
     }
 
     /**
@@ -22,7 +20,7 @@ public class OrderBy extends Limit {
      */
     public Order column(String column) {
         query.append(", ");
-        stringAppender.validateAndAppend(column);
+        StringAppender.validateAndAppend(query, column);
         return new Order(query);
     }
 }

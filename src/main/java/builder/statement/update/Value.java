@@ -4,7 +4,6 @@ import builder.appender.ValueAppender;
 import query.dml.UpdateQuery;
 
 public class Value {
-    private static ValueAppender valueAppender;
     private UpdateQuery query;
 
     public Value(UpdateQuery query) {
@@ -22,7 +21,7 @@ public class Value {
      * clause or terminate query building
      */
     public Column value(String value) {
-        valueAppender.appendStringParam(query, value);
+        ValueAppender.appendStringParam(query, value);
         return new Column(query);
     }
 

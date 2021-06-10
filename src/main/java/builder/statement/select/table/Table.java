@@ -1,5 +1,6 @@
 package builder.statement.select.table;
 
+import builder.appender.StringAppender;
 import query.dql.SelectQuery;
 
 public class Table extends AliasedTable {
@@ -20,7 +21,7 @@ public class Table extends AliasedTable {
      */
     public AliasedTable alias(String alias) {
         query.append(" AS ");
-        stringAppender.validateAndAppend(alias);
+        StringAppender.validateAndAppend(query, alias);
         return new AliasedTable(query);
     }
 }

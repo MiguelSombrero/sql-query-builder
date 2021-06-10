@@ -4,13 +4,10 @@ import builder.appender.StringAppender;
 import query.ddl.CreateQuery;
 
 public class FirstColumn {
-    private StringAppender stringAppender;
-
     private CreateQuery query;
 
     public FirstColumn(CreateQuery query) {
         this.query = query;
-        this.stringAppender = new StringAppender(query);
     }
 
     /**
@@ -24,7 +21,7 @@ public class FirstColumn {
      * append column type to selected column
      */
     public ColumnType column(String column) {
-        stringAppender.validateAndAppend(column);
+        StringAppender.validateAndAppend(query, column);
         return new ColumnType(query);
     }
 }

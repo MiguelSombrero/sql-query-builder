@@ -4,13 +4,10 @@ import builder.appender.StringAppender;
 import query.ddl.DropQuery;
 
 public class Drop {
-    private StringAppender stringAppender;
-
     private DropQuery query;
 
     public Drop(DropQuery query) {
         this.query = query;
-        this.stringAppender = new StringAppender(query);
     }
 
     /**
@@ -24,7 +21,7 @@ public class Drop {
      */
     public TerminalDropOperation table(String table) {
         query.append("TABLE ");
-        stringAppender.validateAndAppend(table);
+        StringAppender.validateAndAppend(query, table);
         return new TerminalDropOperation(query);
     }
 
@@ -39,7 +36,7 @@ public class Drop {
      */
     public TerminalDropOperation database(String database) {
         query.append("DATABASE ");
-        stringAppender.validateAndAppend(database);
+        StringAppender.validateAndAppend(query, database);
         return new TerminalDropOperation(query);
     }
 }

@@ -6,11 +6,9 @@ import builder.appender.StringAppender;
 import query.dql.SelectQuery;
 
 public class JoinTable extends Grouper {
-    protected StringAppender stringAppender;
 
     public JoinTable(SelectQuery query) {
         super(query);
-        this.stringAppender = new StringAppender(query);
     }
 
     /**
@@ -74,7 +72,7 @@ public class JoinTable extends Grouper {
     }
 
     private On join(String table) {
-        stringAppender.validateAndAppend(table);
+        StringAppender.validateAndAppend(query, table);
         return new On(query);
     }
 }

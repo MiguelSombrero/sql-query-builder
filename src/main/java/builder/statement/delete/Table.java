@@ -4,13 +4,10 @@ import builder.appender.StringAppender;
 import query.dml.DeleteQuery;
 
 public class Table {
-    private StringAppender stringAppender;
-
     private DeleteQuery query;
 
     public Table(DeleteQuery query) {
         this.query = query;
-        this.stringAppender = new StringAppender(query);
     }
 
     /**
@@ -24,7 +21,7 @@ public class Table {
      * query building
      */
     public Where table(String table) {
-        stringAppender.validateAndAppend(table);
+        StringAppender.validateAndAppend(query, table);
         return new Where(query);
     }
 }

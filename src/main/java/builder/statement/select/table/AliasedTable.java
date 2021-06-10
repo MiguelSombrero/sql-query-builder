@@ -1,5 +1,6 @@
 package builder.statement.select.table;
 
+import builder.appender.StringAppender;
 import query.dql.SelectQuery;
 
 public class AliasedTable extends JoinTable {
@@ -20,7 +21,7 @@ public class AliasedTable extends JoinTable {
      */
     public Table table(String table) {
         query.append(", ");
-        stringAppender.validateAndAppend(table);
+        StringAppender.validateAndAppend(query, table);
         return new Table(query);
     }
 }

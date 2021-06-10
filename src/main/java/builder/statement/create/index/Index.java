@@ -4,13 +4,10 @@ import builder.appender.StringAppender;
 import query.ddl.CreateQuery;
 
 public class Index {
-    private StringAppender stringAppender;
-
     private CreateQuery query;
 
     public Index(CreateQuery query) {
         this.query = query;
-        this.stringAppender = new StringAppender(query);
     }
 
     /**
@@ -25,7 +22,7 @@ public class Index {
      */
     public IndexedColumn on(String table) {
         query.append(" ON ");
-        stringAppender.validateAndAppend(table);
+        StringAppender.validateAndAppend(query, table);
         return new IndexedColumn(query);
     }
 }

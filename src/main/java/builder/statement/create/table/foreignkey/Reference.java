@@ -4,13 +4,10 @@ import builder.appender.StringAppender;
 import query.ddl.CreateQuery;
 
 public class Reference {
-    private StringAppender stringAppender;
-
     private CreateQuery query;
 
     public Reference(CreateQuery query) {
         this.query = query;
-        this.stringAppender = new StringAppender(query);
     }
 
     /**
@@ -26,9 +23,9 @@ public class Reference {
      */
     public OnAction references(String column, String ofTable) {
         query.append(" REFERENCES ");
-        stringAppender.validateAndAppend(ofTable);
+        StringAppender.validateAndAppend(query, ofTable);
         query.append("(");
-        stringAppender.validateAndAppend(column);
+        StringAppender.validateAndAppend(query, column);
         query.append(")");
         return new OnAction(query);
     }

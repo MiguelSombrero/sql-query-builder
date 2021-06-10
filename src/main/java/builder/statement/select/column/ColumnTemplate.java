@@ -1,18 +1,16 @@
 package builder.statement.select.column;
 
-import builder.appender.AggregateFunction;
+import builder.appender.AggregateFunctionAppender;
 import builder.appender.StringAppender;
 import query.dql.SelectQuery;
 
 public abstract class ColumnTemplate {
-    private StringAppender stringAppender;
-    private AggregateFunction aggregateFunction;
+    private AggregateFunctionAppender aggregateFunctionAppender;
     protected SelectQuery query;
 
     public ColumnTemplate(SelectQuery query) {
         this.query = query;
-        this.stringAppender = new StringAppender(query);
-        this.aggregateFunction = new AggregateFunction(query);
+        this.aggregateFunctionAppender = new AggregateFunctionAppender(query);
     }
 
     public ToFrom all() {
@@ -31,7 +29,7 @@ public abstract class ColumnTemplate {
      */
     public Column column(String column) {
         addCommaAfterFirstValue();
-        stringAppender.validateAndAppend(column);
+        StringAppender.validateAndAppend(query, column);
         return new Column(query);
     }
 
@@ -46,13 +44,13 @@ public abstract class ColumnTemplate {
      */
     public Column count(String column) {
         addCommaAfterFirstValue();
-        aggregateFunction.count(column);
+        aggregateFunctionAppender.count(column);
         return new Column(query);
     }
 
     public Column countAll() {
         addCommaAfterFirstValue();
-        aggregateFunction.countAll();
+        aggregateFunctionAppender.countAll();
         return new Column(query);
     }
 
@@ -67,7 +65,7 @@ public abstract class ColumnTemplate {
      */
     public Column min(String column) {
         addCommaAfterFirstValue();
-        aggregateFunction.min(column);
+        aggregateFunctionAppender.min(column);
         return new Column(query);
     }
 
@@ -82,7 +80,7 @@ public abstract class ColumnTemplate {
      */
     public Column max(String column) {
         addCommaAfterFirstValue();
-        aggregateFunction.max(column);
+        aggregateFunctionAppender.max(column);
         return new Column(query);
     }
 
@@ -97,7 +95,7 @@ public abstract class ColumnTemplate {
      */
     public Column avg(String column) {
         addCommaAfterFirstValue();
-        aggregateFunction.avg(column);
+        aggregateFunctionAppender.avg(column);
         return new Column(query);
     }
 
@@ -112,7 +110,7 @@ public abstract class ColumnTemplate {
      */
     public Column sum(String column) {
         addCommaAfterFirstValue();
-        aggregateFunction.sum(column);
+        aggregateFunctionAppender.sum(column);
         return new Column(query);
     }
 

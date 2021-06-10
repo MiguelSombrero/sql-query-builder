@@ -4,7 +4,6 @@ import builder.appender.ValueAppender;
 import query.dml.InsertQuery;
 
 public abstract class ValueTemplate extends TerminalClosingInsertOperation {
-    private static ValueAppender valueAppender;
 
     public ValueTemplate(InsertQuery query) {
         super(query);
@@ -22,7 +21,7 @@ public abstract class ValueTemplate extends TerminalClosingInsertOperation {
      */
     public Value setString(String value) {
         addCommaAfterFirstValue();
-        valueAppender.appendStringParam(query, value);
+        ValueAppender.appendStringParam(query, value);
         return new Value(query);
     }
 
@@ -38,7 +37,7 @@ public abstract class ValueTemplate extends TerminalClosingInsertOperation {
      */
     public Value setInt(int value) {
         addCommaAfterFirstValue();
-        valueAppender.appendIntParam(query, value);
+        ValueAppender.appendIntParam(query, value);
         return new Value(query);
     }
 

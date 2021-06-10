@@ -6,13 +6,10 @@ import builder.appender.StringAppender;
 import query.ddl.CreateQuery;
 
 public class Create {
-    private StringAppender stringAppender;
-
     private CreateQuery query;
 
     public Create(CreateQuery query) {
         this.query = query;
-        this.stringAppender = new StringAppender(query);
     }
 
     /**
@@ -27,7 +24,7 @@ public class Create {
      */
     public FirstColumn table(String name) {
         query.append("TABLE ");
-        stringAppender.validateAndAppend(name);
+        StringAppender.validateAndAppend(query, name);
         query.append(" (");
         return new FirstColumn(query);
     }
@@ -43,7 +40,7 @@ public class Create {
      */
     public TerminalCreateOperation database(String name) {
         query.append("DATABASE ");
-        stringAppender.validateAndAppend(name);
+        StringAppender.validateAndAppend(query, name);
         return new TerminalCreateOperation(query);
     }
 
@@ -58,7 +55,7 @@ public class Create {
      */
     public Index index(String name) {
         query.append("INDEX ");
-        stringAppender.validateAndAppend(name);
+        StringAppender.validateAndAppend(query, name);
         return new Index(query);
     }
 }

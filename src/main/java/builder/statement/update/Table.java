@@ -4,13 +4,10 @@ import builder.appender.StringAppender;
 import query.dml.UpdateQuery;
 
 public class Table {
-    private StringAppender stringAppender;
-
     private UpdateQuery query;
 
     public Table(UpdateQuery query) {
         this.query = query;
-        this.stringAppender = new StringAppender(query);
     }
 
     /**
@@ -23,7 +20,7 @@ public class Table {
      * columns into UPDATE statement
      */
     public FirstColumn table(String table) {
-        stringAppender.validateAndAppend(table);
+        StringAppender.validateAndAppend(query, table);
         query.append(" SET ");
         return new FirstColumn(query);
     }

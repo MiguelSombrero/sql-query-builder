@@ -1,5 +1,6 @@
 package builder.statement.create.table.column;
 
+import builder.appender.StringAppender;
 import builder.statement.create.table.foreignkey.ForeignKey;
 import query.ddl.CreateQuery;
 
@@ -21,7 +22,7 @@ public class Column extends ForeignKey {
      */
     public ColumnType column(String column) {
         query.append(", ");
-        stringAppender.validateAndAppend(column);
+        StringAppender.validateAndAppend(query, column);
         return new ColumnType(query);
     }
 }

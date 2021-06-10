@@ -4,11 +4,9 @@ import builder.appender.StringAppender;
 import query.dml.InsertQuery;
 
 public class Insert extends Column {
-    private StringAppender stringAppender;
 
     public Insert(InsertQuery query) {
         super(query);
-        this.stringAppender = new StringAppender(query);
     }
 
     /**
@@ -21,7 +19,7 @@ public class Insert extends Column {
      * VALUES or SELECT sub-query to query
      */
     public Column columns(String ...listOfColumns) {
-        stringAppender.validateAndAppendList(listOfColumns);
+        StringAppender.validateAndAppendList(query, listOfColumns);
         query.append(" ");
         return new Column(query);
     }

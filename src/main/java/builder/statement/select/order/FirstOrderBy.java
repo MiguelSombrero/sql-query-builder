@@ -4,11 +4,9 @@ import builder.appender.StringAppender;
 import query.dql.SelectQuery;
 
 public class FirstOrderBy extends Limit {
-    private StringAppender stringAppender;
 
     public FirstOrderBy(SelectQuery query) {
         super(query);
-        this.stringAppender = new StringAppender(query);
     }
 
     /**
@@ -21,7 +19,7 @@ public class FirstOrderBy extends Limit {
      * or append ASC / DESC to current column
      */
     public Order column(String column) {
-        stringAppender.validateAndAppend(column);
+        StringAppender.validateAndAppend(query, column);
         return new Order(query);
     }
 }

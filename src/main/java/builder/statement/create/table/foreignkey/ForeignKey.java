@@ -5,11 +5,9 @@ import builder.appender.StringAppender;
 import query.ddl.CreateQuery;
 
 public class ForeignKey extends TerminalClosingCreateOperation {
-    protected StringAppender stringAppender;
 
     public ForeignKey(CreateQuery query) {
         super(query);
-        this.stringAppender = new StringAppender(query);
     }
 
     /**
@@ -23,7 +21,7 @@ public class ForeignKey extends TerminalClosingCreateOperation {
      */
     public Reference foreignKey(String column) {
         query.append(", FOREIGN KEY (");
-        stringAppender.validateAndAppend(column);
+        StringAppender.validateAndAppend(query, column);
         query.append(")");
         return new Reference(query);
     }

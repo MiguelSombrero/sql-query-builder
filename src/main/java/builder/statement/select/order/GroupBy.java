@@ -4,13 +4,10 @@ import builder.appender.StringAppender;
 import query.dql.SelectQuery;
 
 public class GroupBy {
-    private StringAppender stringAppender;
-
     private SelectQuery query;
 
     public GroupBy(SelectQuery query) {
         this.query = query;
-        this.stringAppender = new StringAppender(query);
     }
 
     /**
@@ -23,7 +20,7 @@ public class GroupBy {
      * or defining HAVING condition to GROUP BY clause
      */
     public Having column(String column) {
-        stringAppender.validateAndAppend(column);
+        StringAppender.validateAndAppend(query, column);
         return new Having(query);
     }
 }

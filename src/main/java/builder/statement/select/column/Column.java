@@ -11,11 +11,9 @@ import query.dql.SelectQuery;
  * column in a list of columns
  */
 public class Column extends AliasedColumn {
-    private StringAppender stringAppender;
 
     public Column(SelectQuery query) {
         super(query);
-        this.stringAppender = new StringAppender(query);
     }
 
     /**
@@ -29,7 +27,7 @@ public class Column extends AliasedColumn {
      */
     public AliasedColumn alias(String as) {
         query.append(" AS ");
-        stringAppender.validateAndAppend(as);
+        StringAppender.validateAndAppend(query, as);
         return new AliasedColumn(query);
     }
 }
