@@ -41,6 +41,21 @@ public class StringValuePatternValidatorTest {
     }
 
     @Test
+    public void testDoesAcceptPercentInFront() {
+        assertTrue(stringValuePatternValidator.validate("%erson_id"));
+    }
+
+    @Test
+    public void testDoesAcceptPercentInEnd() {
+        assertTrue(stringValuePatternValidator.validate("person_i%"));
+    }
+
+    @Test
+    public void testDoesAcceptPercentInFrontAndEnd() {
+        assertTrue(stringValuePatternValidator.validate("%erson_i%"));
+    }
+
+    @Test
     public void testDoesNotAcceptDotInStart(){
         assertFalse(stringValuePatternValidator.validate(".id"));
     }

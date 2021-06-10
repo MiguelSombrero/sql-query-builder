@@ -22,7 +22,7 @@ public class Value {
      * clause or terminate query building
      */
     public Column value(String value) {
-        valueAppender.validateAndAppendString(query, value);
+        valueAppender.appendStringParam(query, value);
         return new Column(query);
     }
 

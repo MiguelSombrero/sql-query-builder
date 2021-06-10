@@ -1,43 +1,40 @@
 package builder.appender;
 
 import query.Query;
-import validation.Validator;
-import validation.ValidatorFactory;
 
 public class ListValueAppender {
-    private static Validator validator = ValidatorFactory.exceptionThrowingStringValueValidator();
 
-    public static void appendListOfValues(Query query, int ...listOfValue) {
+    public static void appendListOfStringParams(Query query, String ...listOfValues) {
         query.append("(");
-        query.append(listOfValue[0]);
-
-        for (int i = 1; i < listOfValue.length; i++) {
-            query.append(", ");
-            query.append(listOfValue[i]);
-        }
-
-        query.append(")");
-    }
-
-    public static void appendListOfValues(Query query, double ...listOfValues) {
-        query.append("(");
-        query.append(listOfValues[0]);
+        ValueAppender.appendStringParam(query, listOfValues[0]);
 
         for (int i = 1; i < listOfValues.length; i++) {
             query.append(", ");
-            query.append(listOfValues[i]);
+            ValueAppender.appendStringParam(query, listOfValues[i]);
         }
 
         query.append(")");
     }
 
-    private static void appendList(Query query, String ...list) {
+    public static void appendListOfIntParams(Query query, int ...listOfValues) {
         query.append("(");
-        query.append(list[0]);
+        ValueAppender.appendIntParam(query, listOfValues[0]);
 
-        for (int i = 1; i < list.length; i++) {
+        for (int i = 1; i < listOfValues.length; i++) {
             query.append(", ");
-            query.append(list[i]);
+            ValueAppender.appendIntParam(query, listOfValues[i]);
+        }
+
+        query.append(")");
+    }
+
+    public static void appendListOfDoubleParams(Query query, double ...listOfValues) {
+        query.append("(");
+        ValueAppender.appendDoubleParam(query, listOfValues[0]);
+
+        for (int i = 1; i < listOfValues.length; i++) {
+            query.append(", ");
+            ValueAppender.appendDoubleParam(query, listOfValues[i]);
         }
 
         query.append(")");

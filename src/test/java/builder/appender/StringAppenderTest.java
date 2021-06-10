@@ -2,7 +2,6 @@ package builder.appender;
 
 import query.SQLQuery;
 import org.junit.Test;
-import builder.appender.StringAppender;
 
 import static org.junit.Assert.assertEquals;
 

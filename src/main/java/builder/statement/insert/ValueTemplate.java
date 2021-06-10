@@ -22,7 +22,7 @@ public abstract class ValueTemplate extends TerminalClosingInsertOperation {
      */
     public Value setString(String value) {
         addCommaAfterFirstValue();
-        valueAppender.validateAndAppendString(query, value);
+        valueAppender.appendStringParam(query, value);
         return new Value(query);
     }
 
@@ -38,7 +38,7 @@ public abstract class ValueTemplate extends TerminalClosingInsertOperation {
      */
     public Value setInt(int value) {
         addCommaAfterFirstValue();
-        valueAppender.validateAndAppendInt(query, value);
+        valueAppender.appendIntParam(query, value);
         return new Value(query);
     }
 
