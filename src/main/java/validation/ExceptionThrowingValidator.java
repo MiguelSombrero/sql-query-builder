@@ -1,6 +1,6 @@
 package validation;
 
-public class ExceptionThrowingValidator implements Validator {
+public class ExceptionThrowingValidator implements Validator<Object> {
 
     Validator validator;
 
@@ -8,7 +8,7 @@ public class ExceptionThrowingValidator implements Validator {
         this.validator = validator;
     }
 
-    public boolean validate(String input) {
+    public boolean validate(Object input) {
         if (!validator.validate(input)) {
             throw new IllegalArgumentException(input + " is not valid input!");
         }

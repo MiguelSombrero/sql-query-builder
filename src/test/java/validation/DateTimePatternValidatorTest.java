@@ -5,24 +5,23 @@ import org.junit.Test;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class DatePatternValidatorTest {
+public class DateTimePatternValidatorTest {
 
-    private DatePatternValidator datePatternValidator = new DatePatternValidator();
-
-    @Test
-    public void testDoesAcceptDateWithoutTime() {
-        assertTrue(datePatternValidator.validate("2021-05-15"));
-    }
-
+    private DateTimePatternValidator datePatternValidator = new DateTimePatternValidator();
 
     @Test
-    public void testDoesNotAcceptDateWithTime() {
-        assertFalse(datePatternValidator.validate("2021-05-15 21:00:00"));
+    public void testDoesAcceptDateWithTime() {
+        assertTrue(datePatternValidator.validate("2021-05-15 21:00:00"));
     }
 
     @Test
     public void testDoesNotAcceptTooLongDateWithTime() {
         assertFalse(datePatternValidator.validate("2021-05-15 21:00:000"));
+    }
+
+    @Test
+    public void testDoesNotAcceptDateWithoutTime() {
+        assertFalse(datePatternValidator.validate("2021-05-15"));
     }
 
     @Test

@@ -20,7 +20,7 @@ public class Value {
      * columns into UPDATE statement, proceed to WHERE
      * clause or terminate query building
      */
-    public Column value(String value) {
+    public Column setString(String value) {
         ValueAppender.appendStringParam(query, value);
         return new Column(query);
     }
@@ -35,8 +35,8 @@ public class Value {
      * columns into UPDATE statement, proceed to WHERE
      * clause or terminate query building
      */
-    public Column value(int value) {
-        query.append(value);
+    public Column setInt(int value) {
+        ValueAppender.appendIntParam(query, value);
         return new Column(query);
     }
 
@@ -50,8 +50,18 @@ public class Value {
      * columns into UPDATE statement, proceed to WHERE
      * clause or terminate query building
      */
-    public Column value(double value) {
-        query.append(value);
+    public Column setDouble(double value) {
+        ValueAppender.appendDoubleParam(query, value);
+        return new Column(query);
+    }
+
+    public Column setDate(String value) {
+        ValueAppender.appendDateParam(query, value);
+        return new Column(query);
+    }
+
+    public Column setDateTime(String value) {
+        ValueAppender.appendDateTimeParam(query, value);
         return new Column(query);
     }
 }

@@ -53,7 +53,19 @@ public abstract class ValueTemplate extends TerminalClosingInsertOperation {
      */
     public Value setDouble(double value) {
         addCommaAfterFirstValue();
-        query.append(value);
+        ValueAppender.appendDoubleParam(query, value);
+        return new Value(query);
+    }
+
+    public Value setDate(String value) {
+        addCommaAfterFirstValue();
+        ValueAppender.appendDateParam(query, value);
+        return new Value(query);
+    }
+
+    public Value setDateTime(String value) {
+        addCommaAfterFirstValue();
+        ValueAppender.appendDateTimeParam(query, value);
         return new Value(query);
     }
 

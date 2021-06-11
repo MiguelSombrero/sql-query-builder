@@ -77,6 +77,40 @@ public class InsertTest extends DatabaseTestBaseClass {
     }
 
     @Test
+    public void testInsertOneDateValue() throws SQLException {
+        InsertQuery query = queryFactory
+                .insertInto()
+                .table("person")
+                .columns("birthdate")
+                .values()
+                    .setDate("1978-04-03")
+                .build();
+
+        assertEquals("INSERT INTO person (birthdate) VALUES ('1978-04-03')", query.toString());
+
+        int result = query.execute();
+
+        assertEquals(4, result);
+    }
+
+    @Test
+    public void testInsertOneDateTimeValue() throws SQLException {
+        InsertQuery query = queryFactory
+                .insertInto()
+                .table("person")
+                    .columns("birthdate")
+                .values()
+                    .setDateTime("1978-04-03 21:00:04")
+                .build();
+
+        assertEquals("INSERT INTO person (birthdate) VALUES ('1978-04-03 21:00:04')", query.toString());
+
+        int result = query.execute();
+
+        assertEquals(4, result);
+    }
+
+    @Test
     public void testInsertMultipleValues() throws SQLException {
         InsertQuery query = queryFactory
                 .insertInto()
@@ -84,7 +118,7 @@ public class InsertTest extends DatabaseTestBaseClass {
                     .columns("id", "birthdate", "firstname", "lastname", "age")
                 .values()
                     .setInt(101)
-                    .setString("1980-04-12")
+                    .setDate("1980-04-12")
                     .setString("Miika")
                     .setString("Somero")
                     .setDouble(40.5)
@@ -131,7 +165,7 @@ public class InsertTest extends DatabaseTestBaseClass {
                 .table("person")
                 .values()
                     .setInt(102)
-                    .setString("1980-04-12")
+                    .setDate("1980-04-12")
                     .setString("Miika")
                     .setString("Somero")
                     .setInt(40)
@@ -162,61 +196,6 @@ public class InsertTest extends DatabaseTestBaseClass {
 
         int result = query.execute();
 
-        assertEquals(5, result);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testInsertWithSQLInjection() {
-        queryFactory
-                .insertInto()
-                .table(";DROP")
-                    .columns("id")
-                .values()
-                    .setInt(100)
-                .build();
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testInsertColumnsWithSQLInjection() {
-        queryFactory
-                .insertInto()
-                .table("person")
-                    .columns("id", ";DROP")
-                .values()
-                    .setInt(100)
-                .build();
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testInsertValuesWithSQLInjection() {
-        queryFactory
-                .insertInto()
-                .table("person")
-                    .columns("firstname")
-                .values()
-                    .setString(";DROP")
-                .build();
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testInsertValuesWithParameterInColumn() {
-        queryFactory
-                .insertInto()
-                .table("person")
-                    .columns("?")
-                .values()
-                    .setString("Miika")
-                .build();
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testInsertValuesWithParameterInValue() {
-        queryFactory
-                .insertInto()
-                .table("person")
-                .columns("lastname")
-                .values()
-                .setString("?")
-                .build();
+        assertEquals(6, result);
     }
 }

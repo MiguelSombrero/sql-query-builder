@@ -2,7 +2,7 @@ package validation;
 
 import java.util.Arrays;
 
-public class OrValidator implements Validator {
+public class OrValidator implements Validator<String> {
 
     Validator[] validators;
 

@@ -8,7 +8,7 @@ public class StringColumnValue extends AbstractColumnValue<String> {
 
     public StringColumnValue(Object value) {
         super(value);
-        validator.validate((String) value);
+        validator.validate(value);
     }
 
     @Override
