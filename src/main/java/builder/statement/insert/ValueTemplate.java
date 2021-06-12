@@ -75,5 +75,17 @@ public abstract class ValueTemplate extends TerminalClosingInsertOperation {
         return new Value(query);
     }
 
+    public Value setBoolean(boolean value) {
+        addCommaAfterFirstValue();
+        ValueAppender.appendBooleanParam(query, value);
+        return new Value(query);
+    }
+
+    public Value setByteArray(byte[] value) {
+        addCommaAfterFirstValue();
+        ValueAppender.appendByteArrayParam(query, value);
+        return new Value(query);
+    }
+
     protected abstract void addCommaAfterFirstValue();
 }

@@ -4,6 +4,8 @@ import database.row.Row;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.*;
 import java.util.List;
 
@@ -77,5 +79,10 @@ public class DatabaseTestBaseClass {
         }
 
         return rows;
+    }
+
+    public byte[] readFileAsByteArray(String path) throws IOException {
+        InputStream in = this.getClass().getClassLoader().getResourceAsStream(path);
+        return new byte[in.available()];
     }
 }

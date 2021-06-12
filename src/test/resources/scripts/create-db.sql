@@ -38,7 +38,7 @@ CREATE TABLE course (
     foreign key (school_id) references school(ID)
 );
 CREATE TABLE all_types (
-    ID INT,
+    ID INT PRIMARY KEY AUTO_INCREMENT,
     hash BIGINT,
     age DOUBLE,
     newdate DATE,

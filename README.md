@@ -65,7 +65,7 @@ Check the latest version from [GitHub Packages](https://github.com/MiguelSombrer
 
 ### Requirements
 
-- Java 8+
+- Java 13+ (using enhanced switch statement released in Java 13)
 - Maven 3.6.0+
 
 ### Commands

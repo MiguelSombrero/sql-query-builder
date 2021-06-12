@@ -1,6 +1,6 @@
 package database.column;
 
-public class AbstractColumnValue<T> {
+public class AbstractColumnValue<T> implements ColumnValue {
     protected T value;
 
     public AbstractColumnValue(T value) {

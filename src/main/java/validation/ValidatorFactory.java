@@ -35,6 +35,10 @@ public class ValidatorFactory {
         return new ExceptionThrowingValidator<>(stringValidator());
     }
 
+    public static Validator<byte[]> exceptionThrowingByteArrayValidator() {
+        return new ExceptionThrowingValidator<>(byteArrayValidator());
+    }
+
     public static Validator<String> stringValidator() {
         return new StringPatternValidator();
     }
@@ -57,5 +61,9 @@ public class ValidatorFactory {
 
     public static Validator<Double> doubleValidator() {
         return new DoubleValidator();
+    }
+
+    public static Validator<byte[]> byteArrayValidator() {
+        return new ByteArrayPatternValidator();
     }
 }

@@ -69,4 +69,14 @@ public class Value {
         ValueAppender.appendDateTimeParam(query, value);
         return new Column(query);
     }
+
+    public Column setBoolean(boolean value) {
+        ValueAppender.appendBooleanParam(query, value);
+        return new Column(query);
+    }
+
+    public Column setByteArray(byte[] value) {
+        ValueAppender.appendByteArrayParam(query, value);
+        return new Column(query);
+    }
 }

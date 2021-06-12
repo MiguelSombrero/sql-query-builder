@@ -8,6 +8,7 @@ import query.QueryFactory;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 import static builder.clause.WhereClauseFactory.valueOf;
@@ -40,7 +41,6 @@ public class InsertTest extends DatabaseTestBaseClass {
         assertThatQueryReturnsRows("SELECT * FROM person WHERE id = 100", 1);
     }
 
-    @Ignore("Throws null pointer?")
     @Test
     public void testInsertOneLongValue() throws SQLException {
         InsertQuery query = queryFactory
@@ -55,11 +55,28 @@ public class InsertTest extends DatabaseTestBaseClass {
 
         int result = query.execute();
 
-        assertEquals(4, result);
+        assertEquals(13, result);
         assertThatQueryReturnsRows("SELECT * FROM all_types WHERE hash = 2485394539475834568", 1);
     }
 
-    @Ignore("Throws NullPointer in some reason?")
+    @Test
+    public void testInsertOneBooleanValue() throws SQLException {
+        InsertQuery query = queryFactory
+                .insertInto()
+                .table("all_types")
+                .columns("active")
+                .values()
+                    .setBoolean(false)
+                .build();
+
+        assertEquals("INSERT INTO all_types (active) VALUES (false)", query.toString());
+
+        int result = query.execute();
+
+        assertEquals(13, result);
+        assertThatQueryReturnsRows("SELECT * FROM all_types WHERE active = false", 2);
+    }
+
     @Test
     public void testInsertOneDoubleValue() throws SQLException {
         InsertQuery query = queryFactory
@@ -74,7 +91,7 @@ public class InsertTest extends DatabaseTestBaseClass {
 
         int result = query.execute();
 
-        assertEquals(4, result);
+        assertEquals(13, result);
         assertThatQueryReturnsRows("SELECT * FROM all_types WHERE age = 19.3", 1);
     }
 
@@ -127,6 +144,24 @@ public class InsertTest extends DatabaseTestBaseClass {
         int result = query.execute();
 
         assertEquals(4, result);
+    }
+
+    @Test
+    public void testInsertByteArrayValue() throws SQLException, IOException {
+        byte[] file = readFileAsByteArray("files/byte-array-test-file.txt");
+
+        InsertQuery query = queryFactory
+                .insertInto()
+                .table("all_types")
+                .columns("contract")
+                .values()
+                .setByteArray(file)
+                .build();
+
+        int result = query.execute();
+
+        assertEquals(13, result);
+        assertThatQueryReturnsRows("SELECT * FROM all_types WHERE contract IS NOT NULL", 3);
     }
 
     @Test

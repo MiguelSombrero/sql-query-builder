@@ -55,6 +55,21 @@ public class UpdateTest extends DatabaseTestBaseClass {
     }
 
     @Test
+    public void testUpdateBooleanValue() throws SQLException {
+        UpdateQuery query = queryFactory
+                .update()
+                .table("all_types")
+                .column("active").setBoolean(false)
+                .build();
+
+        assertEquals("UPDATE all_types SET active = false", query.toString());
+
+        int result = query.execute();
+
+        assertEquals(2, result);
+    }
+
+    @Test
     public void testUpdateDoubleValue() throws SQLException {
         UpdateQuery query = this.baseQuery
                 .column("age").setDouble(50.5)
