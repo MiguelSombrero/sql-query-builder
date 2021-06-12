@@ -40,6 +40,11 @@ public class Value {
         return new Column(query);
     }
 
+    public Column setLong(long value) {
+        ValueAppender.appendLongParam(query, value);
+        return new Column(query);
+    }
+
     /**
      * Validates user input and appends double 'value' into
      * 'UPDATE table SET column = value, ...' statement.

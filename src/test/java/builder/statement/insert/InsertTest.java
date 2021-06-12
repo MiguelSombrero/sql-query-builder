@@ -40,6 +40,25 @@ public class InsertTest extends DatabaseTestBaseClass {
         assertThatQueryReturnsRows("SELECT * FROM person WHERE id = 100", 1);
     }
 
+    @Ignore("Throws null pointer?")
+    @Test
+    public void testInsertOneLongValue() throws SQLException {
+        InsertQuery query = queryFactory
+                .insertInto()
+                .table("all_types")
+                .columns("hash")
+                .values()
+                    .setLong(2485394539475834568L)
+                .build();
+
+        assertEquals("INSERT INTO all_types (hash) VALUES (2485394539475834568)", query.toString());
+
+        int result = query.execute();
+
+        assertEquals(4, result);
+        assertThatQueryReturnsRows("SELECT * FROM all_types WHERE hash = 2485394539475834568", 1);
+    }
+
     @Ignore("Throws NullPointer in some reason?")
     @Test
     public void testInsertOneDoubleValue() throws SQLException {

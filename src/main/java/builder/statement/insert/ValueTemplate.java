@@ -41,6 +41,12 @@ public abstract class ValueTemplate extends TerminalClosingInsertOperation {
         return new Value(query);
     }
 
+    public Value setLong(long value) {
+        addCommaAfterFirstValue();
+        ValueAppender.appendLongParam(query, value);
+        return new Value(query);
+    }
+
     /**
      * Validates user input and appends double 'value(s)'
      * into 'INSERT INTO table VALUE (value(s))' statement.

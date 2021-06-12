@@ -40,6 +40,21 @@ public class UpdateTest extends DatabaseTestBaseClass {
     }
 
     @Test
+    public void testUpdateLongValue() throws SQLException {
+        UpdateQuery query = queryFactory
+                .update()
+                .table("all_types")
+                .column("hash").setLong(2485394539475834568L)
+                .build();
+
+        assertEquals("UPDATE all_types SET hash = 2485394539475834568", query.toString());
+
+        int result = query.execute();
+
+        assertEquals(2, result);
+    }
+
+    @Test
     public void testUpdateDoubleValue() throws SQLException {
         UpdateQuery query = this.baseQuery
                 .column("age").setDouble(50.5)

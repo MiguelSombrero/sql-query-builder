@@ -33,6 +33,12 @@ public class ValueAppender {
         query.addParam(param);
     }
 
+    public static void appendLongParam(Query query, long value) {
+        query.append("?");
+        LongColumnValue param = new LongColumnValue(value);
+        query.addParam(param);
+    }
+
     public static void appendDoubleParam(Query query, double value) {
         doubleValidator.validate(value);
         query.append("?");
