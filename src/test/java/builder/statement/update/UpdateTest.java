@@ -84,7 +84,7 @@ public class UpdateTest extends DatabaseTestBaseClass {
                 .column("birthdate").setDateTime("1985-01-02 21:04:11")
                 .build();
 
-        assertEquals("UPDATE person SET birthdate = '1985-01-02 21:04:11'", query.toString());
+        assertEquals("UPDATE person SET birthdate = '1985-01-02T21:04:11'", query.toString());
 
         int result = query.execute();
 

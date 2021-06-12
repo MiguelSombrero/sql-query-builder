@@ -1,13 +1,13 @@
 package database.column;
 
 public class AbstractColumnValue<T> {
-    protected Object value;
+    protected T value;
 
-    public AbstractColumnValue(Object value) {
+    public AbstractColumnValue(T value) {
         this.value = value;
     }
 
-    public Object getValue() {
+    public T getValue() {
         return this.value;
     }
 

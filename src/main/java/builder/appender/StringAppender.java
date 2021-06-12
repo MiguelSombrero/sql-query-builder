@@ -7,7 +7,7 @@ import validation.Validator;
 import java.util.Arrays;
 
 public class StringAppender {
-    private static Validator validator = ValidatorFactory.exceptionThrowingNameValidator();
+    private static Validator<String> validator = ValidatorFactory.exceptionThrowingNameValidator();
 
     public static void validateAndAppend(Query query, String value) {
         validate(value);

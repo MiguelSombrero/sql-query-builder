@@ -6,7 +6,7 @@ import validation.Validator;
 import validation.ValidatorFactory;
 
 public class WhereClauseFactory {
-    private static Validator validator = ValidatorFactory.exceptionThrowingNameValidator();
+    private static Validator<String> validator = ValidatorFactory.exceptionThrowingNameValidator();
 
     public static Negation valueOf(String operand) {
         validator.validate(operand);

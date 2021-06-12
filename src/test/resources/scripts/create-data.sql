@@ -1,11 +1,11 @@
-INSERT INTO person VALUES (1, '1980-02-28T21:00:00.000', 'Miika', 'Somero', 39);
-INSERT INTO person VALUES (2, '1970-02-28T21:00:00.000', 'Jukka', 'Jukkanen', 30);
-INSERT INTO person VALUES (3, '1990-02-28T21:00:00.000', 'Maija', 'Kultanen', 35);
+INSERT INTO person VALUES (1, '1980-02-28 21:00:00', 'Miika', 'Somero', 39);
+INSERT INTO person VALUES (2, '1970-02-28 21:00:00', 'Jukka', 'Jukkanen', 30);
+INSERT INTO person VALUES (3, '1990-02-28 21:00:00', 'Maija', 'Kultanen', 35);
 
-INSERT INTO student VALUES (4, '1990-02-28T21:00:00.000', 'Liisa', 'Testinen', 19);
-INSERT INTO student VALUES (5, '2001-02-28T21:00:00.000', 'Urkki', 'Somero', 54);
-INSERT INTO student VALUES (6, '2001-02-28T21:00:00.000', 'Miisa', 'Somero', 17);
-INSERT INTO student VALUES (7, '2001-02-28T21:00:00.000', 'Jaska', 'Jokunen', 17);
+INSERT INTO student VALUES (4, '1990-02-28 21:00:00', 'Liisa', 'Testinen', 39);
+INSERT INTO student VALUES (5, '2001-02-28 21:00:00', 'Urkki', 'Somero', 54);
+INSERT INTO student VALUES (6, '2001-02-28 21:00:00', 'Miisa', 'Somero', 17);
+INSERT INTO student VALUES (7, '2001-02-28 21:00:00', 'Jaska', 'Jokunen', 17);
 
 INSERT INTO school VALUES (8, 'Helsingin yliopisto');
 

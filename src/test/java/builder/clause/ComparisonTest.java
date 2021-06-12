@@ -114,8 +114,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
 
         List<Row> result = query.execute();
 
-        assertRowCount(result, 1);
-        assertColumnCount(result, 1);
+        assertRowCount(result, 0);
     }
 
     @Test
@@ -172,62 +171,82 @@ public class ComparisonTest extends DatabaseTestBaseClass {
 
         List<Row> result = query.execute();
 
-        assertRowCount(result, 3);
+        assertRowCount(result, 0);
     }
 
     @Test
     public void testConditionAllGreaterThan() throws SQLException {
         SelectQuery query = this.baseQuery
-                .where(valueOf("lastname")
+                .where(valueOf("age")
                         .greaterThanAll(queryFactory
                                 .select()
-                                .column("lastname")
+                                .column("age")
                                 .from().table("student")
                                 .where(valueOf("age").greaterThan(20))))
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE lastname > ALL (SELECT lastname FROM student WHERE age > 20)", query.toString());
+        assertEquals("SELECT firstname FROM person WHERE age > ALL (SELECT age FROM student WHERE age > 20)", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 0);
     }
 
     @Test
     public void testConditionStringGreaterThanOrEqual() throws SQLException {
         SelectQuery query = this.baseQuery
-                .where(valueOf("birthdate").greaterThanOrEqual("2020-02-28 21:00:00"))
+                .where(valueOf("birthdate").greaterThanOrEqual("1980-02-28 21:00:00"))
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE birthdate >= '2020-02-28 21:00:00'", query.toString());
+        assertEquals("SELECT firstname FROM person WHERE birthdate >= '1980-02-28 21:00:00'", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 2);
     }
 
     @Test
     public void testConditionIntegerGreaterThanOrEqual() throws SQLException {
         SelectQuery query = this.baseQuery
-                .where(valueOf("age").greaterThanOrEqual(18))
+                .where(valueOf("age").greaterThanOrEqual(32))
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE age >= 18", query.toString());
+        assertEquals("SELECT firstname FROM person WHERE age >= 32", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 2);
     }
 
     @Test
     public void testConditionDoubleGreaterThanOrEqual() throws SQLException {
-        SelectQuery query = this.baseQuery
-                .where(valueOf("age").greaterThanOrEqual(18.5))
+        SelectQuery query = this.allTypesBaseQuery
+                .where(valueOf("age").greaterThanOrEqual(27.3))
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE age >= 18.5", query.toString());
+        assertEquals("SELECT * FROM all_types WHERE age >= 27.3", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 1);
     }
 
     @Test
     public void testConditionAnyGreaterThanOrEqual() throws SQLException {
         SelectQuery query = this.baseQuery
-                .where(valueOf("lastname")
+                .where(valueOf("age")
                         .greaterThanOrEqualAny(queryFactory
                                 .select()
-                                .column("lastname")
+                                .column("age")
                                 .from().table("student")
-                                .where(valueOf("age").greaterThan(20))))
+                                .where(valueOf("age").greaterThan(30))))
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE lastname >= ANY (SELECT lastname FROM student WHERE age > 20)", query.toString());
+        assertEquals("SELECT firstname FROM person WHERE age >= ANY (SELECT age FROM student WHERE age > 30)", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 1);
     }
 
     @Test

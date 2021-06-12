@@ -10,52 +10,52 @@ public class ValidatorFactory {
      *
      * @return Validator that throws an exception if validation fails
      */
-    public static Validator exceptionThrowingStringValueValidator() {
-        return new ExceptionThrowingValidator(new OrValidator(
+    public static Validator<Object> exceptionThrowingStringValueValidator() {
+        return new ExceptionThrowingValidator<>(new OrValidator(
                 stringValueValidator(), dateValidator(), dateTimeValidator()));
     }
 
-    public static Validator exceptionThrowingDateValidator() {
-        return new ExceptionThrowingValidator(dateValidator());
+    public static Validator<String> exceptionThrowingDateValidator() {
+        return new ExceptionThrowingValidator<>(dateValidator());
     }
 
-    public static Validator exceptionThrowingDateTimeValidator() {
-        return new ExceptionThrowingValidator(dateTimeValidator());
+    public static Validator<String> exceptionThrowingDateTimeValidator() {
+        return new ExceptionThrowingValidator<>(dateTimeValidator());
     }
 
-    public static Validator exceptionThrowingIntegerValidator() {
-        return new ExceptionThrowingValidator(integerValidator());
+    public static Validator<Integer> exceptionThrowingIntegerValidator() {
+        return new ExceptionThrowingValidator<>(integerValidator());
     }
 
-    public static Validator exceptionThrowingDoubleValidator() {
-        return new ExceptionThrowingValidator(doubleValidator());
+    public static Validator<Double> exceptionThrowingDoubleValidator() {
+        return new ExceptionThrowingValidator<>(doubleValidator());
     }
 
-    public static Validator exceptionThrowingNameValidator() {
-        return new ExceptionThrowingValidator(stringValidator());
+    public static Validator<String> exceptionThrowingNameValidator() {
+        return new ExceptionThrowingValidator<>(stringValidator());
     }
 
-    public static Validator stringValidator() {
+    public static Validator<String> stringValidator() {
         return new StringPatternValidator();
     }
 
-    public static Validator stringValueValidator() {
+    public static Validator<String> stringValueValidator() {
         return new StringValuePatternValidator();
     }
 
-    public static Validator dateValidator() {
+    public static Validator<String> dateValidator() {
         return new DatePatternValidator();
     }
 
-    public static Validator dateTimeValidator() {
+    public static Validator<String> dateTimeValidator() {
         return new DateTimePatternValidator();
     }
 
-    public static Validator integerValidator() {
+    public static Validator<Integer> integerValidator() {
         return new IntegerValidator();
     }
 
-    public static Validator doubleValidator() {
+    public static Validator<Double> doubleValidator() {
         return new DoubleValidator();
     }
 }

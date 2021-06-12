@@ -103,7 +103,7 @@ public class InsertTest extends DatabaseTestBaseClass {
                     .setDateTime("1978-04-03 21:00:04")
                 .build();
 
-        assertEquals("INSERT INTO person (birthdate) VALUES ('1978-04-03 21:00:04')", query.toString());
+        assertEquals("INSERT INTO person (birthdate) VALUES ('1978-04-03T21:00:04')", query.toString());
 
         int result = query.execute();
 

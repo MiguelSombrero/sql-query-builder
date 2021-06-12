@@ -1,29 +1,31 @@
 package builder.clause;
 
 import builder.statement.select.table.Table;
+import database.row.Row;
+import query.dql.SelectQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 import query.QueryFactory;
 import org.junit.Before;
 import org.junit.Test;
-import query.Query;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import static builder.clause.WhereClauseFactory.valueOf;
 import static org.junit.Assert.assertEquals;
 
 public class NegationTest extends DatabaseTestBaseClass {
     private QueryFactory queryFactory;
-    private Table table;
+    private Table baseQuery;
 
     @Before
-    public void setUpQuery() throws SQLException {
+    public void setUpQuery() {
         initializeDatabase();
 
         queryFactory = new QueryFactory(DatabaseConnection.getDataSource());
 
-        this.table = queryFactory
+        this.baseQuery = queryFactory
                 .select()
                 .column("firstname")
                 .from()
@@ -32,26 +34,36 @@ public class NegationTest extends DatabaseTestBaseClass {
 
     @Test
     public void testWhereNotCondition() throws SQLException {
-        Query query = this.table
-                .where(valueOf("age").not().greaterThan(18))
+        SelectQuery query = this.baseQuery
+                .where(valueOf("age").not().greaterThan(32))
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE NOT age > 18", query.toString());
+        assertEquals("SELECT firstname FROM person WHERE NOT age > 32", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 1);
+        assertColumnCount(result, 1);
     }
 
     @Test
     public void testWhereNotAndNotConditions() throws SQLException {
-        Query query = this.table
-                .where(valueOf("age").not().greaterThan(18)
+        SelectQuery query = this.baseQuery
+                .where(valueOf("age").not().greaterThan(32)
                         .and(valueOf("firstname").not().equals("Miika")))
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE NOT age > 18 AND NOT firstname = 'Miika'", query.toString());
+        assertEquals("SELECT firstname FROM person WHERE NOT age > 32 AND NOT firstname = 'Miika'", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 1);
+        assertColumnCount(result, 1);
     }
 
     @Test
     public void testDoubleNot() throws SQLException {
-        Query query = this.table
+        SelectQuery query = this.baseQuery
                 .where(valueOf("age").not().isNotNull())
                 .build();
 
@@ -60,7 +72,7 @@ public class NegationTest extends DatabaseTestBaseClass {
 
     @Test
     public void testWhereNotBetween() throws SQLException {
-        Query query = this.table
+        SelectQuery query = this.baseQuery
                 .where(valueOf("age").not().isBetween(18, 20))
                 .build();
 
@@ -69,7 +81,7 @@ public class NegationTest extends DatabaseTestBaseClass {
 
     @Test
     public void testWhereNotIn() throws SQLException {
-        Query query = this.table
+        SelectQuery query = this.baseQuery
                 .where(valueOf("age").not().isIn(30, 40, 50, 60))
                 .build();
 
@@ -78,7 +90,7 @@ public class NegationTest extends DatabaseTestBaseClass {
 
     @Test
     public void testWhereNotInSubQuery() throws SQLException {
-        Query query = this.table
+        SelectQuery query = this.baseQuery
                 .where(valueOf("lastname")
                         .not()
                         .isInSub(queryFactory
