@@ -1,5 +1,6 @@
 package database.row;
 
+import database.column.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import utils.DateConverter;
@@ -16,9 +17,9 @@ import java.util.Map;
 public class Row {
     protected static Logger logger = LoggerFactory.getLogger(Row.class);
 
-    private Map<String, Object> columns;
+    private Map<String, ColumnValue> columns;
 
-    public Row(Map<String, Object> columns) {
+    public Row(Map<String, ColumnValue> columns) {
         this.columns = columns;
     }
 
@@ -27,64 +28,46 @@ public class Row {
     }
 
     public String getString(String columnName) {
-        Object object = getObject(columnName);
-        return castToType(String.class, object);
+        StringColumnValue value = (StringColumnValue) getObject(columnName);
+        return value.getValue();
     }
 
     public int getInteger(String columnName) {
-        Object object = getObject(columnName);
-        return castToType(Integer.class, object);
-    }
-
-    public BigInteger getBigInteger(String columnName) {
-        Object object = getObject(columnName);
-        String stringValue = String.valueOf(object);
-        return new BigInteger(stringValue);
+        IntegerColumnValue value = (IntegerColumnValue) getObject(columnName);
+        return value.getValue();
     }
 
     public long getLong(String columnName) {
-        Object object = getObject(columnName);
-        return castToType(Long.class, object);
+        LongColumnValue value = (LongColumnValue) getObject(columnName);
+        return value.getValue();
     }
 
     public byte[] getBytes(String columnName) {
-        Object object = getObject(columnName);
-        String stringValue = String.valueOf(object);
-        return stringValue.getBytes(StandardCharsets.UTF_8);
-    }
-
-    public Blob getBlob(String columnName) {
-        Object object = getObject(columnName);
-        return castToType(Blob.class, object);
+        ByteArrayColumnValue value = (ByteArrayColumnValue) getObject(columnName);
+        return value.getValue();
     }
 
     public double getDouble(String columnName) {
-        Object object = getObject(columnName);
-        return castToType(Double.class, object);
+        DoubleColumnValue value = (DoubleColumnValue) getObject(columnName);
+        return value.getValue();
     }
 
     public boolean getBoolean(String columnName) {
-        Object object = getObject(columnName);
-        return castToType(Boolean.class, object);
+        BooleanColumnValue value = (BooleanColumnValue) getObject(columnName);
+        return value.getValue();
     }
 
     public LocalDate getLocalDate(String columnName) {
-        Object object = getObject(columnName);
-        Date date = castToType(Date.class, object);
-        return DateConverter.dateToLocalDate(date);
+        DateColumnValue value = (DateColumnValue) getObject(columnName);
+        return value.getValue();
     }
 
     public LocalDateTime getLocalDateTime(String columnName) {
-        Object object = getObject(columnName);
-        Timestamp timestamp = castToType(Timestamp.class, object);
-        return DateConverter.timestampToLocalDateTime(timestamp);
+        DateTimeColumnValue value = (DateTimeColumnValue) getObject(columnName);
+        return value.getValue();
     }
 
-    private Object getObject(String columnName) {
+    private ColumnValue getObject(String columnName) {
         return this.columns.get(columnName.toLowerCase());
-    }
-
-    private <T> T castToType(Class<T> type, Object value) {
-        return type.cast(value);
     }
 }

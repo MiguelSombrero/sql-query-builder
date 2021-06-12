@@ -1,12 +1,14 @@
 package builder.statement.update;
 
 import query.QueryFactory;
+import query.dml.InsertQuery;
 import query.dml.UpdateQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 import static builder.clause.WhereClauseFactory.valueOf;
@@ -119,6 +121,22 @@ public class UpdateTest extends DatabaseTestBaseClass {
         int result = query.execute();
 
         assertEquals(3, result);
+    }
+
+    @Test
+    public void testUpdateByteArrayValue() throws SQLException, IOException {
+        byte[] file = readFileAsByteArray("files/byte-array-test-file.txt");
+
+        UpdateQuery query = queryFactory
+                .update()
+                .table("all_types")
+                .column("contract").setByteArray(file)
+                .build();
+
+        int result = query.execute();
+
+        assertEquals(2, result);
+        assertThatQueryReturnsRows("SELECT * FROM all_types WHERE NOT contract = '74657374696e6720736f6d652076616c7565736f0a' AND NOT contract = '84657374696e6720736f6d652076616c7565736f0a'", 2);
     }
 
     @Test

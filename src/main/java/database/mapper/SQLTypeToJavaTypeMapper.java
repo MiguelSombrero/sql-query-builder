@@ -2,14 +2,17 @@ package database.mapper;
 
 import database.column.*;
 import org.apache.commons.lang3.NotImplementedException;
+import utils.DateConverter;
 
+import java.nio.charset.StandardCharsets;
+import java.sql.Blob;
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.sql.Types;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class SQLTypeToJavaTypeMapper {
 
-    public ColumnValue map(int type, Object value) {
+    public static ColumnValue toJavaType(int type, Object value) {
         switch (type) {
             case Types.CHAR, Types.NCHAR, Types.LONGNVARCHAR, Types.LONGVARCHAR, Types.VARCHAR, Types.NVARCHAR:
                 return new StringColumnValue((String) value);
@@ -22,11 +25,11 @@ public class SQLTypeToJavaTypeMapper {
             case Types.BOOLEAN:
                 return new BooleanColumnValue((Boolean) value);
             case Types.DATE:
-                return new DateColumnValue((LocalDate) value);
+                return new DateColumnValue(DateConverter.dateToLocalDate((Date) value));
             case Types.TIMESTAMP:
-                return new DateTimeColumnValue((LocalDateTime) value);
+                return new DateTimeColumnValue(DateConverter.timestampToLocalDateTime((Timestamp) value));
             case Types.BLOB, Types.CLOB, Types.NCLOB:
-                return new ByteArrayColumnValue((byte[]) value);
+                return new ByteArrayColumnValue(getBytes(value));
             case Types.DECIMAL, Types.NUMERIC:
                 throw new NotImplementedException("Should be mapped as BigDecimal");
             case Types.SMALLINT:
@@ -34,5 +37,10 @@ public class SQLTypeToJavaTypeMapper {
             default:
                 throw new IllegalArgumentException("Could not map SQL type to Java type");
         }
+    }
+
+    private static byte[] getBytes(Object value) {
+        String stringValue = String.valueOf(value);
+        return stringValue.getBytes(StandardCharsets.UTF_8);
     }
 }

@@ -1,10 +1,11 @@
-package query.dql;
+package database.row;
 
 import builder.clause.WhereClauseFactory;
 import database.row.Row;
 import org.junit.Before;
 import org.junit.Test;
 import query.QueryFactory;
+import query.dql.SelectQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 
@@ -94,17 +95,6 @@ public class RowTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testGetBigInteger() throws SQLException {
-        List<Row> result = baseQuery.execute();
-
-        Row firstRow = result.get(0);
-
-        BigInteger expectedInteger = new BigInteger("9223372036854775806");
-
-        assertEquals(expectedInteger, firstRow.getBigInteger("hash"));
-    }
-
-    @Test
     public void testGetLong() throws SQLException {
         List<Row> result = baseQuery.execute();
 
@@ -123,24 +113,6 @@ public class RowTest extends DatabaseTestBaseClass {
 
         assertThat(expected, equalTo(firstRow.getBytes("description")));
     }
-
-    // how to test Blob equals?
-    /*@Test
-    public void testGetBlob() throws SQLException {
-        List<Row> result = baseQuery.execute();
-
-        Row firstRow = result.get(0);
-
-        byte[] bytesExpected = "74657374696e6720736f6d652076616c7565736f0a".getBytes(StandardCharsets.UTF_8);
-
-        Connection connection = DatabaseConnection.getConnection();
-
-        Blob expected = connection.createBlob();
-
-        expected.setBytes(1, bytesExpected);
-
-        assertThat(expected.getBytes(1, 20), equalTo(firstRow.getBlob("contract").getBytes(1, 20)));
-    }*/
 
     @Test
     public void testGetDouble() throws SQLException {

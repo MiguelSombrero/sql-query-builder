@@ -1,6 +1,6 @@
-package query.dql;
+package database.row;
 
-import database.row.Row;
+import database.column.ColumnValue;
 import org.apache.commons.dbutils.handlers.AbstractListHandler;
 
 import java.sql.ResultSet;
@@ -16,7 +16,7 @@ public class RowHandler extends AbstractListHandler<Row> {
 
     @Override
     protected Row handleRow(ResultSet resultSet) throws SQLException {
-        Map<String, Object> columns = this.convert.toMap(resultSet);
+        Map<String, ColumnValue> columns = this.convert.toMap(resultSet);
         Row row = new Row(columns);
         return row;
     }

@@ -1,5 +1,7 @@
-package query.dql;
+package database.row;
 
+import database.column.ColumnValue;
+import database.mapper.SQLTypeToJavaTypeMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,8 +14,8 @@ import java.util.Map;
 public class CustomRowProcessor {
     private static Logger logger = LoggerFactory.getLogger(CustomRowProcessor.class);
 
-    public Map<String, Object> toMap(ResultSet rs) throws SQLException {
-        Map<String, Object> result = new HashMap<>();
+    public Map<String, ColumnValue> toMap(ResultSet rs) throws SQLException {
+        Map<String, ColumnValue> result = new HashMap<>();
         ResultSetMetaData metaData = rs.getMetaData();
         int cols = metaData.getColumnCount();
 
@@ -29,7 +31,10 @@ public class CustomRowProcessor {
                 throw new IllegalArgumentException("Duplicate column name");
             }
 
-            result.put(columnName, rs.getObject(i));
+            int type = metaData.getColumnType(i);
+            Object value = rs.getObject(i);
+
+            result.put(columnName, SQLTypeToJavaTypeMapper.toJavaType(type, value));
         }
 
         return result;
