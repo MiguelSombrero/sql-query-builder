@@ -11,6 +11,7 @@ import testutils.DatabaseTestBaseClass;
 
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
+import java.sql.Blob;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -109,9 +110,10 @@ public class RowTest extends DatabaseTestBaseClass {
 
         Row firstRow = result.get(0);
 
-        byte[] expected = "This is car".getBytes(StandardCharsets.UTF_8);
+        String expected = "testing some values\n";
+        byte[] bytes = firstRow.getBytes("contract");
 
-        assertThat(expected, equalTo(firstRow.getBytes("description")));
+        assertEquals(expected, new String(bytes, StandardCharsets.UTF_8));
     }
 
     @Test

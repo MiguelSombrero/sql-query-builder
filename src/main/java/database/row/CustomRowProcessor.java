@@ -1,7 +1,7 @@
 package database.row;
 
 import database.column.ColumnValue;
-import database.mapper.SQLTypeToJavaTypeMapper;
+import database.mapper.SQLToJavaMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,6 +13,8 @@ import java.util.Map;
 
 public class CustomRowProcessor {
     private static Logger logger = LoggerFactory.getLogger(CustomRowProcessor.class);
+
+    private static SQLToJavaMapper map;
 
     public Map<String, ColumnValue> toMap(ResultSet rs) throws SQLException {
         Map<String, ColumnValue> result = new HashMap<>();
@@ -34,7 +36,7 @@ public class CustomRowProcessor {
             int type = metaData.getColumnType(i);
             Object value = rs.getObject(i);
 
-            result.put(columnName, SQLTypeToJavaTypeMapper.toJavaType(type, value));
+            result.put(columnName, map.toJavaType(type, value));
         }
 
         return result;
