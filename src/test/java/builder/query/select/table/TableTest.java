@@ -1,11 +1,11 @@
 package builder.query.select.table;
 
+import builder.query.SQLQueryBuilder;
 import builder.query.select.column.ToFrom;
 import database.row.Row;
 import query.dql.SelectQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
-import builder.query.QueryFactory;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,16 +16,16 @@ import static builder.clause.ConditionClauseBuilder.valueOf;
 import static org.junit.Assert.assertEquals;
 
 public class TableTest extends DatabaseTestBaseClass {
-    private QueryFactory queryFactory;
+    private SQLQueryBuilder SQLQueryBuilder;
     private ToFrom baseQuery;
 
     @Before
     public void setUpQuery() {
         initializeDatabase();
 
-        queryFactory = new QueryFactory(DatabaseConnection.getDataSource());
+        SQLQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getDataSource());
 
-        this.baseQuery = queryFactory
+        this.baseQuery = SQLQueryBuilder
                 .select()
                     .all();
     }
@@ -47,7 +47,7 @@ public class TableTest extends DatabaseTestBaseClass {
 
     @Test
     public void testFromMultipleTables() throws SQLException {
-        SelectQuery query = queryFactory
+        SelectQuery query = SQLQueryBuilder
                 .select()
                     .column("firstname")
                     .column("street")
@@ -70,7 +70,7 @@ public class TableTest extends DatabaseTestBaseClass {
     public void testFromSubQuery() throws SQLException {
         SelectQuery query = this.baseQuery
                 .from()
-                    .sub(queryFactory
+                    .sub(SQLQueryBuilder
                             .select()
                                 .all()
                             .from()
@@ -90,7 +90,7 @@ public class TableTest extends DatabaseTestBaseClass {
 
     @Test
     public void testFromMultipleTablesWithAliases() throws SQLException {
-        SelectQuery query = queryFactory
+        SelectQuery query = SQLQueryBuilder
                 .select()
                     .column("p.id")
                     .column("a.city")
@@ -111,7 +111,7 @@ public class TableTest extends DatabaseTestBaseClass {
 
     @Test
     public void testFromOneJoinTableWithAlias() throws SQLException {
-        SelectQuery query = queryFactory
+        SelectQuery query = SQLQueryBuilder
                 .select()
                     .column("person.id")
                 .from()
@@ -129,7 +129,7 @@ public class TableTest extends DatabaseTestBaseClass {
 
     @Test
     public void testInnerJoin() throws SQLException {
-        SelectQuery query = queryFactory
+        SelectQuery query = SQLQueryBuilder
                 .select()
                     .count("person.id")
                 .from()
@@ -147,7 +147,7 @@ public class TableTest extends DatabaseTestBaseClass {
 
     @Test
     public void testLeftJoin() throws SQLException {
-        SelectQuery query = this.queryFactory
+        SelectQuery query = this.SQLQueryBuilder
                 .select()
                     .column("person.id")
                     .column("address.city")
@@ -166,7 +166,7 @@ public class TableTest extends DatabaseTestBaseClass {
 
     @Test
     public void testRightJoin() throws SQLException {
-        SelectQuery query = this.queryFactory
+        SelectQuery query = this.SQLQueryBuilder
                 .select()
                     .column("person.id")
                     .column("address.city")
@@ -185,7 +185,7 @@ public class TableTest extends DatabaseTestBaseClass {
 
     @Test
     public void testMultipleJoins() throws SQLException {
-        SelectQuery query = this.queryFactory
+        SelectQuery query = this.SQLQueryBuilder
                 .select()
                     .column("person.id")
                     .column("address.city")
@@ -207,7 +207,7 @@ public class TableTest extends DatabaseTestBaseClass {
 
     @Test
     public void testFromMultipleTablesAndJoinWithAliases() throws SQLException {
-        SelectQuery query = this.queryFactory
+        SelectQuery query = this.SQLQueryBuilder
                 .select()
                     .column("p.id")
                     .column("a.city")
@@ -247,7 +247,7 @@ public class TableTest extends DatabaseTestBaseClass {
     public void testSelectSubQueryAliasWithSQLInjection() {
         this.baseQuery
                 .from()
-                .sub(queryFactory
+                .sub(SQLQueryBuilder
                         .select()
                             .column("*")
                         .from()

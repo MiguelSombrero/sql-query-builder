@@ -1,7 +1,7 @@
 package builder.query.drop;
 
+import builder.query.SQLQueryBuilder;
 import builder.query.create.table.column.DataType;
-import builder.query.QueryFactory;
 import query.ddl.CreateQuery;
 import query.ddl.DropQuery;
 import testutils.DatabaseConnection;
@@ -14,17 +14,17 @@ import java.sql.SQLException;
 import static org.junit.Assert.assertEquals;
 
 public class DropTest extends DatabaseTestBaseClass {
-    private QueryFactory queryFactory;
+    private SQLQueryBuilder SQLQueryBuilder;
 
     @Before
     public void setUp() throws SQLException {
         initializeDatabase();
-        queryFactory = new QueryFactory(DatabaseConnection.getDataSource());
+        SQLQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getDataSource());
     }
 
     @Test
     public void testDropTable() throws SQLException {
-        CreateQuery createTable = queryFactory
+        CreateQuery createTable = SQLQueryBuilder
                 .create()
                 .table("test_table")
                 .column("id").type(DataType.INT)
@@ -32,7 +32,7 @@ public class DropTest extends DatabaseTestBaseClass {
 
         createTable.execute();
 
-        DropQuery query = queryFactory
+        DropQuery query = SQLQueryBuilder
                 .drop()
                 .table("test_table")
                 .build();
@@ -52,7 +52,7 @@ public class DropTest extends DatabaseTestBaseClass {
 
         createDatabase.execute();*/
 
-        DropQuery query = queryFactory
+        DropQuery query = SQLQueryBuilder
                 .drop()
                 .database("test_db")
                 .build();
@@ -65,7 +65,7 @@ public class DropTest extends DatabaseTestBaseClass {
 
     @Test(expected = IllegalArgumentException.class)
     public void testDropTableWithSQLInjection() {
-        queryFactory
+        SQLQueryBuilder
                 .drop()
                 .table(";DROP")
                 .build();
@@ -73,7 +73,7 @@ public class DropTest extends DatabaseTestBaseClass {
 
     @Test(expected = IllegalArgumentException.class)
     public void testDropDatabaseWithSQLInjection() {
-        queryFactory
+        SQLQueryBuilder
                 .drop()
                 .database(";DROP")
                 .build();

@@ -1,10 +1,10 @@
 package builder.query.select.order;
 
+import builder.query.SQLQueryBuilder;
 import database.row.Row;
 import query.dql.SelectQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
-import builder.query.QueryFactory;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -21,9 +21,9 @@ public class HavingTest extends DatabaseTestBaseClass {
     public void setUpQuery() {
         initializeDatabase();
 
-        QueryFactory queryFactory = new QueryFactory(DatabaseConnection.getDataSource());
+        SQLQueryBuilder SQLQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getDataSource());
 
-        this.having = queryFactory
+        this.having = SQLQueryBuilder
                 .select()
                     .all()
                 .from()

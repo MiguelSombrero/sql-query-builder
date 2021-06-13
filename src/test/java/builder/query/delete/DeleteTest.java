@@ -1,6 +1,6 @@
 package builder.query.delete;
 
-import builder.query.QueryFactory;
+import builder.query.SQLQueryBuilder;
 import query.dml.DeleteQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
@@ -13,17 +13,17 @@ import static builder.clause.ConditionClauseBuilder.valueOf;
 import static org.junit.Assert.assertEquals;
 
 public class DeleteTest extends DatabaseTestBaseClass {
-    private QueryFactory queryFactory;
+    private SQLQueryBuilder SQLQueryBuilder;
 
     @Before
     public void setUp() throws SQLException {
         initializeDatabase();
-        queryFactory = new QueryFactory(DatabaseConnection.getDataSource());
+        SQLQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getDataSource());
     }
 
     @Test
     public void testDeleteFromOneTable() throws SQLException {
-        DeleteQuery query = queryFactory
+        DeleteQuery query = SQLQueryBuilder
                 .deleteFrom()
                     .table("address")
                 .build();
@@ -37,7 +37,7 @@ public class DeleteTest extends DatabaseTestBaseClass {
 
     @Test
     public void testDeleteWithCondition() throws SQLException {
-        DeleteQuery query = queryFactory
+        DeleteQuery query = SQLQueryBuilder
                 .deleteFrom()
                     .table("address")
                 .where(valueOf("person_id").equals(1))
@@ -52,7 +52,7 @@ public class DeleteTest extends DatabaseTestBaseClass {
 
     @Test
     public void testDeleteWithMultipleCondition() throws SQLException {
-        DeleteQuery query = queryFactory
+        DeleteQuery query = SQLQueryBuilder
                 .deleteFrom()
                     .table("address")
                 .where(valueOf("person_id").equals(1)
@@ -68,7 +68,7 @@ public class DeleteTest extends DatabaseTestBaseClass {
 
     @Test(expected = IllegalArgumentException.class)
     public void testDeleteTableWithSQLInjection() {
-        queryFactory
+        SQLQueryBuilder
                 .deleteFrom()
                     .table("; DROP TABLE address")
                 .build();

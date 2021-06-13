@@ -1,9 +1,9 @@
 package performance;
 
+import builder.query.SQLQueryBuilder;
 import builder.query.select.column.FirstColumn;
 import builder.query.select.table.Table;
 import testutils.DatabaseConnection;
-import builder.query.QueryFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -17,13 +17,13 @@ import static org.junit.Assert.assertTrue;
 
 public class PerformanceTest {
     private static Logger logger = LoggerFactory.getLogger(PerformanceTest.class);
-    private QueryFactory queryFactory;
+    private SQLQueryBuilder SQLQueryBuilder;
     private static final String complexQuery = "SELECT p.firstname AS first, p.lastname AS last, c.name AS course FROM persons AS p, courses AS c LEFT JOIN addresses ON addresses.id = persons.address_id WHERE age > 18 AND age < 65 AND NOT firstname = 'Miika'";
     private static final int times = 100_000;
 
     @Before
     public void setUp() throws SQLException {
-        queryFactory = new QueryFactory(DatabaseConnection.getDataSource());
+        SQLQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getDataSource());
     }
 
     @Test
@@ -53,7 +53,7 @@ public class PerformanceTest {
         long end = 0L;
 
         start = System.currentTimeMillis();
-        FirstColumn field = queryFactory.select();
+        FirstColumn field = SQLQueryBuilder.select();
 
         for (int i = 0; i < times; i++) {
             field.column("test").alias("best");
@@ -122,7 +122,7 @@ public class PerformanceTest {
     }
 
     private String buildComplexQuery() {
-        return queryFactory
+        return SQLQueryBuilder
                 .select()
                     .column("p.firstname").alias("first")
                     .column("p.lastname").alias("last")

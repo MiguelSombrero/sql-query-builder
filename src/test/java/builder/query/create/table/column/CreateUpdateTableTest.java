@@ -1,8 +1,8 @@
 package builder.query.create.table.column;
 
+import builder.query.SQLQueryBuilder;
 import query.ddl.CreateQuery;
 import database.row.Row;
-import builder.query.QueryFactory;
 import query.dql.SelectQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
@@ -15,17 +15,17 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 public class CreateUpdateTableTest extends DatabaseTestBaseClass {
-    private QueryFactory queryFactory;
+    private SQLQueryBuilder SQLQueryBuilder;
 
     @Before
     public void setUp() throws SQLException {
         initializeDatabase();
-        queryFactory = new QueryFactory(DatabaseConnection.getDataSource());
+        SQLQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getDataSource());
     }
 
     @Test
     public void testCreateTableDataTypes() throws SQLException {
-        CreateQuery query = queryFactory.create()
+        CreateQuery query = SQLQueryBuilder.create()
                 .table("cars")
                 .column("ID").type(DataType.INT)
                 .column("hash").type(DataType.BIGINT)
@@ -62,7 +62,7 @@ public class CreateUpdateTableTest extends DatabaseTestBaseClass {
 
         insert.execute();*/
 
-        SelectQuery select = queryFactory
+        SelectQuery select = SQLQueryBuilder
                 .select()
                     .all()
                 .from()
@@ -77,7 +77,7 @@ public class CreateUpdateTableTest extends DatabaseTestBaseClass {
 
     @Test
     public void testCreateTableConstraintNotNull() throws SQLException {
-        CreateQuery query = queryFactory.create()
+        CreateQuery query = SQLQueryBuilder.create()
                 .table("planes")
                 .column("ID").type(DataType.INT).notNull()
                 .column("age").type(DataType.DOUBLE)
@@ -91,7 +91,7 @@ public class CreateUpdateTableTest extends DatabaseTestBaseClass {
 
     @Test
     public void testCreateTableConstraintUnique() throws SQLException {
-        CreateQuery query = queryFactory.create()
+        CreateQuery query = SQLQueryBuilder.create()
                 .table("bikes")
                 .column("ID").type(DataType.INT).unique()
                 .column("age").type(DataType.DOUBLE)
@@ -105,7 +105,7 @@ public class CreateUpdateTableTest extends DatabaseTestBaseClass {
 
     @Test
     public void testCreateTableConstraintPrimaryKey() throws SQLException {
-        CreateQuery query = queryFactory.create()
+        CreateQuery query = SQLQueryBuilder.create()
                 .table("vehicles")
                 .column("ID").type(DataType.INT).primaryKey()
                 .column("age").type(DataType.DOUBLE)
@@ -118,7 +118,7 @@ public class CreateUpdateTableTest extends DatabaseTestBaseClass {
 
     @Test
     public void testCreateTableConstraintAutoIncrement() throws SQLException {
-        CreateQuery query = queryFactory.create()
+        CreateQuery query = SQLQueryBuilder.create()
                 .table("vehicles")
                 .column("ID").type(DataType.INT).autoIncrement()
                 .column("person_id").type(DataType.INT)
@@ -132,7 +132,7 @@ public class CreateUpdateTableTest extends DatabaseTestBaseClass {
 
     @Test
     public void testCreateTableConstraintMultipleConstraint() throws SQLException {
-        CreateQuery query = queryFactory.create()
+        CreateQuery query = SQLQueryBuilder.create()
                 .table("vehicles")
                 .column("ID").type(DataType.INT).primaryKey().autoIncrement()
                 .column("person_id").type(DataType.INT).unique().notNull()
@@ -146,7 +146,7 @@ public class CreateUpdateTableTest extends DatabaseTestBaseClass {
 
     @Test(expected = IllegalArgumentException.class)
     public void testCreateTableWithSQLInjection() {
-        queryFactory.create()
+        SQLQueryBuilder.create()
                 .table(";DROP")
                 .column("ID").type(DataType.INT).primaryKey().autoIncrement()
                 .column("person_id").type(DataType.INT).unique().notNull()
@@ -156,7 +156,7 @@ public class CreateUpdateTableTest extends DatabaseTestBaseClass {
 
     @Test(expected = IllegalArgumentException.class)
     public void testCreateTableFirstColumnWithSQLInjection() {
-        queryFactory.create()
+        SQLQueryBuilder.create()
                 .table("vehicles")
                 .column("--DROP").type(DataType.INT).primaryKey().autoIncrement()
                 .column("person_id").type(DataType.INT).unique().notNull()
@@ -166,7 +166,7 @@ public class CreateUpdateTableTest extends DatabaseTestBaseClass {
 
     @Test(expected = IllegalArgumentException.class)
     public void testCreateTableColumnWithSQLInjection() {
-        queryFactory.create()
+        SQLQueryBuilder.create()
                 .table("vehicles")
                 .column("ID").type(DataType.INT).primaryKey().autoIncrement()
                 .column(";DROP").type(DataType.INT).unique().notNull()

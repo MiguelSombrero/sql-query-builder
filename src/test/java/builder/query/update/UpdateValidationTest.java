@@ -3,22 +3,22 @@ package builder.query.update;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import builder.query.QueryFactory;
+import builder.query.SQLQueryBuilder;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 
 import static org.junit.Assert.assertEquals;
 
 public class UpdateValidationTest extends DatabaseTestBaseClass {
-    private QueryFactory queryFactory;
+    private SQLQueryBuilder SQLQueryBuilder;
     private FirstColumn baseQuery;
 
     @Before
     public void setUp() {
         initializeDatabase();
-        queryFactory = new QueryFactory(DatabaseConnection.getDataSource());
+        SQLQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getDataSource());
 
-        this.baseQuery = queryFactory
+        this.baseQuery = SQLQueryBuilder
                 .update()
                 .table("person");
     }
@@ -61,7 +61,7 @@ public class UpdateValidationTest extends DatabaseTestBaseClass {
 
     @Test(expected = IllegalArgumentException.class)
     public void testUpdateTableWithSQLInjection() {
-        queryFactory
+        SQLQueryBuilder
                 .update()
                 .table(";DROP")
                 .column("firstname").setString("Miika")
@@ -72,7 +72,7 @@ public class UpdateValidationTest extends DatabaseTestBaseClass {
 
     @Test(expected = IllegalArgumentException.class)
     public void testUpdateFirstColumnWithSQLInjection() {
-        queryFactory
+        SQLQueryBuilder
                 .update()
                 .table("person")
                 .column("--DROP").setString("Miika")
@@ -83,7 +83,7 @@ public class UpdateValidationTest extends DatabaseTestBaseClass {
 
     @Test(expected = IllegalArgumentException.class)
     public void testUpdateColumnWithSQLInjection() {
-        queryFactory
+        SQLQueryBuilder
                 .update()
                 .table("person")
                 .column("firstname").setString("Miika")
@@ -94,7 +94,7 @@ public class UpdateValidationTest extends DatabaseTestBaseClass {
 
     @Test(expected = IllegalArgumentException.class)
     public void testUpdateValueWithSQLInjection() {
-        queryFactory
+        SQLQueryBuilder
                 .update()
                 .table("person")
                     .column("firstname").setString("Miika")
@@ -105,7 +105,7 @@ public class UpdateValidationTest extends DatabaseTestBaseClass {
 
     @Test(expected = IllegalArgumentException.class)
     public void testUpdateValueWithParameterInColumn() {
-        queryFactory
+        SQLQueryBuilder
                 .update()
                 .table("person")
                 .column("firstname").setString("Miika")
@@ -116,7 +116,7 @@ public class UpdateValidationTest extends DatabaseTestBaseClass {
 
     @Test(expected = IllegalArgumentException.class)
     public void testUpdateValueWithParameterInValue() {
-        queryFactory
+        SQLQueryBuilder
                 .update()
                 .table("person")
                 .column("firstname").setString("?")

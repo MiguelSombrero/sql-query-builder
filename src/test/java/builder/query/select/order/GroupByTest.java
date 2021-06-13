@@ -5,7 +5,7 @@ import database.row.Row;
 import query.dql.SelectQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
-import builder.query.QueryFactory;
+import builder.query.SQLQueryBuilder;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,15 +16,15 @@ import static builder.clause.ConditionClauseBuilder.*;
 import static org.junit.Assert.assertEquals;
 
 public class GroupByTest extends DatabaseTestBaseClass {
-    private Table table;
+    private Table baseQuery;
 
     @Before
     public void setUpQuery() {
         initializeDatabase();
 
-        QueryFactory queryFactory = new QueryFactory(DatabaseConnection.getDataSource());
+        SQLQueryBuilder SQLQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getDataSource());
 
-        this.table = queryFactory
+        this.baseQuery = SQLQueryBuilder
                 .select()
                     .all()
                 .from()
@@ -33,7 +33,7 @@ public class GroupByTest extends DatabaseTestBaseClass {
 
     @Test
     public void testGroupBy() throws SQLException {
-        SelectQuery query = table
+        SelectQuery query = baseQuery
                 .groupBy()
                     .column("age")
                 .build();
@@ -48,7 +48,7 @@ public class GroupByTest extends DatabaseTestBaseClass {
 
     @Test
     public void testMultipleGroupBy() throws SQLException {
-        SelectQuery query = table
+        SelectQuery query = baseQuery
                 .groupBy()
                     .column("age")
                     .column("firstname")
@@ -65,7 +65,7 @@ public class GroupByTest extends DatabaseTestBaseClass {
 
     @Test
     public void testGroupByWhere() throws SQLException {
-        SelectQuery query = this.table
+        SelectQuery query = this.baseQuery
                 .where(valueOf("age").greaterThan(18))
                 .groupBy()
                     .column("lastname")
@@ -81,7 +81,7 @@ public class GroupByTest extends DatabaseTestBaseClass {
 
     @Test
     public void testMultipleGroupByHaving() throws SQLException {
-        SelectQuery query = table
+        SelectQuery query = baseQuery
                 .groupBy()
                     .column("age")
                     .column("firstname")
@@ -98,7 +98,7 @@ public class GroupByTest extends DatabaseTestBaseClass {
 
     @Test
     public void testMultipleGroupByHavingAndOrdering() throws SQLException {
-        SelectQuery query = table
+        SelectQuery query = baseQuery
                 .groupBy()
                     .column("age")
                     .column("firstname")
@@ -117,7 +117,7 @@ public class GroupByTest extends DatabaseTestBaseClass {
 
     @Test(expected =IllegalArgumentException.class)
     public void testGroupByWithSQLInjection() {
-        table
+        baseQuery
                 .groupBy()
                 .column(";DROP")
                 .build();
@@ -125,7 +125,7 @@ public class GroupByTest extends DatabaseTestBaseClass {
 
     @Test(expected =IllegalArgumentException.class)
     public void testGroupByWithHavingColumnSQLInjection() {
-        table
+        baseQuery
                 .groupBy()
                     .column("firstname")
                     .column(";DROP")

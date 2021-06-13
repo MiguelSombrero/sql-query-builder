@@ -1,8 +1,8 @@
 package builder.query.insert;
 
+import builder.query.SQLQueryBuilder;
 import org.junit.Before;
 import org.junit.Test;
-import builder.query.QueryFactory;
 import query.dml.InsertQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
@@ -12,17 +12,17 @@ import java.sql.SQLException;
 import static org.junit.Assert.assertEquals;
 
 public class InsertValidationTest extends DatabaseTestBaseClass {
-    private QueryFactory queryFactory;
+    private SQLQueryBuilder SQLQueryBuilder;
 
     @Before
     public void setUp() throws SQLException {
         initializeDatabase();
-        queryFactory = new QueryFactory(DatabaseConnection.getDataSource());
+        SQLQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getDataSource());
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void testInsertBadIntegerValue() {
-        InsertQuery query = queryFactory
+        InsertQuery query = SQLQueryBuilder
                 .insertInto()
                 .table("person")
                 .columns("id")
@@ -33,7 +33,7 @@ public class InsertValidationTest extends DatabaseTestBaseClass {
 
     @Test(expected = IllegalArgumentException.class)
     public void testInsertBadDoubleValue() {
-        InsertQuery query = queryFactory
+        InsertQuery query = SQLQueryBuilder
                 .insertInto()
                 .table("all_types")
                     .columns("age")
@@ -44,7 +44,7 @@ public class InsertValidationTest extends DatabaseTestBaseClass {
 
     @Test(expected = IllegalArgumentException.class)
     public void testInsertBadStringValue() {
-        InsertQuery query = queryFactory
+        InsertQuery query = SQLQueryBuilder
                 .insertInto()
                 .table("person")
                     .columns("firstname")
@@ -55,7 +55,7 @@ public class InsertValidationTest extends DatabaseTestBaseClass {
 
     @Test(expected = IllegalArgumentException.class)
     public void testInsertBadDateValue() {
-        InsertQuery query = queryFactory
+        InsertQuery query = SQLQueryBuilder
                 .insertInto()
                 .table("person")
                 .columns("birthdate")
@@ -66,7 +66,7 @@ public class InsertValidationTest extends DatabaseTestBaseClass {
 
     @Test(expected = IllegalArgumentException.class)
     public void testInsertBadDateTimeValue() {
-        InsertQuery query = queryFactory
+        InsertQuery query = SQLQueryBuilder
                 .insertInto()
                 .table("person")
                 .columns("birthdate")
@@ -77,7 +77,7 @@ public class InsertValidationTest extends DatabaseTestBaseClass {
 
     @Test(expected = IllegalArgumentException.class)
     public void testInsertWithSQLInjection() {
-        queryFactory
+        SQLQueryBuilder
                 .insertInto()
                 .table(";DROP")
                     .columns("id")
@@ -88,7 +88,7 @@ public class InsertValidationTest extends DatabaseTestBaseClass {
 
     @Test(expected = IllegalArgumentException.class)
     public void testInsertColumnsWithSQLInjection() {
-        queryFactory
+        SQLQueryBuilder
                 .insertInto()
                 .table("person")
                     .columns("id", ";DROP")
@@ -99,7 +99,7 @@ public class InsertValidationTest extends DatabaseTestBaseClass {
 
     @Test(expected = IllegalArgumentException.class)
     public void testInsertValuesWithSQLInjection() {
-        queryFactory
+        SQLQueryBuilder
                 .insertInto()
                 .table("person")
                     .columns("firstname")
@@ -110,7 +110,7 @@ public class InsertValidationTest extends DatabaseTestBaseClass {
 
     @Test(expected = IllegalArgumentException.class)
     public void testInsertValuesWithParameterInColumn() {
-        queryFactory
+        SQLQueryBuilder
                 .insertInto()
                 .table("person")
                     .columns("?")
@@ -121,7 +121,7 @@ public class InsertValidationTest extends DatabaseTestBaseClass {
 
     @Test(expected = IllegalArgumentException.class)
     public void testInsertValuesWithParameterInValue() {
-        queryFactory
+        SQLQueryBuilder
                 .insertInto()
                 .table("person")
                 .columns("lastname")

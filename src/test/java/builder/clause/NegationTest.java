@@ -1,11 +1,11 @@
 package builder.clause;
 
+import builder.query.SQLQueryBuilder;
 import builder.query.select.table.Table;
 import database.row.Row;
 import query.dql.SelectQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
-import builder.query.QueryFactory;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,16 +16,16 @@ import static builder.clause.ConditionClauseBuilder.valueOf;
 import static org.junit.Assert.assertEquals;
 
 public class NegationTest extends DatabaseTestBaseClass {
-    private QueryFactory queryFactory;
+    private SQLQueryBuilder SQLQueryBuilder;
     private Table baseQuery;
 
     @Before
     public void setUpQuery() {
         initializeDatabase();
 
-        queryFactory = new QueryFactory(DatabaseConnection.getDataSource());
+        SQLQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getDataSource());
 
-        this.baseQuery = queryFactory
+        this.baseQuery = SQLQueryBuilder
                 .select()
                 .column("firstname")
                 .from()
@@ -105,7 +105,7 @@ public class NegationTest extends DatabaseTestBaseClass {
         SelectQuery query = this.baseQuery
                 .where(valueOf("lastname")
                         .not()
-                        .isInSub(queryFactory
+                        .isInSub(SQLQueryBuilder
                             .select()
                                 .column("lastname")
                             .from()

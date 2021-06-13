@@ -1,11 +1,11 @@
 package builder.clause;
 
+import builder.query.SQLQueryBuilder;
 import builder.query.select.table.Table;
 import database.row.Row;
 import query.dql.SelectQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
-import builder.query.QueryFactory;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -22,9 +22,9 @@ public class ConditionTest extends DatabaseTestBaseClass {
     public void setUpQuery() {
         initializeDatabase();
 
-        QueryFactory queryFactory = new QueryFactory(DatabaseConnection.getDataSource());
+        SQLQueryBuilder SQLQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getDataSource());
 
-        this.baseQuery = queryFactory
+        this.baseQuery = SQLQueryBuilder
                 .select()
                 .column("firstname")
                 .from()

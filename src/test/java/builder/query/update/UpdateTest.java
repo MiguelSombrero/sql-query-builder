@@ -1,6 +1,6 @@
 package builder.query.update;
 
-import builder.query.QueryFactory;
+import builder.query.SQLQueryBuilder;
 import query.dml.UpdateQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
@@ -14,15 +14,15 @@ import static builder.clause.ConditionClauseBuilder.valueOf;
 import static org.junit.Assert.assertEquals;
 
 public class UpdateTest extends DatabaseTestBaseClass {
-    private QueryFactory queryFactory;
+    private SQLQueryBuilder SQLQueryBuilder;
     private FirstColumn baseQuery;
 
     @Before
     public void setUp() {
         initializeDatabase();
-        queryFactory = new QueryFactory(DatabaseConnection.getDataSource());
+        SQLQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getDataSource());
 
-        this.baseQuery = queryFactory
+        this.baseQuery = SQLQueryBuilder
                 .update()
                 .table("person");
     }
@@ -42,7 +42,7 @@ public class UpdateTest extends DatabaseTestBaseClass {
 
     @Test
     public void testUpdateLongValue() throws SQLException {
-        UpdateQuery query = queryFactory
+        UpdateQuery query = SQLQueryBuilder
                 .update()
                 .table("all_types")
                 .column("hash").setLong(2485394539475834568L)
@@ -57,7 +57,7 @@ public class UpdateTest extends DatabaseTestBaseClass {
 
     @Test
     public void testUpdateBooleanValue() throws SQLException {
-        UpdateQuery query = queryFactory
+        UpdateQuery query = SQLQueryBuilder
                 .update()
                 .table("all_types")
                 .column("active").setBoolean(false)
@@ -126,7 +126,7 @@ public class UpdateTest extends DatabaseTestBaseClass {
     public void testUpdateByteArrayValue() throws SQLException, IOException {
         byte[] file = readFileAsByteArray("files/byte-array-test-file.txt");
 
-        UpdateQuery query = queryFactory
+        UpdateQuery query = SQLQueryBuilder
                 .update()
                 .table("all_types")
                 .column("contract").setByteArray(file)

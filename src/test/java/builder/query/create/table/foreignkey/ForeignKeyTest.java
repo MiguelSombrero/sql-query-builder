@@ -1,8 +1,8 @@
 package builder.query.create.table.foreignkey;
 
+import builder.query.SQLQueryBuilder;
 import builder.query.create.table.column.Constraint;
 import builder.query.create.table.column.DataType;
-import builder.query.QueryFactory;
 import query.ddl.CreateQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
@@ -14,16 +14,16 @@ import java.sql.SQLException;
 import static org.junit.Assert.assertEquals;
 
 public class ForeignKeyTest extends DatabaseTestBaseClass {
-    private QueryFactory queryFactory;
+    private SQLQueryBuilder SQLQueryBuilder;
     private Constraint column;
 
     @Before
     public void setUp() {
         initializeDatabase();
 
-        queryFactory = new QueryFactory(DatabaseConnection.getDataSource());
+        SQLQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getDataSource());
 
-        this.column = queryFactory.create()
+        this.column = SQLQueryBuilder.create()
                 .table("vehicles")
                 .column("ID").type(DataType.INT).primaryKey()
                 .column("person_id").type(DataType.INT)
@@ -109,7 +109,7 @@ public class ForeignKeyTest extends DatabaseTestBaseClass {
 
     @Test(expected = IllegalArgumentException.class)
     public void testCreateTableForeignKeyWithSQLInjection() {
-        queryFactory.create()
+        SQLQueryBuilder.create()
                 .table("vehicles")
                 .column("ID").type(DataType.INT).primaryKey().autoIncrement()
                 .column("person_id").type(DataType.INT).unique().notNull()
@@ -119,7 +119,7 @@ public class ForeignKeyTest extends DatabaseTestBaseClass {
 
     @Test(expected = IllegalArgumentException.class)
     public void testCreateTableForeignKeyReferenceWithSQLInjection() {
-        queryFactory.create()
+        SQLQueryBuilder.create()
                 .table("vehicles")
                 .column("ID").type(DataType.INT).primaryKey().autoIncrement()
                 .column("person_id").type(DataType.INT).unique().notNull()

@@ -1,11 +1,11 @@
 package builder.query.select.order;
 
+import builder.query.SQLQueryBuilder;
 import builder.query.select.table.Table;
 import database.row.Row;
 import query.dql.SelectQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
-import builder.query.QueryFactory;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,16 +16,16 @@ import static builder.clause.ConditionClauseBuilder.*;
 import static org.junit.Assert.assertEquals;
 
 public class LimitTest extends DatabaseTestBaseClass {
-    private QueryFactory queryFactory;
+    private SQLQueryBuilder SQLQueryBuilder;
     private Table baseQuery;
 
     @Before
     public void setUpQuery() {
         initializeDatabase();
 
-        this.queryFactory = new QueryFactory(DatabaseConnection.getDataSource());
+        this.SQLQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getDataSource());
 
-        this.baseQuery = queryFactory
+        this.baseQuery = SQLQueryBuilder
                 .select()
                     .all()
                 .from()
@@ -63,7 +63,7 @@ public class LimitTest extends DatabaseTestBaseClass {
 
     @Test
     public void testLimitJoinTable() throws SQLException {
-        SelectQuery query = queryFactory
+        SelectQuery query = SQLQueryBuilder
                 .select()
                     .column("person.id").alias("personId")
                     .column("person.firstname")

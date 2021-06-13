@@ -5,7 +5,7 @@ import database.row.Row;
 import query.dql.SelectQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
-import builder.query.QueryFactory;
+import builder.query.SQLQueryBuilder;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,7 +16,7 @@ import static builder.clause.ConditionClauseBuilder.*;
 import static org.junit.Assert.assertEquals;
 
 public class ComparisonTest extends DatabaseTestBaseClass {
-    private QueryFactory queryFactory;
+    private SQLQueryBuilder SQLQueryBuilder;
     private Table baseQuery;
     private Table allTypesBaseQuery;
 
@@ -24,15 +24,15 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     public void setUpQuery() {
         initializeDatabase();
 
-        queryFactory = new QueryFactory(DatabaseConnection.getDataSource());
+        SQLQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getDataSource());
 
-        this.baseQuery = queryFactory
+        this.baseQuery = SQLQueryBuilder
                 .select()
                     .column("firstname")
                 .from()
                     .table("person");
 
-        this.allTypesBaseQuery = this.queryFactory
+        this.allTypesBaseQuery = this.SQLQueryBuilder
                 .select()
                     .all()
                 .from()
@@ -84,7 +84,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     public void testConditionAnyEquals() throws SQLException {
         SelectQuery query = this.baseQuery
                 .where(valueOf("lastname")
-                        .equalsAny(queryFactory
+                        .equalsAny(SQLQueryBuilder
                                 .select()
                                 .column("lastname")
                                 .from().table("student")
@@ -103,7 +103,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     public void testConditionAllEquals() throws SQLException {
         SelectQuery query = this.baseQuery
                 .where(valueOf("lastname")
-                        .equalsAll(queryFactory
+                        .equalsAll(SQLQueryBuilder
                                 .select()
                                 .column("lastname")
                                 .from().table("student")
@@ -160,7 +160,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     public void testConditionAnyGreaterThan() throws SQLException {
         SelectQuery query = this.baseQuery
                 .where(valueOf("age")
-                        .greaterThanAny(queryFactory
+                        .greaterThanAny(SQLQueryBuilder
                                 .select()
                                 .column("age")
                                 .from().table("student")
@@ -178,7 +178,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     public void testConditionAllGreaterThan() throws SQLException {
         SelectQuery query = this.baseQuery
                 .where(valueOf("age")
-                        .greaterThanAll(queryFactory
+                        .greaterThanAll(SQLQueryBuilder
                                 .select()
                                 .column("age")
                                 .from().table("student")
@@ -235,7 +235,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     public void testConditionAnyGreaterThanOrEqual() throws SQLException {
         SelectQuery query = this.baseQuery
                 .where(valueOf("age")
-                        .greaterThanOrEqualAny(queryFactory
+                        .greaterThanOrEqualAny(SQLQueryBuilder
                                 .select()
                                 .column("age")
                                 .from().table("student")
@@ -253,7 +253,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     public void testConditionAllGreaterThanOrEqual() throws SQLException {
         SelectQuery query = this.baseQuery
                 .where(valueOf("lastname")
-                        .greaterThanOrEqualAll(queryFactory
+                        .greaterThanOrEqualAll(SQLQueryBuilder
                                 .select()
                                 .column("lastname")
                                 .from().table("student")
@@ -310,7 +310,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     public void testConditionAnyLesserThan() throws SQLException {
         SelectQuery query = this.baseQuery
                 .where(valueOf("lastname")
-                        .lesserThanAny(queryFactory
+                        .lesserThanAny(SQLQueryBuilder
                                 .select()
                                 .column("lastname")
                                 .from().table("student")
@@ -328,7 +328,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     public void testConditionAllLesserThan() throws SQLException {
         SelectQuery query = this.baseQuery
                 .where(valueOf("lastname")
-                        .lesserThanAll(queryFactory
+                        .lesserThanAll(SQLQueryBuilder
                                 .select()
                                 .column("lastname")
                                 .from().table("student")
@@ -385,7 +385,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     public void testConditionAnyLesserThanOrEqual() throws SQLException {
         SelectQuery query = this.baseQuery
                 .where(valueOf("lastname")
-                        .lesserThanOrEqualAny(queryFactory
+                        .lesserThanOrEqualAny(SQLQueryBuilder
                                 .select()
                                 .column("lastname")
                                 .from().table("student")
@@ -403,7 +403,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     public void testConditionAllLesserThanOrEqual() throws SQLException {
         SelectQuery query = this.baseQuery
                 .where(valueOf("lastname")
-                        .lesserThanOrEqualAll(queryFactory
+                        .lesserThanOrEqualAll(SQLQueryBuilder
                                 .select()
                                 .column("lastname")
                                 .from().table("student")
@@ -419,7 +419,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
 
     @Test
     public void testConditionIsNull() throws SQLException {
-        SelectQuery query = this.queryFactory
+        SelectQuery query = this.SQLQueryBuilder
                 .select()
                     .all()
                 .from()
@@ -436,7 +436,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
 
     @Test
     public void testConditionIsNotNull() throws SQLException {
-        SelectQuery query = this.queryFactory
+        SelectQuery query = this.SQLQueryBuilder
                 .select()
                     .all()
                 .from()
@@ -540,7 +540,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     @Test
     public void testConditionInSubQuery() throws SQLException {
         SelectQuery query = this.baseQuery
-                .where(valueOf("lastname").isInSub(queryFactory
+                .where(valueOf("lastname").isInSub(SQLQueryBuilder
                     .select()
                         .all()
                     .from().table("student")
@@ -553,7 +553,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     @Test
     public void testConditionExists() throws SQLException {
         SelectQuery query = this.baseQuery
-                .where(exists(queryFactory
+                .where(exists(SQLQueryBuilder
                         .select()
                             .all()
                         .from().table("student")
@@ -566,7 +566,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     @Test
     public void testConditionNotExists() throws SQLException {
         SelectQuery query = this.baseQuery
-                .where(notExists(queryFactory
+                .where(notExists(SQLQueryBuilder
                         .select()
                             .all()
                         .from().table("student")
