@@ -4,7 +4,7 @@ import database.row.Row;
 import query.dql.SelectQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
-import query.QueryFactory;
+import builder.query.QueryFactory;
 import org.junit.Before;
 import org.junit.Test;
 

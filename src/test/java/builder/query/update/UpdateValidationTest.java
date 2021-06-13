@@ -3,7 +3,7 @@ package builder.query.update;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import query.QueryFactory;
+import builder.query.QueryFactory;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 

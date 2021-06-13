@@ -3,10 +3,10 @@ package builder.query.insert;
 import builder.appender.StringAppender;
 import query.dml.InsertQuery;
 
-public class Table {
+public class InsertTable {
     private InsertQuery query;
 
-    public Table(InsertQuery query) {
+    public InsertTable(InsertQuery query) {
         this.query = query;
     }
 

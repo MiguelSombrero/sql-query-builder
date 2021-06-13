@@ -2,7 +2,7 @@ package builder.query.create.table.column;
 
 import query.ddl.CreateQuery;
 import database.row.Row;
-import query.QueryFactory;
+import builder.query.QueryFactory;
 import query.dql.SelectQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
@@ -14,7 +14,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-public class CreateTableTest extends DatabaseTestBaseClass {
+public class CreateUpdateTableTest extends DatabaseTestBaseClass {
     private QueryFactory queryFactory;
 
     @Before

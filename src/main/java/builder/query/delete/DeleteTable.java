@@ -3,10 +3,10 @@ package builder.query.delete;
 import builder.appender.StringAppender;
 import query.dml.DeleteQuery;
 
-public class Table {
+public class DeleteTable {
     private DeleteQuery query;
 
-    public Table(DeleteQuery query) {
+    public DeleteTable(DeleteQuery query) {
         this.query = query;
     }
 

@@ -3,10 +3,10 @@ package builder.query.update;
 import builder.appender.StringAppender;
 import query.dml.UpdateQuery;
 
-public class Table {
+public class UpdateTable {
     private UpdateQuery query;
 
-    public Table(UpdateQuery query) {
+    public UpdateTable(UpdateQuery query) {
         this.query = query;
     }
 

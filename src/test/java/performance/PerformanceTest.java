@@ -3,7 +3,7 @@ package performance;
 import builder.query.select.column.FirstColumn;
 import builder.query.select.table.Table;
 import testutils.DatabaseConnection;
-import query.QueryFactory;
+import builder.query.QueryFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import java.sql.SQLException;
 
-import static builder.clause.WhereClauseFactory.valueOf;
+import static builder.clause.ConditionClauseBuilder.valueOf;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 

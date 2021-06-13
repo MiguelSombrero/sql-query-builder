@@ -1,23 +1,19 @@
 package database.row;
 
-import builder.clause.WhereClauseFactory;
-import database.row.Row;
+import builder.clause.ConditionClauseBuilder;
 import org.junit.Before;
 import org.junit.Test;
-import query.QueryFactory;
+import builder.query.QueryFactory;
 import query.dql.SelectQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 
-import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
-import java.sql.Blob;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.*;
 
 public class RowTest extends DatabaseTestBaseClass {
@@ -65,7 +61,7 @@ public class RowTest extends DatabaseTestBaseClass {
                 .from()
                     .table("person")
                 .leftJoin("course").on("person.id", "course.person_id")
-                .where(WhereClauseFactory.valueOf("firstname").equals("Miika"))
+                .where(ConditionClauseBuilder.valueOf("firstname").equals("Miika"))
                 .build();
 
         List<Row> result = query.execute();

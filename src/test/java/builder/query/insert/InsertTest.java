@@ -3,14 +3,14 @@ package builder.query.insert;
 import query.dml.InsertQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
-import query.QueryFactory;
+import builder.query.QueryFactory;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
 import java.sql.SQLException;
 
-import static builder.clause.WhereClauseFactory.valueOf;
+import static builder.clause.ConditionClauseBuilder.valueOf;
 import static org.junit.Assert.assertEquals;
 
 public class InsertTest extends DatabaseTestBaseClass {

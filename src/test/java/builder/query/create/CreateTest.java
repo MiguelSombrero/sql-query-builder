@@ -1,6 +1,6 @@
 package builder.query.create;
 
-import query.QueryFactory;
+import builder.query.QueryFactory;
 import query.ddl.CreateQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;

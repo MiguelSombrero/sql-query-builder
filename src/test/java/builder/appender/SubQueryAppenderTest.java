@@ -1,7 +1,7 @@
 package builder.appender;
 
 import testutils.DatabaseConnection;
-import query.QueryFactory;
+import builder.query.QueryFactory;
 import org.junit.Before;
 import clause.SQLClause;
 import builder.query.select.table.Table;

@@ -37,8 +37,8 @@ Above code prints out:
 
 You can import static factory methods for queries to look more natural language like.
 
-    import static query.QueryFactory.*;
-    import static builder.clause.WhereClauseFactory.*;
+    import static builder.query.QueryFactory.*;
+    import static builder.clause.ConditionClauseBuilder.*;
 
     String SQLQuery = select()
             .column("p.id")
