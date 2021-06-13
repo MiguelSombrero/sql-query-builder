@@ -21,7 +21,7 @@ public class DDLBaseQuery extends SQLClause implements Query<Void> {
 
     public Void execute() throws SQLException {
         try {
-            run.execute(this.getQueryString(), getParams());
+            run.execute(this.getQueryString(), getParamValues());
 
         } catch (SQLException e) {
             logger.info("Executing of query " + this + " failed");

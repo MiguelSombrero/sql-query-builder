@@ -13,5 +13,5 @@ public interface Clause {
     void addParam(AbstractColumnValue param);
     void mergeSubQuery(Clause clause);
     String getQueryString();
-    List<ColumnValue> getParamsList();
+    List<ColumnValue> getParams();
 }

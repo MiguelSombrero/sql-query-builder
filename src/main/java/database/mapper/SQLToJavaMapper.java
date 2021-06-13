@@ -38,6 +38,4 @@ public class SQLToJavaMapper {
                 throw new IllegalArgumentException("Could not map SQL type to any Java type");
         }
     }
-
-
 }

@@ -40,27 +40,27 @@ public class SQLClause implements Clause {
         this.params.add(param);
     }
 
-    protected Object[] getParams() {
-        return this.params.stream()
-                .map(columnValue -> columnValue.getValue())
-                .toArray();
+    public List<ColumnValue> getParams() {
+        return this.params;
     }
 
-    public List<ColumnValue> getParamsList() {
-        return this.params;
+    public void mergeSubQuery(Clause subQuery) {
+        append(subQuery.getQueryString());
+        this.params.addAll(subQuery.getParams());
     }
 
     public String getQueryString() {
         return this.queryString.toString();
     }
 
-    public void mergeSubQuery(Clause subQuery) {
-        append(subQuery.getQueryString());
-        this.params.addAll(subQuery.getParamsList());
-    }
-
     @Override
     public String toString() {
         return StringUtils.replaceQuestionMarksWithParams(this.queryString.toString(), this.params);
+    }
+
+    protected Object[] getParamValues() {
+        return this.params.stream()
+                .map(columnValue -> columnValue.getValue())
+                .toArray();
     }
 }
