@@ -5,38 +5,35 @@ import query.SQLQuery;
 
 public class HavingClauseFactory {
 
+    private static AggregateFunctionAppender appender;
+
     public static Negation count(String column) {
         SQLQuery query = createQuery();
-        AggregateFunctionAppender aggregateFunctionAppender = new AggregateFunctionAppender(query);
-        aggregateFunctionAppender.count(column);
+        appender.count(query, column);
         return new Negation(query);
     }
 
     public static Negation sum(String column) {
         SQLQuery query = createQuery();
-        AggregateFunctionAppender aggregateFunctionAppender = new AggregateFunctionAppender(query);
-        aggregateFunctionAppender.sum(column);
+        appender.sum(query, column);
         return new Negation(query);
     }
 
     public static Negation avg(String column) {
         SQLQuery query = createQuery();
-        AggregateFunctionAppender aggregateFunctionAppender = new AggregateFunctionAppender(query);
-        aggregateFunctionAppender.avg(column);
+        appender.avg(query, column);
         return new Negation(query);
     }
 
     public static Negation max(String column) {
         SQLQuery query = createQuery();
-        AggregateFunctionAppender aggregateFunctionAppender = new AggregateFunctionAppender(query);
-        aggregateFunctionAppender.max(column);
+        appender.max(query, column);
         return new Negation(query);
     }
 
     public static Negation min(String column) {
         SQLQuery query = createQuery();
-        AggregateFunctionAppender aggregateFunctionAppender = new AggregateFunctionAppender(query);
-        aggregateFunctionAppender.min(column);
+        appender.min(query, column);
         return new Negation(query);
     }
 

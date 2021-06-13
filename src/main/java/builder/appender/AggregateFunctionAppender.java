@@ -3,23 +3,27 @@ package builder.appender;
 import query.Query;
 
 public class AggregateFunctionAppender {
-    private Query query;
-
-    public AggregateFunctionAppender(Query query) {
-        this.query = query;
-    }
 
     /**
      * Validates user input and appends 'COUNT(column)' into
      * query string 'SELECT aggregate function(s)'
      *
-     * @param column Column name to be appended in the COUNT() queryble'
+     * @param query Query object where string is appended
+     *
+     * @param column Column name to be appended in the COUNT() query'
      */
-    public void count(String column) {
-        applyAggregate("COUNT", column);
+    public static void count(Query query, String column) {
+        query.append("COUNT");
+        applyAggregate(query, column);
     }
 
-    public void countAll() {
+    /**
+     * Appends 'COUNT(*)' into
+     * query string 'SELECT aggregate function(s)'
+     *
+     * @param query Query object where string is appended
+     */
+    public static void countAll(Query query) {
         query.append("COUNT(*)");
     }
 
@@ -27,44 +31,55 @@ public class AggregateFunctionAppender {
      * Validates user input and appends 'MIN(column)' into
      * query string 'SELECT aggregate function(s)'
      *
+     * @param query Query object where string is appended
+     *
      * @param column Column name to be appended in the MIN() query
      */
-    public void min(String column) {
-        applyAggregate("MIN", column);
+    public static void min(Query query, String column) {
+        query.append("MIN");
+        applyAggregate(query, column);
     }
 
     /**
      * Validates user input and appends 'MAX(column)' into
      * query string 'SELECT aggregate function(s)'
      *
+     * @param query Query object where string is appended
+     *
      * @param column Column name to be appended in the MAX() query
      */
-    public void max(String column) {
-        applyAggregate("MAX", column);
+    public static void max(Query query, String column) {
+        query.append("MAX");
+        applyAggregate(query, column);
     }
 
     /**
      * Validates user input and appends 'AVG(column)' into
      * query string 'SELECT aggregate function(s)'
      *
+     * @param query Query object where string is appended
+     *
      * @param column Column name to be appended in the AVG() query
      */
-    public void avg(String column) {
-        applyAggregate("AVG", column);
+    public static void avg(Query query, String column) {
+        query.append("AVG");
+        applyAggregate(query, column);
     }
 
     /**
      * Validates user input and appends 'SUM(column)' into
      * query string 'SELECT aggregate function(s)'
      *
+     * @param query Query object where string is appended
+     *
      * @param column Column name to be appended in the SUM() query
      */
-    public void sum(String column) {
-        applyAggregate("SUM", column);
+    public static void sum(Query query, String column) {
+        query.append("SUM");
+        applyAggregate(query, column);
     }
 
-    private void applyAggregate(String function, String toColumn) {
-        query.append(function);
+    private static void applyAggregate(Query query, String toColumn) {
         query.append("(");
         StringAppender.validateAndAppend(query, toColumn);
         query.append(")");

@@ -8,9 +8,9 @@ import validation.ValidatorFactory;
 public class WhereClauseFactory {
     private static Validator<String> validator = ValidatorFactory.exceptionThrowingNameValidator();
 
-    public static Negation valueOf(String operand) {
-        validator.validate(operand);
-        return new Negation(createQuery(operand));
+    public static Negation valueOf(String column) {
+        validator.validate(column);
+        return new Negation(createQuery(column));
     }
 
     public static Condition exists(SelectQueryBuilder subQuery) {
