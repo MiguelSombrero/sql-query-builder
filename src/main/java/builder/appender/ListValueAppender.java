@@ -1,42 +1,42 @@
 package builder.appender;
 
-import query.Query;
+import clause.Clause;
 
 public class ListValueAppender {
 
-    public static void appendListOfStringParams(Query query, String ...listOfValues) {
-        query.append("(");
-        ValueAppender.appendStringParam(query, listOfValues[0]);
+    public static void appendListOfStringParams(Clause clause, String ...listOfValues) {
+        clause.append("(");
+        ValueAppender.appendStringParam(clause, listOfValues[0]);
 
         for (int i = 1; i < listOfValues.length; i++) {
-            query.append(", ");
-            ValueAppender.appendStringParam(query, listOfValues[i]);
+            clause.append(", ");
+            ValueAppender.appendStringParam(clause, listOfValues[i]);
         }
 
-        query.append(")");
+        clause.append(")");
     }
 
-    public static void appendListOfIntParams(Query query, int ...listOfValues) {
-        query.append("(");
-        ValueAppender.appendIntParam(query, listOfValues[0]);
+    public static void appendListOfIntParams(Clause clause, int ...listOfValues) {
+        clause.append("(");
+        ValueAppender.appendIntParam(clause, listOfValues[0]);
 
         for (int i = 1; i < listOfValues.length; i++) {
-            query.append(", ");
-            ValueAppender.appendIntParam(query, listOfValues[i]);
+            clause.append(", ");
+            ValueAppender.appendIntParam(clause, listOfValues[i]);
         }
 
-        query.append(")");
+        clause.append(")");
     }
 
-    public static void appendListOfDoubleParams(Query query, double ...listOfValues) {
-        query.append("(");
-        ValueAppender.appendDoubleParam(query, listOfValues[0]);
+    public static void appendListOfDoubleParams(Clause clause, double ...listOfValues) {
+        clause.append("(");
+        ValueAppender.appendDoubleParam(clause, listOfValues[0]);
 
         for (int i = 1; i < listOfValues.length; i++) {
-            query.append(", ");
-            ValueAppender.appendDoubleParam(query, listOfValues[i]);
+            clause.append(", ");
+            ValueAppender.appendDoubleParam(clause, listOfValues[i]);
         }
 
-        query.append(")");
+        clause.append(")");
     }
 }

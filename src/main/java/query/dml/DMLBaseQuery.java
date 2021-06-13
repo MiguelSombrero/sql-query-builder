@@ -3,12 +3,13 @@ package query.dml;
 import org.apache.commons.dbutils.QueryRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import query.SQLQuery;
+import query.Query;
+import clause.SQLClause;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
 
-public abstract class DMLBaseQuery extends SQLQuery implements DMLQuery {
+public abstract class DMLBaseQuery extends SQLClause implements Query<Integer> {
     protected static Logger logger = LoggerFactory.getLogger(DMLBaseQuery.class);
 
     protected QueryRunner run;
@@ -26,7 +27,7 @@ public abstract class DMLBaseQuery extends SQLQuery implements DMLQuery {
      *
      * @throws SQLException when SQL error occurs
      */
-    public int execute() throws SQLException {
+    public Integer execute() throws SQLException {
         int result = 0;
 
         try {

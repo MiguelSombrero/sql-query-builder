@@ -5,13 +5,14 @@ import database.row.RowHandler;
 import org.apache.commons.dbutils.QueryRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import query.SQLQuery;
+import query.Query;
+import clause.SQLClause;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.util.List;
 
-public class SelectQuery extends SQLQuery implements DQLQuery {
+public class SelectQuery extends SQLClause implements Query<List<Row>> {
     private static Logger logger = LoggerFactory.getLogger(SelectQuery.class);
 
     private RowHandler handler;

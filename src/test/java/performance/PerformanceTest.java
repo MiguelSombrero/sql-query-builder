@@ -1,7 +1,7 @@
 package performance;
 
-import builder.statement.select.column.FirstColumn;
-import builder.statement.select.table.Table;
+import builder.query.select.column.FirstColumn;
+import builder.query.select.table.Table;
 import testutils.DatabaseConnection;
 import query.QueryFactory;
 import org.junit.Before;

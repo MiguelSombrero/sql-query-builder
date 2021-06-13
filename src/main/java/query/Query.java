@@ -1,11 +1,9 @@
 package query;
 
-import database.column.AbstractColumnValue;
+import clause.Clause;
 
-public interface Query {
-    void append(String value);
-    void append(int value);
-    void append(double value);
-    void insert(int index, String value);
-    void addParam(AbstractColumnValue param);
+import java.sql.SQLException;
+
+public interface Query<T> extends Clause {
+    T execute() throws SQLException;
 }

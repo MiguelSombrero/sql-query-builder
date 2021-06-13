@@ -1,6 +1,6 @@
 package utils;
 
-import database.column.AbstractColumnValue;
+import database.column.ColumnValue;
 import database.column.StringColumnValue;
 import org.junit.Test;
 
@@ -18,7 +18,7 @@ public class StringUtilsTest {
         StringColumnValue param1 = new StringColumnValue("Miika");
         StringColumnValue param2 = new StringColumnValue("Somero");
         StringColumnValue param3 = new StringColumnValue("Kari");
-        List<AbstractColumnValue> params = new ArrayList<>();
+        List<ColumnValue> params = new ArrayList<>();
         params.add(param1);
         params.add(param2);
         params.add(param3);

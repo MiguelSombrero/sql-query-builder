@@ -1,6 +1,6 @@
 package builder.clause;
 
-import builder.statement.select.table.Table;
+import builder.query.select.table.Table;
 import database.row.Row;
 import query.dql.SelectQuery;
 import testutils.DatabaseConnection;

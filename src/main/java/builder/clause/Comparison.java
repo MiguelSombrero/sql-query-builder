@@ -3,8 +3,8 @@ package builder.clause;
 import builder.appender.ListValueAppender;
 import builder.appender.SubQueryAppender;
 import builder.appender.ValueAppender;
-import builder.statement.select.SelectQueryBuilder;
-import query.SQLQuery;
+import builder.query.select.SelectQueryBuilder;
+import clause.SQLClause;
 
 public class Comparison {
     private static final String EQUALS = " = ";
@@ -15,9 +15,9 @@ public class Comparison {
     private static final String ANY = "ANY ";
     private static final String ALL = "ALL ";
 
-    protected SQLQuery query;
+    protected SQLClause query;
 
-    public Comparison(SQLQuery query) {
+    public Comparison(SQLClause query) {
         this.query = query;
     }
 

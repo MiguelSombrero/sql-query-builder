@@ -1,8 +1,8 @@
 package query;
 
-import builder.statement.create.Create;
-import builder.statement.drop.Drop;
-import builder.statement.select.column.FirstColumn;
+import builder.query.create.Create;
+import builder.query.drop.Drop;
+import builder.query.select.column.FirstColumn;
 import query.ddl.CreateQuery;
 import query.ddl.DropQuery;
 import query.dml.DeleteQuery;
@@ -34,19 +34,19 @@ public class QueryFactory {
         return new FirstColumn(query);
     }
 
-    public builder.statement.insert.Table insertInto() {
+    public builder.query.insert.Table insertInto() {
         InsertQuery query = createInsertQuery("INSERT INTO ");
-        return new builder.statement.insert.Table(query);
+        return new builder.query.insert.Table(query);
     }
 
-    public builder.statement.delete.Table deleteFrom() {
+    public builder.query.delete.Table deleteFrom() {
         DeleteQuery query = createDeleteQuery("DELETE FROM ");
-        return new builder.statement.delete.Table(query);
+        return new builder.query.delete.Table(query);
     }
 
-    public builder.statement.update.Table update() {
+    public builder.query.update.Table update() {
         UpdateQuery query = createUpdateQuery("UPDATE ");
-        return new builder.statement.update.Table(query);
+        return new builder.query.update.Table(query);
     }
 
     public Create create() {

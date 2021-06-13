@@ -1,10 +1,10 @@
 package builder.clause;
 
-import query.SQLQuery;
+import clause.SQLClause;
 
 public class Negation extends Comparison {
 
-    public Negation(SQLQuery query) {
+    public Negation(SQLClause query) {
         super(query);
     }
 

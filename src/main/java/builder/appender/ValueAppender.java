@@ -1,7 +1,7 @@
 package builder.appender;
 
 import database.column.*;
-import query.Query;
+import clause.Clause;
 import validation.Validator;
 import validation.ValidatorFactory;
 
@@ -20,49 +20,49 @@ public class ValueAppender {
     private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
-    public static void appendStringParam(Query query, String value) {
+    public static void appendStringParam(Clause clause, String value) {
         stringValueValidator.validate(value);
-        query.append("?");
-        query.addParam(new StringColumnValue(value));
+        clause.append("?");
+        clause.addParam(new StringColumnValue(value));
     }
 
-    public static void appendIntParam(Query query, int value) {
+    public static void appendIntParam(Clause clause, int value) {
         integerValidator.validate(value);
-        query.append("?");
-        query.addParam(new IntegerColumnValue(value));
+        clause.append("?");
+        clause.addParam(new IntegerColumnValue(value));
     }
 
-    public static void appendLongParam(Query query, long value) {
-        query.append("?");
-        query.addParam(new LongColumnValue(value));
+    public static void appendLongParam(Clause clause, long value) {
+        clause.append("?");
+        clause.addParam(new LongColumnValue(value));
     }
 
-    public static void appendDoubleParam(Query query, double value) {
+    public static void appendDoubleParam(Clause clause, double value) {
         doubleValidator.validate(value);
-        query.append("?");
-        query.addParam(new DoubleColumnValue(value));
+        clause.append("?");
+        clause.addParam(new DoubleColumnValue(value));
     }
 
-    public static void appendDateParam(Query query, String value) {
+    public static void appendDateParam(Clause clause, String value) {
         dateValidator.validate(value);
-        query.append("?");
-        query.addParam(new DateColumnValue(LocalDate.parse(value, dateFormatter)));
+        clause.append("?");
+        clause.addParam(new DateColumnValue(LocalDate.parse(value, dateFormatter)));
     }
 
-    public static void appendDateTimeParam(Query query, String value) {
+    public static void appendDateTimeParam(Clause clause, String value) {
         dateTimeValidator.validate(value);
-        query.append("?");
-        query.addParam(new DateTimeColumnValue(LocalDateTime.parse(value, dateTimeFormatter)));
+        clause.append("?");
+        clause.addParam(new DateTimeColumnValue(LocalDateTime.parse(value, dateTimeFormatter)));
     }
 
-    public static void appendBooleanParam(Query query, boolean value) {
-        query.append("?");
-        query.addParam(new BooleanColumnValue(value));
+    public static void appendBooleanParam(Clause clause, boolean value) {
+        clause.append("?");
+        clause.addParam(new BooleanColumnValue(value));
     }
 
-    public static void appendByteArrayParam(Query query, byte[] value) {
+    public static void appendByteArrayParam(Clause clause, byte[] value) {
         byteArrayValidator.validate(value);
-        query.append("?");
-        query.addParam(new ByteArrayColumnValue(value));
+        clause.append("?");
+        clause.addParam(new ByteArrayColumnValue(value));
     }
 }

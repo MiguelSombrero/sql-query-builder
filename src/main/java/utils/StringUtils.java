@@ -1,6 +1,6 @@
 package utils;
 
-import database.column.AbstractColumnValue;
+import database.column.ColumnValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,7 +10,7 @@ public class StringUtils {
     protected static Logger logger = LoggerFactory.getLogger(StringUtils.class);
     private static final char QUESTION_MARK = 63;
 
-    public static String replaceQuestionMarksWithParams(String text, List<AbstractColumnValue> params) {
+    public static String replaceQuestionMarksWithParams(String text, List<ColumnValue> params) {
         StringBuilder replacedText = new StringBuilder();
         int count = 0;
 
@@ -18,7 +18,7 @@ public class StringUtils {
             Character character = text.charAt(i);
 
             if (character == QUESTION_MARK) {
-                AbstractColumnValue value = params.get(count);
+                ColumnValue value = params.get(count);
                 String param = String.valueOf(value.toString());
                 replacedText.append(param);
                 count++;

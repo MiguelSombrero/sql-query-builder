@@ -3,8 +3,8 @@ package builder.appender;
 import testutils.DatabaseConnection;
 import query.QueryFactory;
 import org.junit.Before;
-import query.SQLQuery;
-import builder.statement.select.table.Table;
+import clause.SQLClause;
+import builder.query.select.table.Table;
 import org.junit.Test;
 
 import java.sql.SQLException;
@@ -21,7 +21,7 @@ public class SubQueryAppenderTest {
 
     @Test
     public void testAppendSubQuery() {
-        SQLQuery query = new SQLQuery(new StringBuilder());
+        SQLClause query = new SQLClause(new StringBuilder());
         Table table = queryFactory.select().all().from().table("person");
         SubQueryAppender.appendSubQuery(query, table);
         assertEquals("(SELECT * FROM person)", query.toString());
