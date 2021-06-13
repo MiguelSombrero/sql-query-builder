@@ -16,16 +16,16 @@ import static builder.clause.ConditionClauseBuilder.valueOf;
 import static org.junit.Assert.assertEquals;
 
 public class TableTest extends DatabaseTestBaseClass {
-    private SQLQueryBuilder SQLQueryBuilder;
+    private SQLQueryBuilder sqlQueryBuilder;
     private ToFrom baseQuery;
 
     @Before
     public void setUpQuery() {
         initializeDatabase();
 
-        SQLQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getDataSource());
+        sqlQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getDataSource());
 
-        this.baseQuery = SQLQueryBuilder
+        this.baseQuery = sqlQueryBuilder
                 .select()
                     .all();
     }
@@ -47,7 +47,7 @@ public class TableTest extends DatabaseTestBaseClass {
 
     @Test
     public void testFromMultipleTables() throws SQLException {
-        SelectQuery query = SQLQueryBuilder
+        SelectQuery query = sqlQueryBuilder
                 .select()
                     .column("firstname")
                     .column("street")
@@ -70,7 +70,7 @@ public class TableTest extends DatabaseTestBaseClass {
     public void testFromSubQuery() throws SQLException {
         SelectQuery query = this.baseQuery
                 .from()
-                    .sub(SQLQueryBuilder
+                    .sub(sqlQueryBuilder
                             .select()
                                 .all()
                             .from()
@@ -90,7 +90,7 @@ public class TableTest extends DatabaseTestBaseClass {
 
     @Test
     public void testFromMultipleTablesWithAliases() throws SQLException {
-        SelectQuery query = SQLQueryBuilder
+        SelectQuery query = sqlQueryBuilder
                 .select()
                     .column("p.id")
                     .column("a.city")
@@ -111,7 +111,7 @@ public class TableTest extends DatabaseTestBaseClass {
 
     @Test
     public void testFromOneJoinTableWithAlias() throws SQLException {
-        SelectQuery query = SQLQueryBuilder
+        SelectQuery query = sqlQueryBuilder
                 .select()
                     .column("person.id")
                 .from()
@@ -129,7 +129,7 @@ public class TableTest extends DatabaseTestBaseClass {
 
     @Test
     public void testInnerJoin() throws SQLException {
-        SelectQuery query = SQLQueryBuilder
+        SelectQuery query = sqlQueryBuilder
                 .select()
                     .count("person.id")
                 .from()
@@ -147,7 +147,7 @@ public class TableTest extends DatabaseTestBaseClass {
 
     @Test
     public void testLeftJoin() throws SQLException {
-        SelectQuery query = this.SQLQueryBuilder
+        SelectQuery query = this.sqlQueryBuilder
                 .select()
                     .column("person.id")
                     .column("address.city")
@@ -166,7 +166,7 @@ public class TableTest extends DatabaseTestBaseClass {
 
     @Test
     public void testRightJoin() throws SQLException {
-        SelectQuery query = this.SQLQueryBuilder
+        SelectQuery query = this.sqlQueryBuilder
                 .select()
                     .column("person.id")
                     .column("address.city")
@@ -185,7 +185,7 @@ public class TableTest extends DatabaseTestBaseClass {
 
     @Test
     public void testMultipleJoins() throws SQLException {
-        SelectQuery query = this.SQLQueryBuilder
+        SelectQuery query = this.sqlQueryBuilder
                 .select()
                     .column("person.id")
                     .column("address.city")
@@ -207,7 +207,7 @@ public class TableTest extends DatabaseTestBaseClass {
 
     @Test
     public void testFromMultipleTablesAndJoinWithAliases() throws SQLException {
-        SelectQuery query = this.SQLQueryBuilder
+        SelectQuery query = this.sqlQueryBuilder
                 .select()
                     .column("p.id")
                     .column("a.city")
@@ -225,71 +225,5 @@ public class TableTest extends DatabaseTestBaseClass {
 
         assertRowCount(result, 2);
         assertColumnCount(result, 3);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testSelectTableWithSQLInjection() {
-        this.baseQuery
-                .from()
-                .table(";DROP")
-                .build();
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testSelectTableAliasWithSQLInjection() {
-        this.baseQuery
-                .from()
-                .table("person").alias(";DROP")
-                .build();
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testSelectSubQueryAliasWithSQLInjection() {
-        this.baseQuery
-                .from()
-                .sub(SQLQueryBuilder
-                        .select()
-                            .column("*")
-                        .from()
-                            .table("person")
-                )
-                .alias(";DROP")
-                .build();
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testSelectJoinTableWithSQLInjection() {
-        this.baseQuery
-                .from()
-                .table("person")
-                .leftJoin(";DROP").alias("a").on("person.id", "a.person_id")
-                .build();
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testSelectJoinTableAliasWithSQLInjection() {
-        this.baseQuery
-                .from()
-                .table("person")
-                .leftJoin("address").alias(";DROP").on("person.id", "a.person_id")
-                .build();
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testSelectJoinTableOnWithSQLInjection() {
-        this.baseQuery
-                .from()
-                .table("person")
-                .leftJoin("address").alias("a").on(";DROP", "a.person_id")
-                .build();
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testSelectJoinTableOnJoinWithSQLInjection() {
-        this.baseQuery
-                .from()
-                .table("person")
-                .leftJoin("address").alias("a").on("person.id", ";DROP")
-                .build();
     }
 }

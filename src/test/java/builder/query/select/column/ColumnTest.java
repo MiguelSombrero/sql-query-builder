@@ -14,17 +14,17 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 public class ColumnTest extends DatabaseTestBaseClass {
-    private SQLQueryBuilder SQLQueryBuilder;
+    private SQLQueryBuilder sqlQueryBuilder;
 
     @Before
     public void setUp() throws SQLException {
         initializeDatabase();
-        SQLQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getDataSource());
+        sqlQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getDataSource());
     }
 
     @Test
     public void testSelect() throws SQLException {
-        SelectQuery query = SQLQueryBuilder
+        SelectQuery query = sqlQueryBuilder
                 .select()
                     .column("lastname")
                     .column("age")
@@ -42,7 +42,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
 
     @Test
     public void testSelectTop() throws SQLException {
-        SelectQuery query = SQLQueryBuilder
+        SelectQuery query = sqlQueryBuilder
                 .selectTop(2)
                     .column("lastname")
                     .column("age")
@@ -61,7 +61,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
 
     @Test
     public void testSelectDistinct() throws SQLException {
-        SelectQuery query = SQLQueryBuilder
+        SelectQuery query = sqlQueryBuilder
                 .selectDistinct()
                     .column("lastname")
                     .column("age")
@@ -80,7 +80,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
 
     @Test
     public void testSelectAll() throws SQLException {
-        SelectQuery query = SQLQueryBuilder
+        SelectQuery query = sqlQueryBuilder
                 .select()
                     .all()
                 .from()
@@ -97,7 +97,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
 
     @Test
     public void testSelectCount() throws SQLException {
-        SelectQuery query = SQLQueryBuilder
+        SelectQuery query = sqlQueryBuilder
                 .select()
                     .count("age")
                 .from()
@@ -114,7 +114,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
 
     @Test
     public void testSelectCountAll() throws SQLException {
-        SelectQuery query = SQLQueryBuilder
+        SelectQuery query = sqlQueryBuilder
                 .select()
                     .countAll()
                 .from()
@@ -131,7 +131,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
 
     @Test
     public void testSelectMin() throws SQLException {
-        SelectQuery query = SQLQueryBuilder
+        SelectQuery query = sqlQueryBuilder
                 .select()
                     .min("age")
                 .from()
@@ -148,7 +148,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
 
     @Test
     public void testSelectMax() throws SQLException {
-        SelectQuery query = SQLQueryBuilder
+        SelectQuery query = sqlQueryBuilder
                 .select()
                     .max("age")
                 .from()
@@ -165,7 +165,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
 
     @Test
     public void testSelectAvg() throws SQLException {
-        SelectQuery query = SQLQueryBuilder
+        SelectQuery query = sqlQueryBuilder
                 .select()
                     .avg("age")
                 .from()
@@ -182,7 +182,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
 
     @Test
     public void testSelectSum() throws SQLException {
-        SelectQuery query = SQLQueryBuilder
+        SelectQuery query = sqlQueryBuilder
                 .select()
                     .sum("age")
                 .from()
@@ -199,7 +199,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
 
     @Test
     public void testMultipleAggregateFunctions() throws SQLException {
-        SelectQuery query = SQLQueryBuilder
+        SelectQuery query = sqlQueryBuilder
                 .select()
                     .min("age")
                     .max("birthdate")
@@ -220,7 +220,7 @@ public class ColumnTest extends DatabaseTestBaseClass {
 
     @Test
     public void testMultipleColumnsWithAliases() throws SQLException {
-        SelectQuery query = SQLQueryBuilder
+        SelectQuery query = sqlQueryBuilder
                 .select()
                     .column("lastname").alias("last")
                     .min("age").alias("minAge")
@@ -238,56 +238,5 @@ public class ColumnTest extends DatabaseTestBaseClass {
 
         assertRowCount(result, 3);
         assertColumnCount(result, 4);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testSelectColumnWithParameter() {
-        SQLQueryBuilder
-                .select()
-                    .column("*")
-                .from()
-                    .table("person")
-                .build();
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testSelectFirstColumnWithSQLInjection() {
-        SQLQueryBuilder
-                .select()
-                .column(";DROP")
-                .from()
-                    .table("person")
-                .build();
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testSelectColumnWithSQLInjection() {
-        SQLQueryBuilder
-                .select()
-                    .column("firstname")
-                    .column(";DROP")
-                .from()
-                .table("person")
-                .build();
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testSelectColumnAliasWithSQLInjection() {
-        SQLQueryBuilder
-                .select()
-                .column("firstname").alias(";DROP")
-                .from()
-                .table("person")
-                .build();
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testSelectAggregateFunctionWithSQLInjection() {
-        SQLQueryBuilder
-                .select()
-                    .count(";DROP")
-                .from()
-                    .table("person")
-                .build();
     }
 }

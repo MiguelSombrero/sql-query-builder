@@ -15,15 +15,15 @@ import static builder.clause.ConditionClauseBuilder.*;
 import static org.junit.Assert.assertEquals;
 
 public class HavingTest extends DatabaseTestBaseClass {
-    private Having having;
+    private Having baseQuery;
 
     @Before
     public void setUpQuery() {
         initializeDatabase();
 
-        SQLQueryBuilder SQLQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getDataSource());
+        SQLQueryBuilder sQLQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getDataSource());
 
-        this.having = SQLQueryBuilder
+        this.baseQuery = sQLQueryBuilder
                 .select()
                     .all()
                 .from()
@@ -36,7 +36,7 @@ public class HavingTest extends DatabaseTestBaseClass {
 
     @Test
     public void testHavingCount() throws SQLException {
-        SelectQuery query = this.having
+        SelectQuery query = this.baseQuery
                 .having(count("age").equals(100))
                 .build();
 
@@ -49,7 +49,7 @@ public class HavingTest extends DatabaseTestBaseClass {
 
     @Test
     public void testHavingSum() throws SQLException {
-        SelectQuery query = this.having
+        SelectQuery query = this.baseQuery
                 .having(sum("age").equals(100))
                 .build();
 
@@ -62,7 +62,7 @@ public class HavingTest extends DatabaseTestBaseClass {
 
     @Test
     public void testHavingAvg() throws SQLException {
-        SelectQuery query = this.having
+        SelectQuery query = this.baseQuery
                 .having(avg("age").equals(100))
                 .build();
 
@@ -75,7 +75,7 @@ public class HavingTest extends DatabaseTestBaseClass {
 
     @Test
     public void testHavingMax() throws SQLException {
-        SelectQuery query = this.having
+        SelectQuery query = this.baseQuery
                 .having(max("age").equals(100))
                 .build();
 
@@ -88,7 +88,7 @@ public class HavingTest extends DatabaseTestBaseClass {
 
     @Test
     public void testHavingMin() throws SQLException {
-        SelectQuery query = this.having
+        SelectQuery query = this.baseQuery
                 .having(min("age").equals(100))
                 .build();
 
@@ -101,7 +101,7 @@ public class HavingTest extends DatabaseTestBaseClass {
 
     @Test
     public void testHavingMultipleConditions() throws SQLException {
-        SelectQuery query = this.having
+        SelectQuery query = this.baseQuery
                 .having(max("age").equals(100)
                     .and(min("age").equals(20))
                     .or(avg("age").equals(60)))
@@ -112,12 +112,5 @@ public class HavingTest extends DatabaseTestBaseClass {
         List<Row> result = query.execute();
 
         assertRowCount(result, 0);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testGroupByHavingWithSQLInjection() {
-        this.having
-                .having(count(";DROP").equals(100))
-                .build();
     }
 }

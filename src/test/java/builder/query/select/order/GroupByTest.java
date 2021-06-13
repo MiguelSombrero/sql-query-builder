@@ -22,9 +22,9 @@ public class GroupByTest extends DatabaseTestBaseClass {
     public void setUpQuery() {
         initializeDatabase();
 
-        SQLQueryBuilder SQLQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getDataSource());
+        SQLQueryBuilder sQLQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getDataSource());
 
-        this.baseQuery = SQLQueryBuilder
+        this.baseQuery = sQLQueryBuilder
                 .select()
                     .all()
                 .from()
@@ -113,22 +113,5 @@ public class GroupByTest extends DatabaseTestBaseClass {
         List<Row> result = query.execute();
 
         assertRowCount(result, 0);
-    }
-
-    @Test(expected =IllegalArgumentException.class)
-    public void testGroupByWithSQLInjection() {
-        baseQuery
-                .groupBy()
-                .column(";DROP")
-                .build();
-    }
-
-    @Test(expected =IllegalArgumentException.class)
-    public void testGroupByWithHavingColumnSQLInjection() {
-        baseQuery
-                .groupBy()
-                    .column("firstname")
-                    .column(";DROP")
-                .build();
     }
 }

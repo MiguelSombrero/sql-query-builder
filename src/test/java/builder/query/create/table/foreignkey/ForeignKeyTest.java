@@ -3,6 +3,7 @@ package builder.query.create.table.foreignkey;
 import builder.query.SQLQueryBuilder;
 import builder.query.create.table.column.Constraint;
 import builder.query.create.table.column.DataType;
+import org.h2.jdbc.JdbcSQLSyntaxErrorException;
 import query.ddl.CreateQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
@@ -14,25 +15,30 @@ import java.sql.SQLException;
 import static org.junit.Assert.assertEquals;
 
 public class ForeignKeyTest extends DatabaseTestBaseClass {
-    private SQLQueryBuilder SQLQueryBuilder;
-    private Constraint column;
+    private SQLQueryBuilder sqlQueryBuilder;
+    private Constraint baseQuery;
 
     @Before
     public void setUp() {
         initializeDatabase();
 
-        SQLQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getDataSource());
+        sqlQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getDataSource());
 
-        this.column = SQLQueryBuilder.create()
+        this.baseQuery = sqlQueryBuilder.create()
                 .table("vehicles")
                 .column("ID").type(DataType.INT).primaryKey()
                 .column("person_id").type(DataType.INT)
                 .column("manufacturer_id").type(DataType.INT);;
     }
 
+    @Test(expected = JdbcSQLSyntaxErrorException.class)
+    public void testSelectNonExitingTableThrowsSQLException() throws SQLException {
+        assertThatQueryReturnsRows("SELECT * FROM nonexistring", 0);
+    }
+
     @Test
     public void testCreateTableConstraintForeignKey() throws SQLException {
-        CreateQuery query = this.column
+        CreateQuery query = this.baseQuery
                 .foreignKey("person_id")
                     .references("ID", "person")
                 .build();
@@ -40,11 +46,12 @@ public class ForeignKeyTest extends DatabaseTestBaseClass {
         assertEquals("CREATE TABLE vehicles (ID INT PRIMARY KEY, person_id INT, manufacturer_id INT, FOREIGN KEY (person_id) REFERENCES person(ID))", query.toString());
 
         query.execute();
+        assertThatQueryReturnsRows("SELECT * FROM vehicles", 0);
     }
 
     @Test
     public void testCreateTableConstraintForeignKeyOnActionCascade() throws SQLException {
-        CreateQuery query = this.column
+        CreateQuery query = this.baseQuery
                 .foreignKey("person_id")
                     .references("ID", "person")
                     .onDelete().cascade()
@@ -56,11 +63,12 @@ public class ForeignKeyTest extends DatabaseTestBaseClass {
         assertEquals("CREATE TABLE vehicles (ID INT PRIMARY KEY, person_id INT, manufacturer_id INT, FOREIGN KEY (person_id) REFERENCES person(ID) ON DELETE CASCADE, FOREIGN KEY (manufacturer_id) REFERENCES manufacturer(ID) ON UPDATE CASCADE)", query.toString());
 
         query.execute();
+        assertThatQueryReturnsRows("SELECT * FROM vehicles", 0);
     }
 
     @Test
     public void testCreateTableConstraintForeignKeyOnActionRestrict() throws SQLException {
-        CreateQuery query = this.column
+        CreateQuery query = this.baseQuery
                 .foreignKey("person_id")
                     .references("ID", "person")
                     .onDelete().restrict()
@@ -73,11 +81,12 @@ public class ForeignKeyTest extends DatabaseTestBaseClass {
         assertEquals("CREATE TABLE vehicles (ID INT PRIMARY KEY, person_id INT, manufacturer_id INT, FOREIGN KEY (person_id) REFERENCES person(ID) ON DELETE RESTRICT, FOREIGN KEY (manufacturer_id) REFERENCES manufacturer(ID) ON UPDATE RESTRICT)", query.toString());
 
         query.execute();
+        assertThatQueryReturnsRows("SELECT * FROM vehicles", 0);
     }
 
     @Test
     public void testCreateTableConstraintForeignKeyOnActionSetNull() throws SQLException {
-        CreateQuery query = this.column
+        CreateQuery query = this.baseQuery
                 .foreignKey("person_id")
                     .references("ID", "person")
                     .onDelete().setNull()
@@ -89,11 +98,12 @@ public class ForeignKeyTest extends DatabaseTestBaseClass {
         assertEquals("CREATE TABLE vehicles (ID INT PRIMARY KEY, person_id INT, manufacturer_id INT, FOREIGN KEY (person_id) REFERENCES person(ID) ON DELETE SET NULL, FOREIGN KEY (manufacturer_id) REFERENCES manufacturer(ID) ON UPDATE SET NULL)", query.toString());
 
         query.execute();
+        assertThatQueryReturnsRows("SELECT * FROM vehicles", 0);
     }
 
     @Test
     public void testCreateTableConstraintForeignKeyOnActionSetDefault() throws SQLException {
-        CreateQuery query = this.column
+        CreateQuery query = this.baseQuery
                 .foreignKey("person_id")
                     .references("ID", "person")
                     .onDelete().setDefault()
@@ -105,25 +115,6 @@ public class ForeignKeyTest extends DatabaseTestBaseClass {
         assertEquals("CREATE TABLE vehicles (ID INT PRIMARY KEY, person_id INT, manufacturer_id INT, FOREIGN KEY (person_id) REFERENCES person(ID) ON DELETE SET DEFAULT, FOREIGN KEY (manufacturer_id) REFERENCES manufacturer(ID) ON UPDATE SET DEFAULT)", query.toString());
 
         query.execute();
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testCreateTableForeignKeyWithSQLInjection() {
-        SQLQueryBuilder.create()
-                .table("vehicles")
-                .column("ID").type(DataType.INT).primaryKey().autoIncrement()
-                .column("person_id").type(DataType.INT).unique().notNull()
-                .foreignKey(";DROP").references("ID", "person")
-                .build();
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testCreateTableForeignKeyReferenceWithSQLInjection() {
-        SQLQueryBuilder.create()
-                .table("vehicles")
-                .column("ID").type(DataType.INT).primaryKey().autoIncrement()
-                .column("person_id").type(DataType.INT).unique().notNull()
-                .foreignKey("person_id").references(";DROP", "person")
-                .build();
+        assertThatQueryReturnsRows("SELECT * FROM vehicles", 0);
     }
 }

@@ -467,20 +467,27 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     @Test
     public void testConditionIntegerBetween() throws SQLException {
         SelectQuery query = this.baseQuery
-                .where(valueOf("age").isBetween(18, 65)
-                        .and(valueOf("firstname").isBetween("miika", "siika")))
+                .where(valueOf("age").isBetween(35, 65))
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE age BETWEEN 18 AND 65 AND firstname BETWEEN 'miika' AND 'siika'", query.toString());
+        assertEquals("SELECT firstname FROM person WHERE age BETWEEN 35 AND 65", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 2);
     }
 
     @Test
     public void testConditionDoubleBetween() throws SQLException {
-        SelectQuery query = this.baseQuery
-                .where(valueOf("age").isBetween(18.5, 65.5))
+        SelectQuery query = this.allTypesBaseQuery
+                .where(valueOf("age").isBetween(18.5, 30.5))
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE age BETWEEN 18.5 AND 65.5", query.toString());
+        assertEquals("SELECT * FROM all_types WHERE age BETWEEN 18.5 AND 30.5", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 1);
     }
 
     @Test
@@ -490,6 +497,10 @@ public class ComparisonTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE firstname LIKE 'Mii%'", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 1);
     }
 
     @Test
@@ -499,6 +510,10 @@ public class ComparisonTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE firstname LIKE '%ka'", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 2);
     }
 
     @Test
@@ -508,6 +523,10 @@ public class ComparisonTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE firstname LIKE '%iik%'", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 1);
     }
 
     @Test
@@ -517,24 +536,36 @@ public class ComparisonTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE lastname IN ('Somero', 'Testinen', 'Komero')", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 1);
     }
 
     @Test
     public void testConditionInListOfIntegers() throws SQLException {
         SelectQuery query = this.baseQuery
-                .where(valueOf("age").isIn(18, 19, 20, 21))
+                .where(valueOf("age").isIn(18, 19, 20, 21, 30))
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE age IN (18, 19, 20, 21)", query.toString());
+        assertEquals("SELECT firstname FROM person WHERE age IN (18, 19, 20, 21, 30)", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 1);
     }
 
     @Test
     public void testConditionInListOfDoubles() throws SQLException {
-        SelectQuery query = this.baseQuery
-                .where(valueOf("age").isIn(18.1, 19.2, 20.3, 21.4))
+        SelectQuery query = this.allTypesBaseQuery
+                .where(valueOf("age").isIn(18.1, 19.2, 20.3, 25.6))
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE age IN (18.1, 19.2, 20.3, 21.4)", query.toString());
+        assertEquals("SELECT * FROM all_types WHERE age IN (18.1, 19.2, 20.3, 25.6)", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 1);
     }
 
     @Test
@@ -542,12 +573,16 @@ public class ComparisonTest extends DatabaseTestBaseClass {
         SelectQuery query = this.baseQuery
                 .where(valueOf("lastname").isInSub(SQLQueryBuilder
                     .select()
-                        .all()
+                        .column("lastname")
                     .from().table("student")
-                    .where(valueOf("age").greaterThan(20))))
+                    .where(valueOf("age").lesserThan(20))))
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE lastname IN (SELECT * FROM student WHERE age > 20)", query.toString());
+        assertEquals("SELECT firstname FROM person WHERE lastname IN (SELECT lastname FROM student WHERE age < 20)", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 1);
     }
 
     @Test
@@ -561,6 +596,10 @@ public class ComparisonTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE EXISTS (SELECT * FROM student WHERE age > 20)", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 3);
     }
 
     @Test
@@ -574,33 +613,9 @@ public class ComparisonTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE NOT EXISTS (SELECT * FROM student WHERE age > 20)", query.toString());
-    }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testValueOfWithSQLInjection(){
-        this.baseQuery
-                .where(valueOf(";DROP").contains("miika"))
-                .build();
-    }
+        List<Row> result = query.execute();
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testConditionWithSQLInjection(){
-        this.baseQuery
-                .where(valueOf("firstname").contains(";DROP"))
-                .build();
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testConditionWithParameterInColumn(){
-        this.baseQuery
-                .where(valueOf("?").contains("miika"))
-                .build();
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testConditionWithParameterInValue(){
-        this.baseQuery
-                .where(valueOf("firstname").contains("?"))
-                .build();
+        assertRowCount(result, 0);
     }
 }

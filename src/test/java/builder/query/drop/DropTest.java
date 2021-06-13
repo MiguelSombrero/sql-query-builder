@@ -14,32 +14,24 @@ import java.sql.SQLException;
 import static org.junit.Assert.assertEquals;
 
 public class DropTest extends DatabaseTestBaseClass {
-    private SQLQueryBuilder SQLQueryBuilder;
+    private SQLQueryBuilder sqlQueryBuilder;
 
     @Before
     public void setUp() throws SQLException {
         initializeDatabase();
-        SQLQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getDataSource());
+        sqlQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getDataSource());
     }
 
     @Test
     public void testDropTable() throws SQLException {
-        CreateQuery createTable = SQLQueryBuilder
-                .create()
-                .table("test_table")
-                .column("id").type(DataType.INT)
-                .build();
-
-        createTable.execute();
-
-        DropQuery query = SQLQueryBuilder
+        DropQuery query = sqlQueryBuilder
                 .drop()
-                .table("test_table")
+                .table("course")
                 .build();
 
         query.execute();
 
-        assertEquals("DROP TABLE test_table", query.toString());
+        assertEquals("DROP TABLE course", query.toString());
 
     }
 
@@ -52,7 +44,7 @@ public class DropTest extends DatabaseTestBaseClass {
 
         createDatabase.execute();*/
 
-        DropQuery query = SQLQueryBuilder
+        DropQuery query = sqlQueryBuilder
                 .drop()
                 .database("test_db")
                 .build();
@@ -65,7 +57,7 @@ public class DropTest extends DatabaseTestBaseClass {
 
     @Test(expected = IllegalArgumentException.class)
     public void testDropTableWithSQLInjection() {
-        SQLQueryBuilder
+        sqlQueryBuilder
                 .drop()
                 .table(";DROP")
                 .build();
@@ -73,7 +65,7 @@ public class DropTest extends DatabaseTestBaseClass {
 
     @Test(expected = IllegalArgumentException.class)
     public void testDropDatabaseWithSQLInjection() {
-        SQLQueryBuilder
+        sqlQueryBuilder
                 .drop()
                 .database(";DROP")
                 .build();

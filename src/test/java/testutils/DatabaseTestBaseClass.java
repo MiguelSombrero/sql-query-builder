@@ -74,8 +74,12 @@ public class DatabaseTestBaseClass {
             rows = resultSet.getRow();
 
         } finally {
-            resultSet.close();
-            statement.close();
+            if (resultSet != null) {
+                resultSet.close();
+            }
+            if (statement != null) {
+                statement.close();
+            }
         }
 
         return rows;

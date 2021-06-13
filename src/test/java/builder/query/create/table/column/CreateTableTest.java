@@ -2,30 +2,27 @@ package builder.query.create.table.column;
 
 import builder.query.SQLQueryBuilder;
 import query.ddl.CreateQuery;
-import database.row.Row;
-import query.dql.SelectQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.sql.SQLException;
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-public class CreateUpdateTableTest extends DatabaseTestBaseClass {
-    private SQLQueryBuilder SQLQueryBuilder;
+public class CreateTableTest extends DatabaseTestBaseClass {
+    private SQLQueryBuilder sqlQueryBuilder;
 
     @Before
     public void setUp() throws SQLException {
         initializeDatabase();
-        SQLQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getDataSource());
+        sqlQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getDataSource());
     }
 
     @Test
     public void testCreateTableDataTypes() throws SQLException {
-        CreateQuery query = SQLQueryBuilder.create()
+        CreateQuery query = sqlQueryBuilder.create()
                 .table("cars")
                 .column("ID").type(DataType.INT)
                 .column("hash").type(DataType.BIGINT)
@@ -45,39 +42,12 @@ public class CreateUpdateTableTest extends DatabaseTestBaseClass {
         assertEquals("CREATE TABLE cars (ID INT, hash BIGINT, age DOUBLE, date DATE, datetime DATETIME, created TIMESTAMP, active BOOLEAN, country CHAR, model VARCHAR(32), brand VARCHAR(64), disclaimer VARCHAR(128), description VARCHAR(255), contract BLOB)", query.toString());
 
         query.execute();
-
-        /*DMLQuery insert = queryFactory
-                .insertInto()
-                .table("cars")
-                .values()
-                    .value(105)
-                    .value(12)
-                    .value("2020-02-02")
-                    .value("Finland")
-                    .value("ADC12")
-                    .value("Opel")
-                    .value("Nodisclaimers")
-                    .value("Nodescriptions")
-                .build();
-
-        insert.execute();*/
-
-        SelectQuery select = SQLQueryBuilder
-                .select()
-                    .all()
-                .from()
-                    .table("cars")
-                .build();
-
-        List<Row> selectResults = select.execute();
-
-        //assertEquals("Opel", selectResults.get(0).getStringFrom(5));
-        //assertEquals(1, result);
+        assertThatQueryReturnsRows("SELECT * FROM cars", 0);
     }
 
     @Test
     public void testCreateTableConstraintNotNull() throws SQLException {
-        CreateQuery query = SQLQueryBuilder.create()
+        CreateQuery query = sqlQueryBuilder.create()
                 .table("planes")
                 .column("ID").type(DataType.INT).notNull()
                 .column("age").type(DataType.DOUBLE)
@@ -87,11 +57,12 @@ public class CreateUpdateTableTest extends DatabaseTestBaseClass {
         assertEquals("CREATE TABLE planes (ID INT NOT NULL, age DOUBLE, created TIMESTAMP NOT NULL)", query.toString());
 
         query.execute();
+        assertThatQueryReturnsRows("SELECT * FROM planes", 0);
     }
 
     @Test
     public void testCreateTableConstraintUnique() throws SQLException {
-        CreateQuery query = SQLQueryBuilder.create()
+        CreateQuery query = sqlQueryBuilder.create()
                 .table("bikes")
                 .column("ID").type(DataType.INT).unique()
                 .column("age").type(DataType.DOUBLE)
@@ -101,11 +72,12 @@ public class CreateUpdateTableTest extends DatabaseTestBaseClass {
         assertEquals("CREATE TABLE bikes (ID INT UNIQUE, age DOUBLE, created TIMESTAMP UNIQUE)", query.toString());
 
         query.execute();
+        assertThatQueryReturnsRows("SELECT * FROM bikes", 0);
     }
 
     @Test
     public void testCreateTableConstraintPrimaryKey() throws SQLException {
-        CreateQuery query = SQLQueryBuilder.create()
+        CreateQuery query = sqlQueryBuilder.create()
                 .table("vehicles")
                 .column("ID").type(DataType.INT).primaryKey()
                 .column("age").type(DataType.DOUBLE)
@@ -114,11 +86,12 @@ public class CreateUpdateTableTest extends DatabaseTestBaseClass {
         assertEquals("CREATE TABLE vehicles (ID INT PRIMARY KEY, age DOUBLE)", query.toString());
 
         query.execute();
+        assertThatQueryReturnsRows("SELECT * FROM vehicles", 0);
     }
 
     @Test
     public void testCreateTableConstraintAutoIncrement() throws SQLException {
-        CreateQuery query = SQLQueryBuilder.create()
+        CreateQuery query = sqlQueryBuilder.create()
                 .table("vehicles")
                 .column("ID").type(DataType.INT).autoIncrement()
                 .column("person_id").type(DataType.INT)
@@ -128,11 +101,12 @@ public class CreateUpdateTableTest extends DatabaseTestBaseClass {
         assertEquals("CREATE TABLE vehicles (ID INT AUTO_INCREMENT, person_id INT, FOREIGN KEY (person_id) REFERENCES person(ID))", query.toString());
 
         query.execute();
+        assertThatQueryReturnsRows("SELECT * FROM vehicles", 0);
     }
 
     @Test
     public void testCreateTableConstraintMultipleConstraint() throws SQLException {
-        CreateQuery query = SQLQueryBuilder.create()
+        CreateQuery query = sqlQueryBuilder.create()
                 .table("vehicles")
                 .column("ID").type(DataType.INT).primaryKey().autoIncrement()
                 .column("person_id").type(DataType.INT).unique().notNull()
@@ -142,36 +116,6 @@ public class CreateUpdateTableTest extends DatabaseTestBaseClass {
         assertEquals("CREATE TABLE vehicles (ID INT PRIMARY KEY AUTO_INCREMENT, person_id INT UNIQUE NOT NULL, FOREIGN KEY (person_id) REFERENCES person(ID))", query.toString());
 
         query.execute();
+        assertThatQueryReturnsRows("SELECT * FROM vehicles", 0);
     }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testCreateTableWithSQLInjection() {
-        SQLQueryBuilder.create()
-                .table(";DROP")
-                .column("ID").type(DataType.INT).primaryKey().autoIncrement()
-                .column("person_id").type(DataType.INT).unique().notNull()
-                .foreignKey("person_id").references("ID", "person")
-                .build();
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testCreateTableFirstColumnWithSQLInjection() {
-        SQLQueryBuilder.create()
-                .table("vehicles")
-                .column("--DROP").type(DataType.INT).primaryKey().autoIncrement()
-                .column("person_id").type(DataType.INT).unique().notNull()
-                .foreignKey("person_id").references("ID", "person")
-                .build();
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testCreateTableColumnWithSQLInjection() {
-        SQLQueryBuilder.create()
-                .table("vehicles")
-                .column("ID").type(DataType.INT).primaryKey().autoIncrement()
-                .column(";DROP").type(DataType.INT).unique().notNull()
-                .foreignKey("person_id").references("ID", "person")
-                .build();
-    }
-
 }

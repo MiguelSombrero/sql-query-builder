@@ -16,7 +16,7 @@ import static builder.clause.ConditionClauseBuilder.valueOf;
 import static org.junit.Assert.assertEquals;
 
 public class OrderByTest extends DatabaseTestBaseClass {
-    private Table table;
+    private Table baseQuery;
 
     @Before
     public void setUpQuery() {
@@ -24,7 +24,7 @@ public class OrderByTest extends DatabaseTestBaseClass {
 
         SQLQueryBuilder SQLQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getDataSource());
 
-        this.table = SQLQueryBuilder
+        this.baseQuery = SQLQueryBuilder
                 .select()
                     .all()
                 .from()
@@ -33,7 +33,7 @@ public class OrderByTest extends DatabaseTestBaseClass {
 
     @Test
     public void testOrderBy() throws SQLException {
-        SelectQuery query = table
+        SelectQuery query = baseQuery
                 .orderBy()
                     .column("firstname")
                 .build();
@@ -48,7 +48,7 @@ public class OrderByTest extends DatabaseTestBaseClass {
 
     @Test
     public void testOrderByWhere() throws SQLException {
-        SelectQuery query = table
+        SelectQuery query = baseQuery
                 .where(valueOf("age").greaterThan(18))
                 .orderBy()
                 .column("firstname")
@@ -64,7 +64,7 @@ public class OrderByTest extends DatabaseTestBaseClass {
 
     @Test
     public void testOrderByGroupBy() throws SQLException {
-        SelectQuery query = table
+        SelectQuery query = baseQuery
                 .groupBy()
                     .column("age")
                 .orderBy()
@@ -81,7 +81,7 @@ public class OrderByTest extends DatabaseTestBaseClass {
 
     @Test
     public void testMultipleOrderByGroupBy() throws SQLException {
-        SelectQuery query = table
+        SelectQuery query = baseQuery
                 .groupBy()
                     .column("age")
                 .orderBy()
@@ -100,7 +100,7 @@ public class OrderByTest extends DatabaseTestBaseClass {
 
     @Test
     public void testMultipleOrderByGroupByWithAscDesc() throws SQLException {
-        SelectQuery query = table
+        SelectQuery query = baseQuery
                 .groupBy()
                     .column("age")
                 .orderBy()
@@ -115,24 +115,5 @@ public class OrderByTest extends DatabaseTestBaseClass {
 
         assertRowCount(result, 3);
         assertColumnCount(result, 5);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testOrderByFirstColumnWithSQLInjection() {
-        table
-                .orderBy()
-                    .column(";DROP").asc()
-                .build();
-
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testOrderByColumnWithSQLInjection() {
-        table
-                .orderBy()
-                    .column("age")
-                    .column(";DROP").asc()
-                .build();
-
     }
 }
