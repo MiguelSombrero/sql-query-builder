@@ -55,7 +55,7 @@ public class InsertTest extends DatabaseTestBaseClass {
 
         int result = query.execute();
 
-        assertEquals(13, result);
+        assertEquals(14, result);
         assertThatQueryReturnsRows("SELECT * FROM all_types WHERE hash = 2485394539475834568", 1);
     }
 
@@ -73,7 +73,7 @@ public class InsertTest extends DatabaseTestBaseClass {
 
         int result = query.execute();
 
-        assertEquals(13, result);
+        assertEquals(14, result);
         assertThatQueryReturnsRows("SELECT * FROM all_types WHERE active = false", 2);
     }
 
@@ -91,7 +91,7 @@ public class InsertTest extends DatabaseTestBaseClass {
 
         int result = query.execute();
 
-        assertEquals(13, result);
+        assertEquals(14, result);
         assertThatQueryReturnsRows("SELECT * FROM all_types WHERE age = 19.3", 1);
     }
 
@@ -160,7 +160,7 @@ public class InsertTest extends DatabaseTestBaseClass {
 
         int result = query.execute();
 
-        assertEquals(13, result);
+        assertEquals(14, result);
         assertThatQueryReturnsRows("SELECT * FROM all_types WHERE contract IS NOT NULL", 3);
     }
 

@@ -74,7 +74,7 @@ public class RowTest extends DatabaseTestBaseClass {
 
         assertColumnCount(result, 2);
         assertEquals(1, firstRow.getInteger("personId"));
-        assertEquals(10, firstRow.getInteger("courseId"));
+        assertEquals(11, firstRow.getInteger("courseId"));
     }
 
     @Test
@@ -92,7 +92,7 @@ public class RowTest extends DatabaseTestBaseClass {
 
         Row firstRow = result.get(0);
 
-        assertEquals(11, firstRow.getInteger("ID"));
+        assertEquals(12, firstRow.getInteger("ID"));
     }
 
     @Test

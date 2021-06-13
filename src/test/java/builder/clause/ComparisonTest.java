@@ -261,33 +261,49 @@ public class ComparisonTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE lastname >= ALL (SELECT lastname FROM student WHERE age > 20)", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 0);
     }
 
     @Test
     public void testConditionStringLesserThan() throws SQLException {
         SelectQuery query = this.baseQuery
-                .where(valueOf("birthdate").lesserThan("2020-02-28 21:00:00"))
+                .where(valueOf("birthdate").lesserThan("1985-02-28 21:00:00"))
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE birthdate < '2020-02-28 21:00:00'", query.toString());
+        assertEquals("SELECT firstname FROM person WHERE birthdate < '1985-02-28 21:00:00'", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 2);
     }
 
     @Test
     public void testConditionIntegerLesserThan() throws SQLException {
         SelectQuery query = this.baseQuery
-                .where(valueOf("age").lesserThan(18))
+                .where(valueOf("age").lesserThan(31))
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE age < 18", query.toString());
+        assertEquals("SELECT firstname FROM person WHERE age < 31", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 1);
     }
 
     @Test
     public void testConditionDoubleLesserThan() throws SQLException {
-        SelectQuery query = this.baseQuery
-                .where(valueOf("age").lesserThan(18.5))
+        SelectQuery query = this.allTypesBaseQuery
+                .where(valueOf("age").lesserThan(25.7))
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE age < 18.5", query.toString());
+        assertEquals("SELECT * FROM all_types WHERE age < 25.7", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 1);
     }
 
     @Test
@@ -302,6 +318,10 @@ public class ComparisonTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE lastname < ANY (SELECT lastname FROM student WHERE age > 20)", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 3);
     }
 
     @Test
@@ -316,33 +336,49 @@ public class ComparisonTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE lastname < ALL (SELECT lastname FROM student WHERE age > 20)", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 2);
     }
 
     @Test
     public void testConditionStringLesserThanOrEqual() throws SQLException {
         SelectQuery query = this.baseQuery
-                .where(valueOf("birthdate").lesserThanOrEqual("2020-02-28 21:00:00"))
+                .where(valueOf("birthdate").lesserThanOrEqual("1980-02-28 21:00:00"))
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE birthdate <= '2020-02-28 21:00:00'", query.toString());
+        assertEquals("SELECT firstname FROM person WHERE birthdate <= '1980-02-28 21:00:00'", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 2);
     }
 
     @Test
     public void testConditionIntegerLesserThanOrEqual() throws SQLException {
         SelectQuery query = this.baseQuery
-                .where(valueOf("age").lesserThanOrEqual(18))
+                .where(valueOf("age").lesserThanOrEqual(30))
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE age <= 18", query.toString());
+        assertEquals("SELECT firstname FROM person WHERE age <= 30", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 1);
     }
 
     @Test
     public void testConditionDoubleLesserThanOrEqual() throws SQLException {
-        SelectQuery query = this.baseQuery
-                .where(valueOf("age").lesserThanOrEqual(18.5))
+        SelectQuery query = this.allTypesBaseQuery
+                .where(valueOf("age").lesserThanOrEqual(25.6))
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE age <= 18.5", query.toString());
+        assertEquals("SELECT * FROM all_types WHERE age <= 25.6", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 1);
     }
 
     @Test
@@ -357,6 +393,10 @@ public class ComparisonTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE lastname <= ANY (SELECT lastname FROM student WHERE age > 20)", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 3);
     }
 
     @Test
@@ -371,35 +411,57 @@ public class ComparisonTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE lastname <= ALL (SELECT lastname FROM student WHERE age > 20)", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 3);
     }
 
     @Test
     public void testConditionIsNull() throws SQLException {
-        SelectQuery query = this.baseQuery
-                .where(valueOf("age").isNull()
-                        .and(valueOf("firstname").isNull()))
+        SelectQuery query = this.queryFactory
+                .select()
+                    .all()
+                .from()
+                    .table("school")
+                .where(valueOf("name").isNull())
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE age IS NULL AND firstname IS NULL", query.toString());
+        assertEquals("SELECT * FROM school WHERE name IS NULL", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 1);
     }
 
     @Test
     public void testConditionIsNotNull() throws SQLException {
-        SelectQuery query = this.baseQuery
-                .where(valueOf("age").isNotNull()
-                        .and(valueOf("firstname").isNotNull()))
+        SelectQuery query = this.queryFactory
+                .select()
+                    .all()
+                .from()
+                    .table("school")
+                .where(valueOf("name").isNotNull())
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE age IS NOT NULL AND firstname IS NOT NULL", query.toString());
+        assertEquals("SELECT * FROM school WHERE name IS NOT NULL", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 1);
     }
 
     @Test
     public void testConditionStringBetween() throws SQLException {
         SelectQuery query = this.baseQuery
-                .where(valueOf("firstname").isBetween("ika", "miiika"))
+                .where(valueOf("firstname").isBetween("Ma", "Mi"))
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE firstname BETWEEN 'ika' AND 'miiika'", query.toString());
+        assertEquals("SELECT firstname FROM person WHERE firstname BETWEEN 'Ma' AND 'Mi'", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 1);
     }
 
     @Test

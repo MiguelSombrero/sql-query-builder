@@ -68,15 +68,23 @@ public class NegationTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE NOT age IS NOT NULL", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 0);
     }
 
     @Test
     public void testWhereNotBetween() throws SQLException {
         SelectQuery query = this.baseQuery
-                .where(valueOf("age").not().isBetween(18, 20))
+                .where(valueOf("age").not().isBetween(25, 35))
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE NOT age BETWEEN 18 AND 20", query.toString());
+        assertEquals("SELECT firstname FROM person WHERE NOT age BETWEEN 25 AND 35", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 1);
     }
 
     @Test
@@ -86,6 +94,10 @@ public class NegationTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE NOT age IN (30, 40, 50, 60)", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 2);
     }
 
     @Test
@@ -95,13 +107,17 @@ public class NegationTest extends DatabaseTestBaseClass {
                         .not()
                         .isInSub(queryFactory
                             .select()
-                                .all()
+                                .column("lastname")
                             .from()
                                 .table("student")
                             .where(valueOf("age").greaterThan(20))))
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE NOT lastname IN (SELECT * FROM student WHERE age > 20)", query.toString());
+        assertEquals("SELECT firstname FROM person WHERE NOT lastname IN (SELECT lastname FROM student WHERE age > 20)", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 2);
     }
 
     @Test

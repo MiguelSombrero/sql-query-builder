@@ -201,7 +201,7 @@ public class TableTest extends DatabaseTestBaseClass {
 
         List<Row> result = query.execute();
 
-        assertRowCount(result, 1);
+        assertRowCount(result, 2);
         assertColumnCount(result, 3);
     }
 
@@ -223,7 +223,7 @@ public class TableTest extends DatabaseTestBaseClass {
 
         List<Row> result = query.execute();
 
-        assertRowCount(result, 1);
+        assertRowCount(result, 2);
         assertColumnCount(result, 3);
     }
 
