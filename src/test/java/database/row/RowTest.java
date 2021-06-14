@@ -17,15 +17,15 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 public class RowTest extends DatabaseTestBaseClass {
-    private SQLQueryBuilder SQLQueryBuilder;
+    private SQLQueryBuilder sqlQueryBuilder;
     private SelectQuery baseQuery;
 
     @Before
     public void setUpQuery() {
         initializeDatabase();
-        SQLQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getDataSource());
+        sqlQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getDataSource());
 
-        this.baseQuery = SQLQueryBuilder
+        this.baseQuery = sqlQueryBuilder
                 .select()
                 .all()
                 .from()
@@ -54,7 +54,7 @@ public class RowTest extends DatabaseTestBaseClass {
 
     @Test
     public void testUsesAliasNamesInsteadOfColumnNames() throws SQLException {
-        SelectQuery query = SQLQueryBuilder
+        SelectQuery query = sqlQueryBuilder
                 .select()
                     .column("person.id").alias("personId")
                     .column("course.id").alias("courseId")
@@ -168,7 +168,7 @@ public class RowTest extends DatabaseTestBaseClass {
 
     @Test(expected = IllegalArgumentException.class)
     public void testDuplicateKeyThrowsException() throws SQLException {
-        SelectQuery query = SQLQueryBuilder
+        SelectQuery query = sqlQueryBuilder
                 .select()
                     .all()
                 .from()
