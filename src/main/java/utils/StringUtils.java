@@ -18,8 +18,17 @@ public class StringUtils {
             Character character = text.charAt(i);
 
             if (character == QUESTION_MARK) {
-                ColumnValue value = params.get(count);
-                String param = String.valueOf(value.toString());
+                ColumnValue value;
+
+                try {
+                    value = params.get(count);
+                } catch (IndexOutOfBoundsException e) {
+                    logger.info("Mismatch in query string and param count");
+                    logger.debug(e.getLocalizedMessage());
+                    throw e;
+                }
+
+                String param = value.toString();
                 replacedText.append(param);
                 count++;
             } else {

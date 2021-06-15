@@ -82,4 +82,26 @@ public class SelectQueryTest extends DatabaseTestBaseClass {
 
         assertEquals(null, firstRow.getString("name"));
     }
+
+    @Test
+    public void testQueryCanBeExecutedMultipleTime() throws SQLException {
+        StringBuilder queryString = new StringBuilder("SELECT * FROM person");
+        SelectQuery query = new SelectQuery(queryString, dataSource);
+
+        List<Row> result1 = query.execute();
+        assertRowCount(result1, 3);
+
+        List<Row> result2 = query.execute();
+        assertRowCount(result2, 3);
+
+        List<Row> result3 = query.execute();
+        assertRowCount(result3, 3);
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testExecuteInvalidQueryThrowsSQLException() throws SQLException {
+        StringBuilder queryString = new StringBuilder("SELECT * FROM person WHERE birthdate > ?");
+        SelectQuery query = new SelectQuery(queryString, dataSource);
+        query.execute();
+    }
 }

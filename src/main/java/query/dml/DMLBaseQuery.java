@@ -15,8 +15,12 @@ public abstract class DMLBaseQuery extends SQLClause implements Query<Integer> {
     protected QueryRunner run;
 
     public DMLBaseQuery(StringBuilder queryString, DataSource dataSource) {
+        this(queryString, new QueryRunner(dataSource));
+    }
+
+    public DMLBaseQuery(StringBuilder queryString, QueryRunner run) {
         super(queryString);
-        this.run = new QueryRunner(dataSource);
+        this.run = run;
     }
 
     /**
@@ -28,7 +32,7 @@ public abstract class DMLBaseQuery extends SQLClause implements Query<Integer> {
      * @throws SQLException when SQL error occurs
      */
     public Integer execute() throws SQLException {
-        int result = 0;
+        int result;
 
         try {
             result = this.run();

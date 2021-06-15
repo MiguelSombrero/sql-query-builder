@@ -2,7 +2,9 @@ package query.dql;
 
 import database.row.Row;
 import database.row.RowHandler;
+import org.apache.commons.dbutils.AbstractQueryRunner;
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.handlers.AbstractListHandler;
 import query.Query;
 import clause.SQLClause;
 
@@ -11,13 +13,17 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class SelectQuery extends SQLClause implements Query<List<Row>> {
-    private RowHandler handler;
+    private AbstractListHandler<Row> handler;
     private QueryRunner run;
 
     public SelectQuery(StringBuilder queryString, DataSource dataSource) {
+        this(queryString, new QueryRunner(dataSource), new RowHandler());
+    }
+
+    public SelectQuery(StringBuilder queryString, QueryRunner run, AbstractListHandler<Row> handler) {
         super(queryString);
-        this.run = new QueryRunner(dataSource);
-        this.handler = new RowHandler();
+        this.run = run;
+        this.handler = handler;
     }
 
     public List<Row> execute() throws SQLException {
