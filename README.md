@@ -2,13 +2,25 @@
 
 ![GitHub Actions](https://github.com/MiguelSombrero/sql-query-builder/workflows/Java%20CI%20with%20Maven/badge.svg)
 
-Sql query builder is Java-library used for building SQL query strings more easily. Syntax of the SQL query strings is intended to be compatible at least with MySQL.
+Sql query builder is Java-library used for building and executing SQL queries.
+
+**Syntax of the SQL queries is compatible at least with MySQL, but might work with other DBMS too.**
+
+## Main features
+
+- Create `SELECT`, `UPDATE`, `INSERT`, `CREATE`, `DELETE` and `DROP` queries easily
+- Execute queries against database and do something with the results
+- Supports user input validation and parametrized queries
 
 ## Examples
 
-Basic SELECT statement:
+To use sql-query-builder, you need to instantiate `SQLQueryBuilder` class with [Datasource](https://docs.oracle.com/javase/8/docs/api/javax/sql/DataSource.html) object to connect your database.
 
-    String SQLQuery = QueryFactory
+    SQLQueryBuilder sqlQueryBuilder = new SQLQueryBuilder(datasource);
+
+After this you can start creating queries:
+
+    SelectQuery query = sqlQueryBuilder
         .select()
             .column("firstname").alias("first")
             .column("lastname").alias("last")
@@ -18,13 +30,24 @@ Basic SELECT statement:
         .where(valueOf("age").greaterThan(18))
         .build();
 
-    logger.info(SQLQuery)
+    logger.info(query.toString())
 
 Above code prints out:
 
     SELECT firstname AS first, lastname AS last, age
     FROM person
     WHERE age > 18
+
+Execute `SELECT` query with
+
+    List<Row> result = query.execute();
+
+`SELECT` query results list of `Row` objects, which represents database rows. To access rows and data:
+
+    Row firstRow = result.get(0);
+
+    int age = firstRow.getInteger("age");
+    String firstname = firstRow.getString("first");
 
 More examples can be found in [examples](https://github.com/MiguelSombrero/sql-SQLQuery-builder/tree/develop/docs/examples.md) document.
 

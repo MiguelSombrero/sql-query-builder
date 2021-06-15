@@ -56,9 +56,9 @@ public class DatabaseTestBaseClass {
         assertEquals(count, result.get(0).getColumnCount());
     }
 
-    protected void assertThatQueryReturnsRows(String query, int rows) throws SQLException {
+    protected void assertThatQueryReturnsRows(String query, int expected) throws SQLException {
         int resultRows = executeSelectAndReturnRows(query);
-        assertEquals(resultRows, rows);
+        assertEquals(expected, resultRows);
     }
 
     protected int executeSelectAndReturnRows(String query) throws SQLException {
