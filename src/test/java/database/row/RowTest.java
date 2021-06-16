@@ -61,7 +61,7 @@ public class RowTest extends DatabaseTestBaseClass {
                 .from()
                     .table("person")
                 .leftJoin("course").on("person.id", "course.person_id")
-                .where(ConditionClauseBuilder.valueOf("firstname").equals("Miika"))
+                .where(ConditionClauseBuilder.valueOf("firstname").stringEquals("Miika"))
                 .build();
 
         List<Row> result = query.execute();

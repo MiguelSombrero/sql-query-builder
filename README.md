@@ -30,7 +30,11 @@ After this you can start creating queries:
         .where(valueOf("age").greaterThan(18))
         .build();
 
-    logger.info(query.toString())
+Query object can be used as a query string with some other database framework:
+
+    String queryString = query.toString();
+
+    logger.info(queryString);
 
 Above code prints out:
 
@@ -38,7 +42,7 @@ Above code prints out:
     FROM person
     WHERE age > 18
 
-Execute `SELECT` query with
+Or Query object can be used to execute query directly:
 
     List<Row> result = query.execute();
 
@@ -49,7 +53,7 @@ Execute `SELECT` query with
     int age = firstRow.getInteger("age");
     String firstname = firstRow.getString("first");
 
-More examples can be found in [examples](https://github.com/MiguelSombrero/sql-SQLQuery-builder/tree/develop/docs/examples.md) document.
+More examples can be found in [examples](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/examples.md) document.
 
 ## How to use this library
 
@@ -63,11 +67,11 @@ Add Maven dependency to your project:
 
     <dependency>
         <groupId>com.github.miguelsombrero</groupId>
-        <artifactId>sql-SQLQuery-builder</artifactId>
-        <version>1.0.4</version>
+        <artifactId>sql-query-builder</artifactId>
+        <version>1.0.5</version>
     </dependency>
 
-Check the latest version from [GitHub Packages](https://github.com/MiguelSombrero?tab=packages&repo_name=sql-SQLQuery-builder)
+Check the latest version from [GitHub Packages](https://github.com/MiguelSombrero?tab=packages&repo_name=sql-query-builder)
 
 ### 3. Install dependency 
 
@@ -75,11 +79,11 @@ Check the latest version from [GitHub Packages](https://github.com/MiguelSombrer
 
 ## Documentation
 
-[Design document](https://github.com/MiguelSombrero/sql-SQLQuery-builder/tree/develop/docs/design.md)
+[Design document](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/design.md)
 
-[Examples](https://github.com/MiguelSombrero/sql-SQLQuery-builder/tree/develop/docs/examples.md)
+[Examples](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/examples.md)
 
-[Supported operations](https://github.com/MiguelSombrero/sql-SQLQuery-builder/tree/develop/docs/supported.md)
+[Supported operations](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/supported.md)
 
 ## Known issues
 - In CREATE TABLE user can chain same constraints infinitely (`...column("ID").type(DataType.INT).notNull().notNull().notNull() ...`) 

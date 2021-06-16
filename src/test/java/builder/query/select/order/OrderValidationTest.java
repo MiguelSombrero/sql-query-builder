@@ -30,7 +30,7 @@ public class OrderValidationTest extends DatabaseTestBaseClass {
     public void testGroupByHavingWithSQLInjection() {
         this.baseQuery.groupBy()
                 .column("age")
-                .having(count(";DROP").equals(100))
+                .having(count(";DROP").integerEquals(100))
                 .build();
     }
 

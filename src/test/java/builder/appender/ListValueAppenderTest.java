@@ -22,6 +22,13 @@ public class ListValueAppenderTest {
     }
 
     @Test
+    public void testAppendListOfLongValues() {
+        SQLClause query = new SQLClause(new StringBuilder());
+        ListValueAppender.appendListOfLongParams(query, 9223372036854775801L, 9223372036854775802L, 9223372036854775803L, 9223372036854775804L);
+        assertEquals("(9223372036854775801, 9223372036854775802, 9223372036854775803, 9223372036854775804)", query.toString());
+    }
+
+    @Test
     public void testAppendListOfDoubleValues() {
         SQLClause query = new SQLClause(new StringBuilder());
         ListValueAppender.appendListOfDoubleParams(query, 0.0, 1.1, 2.2, 3.3, 4.4);

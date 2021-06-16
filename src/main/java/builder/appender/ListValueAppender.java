@@ -28,6 +28,18 @@ public class ListValueAppender {
         clause.append(")");
     }
 
+    public static void appendListOfLongParams(Clause clause, long ...listOfValues) {
+        clause.append("(");
+        ValueAppender.appendLongParam(clause, listOfValues[0]);
+
+        for (int i = 1; i < listOfValues.length; i++) {
+            clause.append(", ");
+            ValueAppender.appendLongParam(clause, listOfValues[i]);
+        }
+
+        clause.append(")");
+    }
+
     public static void appendListOfDoubleParams(Clause clause, double ...listOfValues) {
         clause.append("(");
         ValueAppender.appendDoubleParam(clause, listOfValues[0]);

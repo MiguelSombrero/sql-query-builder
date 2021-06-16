@@ -15,10 +15,10 @@ public class Comparison {
     private static final String ANY = "ANY ";
     private static final String ALL = "ALL ";
 
-    protected SQLClause query;
+    protected SQLClause clause;
 
-    public Comparison(SQLClause query) {
-        this.query = query;
+    public Comparison(SQLClause clause) {
+        this.clause = clause;
     }
 
     /**
@@ -30,9 +30,9 @@ public class Comparison {
      * more conditions with AND, OR and OR (...) operators,
      * or terminate query building
      */
-    public Condition equals(String value) {
-        query.append(EQUALS);
-        ValueAppender.appendStringParam(query, value);
+    public Condition stringEquals(String value) {
+        clause.append(EQUALS);
+        ValueAppender.appendStringParam(clause, value);
         return getCondition();
     }
 
@@ -45,9 +45,9 @@ public class Comparison {
      * more conditions with AND, OR and OR (...) operators,
      * or terminate query building
      */
-    public Condition equals(int value) {
-        query.append(EQUALS);
-        query.append(value);
+    public Condition integerEquals(int value) {
+        clause.append(EQUALS);
+        ValueAppender.appendIntParam(clause, value);
         return getCondition();
     }
 
@@ -60,9 +60,24 @@ public class Comparison {
      * more conditions with AND, OR and OR (...) operators,
      * or terminate query building
      */
-    public Condition equals(double value) {
-        query.append(EQUALS);
-        query.append(value);
+    public Condition longEquals(long value) {
+        clause.append(EQUALS);
+        ValueAppender.appendLongParam(clause, value);
+        return getCondition();
+    }
+
+    /**
+     * Appends '= value' into 'WHERE operand = value' clause.
+     *
+     * @param value Value to be appended
+     *
+     * @return Condition class which can be used to append
+     * more conditions with AND, OR and OR (...) operators,
+     * or terminate query building
+     */
+    public Condition doubleEquals(double value) {
+        clause.append(EQUALS);
+        ValueAppender.appendDoubleParam(clause, value);
         return getCondition();
     }
 
@@ -78,9 +93,9 @@ public class Comparison {
      * or terminate query building
      */
     public Condition equalsAny(SelectQueryBuilder subQuery) {
-        query.append(EQUALS);
-        query.append(ANY);
-        SubQueryAppender.appendSubQuery(query, subQuery);
+        clause.append(EQUALS);
+        clause.append(ANY);
+        SubQueryAppender.appendSubQuery(clause, subQuery);
         return getCondition();
     }
 
@@ -96,9 +111,9 @@ public class Comparison {
      * or terminate query building
      */
     public Condition equalsAll(SelectQueryBuilder subQuery) {
-        query.append(EQUALS);
-        query.append(ALL);
-        SubQueryAppender.appendSubQuery(query, subQuery);
+        clause.append(EQUALS);
+        clause.append(ALL);
+        SubQueryAppender.appendSubQuery(clause, subQuery);
         return getCondition();
     }
 
@@ -112,8 +127,8 @@ public class Comparison {
      * or terminate query building
      */
     public Condition greaterThan(String value) {
-        query.append(GREATER_THAN);
-        ValueAppender.appendStringParam(query, value);
+        clause.append(GREATER_THAN);
+        ValueAppender.appendStringParam(clause, value);
         return getCondition();
     }
 
@@ -127,8 +142,23 @@ public class Comparison {
      * or terminate query building
      */
     public Condition greaterThan(int value) {
-        query.append(GREATER_THAN);
-        query.append(value);
+        clause.append(GREATER_THAN);
+        ValueAppender.appendIntParam(clause, value);
+        return getCondition();
+    }
+
+    /**
+     * Appends '> value' into 'WHERE operand > value' clause.
+     *
+     * @param value Value to be appended
+     *
+     * @return Condition class which can be used to append
+     * more conditions with AND, OR and OR (...) operators,
+     * or terminate query building
+     */
+    public Condition greaterThan(long value) {
+        clause.append(GREATER_THAN);
+        ValueAppender.appendLongParam(clause, value);
         return getCondition();
     }
 
@@ -142,8 +172,8 @@ public class Comparison {
      * or terminate query building
      */
     public Condition greaterThan(double value) {
-        query.append(GREATER_THAN);
-        query.append(value);
+        clause.append(GREATER_THAN);
+        ValueAppender.appendDoubleParam(clause, value);
         return getCondition();
     }
 
@@ -159,9 +189,9 @@ public class Comparison {
      * or terminate query building
      */
     public Condition greaterThanAny(SelectQueryBuilder subQuery) {
-        query.append(GREATER_THAN);
-        query.append(ANY);
-        SubQueryAppender.appendSubQuery(query, subQuery);
+        clause.append(GREATER_THAN);
+        clause.append(ANY);
+        SubQueryAppender.appendSubQuery(clause, subQuery);
         return getCondition();
     }
 
@@ -177,9 +207,9 @@ public class Comparison {
      * or terminate query building
      */
     public Condition greaterThanAll(SelectQueryBuilder subQuery) {
-        query.append(GREATER_THAN);
-        query.append(ALL);
-        SubQueryAppender.appendSubQuery(query, subQuery);
+        clause.append(GREATER_THAN);
+        clause.append(ALL);
+        SubQueryAppender.appendSubQuery(clause, subQuery);
         return getCondition();
     }
 
@@ -193,8 +223,8 @@ public class Comparison {
      * or terminate query building
      */
     public Condition greaterThanOrEqual(String value) {
-        query.append(GREATER_THAN_OR_EQUAL);
-        ValueAppender.appendStringParam(query, value);
+        clause.append(GREATER_THAN_OR_EQUAL);
+        ValueAppender.appendStringParam(clause, value);
         return getCondition();
     }
 
@@ -208,8 +238,23 @@ public class Comparison {
      * or terminate query building
      */
     public Condition greaterThanOrEqual(int value) {
-        query.append(GREATER_THAN_OR_EQUAL);
-        query.append(value);
+        clause.append(GREATER_THAN_OR_EQUAL);
+        ValueAppender.appendIntParam(clause, value);
+        return getCondition();
+    }
+
+    /**
+     * Appends '>= value' into 'WHERE operand >= value' clause.
+     *
+     * @param value Value to be appended
+     *
+     * @return Condition class which can be used to append
+     * more conditions with AND, OR and OR (...) operators,
+     * or terminate query building
+     */
+    public Condition greaterThanOrEqual(long value) {
+        clause.append(GREATER_THAN_OR_EQUAL);
+        ValueAppender.appendLongParam(clause, value);
         return getCondition();
     }
 
@@ -223,8 +268,8 @@ public class Comparison {
      * or terminate query building
      */
     public Condition greaterThanOrEqual(double value) {
-        query.append(GREATER_THAN_OR_EQUAL);
-        query.append(value);
+        clause.append(GREATER_THAN_OR_EQUAL);
+        ValueAppender.appendDoubleParam(clause, value);
         return getCondition();
     }
 
@@ -240,9 +285,9 @@ public class Comparison {
      * or terminate query building
      */
     public Condition greaterThanOrEqualAny(SelectQueryBuilder subQuery) {
-        query.append(GREATER_THAN_OR_EQUAL);
-        query.append(ANY);
-        SubQueryAppender.appendSubQuery(query, subQuery);
+        clause.append(GREATER_THAN_OR_EQUAL);
+        clause.append(ANY);
+        SubQueryAppender.appendSubQuery(clause, subQuery);
         return getCondition();
     }
 
@@ -258,9 +303,9 @@ public class Comparison {
      * or terminate query building
      */
     public Condition greaterThanOrEqualAll(SelectQueryBuilder subQuery) {
-        query.append(GREATER_THAN_OR_EQUAL);
-        query.append(ALL);
-        SubQueryAppender.appendSubQuery(query, subQuery);
+        clause.append(GREATER_THAN_OR_EQUAL);
+        clause.append(ALL);
+        SubQueryAppender.appendSubQuery(clause, subQuery);
         return getCondition();
     }
 
@@ -274,8 +319,8 @@ public class Comparison {
      * or terminate query building
      */
     public Condition lesserThan(String value) {
-        query.append(LESSER_THAN);
-        ValueAppender.appendStringParam(query, value);
+        clause.append(LESSER_THAN);
+        ValueAppender.appendStringParam(clause, value);
         return getCondition();
     }
 
@@ -289,8 +334,23 @@ public class Comparison {
      * or terminate query building
      */
     public Condition lesserThan(int value) {
-        query.append(LESSER_THAN);
-        query.append(value);
+        clause.append(LESSER_THAN);
+        ValueAppender.appendIntParam(clause, value);
+        return getCondition();
+    }
+
+    /**
+     * Appends '< value' into 'WHERE operand < value' clause.
+     *
+     * @param value Value to be appended
+     *
+     * @return Condition class which can be used to append
+     * more conditions with AND, OR and OR (...) operators,
+     * or terminate query building
+     */
+    public Condition lesserThan(long value) {
+        clause.append(LESSER_THAN);
+        ValueAppender.appendLongParam(clause, value);
         return getCondition();
     }
 
@@ -304,8 +364,8 @@ public class Comparison {
      * or terminate query building
      */
     public Condition lesserThan(double value) {
-        query.append(LESSER_THAN);
-        query.append(value);
+        clause.append(LESSER_THAN);
+        ValueAppender.appendDoubleParam(clause, value);
         return getCondition();
     }
 
@@ -321,9 +381,9 @@ public class Comparison {
      * or terminate query building
      */
     public Condition lesserThanAny(SelectQueryBuilder subQuery) {
-        query.append(LESSER_THAN);
-        query.append(ANY);
-        SubQueryAppender.appendSubQuery(query, subQuery);
+        clause.append(LESSER_THAN);
+        clause.append(ANY);
+        SubQueryAppender.appendSubQuery(clause, subQuery);
         return getCondition();
     }
 
@@ -339,9 +399,9 @@ public class Comparison {
      * or terminate query building
      */
     public Condition lesserThanAll(SelectQueryBuilder subQuery) {
-        query.append(LESSER_THAN);
-        query.append(ALL);
-        SubQueryAppender.appendSubQuery(query, subQuery);
+        clause.append(LESSER_THAN);
+        clause.append(ALL);
+        SubQueryAppender.appendSubQuery(clause, subQuery);
         return getCondition();
     }
 
@@ -355,8 +415,8 @@ public class Comparison {
      * or terminate query building
      */
     public Condition lesserThanOrEqual(String value) {
-        query.append(LESSER_THAN_OR_EQUAL);
-        ValueAppender.appendStringParam(query, value);
+        clause.append(LESSER_THAN_OR_EQUAL);
+        ValueAppender.appendStringParam(clause, value);
         return getCondition();
     }
 
@@ -370,8 +430,23 @@ public class Comparison {
      * or terminate query building
      */
     public Condition lesserThanOrEqual(int value) {
-        query.append(LESSER_THAN_OR_EQUAL);
-        query.append(value);
+        clause.append(LESSER_THAN_OR_EQUAL);
+        ValueAppender.appendIntParam(clause, value);
+        return getCondition();
+    }
+
+    /**
+     * Appends '<= value' into 'WHERE operand <= value' clause.
+     *
+     * @param value Value to be appended
+     *
+     * @return Condition class which can be used to append
+     * more conditions with AND, OR and OR (...) operators,
+     * or terminate query building
+     */
+    public Condition lesserThanOrEqual(long value) {
+        clause.append(LESSER_THAN_OR_EQUAL);
+        ValueAppender.appendLongParam(clause, value);
         return getCondition();
     }
 
@@ -385,8 +460,8 @@ public class Comparison {
      * or terminate query building
      */
     public Condition lesserThanOrEqual(double value) {
-        query.append(LESSER_THAN_OR_EQUAL);
-        query.append(value);
+        clause.append(LESSER_THAN_OR_EQUAL);
+        ValueAppender.appendDoubleParam(clause, value);
         return getCondition();
     }
 
@@ -402,9 +477,9 @@ public class Comparison {
      * or terminate query building
      */
     public Condition lesserThanOrEqualAny(SelectQueryBuilder subQuery) {
-        query.append(LESSER_THAN_OR_EQUAL);
-        query.append(ANY);
-        SubQueryAppender.appendSubQuery(query, subQuery);
+        clause.append(LESSER_THAN_OR_EQUAL);
+        clause.append(ANY);
+        SubQueryAppender.appendSubQuery(clause, subQuery);
         return getCondition();
     }
 
@@ -420,9 +495,9 @@ public class Comparison {
      * or terminate query building
      */
     public Condition lesserThanOrEqualAll(SelectQueryBuilder subQuery) {
-        query.append(LESSER_THAN_OR_EQUAL);
-        query.append(ALL);
-        SubQueryAppender.appendSubQuery(query, subQuery);
+        clause.append(LESSER_THAN_OR_EQUAL);
+        clause.append(ALL);
+        SubQueryAppender.appendSubQuery(clause, subQuery);
         return getCondition();
     }
 
@@ -437,8 +512,8 @@ public class Comparison {
      */
     public Condition startsWith(String pattern) {
         String startsWith = pattern.concat("%");
-        query.append(" LIKE ");
-        ValueAppender.appendStringParam(query, startsWith);
+        clause.append(" LIKE ");
+        ValueAppender.appendStringParam(clause, startsWith);
         return getCondition();
     }
 
@@ -453,8 +528,8 @@ public class Comparison {
      */
     public Condition endsWith(String pattern) {
         String endsWith = "%".concat(pattern);
-        query.append(" LIKE ");
-        ValueAppender.appendStringParam(query, endsWith);
+        clause.append(" LIKE ");
+        ValueAppender.appendStringParam(clause, endsWith);
         return getCondition();
     }
 
@@ -469,8 +544,8 @@ public class Comparison {
      */
     public Condition contains(String pattern) {
         String contains = "%".concat(pattern).concat("%");
-        query.append(" LIKE ");
-        ValueAppender.appendStringParam(query, contains);
+        clause.append(" LIKE ");
+        ValueAppender.appendStringParam(clause, contains);
         return getCondition();
     }
 
@@ -487,10 +562,10 @@ public class Comparison {
      * or terminate query building
      */
     public Condition isBetween(String lower, String higher) {
-        query.append(" BETWEEN ");
-        ValueAppender.appendStringParam(query, lower);
-        query.append(" AND ");
-        ValueAppender.appendStringParam(query, higher);
+        clause.append(" BETWEEN ");
+        ValueAppender.appendStringParam(clause, lower);
+        clause.append(" AND ");
+        ValueAppender.appendStringParam(clause, higher);
         return getCondition();
     }
 
@@ -507,10 +582,30 @@ public class Comparison {
      * or terminate query building
      */
     public Condition isBetween(int lower, int higher) {
-        query.append(" BETWEEN ");
-        query.append(lower);
-        query.append(" AND ");
-        query.append(higher);
+        clause.append(" BETWEEN ");
+        ValueAppender.appendIntParam(clause, lower);
+        clause.append(" AND ");
+        ValueAppender.appendIntParam(clause, higher);
+        return getCondition();
+    }
+
+    /**
+     * Appends 'BETWEEN lower AND higher' into 'WHERE operand
+     * BETWEEN lower AND higher' clause.
+     *
+     * @param lower Lower value of BETWEEN comparison
+     *
+     * @param higher Higher value of BETWEEN comparison
+     *
+     * @return Condition class which can be used to append
+     * more conditions with AND, OR and OR (...) operators,
+     * or terminate query building
+     */
+    public Condition isBetween(long lower, long higher) {
+        clause.append(" BETWEEN ");
+        ValueAppender.appendLongParam(clause, lower);
+        clause.append(" AND ");
+        ValueAppender.appendLongParam(clause, higher);
         return getCondition();
     }
 
@@ -527,10 +622,10 @@ public class Comparison {
      * or terminate query building
      */
     public Condition isBetween(double lower, double higher) {
-        query.append(" BETWEEN ");
-        query.append(lower);
-        query.append(" AND ");
-        query.append(higher);
+        clause.append(" BETWEEN ");
+        ValueAppender.appendDoubleParam(clause, lower);
+        clause.append(" AND ");
+        ValueAppender.appendDoubleParam(clause, higher);
         return getCondition();
     }
 
@@ -542,7 +637,7 @@ public class Comparison {
      * or terminate query building
      */
     public Condition isNull() {
-        query.append(" IS NULL");
+        clause.append(" IS NULL");
         return getCondition();
     }
 
@@ -554,7 +649,7 @@ public class Comparison {
      * or terminate query building
      */
     public Condition isNotNull() {
-        query.append(" IS NOT NULL");
+        clause.append(" IS NOT NULL");
         return getCondition();
     }
 
@@ -568,8 +663,8 @@ public class Comparison {
      * or terminate query building
      */
     public Condition isIn(String ...listOfValues) {
-        query.append(" IN ");
-        ListValueAppender.appendListOfStringParams(query, listOfValues);
+        clause.append(" IN ");
+        ListValueAppender.appendListOfStringParams(clause, listOfValues);
         return getCondition();
     }
 
@@ -583,8 +678,23 @@ public class Comparison {
      * or terminate query building
      */
     public Condition isIn(int ...listOfValues) {
-        query.append(" IN ");
-        ListValueAppender.appendListOfIntParams(query, listOfValues);
+        clause.append(" IN ");
+        ListValueAppender.appendListOfIntParams(clause, listOfValues);
+        return getCondition();
+    }
+
+    /**
+     * Appends 'IN (listOfValues)' into 'WHERE operand IN (listOfValues)' clause.
+     *
+     * @param listOfValues Values operand is being compared
+     *
+     * @return Condition class which can be used to append
+     * more conditions with AND, OR and OR (...) operators,
+     * or terminate query building
+     */
+    public Condition isIn(long ...listOfValues) {
+        clause.append(" IN ");
+        ListValueAppender.appendListOfLongParams(clause, listOfValues);
         return getCondition();
     }
 
@@ -598,8 +708,8 @@ public class Comparison {
      * or terminate query building
      */
     public Condition isIn(double ...listOfValues) {
-        query.append(" IN ");
-        ListValueAppender.appendListOfDoubleParams(query, listOfValues);
+        clause.append(" IN ");
+        ListValueAppender.appendListOfDoubleParams(clause, listOfValues);
         return getCondition();
     }
 
@@ -615,12 +725,12 @@ public class Comparison {
      * or terminate query building
      */
     public Condition isInSub(SelectQueryBuilder subQuery) {
-        query.append(" IN ");
-        SubQueryAppender.appendSubQuery(query, subQuery);
+        clause.append(" IN ");
+        SubQueryAppender.appendSubQuery(clause, subQuery);
         return getCondition();
     }
 
     private Condition getCondition() {
-        return new Condition(query);
+        return new Condition(clause);
     }
 }

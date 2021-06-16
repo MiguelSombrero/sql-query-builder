@@ -42,7 +42,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     @Test
     public void testConditionStringEquals() throws SQLException {
         SelectQuery query = this.baseQuery
-                .where(valueOf("firstname").equals("Miika"))
+                .where(valueOf("firstname").stringEquals("Miika"))
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE firstname = 'Miika'", query.toString());
@@ -56,7 +56,7 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     @Test
     public void testConditionIntegerEquals() throws SQLException {
         SelectQuery query = this.baseQuery
-                .where(valueOf("age").equals(39))
+                .where(valueOf("age").integerEquals(39))
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE age = 39", query.toString());
@@ -67,9 +67,22 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     }
 
     @Test
+    public void testConditionLongEquals() throws SQLException {
+        SelectQuery query = this.allTypesBaseQuery
+                .where(valueOf("hash").longEquals(9223372036854775806L))
+                .build();
+
+        assertEquals("SELECT * FROM all_types WHERE hash = 9223372036854775806", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 1);
+    }
+
+    @Test
     public void testConditionDoubleEquals() throws SQLException {
         SelectQuery query = this.allTypesBaseQuery
-                .where(valueOf("age").equals(120.1))
+                .where(valueOf("age").doubleEquals(120.1))
                 .build();
 
         assertEquals("SELECT * FROM all_types WHERE age = 120.1", query.toString());
@@ -144,6 +157,19 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     }
 
     @Test
+    public void testConditionLongGreaterThan() throws SQLException {
+        SelectQuery query = this.allTypesBaseQuery
+                .where(valueOf("hash").greaterThan(922337223234222806L))
+                .build();
+
+        assertEquals("SELECT * FROM all_types WHERE hash > 922337223234222806", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 1);
+    }
+
+    @Test
     public void testConditionDoubleGreaterThan() throws SQLException {
         SelectQuery query = this.allTypesBaseQuery
                 .where(valueOf("age").greaterThan(25.8))
@@ -212,6 +238,19 @@ public class ComparisonTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE age >= 32", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 2);
+    }
+
+    @Test
+    public void testConditionLongGreaterThanOrEqual() throws SQLException {
+        SelectQuery query = this.allTypesBaseQuery
+                .where(valueOf("hash").greaterThanOrEqual(922337223234222806L))
+                .build();
+
+        assertEquals("SELECT * FROM all_types WHERE hash >= 922337223234222806", query.toString());
 
         List<Row> result = query.execute();
 
@@ -294,6 +333,19 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     }
 
     @Test
+    public void testConditionLongLesserThan() throws SQLException {
+        SelectQuery query = this.allTypesBaseQuery
+                .where(valueOf("hash").lesserThan(9223372036854775806L))
+                .build();
+
+        assertEquals("SELECT * FROM all_types WHERE hash < 9223372036854775806", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 1);
+    }
+
+    @Test
     public void testConditionDoubleLesserThan() throws SQLException {
         SelectQuery query = this.allTypesBaseQuery
                 .where(valueOf("age").lesserThan(25.7))
@@ -366,6 +418,19 @@ public class ComparisonTest extends DatabaseTestBaseClass {
         List<Row> result = query.execute();
 
         assertRowCount(result, 1);
+    }
+
+    @Test
+    public void testConditionLongLesserThanOrEqual() throws SQLException {
+        SelectQuery query = this.allTypesBaseQuery
+                .where(valueOf("hash").lesserThanOrEqual(9223372036854775806L))
+                .build();
+
+        assertEquals("SELECT * FROM all_types WHERE hash <= 9223372036854775806", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 2);
     }
 
     @Test
@@ -478,6 +543,19 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     }
 
     @Test
+    public void testConditionLongBetween() throws SQLException {
+        SelectQuery query = this.allTypesBaseQuery
+                .where(valueOf("hash").isBetween(9223372036854775801L, 9223372036854775807L))
+                .build();
+
+        assertEquals("SELECT * FROM all_types WHERE hash BETWEEN 9223372036854775801 AND 9223372036854775807", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 1);
+    }
+
+    @Test
     public void testConditionDoubleBetween() throws SQLException {
         SelectQuery query = this.allTypesBaseQuery
                 .where(valueOf("age").isBetween(18.5, 30.5))
@@ -549,6 +627,19 @@ public class ComparisonTest extends DatabaseTestBaseClass {
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE age IN (18, 19, 20, 21, 30)", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 1);
+    }
+
+    @Test
+    public void testConditionInListOfLong() throws SQLException {
+        SelectQuery query = this.allTypesBaseQuery
+                .where(valueOf("hash").isIn(9223372036854775802L, 9223372036854775804L, 9223372036854775806L, 9223372036854775807L))
+                .build();
+
+        assertEquals("SELECT * FROM all_types WHERE hash IN (9223372036854775802, 9223372036854775804, 9223372036854775806, 9223372036854775807)", query.toString());
 
         List<Row> result = query.execute();
 

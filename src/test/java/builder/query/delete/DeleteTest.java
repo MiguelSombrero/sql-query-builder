@@ -40,7 +40,7 @@ public class DeleteTest extends DatabaseTestBaseClass {
         DeleteQuery query = SQLQueryBuilder
                 .deleteFrom()
                     .table("address")
-                .where(valueOf("person_id").equals(1))
+                .where(valueOf("person_id").integerEquals(1))
                 .build();
 
         assertEquals("DELETE FROM address WHERE person_id = 1", query.toString());
@@ -55,8 +55,8 @@ public class DeleteTest extends DatabaseTestBaseClass {
         DeleteQuery query = SQLQueryBuilder
                 .deleteFrom()
                     .table("address")
-                .where(valueOf("person_id").equals(1)
-                        .and(valueOf("city").equals("Oulu")))
+                .where(valueOf("person_id").integerEquals(1)
+                        .and(valueOf("city").stringEquals("Oulu")))
                 .build();
 
         assertEquals("DELETE FROM address WHERE person_id = 1 AND city = 'Oulu'", query.toString());

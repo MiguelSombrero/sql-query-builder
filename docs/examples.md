@@ -11,9 +11,15 @@
 
 ### <a name="select"></a>SELECT statement
 
+create `SelectQuery` with `SQLQueryBuilder` to execute SQL `SELECT` queries.
+
 #### Basic example
 
-    String SQLQuery = QueryFactory
+Instantiate `SQLQueryBuilder` with datasource to your database: 
+
+    SQLQueryBuilder sqlQueryBuilder = new SQLQueryBuilder(datasource);
+
+    SelectQuery query = sqlQueryBuilder
         .select()
             .column("firstname").alias("first")
             .column("lastname").alias("last")
@@ -23,7 +29,7 @@
         .where(valueOf("age").greaterThan(18))
         .build();
 
-    logger.info(SQLQuery)
+    logger.info(query.toString());
 
 Above code prints out:
 
@@ -31,16 +37,26 @@ Above code prints out:
     FROM person
     WHERE age > 18
 
-(line breaks are added for better readability)
+(line breaks is added for better readability)
+
+Execute `SELECT` query and get the results: 
+
+    List<Row> result = query.execute();
+
+    Row firstRow = result.get(0);
+
+    int age = firstRow.getInteger("age");
+    String firstname = firstRow.getString("first");
 
 #### More complex example with joins
 
-You can import static factory methods for queries to look more natural language like.
+You can import static factory methods from `ConditionClauseBuilder` to create `WHERE` and `HAVING` clauses inside query.
 
-    import static builder.query.SQLQueryBuilder.*;
     import static builder.clause.ConditionClauseBuilder.*;
 
-    String SQLQuery = select()
+    SQLQueryBuilder sqlQueryBuilder = new SQLQueryBuilder(datasource);
+
+    SelectQuery query = sqlQueryBuilder
             .column("p.id")
             .column("p.age")
             .column("p.firstname").alias("name")
@@ -57,7 +73,7 @@ You can import static factory methods for queries to look more natural language 
         .limit(100)
         .build();
 
-        logger.info(SQLQuery);
+        logger.info(query.toString());
 
 Above code prints out:
 
@@ -72,10 +88,9 @@ Above code prints out:
 
 #### Example with aggregate functions
 
-    ...
-    import static builder.clause.HavingClauseFactory.*;
+    imports ...
 
-    String SQLQuery = select()
+    SelectQuery query = sqlQueryBuilder
             .column("s.name").alias("school")
             .avg("c.difficulty").alias("avgDifficulty")
         .from()
@@ -86,7 +101,7 @@ Above code prints out:
         .having(avg("c.difficulty").greaterThan(1))
         .build();
 
-        logger.info(SQLQuery);
+        logger.info(query.toString());
 
 Above code prints out:
 
@@ -96,18 +111,23 @@ Above code prints out:
     GROUP BY school
     HAVING avgDifficulty > 1
 
-#### Sub-queries can be made by using `QueryFactory` to build sub-SQLQuery
+#### Sub-queries can be made by using `SQLQueryBuilder` to build also sub-query
 
-    String SQLQuery = select()
+    imports ...
+
+    SelectQuery query = sqlQueryBuilder
             .column("*")
         .from()
-            .sub(select()
+            .sub(sqlQueryBuilder.
+                select()
                     .column("*")
                 .from()
                     .table("person")
                 .where(valueOf("age).greaterThan(20)))
                 .alias("p")
         .build();
+
+        logger.info(query.toString());
 
 This prints out:
 
@@ -120,9 +140,13 @@ This prints out:
 
 ### <a name="insert"></a>INSERT INTO statement
 
+create `InsertQuery` with `SQLQueryBuilder` to execute SQL `INSERT` queries. 
+
 #### Basic example
 
-    String SQLQuery = insertInto()
+    imports ...
+
+    InsertQuery query = sqlQueryBuilder
             .table("person")
                 .columns("id", "birthdate", "firstname", "lastname", "age")
             .values()

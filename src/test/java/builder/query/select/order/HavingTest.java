@@ -37,7 +37,7 @@ public class HavingTest extends DatabaseTestBaseClass {
     @Test
     public void testHavingCount() throws SQLException {
         SelectQuery query = this.baseQuery
-                .having(count("age").equals(100))
+                .having(count("age").integerEquals(100))
                 .build();
 
         assertEquals("SELECT * FROM person GROUP BY age, firstname, lastname HAVING COUNT(age) = 100", query.toString());
@@ -50,7 +50,7 @@ public class HavingTest extends DatabaseTestBaseClass {
     @Test
     public void testHavingSum() throws SQLException {
         SelectQuery query = this.baseQuery
-                .having(sum("age").equals(100))
+                .having(sum("age").integerEquals(100))
                 .build();
 
         assertEquals("SELECT * FROM person GROUP BY age, firstname, lastname HAVING SUM(age) = 100", query.toString());
@@ -63,7 +63,7 @@ public class HavingTest extends DatabaseTestBaseClass {
     @Test
     public void testHavingAvg() throws SQLException {
         SelectQuery query = this.baseQuery
-                .having(avg("age").equals(100))
+                .having(avg("age").integerEquals(100))
                 .build();
 
         assertEquals("SELECT * FROM person GROUP BY age, firstname, lastname HAVING AVG(age) = 100", query.toString());
@@ -76,7 +76,7 @@ public class HavingTest extends DatabaseTestBaseClass {
     @Test
     public void testHavingMax() throws SQLException {
         SelectQuery query = this.baseQuery
-                .having(max("age").equals(100))
+                .having(max("age").integerEquals(100))
                 .build();
 
         assertEquals("SELECT * FROM person GROUP BY age, firstname, lastname HAVING MAX(age) = 100", query.toString());
@@ -89,7 +89,7 @@ public class HavingTest extends DatabaseTestBaseClass {
     @Test
     public void testHavingMin() throws SQLException {
         SelectQuery query = this.baseQuery
-                .having(min("age").equals(100))
+                .having(min("age").integerEquals(100))
                 .build();
 
         assertEquals("SELECT * FROM person GROUP BY age, firstname, lastname HAVING MIN(age) = 100", query.toString());
@@ -102,9 +102,9 @@ public class HavingTest extends DatabaseTestBaseClass {
     @Test
     public void testHavingMultipleConditions() throws SQLException {
         SelectQuery query = this.baseQuery
-                .having(max("age").equals(100)
-                    .and(min("age").equals(20))
-                    .or(avg("age").equals(60)))
+                .having(max("age").integerEquals(100)
+                    .and(min("age").integerEquals(20))
+                    .or(avg("age").integerEquals(60)))
                 .build();
 
         assertEquals("SELECT * FROM person GROUP BY age, firstname, lastname HAVING MAX(age) = 100 AND MIN(age) = 20 OR AVG(age) = 60", query.toString());
