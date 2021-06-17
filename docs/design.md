@@ -1,93 +1,111 @@
 # Design document
 
-Starting point of using library is static factory class `QueryFactory` found in package `main/java/factory`.
+## Table of contents
+1. [About the design](#about)
+2. [Factory classes](#factory)
+3. [User input validation](#validation)
+4. [WHERE and HAVING](#condition)
+5. [SELECT statement](#select)
+6. [INSERT statement](#insert)
+7. [UPDATE statement](#update)
+8. [CREATE statement](#create)
+9. [DELETE statement](#delete)
+10. [DROP statement](#drop)
 
-## About the design
+## <a name="about"></a>About the design
 
-### Builder pattern
+Factory class `QueryFactory` is used to create different queries. Factory creates `Query` object, which represents SQL (or any other) query.
 
-I have used [builder pattern](https://en.wikipedia.org/wiki/Builder_pattern) to chain classes. 
+`Query` is passed as a parameter to classes that defines methods for handling query.  
 
-For example `From.table(String tableName)` method returns `Table` class, and when you are in `Table`, you cannot go back to `From` class.
+Classes are chained together using [builder pattern](https://en.wikipedia.org/wiki/Builder_pattern).
 
-This design ensures that query builder does not allow user to build invalid SQL, for example call same method infinitely: `QueryFactory.select().column("firstname).alias("f").alias("f").alias("f) ...`.
+## <a name="factory"></a>Factory classes
 
-Therefore, there is relatively large amount of classes with minimum functionality.
+Package `/src/main/java/factory` contains all the factory classes to create queries and clauses.  
 
-### Template method pattern
+Use factory class `QueryFactory` to build SQL queries. Factory classes `WhereClauseFactory` and `HavingClauseFactory` is used to build `WHERE` and `HAVING` clauses, that can be embedded in SQL queries.
 
-[Template method](https://en.wikipedia.org/wiki/Template_method_pattern) is used to reduce duplicate code in scenarios, where same functionality differs just a bit in different cases.
+See detailed examples in [Examples](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/examples.md) document.
 
-Basic example of the scenario is when you are creating list of values, and you need to add comma after first value.
+## <a name="validation"></a>User input validation
 
-For example in statement `SELECT firstname, lastname, age FROM ...` you need to add first value as `firstname` and the rest of the values with comma as `, lastname`.
+Package `/src/main/java/validation` contains validators for validating user input.
 
-![Template method_diagram](https://github.com/MiguelSombrero/sql-query-builder/blob/develop/docs/template-method-diagram.jpg)
+**Note that** these validations is not enough for preventing SQL injection type attacks.
 
-## Class diagrams
+If this library is used in untrusted environment, it is highly recommended to use parametrized queries.
 
-### Where clause
+Check out examples of building [parametrized queries](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/examples.md#parametrized).
 
-Classes of `WHERE` clause is implemented in package `/main/java/builder/clause/where`.
+## <a name="condition"></a>WHERE and HAVING conditions
 
-Where clause is used embedded in another SQL statement by `where(Conjunction clause)` method.
+Package `/src/main/java/builder/condition` contains classes of `WHERE` and `HAVING` clauses.
 
-Where clauses is build by its own factory initialized by `WhereClauseFactory`, for example `WhereClauseFactory.valueOf(String operand)`.
+Where and having clauses is used as embedded in another SQL statement by calling `where(Condition whereClause)` and `having(Condition havingClause)` methods.
 
-#### Class diagram
+### Class diagram
 
-![Select_class_diagram](https://github.com/MiguelSombrero/sql-query-builder/blob/develop/docs/where-class-diagram.jpg)
+![Condition_class_diagram](https://github.com/MiguelSombrero/sql-query-builder/blob/develop/docs/where-class-diagram.jpg)
 
-For the convenience, showing in diagram only one overload of every method of `Comparison` class.
+(For the convenience, diagram is showing only one overload of every method of `Comparison` class)
 
-Where clause and its builder is used in all the statements that are using `WHERE` conditions.
+## <a name="select">SELECT statement
 
-For Example `...from().table("person").where(WhereClauseFactory.valueOf("age").greaterThan(30))`.
+Package `/src/main/java/builder/statement/select` contains classes of `SELECT` queries.
 
-### Select statement
-
-Classes of `SELECT` queries is implemented in package `/main/java/builder/statement/select`.
-
-#### Class diagram
+### Class diagram
 
 ![Select_class_diagram](https://github.com/MiguelSombrero/sql-query-builder/blob/develop/docs/select-class-diagram.jpg)
 
-### Insert statement
+Create SELECT statement by calling `QueryFactory.select()...` or other select options.
 
-Classes of `INSERT INTO` queries is implemented in package `/main/java/builder/statement/insert`.
+## <a name="insert">INSERT statement
 
-#### Class diagram
+Package `/src/main/java/builder/statement/insert` contains classes of `INSERT INTO` queries.
+
+### Class diagram
 
 ![Insert_class_diagram](https://github.com/MiguelSombrero/sql-query-builder/blob/develop/docs/insert-class-diagram.jpg)
 
-### Update statement
+Create INSERT statement by calling `QueryFactory.inserInto()...`.
 
-Classes of `UPDATE` queries is implemented in package `/main/java/builder/statement/update`.
+## <a name="update">UPDATE statement
 
-#### Class diagram
+Package `/src/main/java/builder/statement/update` contains classes of `UPDATE` queries.
+
+### Class diagram
 
 ![Update_class_diagram](https://github.com/MiguelSombrero/sql-query-builder/blob/develop/docs/update-class-diagram.jpg)
 
-### Create statements
+Create UPDATE statement by calling `QueryFactory.update()...`.
 
-Classes of `CREATE` queries is implemented in package `/main/java/builder/statement/create`.
+## <a name="create">CREATE statement
 
-#### Class diagram
+Package `/src/main/java/builder/statement/create` contains classes of `CREATE` queries.
+
+### Class diagram
 
 ![Create_class_diagram](https://github.com/MiguelSombrero/sql-query-builder/blob/develop/docs/create-class-diagram.jpg)
 
-### Delete statements
+Create CREATE statement by calling `QueryFactory.create()...`.
 
-Classes of `DELETE` queries is implemented in package `/main/java/builder/statement/delete`.
+## <a name="delete">DELETE statement
 
-#### Class diagram
+Package `/src/main/java/builder/statement/delete` contains classes of `DELETE` queries.
+
+### Class diagram
 
 ![Delete_class_diagram](https://github.com/MiguelSombrero/sql-query-builder/blob/develop/docs/delete-class-diagram.jpg)
 
-### Drop statements
+Create DELETE statement by calling `QueryFactory.deleteFrom()...`.
 
-Classes of `DROP` queries is implemented in package `/main/java/builder/statement/drop`.
+## <a name="drop">DROP statement
 
-#### Class diagram
+Package `/src/main/java/builder/statement/drop` ontains classes of `DROP` queries.
+
+### Class diagram
 
 ![Drop_class_diagram](https://github.com/MiguelSombrero/sql-query-builder/blob/develop/docs/drop-class-diagram.jpg)
+
+Create DROP statement by calling `QueryFactory.drop()...`.

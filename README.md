@@ -2,45 +2,40 @@
 
 ![GitHub Actions](https://github.com/MiguelSombrero/sql-query-builder/workflows/Java%20CI%20with%20Maven/badge.svg)
 
-Sql query builder is Java-library used to build SQL query strings more easily. Syntax of the query strings is intended to be compatible with MySQL.
+Sql query builder is Java-library used for building and executing SQL queries.
 
-## How to use this library
+**Syntax of the SQL queries is compatible at least with MySQL, but might work with other DBMS too.**
 
-### Add Maven dependency
+## Main features
 
-Add Maven dependency to your project:
-
-    <dependency>
-        <groupId>com.github.miguelsombrero</groupId>
-        <artifactId>sql-query-builder</artifactId>
-        <version>{version}-SNAPSHOT</version>
-    </dependency>
-
-Check the latest version from [GitHub](https://github.com/MiguelSombrero/sql-query-builder) 
-
-### Install dependency 
-
-    mvn install
-
-### Use
-
-Starting point of using library is static factory class `QueryFactory` found in package `main/java/factory`.
+- Create `SELECT`, `UPDATE`, `INSERT`, `CREATE`, `DELETE` and `DROP` queries easily
+- Execute queries against database and do something with the results
+- Supports [user input validation](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/supported.md#validation)
+  and [parametrized queries](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/supported.md#parametrized) by default
 
 ## Examples
 
-Basic SELECT statement:
+To use sql-query-builder, you need to instantiate `SQLQueryBuilder` class with [Datasource](https://docs.oracle.com/javase/8/docs/api/javax/sql/DataSource.html) object to connect your database.
 
-    String query = QueryFactory
+    SQLQueryBuilder sqlQueryBuilder = new SQLQueryBuilder(datasource);
+
+After this you can start creating queries:
+
+    SelectQuery query = sqlQueryBuilder
         .select()
             .column("firstname").alias("first")
             .column("lastname").alias("last")
             .column("age")
         .from()
             .table("person")
-        .where(valueOf("age").greaterThan(18))
+        .where(valueOf("age").greaterThanInteger(18))
         .build();
 
-    logger.info(query)
+Query object can be used as a query string with some other database framework:
+
+    String queryString = query.toString();
+
+    logger.info(queryString);
 
 Above code prints out:
 
@@ -48,43 +43,78 @@ Above code prints out:
     FROM person
     WHERE age > 18
 
+Or Query object can be used to execute query directly:
+
+    List<Row> result = query.execute();
+
+`SELECT` query results list of `Row` objects, which represents database rows. To access rows and data:
+
+    Row firstRow = result.get(0);
+
+    int age = firstRow.getInteger("age");
+    String firstname = firstRow.getString("first");
+
 More examples can be found in [examples](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/examples.md) document.
+
+## How to use this library
+
+### 1. Add repository information
+
+Add necessary [repository information](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry) to your pom-file to access and authenticate to GitHub packages.
+
+### 2. Add Maven dependency
+
+Add Maven dependency to your project:
+
+    <dependency>
+        <groupId>com.github.miguelsombrero</groupId>
+        <artifactId>sql-query-builder</artifactId>
+        <version>1.0.5</version>
+    </dependency>
+
+Check the latest version from [GitHub Packages](https://github.com/MiguelSombrero?tab=packages&repo_name=sql-query-builder)
+
+### 3. Install dependency 
+
+    mvn install
 
 ## Documentation
 
-[Design documents](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/design.md)
+[Design document](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/design.md)
 
 [Examples](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/examples.md)
 
-## Not yet implemented
+[Supported operations](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/supported.md)
 
-### General 
-- Javadoc
-- Test coverage reports
-- Maven Gitflow plugin configurations
+## External dependencies
 
-### SELECT
-- Better Like operator (giving patterns without "%" etc. symbols)
-- Better HAVING clause (no need for giving condition by string)
-- Aggregate functions in HAVING clauses (HAVING COUNT(person.id) < 20)
-- All operator in SELECT and HAVING statements (SELECT ALL, HAVING column = ALL (...))
-- Select into statement (SELECT INTO)
-- Case statements (CASE - WHEN, THEN)
-- Union operator (UNION)
-
-### DELETE
-- Delete from multiple tables with joins (DELETE T1, T2, FROM T1 ... JOIN ...)
-
-### CREATE
-- Create table constraints (default, check, auto_increment, ...)
-- Foreign key constraints (on delete, on update, ...)
-- Create table AS clauses (CREATE table x AS, ...)
-
-### ALTER
-- ALTER TABLE statements
-
-And propably many more special cases ...
+- [Apache Commons DbUtils](https://commons.apache.org/proper/commons-dbutils/index.html)
+- 
 
 ## Known issues
+- In CREATE TABLE user can chain same constraints infinitely (`...column("ID").type(DataType.INT).notNull().notNull().notNull() ...`) 
 
-- You can pass other than `SELECT` statements in sub-select (`sub(Builder query)`) methods.
+## For developers
+
+### Requirements
+
+- Java 13+ (using enhanced switch statement released in Java 13)
+- Maven 3.6.0+
+
+### Commands
+
+#### Build project
+
+    mvn clean install
+
+#### Run tests
+
+    mvn clean test
+
+#### Create release
+
+    mvn gitflow:release
+
+#### Deploy to GitHub packages
+
+GitHub Action for deploying release to GitHub packages triggers when new release is created with `mvn gitflow:release` command.
