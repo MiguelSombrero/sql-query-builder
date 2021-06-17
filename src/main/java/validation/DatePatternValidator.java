@@ -2,8 +2,8 @@ package validation;
 
 import java.util.regex.Pattern;
 
-public class DatePatternValidator implements Validator {
-    private static final String VALID_DATE_PATTERN = "^(\\d{4})-(\\d{2})-(\\d{2})(\\s(\\d{2}):(\\d{2}):(\\d{2}))?$";
+public class DatePatternValidator implements Validator<String> {
+    private static final String VALID_DATE_PATTERN = "^(\\d{4})-(\\d{2})-(\\d{2})$";
 
     public boolean validate(String input) {
         if (input == null) {

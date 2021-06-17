@@ -10,13 +10,14 @@ public class DatePatternValidatorTest {
     private DatePatternValidator datePatternValidator = new DatePatternValidator();
 
     @Test
-    public void testDoesAcceptDateWithTime() {
-        assertTrue(datePatternValidator.validate("2021-05-15 21:00:00"));
-    }
-
-    @Test
     public void testDoesAcceptDateWithoutTime() {
         assertTrue(datePatternValidator.validate("2021-05-15"));
+    }
+
+
+    @Test
+    public void testDoesNotAcceptDateWithTime() {
+        assertFalse(datePatternValidator.validate("2021-05-15 21:00:00"));
     }
 
     @Test

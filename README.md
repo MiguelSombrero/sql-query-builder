@@ -2,33 +2,57 @@
 
 ![GitHub Actions](https://github.com/MiguelSombrero/sql-query-builder/workflows/Java%20CI%20with%20Maven/badge.svg)
 
-Sql query builder is Java-library used for building SQL query strings more easily. Syntax of the query strings is intended to be compatible at least with MySQL.
+Sql query builder is Java-library used for building and executing SQL queries.
 
-**Note that**
-- This library does not provide any data access methods. It simply builds strings that are valid SQL and can be used as a query strings with some other framework/library.
-- You should always use parametrized queries in untrusted environments, if your SQL query takes user input as parameters. Check out examples of building [parametrized queries](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/examples.md#parametrized).
+**Syntax of the SQL queries is compatible at least with MySQL, but might work with other DBMS too.**
+
+## Main features
+
+- Create `SELECT`, `UPDATE`, `INSERT`, `CREATE`, `DELETE` and `DROP` queries easily
+- Execute queries against database and do something with the results
+- Supports [user input validation](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/supported.md#validation)
+  and [parametrized queries](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/supported.md#parametrized) by default
 
 ## Examples
 
-Basic SELECT statement:
+To use sql-query-builder, you need to instantiate `SQLQueryBuilder` class with [Datasource](https://docs.oracle.com/javase/8/docs/api/javax/sql/DataSource.html) object to connect your database.
 
-    String query = QueryFactory
+    SQLQueryBuilder sqlQueryBuilder = new SQLQueryBuilder(datasource);
+
+After this you can start creating queries:
+
+    SelectQuery query = sqlQueryBuilder
         .select()
             .column("firstname").alias("first")
             .column("lastname").alias("last")
             .column("age")
         .from()
             .table("person")
-        .where(valueOf("age").greaterThan(18))
+        .where(valueOf("age").greaterThanInteger(18))
         .build();
 
-    logger.info(query)
+Query object can be used as a query string with some other database framework:
+
+    String queryString = query.toString();
+
+    logger.info(queryString);
 
 Above code prints out:
 
     SELECT firstname AS first, lastname AS last, age
     FROM person
     WHERE age > 18
+
+Or Query object can be used to execute query directly:
+
+    List<Row> result = query.execute();
+
+`SELECT` query results list of `Row` objects, which represents database rows. To access rows and data:
+
+    Row firstRow = result.get(0);
+
+    int age = firstRow.getInteger("age");
+    String firstname = firstRow.getString("first");
 
 More examples can be found in [examples](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/examples.md) document.
 
@@ -45,7 +69,7 @@ Add Maven dependency to your project:
     <dependency>
         <groupId>com.github.miguelsombrero</groupId>
         <artifactId>sql-query-builder</artifactId>
-        <version>1.0.4</version>
+        <version>1.0.5</version>
     </dependency>
 
 Check the latest version from [GitHub Packages](https://github.com/MiguelSombrero?tab=packages&repo_name=sql-query-builder)
@@ -62,6 +86,11 @@ Check the latest version from [GitHub Packages](https://github.com/MiguelSombrer
 
 [Supported operations](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/supported.md)
 
+## External dependencies
+
+- [Apache Commons DbUtils](https://commons.apache.org/proper/commons-dbutils/index.html)
+- 
+
 ## Known issues
 - In CREATE TABLE user can chain same constraints infinitely (`...column("ID").type(DataType.INT).notNull().notNull().notNull() ...`) 
 
@@ -69,7 +98,7 @@ Check the latest version from [GitHub Packages](https://github.com/MiguelSombrer
 
 ### Requirements
 
-- Java 8+
+- Java 13+ (using enhanced switch statement released in Java 13)
 - Maven 3.6.0+
 
 ### Commands

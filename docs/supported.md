@@ -1,5 +1,17 @@
 # Supported operations
 
+### <a name="validation"></a>Parametrized queries
+
+Sql-query-builder validates all user input.
+
+TODO: more details on validation
+
+### <a name="parametrized"></a>Parametrized queries
+
+Sql-query-builder parametrizes all value type user input.
+
+TODO: more details
+
 ## SELECT
 
 - SELECT, SELECT DISTINCT, SELECT TOP
@@ -43,7 +55,7 @@
 ## CREATE
 
 - CREATE
-    - table, database, index
+    - table, testutils, index
 - INT, DOUBLE, TIMESTAMP, CHAR, VARCHAR
 - NOT NULL, PRIMARY KEY, UNIQUE, AUTO_INCREMENT
 - FOREIGN KEY key REFERENCES table(key)
@@ -60,4 +72,4 @@
 ## DROP
 
 - DROP
-    - table, database
+    - table, testutils

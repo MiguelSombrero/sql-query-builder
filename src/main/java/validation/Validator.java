@@ -1,5 +1,5 @@
 package validation;
 
-public interface Validator {
-    boolean validate(String input);
+public interface Validator<T> {
+    boolean validate(T input);
 }

@@ -2,7 +2,7 @@ package validation;
 
 import java.util.regex.Pattern;
 
-public class StringPatternValidator implements Validator {
+public class StringPatternValidator implements Validator<String> {
     private static final String VALID_STRING_PATTERN = "^\\w+\\.?\\w*$";
 
     public boolean validate(String input) {

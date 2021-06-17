@@ -7,17 +7,17 @@ import static org.junit.Assert.assertTrue;
 
 public class ExceptionThrowingValidatorTest {
 
-    private Validator dateValidator = new ExceptionThrowingValidator(new DatePatternValidator());
-    private Validator stringValidator = new ExceptionThrowingValidator(new StringPatternValidator());
-
-    @Test
-    public void testDoesAcceptDateWithTime() {
-        assertTrue(dateValidator.validate("2021-05-15 21:00:00"));
-    }
+    private Validator<String> dateValidator = new ExceptionThrowingValidator<>(new DatePatternValidator());
+    private Validator<String> stringValidator = new ExceptionThrowingValidator<>(new StringPatternValidator());
 
     @Test
     public void testDoesAcceptDateWithoutTime() {
         assertTrue(dateValidator.validate("2021-05-15"));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testDoesNotAcceptDateWithTime() {
+        assertTrue(dateValidator.validate("2021-05-15 21:00:00"));
     }
 
     @Test(expected = IllegalArgumentException.class)
