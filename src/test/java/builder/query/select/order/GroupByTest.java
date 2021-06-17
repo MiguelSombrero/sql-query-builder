@@ -66,7 +66,7 @@ public class GroupByTest extends DatabaseTestBaseClass {
     @Test
     public void testGroupByWhere() throws SQLException {
         SelectQuery query = this.baseQuery
-                .where(valueOf("age").greaterThan(18))
+                .where(valueOf("age").greaterThanInteger(18))
                 .groupBy()
                     .column("lastname")
                 .build();

@@ -14,7 +14,7 @@ public class ValueAppender {
     private static Validator<String> dateValidator = ValidatorFactory.exceptionThrowingDateValidator();
     private static Validator<Double> doubleValidator = ValidatorFactory.exceptionThrowingDoubleValidator();
     private static Validator<Integer> integerValidator = ValidatorFactory.exceptionThrowingIntegerValidator();
-    private static Validator<Object> stringValueValidator = ValidatorFactory.exceptionThrowingStringValueValidator();
+    private static Validator<String> stringValueValidator = ValidatorFactory.exceptionThrowingStringValueValidator();
     private static Validator<byte[]> byteArrayValidator = ValidatorFactory.exceptionThrowingByteArrayValidator();
 
     private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");

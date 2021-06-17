@@ -31,11 +31,6 @@ public class StringValuePatternValidatorTest {
     }
 
     @Test
-    public void testDoesAcceptOneDot() {
-        assertTrue(stringValuePatternValidator.validate("p.id"));
-    }
-
-    @Test
     public void testMaximumValue() {
         assertTrue(stringValuePatternValidator.validate(StringUtils.repeat("a", 255)));
     }
@@ -53,6 +48,11 @@ public class StringValuePatternValidatorTest {
     @Test
     public void testDoesAcceptPercentInFrontAndEnd() {
         assertTrue(stringValuePatternValidator.validate("%erson_i%"));
+    }
+
+    @Test
+    public void testDoesNotAcceptDot() {
+        assertFalse(stringValuePatternValidator.validate("p.id"));
     }
 
     @Test

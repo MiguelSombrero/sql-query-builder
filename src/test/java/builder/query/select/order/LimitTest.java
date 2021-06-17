@@ -49,7 +49,7 @@ public class LimitTest extends DatabaseTestBaseClass {
     @Test
     public void testLimitFromTableWhere() throws SQLException {
         SelectQuery query = baseQuery
-                .where(valueOf("age").greaterThan(18))
+                .where(valueOf("age").greaterThanInteger(18))
                 .limit(2)
                 .build();
 
@@ -103,7 +103,7 @@ public class LimitTest extends DatabaseTestBaseClass {
         SelectQuery query = baseQuery
                 .groupBy()
                     .column("age")
-                .having(count("age").greaterThan(20))
+                .having(count("age").greaterThanInteger(20))
                 .limit(2)
                 .build();
 

@@ -3,16 +3,15 @@ package validation;
 public class ValidatorFactory {
 
     /**
-     * Validator that accepts String values, Dates and DateTimes as input.
-     * Validation fails if NO ONE of the validators returns 'true'. Validator
-     * is used in cases where user gives input as String and it can represent
-     * String, Date or DateTime.
+     * Validator that accepts String values as input. Validator
+     * is used in cases where user gives input as String. This validator is
+     * not used for validating column and table names and other strings
+     * that are not values.
      *
      * @return Validator that throws an exception if validation fails
      */
-    public static Validator<Object> exceptionThrowingStringValueValidator() {
-        return new ExceptionThrowingValidator<>(new OrValidator(
-                stringValueValidator(), dateValidator(), dateTimeValidator()));
+    public static Validator<String> exceptionThrowingStringValueValidator() {
+        return new ExceptionThrowingValidator<>(stringValueValidator());
     }
 
     public static Validator<String> exceptionThrowingDateValidator() {

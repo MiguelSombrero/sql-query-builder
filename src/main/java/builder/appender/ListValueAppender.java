@@ -16,6 +16,30 @@ public class ListValueAppender {
         clause.append(")");
     }
 
+    public static void appendListOfDateParams(Clause clause, String ...listOfValues) {
+        clause.append("(");
+        ValueAppender.appendDateParam(clause, listOfValues[0]);
+
+        for (int i = 1; i < listOfValues.length; i++) {
+            clause.append(", ");
+            ValueAppender.appendDateParam(clause, listOfValues[i]);
+        }
+
+        clause.append(")");
+    }
+
+    public static void appendListOfDateTimeParams(Clause clause, String ...listOfValues) {
+        clause.append("(");
+        ValueAppender.appendDateTimeParam(clause, listOfValues[0]);
+
+        for (int i = 1; i < listOfValues.length; i++) {
+            clause.append(", ");
+            ValueAppender.appendDateTimeParam(clause, listOfValues[i]);
+        }
+
+        clause.append(")");
+    }
+
     public static void appendListOfIntParams(Clause clause, int ...listOfValues) {
         clause.append("(");
         ValueAppender.appendIntParam(clause, listOfValues[0]);

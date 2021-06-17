@@ -13,7 +13,21 @@ public class ListValueAppenderTest {
         ListValueAppender.appendListOfStringParams(query, "miika", "liika", "siika", "riika");
         assertEquals("('miika', 'liika', 'siika', 'riika')", query.toString());
     }
-    
+
+    @Test
+    public void testAppendListOfDateValues() {
+        SQLClause query = new SQLClause(new StringBuilder());
+        ListValueAppender.appendListOfDateParams(query, "1981-01-01", "1982-02-02", "1983-03-03", "1984-04-04");
+        assertEquals("('1981-01-01', '1982-02-02', '1983-03-03', '1984-04-04')", query.toString());
+    }
+
+    @Test
+    public void testAppendListOfDateTimeValues() {
+        SQLClause query = new SQLClause(new StringBuilder());
+        ListValueAppender.appendListOfDateTimeParams(query, "1981-01-01 21:01:01", "1982-02-02 21:02:02", "1983-03-03 21:03:03", "1984-04-04 21:04:04");
+        assertEquals("('1981-01-01T21:01:01', '1982-02-02T21:02:02', '1983-03-03T21:03:03', '1984-04-04T21:04:04')", query.toString());
+    }
+
     @Test
     public void testAppendListOfIntegerValues() {
         SQLClause query = new SQLClause(new StringBuilder());

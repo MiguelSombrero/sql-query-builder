@@ -200,7 +200,7 @@ public class InsertTest extends DatabaseTestBaseClass {
                             .column("age")
                         .from()
                             .table("student")
-                        .where(valueOf("age").greaterThan(18))
+                        .where(valueOf("age").greaterThanInteger(18))
                 )
                 .build();
 
@@ -241,7 +241,7 @@ public class InsertTest extends DatabaseTestBaseClass {
                             .all()
                         .from()
                             .table("student")
-                        .where(valueOf("age").lesserThan(18))
+                        .where(valueOf("age").lesserThanInteger(18))
                 )
                 .build();
 

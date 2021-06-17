@@ -34,11 +34,11 @@ public class ConditionTest extends DatabaseTestBaseClass {
     @Test
     public void testWhereAndCondition() throws SQLException {
         SelectQuery query = this.baseQuery
-                .where(valueOf("age").greaterThan(30)
-                        .and(valueOf("birthdate").greaterThan("1980-02-28 21:00:00")))
+                .where(valueOf("age").greaterThanInteger(30)
+                        .and(valueOf("birthdate").greaterThanDateTime("1980-02-28 21:00:10")))
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE age > 30 AND birthdate > '1980-02-28 21:00:00'", query.toString());
+        assertEquals("SELECT firstname FROM person WHERE age > 30 AND birthdate > '1980-02-28T21:00:10'", query.toString());
 
         List<Row> result = query.execute();
 
@@ -48,11 +48,11 @@ public class ConditionTest extends DatabaseTestBaseClass {
     @Test
     public void testWhereOrCondition() throws SQLException {
         SelectQuery query = this.baseQuery
-                .where(valueOf("age").greaterThan(30)
-                        .or(valueOf("birthdate").greaterThan("1980-02-28 21:00:00")))
+                .where(valueOf("age").greaterThanInteger(30)
+                        .or(valueOf("birthdate").greaterThanDateTime("1980-02-28 21:00:02")))
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE age > 30 OR birthdate > '1980-02-28 21:00:00'", query.toString());
+        assertEquals("SELECT firstname FROM person WHERE age > 30 OR birthdate > '1980-02-28T21:00:02'", query.toString());
 
         List<Row> result = query.execute();
 
@@ -62,8 +62,8 @@ public class ConditionTest extends DatabaseTestBaseClass {
     @Test
     public void testWhereNegativeCondition() throws SQLException {
         SelectQuery query = this.baseQuery
-                .where(valueOf("age").greaterThan(-100)
-                        .and(valueOf("age").lesserThan(-18)))
+                .where(valueOf("age").greaterThanInteger(-100)
+                        .and(valueOf("age").lesserThanInteger(-18)))
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE age > -100 AND age < -18", query.toString());
@@ -76,12 +76,12 @@ public class ConditionTest extends DatabaseTestBaseClass {
     @Test
     public void testWhereAndOrConditions() throws SQLException {
         SelectQuery query = this.baseQuery
-                .where(valueOf("age").greaterThan(30)
-                        .and(valueOf("birthdate").greaterThan("1980-02-28 21:00:00"))
-                        .or(valueOf("birthdate").lesserThan("1960-02-28 21:00:00")))
+                .where(valueOf("age").greaterThanInteger(30)
+                        .and(valueOf("birthdate").greaterThanDateTime("1980-02-28 21:00:05"))
+                        .or(valueOf("birthdate").lesserThanDateTime("1960-02-28 21:00:05")))
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE age > 30 AND birthdate > '1980-02-28 21:00:00' OR birthdate < '1960-02-28 21:00:00'", query.toString());
+        assertEquals("SELECT firstname FROM person WHERE age > 30 AND birthdate > '1980-02-28T21:00:05' OR birthdate < '1960-02-28T21:00:05'", query.toString());
 
         List<Row> result = query.execute();
 
@@ -91,9 +91,9 @@ public class ConditionTest extends DatabaseTestBaseClass {
     @Test
     public void testWhereOrSubCondition() throws SQLException {
         SelectQuery query = this.baseQuery
-                .where(valueOf("age").lesserThan(18)
-                        .orSub(valueOf("age").greaterThan(37)
-                                .and(valueOf("age").lesserThan(60))))
+                .where(valueOf("age").lesserThanInteger(18)
+                        .orSub(valueOf("age").greaterThanInteger(37)
+                                .and(valueOf("age").lesserThanInteger(60))))
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE age < 18 OR (age > 37 AND age < 60)", query.toString());
@@ -106,9 +106,9 @@ public class ConditionTest extends DatabaseTestBaseClass {
     @Test(expected = IllegalArgumentException.class)
     public void testOrSubWithSQLInjection() {
         this.baseQuery
-                .where(valueOf("age").lesserThan(18)
-                        .orSub(valueOf(";DROP").greaterThan(50)
-                                .and(valueOf("age").lesserThan(60))))
+                .where(valueOf("age").lesserThanInteger(18)
+                        .orSub(valueOf(";DROP").greaterThanInteger(50)
+                                .and(valueOf("age").lesserThanInteger(60))))
                 .build();
     }
 }

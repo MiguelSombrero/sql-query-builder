@@ -156,7 +156,7 @@ public class Comparison {
      * more conditions with AND, OR and OR (...) operators,
      * or terminate query building
      */
-    public Condition greaterThan(String value) {
+    public Condition greaterThanString(String value) {
         clause.append(GREATER_THAN);
         ValueAppender.appendStringParam(clause, value);
         return getCondition();
@@ -171,7 +171,37 @@ public class Comparison {
      * more conditions with AND, OR and OR (...) operators,
      * or terminate query building
      */
-    public Condition greaterThan(int value) {
+    public Condition greaterThanDate(String value) {
+        clause.append(GREATER_THAN);
+        ValueAppender.appendDateParam(clause, value);
+        return getCondition();
+    }
+
+    /**
+     * Appends '> value' into 'WHERE operand > value' clause.
+     *
+     * @param value Value to be appended
+     *
+     * @return Condition class which can be used to append
+     * more conditions with AND, OR and OR (...) operators,
+     * or terminate query building
+     */
+    public Condition greaterThanDateTime(String value) {
+        clause.append(GREATER_THAN);
+        ValueAppender.appendDateTimeParam(clause, value);
+        return getCondition();
+    }
+
+    /**
+     * Appends '> value' into 'WHERE operand > value' clause.
+     *
+     * @param value Value to be appended
+     *
+     * @return Condition class which can be used to append
+     * more conditions with AND, OR and OR (...) operators,
+     * or terminate query building
+     */
+    public Condition greaterThanInteger(int value) {
         clause.append(GREATER_THAN);
         ValueAppender.appendIntParam(clause, value);
         return getCondition();
@@ -186,7 +216,7 @@ public class Comparison {
      * more conditions with AND, OR and OR (...) operators,
      * or terminate query building
      */
-    public Condition greaterThan(long value) {
+    public Condition greaterThanLong(long value) {
         clause.append(GREATER_THAN);
         ValueAppender.appendLongParam(clause, value);
         return getCondition();
@@ -201,7 +231,7 @@ public class Comparison {
      * more conditions with AND, OR and OR (...) operators,
      * or terminate query building
      */
-    public Condition greaterThan(double value) {
+    public Condition greaterThanDouble(double value) {
         clause.append(GREATER_THAN);
         ValueAppender.appendDoubleParam(clause, value);
         return getCondition();
@@ -252,7 +282,7 @@ public class Comparison {
      * more conditions with AND, OR and OR (...) operators,
      * or terminate query building
      */
-    public Condition greaterThanOrEqual(String value) {
+    public Condition greaterThanOrEqualString(String value) {
         clause.append(GREATER_THAN_OR_EQUAL);
         ValueAppender.appendStringParam(clause, value);
         return getCondition();
@@ -267,7 +297,37 @@ public class Comparison {
      * more conditions with AND, OR and OR (...) operators,
      * or terminate query building
      */
-    public Condition greaterThanOrEqual(int value) {
+    public Condition greaterThanOrEqualDate(String value) {
+        clause.append(GREATER_THAN_OR_EQUAL);
+        ValueAppender.appendDateParam(clause, value);
+        return getCondition();
+    }
+
+    /**
+     * Appends '>= value' into 'WHERE operand >= value' clause.
+     *
+     * @param value Value to be appended
+     *
+     * @return Condition class which can be used to append
+     * more conditions with AND, OR and OR (...) operators,
+     * or terminate query building
+     */
+    public Condition greaterThanOrEqualDateTime(String value) {
+        clause.append(GREATER_THAN_OR_EQUAL);
+        ValueAppender.appendDateTimeParam(clause, value);
+        return getCondition();
+    }
+
+    /**
+     * Appends '>= value' into 'WHERE operand >= value' clause.
+     *
+     * @param value Value to be appended
+     *
+     * @return Condition class which can be used to append
+     * more conditions with AND, OR and OR (...) operators,
+     * or terminate query building
+     */
+    public Condition greaterThanOrEqualInteger(int value) {
         clause.append(GREATER_THAN_OR_EQUAL);
         ValueAppender.appendIntParam(clause, value);
         return getCondition();
@@ -282,7 +342,7 @@ public class Comparison {
      * more conditions with AND, OR and OR (...) operators,
      * or terminate query building
      */
-    public Condition greaterThanOrEqual(long value) {
+    public Condition greaterThanOrEqualLong(long value) {
         clause.append(GREATER_THAN_OR_EQUAL);
         ValueAppender.appendLongParam(clause, value);
         return getCondition();
@@ -297,7 +357,7 @@ public class Comparison {
      * more conditions with AND, OR and OR (...) operators,
      * or terminate query building
      */
-    public Condition greaterThanOrEqual(double value) {
+    public Condition greaterThanOrEqualDouble(double value) {
         clause.append(GREATER_THAN_OR_EQUAL);
         ValueAppender.appendDoubleParam(clause, value);
         return getCondition();
@@ -348,7 +408,7 @@ public class Comparison {
      * more conditions with AND, OR and OR (...) operators,
      * or terminate query building
      */
-    public Condition lesserThan(String value) {
+    public Condition lesserThanString(String value) {
         clause.append(LESSER_THAN);
         ValueAppender.appendStringParam(clause, value);
         return getCondition();
@@ -363,7 +423,37 @@ public class Comparison {
      * more conditions with AND, OR and OR (...) operators,
      * or terminate query building
      */
-    public Condition lesserThan(int value) {
+    public Condition lesserThanDate(String value) {
+        clause.append(LESSER_THAN);
+        ValueAppender.appendDateParam(clause, value);
+        return getCondition();
+    }
+
+    /**
+     * Appends '< value' into 'WHERE operand < value' clause.
+     *
+     * @param value Value to be appended
+     *
+     * @return Condition class which can be used to append
+     * more conditions with AND, OR and OR (...) operators,
+     * or terminate query building
+     */
+    public Condition lesserThanDateTime(String value) {
+        clause.append(LESSER_THAN);
+        ValueAppender.appendDateTimeParam(clause, value);
+        return getCondition();
+    }
+
+    /**
+     * Appends '< value' into 'WHERE operand < value' clause.
+     *
+     * @param value Value to be appended
+     *
+     * @return Condition class which can be used to append
+     * more conditions with AND, OR and OR (...) operators,
+     * or terminate query building
+     */
+    public Condition lesserThanInteger(int value) {
         clause.append(LESSER_THAN);
         ValueAppender.appendIntParam(clause, value);
         return getCondition();
@@ -378,7 +468,7 @@ public class Comparison {
      * more conditions with AND, OR and OR (...) operators,
      * or terminate query building
      */
-    public Condition lesserThan(long value) {
+    public Condition lesserThanLong(long value) {
         clause.append(LESSER_THAN);
         ValueAppender.appendLongParam(clause, value);
         return getCondition();
@@ -393,7 +483,7 @@ public class Comparison {
      * more conditions with AND, OR and OR (...) operators,
      * or terminate query building
      */
-    public Condition lesserThan(double value) {
+    public Condition lesserThanDouble(double value) {
         clause.append(LESSER_THAN);
         ValueAppender.appendDoubleParam(clause, value);
         return getCondition();
@@ -444,7 +534,7 @@ public class Comparison {
      * more conditions with AND, OR and OR (...) operators,
      * or terminate query building
      */
-    public Condition lesserThanOrEqual(String value) {
+    public Condition lesserThanOrEqualString(String value) {
         clause.append(LESSER_THAN_OR_EQUAL);
         ValueAppender.appendStringParam(clause, value);
         return getCondition();
@@ -459,7 +549,37 @@ public class Comparison {
      * more conditions with AND, OR and OR (...) operators,
      * or terminate query building
      */
-    public Condition lesserThanOrEqual(int value) {
+    public Condition lesserThanOrEqualDate(String value) {
+        clause.append(LESSER_THAN_OR_EQUAL);
+        ValueAppender.appendDateParam(clause, value);
+        return getCondition();
+    }
+
+    /**
+     * Appends '<= value' into 'WHERE operand <= value' clause.
+     *
+     * @param value Value to be appended
+     *
+     * @return Condition class which can be used to append
+     * more conditions with AND, OR and OR (...) operators,
+     * or terminate query building
+     */
+    public Condition lesserThanOrEqualDateTime(String value) {
+        clause.append(LESSER_THAN_OR_EQUAL);
+        ValueAppender.appendDateTimeParam(clause, value);
+        return getCondition();
+    }
+
+    /**
+     * Appends '<= value' into 'WHERE operand <= value' clause.
+     *
+     * @param value Value to be appended
+     *
+     * @return Condition class which can be used to append
+     * more conditions with AND, OR and OR (...) operators,
+     * or terminate query building
+     */
+    public Condition lesserThanOrEqualInteger(int value) {
         clause.append(LESSER_THAN_OR_EQUAL);
         ValueAppender.appendIntParam(clause, value);
         return getCondition();
@@ -474,7 +594,7 @@ public class Comparison {
      * more conditions with AND, OR and OR (...) operators,
      * or terminate query building
      */
-    public Condition lesserThanOrEqual(long value) {
+    public Condition lesserThanOrEqualLong(long value) {
         clause.append(LESSER_THAN_OR_EQUAL);
         ValueAppender.appendLongParam(clause, value);
         return getCondition();
@@ -489,7 +609,7 @@ public class Comparison {
      * more conditions with AND, OR and OR (...) operators,
      * or terminate query building
      */
-    public Condition lesserThanOrEqual(double value) {
+    public Condition lesserThanOrEqualDouble(double value) {
         clause.append(LESSER_THAN_OR_EQUAL);
         ValueAppender.appendDoubleParam(clause, value);
         return getCondition();
@@ -591,7 +711,7 @@ public class Comparison {
      * more conditions with AND, OR and OR (...) operators,
      * or terminate query building
      */
-    public Condition isBetween(String lower, String higher) {
+    public Condition isBetweenString(String lower, String higher) {
         clause.append(" BETWEEN ");
         ValueAppender.appendStringParam(clause, lower);
         clause.append(" AND ");
@@ -611,7 +731,47 @@ public class Comparison {
      * more conditions with AND, OR and OR (...) operators,
      * or terminate query building
      */
-    public Condition isBetween(int lower, int higher) {
+    public Condition isBetweenDate(String lower, String higher) {
+        clause.append(" BETWEEN ");
+        ValueAppender.appendDateParam(clause, lower);
+        clause.append(" AND ");
+        ValueAppender.appendDateParam(clause, higher);
+        return getCondition();
+    }
+
+    /**
+     * Appends 'BETWEEN lower AND higher' into 'WHERE operand
+     * BETWEEN lower AND higher' clause.
+     *
+     * @param lower Lower value of BETWEEN comparison
+     *
+     * @param higher Higher value of BETWEEN comparison
+     *
+     * @return Condition class which can be used to append
+     * more conditions with AND, OR and OR (...) operators,
+     * or terminate query building
+     */
+    public Condition isBetweenDateTime(String lower, String higher) {
+        clause.append(" BETWEEN ");
+        ValueAppender.appendDateTimeParam(clause, lower);
+        clause.append(" AND ");
+        ValueAppender.appendDateTimeParam(clause, higher);
+        return getCondition();
+    }
+
+    /**
+     * Appends 'BETWEEN lower AND higher' into 'WHERE operand
+     * BETWEEN lower AND higher' clause.
+     *
+     * @param lower Lower value of BETWEEN comparison
+     *
+     * @param higher Higher value of BETWEEN comparison
+     *
+     * @return Condition class which can be used to append
+     * more conditions with AND, OR and OR (...) operators,
+     * or terminate query building
+     */
+    public Condition isBetweenInteger(int lower, int higher) {
         clause.append(" BETWEEN ");
         ValueAppender.appendIntParam(clause, lower);
         clause.append(" AND ");
@@ -631,7 +791,7 @@ public class Comparison {
      * more conditions with AND, OR and OR (...) operators,
      * or terminate query building
      */
-    public Condition isBetween(long lower, long higher) {
+    public Condition isBetweenLong(long lower, long higher) {
         clause.append(" BETWEEN ");
         ValueAppender.appendLongParam(clause, lower);
         clause.append(" AND ");
@@ -651,7 +811,7 @@ public class Comparison {
      * more conditions with AND, OR and OR (...) operators,
      * or terminate query building
      */
-    public Condition isBetween(double lower, double higher) {
+    public Condition isBetweenDouble(double lower, double higher) {
         clause.append(" BETWEEN ");
         ValueAppender.appendDoubleParam(clause, lower);
         clause.append(" AND ");
@@ -692,7 +852,7 @@ public class Comparison {
      * more conditions with AND, OR and OR (...) operators,
      * or terminate query building
      */
-    public Condition isIn(String ...listOfValues) {
+    public Condition isInString(String ...listOfValues) {
         clause.append(" IN ");
         ListValueAppender.appendListOfStringParams(clause, listOfValues);
         return getCondition();
@@ -707,7 +867,37 @@ public class Comparison {
      * more conditions with AND, OR and OR (...) operators,
      * or terminate query building
      */
-    public Condition isIn(int ...listOfValues) {
+    public Condition isInDate(String ...listOfValues) {
+        clause.append(" IN ");
+        ListValueAppender.appendListOfDateParams(clause, listOfValues);
+        return getCondition();
+    }
+
+    /**
+     * Appends 'IN (listOfValues)' into 'WHERE operand IN (listOfValues)' clause.
+     *
+     * @param listOfValues Values operand is being compared
+     *
+     * @return Condition class which can be used to append
+     * more conditions with AND, OR and OR (...) operators,
+     * or terminate query building
+     */
+    public Condition isInDateTime(String ...listOfValues) {
+        clause.append(" IN ");
+        ListValueAppender.appendListOfDateTimeParams(clause, listOfValues);
+        return getCondition();
+    }
+
+    /**
+     * Appends 'IN (listOfValues)' into 'WHERE operand IN (listOfValues)' clause.
+     *
+     * @param listOfValues Values operand is being compared
+     *
+     * @return Condition class which can be used to append
+     * more conditions with AND, OR and OR (...) operators,
+     * or terminate query building
+     */
+    public Condition isInInteger(int ...listOfValues) {
         clause.append(" IN ");
         ListValueAppender.appendListOfIntParams(clause, listOfValues);
         return getCondition();
@@ -722,7 +912,7 @@ public class Comparison {
      * more conditions with AND, OR and OR (...) operators,
      * or terminate query building
      */
-    public Condition isIn(long ...listOfValues) {
+    public Condition isInLong(long ...listOfValues) {
         clause.append(" IN ");
         ListValueAppender.appendListOfLongParams(clause, listOfValues);
         return getCondition();
@@ -737,7 +927,7 @@ public class Comparison {
      * more conditions with AND, OR and OR (...) operators,
      * or terminate query building
      */
-    public Condition isIn(double ...listOfValues) {
+    public Condition isInDouble(double ...listOfValues) {
         clause.append(" IN ");
         ListValueAppender.appendListOfDoubleParams(clause, listOfValues);
         return getCondition();

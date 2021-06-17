@@ -3,7 +3,7 @@ package validation;
 import java.util.regex.Pattern;
 
 public class StringValuePatternValidator implements Validator<String> {
-    private static final String VALID_STRING_VALUE_PATTERN = "^(?!.*\\s\\s)(?!.*--)\\%?[\\w\\-\\s]+\\.?\\w*\\%?$";
+    private static final String VALID_STRING_VALUE_PATTERN = "^(?!.*\\s\\s)(?!.*--)\\%?[\\w\\-\\s]+\\%?$";
 
     public boolean validate(String input) {
         if (input == null) {

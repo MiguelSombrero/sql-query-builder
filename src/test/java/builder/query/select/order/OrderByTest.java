@@ -49,7 +49,7 @@ public class OrderByTest extends DatabaseTestBaseClass {
     @Test
     public void testOrderByWhere() throws SQLException {
         SelectQuery query = baseQuery
-                .where(valueOf("age").greaterThan(18))
+                .where(valueOf("age").greaterThanInteger(18))
                 .orderBy()
                 .column("firstname")
                 .build();

@@ -35,7 +35,7 @@ public class NegationTest extends DatabaseTestBaseClass {
     @Test
     public void testWhereNotCondition() throws SQLException {
         SelectQuery query = this.baseQuery
-                .where(valueOf("age").not().greaterThan(32))
+                .where(valueOf("age").not().greaterThanInteger(32))
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE NOT age > 32", query.toString());
@@ -49,7 +49,7 @@ public class NegationTest extends DatabaseTestBaseClass {
     @Test
     public void testWhereNotAndNotConditions() throws SQLException {
         SelectQuery query = this.baseQuery
-                .where(valueOf("age").not().greaterThan(32)
+                .where(valueOf("age").not().greaterThanInteger(32)
                         .and(valueOf("firstname").not().equalsString("Miika")))
                 .build();
 
@@ -77,7 +77,7 @@ public class NegationTest extends DatabaseTestBaseClass {
     @Test
     public void testWhereNotBetween() throws SQLException {
         SelectQuery query = this.baseQuery
-                .where(valueOf("age").not().isBetween(25, 35))
+                .where(valueOf("age").not().isBetweenInteger(25, 35))
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE NOT age BETWEEN 25 AND 35", query.toString());
@@ -90,7 +90,7 @@ public class NegationTest extends DatabaseTestBaseClass {
     @Test
     public void testWhereNotIn() throws SQLException {
         SelectQuery query = this.baseQuery
-                .where(valueOf("age").not().isIn(30, 40, 50, 60))
+                .where(valueOf("age").not().isInInteger(30, 40, 50, 60))
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE NOT age IN (30, 40, 50, 60)", query.toString());
@@ -110,7 +110,7 @@ public class NegationTest extends DatabaseTestBaseClass {
                                 .column("lastname")
                             .from()
                                 .table("student")
-                            .where(valueOf("age").greaterThan(20))))
+                            .where(valueOf("age").greaterThanInteger(20))))
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE NOT lastname IN (SELECT lastname FROM student WHERE age > 20)", query.toString());

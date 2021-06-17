@@ -83,8 +83,8 @@ public class PerformanceTest {
                     .table("persons").alias("p")
                     .table("courses").alias("c")
                 .leftJoin("addresses").on("addresses.id", "persons.address_id")
-                .where(valueOf("age").greaterThan(18)
-                        .and(valueOf("age").lesserThan(65))
+                .where(valueOf("age").greaterThanInteger(18)
+                        .and(valueOf("age").lesserThanInteger(65))
                         .and(valueOf("firstname").not().equalsString("Miika")))
                 .build()
                 .toString();
