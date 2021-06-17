@@ -86,7 +86,7 @@ public class GroupByTest extends DatabaseTestBaseClass {
                     .column("age")
                     .column("firstname")
                     .column("lastname")
-                .having(count("age").integerEquals(100))
+                .having(count("age").equalsInteger(100))
                 .build();
 
         assertEquals("SELECT * FROM person GROUP BY age, firstname, lastname HAVING COUNT(age) = 100", query.toString());
@@ -103,7 +103,7 @@ public class GroupByTest extends DatabaseTestBaseClass {
                     .column("age")
                     .column("firstname")
                     .column("lastname")
-                .having(count("age").integerEquals(100))
+                .having(count("age").equalsInteger(100))
                 .orderBy()
                     .column("age").asc()
                 .build();

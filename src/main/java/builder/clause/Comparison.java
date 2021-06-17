@@ -30,7 +30,7 @@ public class Comparison {
      * more conditions with AND, OR and OR (...) operators,
      * or terminate query building
      */
-    public Condition stringEquals(String value) {
+    public Condition equalsString(String value) {
         clause.append(EQUALS);
         ValueAppender.appendStringParam(clause, value);
         return getCondition();
@@ -45,7 +45,37 @@ public class Comparison {
      * more conditions with AND, OR and OR (...) operators,
      * or terminate query building
      */
-    public Condition integerEquals(int value) {
+    public Condition equalsDate(String value) {
+        clause.append(EQUALS);
+        ValueAppender.appendDateParam(clause, value);
+        return getCondition();
+    }
+
+    /**
+     * Appends '= value' into 'WHERE operand = value' clause.
+     *
+     * @param value Value to be appended
+     *
+     * @return Condition class which can be used to append
+     * more conditions with AND, OR and OR (...) operators,
+     * or terminate query building
+     */
+    public Condition equalsDateTime(String value) {
+        clause.append(EQUALS);
+        ValueAppender.appendDateTimeParam(clause, value);
+        return getCondition();
+    }
+
+    /**
+     * Appends '= value' into 'WHERE operand = value' clause.
+     *
+     * @param value Value to be appended
+     *
+     * @return Condition class which can be used to append
+     * more conditions with AND, OR and OR (...) operators,
+     * or terminate query building
+     */
+    public Condition equalsInteger(int value) {
         clause.append(EQUALS);
         ValueAppender.appendIntParam(clause, value);
         return getCondition();
@@ -60,7 +90,7 @@ public class Comparison {
      * more conditions with AND, OR and OR (...) operators,
      * or terminate query building
      */
-    public Condition longEquals(long value) {
+    public Condition equalsLong(long value) {
         clause.append(EQUALS);
         ValueAppender.appendLongParam(clause, value);
         return getCondition();
@@ -75,7 +105,7 @@ public class Comparison {
      * more conditions with AND, OR and OR (...) operators,
      * or terminate query building
      */
-    public Condition doubleEquals(double value) {
+    public Condition equalsDouble(double value) {
         clause.append(EQUALS);
         ValueAppender.appendDoubleParam(clause, value);
         return getCondition();

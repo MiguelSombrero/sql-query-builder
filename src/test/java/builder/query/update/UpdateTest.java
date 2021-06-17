@@ -157,8 +157,8 @@ public class UpdateTest extends DatabaseTestBaseClass {
     public void testUpdateWithCondition() throws SQLException {
         UpdateQuery query = this.baseQuery
                     .column("age").setInt(50)
-                .where(valueOf("id").integerEquals(1)
-                        .or(valueOf("id").integerEquals(2)))
+                .where(valueOf("id").equalsInteger(1)
+                        .or(valueOf("id").equalsInteger(2)))
                 .build();
 
         assertEquals("UPDATE person SET age = 50 WHERE id = 1 OR id = 2", query.toString());

@@ -50,7 +50,7 @@ public class NegationTest extends DatabaseTestBaseClass {
     public void testWhereNotAndNotConditions() throws SQLException {
         SelectQuery query = this.baseQuery
                 .where(valueOf("age").not().greaterThan(32)
-                        .and(valueOf("firstname").not().stringEquals("Miika")))
+                        .and(valueOf("firstname").not().equalsString("Miika")))
                 .build();
 
         assertEquals("SELECT firstname FROM person WHERE NOT age > 32 AND NOT firstname = 'Miika'", query.toString());
