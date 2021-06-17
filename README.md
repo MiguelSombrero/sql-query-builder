@@ -11,7 +11,7 @@ Sql query builder is Java-library used for building and executing SQL queries.
 - Create `SELECT`, `UPDATE`, `INSERT`, `CREATE`, `DELETE` and `DROP` queries easily
 - Execute queries against database and do something with the results
 - Supports [user input validation](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/supported.md#validation)
-  and [parametrized queries](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/supported.md#parametrized)
+  and [parametrized queries](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/supported.md#parametrized) by default
 
 ## Examples
 
