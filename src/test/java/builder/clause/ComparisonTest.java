@@ -120,6 +120,19 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     }
 
     @Test
+    public void testConditionBooleanEquals() throws SQLException {
+        SelectQuery query = this.allTypesBaseQuery
+                .where(valueOf("active").equalsBoolean(true))
+                .build();
+
+        assertEquals("SELECT * FROM all_types WHERE active = true", query.toString());
+
+        List<Row> result = query.execute();
+
+        assertRowCount(result, 1);
+    }
+
+    @Test
     public void testConditionAnyEquals() throws SQLException {
         SelectQuery query = this.baseQuery
                 .where(valueOf("lastname")

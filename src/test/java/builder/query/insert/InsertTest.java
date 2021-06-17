@@ -25,7 +25,7 @@ public class InsertTest extends DatabaseTestBaseClass {
     @Test
     public void testInsertOneIntegerValue() throws SQLException {
         InsertQuery query = SQLQueryBuilder
-                .insertInto()
+                .insert()
                 .table("person")
                 .columns("id")
                 .values()
@@ -43,7 +43,7 @@ public class InsertTest extends DatabaseTestBaseClass {
     @Test
     public void testInsertOneLongValue() throws SQLException {
         InsertQuery query = SQLQueryBuilder
-                .insertInto()
+                .insert()
                 .table("all_types")
                 .columns("hash")
                 .values()
@@ -61,7 +61,7 @@ public class InsertTest extends DatabaseTestBaseClass {
     @Test
     public void testInsertOneBooleanValue() throws SQLException {
         InsertQuery query = SQLQueryBuilder
-                .insertInto()
+                .insert()
                 .table("all_types")
                 .columns("active")
                 .values()
@@ -79,7 +79,7 @@ public class InsertTest extends DatabaseTestBaseClass {
     @Test
     public void testInsertOneDoubleValue() throws SQLException {
         InsertQuery query = SQLQueryBuilder
-                .insertInto()
+                .insert()
                 .table("all_types")
                 .columns("age")
                 .values()
@@ -97,7 +97,7 @@ public class InsertTest extends DatabaseTestBaseClass {
     @Test
     public void testInsertOneStringValue() throws SQLException {
         InsertQuery query = SQLQueryBuilder
-                .insertInto()
+                .insert()
                 .table("person")
                 .columns("firstname")
                 .values()
@@ -114,7 +114,7 @@ public class InsertTest extends DatabaseTestBaseClass {
     @Test
     public void testInsertOneDateValue() throws SQLException {
         InsertQuery query = SQLQueryBuilder
-                .insertInto()
+                .insert()
                 .table("person")
                 .columns("birthdate")
                 .values()
@@ -131,7 +131,7 @@ public class InsertTest extends DatabaseTestBaseClass {
     @Test
     public void testInsertOneDateTimeValue() throws SQLException {
         InsertQuery query = SQLQueryBuilder
-                .insertInto()
+                .insert()
                 .table("person")
                     .columns("birthdate")
                 .values()
@@ -150,7 +150,7 @@ public class InsertTest extends DatabaseTestBaseClass {
         byte[] file = readFileAsByteArray("files/byte-array-test-file.txt");
 
         InsertQuery query = SQLQueryBuilder
-                .insertInto()
+                .insert()
                 .table("all_types")
                 .columns("contract")
                 .values()
@@ -166,7 +166,7 @@ public class InsertTest extends DatabaseTestBaseClass {
     @Test
     public void testInsertMultipleValues() throws SQLException {
         InsertQuery query = SQLQueryBuilder
-                .insertInto()
+                .insert()
                 .table("person")
                     .columns("id", "birthdate", "firstname", "lastname", "age")
                 .values()
@@ -188,7 +188,7 @@ public class InsertTest extends DatabaseTestBaseClass {
     @Test
     public void testInsertQuery() throws SQLException {
         InsertQuery query = SQLQueryBuilder
-                .insertInto()
+                .insert()
                 .table("person")
                 .columns("id", "birthdate", "firstname", "lastname", "age")
                 .sub(SQLQueryBuilder
@@ -214,7 +214,7 @@ public class InsertTest extends DatabaseTestBaseClass {
     @Test
     public void testInsertMultipleValuesWithoutSpecifyingColumns() throws SQLException {
         InsertQuery query = SQLQueryBuilder
-                .insertInto()
+                .insert()
                 .table("person")
                 .values()
                     .setInt(102)
@@ -234,7 +234,7 @@ public class InsertTest extends DatabaseTestBaseClass {
     @Test
     public void testInsertQueryWithoutSpecifyingColumns() throws SQLException {
         InsertQuery query = SQLQueryBuilder
-                .insertInto()
+                .insert()
                 .table("person")
                 .sub(SQLQueryBuilder
                         .select()

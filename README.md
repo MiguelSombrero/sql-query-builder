@@ -10,7 +10,8 @@ Sql query builder is Java-library used for building and executing SQL queries.
 
 - Create `SELECT`, `UPDATE`, `INSERT`, `CREATE`, `DELETE` and `DROP` queries easily
 - Execute queries against database and do something with the results
-- Supports user input validation and parametrized queries
+- Supports [user input validation](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/supported.md#validation)
+  and [parametrized queries](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/supported.md#parametrized)
 
 ## Examples
 
@@ -27,7 +28,7 @@ After this you can start creating queries:
             .column("age")
         .from()
             .table("person")
-        .where(valueOf("age").greaterThan(18))
+        .where(valueOf("age").greaterThanInteger(18))
         .build();
 
 Query object can be used as a query string with some other database framework:
@@ -84,6 +85,11 @@ Check the latest version from [GitHub Packages](https://github.com/MiguelSombrer
 [Examples](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/examples.md)
 
 [Supported operations](https://github.com/MiguelSombrero/sql-query-builder/tree/develop/docs/supported.md)
+
+## External dependencies
+
+- [Apache Commons DbUtils](https://commons.apache.org/proper/commons-dbutils/index.html)
+- 
 
 ## Known issues
 - In CREATE TABLE user can chain same constraints infinitely (`...column("ID").type(DataType.INT).notNull().notNull().notNull() ...`) 

@@ -23,7 +23,7 @@ public class InsertValidationTest extends DatabaseTestBaseClass {
     @Test(expected = IllegalArgumentException.class)
     public void testInsertBadIntegerValue() {
         InsertQuery query = SQLQueryBuilder
-                .insertInto()
+                .insert()
                 .table("person")
                 .columns("id")
                 .values()
@@ -34,7 +34,7 @@ public class InsertValidationTest extends DatabaseTestBaseClass {
     @Test(expected = IllegalArgumentException.class)
     public void testInsertBadDoubleValue() {
         InsertQuery query = SQLQueryBuilder
-                .insertInto()
+                .insert()
                 .table("all_types")
                     .columns("age")
                 .values()
@@ -45,7 +45,7 @@ public class InsertValidationTest extends DatabaseTestBaseClass {
     @Test(expected = IllegalArgumentException.class)
     public void testInsertBadStringValue() {
         InsertQuery query = SQLQueryBuilder
-                .insertInto()
+                .insert()
                 .table("person")
                     .columns("firstname")
                 .values()
@@ -56,7 +56,7 @@ public class InsertValidationTest extends DatabaseTestBaseClass {
     @Test(expected = IllegalArgumentException.class)
     public void testInsertBadDateValue() {
         InsertQuery query = SQLQueryBuilder
-                .insertInto()
+                .insert()
                 .table("person")
                 .columns("birthdate")
                 .values()
@@ -67,7 +67,7 @@ public class InsertValidationTest extends DatabaseTestBaseClass {
     @Test(expected = IllegalArgumentException.class)
     public void testInsertBadDateTimeValue() {
         InsertQuery query = SQLQueryBuilder
-                .insertInto()
+                .insert()
                 .table("person")
                 .columns("birthdate")
                 .values()
@@ -78,7 +78,7 @@ public class InsertValidationTest extends DatabaseTestBaseClass {
     @Test(expected = IllegalArgumentException.class)
     public void testInsertWithSQLInjection() {
         SQLQueryBuilder
-                .insertInto()
+                .insert()
                 .table(";DROP")
                     .columns("id")
                 .values()
@@ -89,7 +89,7 @@ public class InsertValidationTest extends DatabaseTestBaseClass {
     @Test(expected = IllegalArgumentException.class)
     public void testInsertColumnsWithSQLInjection() {
         SQLQueryBuilder
-                .insertInto()
+                .insert()
                 .table("person")
                     .columns("id", ";DROP")
                 .values()
@@ -100,7 +100,7 @@ public class InsertValidationTest extends DatabaseTestBaseClass {
     @Test(expected = IllegalArgumentException.class)
     public void testInsertValuesWithSQLInjection() {
         SQLQueryBuilder
-                .insertInto()
+                .insert()
                 .table("person")
                     .columns("firstname")
                 .values()
@@ -111,7 +111,7 @@ public class InsertValidationTest extends DatabaseTestBaseClass {
     @Test(expected = IllegalArgumentException.class)
     public void testInsertValuesWithParameterInColumn() {
         SQLQueryBuilder
-                .insertInto()
+                .insert()
                 .table("person")
                     .columns("?")
                 .values()
@@ -122,7 +122,7 @@ public class InsertValidationTest extends DatabaseTestBaseClass {
     @Test(expected = IllegalArgumentException.class)
     public void testInsertValuesWithParameterInValue() {
         SQLQueryBuilder
-                .insertInto()
+                .insert()
                 .table("person")
                 .columns("lastname")
                 .values()

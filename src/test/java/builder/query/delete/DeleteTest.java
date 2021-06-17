@@ -24,7 +24,7 @@ public class DeleteTest extends DatabaseTestBaseClass {
     @Test
     public void testDeleteFromOneTable() throws SQLException {
         DeleteQuery query = SQLQueryBuilder
-                .deleteFrom()
+                .delete()
                     .table("address")
                 .build();
 
@@ -38,7 +38,7 @@ public class DeleteTest extends DatabaseTestBaseClass {
     @Test
     public void testDeleteWithCondition() throws SQLException {
         DeleteQuery query = SQLQueryBuilder
-                .deleteFrom()
+                .delete()
                     .table("address")
                 .where(valueOf("person_id").equalsInteger(1))
                 .build();
@@ -53,7 +53,7 @@ public class DeleteTest extends DatabaseTestBaseClass {
     @Test
     public void testDeleteWithMultipleCondition() throws SQLException {
         DeleteQuery query = SQLQueryBuilder
-                .deleteFrom()
+                .delete()
                     .table("address")
                 .where(valueOf("person_id").equalsInteger(1)
                         .and(valueOf("city").equalsString("Oulu")))
@@ -69,7 +69,7 @@ public class DeleteTest extends DatabaseTestBaseClass {
     @Test(expected = IllegalArgumentException.class)
     public void testDeleteTableWithSQLInjection() {
         SQLQueryBuilder
-                .deleteFrom()
+                .delete()
                     .table("; DROP TABLE address")
                 .build();
     }

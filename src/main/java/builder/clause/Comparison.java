@@ -112,6 +112,21 @@ public class Comparison {
     }
 
     /**
+     * Appends '= value' into 'WHERE operand = value' clause.
+     *
+     * @param value Value to be appended
+     *
+     * @return Condition class which can be used to append
+     * more conditions with AND, OR and OR (...) operators,
+     * or terminate query building
+     */
+    public Condition equalsBoolean(boolean value) {
+        clause.append(EQUALS);
+        ValueAppender.appendBooleanParam(clause, value);
+        return getCondition();
+    }
+
+    /**
      * Appends '= ANY (select sub-query)' into
      * 'WHERE operand = ANY (select sub-query)' clause.
      *

@@ -1,5 +1,17 @@
 # Supported operations
 
+### <a name="validation"></a>Parametrized queries
+
+Sql-query-builder validates all user input.
+
+TODO: more details on validation
+
+### <a name="parametrized"></a>Parametrized queries
+
+Sql-query-builder parametrizes all value type user input.
+
+TODO: more details
+
 ## SELECT
 
 - SELECT, SELECT DISTINCT, SELECT TOP

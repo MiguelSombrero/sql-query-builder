@@ -37,12 +37,12 @@ public class SQLQueryBuilder {
         return new FirstColumn(query);
     }
 
-    public InsertTable insertInto() {
+    public InsertTable insert() {
         InsertQuery query = sqlQueryFactory.createInsertQuery();
         return new InsertTable(query);
     }
 
-    public DeleteTable deleteFrom() {
+    public DeleteTable delete() {
         DeleteQuery query = sqlQueryFactory.createDeleteQuery();
         return new DeleteTable(query);
     }

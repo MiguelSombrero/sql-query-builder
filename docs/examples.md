@@ -1,23 +1,27 @@
 # Examples
 
 ## Table of contents
+0. [General](#general)
 1. [SELECT statement](#select)
 2. [INSERT statement](#insert)
 3. [UPDATE statement](#update)
 4. [CREATE statement](#create)
 5. [DELETE statement](#delete)
 6. [DROP statement](#drop)
-7. [Parametrized queries](#parametrized)
+
+### <a name="general"></a>General
+
+First, instantiate `SQLQueryBuilder` with datasource to your database:
+
+    SQLQueryBuilder sqlQueryBuilder = new SQLQueryBuilder(datasource);
+
+After that you can start creating and executing queries.
 
 ### <a name="select"></a>SELECT statement
 
-create `SelectQuery` with `SQLQueryBuilder` to execute SQL `SELECT` queries.
+Create `SelectQuery` with `SQLQueryBuilder` to execute SQL `SELECT` queries.
 
 #### Basic example
-
-Instantiate `SQLQueryBuilder` with datasource to your database: 
-
-    SQLQueryBuilder sqlQueryBuilder = new SQLQueryBuilder(datasource);
 
     SelectQuery query = sqlQueryBuilder
         .select()
@@ -26,7 +30,7 @@ Instantiate `SQLQueryBuilder` with datasource to your database:
             .column("age")
         .from()
             .table("person")
-        .where(valueOf("age").greaterThan(18))
+        .where(valueOf("age").greaterThanInteger(18))
         .build();
 
     logger.info(query.toString());
@@ -57,6 +61,7 @@ You can import static factory methods from `ConditionClauseBuilder` to create `W
     SQLQueryBuilder sqlQueryBuilder = new SQLQueryBuilder(datasource);
 
     SelectQuery query = sqlQueryBuilder
+        .select()
             .column("p.id")
             .column("p.age")
             .column("p.firstname").alias("name")
@@ -65,8 +70,8 @@ You can import static factory methods from `ConditionClauseBuilder` to create `W
             .table("person").alias("p")
         .leftJoin("course").alias("c")
             .on("p.id = c.person_id")
-        .where(valueOf("p.age").greaterThan(18)
-            .and("p.age").lesserThan(65)
+        .where(valueOf("p.age").greaterThanInteger(18)
+            .and("p.age").lesserThanInteger(65)
             .and("c.name").isNotNull())
         .orderBy()
             .column("p.age").desc()
@@ -91,6 +96,7 @@ Above code prints out:
     imports ...
 
     SelectQuery query = sqlQueryBuilder
+        .select()
             .column("s.name").alias("school")
             .avg("c.difficulty").alias("avgDifficulty")
         .from()
@@ -98,7 +104,7 @@ Above code prints out:
         .innerJoin("course").alias("c").on("s.id = c.school_id")
         .groupBy()
             .column("school")
-        .having(avg("c.difficulty").greaterThan(1))
+        .having(avg("c.difficulty").greaterThanInteger(1))
         .build();
 
         logger.info(query.toString());
@@ -116,6 +122,7 @@ Above code prints out:
     imports ...
 
     SelectQuery query = sqlQueryBuilder
+        .select()
             .column("*")
         .from()
             .sub(sqlQueryBuilder.
@@ -123,7 +130,7 @@ Above code prints out:
                     .column("*")
                 .from()
                     .table("person")
-                .where(valueOf("age).greaterThan(20)))
+                .where(valueOf("age).greaterThanInteger(20)))
                 .alias("p")
         .build();
 
@@ -147,17 +154,18 @@ create `InsertQuery` with `SQLQueryBuilder` to execute SQL `INSERT` queries.
     imports ...
 
     InsertQuery query = sqlQueryBuilder
+            .insert()
             .table("person")
                 .columns("id", "birthdate", "firstname", "lastname", "age")
             .values()
-                .value(101)
-                .value("1980-04-12")
-                .value("Miika")
-                .value("Somero")
-                .value(40)
+                .setInteger(101)
+                .setDate("1980-04-12")
+                .setString("Miika")
+                .setString("Somero")
+                .setInteger(40)
             .build();
 
-        logger.info(SQLQuery);
+        logger.info(query.toString());
 
 Prints out:
 
@@ -166,16 +174,17 @@ Prints out:
 
 #### Insert into select example
 
-    String SQLQuery = insertInto()
+    InsertQuery query = sqlQueryBuilder
+            .insert()
             .table("person")
             .sub(select()
                     .column("*")
                 .from()
                     .table("student")
-                .where(valueOf("age").lesserThan(18)))
+                .where(valueOf("age").lesserThanInteger(18)))
         .build();
 
-        logger.info(SQLQuery);
+        logger.info(query.toString());
 
 Prints out:
 
@@ -185,16 +194,19 @@ Prints out:
 
 ### <a name="update"></a>UPDATE statement
 
+Create `UpdateQuery` with `SQLQueryBuilder` to execute SQL `UPDATE` queries.
+
 #### Basic example
 
-    String SQLQuery = update()
+    UpdateQuery query = sqlQueryBuilder
+        .update()
         .table("person")
             .column("age").value(50)
-        .where(valueOf("id").equals(1)
-            .or(valueOf("id").equals(2)))
+        .where(valueOf("id").equalsInteger(1)
+            .or(valueOf("id").equalsInteger(2)))
         .build();
 
-    logger.info(SQLQuery);
+    logger.info(query.toString());
 
 Prints out:
 
@@ -206,7 +218,10 @@ Prints out:
 
 ### <a name="create"></a>CREATE TABLE statement
 
-    String SQLQuery = create()
+Create `CreateQuery` with `SQLQueryBuilder` to execute SQL `CREATE` queries.
+
+    CreateQuery query = sqlQueryBuilder
+        .create()
         .table("vehicles")
             .column("ID").type(DataType.INT).primaryKey()
             .column("name").type(DataType.VARCHAR_255).notNull()
@@ -215,7 +230,7 @@ Prints out:
         .foreignKey("manufacturer_id").references("ID", "manufacturer")
         .build();
 
-    logger.info(SQLQuery);
+    logger.info(query.toString());
 
 Prints out:
 
@@ -227,19 +242,22 @@ Prints out:
         FOREIGN KEY (manufacturer_id) REFERENCES manufacturer(ID)
     )
 
-DELETE index and DELETE testutils are also supported, but examples are trivial.
+CREATE index and CREATE database is also supported, but examples are trivial.
 
 ### <a name="delete"></a>DELETE TABLE statement
 
+Create `DeleteQuery` with `SQLQueryBuilder` to execute SQL `DELETE` queries.
+
 #### Basic example
 
-    String SQLQuery = deleteFrom()
+    DeleteQuery query = sqlQueryBuilder 
+        .delete()
         .table("address")
-        .where(valueOf("city").equals("Helsinki)
-            .or(valueOf("city").equals("Oulu")))
+        .where(valueOf("city").equalsString("Helsinki")
+            .or(valueOf("city").equalsString("Oulu")))
         .build();
 
-    logger.info(SQLQuery);
+    logger.info(query.toString());
 
 Prints out:
 
@@ -249,84 +267,17 @@ Prints out:
 
 ### <a name="drop"></a>DROP statement
 
+Create `DropQuery` with `SQLQueryBuilder` to execute SQL `Drop` queries.
+
 #### Basic example
 
-    String SQLQuery = drop()
+    DeleteQuery query = sqlQueryBuilder 
+        .drop()
         .table("test_table")
         .build();
 
-    logger.info(SQLQuery);
+    logger.info(query.toString());
 
 Prints out:
 
     DROP TABLE test_table
-
-### <a name="parametrized"></a>Parametrized queries
-
-You should always use parametrized queries in untrusted environments, if your SQL SQLQuery takes user input as parameters.
-
-You can create parametrized `INSERT`, `UPDATE`, `WHERE` and `HAVING` statements to use with prepared statements.
-
-#### INSERT statement
-
-    String SQLQuery = insertInto()
-        .table("person")
-        .columns("id", "birthdate", "firstname", "lastname", "age")
-        .values()
-            .value("?)
-            .value("?")
-            .value("?")
-            .value("?")
-            .value("?")
-        .build();
-
-        logger.info(SQLQuery);
-
-Prints out:
-
-    INSERT INTO person (id, birthdate, firstname, lastname, age)
-    VALUES (?, ?, ?, ?, ?)
-
-Now you can use this SQLQuery with prepared statement:
-
-    Connection conn = DriverManager.getConnection(path, user, password);  
-
-    PreparedStatement stmt = conn.prepareStatement(SQLQuery);  
-    stmt.setInt(1, 1);  
-    stmt.setString(2, "2021-05-20");  
-    stmt.setString(3, "Miika");
-    stmt.setString(4, "Somero");
-    stmt.setInt(5, 40);
-
-#### UPDATE statement
-
-    String SQLQuery = update()
-        .table("person")
-        .column("firstname").value("?")
-        .column("lastname").value("?")
-        .column("age").value("?")
-        .build();
-
-        logger.info(SQLQuery);
-
-Prints out:
-
-    UPDATE person
-    SET firstname = ?, lastname = ?, age = ?
-
-#### WHERE clause in SELECT statement
-
-    String SQLQuery = select()
-        .column("firstname")
-        .from()
-            .table("person");
-        .where(valueOf("firstname").isIn("?", "?", "?"))
-        .build();
-
-        logger.info(SQLQuery);
-
-Prints out:
-
-    SELECT firstname
-    FROM person
-    WHERE firstname IN (?, ?, ?)

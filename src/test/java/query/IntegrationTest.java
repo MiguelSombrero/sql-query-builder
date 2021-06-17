@@ -49,7 +49,7 @@ public class IntegrationTest extends DatabaseTestBaseClass {
 
         assertThatQueryReturnsRows("SELECT * FROM cars", 0);
 
-        InsertQuery insert = sqlQueryBuilder.insertInto()
+        InsertQuery insert = sqlQueryBuilder.insert()
                 .table("cars")
                 .values()
                     .setInt(1)
