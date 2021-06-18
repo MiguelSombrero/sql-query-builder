@@ -24,7 +24,7 @@ public class SQLClauseTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testAppendString() {
+    public void testAppend() {
         SQLClause query = new SQLClause(new StringBuilder());
         query.append("miika");
         query.append(" ");
@@ -33,30 +33,12 @@ public class SQLClauseTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testAppendInteger() {
+    public void testAppendFront() {
         SQLClause query = new SQLClause(new StringBuilder());
-        query.append(0);
-        query.append(1);
-        query.append(2);
-        assertEquals("012", query.toString());
-    }
-
-    @Test
-    public void testAppendDouble() {
-        SQLClause query = new SQLClause(new StringBuilder());
-        query.append(0.0);
-        query.append(1.1);
-        query.append(2.2);
-        assertEquals("0.01.12.2", query.toString());
-    }
-
-    @Test
-    public void testInsert() {
-        SQLClause query = new SQLClause(new StringBuilder());
-        query.insert(0, "somero");
-        query.insert(0, "miika ");
-        query.insert(6, "testaaja ");
-        assertEquals("miika testaaja somero", query.toString());
+        query.appendFront("somero");
+        query.appendFront("miika ");
+        query.appendFront("testaaja ");
+        assertEquals("testaaja miika somero", query.toString());
     }
 
     @Test

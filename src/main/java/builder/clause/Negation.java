@@ -16,7 +16,7 @@ public class Negation extends Comparison {
      * or terminate query building
      */
     public Comparison not() {
-        clause.insert(0, "NOT ");
+        clause.appendFront("NOT ");
         return new Comparison(clause);
     }
 

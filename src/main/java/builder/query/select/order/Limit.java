@@ -1,5 +1,6 @@
 package builder.query.select.order;
 
+import builder.appender.ValueAppender;
 import builder.query.select.TerminalSelectOperation;
 import query.dql.SelectQuery;
 
@@ -19,7 +20,7 @@ public class Limit extends TerminalSelectOperation {
      */
     public Offset limit(int to) {
         query.append(" LIMIT ");
-        query.append(to);
+        ValueAppender.appendIntParam(query, to);
         return new Offset(query);
     }
 }

@@ -24,16 +24,8 @@ public class SQLClause implements Clause {
         this.queryString = this.queryString.append(value);
     }
 
-    public void append(int value) {
-        this.queryString = this.queryString.append(value);
-    }
-
-    public void append(double value) {
-        this.queryString = this.queryString.append(value);
-    }
-
-    public void insert(int index, String value) {
-        this.queryString = this.queryString.insert(index, value);
+    public void appendFront(String value) {
+        this.queryString = this.queryString.insert(0, value);
     }
 
     public void addParam(AbstractColumnValue param) {

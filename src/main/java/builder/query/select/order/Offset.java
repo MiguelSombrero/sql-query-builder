@@ -1,5 +1,6 @@
 package builder.query.select.order;
 
+import builder.appender.ValueAppender;
 import builder.query.select.TerminalSelectOperation;
 import query.dql.SelectQuery;
 
@@ -19,7 +20,7 @@ public class Offset extends TerminalSelectOperation {
      */
     public TerminalSelectOperation offset(int rows) {
         query.append(" OFFSET ");
-        query.append(rows);
+        ValueAppender.appendIntParam(query, rows);
         return new TerminalSelectOperation(query);
     }
 }

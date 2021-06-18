@@ -2,15 +2,18 @@
 
 ### <a name="validation"></a>Parametrized queries
 
-Sql-query-builder validates all user input.
+Sql-query-builder validates all user input that is in String format.
 
-TODO: more details on validation
+Implementation of the validators can be found in package `.../main/java/validation/`. 
 
 ### <a name="parametrized"></a>Parametrized queries
 
-Sql-query-builder parametrizes all value type user input.
+Sql-query-builder parametrizes all value type user input by default. Value type
+mean statements like `WHERE age > value`, `INSERT INTO ... VALUES (values)` and `UPDATE ... column1 = value1, column2 = value2`.
 
-TODO: more details
+Column and table names etc. is not parametrized so **if you use this library in untrusted environment, do not
+take user input in any other fields than values**. For example in statement `SELECT * FROM person` table name `person` is not parametrized in query
+and might be vulnerable to SQL injection, even if the input is validated.
 
 ## SELECT
 
