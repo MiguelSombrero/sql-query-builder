@@ -1,6 +1,6 @@
 package builder.query.create.table.foreignkey;
 
-import query.ddl.CreateQuery;
+import query.CreateQuery;
 
 public class Action {
     private CreateQuery query;

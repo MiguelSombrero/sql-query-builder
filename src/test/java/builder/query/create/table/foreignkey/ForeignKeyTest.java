@@ -4,7 +4,7 @@ import builder.query.SQLQueryBuilder;
 import builder.query.create.table.column.Constraint;
 import builder.query.create.table.column.DataType;
 import org.h2.jdbc.JdbcSQLSyntaxErrorException;
-import query.ddl.CreateQuery;
+import query.CreateQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 import org.junit.Before;

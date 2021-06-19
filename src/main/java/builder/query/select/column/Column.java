@@ -1,7 +1,7 @@
 package builder.query.select.column;
 
 import builder.appender.StringAppender;
-import query.dql.SelectQuery;
+import query.SelectQuery;
 
 /**
  * represents column after first column to be appended in

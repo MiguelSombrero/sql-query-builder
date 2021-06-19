@@ -2,7 +2,7 @@ package builder.query.create.table.foreignkey;
 
 import builder.query.create.TerminalClosingCreateOperation;
 import builder.appender.StringAppender;
-import query.ddl.CreateQuery;
+import query.CreateQuery;
 
 public class ForeignKey extends TerminalClosingCreateOperation {
 

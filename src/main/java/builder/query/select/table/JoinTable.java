@@ -3,7 +3,7 @@ package builder.query.select.table;
 import builder.clause.Condition;
 import builder.query.select.order.Grouper;
 import builder.appender.StringAppender;
-import query.dql.SelectQuery;
+import query.SelectQuery;
 
 public class JoinTable extends Grouper {
 

@@ -1,7 +1,7 @@
 package builder.query.create.index;
 
 import builder.appender.StringAppender;
-import query.ddl.CreateQuery;
+import query.CreateQuery;
 
 public class Index {
     private CreateQuery query;

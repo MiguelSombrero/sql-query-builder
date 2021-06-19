@@ -1,10 +1,9 @@
-package query.dql;
+package query;
 
 import database.row.Row;
 import database.row.RowHandler;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.AbstractListHandler;
-import query.SQLQuery;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;

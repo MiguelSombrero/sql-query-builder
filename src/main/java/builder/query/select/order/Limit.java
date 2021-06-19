@@ -2,7 +2,7 @@ package builder.query.select.order;
 
 import builder.appender.ValueAppender;
 import builder.query.select.TerminalSelectOperation;
-import query.dql.SelectQuery;
+import query.SelectQuery;
 
 public class Limit extends TerminalSelectOperation {
 

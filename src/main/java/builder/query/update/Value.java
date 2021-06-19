@@ -1,7 +1,7 @@
 package builder.query.update;
 
 import builder.appender.ValueAppender;
-import query.dml.UpdateQuery;
+import query.UpdateQuery;
 
 public class Value {
     private UpdateQuery query;

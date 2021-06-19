@@ -1,7 +1,7 @@
 package builder.query.delete;
 
 import builder.clause.Condition;
-import query.dml.DeleteQuery;
+import query.DeleteQuery;
 
 public class Where extends TerminalDeleteOperation {
 

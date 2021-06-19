@@ -1,7 +1,8 @@
-package query.ddl;
+package query;
 
 import org.junit.Before;
 import org.junit.Test;
+import query.DropQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 

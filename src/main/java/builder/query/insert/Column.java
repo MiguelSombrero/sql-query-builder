@@ -1,7 +1,7 @@
 package builder.query.insert;
 
 import builder.query.select.SelectQueryBuilder;
-import query.dml.InsertQuery;
+import query.InsertQuery;
 
 public class Column {
 

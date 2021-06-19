@@ -1,21 +1,20 @@
-package query.dml;
+package query;
 
 import org.apache.commons.dbutils.QueryRunner;
-import query.SQLQuery;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
 
-public class UpdateQuery extends SQLQuery<Integer> {
+public class DeleteQuery extends SQLQuery<Integer> {
 
-    public UpdateQuery(StringBuilder queryString, DataSource dataSource) {
+    public DeleteQuery(StringBuilder queryString, DataSource dataSource) {
         super(queryString, new QueryRunner(dataSource));
     }
 
     /**
-     * Executes UPDATE query for this query string.
+     * Executes DELETE query for this query string.
      *
-     * @return Number of rows updated
+     * @return Number of rows deleted
      *
      * @throws SQLException if SQL exception occurs
      */

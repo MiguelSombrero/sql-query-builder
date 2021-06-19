@@ -1,4 +1,4 @@
-package query.dml;
+package query;
 
 import org.apache.commons.dbutils.QueryRunner;
 import query.SQLQuery;
@@ -6,16 +6,16 @@ import query.SQLQuery;
 import javax.sql.DataSource;
 import java.sql.SQLException;
 
-public class DeleteQuery extends SQLQuery<Integer> {
+public class UpdateQuery extends SQLQuery<Integer> {
 
-    public DeleteQuery(StringBuilder queryString, DataSource dataSource) {
+    public UpdateQuery(StringBuilder queryString, DataSource dataSource) {
         super(queryString, new QueryRunner(dataSource));
     }
 
     /**
-     * Executes DELETE query for this query string.
+     * Executes UPDATE query for this query string.
      *
-     * @return Number of rows deleted
+     * @return Number of rows updated
      *
      * @throws SQLException if SQL exception occurs
      */

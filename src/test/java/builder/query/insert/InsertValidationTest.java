@@ -3,7 +3,7 @@ package builder.query.insert;
 import builder.query.SQLQueryBuilder;
 import org.junit.Before;
 import org.junit.Test;
-import query.dml.InsertQuery;
+import query.InsertQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 

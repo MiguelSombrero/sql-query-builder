@@ -4,7 +4,7 @@ import builder.clause.ConditionClauseBuilder;
 import builder.query.SQLQueryBuilder;
 import org.junit.Before;
 import org.junit.Test;
-import query.dql.SelectQuery;
+import query.SelectQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 

@@ -1,7 +1,7 @@
 package builder.query.select.column;
 
 import builder.query.select.table.From;
-import query.dql.SelectQuery;
+import query.SelectQuery;
 
 public class ToFrom {
     private SelectQuery query;

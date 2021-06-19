@@ -2,7 +2,7 @@ package builder.query.select.order;
 
 import builder.clause.Condition;
 import builder.appender.StringAppender;
-import query.dql.SelectQuery;
+import query.SelectQuery;
 
 public class Having extends Orderer {
 

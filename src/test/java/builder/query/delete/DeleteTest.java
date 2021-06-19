@@ -1,7 +1,7 @@
 package builder.query.delete;
 
 import builder.query.SQLQueryBuilder;
-import query.dml.DeleteQuery;
+import query.DeleteQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 import org.junit.Before;

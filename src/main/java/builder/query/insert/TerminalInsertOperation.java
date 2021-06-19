@@ -1,7 +1,7 @@
 package builder.query.insert;
 
 import builder.query.QueryBuilder;
-import query.dml.InsertQuery;
+import query.InsertQuery;
 
 public class TerminalInsertOperation implements QueryBuilder {
 

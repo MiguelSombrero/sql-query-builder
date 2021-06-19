@@ -1,6 +1,6 @@
 package builder.query.select.column;
 
-import query.dql.SelectQuery;
+import query.SelectQuery;
 
 /**
  * represents the first column to be appended in

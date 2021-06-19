@@ -1,8 +1,9 @@
-package query.dml;
+package query;
 
 import database.column.StringColumnValue;
 import org.junit.Before;
 import org.junit.Test;
+import query.UpdateQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 

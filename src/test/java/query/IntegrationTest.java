@@ -5,9 +5,6 @@ import builder.query.create.table.column.DataType;
 import database.row.Row;
 import org.junit.Before;
 import org.junit.Test;
-import query.ddl.CreateQuery;
-import query.dml.InsertQuery;
-import query.dql.SelectQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 

@@ -1,7 +1,7 @@
 package builder.query.update;
 
 import builder.query.SQLQueryBuilder;
-import query.dml.UpdateQuery;
+import query.UpdateQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 import org.junit.Before;

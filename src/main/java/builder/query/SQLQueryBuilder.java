@@ -6,12 +6,12 @@ import builder.query.drop.Drop;
 import builder.query.insert.InsertTable;
 import builder.query.select.column.FirstColumn;
 import builder.query.update.UpdateTable;
-import query.ddl.CreateQuery;
-import query.ddl.DropQuery;
-import query.dml.DeleteQuery;
-import query.dml.InsertQuery;
-import query.dml.UpdateQuery;
-import query.dql.SelectQuery;
+import query.CreateQuery;
+import query.DropQuery;
+import query.DeleteQuery;
+import query.InsertQuery;
+import query.UpdateQuery;
+import query.SelectQuery;
 
 import javax.sql.DataSource;
 

@@ -1,7 +1,7 @@
 package builder.query.insert;
 
 import builder.appender.StringAppender;
-import query.dml.InsertQuery;
+import query.InsertQuery;
 
 public class InsertTable {
     private InsertQuery query;

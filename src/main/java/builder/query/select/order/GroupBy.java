@@ -1,7 +1,7 @@
 package builder.query.select.order;
 
 import builder.appender.StringAppender;
-import query.dql.SelectQuery;
+import query.SelectQuery;
 
 public class GroupBy {
     private SelectQuery query;

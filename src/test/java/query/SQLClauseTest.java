@@ -4,8 +4,6 @@ import database.column.StringColumnValue;
 import org.junit.Before;
 import org.junit.Test;
 import database.row.Row;
-import query.SQLClause;
-import query.dql.SelectQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 

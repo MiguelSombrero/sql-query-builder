@@ -1,9 +1,8 @@
-package query.ddl;
+package query;
 
-import database.column.IntegerColumnValue;
 import org.junit.Before;
 import org.junit.Test;
-import query.dml.DeleteQuery;
+import query.CreateQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 

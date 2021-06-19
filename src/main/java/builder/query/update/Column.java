@@ -2,7 +2,7 @@ package builder.query.update;
 
 import builder.clause.Condition;
 import builder.appender.StringAppender;
-import query.dml.UpdateQuery;
+import query.UpdateQuery;
 
 public class Column extends TerminalUpdateOperation {
 

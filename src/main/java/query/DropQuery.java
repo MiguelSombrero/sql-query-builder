@@ -1,13 +1,12 @@
-package query.ddl;
+package query;
 
 import org.apache.commons.dbutils.QueryRunner;
-import query.SQLQuery;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
 
-public class CreateQuery extends SQLQuery<Void> {
-    public CreateQuery(StringBuilder queryString, DataSource dataSource) {
+public class DropQuery extends SQLQuery<Void> {
+    public DropQuery(StringBuilder queryString, DataSource dataSource) {
         super(queryString, new QueryRunner(dataSource));
     }
 
