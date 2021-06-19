@@ -1,6 +1,6 @@
 package builder.appender;
 
-import clause.SQLClause;
+import query.SQLClause;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

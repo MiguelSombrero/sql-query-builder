@@ -1,9 +1,10 @@
-package clause;
+package query;
 
 import database.column.StringColumnValue;
 import org.junit.Before;
 import org.junit.Test;
 import database.row.Row;
+import query.SQLClause;
 import query.dql.SelectQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
@@ -51,7 +52,7 @@ public class SQLClauseTest extends DatabaseTestBaseClass {
         StringColumnValue param = new StringColumnValue("Miika");
         subQuery.addParam(param);
 
-        selectQuery.mergeSubQuery(subQuery);
+        selectQuery.mergeClause(subQuery);
 
         assertEquals("SELECT * FROM person WHERE firstname = 'Miika'", selectQuery.toString());
 

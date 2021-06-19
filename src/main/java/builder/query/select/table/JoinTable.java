@@ -22,7 +22,7 @@ public class JoinTable extends Grouper {
      */
     public Grouper where(Condition condition) {
         query.append(" WHERE ");
-        query.mergeSubQuery(condition.build());
+        query.mergeClause(condition.build());
         return new Grouper(query);
     }
 

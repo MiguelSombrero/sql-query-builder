@@ -1,6 +1,6 @@
 package builder.clause;
 
-import clause.Clause;
+import query.Clause;
 
 public class TerminalClauseOperation implements ClauseBuilder {
 

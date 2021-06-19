@@ -18,6 +18,6 @@ public class UpdateQuery extends DMLBaseQuery {
      */
     @Override
     protected int run() throws SQLException {
-        return run.update(this.getQueryString(), getParamValues());
+        return run.update(this.getQueryString(), this.getParamValues());
     }
 }

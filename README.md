@@ -88,17 +88,18 @@ Check the latest version from [GitHub Packages](https://github.com/MiguelSombrer
 
 ## External dependencies
 
-- [Apache Commons DbUtils](https://commons.apache.org/proper/commons-dbutils/index.html)
-- 
+- [Apache Commons DbUtils](https://commons.apache.org/proper/commons-dbutils/index.html) JDBC utility [Apache license 2.0](https://www.apache.org/licenses/LICENSE-2.0)
+- [slf4j](http://www.slf4j.org/) logging utility [MIT](http://www.slf4j.org/license.html)
 
-## Known issues
+## Known bugs / shortcomings
 - In CREATE TABLE user can chain same constraints infinitely (`...column("ID").type(DataType.INT).notNull().notNull().notNull() ...`) 
+- ALTER statements not yet implemented 
 
 ## For developers
 
 ### Requirements
 
-- Java 13+ (using enhanced switch statement released in Java 13)
+- Java 13+ (using enhanced switch statement released in Java 13, should be easy enough to downgrade Java 8)
 - Maven 3.6.0+
 
 ### Commands

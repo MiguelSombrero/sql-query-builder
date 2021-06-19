@@ -1,7 +1,7 @@
 package builder.appender;
 
 import database.column.*;
-import clause.Clause;
+import query.Clause;
 import validation.Validator;
 import validation.ValidatorFactory;
 

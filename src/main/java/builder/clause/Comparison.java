@@ -4,7 +4,7 @@ import builder.appender.ListValueAppender;
 import builder.appender.SubQueryAppender;
 import builder.appender.ValueAppender;
 import builder.query.select.SelectQueryBuilder;
-import clause.SQLClause;
+import query.Clause;
 
 public class Comparison {
     private static final String EQUALS = " = ";
@@ -15,9 +15,9 @@ public class Comparison {
     private static final String ANY = "ANY ";
     private static final String ALL = "ALL ";
 
-    protected SQLClause clause;
+    protected Clause clause;
 
-    public Comparison(SQLClause clause) {
+    public Comparison(Clause clause) {
         this.clause = clause;
     }
 

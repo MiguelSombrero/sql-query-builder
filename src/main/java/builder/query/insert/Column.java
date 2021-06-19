@@ -33,7 +33,7 @@ public class Column {
      * to terminate DML type query building
      */
     public TerminalInsertOperation sub(SelectQueryBuilder subQuery) {
-        query.mergeSubQuery(subQuery.build());
+        query.mergeClause(subQuery.build());
         return new TerminalInsertOperation(query);
     }
 }

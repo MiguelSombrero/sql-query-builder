@@ -38,4 +38,14 @@ public class StringUtils {
 
         return replacedText.toString();
     }
+
+    public static String repeatTextTimes(String text, int times) {
+        StringBuilder string = new StringBuilder();
+
+        for (int i = 0; i < times; i++) {
+            string.append(text);
+        }
+
+        return string.toString();
+    }
 }

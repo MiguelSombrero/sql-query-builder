@@ -1,7 +1,7 @@
 package validation;
 
-import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
+import utils.StringUtils;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -27,7 +27,7 @@ public class StringPatternValidatorTest {
 
     @Test
     public void testMaximumValue() {
-        assertTrue(stringPatternValidator.validate(StringUtils.repeat("a", 255)));
+        assertTrue(stringPatternValidator.validate(StringUtils.repeatTextTimes("a", 255)));
     }
 
     @Test
@@ -72,6 +72,6 @@ public class StringPatternValidatorTest {
 
     @Test
     public void testDoesNotAcceptTooLongValue() {
-        assertFalse(stringPatternValidator.validate(StringUtils.repeat("a", 256)));
+        assertFalse(stringPatternValidator.validate(StringUtils.repeatTextTimes("a", 256)));
     }
 }

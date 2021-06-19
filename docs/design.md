@@ -14,8 +14,10 @@
 
 This document gives an overview of design of the sql-query-builder.
 
-Query builder `SQLQueryBuilder` is using [builder pattern](https://en.wikipedia.org/wiki/Builder_pattern) to chain classes when building the queries.
-This design is used to enforce correct SQL syntax when building queries.
+I have used [builder pattern](https://en.wikipedia.org/wiki/Builder_pattern) in `SQLQueryBuilder` implementation to chain classes when building the queries.
+This design enforces correct SQL syntax when building queries.
+
+From class diagrams below **is intentionally missing some classes, methods and relations**, for the sake of simplicity.  
 
 ## <a name="condition"></a>WHERE and HAVING conditions
 

@@ -1,7 +1,6 @@
 package database.mapper;
 
 import database.column.*;
-import org.apache.commons.lang3.NotImplementedException;
 import org.junit.Test;
 import testutils.DatabaseConnection;
 
@@ -117,7 +116,7 @@ public class SQLToJavaMapperTest {
         connection.close();
     }
 
-    @Test(expected = NotImplementedException.class)
+    @Test(expected = UnsupportedOperationException.class)
     public void testThatNotImplementedThrowsException() throws SQLException {
         int type = Types.DECIMAL;
         Object value = "";

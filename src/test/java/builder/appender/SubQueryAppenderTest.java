@@ -3,7 +3,7 @@ package builder.appender;
 import builder.query.SQLQueryBuilder;
 import testutils.DatabaseConnection;
 import org.junit.Before;
-import clause.SQLClause;
+import query.SQLClause;
 import builder.query.select.table.Table;
 import org.junit.Test;
 

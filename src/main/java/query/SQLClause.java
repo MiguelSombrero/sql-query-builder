@@ -1,6 +1,5 @@
-package clause;
+package query;
 
-import database.column.AbstractColumnValue;
 import database.column.ColumnValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,26 +8,17 @@ import utils.StringUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SQLClause implements Clause {
+public class SQLClause extends SQLStatement implements Clause {
     protected static Logger logger = LoggerFactory.getLogger(SQLClause.class);
 
-    private StringBuilder queryString;
     private List<ColumnValue> params;
 
     public SQLClause(StringBuilder queryString) {
-        this.queryString = queryString;
+        super(queryString);
         this.params = new ArrayList<>();
     }
 
-    public void append(String value) {
-        this.queryString = this.queryString.append(value);
-    }
-
-    public void appendFront(String value) {
-        this.queryString = this.queryString.insert(0, value);
-    }
-
-    public void addParam(AbstractColumnValue param) {
+    public void addParam(ColumnValue param) {
         this.params.add(param);
     }
 
@@ -36,18 +26,14 @@ public class SQLClause implements Clause {
         return this.params;
     }
 
-    public void mergeSubQuery(Clause subQuery) {
+    public void mergeClause(Clause subQuery) {
         append(subQuery.getQueryString());
         this.params.addAll(subQuery.getParams());
     }
 
-    public String getQueryString() {
-        return this.queryString.toString();
-    }
-
     @Override
     public String toString() {
-        return StringUtils.replaceQuestionMarksWithParams(this.queryString.toString(), this.params);
+        return StringUtils.replaceQuestionMarksWithParams(this.getQueryString(), this.params);
     }
 
     protected Object[] getParamValues() {

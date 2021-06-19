@@ -20,7 +20,7 @@ public class Where extends TerminalDeleteOperation {
      */
     public TerminalDeleteOperation where(Condition condition) {
         query.append(" WHERE ");
-        query.mergeSubQuery(condition.build());
+        query.mergeClause(condition.build());
         return new TerminalDeleteOperation(query);
     }
 }

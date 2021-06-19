@@ -3,55 +3,53 @@ package builder.clause;
 import builder.appender.AggregateFunctionAppender;
 import builder.appender.StringAppender;
 import builder.query.select.SelectQueryBuilder;
-import clause.SQLClause;
+import query.Clause;
 
 public class ConditionClauseBuilder {
-    private static AggregateFunctionAppender aggregateFunctionAppender;
-    private static ClauseFactory clauseFactory;
-
+    
     public static Negation valueOf(String column) {
-        SQLClause clause = clauseFactory.createEmptyClause();
+        Clause clause = ClauseFactory.createEmptyClause();
         StringAppender.validateAndAppend(clause, column);
         return new Negation(clause);
     }
 
     public static Condition exists(SelectQueryBuilder subQuery) {
-        SQLClause clause = clauseFactory.createExistsClause(subQuery);
+        Clause clause = ClauseFactory.createExistsClause(subQuery);
         return new Condition(clause);
     }
 
     public static Condition notExists(SelectQueryBuilder subQuery) {
-        SQLClause clause = clauseFactory.createNotExistsClause(subQuery);
+        Clause clause = ClauseFactory.createNotExistsClause(subQuery);
         return new Condition(clause);
     }
 
     public static Negation count(String column) {
-        SQLClause clause = clauseFactory.createEmptyClause();
-        aggregateFunctionAppender.count(clause, column);
+        Clause clause = ClauseFactory.createEmptyClause();
+        AggregateFunctionAppender.count(clause, column);
         return new Negation(clause);
     }
 
     public static Negation sum(String column) {
-        SQLClause clause = clauseFactory.createEmptyClause();
-        aggregateFunctionAppender.sum(clause, column);
+        Clause clause = ClauseFactory.createEmptyClause();
+        AggregateFunctionAppender.sum(clause, column);
         return new Negation(clause);
     }
 
     public static Negation avg(String column) {
-        SQLClause clause = clauseFactory.createEmptyClause();
-        aggregateFunctionAppender.avg(clause, column);
+        Clause clause = ClauseFactory.createEmptyClause();
+        AggregateFunctionAppender.avg(clause, column);
         return new Negation(clause);
     }
 
     public static Negation max(String column) {
-        SQLClause clause = clauseFactory.createEmptyClause();
-        aggregateFunctionAppender.max(clause, column);
+        Clause clause = ClauseFactory.createEmptyClause();
+        AggregateFunctionAppender.max(clause, column);
         return new Negation(clause);
     }
 
     public static Negation min(String column) {
-        SQLClause clause = clauseFactory.createEmptyClause();
-        aggregateFunctionAppender.min(clause, column);
+        Clause clause = ClauseFactory.createEmptyClause();
+        AggregateFunctionAppender.min(clause, column);
         return new Negation(clause);
     }
 }

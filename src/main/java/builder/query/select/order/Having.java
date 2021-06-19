@@ -37,7 +37,7 @@ public class Having extends Orderer {
      */
     public Orderer having(Condition condition) {
         query.append(" HAVING ");
-        query.mergeSubQuery(condition.build());
+        query.mergeClause(condition.build());
         return new Orderer(query);
     }
 }

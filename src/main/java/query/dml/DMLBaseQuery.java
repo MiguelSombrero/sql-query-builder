@@ -3,24 +3,20 @@ package query.dml;
 import org.apache.commons.dbutils.QueryRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import query.Query;
-import clause.SQLClause;
+import query.SQLQuery;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
 
-public abstract class DMLBaseQuery extends SQLClause implements Query<Integer> {
+public abstract class DMLBaseQuery extends SQLQuery<Integer> {
     protected static Logger logger = LoggerFactory.getLogger(DMLBaseQuery.class);
-
-    protected QueryRunner run;
 
     public DMLBaseQuery(StringBuilder queryString, DataSource dataSource) {
         this(queryString, new QueryRunner(dataSource));
     }
 
     public DMLBaseQuery(StringBuilder queryString, QueryRunner run) {
-        super(queryString);
-        this.run = run;
+        super(queryString, run);
     }
 
     /**
