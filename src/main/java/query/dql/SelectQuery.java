@@ -22,17 +22,17 @@ public class SelectQuery extends SQLQuery<List<Row>> {
         this.handler = handler;
     }
 
-    public List<Row> execute() throws SQLException {
-        List<Row> result;
-
-        try {
-            result = run.query(this.getQueryString(), handler, this.getParamValues());
-
-        } catch (SQLException e) {
-            logger.info("Executing of query " + this + " failed");
-            logger.debug(e.getLocalizedMessage());
-            throw e;
-        }
-        return result;
+    /**
+     * Executes SELECT query for this query string. Uses
+     * AbstractListHandler to create Row objects from
+     * database ResultSet.
+     *
+     * @return List of Row objects which represents database rows
+     *
+     * @throws SQLException if SQL exception occurs
+     */
+    @Override
+    protected List<Row> run() throws SQLException {
+        return run.query(this.getQueryString(), handler, this.getParamValues());
     }
 }

@@ -2,13 +2,14 @@
 
 ## Table of contents
 1. [About the design](#about)
-2. [WHERE and HAVING](#condition)
-3. [SELECT statement](#select)
-4. [INSERT statement](#insert)
-5. [UPDATE statement](#update)
-6. [CREATE statement](#create)
-7. [DELETE statement](#delete)
-8. [DROP statement](#drop)
+2. [Query, Clause and Statement](#query)
+3. [WHERE and HAVING](#condition)
+4. [SELECT statement](#select)
+5. [INSERT statement](#insert)
+6. [UPDATE statement](#update)
+7. [CREATE statement](#create)
+8. [DELETE statement](#delete)
+9. [DROP statement](#drop)
 
 ## <a name="about"></a>About the design
 
@@ -18,6 +19,16 @@ I have used [builder pattern](https://en.wikipedia.org/wiki/Builder_pattern) in 
 This design enforces correct SQL syntax when building queries.
 
 From class diagrams below **is intentionally missing some classes, methods and relations**, for the sake of simplicity.  
+
+## <a name="query"></a>Query, Clause and Statement
+
+Package `/src/main/java/query` contains classes of `Query`, `Clause` and `Statement` objects.
+
+These classes represents SQL statements, clauses and queries that `SQLQueryBuilder` builds and which can be used to execute database queries.
+
+### Class diagram
+
+![Query_class_diagram](https://github.com/MiguelSombrero/sql-query-builder/blob/develop/docs/query-class-diagram.jpg)
 
 ## <a name="condition"></a>WHERE and HAVING conditions
 

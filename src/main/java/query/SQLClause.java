@@ -35,10 +35,4 @@ public class SQLClause extends SQLStatement implements Clause {
     public String toString() {
         return StringUtils.replaceQuestionMarksWithParams(this.getQueryString(), this.params);
     }
-
-    protected Object[] getParamValues() {
-        return this.params.stream()
-                .map(columnValue -> columnValue.getValue())
-                .toArray();
-    }
 }
