@@ -1,7 +1,7 @@
 package builder.query.drop;
 
 import builder.query.QueryBuilder;
-import query.ddl.DropQuery;
+import query.DropQuery;
 
 public class TerminalDropOperation implements QueryBuilder {
 

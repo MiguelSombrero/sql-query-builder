@@ -3,7 +3,7 @@ package builder.query.create;
 import builder.query.create.index.Index;
 import builder.query.create.table.column.FirstColumn;
 import builder.appender.StringAppender;
-import query.ddl.CreateQuery;
+import query.CreateQuery;
 
 public class Create {
     private CreateQuery query;

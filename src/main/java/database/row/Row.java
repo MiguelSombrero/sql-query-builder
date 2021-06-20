@@ -22,46 +22,56 @@ public class Row {
     }
 
     public String getString(String columnName) {
-        StringColumnValue value = (StringColumnValue) getObject(columnName);
+        StringColumnValue value = (StringColumnValue) getColumnValue(columnName);
         return value.getValue();
     }
 
     public int getInteger(String columnName) {
-        IntegerColumnValue value = (IntegerColumnValue) getObject(columnName);
+        IntegerColumnValue value = (IntegerColumnValue) getColumnValue(columnName);
         return value.getValue();
     }
 
     public long getLong(String columnName) {
-        LongColumnValue value = (LongColumnValue) getObject(columnName);
+        LongColumnValue value = (LongColumnValue) getColumnValue(columnName);
         return value.getValue();
     }
 
     public byte[] getBytes(String columnName) {
-        ByteArrayColumnValue value = (ByteArrayColumnValue) getObject(columnName);
+        ByteArrayColumnValue value = (ByteArrayColumnValue) getColumnValue(columnName);
         return value.getValue();
     }
 
     public double getDouble(String columnName) {
-        DoubleColumnValue value = (DoubleColumnValue) getObject(columnName);
+        DoubleColumnValue value = (DoubleColumnValue) getColumnValue(columnName);
         return value.getValue();
     }
 
     public boolean getBoolean(String columnName) {
-        BooleanColumnValue value = (BooleanColumnValue) getObject(columnName);
+        BooleanColumnValue value = (BooleanColumnValue) getColumnValue(columnName);
         return value.getValue();
     }
 
     public LocalDate getLocalDate(String columnName) {
-        DateColumnValue value = (DateColumnValue) getObject(columnName);
+        DateColumnValue value = (DateColumnValue) getColumnValue(columnName);
         return value.getValue();
     }
 
     public LocalDateTime getLocalDateTime(String columnName) {
-        DateTimeColumnValue value = (DateTimeColumnValue) getObject(columnName);
+        DateTimeColumnValue value = (DateTimeColumnValue) getColumnValue(columnName);
         return value.getValue();
     }
 
-    private ColumnValue getObject(String columnName) {
-        return this.columns.get(columnName.toLowerCase());
+    private ColumnValue getColumnValue(String columnName) {
+        ColumnValue value;
+
+        try {
+            value = this.columns.get(columnName.toLowerCase());
+        } catch (NullPointerException e) {
+            logger.info("Did not find column with column name " + columnName);
+            logger.debug(e.getLocalizedMessage());
+            throw e;
+        }
+
+        return value;
     }
 }

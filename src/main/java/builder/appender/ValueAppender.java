@@ -1,7 +1,7 @@
 package builder.appender;
 
 import database.column.*;
-import clause.Clause;
+import query.Clause;
 import validation.Validator;
 import validation.ValidatorFactory;
 
@@ -12,8 +12,6 @@ import java.time.format.DateTimeFormatter;
 public class ValueAppender {
     private static Validator<String> dateTimeValidator = ValidatorFactory.exceptionThrowingDateTimeValidator();
     private static Validator<String> dateValidator = ValidatorFactory.exceptionThrowingDateValidator();
-    private static Validator<Double> doubleValidator = ValidatorFactory.exceptionThrowingDoubleValidator();
-    private static Validator<Integer> integerValidator = ValidatorFactory.exceptionThrowingIntegerValidator();
     private static Validator<String> stringValueValidator = ValidatorFactory.exceptionThrowingStringValueValidator();
     private static Validator<byte[]> byteArrayValidator = ValidatorFactory.exceptionThrowingByteArrayValidator();
 
@@ -27,7 +25,6 @@ public class ValueAppender {
     }
 
     public static void appendIntParam(Clause clause, int value) {
-        integerValidator.validate(value);
         clause.append("?");
         clause.addParam(new IntegerColumnValue(value));
     }
@@ -38,7 +35,6 @@ public class ValueAppender {
     }
 
     public static void appendDoubleParam(Clause clause, double value) {
-        doubleValidator.validate(value);
         clause.append("?");
         clause.addParam(new DoubleColumnValue(value));
     }

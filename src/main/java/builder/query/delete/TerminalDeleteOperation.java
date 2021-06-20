@@ -1,7 +1,7 @@
 package builder.query.delete;
 
 import builder.query.QueryBuilder;
-import query.dml.DeleteQuery;
+import query.DeleteQuery;
 
 public class TerminalDeleteOperation implements QueryBuilder {
 

@@ -1,6 +1,6 @@
 package builder.appender;
 
-import clause.Clause;
+import query.Clause;
 import validation.ValidatorFactory;
 import validation.Validator;
 

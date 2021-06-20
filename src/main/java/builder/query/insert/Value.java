@@ -1,6 +1,6 @@
 package builder.query.insert;
 
-import query.dml.InsertQuery;
+import query.InsertQuery;
 
 public class Value extends ValueTemplate {
 

@@ -1,9 +1,7 @@
 package builder.query.drop;
 
 import builder.query.SQLQueryBuilder;
-import builder.query.create.table.column.DataType;
-import query.ddl.CreateQuery;
-import query.ddl.DropQuery;
+import query.DropQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 import org.junit.Before;

@@ -1,6 +1,6 @@
 package builder.query.select.order;
 
-import query.dql.SelectQuery;
+import query.SelectQuery;
 
 public class Order extends OrderBy {
 

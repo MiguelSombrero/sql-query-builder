@@ -1,10 +1,10 @@
 package builder.clause;
 
-import clause.SQLClause;
+import query.Clause;
 
 public class Negation extends Comparison {
 
-    public Negation(SQLClause query) {
+    public Negation(Clause query) {
         super(query);
     }
 
@@ -16,7 +16,7 @@ public class Negation extends Comparison {
      * or terminate query building
      */
     public Comparison not() {
-        clause.insert(0, "NOT ");
+        clause.appendFront("NOT ");
         return new Comparison(clause);
     }
 

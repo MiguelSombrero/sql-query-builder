@@ -1,7 +1,7 @@
 package builder.query.drop;
 
 import builder.appender.StringAppender;
-import query.ddl.DropQuery;
+import query.DropQuery;
 
 public class Drop {
     private DropQuery query;

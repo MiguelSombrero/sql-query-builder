@@ -1,7 +1,7 @@
 package builder.query.select.table;
 
 import builder.appender.StringAppender;
-import query.dql.SelectQuery;
+import query.SelectQuery;
 
 public class AliasedTable extends JoinTable {
 

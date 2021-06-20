@@ -1,6 +1,6 @@
 package builder.clause;
 
-import clause.Clause;
+import query.Clause;
 
 public class Condition extends TerminalClauseOperation {
 
@@ -21,7 +21,7 @@ public class Condition extends TerminalClauseOperation {
      */
     public Condition and(Condition condition) {
         clause.append(" AND ");
-        clause.mergeSubQuery(condition.build());
+        clause.mergeClause(condition.build());
         return this;
     }
 
@@ -38,7 +38,7 @@ public class Condition extends TerminalClauseOperation {
      */
     public Condition or(Condition condition) {
         clause.append(" OR ");
-        clause.mergeSubQuery(condition.build());
+        clause.mergeClause(condition.build());
         return this;
     }
 
@@ -57,7 +57,7 @@ public class Condition extends TerminalClauseOperation {
      */
     public Condition orSub(Condition condition) {
         clause.append(" OR (");
-        clause.mergeSubQuery(condition.build());
+        clause.mergeClause(condition.build());
         clause.append(")");
         return this;
     }

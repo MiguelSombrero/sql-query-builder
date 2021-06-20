@@ -3,7 +3,7 @@ package builder.query.insert;
 import builder.query.SQLQueryBuilder;
 import org.junit.Before;
 import org.junit.Test;
-import query.dml.InsertQuery;
+import query.InsertQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 
@@ -18,28 +18,6 @@ public class InsertValidationTest extends DatabaseTestBaseClass {
     public void setUp() throws SQLException {
         initializeDatabase();
         SQLQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getDataSource());
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testInsertBadIntegerValue() {
-        InsertQuery query = SQLQueryBuilder
-                .insert()
-                .table("person")
-                .columns("id")
-                .values()
-                    .setInt(Integer.MAX_VALUE)
-                .build();
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testInsertBadDoubleValue() {
-        InsertQuery query = SQLQueryBuilder
-                .insert()
-                .table("all_types")
-                    .columns("age")
-                .values()
-                    .setDouble(Double.MAX_VALUE)
-                .build();
     }
 
     @Test(expected = IllegalArgumentException.class)

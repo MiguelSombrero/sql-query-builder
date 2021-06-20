@@ -1,7 +1,7 @@
 package builder.query.insert;
 
 import builder.query.select.SelectQueryBuilder;
-import query.dml.InsertQuery;
+import query.InsertQuery;
 
 public class Column {
 
@@ -29,11 +29,11 @@ public class Column {
      *
      * @param subQuery SELECT sub-query to be appended
      *
-     * @return TerminalDMLOperation class which can be used only
-     * to terminate DML type query building
+     * @return TerminalInsertOperation class which can be used only
+     * to terminate query building and return InsertQuery
      */
     public TerminalInsertOperation sub(SelectQueryBuilder subQuery) {
-        query.mergeSubQuery(subQuery.build());
+        query.mergeClause(subQuery.build());
         return new TerminalInsertOperation(query);
     }
 }

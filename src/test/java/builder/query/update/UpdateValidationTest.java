@@ -24,21 +24,6 @@ public class UpdateValidationTest extends DatabaseTestBaseClass {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testUpdateBadIntegerValue() {
-        this.baseQuery
-                .column("age").setInt(Integer.MIN_VALUE)
-                .build();
-    }
-
-    @Ignore("Validation does not work yet on decimal values")
-    @Test(expected = IllegalArgumentException.class)
-    public void testUpdateBadDoubleValue() {
-        this.baseQuery
-                .column("age").setDouble(Double.MIN_VALUE)
-                .build();
-    }
-
-    @Test(expected = IllegalArgumentException.class)
     public void testUpdateBadStringValue() {
         this.baseQuery
                 .column("firstname").setString("Miika--Lassi Kari")

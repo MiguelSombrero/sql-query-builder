@@ -2,7 +2,7 @@ package builder.query.select.table;
 
 import builder.query.select.SelectQueryBuilder;
 import builder.appender.StringAppender;
-import query.dql.SelectQuery;
+import query.SelectQuery;
 
 public class From {
     private SelectQuery query;
@@ -37,7 +37,7 @@ public class From {
      */
     public SubQuery sub(SelectQueryBuilder subQuery) {
         query.append("(");
-        query.mergeSubQuery(subQuery.build());
+        query.mergeClause(subQuery.build());
         query.append(")");
         return new SubQuery(query);
     }

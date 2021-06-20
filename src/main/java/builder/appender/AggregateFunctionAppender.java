@@ -1,6 +1,6 @@
 package builder.appender;
 
-import clause.Clause;
+import query.Clause;
 
 public class AggregateFunctionAppender {
 

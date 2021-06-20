@@ -2,7 +2,7 @@ package builder.query.create.index;
 
 import builder.query.create.TerminalCreateOperation;
 import builder.appender.StringAppender;
-import query.ddl.CreateQuery;
+import query.CreateQuery;
 
 public class IndexedColumn {
     private CreateQuery query;
@@ -17,8 +17,8 @@ public class IndexedColumn {
      *
      * @param listOfColumns List of columns index is being created
      *
-     * @return TerminalDDLOperation which can be used only
-     * to terminate query building
+     * @return TerminalCreateOperation which can be used only
+     * to terminate query building and return CreateQuery
      */
     public TerminalCreateOperation columns(String ...listOfColumns) {
         query.append(" ");

@@ -1,7 +1,7 @@
 package builder.query.delete;
 
 import builder.appender.StringAppender;
-import query.dml.DeleteQuery;
+import query.DeleteQuery;
 
 public class DeleteTable {
     private DeleteQuery query;

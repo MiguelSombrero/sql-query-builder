@@ -26,4 +26,16 @@ public class StringUtilsTest {
         String replaced = StringUtils.replaceQuestionMarksWithParams(query, params);
         assertEquals("INSERT INTO person VALUES ('Miika', 'Somero', 'Kari')", replaced);
     }
+
+    @Test
+    public void repeatTextTimesWork() {
+        String result = StringUtils.repeatTextTimes("a", 1000);
+        assertEquals(1000, result.length());
+    }
+
+    @Test
+    public void repeatTextTimesTextIsCorrect() {
+        String result = StringUtils.repeatTextTimes("a", 10);
+        assertEquals("aaaaaaaaaa", result);
+    }
 }

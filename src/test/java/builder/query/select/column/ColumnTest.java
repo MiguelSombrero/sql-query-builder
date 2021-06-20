@@ -2,7 +2,7 @@ package builder.query.select.column;
 
 import builder.query.SQLQueryBuilder;
 import database.row.Row;
-import query.dql.SelectQuery;
+import query.SelectQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 import org.junit.Before;

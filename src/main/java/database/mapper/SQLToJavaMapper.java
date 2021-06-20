@@ -1,7 +1,6 @@
 package database.mapper;
 
 import database.column.*;
-import org.apache.commons.lang3.NotImplementedException;
 import database.converter.SQLToJavaConverter;
 
 import java.sql.*;
@@ -29,11 +28,11 @@ public class SQLToJavaMapper {
             case Types.BLOB:
                 return new ByteArrayColumnValue(convert.blobToByteArray((Blob) value));
             case Types.CLOB, Types.NCLOB:
-                throw new NotImplementedException("Should be mapped as byte array");
+                throw new UnsupportedOperationException("Should be mapped as byte array");
             case Types.DECIMAL, Types.NUMERIC:
-                throw new NotImplementedException("Should be mapped as BigDecimal");
+                throw new UnsupportedOperationException("Should be mapped as BigDecimal");
             case Types.SMALLINT:
-                throw new NotImplementedException("SmallInt should be mapped as short");
+                throw new UnsupportedOperationException("SmallInt should be mapped as short");
             default:
                 throw new IllegalArgumentException("Could not map SQL type to any Java type");
         }

@@ -1,11 +1,10 @@
-package query.dql;
+package query;
 
 import database.column.DateTimeColumnValue;
-import database.column.StringColumnValue;
 import database.row.Row;
 import org.junit.Before;
 import org.junit.Test;
-import query.dml.InsertQuery;
+import query.SelectQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 

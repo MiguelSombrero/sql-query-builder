@@ -2,7 +2,7 @@ package builder.query.update;
 
 import builder.clause.Condition;
 import builder.appender.StringAppender;
-import query.dml.UpdateQuery;
+import query.UpdateQuery;
 
 public class Column extends TerminalUpdateOperation {
 
@@ -36,7 +36,7 @@ public class Column extends TerminalUpdateOperation {
      */
     public TerminalUpdateOperation where(Condition condition) {
         query.append(" WHERE ");
-        query.mergeSubQuery(condition.build());
+        query.mergeClause(condition.build());
         return new TerminalUpdateOperation(query);
     }
 }

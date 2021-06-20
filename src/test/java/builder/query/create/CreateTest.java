@@ -1,7 +1,7 @@
 package builder.query.create;
 
 import builder.query.SQLQueryBuilder;
-import query.ddl.CreateQuery;
+import query.CreateQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 import org.junit.Before;

@@ -1,7 +1,7 @@
 package builder.query.create.table.column;
 
 import builder.appender.StringAppender;
-import query.ddl.CreateQuery;
+import query.CreateQuery;
 
 public class FirstColumn {
     private CreateQuery query;

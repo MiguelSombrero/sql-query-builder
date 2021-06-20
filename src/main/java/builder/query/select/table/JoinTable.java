@@ -3,7 +3,7 @@ package builder.query.select.table;
 import builder.clause.Condition;
 import builder.query.select.order.Grouper;
 import builder.appender.StringAppender;
-import query.dql.SelectQuery;
+import query.SelectQuery;
 
 public class JoinTable extends Grouper {
 
@@ -22,7 +22,7 @@ public class JoinTable extends Grouper {
      */
     public Grouper where(Condition condition) {
         query.append(" WHERE ");
-        query.mergeSubQuery(condition.build());
+        query.mergeClause(condition.build());
         return new Grouper(query);
     }
 

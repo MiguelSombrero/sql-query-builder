@@ -3,7 +3,7 @@ package builder.query.select.order;
 import builder.query.SQLQueryBuilder;
 import builder.query.select.table.Table;
 import database.row.Row;
-import query.dql.SelectQuery;
+import query.SelectQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 import org.junit.Before;

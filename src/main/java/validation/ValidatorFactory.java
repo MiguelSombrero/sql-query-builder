@@ -22,14 +22,6 @@ public class ValidatorFactory {
         return new ExceptionThrowingValidator<>(dateTimeValidator());
     }
 
-    public static Validator<Integer> exceptionThrowingIntegerValidator() {
-        return new ExceptionThrowingValidator<>(integerValidator());
-    }
-
-    public static Validator<Double> exceptionThrowingDoubleValidator() {
-        return new ExceptionThrowingValidator<>(doubleValidator());
-    }
-
     public static Validator<String> exceptionThrowingNameValidator() {
         return new ExceptionThrowingValidator<>(stringValidator());
     }
@@ -52,14 +44,6 @@ public class ValidatorFactory {
 
     public static Validator<String> dateTimeValidator() {
         return new DateTimePatternValidator();
-    }
-
-    public static Validator<Integer> integerValidator() {
-        return new IntegerValidator();
-    }
-
-    public static Validator<Double> doubleValidator() {
-        return new DoubleValidator();
     }
 
     public static Validator<byte[]> byteArrayValidator() {

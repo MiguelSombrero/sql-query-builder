@@ -2,15 +2,10 @@ package builder.clause;
 
 import builder.query.SQLQueryBuilder;
 import builder.query.select.table.Table;
-import database.row.Row;
 import org.junit.Before;
 import org.junit.Test;
-import query.dql.SelectQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
-
-import java.sql.SQLException;
-import java.util.List;
 
 import static builder.clause.ConditionClauseBuilder.*;
 import static org.junit.Assert.assertEquals;

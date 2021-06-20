@@ -1,7 +1,7 @@
 package builder.query.update;
 
 import builder.appender.StringAppender;
-import query.dml.UpdateQuery;
+import query.UpdateQuery;
 
 public class UpdateTable {
     private UpdateQuery query;

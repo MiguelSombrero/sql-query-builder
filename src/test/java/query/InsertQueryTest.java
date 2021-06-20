@@ -1,17 +1,15 @@
-package query.dml;
+package query;
 
 import database.column.StringColumnValue;
-import database.row.Row;
 import org.junit.Before;
 import org.junit.Test;
-import query.dql.SelectQuery;
+import query.InsertQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 
 import javax.sql.DataSource;
 
 import java.sql.SQLException;
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 

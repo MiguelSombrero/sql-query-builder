@@ -1,6 +1,6 @@
 package builder.query.create.table.column;
 
-import query.ddl.CreateQuery;
+import query.CreateQuery;
 
 public class ColumnType {
 

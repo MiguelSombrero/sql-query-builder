@@ -1,6 +1,6 @@
 package builder.clause;
 
-import clause.Clause;
+import query.Clause;
 
 public interface ClauseBuilder {
     Clause build();

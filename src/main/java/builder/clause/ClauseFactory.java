@@ -1,19 +1,20 @@
 package builder.clause;
 
 import builder.query.select.SelectQueryBuilder;
-import clause.SQLClause;
+import query.Clause;
+import query.SQLClause;
 
 public class ClauseFactory {
 
-    public static SQLClause createEmptyClause() {
+    public static Clause createEmptyClause() {
         return new SQLClause(createQueryString(""));
     }
 
-    public static SQLClause createExistsClause(SelectQueryBuilder subQuery) {
+    public static Clause createExistsClause(SelectQueryBuilder subQuery) {
         return new SQLClause(createQueryString("EXISTS (" + subQuery.build() + ")"));
     }
 
-    public static SQLClause createNotExistsClause(SelectQueryBuilder subQuery) {
+    public static Clause createNotExistsClause(SelectQueryBuilder subQuery) {
         return new SQLClause(createQueryString("NOT EXISTS (" + subQuery.build() + ")"));
     }
 

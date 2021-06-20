@@ -1,7 +1,7 @@
 package validation;
 
-import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
+import utils.StringUtils;
 
 import static org.junit.Assert.assertTrue;
 
@@ -82,6 +82,6 @@ public class ExceptionThrowingValidatorTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testDoesNotAcceptTooLongValue() {
-        stringValidator.validate(StringUtils.repeat("a", 256));
+        stringValidator.validate(StringUtils.repeatTextTimes("a", 256));
     }
 }

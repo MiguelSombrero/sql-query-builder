@@ -4,7 +4,7 @@ import builder.clause.ConditionClauseBuilder;
 import builder.query.SQLQueryBuilder;
 import org.junit.Before;
 import org.junit.Test;
-import query.dql.SelectQuery;
+import query.SelectQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 
@@ -177,6 +177,15 @@ public class RowTest extends DatabaseTestBaseClass {
                 .build();
 
         query.execute();
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testKeyNotFoundThrowsException() throws SQLException {
+        List<Row> result = baseQuery.execute();
+
+        Row firstRow = result.get(0);
+
+        firstRow.getString("notfound");
     }
 
 }

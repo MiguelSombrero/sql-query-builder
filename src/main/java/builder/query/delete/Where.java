@@ -1,7 +1,7 @@
 package builder.query.delete;
 
 import builder.clause.Condition;
-import query.dml.DeleteQuery;
+import query.DeleteQuery;
 
 public class Where extends TerminalDeleteOperation {
 
@@ -20,7 +20,7 @@ public class Where extends TerminalDeleteOperation {
      */
     public TerminalDeleteOperation where(Condition condition) {
         query.append(" WHERE ");
-        query.mergeSubQuery(condition.build());
+        query.mergeClause(condition.build());
         return new TerminalDeleteOperation(query);
     }
 }

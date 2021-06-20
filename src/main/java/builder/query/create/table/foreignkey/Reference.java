@@ -1,7 +1,7 @@
 package builder.query.create.table.foreignkey;
 
 import builder.appender.StringAppender;
-import query.ddl.CreateQuery;
+import query.CreateQuery;
 
 public class Reference {
     private CreateQuery query;

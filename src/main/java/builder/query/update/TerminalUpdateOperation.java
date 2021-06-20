@@ -1,7 +1,7 @@
 package builder.query.update;
 
 import builder.query.QueryBuilder;
-import query.dml.UpdateQuery;
+import query.UpdateQuery;
 
 public class TerminalUpdateOperation implements QueryBuilder {
 

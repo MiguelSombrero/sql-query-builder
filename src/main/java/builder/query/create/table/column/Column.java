@@ -2,7 +2,7 @@ package builder.query.create.table.column;
 
 import builder.appender.StringAppender;
 import builder.query.create.table.foreignkey.ForeignKey;
-import query.ddl.CreateQuery;
+import query.CreateQuery;
 
 public class Column extends ForeignKey {
 

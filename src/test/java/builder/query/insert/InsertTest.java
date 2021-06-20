@@ -1,6 +1,6 @@
 package builder.query.insert;
 
-import query.dml.InsertQuery;
+import query.InsertQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 import builder.query.SQLQueryBuilder;
