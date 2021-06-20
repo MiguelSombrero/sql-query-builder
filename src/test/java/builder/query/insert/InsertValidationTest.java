@@ -21,28 +21,6 @@ public class InsertValidationTest extends DatabaseTestBaseClass {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testInsertBadIntegerValue() {
-        InsertQuery query = SQLQueryBuilder
-                .insert()
-                .table("person")
-                .columns("id")
-                .values()
-                    .setInt(Integer.MAX_VALUE)
-                .build();
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testInsertBadDoubleValue() {
-        InsertQuery query = SQLQueryBuilder
-                .insert()
-                .table("all_types")
-                    .columns("age")
-                .values()
-                    .setDouble(Double.MAX_VALUE)
-                .build();
-    }
-
-    @Test(expected = IllegalArgumentException.class)
     public void testInsertBadStringValue() {
         InsertQuery query = SQLQueryBuilder
                 .insert()

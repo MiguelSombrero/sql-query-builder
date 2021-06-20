@@ -14,7 +14,7 @@ public class Value {
      * Validates user input and appends string 'value' into
      * 'UPDATE table SET column = value, ...' statement.
      *
-     * @param value Value to be appended in selected column
+     * @param value String value to be appended in selected column
      *
      * @return Column class which can be used to append more
      * columns into UPDATE statement, proceed to WHERE
@@ -29,7 +29,7 @@ public class Value {
      * Validates user input and appends integer 'value' into
      * 'UPDATE table SET column = value, ...' statement.
      *
-     * @param value Value to be appended in selected column
+     * @param value Int value to be appended in selected column
      *
      * @return Column class which can be used to append more
      * columns into UPDATE statement, proceed to WHERE
@@ -40,6 +40,16 @@ public class Value {
         return new Column(query);
     }
 
+    /**
+     * Validates user input and appends integer 'value' into
+     * 'UPDATE table SET column = value, ...' statement.
+     *
+     * @param value Long value to be appended in selected column
+     *
+     * @return Column class which can be used to append more
+     * columns into UPDATE statement, proceed to WHERE
+     * clause or terminate query building
+     */
     public Column setLong(long value) {
         ValueAppender.appendLongParam(query, value);
         return new Column(query);
@@ -60,21 +70,61 @@ public class Value {
         return new Column(query);
     }
 
+    /**
+     * Validates user input and appends integer 'value' into
+     * 'UPDATE table SET column = value, ...' statement.
+     *
+     * @param value Date value to be appended in selected column
+     *
+     * @return Column class which can be used to append more
+     * columns into UPDATE statement, proceed to WHERE
+     * clause or terminate query building
+     */
     public Column setDate(String value) {
         ValueAppender.appendDateParam(query, value);
         return new Column(query);
     }
 
+    /**
+     * Validates user input and appends integer 'value' into
+     * 'UPDATE table SET column = value, ...' statement.
+     *
+     * @param value DateTime value to be appended in selected column
+     *
+     * @return Column class which can be used to append more
+     * columns into UPDATE statement, proceed to WHERE
+     * clause or terminate query building
+     */
     public Column setDateTime(String value) {
         ValueAppender.appendDateTimeParam(query, value);
         return new Column(query);
     }
 
+    /**
+     * Validates user input and appends integer 'value' into
+     * 'UPDATE table SET column = value, ...' statement.
+     *
+     * @param value Boolean value to be appended in selected column
+     *
+     * @return Column class which can be used to append more
+     * columns into UPDATE statement, proceed to WHERE
+     * clause or terminate query building
+     */
     public Column setBoolean(boolean value) {
         ValueAppender.appendBooleanParam(query, value);
         return new Column(query);
     }
 
+    /**
+     * Validates user input and appends integer 'value' into
+     * 'UPDATE table SET column = value, ...' statement.
+     *
+     * @param value ByteArray value to be appended in selected column
+     *
+     * @return Column class which can be used to append more
+     * columns into UPDATE statement, proceed to WHERE
+     * clause or terminate query building
+     */
     public Column setByteArray(byte[] value) {
         ValueAppender.appendByteArrayParam(query, value);
         return new Column(query);

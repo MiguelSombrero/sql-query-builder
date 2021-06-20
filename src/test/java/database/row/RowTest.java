@@ -179,4 +179,13 @@ public class RowTest extends DatabaseTestBaseClass {
         query.execute();
     }
 
+    @Test(expected = NullPointerException.class)
+    public void testKeyNotFoundThrowsException() throws SQLException {
+        List<Row> result = baseQuery.execute();
+
+        Row firstRow = result.get(0);
+
+        firstRow.getString("notfound");
+    }
+
 }

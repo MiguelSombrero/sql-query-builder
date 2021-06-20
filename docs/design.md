@@ -15,22 +15,14 @@
 
 This document gives an overview of design of the sql-query-builder.
 
-I have used [builder pattern](https://en.wikipedia.org/wiki/Builder_pattern) in `SQLQueryBuilder` implementation to chain classes when building the queries.
+`SQLQueryBuilder` implementation uses [builder pattern](https://en.wikipedia.org/wiki/Builder_pattern) to chain classes.
 This design enforces correct SQL syntax when building queries.
-
-Validation classes found in package `src/main/java/validation/` is created with [Decorator pattern](https://en.wikipedia.org/wiki/Decorator_pattern) to make building of validators more dynamic.
-
-`SQLQuery` implementations in package `src/main/java/query/` uses [template method pattern](https://en.wikipedia.org/wiki/Template_method_pattern) to reduce boilerplate code.
-
-Probably some other design patterns is present too, more or less intentionally used.
 
 **Notice that class diagrams below is missing some classes, methods and relations**, for the sake of simplicity.  
 
 ## <a name="query"></a>Query, Clause and Statement
 
-Package `/src/main/java/query` contains classes of `Query`, `Clause` and `Statement` objects.
-
-These classes represents SQL statements, clauses and queries that `SQLQueryBuilder` builds and which can be used to execute database queries.
+Package `/src/main/java/query` contains classes of `Query`, `Clause` and `Statement` objects. These classes represent SQL statements, clauses and queries that `SQLQueryBuilder` builds.
 
 ### Class diagram
 

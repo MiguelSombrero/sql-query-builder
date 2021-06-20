@@ -23,24 +23,6 @@ public class SQLClauseTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testAppend() {
-        SQLClause query = new SQLClause(new StringBuilder());
-        query.append("miika");
-        query.append(" ");
-        query.append("Somero");
-        assertEquals("miika Somero", query.toString());
-    }
-
-    @Test
-    public void testAppendFront() {
-        SQLClause query = new SQLClause(new StringBuilder());
-        query.appendFront("somero");
-        query.appendFront("miika ");
-        query.appendFront("testaaja ");
-        assertEquals("testaaja miika somero", query.toString());
-    }
-
-    @Test
     public void testMergeSubQuery() throws SQLException {
         StringBuilder queryString = new StringBuilder("SELECT * FROM person WHERE ");
         StringBuilder subQueryString = new StringBuilder("firstname = ?");

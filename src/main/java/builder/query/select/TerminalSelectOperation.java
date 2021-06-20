@@ -13,7 +13,7 @@ public class TerminalSelectOperation implements SelectQueryBuilder {
     /**
      * Terminates query building.
      *
-     * @return DQLQuery object which can be used to
+     * @return SelectQuery object which can be used to
      * execute SELECT queries
      */
     public SelectQuery build() {

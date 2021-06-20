@@ -1,8 +1,9 @@
 # Supported operations
 
-### <a name="validation"></a>Parametrized queries
+### <a name="validation"></a>User input validation
 
-Sql-query-builder validates all user input that is in String format.
+Sql-query-builder validates all user input that is comes in String format.
+Double, int, long and other primitive types is not validated.
 
 Implementation of the validators can be found in package `.../main/java/validation/`. 
 

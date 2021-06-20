@@ -17,8 +17,8 @@ public class IndexedColumn {
      *
      * @param listOfColumns List of columns index is being created
      *
-     * @return TerminalDDLOperation which can be used only
-     * to terminate query building
+     * @return TerminalCreateOperation which can be used only
+     * to terminate query building and return CreateQuery
      */
     public TerminalCreateOperation columns(String ...listOfColumns) {
         query.append(" ");

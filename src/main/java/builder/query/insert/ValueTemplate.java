@@ -13,7 +13,7 @@ public abstract class ValueTemplate extends TerminalClosingInsertOperation {
      * Validates user input and appends string 'value(s)'
      * into 'INSERT INTO table VALUE (value(s))' statement.
      *
-     * @param value Value to be appended
+     * @param value String value to be appended
      *
      * @return Value class which can be used to append
      * value (with comma in front) into 'VALUE (value(s))'
@@ -29,7 +29,7 @@ public abstract class ValueTemplate extends TerminalClosingInsertOperation {
      * Validates user input and appends integer 'value(s)'
      * into 'INSERT INTO table VALUE (value(s))' statement.
      *
-     * @param value Value to be appended
+     * @param value Int value to be appended
      *
      * @return Value class which can be used to append
      * value (with comma in front) into 'VALUE (value(s))'
@@ -41,6 +41,16 @@ public abstract class ValueTemplate extends TerminalClosingInsertOperation {
         return new Value(query);
     }
 
+    /**
+     * Validates user input and appends integer 'value(s)'
+     * into 'INSERT INTO table VALUE (value(s))' statement.
+     *
+     * @param value Long value to be appended
+     *
+     * @return Value class which can be used to append
+     * value (with comma in front) into 'VALUE (value(s))'
+     * statement
+     */
     public Value setLong(long value) {
         addCommaAfterFirstValue();
         ValueAppender.appendLongParam(query, value);
@@ -51,7 +61,7 @@ public abstract class ValueTemplate extends TerminalClosingInsertOperation {
      * Validates user input and appends double 'value(s)'
      * into 'INSERT INTO table VALUE (value(s))' statement.
      *
-     * @param value Value to be appended
+     * @param value Double value to be appended
      *
      * @return Value class which can be used to append
      * value (with comma in front) into 'VALUE (value(s))'
@@ -63,24 +73,64 @@ public abstract class ValueTemplate extends TerminalClosingInsertOperation {
         return new Value(query);
     }
 
+    /**
+     * Validates user input and appends integer 'value(s)'
+     * into 'INSERT INTO table VALUE (value(s))' statement.
+     *
+     * @param value Date value to be appended
+     *
+     * @return Value class which can be used to append
+     * value (with comma in front) into 'VALUE (value(s))'
+     * statement
+     */
     public Value setDate(String value) {
         addCommaAfterFirstValue();
         ValueAppender.appendDateParam(query, value);
         return new Value(query);
     }
 
+    /**
+     * Validates user input and appends integer 'value(s)'
+     * into 'INSERT INTO table VALUE (value(s))' statement.
+     *
+     * @param value DateTime value to be appended
+     *
+     * @return Value class which can be used to append
+     * value (with comma in front) into 'VALUE (value(s))'
+     * statement
+     */
     public Value setDateTime(String value) {
         addCommaAfterFirstValue();
         ValueAppender.appendDateTimeParam(query, value);
         return new Value(query);
     }
 
+    /**
+     * Validates user input and appends integer 'value(s)'
+     * into 'INSERT INTO table VALUE (value(s))' statement.
+     *
+     * @param value Boolean value to be appended
+     *
+     * @return Value class which can be used to append
+     * value (with comma in front) into 'VALUE (value(s))'
+     * statement
+     */
     public Value setBoolean(boolean value) {
         addCommaAfterFirstValue();
         ValueAppender.appendBooleanParam(query, value);
         return new Value(query);
     }
 
+    /**
+     * Validates user input and appends integer 'value(s)'
+     * into 'INSERT INTO table VALUE (value(s))' statement.
+     *
+     * @param value Byte array value to be appended
+     *
+     * @return Value class which can be used to append
+     * value (with comma in front) into 'VALUE (value(s))'
+     * statement
+     */
     public Value setByteArray(byte[] value) {
         addCommaAfterFirstValue();
         ValueAppender.appendByteArrayParam(query, value);

@@ -29,8 +29,8 @@ public class Column {
      *
      * @param subQuery SELECT sub-query to be appended
      *
-     * @return TerminalDMLOperation class which can be used only
-     * to terminate DML type query building
+     * @return TerminalInsertOperation class which can be used only
+     * to terminate query building and return InsertQuery
      */
     public TerminalInsertOperation sub(SelectQueryBuilder subQuery) {
         query.mergeClause(subQuery.build());

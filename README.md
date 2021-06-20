@@ -69,7 +69,7 @@ Add Maven dependency to your project:
     <dependency>
         <groupId>com.github.miguelsombrero</groupId>
         <artifactId>sql-query-builder</artifactId>
-        <version>1.0.5</version>
+        <version>2.0.1</version>
     </dependency>
 
 Check the latest version from [GitHub Packages](https://github.com/MiguelSombrero?tab=packages&repo_name=sql-query-builder)
@@ -88,12 +88,16 @@ Check the latest version from [GitHub Packages](https://github.com/MiguelSombrer
 
 ## External dependencies
 
-- [Apache Commons DbUtils](https://commons.apache.org/proper/commons-dbutils/index.html) JDBC utility [Apache license 2.0](https://www.apache.org/licenses/LICENSE-2.0)
-- [slf4j](http://www.slf4j.org/) logging utility [MIT](http://www.slf4j.org/license.html)
+- [Apache Commons DbUtils](https://commons.apache.org/proper/commons-dbutils/index.html) JDBC utility (license: [Apache license 2.0](https://www.apache.org/licenses/LICENSE-2.0))
+- [slf4j](http://www.slf4j.org/) logging utility (license: [MIT](http://www.slf4j.org/license.html))
 
 ## Known bugs / shortcomings
 - In CREATE TABLE user can chain same constraints infinitely (`...column("ID").type(DataType.INT).notNull().notNull().notNull() ...`) 
+- Returns DateTime type column values without seconds if zero (e.g. 2020-03-03 21:00:00 -> 2020-03-03 21:00)
+
+## Not yet implemented
 - ALTER statements not yet implemented 
+- Missing some datatypes (SMALLINT, DECIMAL, NUMERIC, FLOAT, TIME, TEXT, BINARY)
 
 ## For developers
 
