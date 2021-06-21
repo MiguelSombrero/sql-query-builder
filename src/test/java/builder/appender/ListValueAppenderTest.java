@@ -22,10 +22,10 @@ public class ListValueAppenderTest {
     }
 
     @Test
-    public void testAppendListOfDateTimeValues() {
+    public void testAppendListOfTimestampValues() {
         SQLClause query = new SQLClause(new StringBuilder());
-        ListValueAppender.appendListOfDateTimeParams(query, "1981-01-01 21:01:01", "1982-02-02 21:02:02", "1983-03-03 21:03:03", "1984-04-04 21:04:04");
-        assertEquals("('1981-01-01T21:01:01', '1982-02-02T21:02:02', '1983-03-03T21:03:03', '1984-04-04T21:04:04')", query.toString());
+        ListValueAppender.appendListOfTimestampParams(query, "1981-01-01 21:01:01", "1982-02-02 21:02:02", "1983-03-03 21:03:03", "1984-04-04 21:04:04");
+        assertEquals("('1981-01-01 21:01:01.0', '1982-02-02 21:02:02.0', '1983-03-03 21:03:03.0', '1984-04-04 21:04:04.0')", query.toString());
     }
 
     @Test

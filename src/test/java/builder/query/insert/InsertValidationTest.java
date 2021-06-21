@@ -43,13 +43,13 @@ public class InsertValidationTest extends DatabaseTestBaseClass {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void testInsertBadDateTimeValue() {
+    public void testInsertBadTimestampValue() {
         InsertQuery query = SQLQueryBuilder
                 .insert()
                 .table("person")
                 .columns("birthdate")
                 .values()
-                .setDateTime("1978-04-02")
+                .setTimestamp("1978-04-02")
                 .build();
     }
 

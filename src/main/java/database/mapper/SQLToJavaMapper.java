@@ -2,14 +2,20 @@ package database.mapper;
 
 import database.column.*;
 import database.converter.SQLToJavaConverter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.*;
 
 public class SQLToJavaMapper {
+    protected static Logger logger = LoggerFactory.getLogger(SQLToJavaMapper.class);
 
     private static SQLToJavaConverter convert;
 
     public static ColumnValue toJavaType(int type, Object value) throws SQLException {
+        logger.info("tyyppi on " + type);
+
+
         switch (type) {
             case Types.CHAR, Types.NCHAR, Types.LONGNVARCHAR, Types.LONGVARCHAR, Types.VARCHAR, Types.NVARCHAR:
                 return new StringColumnValue((String) value);
@@ -19,14 +25,16 @@ public class SQLToJavaMapper {
                 return new LongColumnValue((Long) value);
             case Types.DOUBLE, Types.FLOAT:
                 return new DoubleColumnValue((Double) value);
-            case Types.BOOLEAN:
+            case Types.BOOLEAN, Types.TINYINT, Types.BIT:
                 return new BooleanColumnValue((Boolean) value);
             case Types.DATE:
-                return new DateColumnValue(convert.dateToLocalDate((Date) value));
+                return new DateColumnValue((Date) value);
             case Types.TIMESTAMP:
-                return new DateTimeColumnValue(convert.timestampToLocalDateTime((Timestamp) value));
+                return new TimestampColumnValue((Timestamp) value);
             case Types.BLOB:
                 return new ByteArrayColumnValue(convert.blobToByteArray((Blob) value));
+            case Types.BINARY, Types.VARBINARY, Types.LONGVARBINARY:
+                return new ByteArrayColumnValue((byte[]) value);
             case Types.CLOB, Types.NCLOB:
                 throw new UnsupportedOperationException("Should be mapped as byte array");
             case Types.DECIMAL, Types.NUMERIC:

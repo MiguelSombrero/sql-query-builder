@@ -99,9 +99,9 @@ public abstract class ValueTemplate extends TerminalClosingInsertOperation {
      * value (with comma in front) into 'VALUE (value(s))'
      * statement
      */
-    public Value setDateTime(String value) {
+    public Value setTimestamp(String value) {
         addCommaAfterFirstValue();
-        ValueAppender.appendDateTimeParam(query, value);
+        ValueAppender.appendTimestampParam(query, value);
         return new Value(query);
     }
 

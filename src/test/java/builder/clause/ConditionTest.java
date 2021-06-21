@@ -35,10 +35,10 @@ public class ConditionTest extends DatabaseTestBaseClass {
     public void testWhereAndCondition() throws SQLException {
         SelectQuery query = this.baseQuery
                 .where(valueOf("age").greaterThanInteger(30)
-                        .and(valueOf("birthdate").greaterThanDateTime("1980-02-28 21:00:10")))
+                        .and(valueOf("birthdate").greaterThanTimestamp("1980-02-28 21:00:10")))
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE age > 30 AND birthdate > '1980-02-28T21:00:10'", query.toString());
+        assertEquals("SELECT firstname FROM person WHERE age > 30 AND birthdate > '1980-02-28 21:00:10.0'", query.toString());
 
         List<Row> result = query.execute();
 
@@ -49,10 +49,10 @@ public class ConditionTest extends DatabaseTestBaseClass {
     public void testWhereOrCondition() throws SQLException {
         SelectQuery query = this.baseQuery
                 .where(valueOf("age").greaterThanInteger(30)
-                        .or(valueOf("birthdate").greaterThanDateTime("1980-02-28 21:00:02")))
+                        .or(valueOf("birthdate").greaterThanTimestamp("1980-02-28 21:00:02")))
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE age > 30 OR birthdate > '1980-02-28T21:00:02'", query.toString());
+        assertEquals("SELECT firstname FROM person WHERE age > 30 OR birthdate > '1980-02-28 21:00:02.0'", query.toString());
 
         List<Row> result = query.execute();
 
@@ -77,11 +77,11 @@ public class ConditionTest extends DatabaseTestBaseClass {
     public void testWhereAndOrConditions() throws SQLException {
         SelectQuery query = this.baseQuery
                 .where(valueOf("age").greaterThanInteger(30)
-                        .and(valueOf("birthdate").greaterThanDateTime("1980-02-28 21:00:05"))
-                        .or(valueOf("birthdate").lesserThanDateTime("1960-02-28 21:00:05")))
+                        .and(valueOf("birthdate").greaterThanTimestamp("1980-02-28 21:00:05"))
+                        .or(valueOf("birthdate").lesserThanTimestamp("1960-02-28 21:00:05")))
                 .build();
 
-        assertEquals("SELECT firstname FROM person WHERE age > 30 AND birthdate > '1980-02-28T21:00:05' OR birthdate < '1960-02-28T21:00:05'", query.toString());
+        assertEquals("SELECT firstname FROM person WHERE age > 30 AND birthdate > '1980-02-28 21:00:05.0' OR birthdate < '1960-02-28 21:00:05.0'", query.toString());
 
         List<Row> result = query.execute();
 

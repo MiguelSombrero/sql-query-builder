@@ -95,8 +95,8 @@ public class Value {
      * columns into UPDATE statement, proceed to WHERE
      * clause or terminate query building
      */
-    public Column setDateTime(String value) {
-        ValueAppender.appendDateTimeParam(query, value);
+    public Column setTimestamp(String value) {
+        ValueAppender.appendTimestampParam(query, value);
         return new Column(query);
     }
 

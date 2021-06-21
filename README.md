@@ -93,11 +93,12 @@ Check the latest version from [GitHub Packages](https://github.com/MiguelSombrer
 
 ## Known bugs / shortcomings
 - In CREATE TABLE user can chain same constraints infinitely (`...column("ID").type(DataType.INT).notNull().notNull().notNull() ...`) 
-- Returns DateTime type column values without seconds if zero (e.g. 2020-03-03 21:00:00 -> 2020-03-03 21:00)
+- Missing validation of 'char' type input
 
 ## Not yet implemented
 - ALTER statements not yet implemented 
 - Missing some datatypes (SMALLINT, DECIMAL, NUMERIC, FLOAT, TIME, TEXT, BINARY)
+- Character comparison methods in Comparison class
 
 ## For developers
 
@@ -112,7 +113,7 @@ Check the latest version from [GitHub Packages](https://github.com/MiguelSombrer
 
     mvn clean install
 
-#### Run tests
+#### Run unit tests
 
     mvn clean test
 
@@ -123,3 +124,16 @@ Check the latest version from [GitHub Packages](https://github.com/MiguelSombrer
 #### Deploy to GitHub packages
 
 GitHub Action for deploying release to GitHub packages triggers when new release is created with `mvn gitflow:release` command.
+
+### Integration tests
+
+Integration tests against live database is implemented in package `src/test/integration/`.
+Tests is ignored by default, since they require MySQL database running in docker container (or local machine etc).
+
+#### MySQL tests
+
+You can start official MySQL docker container with command:
+
+    docker run --name mysql_db -p 3306:3306 -e MYSQL_ROOT_PASSWORD=sa -e MYSQL_DATABASE=test_db -d mysql:latest
+
+Integration tests against MySQL database can be found in class `MySQLIntegrationTest`.

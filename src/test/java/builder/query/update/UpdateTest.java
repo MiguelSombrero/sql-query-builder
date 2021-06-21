@@ -14,17 +14,31 @@ import static builder.clause.ConditionClauseBuilder.valueOf;
 import static org.junit.Assert.assertEquals;
 
 public class UpdateTest extends DatabaseTestBaseClass {
-    private SQLQueryBuilder SQLQueryBuilder;
+    private SQLQueryBuilder sqlQueryBuilder;
     private FirstColumn baseQuery;
 
     @Before
     public void setUp() {
         initializeDatabase();
-        SQLQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getDataSource());
+        sqlQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getDataSource());
 
-        this.baseQuery = SQLQueryBuilder
+        this.baseQuery = sqlQueryBuilder
                 .update()
                 .table("person");
+    }
+
+
+    @Test
+    public void testUpdateStringValue() throws SQLException {
+        UpdateQuery query = this.baseQuery
+                .column("firstname").setString("Miika-Lassi Kari")
+                .build();
+
+        assertEquals("UPDATE person SET firstname = 'Miika-Lassi Kari'", query.toString());
+
+        int result = query.execute();
+
+        assertEquals(3, result);
     }
 
     @Test
@@ -42,7 +56,7 @@ public class UpdateTest extends DatabaseTestBaseClass {
 
     @Test
     public void testUpdateLongValue() throws SQLException {
-        UpdateQuery query = SQLQueryBuilder
+        UpdateQuery query = sqlQueryBuilder
                 .update()
                 .table("all_types")
                 .column("hash").setLong(2485394539475834568L)
@@ -57,7 +71,7 @@ public class UpdateTest extends DatabaseTestBaseClass {
 
     @Test
     public void testUpdateBooleanValue() throws SQLException {
-        UpdateQuery query = SQLQueryBuilder
+        UpdateQuery query = sqlQueryBuilder
                 .update()
                 .table("all_types")
                 .column("active").setBoolean(false)
@@ -84,19 +98,6 @@ public class UpdateTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testUpdateStringValue() throws SQLException {
-        UpdateQuery query = this.baseQuery
-                    .column("firstname").setString("Miika-Lassi Kari")
-                .build();
-
-        assertEquals("UPDATE person SET firstname = 'Miika-Lassi Kari'", query.toString());
-
-        int result = query.execute();
-
-        assertEquals(3, result);
-    }
-
-    @Test
     public void testUpdateDateValue() throws SQLException {
         UpdateQuery query = this.baseQuery
                 .column("birthdate").setDate("1985-01-02")
@@ -110,12 +111,12 @@ public class UpdateTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testUpdateDateTimeValue() throws SQLException {
+    public void testUpdateTimestampValue() throws SQLException {
         UpdateQuery query = this.baseQuery
-                .column("birthdate").setDateTime("1985-01-02 21:04:11")
+                .column("birthdate").setTimestamp("1985-01-02 21:04:11.0")
                 .build();
 
-        assertEquals("UPDATE person SET birthdate = '1985-01-02T21:04:11'", query.toString());
+        assertEquals("UPDATE person SET birthdate = '1985-01-02 21:04:11.0'", query.toString());
 
         int result = query.execute();
 
@@ -126,7 +127,7 @@ public class UpdateTest extends DatabaseTestBaseClass {
     public void testUpdateByteArrayValue() throws SQLException, IOException {
         byte[] file = readFileAsByteArray("files/byte-array-test-file.txt");
 
-        UpdateQuery query = SQLQueryBuilder
+        UpdateQuery query = sqlQueryBuilder
                 .update()
                 .table("all_types")
                 .column("contract").setByteArray(file)

@@ -28,10 +28,10 @@ public class CreateTableTest extends DatabaseTestBaseClass {
                 .column("hash").type(DataType.BIGINT)
                 .column("age").type(DataType.DOUBLE)
                 .column("date").type(DataType.DATE)
-                .column("datetime").type(DataType.DATETIME)
                 .column("created").type(DataType.TIMESTAMP)
                 .column("active").type(DataType.BOOLEAN)
-                .column("country").type(DataType.CHAR)
+                .column("country").type(DataType.CHAR_32)
+                //TODO: rest of the CHAR types
                 .column("model").type(DataType.VARCHAR_32)
                 .column("brand").type(DataType.VARCHAR_64)
                 .column("disclaimer").type(DataType.VARCHAR_128)
@@ -39,7 +39,7 @@ public class CreateTableTest extends DatabaseTestBaseClass {
                 .column("contract").type(DataType.BLOB)
                 .build();
 
-        assertEquals("CREATE TABLE cars (ID INT, hash BIGINT, age DOUBLE, date DATE, datetime DATETIME, created TIMESTAMP, active BOOLEAN, country CHAR, model VARCHAR(32), brand VARCHAR(64), disclaimer VARCHAR(128), description VARCHAR(255), contract BLOB)", query.toString());
+        assertEquals("CREATE TABLE cars (ID INT, hash BIGINT, age DOUBLE, date DATE, created TIMESTAMP, active BOOLEAN, country CHAR(32), model VARCHAR(32), brand VARCHAR(64), disclaimer VARCHAR(128), description VARCHAR(255), contract BLOB)", query.toString());
 
         query.execute();
         assertThatQueryReturnsRows("SELECT * FROM cars", 0);

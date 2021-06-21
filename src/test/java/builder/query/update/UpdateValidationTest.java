@@ -1,7 +1,6 @@
 package builder.query.update;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import builder.query.SQLQueryBuilder;
 import testutils.DatabaseConnection;
@@ -40,7 +39,7 @@ public class UpdateValidationTest extends DatabaseTestBaseClass {
     @Test(expected = IllegalArgumentException.class)
     public void testUpdateDateTimeValue() {
         this.baseQuery
-                .column("birthdate").setDateTime("1985-01-02")
+                .column("birthdate").setTimestamp("1985-01-02")
                 .build();
     }
 

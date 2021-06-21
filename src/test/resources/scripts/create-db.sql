@@ -42,7 +42,6 @@ CREATE TABLE all_types (
     hash BIGINT,
     age DOUBLE,
     newdate DATE,
-    newdatetime DATETIME,
     created TIMESTAMP,
     active BOOLEAN,
     country CHAR,

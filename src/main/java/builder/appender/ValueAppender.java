@@ -5,18 +5,14 @@ import query.Clause;
 import validation.Validator;
 import validation.ValidatorFactory;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.sql.Date;
+import java.sql.Timestamp;
 
 public class ValueAppender {
-    private static Validator<String> dateTimeValidator = ValidatorFactory.exceptionThrowingDateTimeValidator();
+    private static Validator<String> timestampValidator = ValidatorFactory.exceptionThrowingTimestampValidator();
     private static Validator<String> dateValidator = ValidatorFactory.exceptionThrowingDateValidator();
     private static Validator<String> stringValueValidator = ValidatorFactory.exceptionThrowingStringValueValidator();
     private static Validator<byte[]> byteArrayValidator = ValidatorFactory.exceptionThrowingByteArrayValidator();
-
-    private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    private static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public static void appendStringParam(Clause clause, String value) {
         stringValueValidator.validate(value);
@@ -42,13 +38,13 @@ public class ValueAppender {
     public static void appendDateParam(Clause clause, String value) {
         dateValidator.validate(value);
         clause.append("?");
-        clause.addParam(new DateColumnValue(LocalDate.parse(value, dateFormatter)));
+        clause.addParam(new DateColumnValue(Date.valueOf(value)));
     }
 
-    public static void appendDateTimeParam(Clause clause, String value) {
-        dateTimeValidator.validate(value);
+    public static void appendTimestampParam(Clause clause, String value) {
+        timestampValidator.validate(value);
         clause.append("?");
-        clause.addParam(new DateTimeColumnValue(LocalDateTime.parse(value, dateTimeFormatter)));
+        clause.addParam(new TimestampColumnValue(Timestamp.valueOf(value)));
     }
 
     public static void appendBooleanParam(Clause clause, boolean value) {

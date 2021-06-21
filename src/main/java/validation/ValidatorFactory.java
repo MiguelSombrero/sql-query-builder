@@ -18,8 +18,8 @@ public class ValidatorFactory {
         return new ExceptionThrowingValidator<>(dateValidator());
     }
 
-    public static Validator<String> exceptionThrowingDateTimeValidator() {
-        return new ExceptionThrowingValidator<>(dateTimeValidator());
+    public static Validator<String> exceptionThrowingTimestampValidator() {
+        return new ExceptionThrowingValidator<>(timestampValidator());
     }
 
     public static Validator<String> exceptionThrowingNameValidator() {
@@ -42,8 +42,8 @@ public class ValidatorFactory {
         return new DatePatternValidator();
     }
 
-    public static Validator<String> dateTimeValidator() {
-        return new DateTimePatternValidator();
+    public static Validator<String> timestampValidator() {
+        return new TimestampPatternValidator();
     }
 
     public static Validator<byte[]> byteArrayValidator() {

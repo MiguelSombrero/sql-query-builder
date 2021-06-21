@@ -5,13 +5,18 @@ import org.junit.Test;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-public class DateTimePatternValidatorTest {
+public class TimestampPatternValidatorTest {
 
-    private DateTimePatternValidator datePatternValidator = new DateTimePatternValidator();
+    private TimestampPatternValidator datePatternValidator = new TimestampPatternValidator();
 
     @Test
     public void testDoesAcceptDateWithTime() {
         assertTrue(datePatternValidator.validate("2021-05-15 21:00:00"));
+    }
+
+    @Test
+    public void testDoesAcceptDateWithMilliseconds() {
+        assertTrue(datePatternValidator.validate("2021-05-15 21:00:00.5"));
     }
 
     @Test
