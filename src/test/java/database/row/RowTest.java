@@ -8,6 +8,7 @@ import query.SelectQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 
+import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.sql.Date;
 import java.sql.SQLException;
@@ -39,7 +40,7 @@ public class RowTest extends DatabaseTestBaseClass {
 
         Row firstRow = result.get(0);
 
-        assertEquals(12, firstRow.getColumnCount());
+        assertEquals(14, firstRow.getColumnCount());
     }
 
     @Test
@@ -101,6 +102,24 @@ public class RowTest extends DatabaseTestBaseClass {
     }
 
     @Test
+    public void testGetDouble() throws SQLException {
+        List<Row> result = baseQuery.execute();
+
+        Row firstRow = result.get(0);
+
+        assertEquals(25.6, firstRow.getDouble("age"), 0.1);
+    }
+
+    @Test
+    public void testGetBigDecimal() throws SQLException {
+        List<Row> result = baseQuery.execute();
+
+        Row firstRow = result.get(0);
+
+        assertEquals(BigDecimal.valueOf(13200.50).doubleValue(), firstRow.getBigDecimal("price").doubleValue(), 0.01);
+    }
+
+    @Test
     public void testGetBytes() throws SQLException {
         List<Row> result = baseQuery.execute();
 
@@ -110,15 +129,6 @@ public class RowTest extends DatabaseTestBaseClass {
         byte[] bytes = firstRow.getBytes("contract");
 
         assertEquals(expected, new String(bytes, StandardCharsets.UTF_8));
-    }
-
-    @Test
-    public void testGetDouble() throws SQLException {
-        List<Row> result = baseQuery.execute();
-
-        Row firstRow = result.get(0);
-
-        assertEquals(25.6, firstRow.getDouble("age"), 0.1);
     }
 
     @Test

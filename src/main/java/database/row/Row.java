@@ -4,6 +4,7 @@ import database.column.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.Map;
@@ -36,13 +37,18 @@ public class Row {
         return value.getValue();
     }
 
-    public byte[] getBytes(String columnName) {
-        ByteArrayColumnValue value = (ByteArrayColumnValue) getColumnValue(columnName);
+    public double getDouble(String columnName) {
+        DoubleColumnValue value = (DoubleColumnValue) getColumnValue(columnName);
         return value.getValue();
     }
 
-    public double getDouble(String columnName) {
-        DoubleColumnValue value = (DoubleColumnValue) getColumnValue(columnName);
+    public BigDecimal getBigDecimal(String columnName) {
+        BigDecimalColumnValue value = (BigDecimalColumnValue) getColumnValue(columnName);
+        return value.getValue();
+    }
+
+    public byte[] getBytes(String columnName) {
+        ByteArrayColumnValue value = (ByteArrayColumnValue) getColumnValue(columnName);
         return value.getValue();
     }
 

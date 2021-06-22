@@ -23,7 +23,7 @@ public class UpdateQueryTest extends DatabaseTestBaseClass {
 
     @Test
     public void testExecuteAllFieldsUpdate() throws SQLException {
-        StringBuilder queryString = new StringBuilder("UPDATE all_types SET id = 100, hash = 8223372036854775806, age = 32.2, newdate = '2021-03-01', created = '2021-05-05 20:02:01', active = false, country = 10, model = 'T1000', brand = 'Saab', disclaimer = 'Great car', description = 'Buy this', contract = '64657374696e6720736f6d652076616c7565730a' WHERE id = 12");
+        StringBuilder queryString = new StringBuilder("UPDATE all_types SET id = 100, hash = 8223372036854775806, age = 32.2, price = 15500.99, taxes = 1.6, newdate = '2021-03-01', created = '2021-05-05 20:02:01', active = false, country = 10, model = 'T1000', brand = 'Saab', disclaimer = 'Great car', description = 'Buy this', contract = '64657374696e6720736f6d652076616c7565730a' WHERE id = 12");
         UpdateQuery query = new UpdateQuery(queryString, dataSource);
 
         int result = query.execute();
@@ -32,6 +32,8 @@ public class UpdateQueryTest extends DatabaseTestBaseClass {
         assertThatQueryReturnsRows("SELECT * FROM all_types WHERE id = 100", 1);
         assertThatQueryReturnsRows("SELECT * FROM all_types WHERE hash = 8223372036854775806", 1);
         assertThatQueryReturnsRows("SELECT * FROM all_types WHERE age = 32.2", 1);
+        assertThatQueryReturnsRows("SELECT * FROM all_types WHERE price = 15500.99", 1);
+        assertThatQueryReturnsRows("SELECT * FROM all_types WHERE taxes = 1.6", 1);
         assertThatQueryReturnsRows("SELECT * FROM all_types WHERE newdate = '2021-03-01'", 1);
         assertThatQueryReturnsRows("SELECT * FROM all_types WHERE created = '2021-05-05 20:02:01'", 1);
         assertThatQueryReturnsRows("SELECT * FROM all_types WHERE active = false", 2);

@@ -138,13 +138,20 @@ public class SQLToJavaMapperTest {
         assertThat(mapper.toJavaType(type, value), instanceOf(ByteArrayColumnValue.class));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
-    public void testThatNotImplementedThrowsException() throws SQLException {
+    /*@Test
+    public void testThatDecimalMapsToBigDecimal() throws SQLException {
         int type = Types.DECIMAL;
-        Object value = "";
-        mapper.toJavaType(type, value);
+        Object value = 1234567.89;
+        assertThat(mapper.toJavaType(type, value), instanceOf(BigDecimalColumnValue.class));
     }
 
+    @Test
+    public void testThatNumericMapsToBigDecimal() throws SQLException {
+        int type = Types.NUMERIC;
+        Object value = 1234567.89;
+        assertThat(mapper.toJavaType(type, value), instanceOf(BigDecimalColumnValue.class));
+    }
+*/
     @Test(expected = IllegalArgumentException.class)
     public void testThatUnknownTypeThrowsException() throws SQLException {
         int type = 2576897;

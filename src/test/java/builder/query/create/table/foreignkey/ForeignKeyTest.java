@@ -2,7 +2,6 @@ package builder.query.create.table.foreignkey;
 
 import builder.query.SQLQueryBuilder;
 import builder.query.create.table.column.Constraint;
-import builder.query.create.table.column.DataType;
 import org.h2.jdbc.JdbcSQLSyntaxErrorException;
 import query.CreateQuery;
 import testutils.DatabaseConnection;
@@ -26,9 +25,9 @@ public class ForeignKeyTest extends DatabaseTestBaseClass {
 
         this.baseQuery = sqlQueryBuilder.create()
                 .table("vehicles")
-                .column("ID").type(DataType.INT).primaryKey()
-                .column("person_id").type(DataType.INT)
-                .column("manufacturer_id").type(DataType.INT);;
+                .column("ID").type("INT").primaryKey()
+                .column("person_id").type("INT")
+                .column("manufacturer_id").type("INT");
     }
 
     @Test(expected = JdbcSQLSyntaxErrorException.class)

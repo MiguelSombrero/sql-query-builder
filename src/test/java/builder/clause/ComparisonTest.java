@@ -116,7 +116,6 @@ public class ComparisonTest extends DatabaseTestBaseClass {
         List<Row> result = query.execute();
 
         assertRowCount(result, 1);
-        assertColumnCount(result, 12);
     }
 
     @Test

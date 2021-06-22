@@ -92,7 +92,7 @@ Check the latest version from [GitHub Packages](https://github.com/MiguelSombrer
 - [slf4j](http://www.slf4j.org/) logging utility (license: [MIT](http://www.slf4j.org/license.html))
 
 ## Known bugs / shortcomings
-- In CREATE TABLE user can chain same constraints infinitely (`...column("ID").type(DataType.INT).notNull().notNull().notNull() ...`) 
+- In CREATE TABLE user can chain same constraints infinitely (`...column("ID").type("INT").notNull().notNull().notNull() ...`) 
 - Missing validation of 'char' type input
 
 ## Not yet implemented

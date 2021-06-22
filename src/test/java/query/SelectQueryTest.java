@@ -36,6 +36,8 @@ public class SelectQueryTest extends DatabaseTestBaseClass {
         assertEquals(12, firstRow.getInteger("id"));
         assertEquals(9223372036854775806L, firstRow.getLong("hash"));
         assertEquals(25.6, firstRow.getDouble("age"), 0.1);
+        assertEquals(13200.50, firstRow.getBigDecimal("price").doubleValue(), 0.01);
+        assertEquals(3.4, firstRow.getBigDecimal("taxes").doubleValue(), 0.01);
         assertEquals("2020-02-02", firstRow.getDate("newdate").toString());
         assertEquals("2020-02-02 22:02:01.0", firstRow.getTimestamp("created").toString());
         assertEquals(true, firstRow.getBoolean("active"));

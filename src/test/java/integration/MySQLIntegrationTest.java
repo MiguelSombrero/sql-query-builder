@@ -1,7 +1,6 @@
 package integration;
 
 import builder.query.SQLQueryBuilder;
-import builder.query.create.table.column.DataType;
 import com.mysql.cj.jdbc.MysqlDataSource;
 import database.row.Row;
 import org.junit.Before;
@@ -44,18 +43,18 @@ public class MySQLIntegrationTest {
     public void testAllQueryTypes() throws SQLException {
         CreateQuery create = sqlQueryBuilder.create()
                 .table("cars")
-                .column("ID").type(DataType.INT).primaryKey()
-                .column("hash").type(DataType.BIGINT)
-                .column("age").type(DataType.DOUBLE)
-                .column("date").type(DataType.DATE)
-                .column("created").type(DataType.TIMESTAMP)
-                .column("active").type(DataType.BOOLEAN)
-                .column("country").type(DataType.CHAR_32)
-                .column("model").type(DataType.VARCHAR_32)
-                .column("brand").type(DataType.VARCHAR_64)
-                .column("disclaimer").type(DataType.VARCHAR_128)
-                .column("description").type(DataType.VARCHAR_255)
-                .column("contract").type(DataType.BLOB)
+                .column("ID").type("INT").primaryKey()
+                .column("hash").type("BIGINT")
+                .column("age").type("DOUBLE")
+                .column("date").type("DATE")
+                .column("created").type("TIMESTAMP")
+                .column("active").type("BOOLEAN")
+                .column("country").type("CHAR(32)")
+                .column("model").type("VARCHAR(32)")
+                .column("brand").type("VARCHAR(64)")
+                .column("disclaimer").type("VARCHAR(128)")
+                .column("description").type("VARCHAR(255)")
+                .column("contract").type("BLOB")
                 .build();
 
         create.execute();

@@ -24,7 +24,7 @@ public class InsertQueryTest extends DatabaseTestBaseClass {
 
     @Test
     public void testExecuteAllFieldsInsert() throws SQLException {
-        StringBuilder queryString = new StringBuilder("INSERT INTO all_types VALUES (100, 8223372036854775806, 32.2, '2021-03-01', '2021-05-05 20:02:01', true, 10, 'T1000', 'Saab', 'Great car', 'Buy this', '64657374696e6720736f6d652076616c7565730a')");
+        StringBuilder queryString = new StringBuilder("INSERT INTO all_types VALUES (100, 8223372036854775806, 32.2, 15500.99, 1.6, '2021-03-01', '2021-05-05 20:02:01', true, 10, 'T1000', 'Saab', 'Great car', 'Buy this', '64657374696e6720736f6d652076616c7565730a')");
         InsertQuery query = new InsertQuery(queryString, dataSource);
 
         int result = query.execute();
@@ -33,6 +33,8 @@ public class InsertQueryTest extends DatabaseTestBaseClass {
         assertThatQueryReturnsRows("SELECT * FROM all_types WHERE id = 100", 1);
         assertThatQueryReturnsRows("SELECT * FROM all_types WHERE hash = 8223372036854775806", 1);
         assertThatQueryReturnsRows("SELECT * FROM all_types WHERE age = 32.2", 1);
+        assertThatQueryReturnsRows("SELECT * FROM all_types WHERE price = 15500.99", 1);
+        assertThatQueryReturnsRows("SELECT * FROM all_types WHERE taxes = 1.6", 1);
         assertThatQueryReturnsRows("SELECT * FROM all_types WHERE newdate = '2021-03-01'", 1);
         assertThatQueryReturnsRows("SELECT * FROM all_types WHERE created = '2021-05-05 20:02:01'", 1);
         assertThatQueryReturnsRows("SELECT * FROM all_types WHERE active = true", 2);

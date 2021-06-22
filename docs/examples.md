@@ -223,10 +223,10 @@ Create `CreateQuery` with `SQLQueryBuilder` to execute SQL `CREATE` queries.
     CreateQuery query = sqlQueryBuilder
         .create()
         .table("vehicles")
-            .column("ID").type(DataType.INT).primaryKey()
-            .column("name").type(DataType.VARCHAR_255).notNull()
-            .column("model").type(DataType.VARCHAR_64)
-            .column("manufacturer_id").type(DataType.INT)
+            .column("ID").type("INT").primaryKey()
+            .column("name").type("VARCHAR(255)").notNull()
+            .column("model").type("VARCHAR(64)")
+            .column("manufacturer_id").type("INT")
         .foreignKey("manufacturer_id").references("ID", "manufacturer")
         .build();
 

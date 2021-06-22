@@ -41,6 +41,8 @@ CREATE TABLE all_types (
     ID INT PRIMARY KEY AUTO_INCREMENT,
     hash BIGINT,
     age DOUBLE,
+    price DECIMAL(8,2),
+    taxes NUMERIC(4,2),
     newdate DATE,
     created TIMESTAMP,
     active BOOLEAN,
