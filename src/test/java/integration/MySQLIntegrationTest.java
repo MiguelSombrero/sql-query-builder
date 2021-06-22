@@ -8,6 +8,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 import query.*;
 
+import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.util.List;
@@ -46,6 +47,8 @@ public class MySQLIntegrationTest {
                 .column("ID").type("INT").primaryKey()
                 .column("hash").type("BIGINT")
                 .column("age").type("DOUBLE")
+                .column("price").type("DECIMAL(8,2)")
+                .column("taxes").type("NUMERIC(5,2)")
                 .column("date").type("DATE")
                 .column("created").type("TIMESTAMP")
                 .column("active").type("BOOLEAN")
@@ -65,6 +68,8 @@ public class MySQLIntegrationTest {
                     .setInt(1)
                     .setLong(123456789)
                     .setDouble(3.4)
+                    .setBigDecimal(BigDecimal.valueOf(123456.78))
+                    .setBigDecimal(BigDecimal.valueOf(11.25))
                     .setDate("2020-02-02")
                     .setTimestamp("2020-03-03 21:00:02.0")
                     .setBoolean(true)
@@ -90,6 +95,8 @@ public class MySQLIntegrationTest {
         assertEquals(1, firstRow.getInteger("id"));
         assertEquals(123456789, firstRow.getLong("hash"));
         assertEquals(3.4, firstRow.getDouble("age"), 0.1);
+        assertEquals(BigDecimal.valueOf(123456.78), firstRow.getBigDecimal("price"));
+        assertEquals(BigDecimal.valueOf(11.25), firstRow.getBigDecimal("taxes"));
         assertEquals("2020-02-02", firstRow.getDate("date").toString());
         assertEquals("2020-03-03 21:00:02.0", firstRow.getTimestamp("created").toString());
         assertEquals(true, firstRow.getBoolean("active"));

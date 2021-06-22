@@ -69,7 +69,7 @@ Add Maven dependency to your project:
     <dependency>
         <groupId>com.github.miguelsombrero</groupId>
         <artifactId>sql-query-builder</artifactId>
-        <version>2.0.1</version>
+        <version>2.0.2</version>
     </dependency>
 
 Check the latest version from [GitHub Packages](https://github.com/MiguelSombrero?tab=packages&repo_name=sql-query-builder)
@@ -93,12 +93,10 @@ Check the latest version from [GitHub Packages](https://github.com/MiguelSombrer
 
 ## Known bugs / shortcomings
 - In CREATE TABLE user can chain same constraints infinitely (`...column("ID").type("INT").notNull().notNull().notNull() ...`) 
-- Missing validation of 'char' type input
 
 ## Not yet implemented
 - ALTER statements not yet implemented 
-- Missing some datatypes (SMALLINT, DECIMAL, NUMERIC, FLOAT, TIME, TEXT, BINARY)
-- Character comparison methods in Comparison class
+- Missing still some datatype mappings (SMALLINT, REAL, TIME, ARRAY, CLOB)
 
 ## For developers
 

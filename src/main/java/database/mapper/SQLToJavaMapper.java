@@ -39,6 +39,12 @@ public class SQLToJavaMapper {
                 throw new UnsupportedOperationException("Should be mapped as byte array");
             case Types.SMALLINT:
                 throw new UnsupportedOperationException("SmallInt should be mapped as short");
+            case Types.ARRAY:
+                throw new UnsupportedOperationException("Array should be mapped as byte array");
+            case Types.TIME:
+                throw new UnsupportedOperationException("Time should be mapped as java.sql.Time");
+            case Types.REAL:
+                throw new UnsupportedOperationException("Real should be mapped as float");
             default:
                 throw new IllegalArgumentException("Could not map SQL type to any Java type");
         }

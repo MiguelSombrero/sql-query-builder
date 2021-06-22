@@ -3,6 +3,8 @@ package builder.query.insert;
 import builder.appender.ValueAppender;
 import query.InsertQuery;
 
+import java.math.BigDecimal;
+
 public abstract class ValueTemplate extends TerminalClosingInsertOperation {
 
     public ValueTemplate(InsertQuery query) {
@@ -70,6 +72,22 @@ public abstract class ValueTemplate extends TerminalClosingInsertOperation {
     public Value setDouble(double value) {
         addCommaAfterFirstValue();
         ValueAppender.appendDoubleParam(query, value);
+        return new Value(query);
+    }
+
+    /**
+     * Validates user input and appends double 'value(s)'
+     * into 'INSERT INTO table VALUE (value(s))' statement.
+     *
+     * @param value BigDecimal value to be appended
+     *
+     * @return Value class which can be used to append
+     * value (with comma in front) into 'VALUE (value(s))'
+     * statement
+     */
+    public Value setBigDecimal(BigDecimal value) {
+        addCommaAfterFirstValue();
+        ValueAppender.appendBigDecimalParam(query, value);
         return new Value(query);
     }
 

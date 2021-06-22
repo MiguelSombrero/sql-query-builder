@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.sql.SQLException;
 
 import static builder.clause.ConditionClauseBuilder.valueOf;
@@ -23,7 +24,7 @@ public class InsertTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testInsertOneStringValue() throws SQLException {
+    public void testInsertStringValue() throws SQLException {
         InsertQuery query = sqlQueryBuilder
                 .insert()
                 .table("person")
@@ -40,7 +41,7 @@ public class InsertTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testInsertOneIntegerValue() throws SQLException {
+    public void testInsertIntegerValue() throws SQLException {
         InsertQuery query = sqlQueryBuilder
                 .insert()
                 .table("person")
@@ -58,7 +59,7 @@ public class InsertTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testInsertOneLongValue() throws SQLException {
+    public void testInsertLongValue() throws SQLException {
         InsertQuery query = sqlQueryBuilder
                 .insert()
                 .table("all_types")
@@ -73,6 +74,42 @@ public class InsertTest extends DatabaseTestBaseClass {
 
         assertEquals(14, result);
         assertThatQueryReturnsRows("SELECT * FROM all_types WHERE hash = 2485394539475834568", 1);
+    }
+
+    @Test
+    public void testInsertDoubleValue() throws SQLException {
+        InsertQuery query = sqlQueryBuilder
+                .insert()
+                .table("all_types")
+                .columns("age")
+                .values()
+                .setDouble(19.3)
+                .build();
+
+        assertEquals("INSERT INTO all_types (age) VALUES (19.3)", query.toString());
+
+        int result = query.execute();
+
+        assertEquals(14, result);
+        assertThatQueryReturnsRows("SELECT * FROM all_types WHERE age = 19.3", 1);
+    }
+
+    @Test
+    public void testInsertBigDecimalValue() throws SQLException {
+        InsertQuery query = sqlQueryBuilder
+                .insert()
+                .table("all_types")
+                .columns("price")
+                .values()
+                .setBigDecimal(BigDecimal.valueOf(21100.99))
+                .build();
+
+        assertEquals("INSERT INTO all_types (price) VALUES (21100.99)", query.toString());
+
+        int result = query.execute();
+
+        assertEquals(14, result);
+        assertThatQueryReturnsRows("SELECT * FROM all_types WHERE price = 21100.99", 1);
     }
 
     @Test
@@ -91,24 +128,6 @@ public class InsertTest extends DatabaseTestBaseClass {
 
         assertEquals(14, result);
         assertThatQueryReturnsRows("SELECT * FROM all_types WHERE active = false", 2);
-    }
-
-    @Test
-    public void testInsertOneDoubleValue() throws SQLException {
-        InsertQuery query = sqlQueryBuilder
-                .insert()
-                .table("all_types")
-                .columns("age")
-                .values()
-                    .setDouble(19.3)
-                .build();
-
-        assertEquals("INSERT INTO all_types (age) VALUES (19.3)", query.toString());
-
-        int result = query.execute();
-
-        assertEquals(14, result);
-        assertThatQueryReturnsRows("SELECT * FROM all_types WHERE age = 19.3", 1);
     }
 
     @Test

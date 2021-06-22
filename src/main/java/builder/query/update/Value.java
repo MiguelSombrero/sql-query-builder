@@ -3,6 +3,8 @@ package builder.query.update;
 import builder.appender.ValueAppender;
 import query.UpdateQuery;
 
+import java.math.BigDecimal;
+
 public class Value {
     private UpdateQuery query;
 
@@ -67,6 +69,21 @@ public class Value {
      */
     public Column setDouble(double value) {
         ValueAppender.appendDoubleParam(query, value);
+        return new Column(query);
+    }
+
+    /**
+     * Validates user input and appends double 'value' into
+     * 'UPDATE table SET column = value, ...' statement.
+     *
+     * @param value Value to be appended in selected column
+     *
+     * @return Column class which can be used to append more
+     * columns into UPDATE statement, proceed to WHERE
+     * clause or terminate query building
+     */
+    public Column setBigDecimal(BigDecimal value) {
+        ValueAppender.appendBigDecimalParam(query, value);
         return new Column(query);
     }
 

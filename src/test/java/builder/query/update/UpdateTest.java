@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.sql.SQLException;
 
 import static builder.clause.ConditionClauseBuilder.valueOf;
@@ -70,6 +71,34 @@ public class UpdateTest extends DatabaseTestBaseClass {
     }
 
     @Test
+    public void testUpdateDoubleValue() throws SQLException {
+        UpdateQuery query = this.baseQuery
+                .column("age").setDouble(50.5)
+                .build();
+
+        assertEquals("UPDATE person SET age = 50.5", query.toString());
+
+        int result = query.execute();
+
+        assertEquals(3, result);
+    }
+
+    @Test
+    public void testUpdateBigDecimalValue() throws SQLException {
+        UpdateQuery query = this.sqlQueryBuilder
+                .update()
+                .table("all_types")
+                .column("price").setBigDecimal(BigDecimal.valueOf(9000.10))
+                .build();
+
+        assertEquals("UPDATE all_types SET price = 9000.1", query.toString());
+
+        int result = query.execute();
+
+        assertEquals(2, result);
+    }
+
+    @Test
     public void testUpdateBooleanValue() throws SQLException {
         UpdateQuery query = sqlQueryBuilder
                 .update()
@@ -82,19 +111,6 @@ public class UpdateTest extends DatabaseTestBaseClass {
         int result = query.execute();
 
         assertEquals(2, result);
-    }
-
-    @Test
-    public void testUpdateDoubleValue() throws SQLException {
-        UpdateQuery query = this.baseQuery
-                .column("age").setDouble(50.5)
-                .build();
-
-        assertEquals("UPDATE person SET age = 50.5", query.toString());
-
-        int result = query.execute();
-
-        assertEquals(3, result);
     }
 
     @Test

@@ -5,6 +5,7 @@ import query.Clause;
 import validation.Validator;
 import validation.ValidatorFactory;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Timestamp;
 
@@ -33,6 +34,11 @@ public class ValueAppender {
     public static void appendDoubleParam(Clause clause, double value) {
         clause.append("?");
         clause.addParam(new DoubleColumnValue(value));
+    }
+
+    public static void appendBigDecimalParam(Clause clause, BigDecimal value) {
+        clause.append("?");
+        clause.addParam(new BigDecimalColumnValue(value));
     }
 
     public static void appendDateParam(Clause clause, String value) {
