@@ -79,6 +79,7 @@ and might be vulnerable to SQL injection, even if the input is validated.
 
 - DROP
     - table, database
+- IF EXISTS
   
 ## Supported data types
 

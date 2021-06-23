@@ -4,7 +4,8 @@
 
 Sql query builder is Java-library used for building and executing SQL queries.
 
-**Syntax of the SQL queries is compatible at least with MySQL, but might work with other DBMS too.**
+Syntax of the SQL queries is compatible with MySQL, but might work with other DBMS too.
+SQL queries [is tested](#integration) against MySQL and Postgres database container.
 
 ## Main features
 
@@ -95,7 +96,7 @@ Check the latest version from [GitHub Packages](https://github.com/MiguelSombrer
 - In CREATE TABLE user can chain same constraints infinitely (`...column("ID").type("INT").notNull().notNull().notNull() ...`) 
 
 ## Not yet implemented
-- ALTER statements not yet implemented 
+- ALTER statements
 - Missing still some datatype mappings (SMALLINT, REAL, TIME, ARRAY, CLOB)
 
 ## For developers
@@ -123,15 +124,23 @@ Check the latest version from [GitHub Packages](https://github.com/MiguelSombrer
 
 GitHub Action for deploying release to GitHub packages triggers when new release is created with `mvn gitflow:release` command.
 
-### Integration tests
+### <a name="integration"></a>Integration tests
 
 Integration tests against live database is implemented in package `src/test/integration/`.
-Tests is ignored by default, since they require MySQL database running in docker container (or local machine etc).
+Tests is ignored by default, since they require database running in docker container (or local machine etc).
 
 #### MySQL tests
 
-You can start official MySQL docker container with command:
+Official MySQL docker container can be started with command:
 
-    docker run --name mysql_db -p 3306:3306 -e MYSQL_ROOT_PASSWORD=sa -e MYSQL_DATABASE=test_db -d mysql:latest
+    docker run --name mysql_test_db -p 3306:3306 -e MYSQL_ROOT_PASSWORD=sa -e MYSQL_DATABASE=test_db -d mysql:latest
 
 Integration tests against MySQL database can be found in class `MySQLIntegrationTest`.
+
+#### Postgres tests
+
+Official Postgres docker container can be started with command:
+
+    docker run --name postgres_test_db -p 5432:5432 -e POSTGRES_PASSWORD=sa -d postgres
+
+Integration tests against MySQL database can be found in class `PostgreSQLIntegrationTest`.

@@ -273,7 +273,8 @@ Create `DropQuery` with `SQLQueryBuilder` to execute SQL `Drop` queries.
 
     DeleteQuery query = sqlQueryBuilder 
         .drop()
-        .table("test_table")
+        .table()
+        .name("test_table")
         .build();
 
     logger.info(query.toString());

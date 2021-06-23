@@ -6,6 +6,7 @@ import database.row.Row;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.postgresql.ds.PGSimpleDataSource;
 import query.*;
 
 import java.math.BigDecimal;
@@ -16,18 +17,18 @@ import java.util.List;
 import static builder.clause.ConditionClauseBuilder.valueOf;
 import static org.junit.Assert.assertEquals;
 
-@Ignore("These integration tests is run against live MySQL database container and must be executed manually")
-public class MySQLIntegrationTest {
+@Ignore("These integration tests is run against live Postgres database container and must be executed manually")
+public class PostgreSQLIntegrationTest {
     private SQLQueryBuilder sqlQueryBuilder;
 
     @Before
     public void setUp() throws SQLException {
-        // Before tests start MySQL container:
-        // docker run --name mysql_db -p 3306:3306 -e MYSQL_ROOT_PASSWORD=sa -e MYSQL_DATABASE=test_db -d mysql:latest
+        // Before tests start Postgres container:
+        // docker run --name postgres_test_db -p 5432:5432 -e POSTGRES_PASSWORD=sa -d postgres
 
-        MysqlDataSource dataSource = new MysqlDataSource();
-        dataSource.setURL("jdbc:mysql://localhost:3306/test_db");
-        dataSource.setUser("root");
+        PGSimpleDataSource dataSource = new PGSimpleDataSource();
+        dataSource.setURL("jdbc:postgresql://localhost:5432/postgres");
+        dataSource.setUser("postgres");
         dataSource.setPassword("sa");
 
         sqlQueryBuilder = new SQLQueryBuilder(dataSource);
@@ -48,18 +49,18 @@ public class MySQLIntegrationTest {
                 .table("cars")
                 .column("ID").type("INT").primaryKey()
                 .column("hash").type("BIGINT")
-                .column("age").type("DOUBLE")
+                .column("age").type("DOUBLE PRECISION")
                 .column("price").type("DECIMAL(8,2)")
                 .column("taxes").type("NUMERIC(5,2)")
                 .column("date").type("DATE")
                 .column("created").type("TIMESTAMP")
                 .column("active").type("BOOLEAN")
-                .column("country").type("CHAR(32)")
+                .column("country").type("CHAR(3)")
                 .column("model").type("VARCHAR(32)")
                 .column("brand").type("VARCHAR(64)")
                 .column("disclaimer").type("VARCHAR(128)")
                 .column("description").type("VARCHAR(255)")
-                .column("contract").type("BLOB")
+                .column("contract").type("BYTEA")
                 .build();
 
         create.execute();
