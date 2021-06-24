@@ -16,7 +16,7 @@ import java.util.List;
 import static builder.clause.ConditionClauseBuilder.valueOf;
 import static org.junit.Assert.assertEquals;
 
-//@Ignore("These integration tests is run against live MySQL database container and must be executed manually")
+@Ignore("These integration tests is run against live MySQL database container and must be executed manually")
 public class MySQLIntegrationTest {
     private SQLQueryBuilder sqlQueryBuilder;
 

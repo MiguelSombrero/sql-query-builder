@@ -5,7 +5,7 @@
 Sql query builder is Java-library used for building and executing SQL queries.
 
 Syntax of the SQL queries is compatible with MySQL, but might work with other DBMS too.
-SQL queries [is tested](#integration) against MySQL and Postgres database container.
+SQL queries [is tested](#integration) against MySQL and Postgres database containers.
 
 ## Main features
 
@@ -97,7 +97,7 @@ Check the latest version from [GitHub Packages](https://github.com/MiguelSombrer
 
 ## Not yet implemented
 - ALTER statements
-- Missing still some datatype mappings (SMALLINT, REAL, TIME, ARRAY, CLOB)
+- Missing some datatype mappings (SMALLINT, REAL, TIME, ARRAY, CLOB)
 
 ## For developers
 
@@ -126,8 +126,10 @@ GitHub Action for deploying release to GitHub packages triggers when new release
 
 ### <a name="integration"></a>Integration tests
 
-Integration tests against live database is implemented in package `src/test/integration/`.
-Tests is ignored by default, since they require database running in docker container (or local machine etc).
+Integration tests against "live" database is implemented in package `src/test/integration/`.
+Tests is ignored by default, since they require database running in docker container (or local machine).
+
+Run integrations tests manually with docker containers running in your machine.
 
 #### MySQL tests
 
