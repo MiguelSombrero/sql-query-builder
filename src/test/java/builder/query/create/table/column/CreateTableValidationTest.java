@@ -21,8 +21,8 @@ public class CreateTableValidationTest extends DatabaseTestBaseClass {
     public void testCreateTableWithSQLInjection() {
         sqlQueryBuilder.create()
                 .table(";DROP")
-                .column("ID").type(DataType.INT).primaryKey().autoIncrement()
-                .column("person_id").type(DataType.INT).unique().notNull()
+                .column("ID").type("INT").primaryKey().autoIncrement()
+                .column("person_id").type("INT").unique().notNull()
                 .foreignKey("person_id").references("ID", "person")
                 .build();
     }
@@ -31,8 +31,8 @@ public class CreateTableValidationTest extends DatabaseTestBaseClass {
     public void testCreateTableFirstColumnWithSQLInjection() {
         sqlQueryBuilder.create()
                 .table("vehicles")
-                .column("--DROP").type(DataType.INT).primaryKey().autoIncrement()
-                .column("person_id").type(DataType.INT).unique().notNull()
+                .column("--DROP").type("INT").primaryKey().autoIncrement()
+                .column("person_id").type("INT").unique().notNull()
                 .foreignKey("person_id").references("ID", "person")
                 .build();
     }
@@ -41,8 +41,8 @@ public class CreateTableValidationTest extends DatabaseTestBaseClass {
     public void testCreateTableColumnWithSQLInjection() {
         sqlQueryBuilder.create()
                 .table("vehicles")
-                .column("ID").type(DataType.INT).primaryKey().autoIncrement()
-                .column(";DROP").type(DataType.INT).unique().notNull()
+                .column("ID").type("INT").primaryKey().autoIncrement()
+                .column(";DROP").type("INT").unique().notNull()
                 .foreignKey("person_id").references("ID", "person")
                 .build();
     }

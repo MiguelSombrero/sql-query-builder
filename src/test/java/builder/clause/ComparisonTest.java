@@ -69,10 +69,10 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     @Test
     public void testConditionDateTimeEquals() throws SQLException {
         SelectQuery query = this.allTypesBaseQuery
-                .where(valueOf("newdatetime").equalsDateTime("2018-01-02 21:12:01"))
+                .where(valueOf("created").equalsTimestamp("2020-02-02 22:02:01"))
                 .build();
 
-        assertEquals("SELECT * FROM all_types WHERE newdatetime = '2018-01-02T21:12:01'", query.toString());
+        assertEquals("SELECT * FROM all_types WHERE created = '2020-02-02 22:02:01.0'", query.toString());
 
         List<Row> result = query.execute();
 
@@ -116,7 +116,6 @@ public class ComparisonTest extends DatabaseTestBaseClass {
         List<Row> result = query.execute();
 
         assertRowCount(result, 1);
-        assertColumnCount(result, 13);
     }
 
     @Test
@@ -196,12 +195,12 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testConditionDateTimeGreaterThan() throws SQLException {
+    public void testConditionTimestampGreaterThan() throws SQLException {
         SelectQuery query = this.allTypesBaseQuery
-                .where(valueOf("newdatetime").greaterThanDateTime("2019-02-28 21:00:01"))
+                .where(valueOf("created").greaterThanTimestamp("2019-02-28 21:00:01"))
                 .build();
 
-        assertEquals("SELECT * FROM all_types WHERE newdatetime > '2019-02-28T21:00:01'", query.toString());
+        assertEquals("SELECT * FROM all_types WHERE created > '2019-02-28 21:00:01.0'", query.toString());
 
         List<Row> result = query.execute();
 
@@ -312,10 +311,10 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     @Test
     public void testConditionDateTimeGreaterThanOrEqual() throws SQLException {
         SelectQuery query = this.allTypesBaseQuery
-                .where(valueOf("newdatetime").greaterThanOrEqualDateTime("2019-02-28 21:00:03"))
+                .where(valueOf("created").greaterThanOrEqualTimestamp("2019-02-28 21:00:03"))
                 .build();
 
-        assertEquals("SELECT * FROM all_types WHERE newdatetime >= '2019-02-28T21:00:03'", query.toString());
+        assertEquals("SELECT * FROM all_types WHERE created >= '2019-02-28 21:00:03.0'", query.toString());
 
         List<Row> result = query.execute();
 
@@ -424,12 +423,12 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testConditionDateTimeLesserThan() throws SQLException {
+    public void testConditionTimestampLesserThan() throws SQLException {
         SelectQuery query = this.allTypesBaseQuery
-                .where(valueOf("newdatetime").lesserThanDateTime("2019-02-28 22:00:10"))
+                .where(valueOf("created").lesserThanTimestamp("2019-02-28 22:00:00"))
                 .build();
 
-        assertEquals("SELECT * FROM all_types WHERE newdatetime < '2019-02-28T22:00:10'", query.toString());
+        assertEquals("SELECT * FROM all_types WHERE created < '2019-02-28 22:00:00.0'", query.toString());
 
         List<Row> result = query.execute();
 
@@ -538,12 +537,12 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testConditionDateTimeLesserThanOrEqual() throws SQLException {
+    public void testConditionTimestampLesserThanOrEqual() throws SQLException {
         SelectQuery query = this.allTypesBaseQuery
-                .where(valueOf("newdatetime").lesserThanOrEqualDateTime("2019-01-02 22:02:02"))
+                .where(valueOf("created").lesserThanOrEqualTimestamp("2019-01-02 22:02:02"))
                 .build();
 
-        assertEquals("SELECT * FROM all_types WHERE newdatetime <= '2019-01-02T22:02:02'", query.toString());
+        assertEquals("SELECT * FROM all_types WHERE created <= '2019-01-02 22:02:02.0'", query.toString());
 
         List<Row> result = query.execute();
 
@@ -686,12 +685,12 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testConditionDateTimeBetween() throws SQLException {
+    public void testConditionTimestampBetween() throws SQLException {
         SelectQuery query = this.allTypesBaseQuery
-                .where(valueOf("newdatetime").isBetweenDateTime("2019-01-01 03:03:03", "2021-01-01 04:04:04"))
+                .where(valueOf("created").isBetweenTimestamp("2019-01-01 03:03:03", "2021-01-01 04:04:04"))
                 .build();
 
-        assertEquals("SELECT * FROM all_types WHERE newdatetime BETWEEN '2019-01-01T03:03:03' AND '2021-01-01T04:04:04'", query.toString());
+        assertEquals("SELECT * FROM all_types WHERE created BETWEEN '2019-01-01 03:03:03.0' AND '2021-01-01 04:04:04.0'", query.toString());
 
         List<Row> result = query.execute();
 
@@ -803,12 +802,12 @@ public class ComparisonTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testConditionInListOfDateTimes() throws SQLException {
+    public void testConditionInListOfTimestamps() throws SQLException {
         SelectQuery query = this.allTypesBaseQuery
-                .where(valueOf("newdatetime").isInDateTime("1981-01-01 21:01:01", "2018-01-02 21:12:01", "1983-03-03 21:01:03", "1984-04-04 21:01:04"))
+                .where(valueOf("created").isInDateTime("1981-01-01 21:01:01", "2018-01-02 21:12:01", "1983-03-03 21:01:03", "1984-04-04 21:01:04"))
                 .build();
 
-        assertEquals("SELECT * FROM all_types WHERE newdatetime IN ('1981-01-01T21:01:01', '2018-01-02T21:12:01', '1983-03-03T21:01:03', '1984-04-04T21:01:04')", query.toString());
+        assertEquals("SELECT * FROM all_types WHERE created IN ('1981-01-01 21:01:01.0', '2018-01-02 21:12:01.0', '1983-03-03 21:01:03.0', '1984-04-04 21:01:04.0')", query.toString());
 
         List<Row> result = query.execute();
 

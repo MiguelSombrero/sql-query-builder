@@ -1,6 +1,6 @@
 package builder.query.select.column;
 
-import query.SelectQuery;
+import query.Clause;
 
 /**
  * represents the first column to be appended in
@@ -11,8 +11,8 @@ import query.SelectQuery;
  */
 public class FirstColumn extends ColumnTemplate {
 
-    public FirstColumn(SelectQuery query) {
-        super(query);
+    public FirstColumn(Clause clause) {
+        super(clause);
     }
 
     @Override

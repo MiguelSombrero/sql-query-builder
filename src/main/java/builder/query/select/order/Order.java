@@ -1,11 +1,11 @@
 package builder.query.select.order;
 
-import query.SelectQuery;
+import query.Clause;
 
 public class Order extends OrderBy {
 
-    public Order(SelectQuery query) {
-        super(query);
+    public Order(Clause clause) {
+        super(clause);
     }
 
     /**
@@ -16,8 +16,8 @@ public class Order extends OrderBy {
      * 'SELECT ... ORDER BY column(s)' statement
      */
     public OrderBy desc() {
-        query.append(" DESC");
-        return new OrderBy(query);
+        clause.append(" DESC");
+        return new OrderBy(clause);
     }
 
     /**
@@ -28,7 +28,7 @@ public class Order extends OrderBy {
      * 'SELECT ... ORDER BY column(s)' statement
      */
     public OrderBy asc() {
-        query.append(" ASC");
-        return new OrderBy(query);
+        clause.append(" ASC");
+        return new OrderBy(clause);
     }
 }

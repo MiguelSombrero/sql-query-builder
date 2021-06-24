@@ -1,14 +1,16 @@
 package builder.query.drop;
 
 import builder.query.QueryBuilder;
+import builder.query.SQLQueryBuilder;
+import query.Clause;
 import query.DropQuery;
 
 public class TerminalDropOperation implements QueryBuilder {
 
-    protected DropQuery query;
+    protected Clause clause;
 
-    public TerminalDropOperation(DropQuery query) {
-        this.query = query;
+    public TerminalDropOperation(Clause clause) {
+        this.clause = clause;
     }
 
     /**
@@ -18,6 +20,7 @@ public class TerminalDropOperation implements QueryBuilder {
      * execute CREATE queries
      */
     public DropQuery build() {
-        return this.query;
+        DropQuery query = new DropQuery(clause, SQLQueryBuilder.getDataSource());
+        return query;
     }
 }

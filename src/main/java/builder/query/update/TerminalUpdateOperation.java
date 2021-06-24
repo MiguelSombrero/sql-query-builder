@@ -1,14 +1,16 @@
 package builder.query.update;
 
 import builder.query.QueryBuilder;
+import builder.query.SQLQueryBuilder;
+import query.Clause;
 import query.UpdateQuery;
 
 public class TerminalUpdateOperation implements QueryBuilder {
 
-    protected UpdateQuery query;
+    protected Clause clause;
 
-    public TerminalUpdateOperation(UpdateQuery query) {
-        this.query = query;
+    public TerminalUpdateOperation(Clause clause) {
+        this.clause = clause;
     }
 
     /**
@@ -18,6 +20,7 @@ public class TerminalUpdateOperation implements QueryBuilder {
      * execute UPDATE queries
      */
     public UpdateQuery build() {
-        return this.query;
+        UpdateQuery query = new UpdateQuery(clause, SQLQueryBuilder.getDataSource());
+        return query;
     }
 }

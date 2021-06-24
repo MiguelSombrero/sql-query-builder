@@ -1,12 +1,12 @@
 package builder.query.select.column;
 
 import builder.query.select.table.From;
-import query.SelectQuery;
+import query.Clause;
 
 public class AliasedColumn extends ColumnTemplate {
 
-    public AliasedColumn(SelectQuery query) {
-        super(query);
+    public AliasedColumn(Clause clause) {
+        super(clause);
     }
 
     /**
@@ -16,12 +16,12 @@ public class AliasedColumn extends ColumnTemplate {
      *  or sub-queries in 'FROM table' statement.
      */
     public From from() {
-        query.append(" FROM ");
-        return new From(query);
+        clause.append(" FROM ");
+        return new From(clause);
     }
 
     @Override
     protected void addCommaAfterFirstValue() {
-        query.append(", ");
+        clause.append(", ");
     }
 }

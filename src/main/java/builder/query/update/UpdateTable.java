@@ -1,13 +1,13 @@
 package builder.query.update;
 
 import builder.appender.StringAppender;
-import query.UpdateQuery;
+import query.Clause;
 
 public class UpdateTable {
-    private UpdateQuery query;
+    private Clause clause;
 
-    public UpdateTable(UpdateQuery query) {
-        this.query = query;
+    public UpdateTable(Clause clause) {
+        this.clause = clause;
     }
 
     /**
@@ -20,8 +20,8 @@ public class UpdateTable {
      * columns into UPDATE statement
      */
     public FirstColumn table(String table) {
-        StringAppender.validateAndAppend(query, table);
-        query.append(" SET ");
-        return new FirstColumn(query);
+        StringAppender.validateAndAppend(clause, table);
+        clause.append(" SET ");
+        return new FirstColumn(clause);
     }
 }

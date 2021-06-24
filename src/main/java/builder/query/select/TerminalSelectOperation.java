@@ -1,13 +1,15 @@
 package builder.query.select;
 
+import builder.query.SQLQueryBuilder;
+import query.Clause;
 import query.SelectQuery;
 
 public class TerminalSelectOperation implements SelectQueryBuilder {
 
-    protected SelectQuery query;
+    protected Clause clause;
 
-    public TerminalSelectOperation(SelectQuery query) {
-        this.query = query;
+    public TerminalSelectOperation(Clause clause) {
+        this.clause = clause;
     }
 
     /**
@@ -17,6 +19,7 @@ public class TerminalSelectOperation implements SelectQueryBuilder {
      * execute SELECT queries
      */
     public SelectQuery build() {
-        return this.query;
+        SelectQuery query = new SelectQuery(clause, SQLQueryBuilder.getDataSource());
+        return query;
     }
 }

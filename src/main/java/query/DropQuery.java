@@ -6,13 +6,13 @@ import javax.sql.DataSource;
 import java.sql.SQLException;
 
 public class DropQuery extends SQLQuery<Void> {
-    public DropQuery(StringBuilder queryString, DataSource dataSource) {
-        super(queryString, new QueryRunner(dataSource));
+    public DropQuery(Clause clause, DataSource dataSource) {
+        super(clause, new QueryRunner(dataSource));
     }
 
     @Override
     protected Void run() throws SQLException {
-        run.execute(this.getQueryString(), this.getParamValues());
+        run.execute(this.clause.getQueryString(), this.getParamValues());
         return null;
     }
 }

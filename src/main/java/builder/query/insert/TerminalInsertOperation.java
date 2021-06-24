@@ -1,14 +1,16 @@
 package builder.query.insert;
 
 import builder.query.QueryBuilder;
+import builder.query.SQLQueryBuilder;
+import query.Clause;
 import query.InsertQuery;
 
 public class TerminalInsertOperation implements QueryBuilder {
 
-    protected InsertQuery query;
+    protected Clause clause;
 
-    public TerminalInsertOperation(InsertQuery query) {
-        this.query = query;
+    public TerminalInsertOperation(Clause clause) {
+        this.clause = clause;
     }
 
     /**
@@ -18,6 +20,7 @@ public class TerminalInsertOperation implements QueryBuilder {
      * execute INSERT, UPDATE and DELETE queries
      */
     public InsertQuery build() {
-        return this.query;
+        InsertQuery query = new InsertQuery(clause, SQLQueryBuilder.getDataSource());
+        return query;
     }
 }

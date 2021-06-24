@@ -1,10 +1,10 @@
 package database.column;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
-public class DateColumnValue extends AbstractColumnValue<Date> {
+public class TimestampColumnValue extends AbstractColumnValue<Timestamp> {
 
-    public DateColumnValue(Date value) {
+    public TimestampColumnValue(Timestamp value) {
         super(value);
     }
 

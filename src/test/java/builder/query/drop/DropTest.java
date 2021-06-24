@@ -24,13 +24,27 @@ public class DropTest extends DatabaseTestBaseClass {
     public void testDropTable() throws SQLException {
         DropQuery query = sqlQueryBuilder
                 .drop()
-                .table("course")
+                .table()
+                .name("course")
                 .build();
 
         query.execute();
 
         assertEquals("DROP TABLE course", query.toString());
+    }
 
+    @Test
+    public void testDropTableIfExists() throws SQLException {
+        DropQuery query = sqlQueryBuilder
+                .drop()
+                .table()
+                .ifExists()
+                .name("course")
+                .build();
+
+        query.execute();
+
+        assertEquals("DROP TABLE IF EXISTS course", query.toString());
     }
 
     @Test
@@ -44,7 +58,8 @@ public class DropTest extends DatabaseTestBaseClass {
 
         DropQuery query = sqlQueryBuilder
                 .drop()
-                .database("test_db")
+                .database()
+                .name("test_db")
                 .build();
 
         // DROP DATABASE not supported in H2?
@@ -57,7 +72,8 @@ public class DropTest extends DatabaseTestBaseClass {
     public void testDropTableWithSQLInjection() {
         sqlQueryBuilder
                 .drop()
-                .table(";DROP")
+                .table()
+                .name(";DROP")
                 .build();
     }
 
@@ -65,7 +81,8 @@ public class DropTest extends DatabaseTestBaseClass {
     public void testDropDatabaseWithSQLInjection() {
         sqlQueryBuilder
                 .drop()
-                .database(";DROP")
+                .database()
+                .name(";DROP")
                 .build();
     }
 }

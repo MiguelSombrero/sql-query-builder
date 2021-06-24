@@ -1,12 +1,12 @@
 package builder.query.select.order;
 
 import builder.appender.StringAppender;
-import query.SelectQuery;
+import query.Clause;
 
 public class OrderBy extends Limit {
 
-    public OrderBy(SelectQuery query) {
-        super(query);
+    public OrderBy(Clause clause) {
+        super(clause);
     }
 
     /**
@@ -19,8 +19,8 @@ public class OrderBy extends Limit {
      * or append ASC / DESC to current column
      */
     public Order column(String column) {
-        query.append(", ");
-        StringAppender.validateAndAppend(query, column);
-        return new Order(query);
+        clause.append(", ");
+        StringAppender.validateAndAppend(clause, column);
+        return new Order(clause);
     }
 }

@@ -1,27 +1,28 @@
 package builder.query.create.table.column;
 
-import query.CreateQuery;
+import query.Clause;
 
 public class ColumnType {
 
-    private CreateQuery query;
+    private Clause clause;
 
-    public ColumnType(CreateQuery query) {
-        this.query = query;
+    public ColumnType(Clause clause) {
+        this.clause = clause;
     }
 
     /**
      * Appends 'datatype' into 'CREATE TABLE name (column datatype, ...)'
      * statement.
      *
-     * @param dataType Datatype to be assigned to column
+     * @param dataType Datatype as a String to be assigned to column.
+     * For example VARCHAR or DECIMAL(5,2)
      *
      * @return Constrain class which can be used to
      * create constraints in selected column
      */
-    public Constraint type(DataType dataType) {
-        query.append(" ");
-        query.append(dataType.getType());
-        return new Constraint(query);
+    public Constraint type(String dataType) {
+        clause.append(" ");
+        clause.append(dataType);
+        return new Constraint(clause);
     }
 }

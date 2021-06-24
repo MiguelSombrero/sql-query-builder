@@ -1,25 +1,25 @@
 package builder.query;
 
+import builder.clause.ClauseFactory;
 import builder.query.create.Create;
 import builder.query.delete.DeleteTable;
 import builder.query.drop.Drop;
 import builder.query.insert.InsertTable;
 import builder.query.select.column.FirstColumn;
 import builder.query.update.UpdateTable;
-import query.CreateQuery;
-import query.DropQuery;
-import query.DeleteQuery;
-import query.InsertQuery;
-import query.UpdateQuery;
-import query.SelectQuery;
+import query.*;
 
 import javax.sql.DataSource;
 
 public class SQLQueryBuilder {
-    private SQLQueryFactory sqlQueryFactory;
+    private static DataSource dataSource;
 
-    public SQLQueryBuilder(DataSource dataSource) {
-        this.sqlQueryFactory = new SQLQueryFactory(dataSource);
+    public SQLQueryBuilder(DataSource source) {
+        dataSource = source;
+    }
+
+    public static DataSource getDataSource() {
+        return dataSource;
     }
 
     /**
@@ -29,8 +29,8 @@ public class SQLQueryBuilder {
      * statement builder.
      */
     public FirstColumn select() {
-        SelectQuery query = sqlQueryFactory.createSelectQuery();
-        return new FirstColumn(query);
+        Clause clause = ClauseFactory.createClause("SELECT ");
+        return new FirstColumn(clause);
     }
 
     /**
@@ -40,8 +40,8 @@ public class SQLQueryBuilder {
      * statement builder.
      */
     public FirstColumn selectDistinct() {
-        SelectQuery query = sqlQueryFactory.createSelectDistinctQuery();
-        return new FirstColumn(query);
+        Clause clause = ClauseFactory.createClause("SELECT DISTINCT ");
+        return new FirstColumn(clause);
     }
 
     /**
@@ -51,8 +51,8 @@ public class SQLQueryBuilder {
      * statement builder.
      */
     public FirstColumn selectTop(int rows) {
-        SelectQuery query = sqlQueryFactory.createSelectTopQuery(rows);
-        return new FirstColumn(query);
+        Clause clause = ClauseFactory.createClause("SELECT TOP " + rows + " ");
+        return new FirstColumn(clause);
     }
 
     /**
@@ -62,8 +62,8 @@ public class SQLQueryBuilder {
      * statement builder.
      */
     public InsertTable insert() {
-        InsertQuery query = sqlQueryFactory.createInsertQuery();
-        return new InsertTable(query);
+        Clause clause = ClauseFactory.createClause("INSERT INTO ");
+        return new InsertTable(clause);
     }
 
     /**
@@ -73,8 +73,8 @@ public class SQLQueryBuilder {
      * statement builder.
      */
     public DeleteTable delete() {
-        DeleteQuery query = sqlQueryFactory.createDeleteQuery();
-        return new DeleteTable(query);
+        Clause clause = ClauseFactory.createClause("DELETE FROM ");
+        return new DeleteTable(clause);
     }
 
     /**
@@ -84,8 +84,8 @@ public class SQLQueryBuilder {
      * statement builder.
      */
     public UpdateTable update() {
-        UpdateQuery query = sqlQueryFactory.createUpdateQuery();
-        return new UpdateTable(query);
+        Clause clause = ClauseFactory.createClause("UPDATE ");
+        return new UpdateTable(clause);
     }
 
     /**
@@ -95,8 +95,8 @@ public class SQLQueryBuilder {
      * statement builder.
      */
     public Create create() {
-        CreateQuery query = sqlQueryFactory.createCreateQuery();
-        return new Create(query);
+        Clause clause = ClauseFactory.createClause("CREATE ");
+        return new Create(clause);
     }
 
     /**
@@ -106,7 +106,7 @@ public class SQLQueryBuilder {
      * statement builder.
      */
     public Drop drop() {
-        DropQuery query = sqlQueryFactory.createDropQuery();
-        return new Drop(query);
+        Clause clause = ClauseFactory.createClause("DROP ");
+        return new Drop(clause);
     }
 }

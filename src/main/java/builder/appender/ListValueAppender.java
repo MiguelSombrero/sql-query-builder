@@ -28,13 +28,13 @@ public class ListValueAppender {
         clause.append(")");
     }
 
-    public static void appendListOfDateTimeParams(Clause clause, String ...listOfValues) {
+    public static void appendListOfTimestampParams(Clause clause, String ...listOfValues) {
         clause.append("(");
-        ValueAppender.appendDateTimeParam(clause, listOfValues[0]);
+        ValueAppender.appendTimestampParam(clause, listOfValues[0]);
 
         for (int i = 1; i < listOfValues.length; i++) {
             clause.append(", ");
-            ValueAppender.appendDateTimeParam(clause, listOfValues[i]);
+            ValueAppender.appendTimestampParam(clause, listOfValues[i]);
         }
 
         clause.append(")");

@@ -1,12 +1,12 @@
 package builder.query.select.table;
 
 import builder.appender.StringAppender;
-import query.SelectQuery;
+import query.Clause;
 
 public class Table extends AliasedTable {
 
-    public Table(SelectQuery query) {
-        super(query);
+    public Table(Clause clause) {
+        super(clause);
     }
 
     /**
@@ -20,8 +20,8 @@ public class Table extends AliasedTable {
      * to WHERE, JOIN, GROUP BY etc. statements
      */
     public AliasedTable alias(String alias) {
-        query.append(" AS ");
-        StringAppender.validateAndAppend(query, alias);
-        return new AliasedTable(query);
+        clause.append(" AS ");
+        StringAppender.validateAndAppend(clause, alias);
+        return new AliasedTable(clause);
     }
 }

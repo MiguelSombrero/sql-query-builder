@@ -4,7 +4,8 @@
 
 Sql query builder is Java-library used for building and executing SQL queries.
 
-**Syntax of the SQL queries is compatible at least with MySQL, but might work with other DBMS too.**
+Syntax of the SQL queries is compatible with MySQL, but might work with other DBMS too.
+SQL queries [is tested](#integration) against MySQL and Postgres database containers.
 
 ## Main features
 
@@ -69,7 +70,7 @@ Add Maven dependency to your project:
     <dependency>
         <groupId>com.github.miguelsombrero</groupId>
         <artifactId>sql-query-builder</artifactId>
-        <version>2.0.1</version>
+        <version>2.0.2</version>
     </dependency>
 
 Check the latest version from [GitHub Packages](https://github.com/MiguelSombrero?tab=packages&repo_name=sql-query-builder)
@@ -92,12 +93,11 @@ Check the latest version from [GitHub Packages](https://github.com/MiguelSombrer
 - [slf4j](http://www.slf4j.org/) logging utility (license: [MIT](http://www.slf4j.org/license.html))
 
 ## Known bugs / shortcomings
-- In CREATE TABLE user can chain same constraints infinitely (`...column("ID").type(DataType.INT).notNull().notNull().notNull() ...`) 
-- Returns DateTime type column values without seconds if zero (e.g. 2020-03-03 21:00:00 -> 2020-03-03 21:00)
+- In CREATE TABLE user can chain same constraints infinitely (`...column("ID").type("INT").notNull().notNull().notNull() ...`) 
 
 ## Not yet implemented
-- ALTER statements not yet implemented 
-- Missing some datatypes (SMALLINT, DECIMAL, NUMERIC, FLOAT, TIME, TEXT, BINARY)
+- ALTER statements
+- Missing some datatype mappings (SMALLINT, REAL, TIME, ARRAY, CLOB)
 
 ## For developers
 
@@ -112,7 +112,7 @@ Check the latest version from [GitHub Packages](https://github.com/MiguelSombrer
 
     mvn clean install
 
-#### Run tests
+#### Run unit tests
 
     mvn clean test
 
@@ -123,3 +123,26 @@ Check the latest version from [GitHub Packages](https://github.com/MiguelSombrer
 #### Deploy to GitHub packages
 
 GitHub Action for deploying release to GitHub packages triggers when new release is created with `mvn gitflow:release` command.
+
+### <a name="integration"></a>Integration tests
+
+Integration tests against "live" database is implemented in package `src/test/integration/`.
+Tests is ignored by default, since they require database running in docker container (or local machine).
+
+Run integrations tests manually with docker containers running in your machine.
+
+#### MySQL tests
+
+Official MySQL docker container can be started with command:
+
+    docker run --name mysql_test_db -p 3306:3306 -e MYSQL_ROOT_PASSWORD=sa -e MYSQL_DATABASE=test_db -d mysql:latest
+
+Integration tests against MySQL database can be found in class `MySQLIntegrationTest`.
+
+#### Postgres tests
+
+Official Postgres docker container can be started with command:
+
+    docker run --name postgres_test_db -p 5432:5432 -e POSTGRES_PASSWORD=sa -d postgres
+
+Integration tests against MySQL database can be found in class `PostgreSQLIntegrationTest`.

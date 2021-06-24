@@ -60,9 +60,9 @@ public class Comparison {
      * more conditions with AND, OR and OR (...) operators,
      * or terminate query building
      */
-    public Condition equalsDateTime(String value) {
+    public Condition equalsTimestamp(String value) {
         clause.append(EQUALS);
-        ValueAppender.appendDateTimeParam(clause, value);
+        ValueAppender.appendTimestampParam(clause, value);
         return getCondition();
     }
 
@@ -201,9 +201,9 @@ public class Comparison {
      * more conditions with AND, OR and OR (...) operators,
      * or terminate query building
      */
-    public Condition greaterThanDateTime(String value) {
+    public Condition greaterThanTimestamp(String value) {
         clause.append(GREATER_THAN);
-        ValueAppender.appendDateTimeParam(clause, value);
+        ValueAppender.appendTimestampParam(clause, value);
         return getCondition();
     }
 
@@ -327,9 +327,9 @@ public class Comparison {
      * more conditions with AND, OR and OR (...) operators,
      * or terminate query building
      */
-    public Condition greaterThanOrEqualDateTime(String value) {
+    public Condition greaterThanOrEqualTimestamp(String value) {
         clause.append(GREATER_THAN_OR_EQUAL);
-        ValueAppender.appendDateTimeParam(clause, value);
+        ValueAppender.appendTimestampParam(clause, value);
         return getCondition();
     }
 
@@ -453,9 +453,9 @@ public class Comparison {
      * more conditions with AND, OR and OR (...) operators,
      * or terminate query building
      */
-    public Condition lesserThanDateTime(String value) {
+    public Condition lesserThanTimestamp(String value) {
         clause.append(LESSER_THAN);
-        ValueAppender.appendDateTimeParam(clause, value);
+        ValueAppender.appendTimestampParam(clause, value);
         return getCondition();
     }
 
@@ -579,9 +579,9 @@ public class Comparison {
      * more conditions with AND, OR and OR (...) operators,
      * or terminate query building
      */
-    public Condition lesserThanOrEqualDateTime(String value) {
+    public Condition lesserThanOrEqualTimestamp(String value) {
         clause.append(LESSER_THAN_OR_EQUAL);
-        ValueAppender.appendDateTimeParam(clause, value);
+        ValueAppender.appendTimestampParam(clause, value);
         return getCondition();
     }
 
@@ -766,11 +766,11 @@ public class Comparison {
      * more conditions with AND, OR and OR (...) operators,
      * or terminate query building
      */
-    public Condition isBetweenDateTime(String lower, String higher) {
+    public Condition isBetweenTimestamp(String lower, String higher) {
         clause.append(" BETWEEN ");
-        ValueAppender.appendDateTimeParam(clause, lower);
+        ValueAppender.appendTimestampParam(clause, lower);
         clause.append(" AND ");
-        ValueAppender.appendDateTimeParam(clause, higher);
+        ValueAppender.appendTimestampParam(clause, higher);
         return getCondition();
     }
 
@@ -899,7 +899,7 @@ public class Comparison {
      */
     public Condition isInDateTime(String ...listOfValues) {
         clause.append(" IN ");
-        ListValueAppender.appendListOfDateTimeParams(clause, listOfValues);
+        ListValueAppender.appendListOfTimestampParams(clause, listOfValues);
         return getCondition();
     }
 

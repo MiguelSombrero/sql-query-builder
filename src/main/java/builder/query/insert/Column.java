@@ -1,14 +1,14 @@
 package builder.query.insert;
 
 import builder.query.select.SelectQueryBuilder;
-import query.InsertQuery;
+import query.Clause;
 
 public class Column {
 
-    protected InsertQuery query;
+    protected Clause clause;
 
-    public Column(InsertQuery query) {
-        this.query = query;
+    public Column(Clause clause) {
+        this.clause = clause;
     }
 
     /**
@@ -19,8 +19,8 @@ public class Column {
      * statement
      */
     public FirstValue values() {
-        query.append("VALUES (");
-        return new FirstValue(query);
+        clause.append("VALUES (");
+        return new FirstValue(clause);
     }
 
     /**
@@ -33,7 +33,7 @@ public class Column {
      * to terminate query building and return InsertQuery
      */
     public TerminalInsertOperation sub(SelectQueryBuilder subQuery) {
-        query.mergeClause(subQuery.build());
-        return new TerminalInsertOperation(query);
+        clause.mergeClause(subQuery.build().getClause());
+        return new TerminalInsertOperation(clause);
     }
 }

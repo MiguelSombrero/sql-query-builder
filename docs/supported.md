@@ -1,13 +1,13 @@
-# Supported operations
+# Supported operations and data types
 
-### <a name="validation"></a>User input validation
+## <a name="validation"></a>User input validation
 
 Sql-query-builder validates all user input that is comes in String format.
 Double, int, long and other primitive types is not validated.
 
 Implementation of the validators can be found in package `.../main/java/validation/`. 
 
-### <a name="parametrized"></a>Parametrized queries
+## <a name="parametrized"></a>Parametrized queries
 
 Sql-query-builder parametrizes all value type user input by default. Value type
 mean statements like `WHERE age > value`, `INSERT INTO ... VALUES (values)` and `UPDATE ... column1 = value1, column2 = value2`.
@@ -16,7 +16,9 @@ Column and table names etc. is not parametrized so **if you use this library in 
 take user input in any other fields than values**. For example in statement `SELECT * FROM person` table name `person` is not parametrized in query
 and might be vulnerable to SQL injection, even if the input is validated.
 
-## SELECT
+## Supported SQL operations
+
+### SELECT
 
 - SELECT, SELECT DISTINCT, SELECT TOP
     - column, min(column), max(column), avg(column), sum(column)
@@ -39,7 +41,7 @@ and might be vulnerable to SQL injection, even if the input is validated.
 - LIMIT
 - OFFSET
 
-## INSERT
+### INSERT
 
 - INSERT INTO
     - table (optional columns)
@@ -47,7 +49,7 @@ and might be vulnerable to SQL injection, even if the input is validated.
     - (optional values)
     - sub-query
 
-## UPDATE
+### UPDATE
 
 - UPDATE
     - table
@@ -56,24 +58,28 @@ and might be vulnerable to SQL injection, even if the input is validated.
 - WHERE
     - condition
     
-## CREATE
+### CREATE
 
 - CREATE
-    - table, testutils, index
+    - table, database, index
 - INT, DOUBLE, TIMESTAMP, CHAR, VARCHAR
 - NOT NULL, PRIMARY KEY, UNIQUE, AUTO_INCREMENT
 - FOREIGN KEY key REFERENCES table(key)
 - ON DELETE, ON UPDATE
   - cascade, restrict, set null, set default
 
-## DELETE
+### DELETE
 
 - DELETE FROM
     - table
 - WHERE
     - condition
     
-## DROP
+### DROP
 
 - DROP
-    - table, testutils
+    - table, database
+- IF EXISTS
+  
+## Supported data types
+

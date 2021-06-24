@@ -1,14 +1,16 @@
 package builder.query.create;
 
 import builder.query.QueryBuilder;
+import builder.query.SQLQueryBuilder;
+import query.Clause;
 import query.CreateQuery;
 
 public class TerminalCreateOperation implements QueryBuilder {
 
-    protected CreateQuery query;
+    protected Clause clause;
 
-    public TerminalCreateOperation(CreateQuery query) {
-        this.query = query;
+    public TerminalCreateOperation(Clause clause) {
+        this.clause = clause;
     }
 
     /**
@@ -18,6 +20,7 @@ public class TerminalCreateOperation implements QueryBuilder {
      * execute CREATE queries
      */
     public CreateQuery build() {
-        return this.query;
+        CreateQuery query = new CreateQuery(clause, SQLQueryBuilder.getDataSource());
+        return query;
     }
 }

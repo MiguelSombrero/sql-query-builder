@@ -1,7 +1,7 @@
 package builder.query.select.column;
 
 import builder.appender.StringAppender;
-import query.SelectQuery;
+import query.Clause;
 
 /**
  * represents column after first column to be appended in
@@ -12,8 +12,8 @@ import query.SelectQuery;
  */
 public class Column extends AliasedColumn {
 
-    public Column(SelectQuery query) {
-        super(query);
+    public Column(Clause clause) {
+        super(clause);
     }
 
     /**
@@ -26,8 +26,8 @@ public class Column extends AliasedColumn {
      * except it cannot be aliased
      */
     public AliasedColumn alias(String as) {
-        query.append(" AS ");
-        StringAppender.validateAndAppend(query, as);
-        return new AliasedColumn(query);
+        clause.append(" AS ");
+        StringAppender.validateAndAppend(clause, as);
+        return new AliasedColumn(clause);
     }
 }

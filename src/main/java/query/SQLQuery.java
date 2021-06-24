@@ -6,13 +6,14 @@ import org.slf4j.LoggerFactory;
 
 import java.sql.SQLException;
 
-public abstract class SQLQuery<T> extends SQLClause implements Query<T> {
+public abstract class SQLQuery<T> implements Query<T> {
     protected static Logger logger = LoggerFactory.getLogger(SQLQuery.class);
 
+    protected Clause clause;
     protected QueryRunner run;
 
-    public SQLQuery(StringBuilder queryString, QueryRunner run) {
-        super(queryString);
+    public SQLQuery(Clause clause, QueryRunner run) {
+        this.clause = clause;
         this.run = run;
     }
 
@@ -31,9 +32,18 @@ public abstract class SQLQuery<T> extends SQLClause implements Query<T> {
     }
 
     protected Object[] getParamValues() {
-        return this.getParams().stream()
+        return this.clause.getParams().stream()
                 .map(columnValue -> columnValue.getValue())
                 .toArray();
+    }
+
+    public Clause getClause() {
+        return this.clause;
+    }
+
+    @Override
+    public String toString() {
+        return this.clause.toString();
     }
 
     protected abstract T run() throws SQLException;

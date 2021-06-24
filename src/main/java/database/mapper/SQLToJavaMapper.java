@@ -2,10 +2,14 @@ package database.mapper;
 
 import database.column.*;
 import database.converter.SQLToJavaConverter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import java.math.BigDecimal;
 import java.sql.*;
 
 public class SQLToJavaMapper {
+    protected static Logger logger = LoggerFactory.getLogger(SQLToJavaMapper.class);
 
     private static SQLToJavaConverter convert;
 
@@ -19,20 +23,28 @@ public class SQLToJavaMapper {
                 return new LongColumnValue((Long) value);
             case Types.DOUBLE, Types.FLOAT:
                 return new DoubleColumnValue((Double) value);
-            case Types.BOOLEAN:
+            case Types.BOOLEAN, Types.TINYINT, Types.BIT:
                 return new BooleanColumnValue((Boolean) value);
             case Types.DATE:
-                return new DateColumnValue(convert.dateToLocalDate((Date) value));
+                return new DateColumnValue((Date) value);
             case Types.TIMESTAMP:
-                return new DateTimeColumnValue(convert.timestampToLocalDateTime((Timestamp) value));
+                return new TimestampColumnValue((Timestamp) value);
             case Types.BLOB:
                 return new ByteArrayColumnValue(convert.blobToByteArray((Blob) value));
+            case Types.BINARY, Types.VARBINARY, Types.LONGVARBINARY:
+                return new ByteArrayColumnValue((byte[]) value);
+            case Types.DECIMAL, Types.NUMERIC:
+                return new BigDecimalColumnValue((BigDecimal) value);
             case Types.CLOB, Types.NCLOB:
                 throw new UnsupportedOperationException("Should be mapped as byte array");
-            case Types.DECIMAL, Types.NUMERIC:
-                throw new UnsupportedOperationException("Should be mapped as BigDecimal");
             case Types.SMALLINT:
                 throw new UnsupportedOperationException("SmallInt should be mapped as short");
+            case Types.ARRAY:
+                throw new UnsupportedOperationException("Array should be mapped as byte array");
+            case Types.TIME:
+                throw new UnsupportedOperationException("Time should be mapped as java.sql.Time");
+            case Types.REAL:
+                throw new UnsupportedOperationException("Real should be mapped as float");
             default:
                 throw new IllegalArgumentException("Could not map SQL type to any Java type");
         }

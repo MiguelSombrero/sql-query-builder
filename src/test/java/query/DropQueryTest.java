@@ -21,7 +21,7 @@ public class DropQueryTest extends DatabaseTestBaseClass {
     @Test(expected = SQLException.class)
     public void testExecuteAllFieldsCreateTable() throws SQLException {
         StringBuilder queryString = new StringBuilder("DROP TABLE course");
-        DropQuery query = new DropQuery(queryString, dataSource);
+        DropQuery query = new DropQuery(new SQLClause(queryString), dataSource);
 
         query.execute();
 

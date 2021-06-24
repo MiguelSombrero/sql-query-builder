@@ -16,7 +16,7 @@ public class OrValidatorTest {
     @Test
     public void testReturnsTrueWithValidInputInOneValidator() {
         OrValidator orValidator = new OrValidator(
-                new StringPatternValidator(), new DateTimePatternValidator());
+                new StringPatternValidator(), new TimestampPatternValidator());
 
         assertTrue(orValidator.validate("2020-02-02 21:00:00"));
     }

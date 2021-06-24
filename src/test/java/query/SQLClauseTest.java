@@ -13,32 +13,21 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-public class SQLClauseTest extends DatabaseTestBaseClass {
-    private DataSource dataSource;
-
-    @Before
-    public void setUp() {
-        initializeDatabase();
-        dataSource = DatabaseConnection.getDataSource();
-    }
+public class SQLClauseTest {
 
     @Test
-    public void testMergeSubQuery() throws SQLException {
+    public void testMergeSubQuery() {
         StringBuilder queryString = new StringBuilder("SELECT * FROM person WHERE ");
         StringBuilder subQueryString = new StringBuilder("firstname = ?");
 
-        SelectQuery selectQuery = new SelectQuery(queryString, dataSource);
-        SQLClause subQuery = new SQLClause(subQueryString);
+        Clause clause = new SQLClause(queryString);
+        Clause subClause = new SQLClause(subQueryString);
+
         StringColumnValue param = new StringColumnValue("Miika");
-        subQuery.addParam(param);
+        subClause.addParam(param);
 
-        selectQuery.mergeClause(subQuery);
+        clause.mergeClause(subClause);
 
-        assertEquals("SELECT * FROM person WHERE firstname = 'Miika'", selectQuery.toString());
-
-        List<Row> result = selectQuery.execute();
-
-        assertRowCount(result, 1);
-        assertColumnCount(result, 5);
+        assertEquals("SELECT * FROM person WHERE firstname = 'Miika'", clause.toString());
     }
 }

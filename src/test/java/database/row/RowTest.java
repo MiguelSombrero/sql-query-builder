@@ -8,10 +8,11 @@ import query.SelectQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 
+import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
+import java.sql.Date;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -39,7 +40,7 @@ public class RowTest extends DatabaseTestBaseClass {
 
         Row firstRow = result.get(0);
 
-        assertEquals(13, firstRow.getColumnCount());
+        assertEquals(14, firstRow.getColumnCount());
     }
 
     @Test
@@ -101,6 +102,24 @@ public class RowTest extends DatabaseTestBaseClass {
     }
 
     @Test
+    public void testGetDouble() throws SQLException {
+        List<Row> result = baseQuery.execute();
+
+        Row firstRow = result.get(0);
+
+        assertEquals(25.6, firstRow.getDouble("age"), 0.1);
+    }
+
+    @Test
+    public void testGetBigDecimal() throws SQLException {
+        List<Row> result = baseQuery.execute();
+
+        Row firstRow = result.get(0);
+
+        assertEquals(BigDecimal.valueOf(13200.50).doubleValue(), firstRow.getBigDecimal("price").doubleValue(), 0.01);
+    }
+
+    @Test
     public void testGetBytes() throws SQLException {
         List<Row> result = baseQuery.execute();
 
@@ -113,15 +132,6 @@ public class RowTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testGetDouble() throws SQLException {
-        List<Row> result = baseQuery.execute();
-
-        Row firstRow = result.get(0);
-
-        assertEquals(25.6, firstRow.getDouble("age"), 0.1);
-    }
-
-    @Test
     public void testGetBoolean() throws SQLException {
         List<Row> result = baseQuery.execute();
 
@@ -131,30 +141,21 @@ public class RowTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testGetLocalDate() throws SQLException {
+    public void testGetDate() throws SQLException {
         List<Row> result = baseQuery.execute();
 
         Row firstRow = result.get(0);
 
-        assertEquals(LocalDate.parse("2020-02-02"), firstRow.getLocalDate("newdate"));
+        assertEquals(Date.valueOf("2020-02-02"), firstRow.getDate("newdate"));
     }
 
     @Test
-    public void testGetLocalDateTimeOfDateTime() throws SQLException {
+    public void testGetTimestamp() throws SQLException {
         List<Row> result = baseQuery.execute();
 
         Row firstRow = result.get(0);
 
-        assertEquals(LocalDateTime.of(2020, 02, 02, 22, 02, 01), firstRow.getLocalDateTime("newdatetime"));
-    }
-
-    @Test
-    public void testGetLocalDateTimeOfTimestamp() throws SQLException {
-        List<Row> result = baseQuery.execute();
-
-        Row firstRow = result.get(0);
-
-        assertEquals(LocalDateTime.of(2020, 02, 02, 22, 02, 01), firstRow.getLocalDateTime("created"));
+        assertEquals(Timestamp.valueOf("2020-02-02 22:02:01.0"), firstRow.getTimestamp("created"));
     }
 
     @Test(expected = ClassCastException.class)

@@ -8,23 +8,41 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.sql.SQLException;
 
 import static builder.clause.ConditionClauseBuilder.valueOf;
 import static org.junit.Assert.assertEquals;
 
 public class InsertTest extends DatabaseTestBaseClass {
-    private SQLQueryBuilder SQLQueryBuilder;
+    private SQLQueryBuilder sqlQueryBuilder;
 
     @Before
     public void setUp() throws SQLException {
         initializeDatabase();
-        SQLQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getDataSource());
+        sqlQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getDataSource());
     }
 
     @Test
-    public void testInsertOneIntegerValue() throws SQLException {
-        InsertQuery query = SQLQueryBuilder
+    public void testInsertStringValue() throws SQLException {
+        InsertQuery query = sqlQueryBuilder
+                .insert()
+                .table("person")
+                .columns("firstname")
+                .values()
+                .setString("Miika-Lassi Kari")
+                .build();
+
+        assertEquals("INSERT INTO person (firstname) VALUES ('Miika-Lassi Kari')", query.toString());
+
+        int result = query.execute();
+
+        assertEquals(4, result);
+    }
+
+    @Test
+    public void testInsertIntegerValue() throws SQLException {
+        InsertQuery query = sqlQueryBuilder
                 .insert()
                 .table("person")
                 .columns("id")
@@ -41,8 +59,8 @@ public class InsertTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testInsertOneLongValue() throws SQLException {
-        InsertQuery query = SQLQueryBuilder
+    public void testInsertLongValue() throws SQLException {
+        InsertQuery query = sqlQueryBuilder
                 .insert()
                 .table("all_types")
                 .columns("hash")
@@ -59,8 +77,44 @@ public class InsertTest extends DatabaseTestBaseClass {
     }
 
     @Test
+    public void testInsertDoubleValue() throws SQLException {
+        InsertQuery query = sqlQueryBuilder
+                .insert()
+                .table("all_types")
+                .columns("age")
+                .values()
+                .setDouble(19.3)
+                .build();
+
+        assertEquals("INSERT INTO all_types (age) VALUES (19.3)", query.toString());
+
+        int result = query.execute();
+
+        assertEquals(14, result);
+        assertThatQueryReturnsRows("SELECT * FROM all_types WHERE age = 19.3", 1);
+    }
+
+    @Test
+    public void testInsertBigDecimalValue() throws SQLException {
+        InsertQuery query = sqlQueryBuilder
+                .insert()
+                .table("all_types")
+                .columns("price")
+                .values()
+                .setBigDecimal(BigDecimal.valueOf(21100.99))
+                .build();
+
+        assertEquals("INSERT INTO all_types (price) VALUES (21100.99)", query.toString());
+
+        int result = query.execute();
+
+        assertEquals(14, result);
+        assertThatQueryReturnsRows("SELECT * FROM all_types WHERE price = 21100.99", 1);
+    }
+
+    @Test
     public void testInsertOneBooleanValue() throws SQLException {
-        InsertQuery query = SQLQueryBuilder
+        InsertQuery query = sqlQueryBuilder
                 .insert()
                 .table("all_types")
                 .columns("active")
@@ -77,43 +131,8 @@ public class InsertTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testInsertOneDoubleValue() throws SQLException {
-        InsertQuery query = SQLQueryBuilder
-                .insert()
-                .table("all_types")
-                .columns("age")
-                .values()
-                    .setDouble(19.3)
-                .build();
-
-        assertEquals("INSERT INTO all_types (age) VALUES (19.3)", query.toString());
-
-        int result = query.execute();
-
-        assertEquals(14, result);
-        assertThatQueryReturnsRows("SELECT * FROM all_types WHERE age = 19.3", 1);
-    }
-
-    @Test
-    public void testInsertOneStringValue() throws SQLException {
-        InsertQuery query = SQLQueryBuilder
-                .insert()
-                .table("person")
-                .columns("firstname")
-                .values()
-                    .setString("Miika-Lassi Kari")
-                .build();
-
-        assertEquals("INSERT INTO person (firstname) VALUES ('Miika-Lassi Kari')", query.toString());
-
-        int result = query.execute();
-
-        assertEquals(4, result);
-    }
-
-    @Test
     public void testInsertOneDateValue() throws SQLException {
-        InsertQuery query = SQLQueryBuilder
+        InsertQuery query = sqlQueryBuilder
                 .insert()
                 .table("person")
                 .columns("birthdate")
@@ -129,16 +148,16 @@ public class InsertTest extends DatabaseTestBaseClass {
     }
 
     @Test
-    public void testInsertOneDateTimeValue() throws SQLException {
-        InsertQuery query = SQLQueryBuilder
+    public void testInsertTimestampValue() throws SQLException {
+        InsertQuery query = sqlQueryBuilder
                 .insert()
                 .table("person")
                     .columns("birthdate")
                 .values()
-                    .setDateTime("1978-04-03 21:00:04")
+                    .setTimestamp("1978-04-03 21:00:04")
                 .build();
 
-        assertEquals("INSERT INTO person (birthdate) VALUES ('1978-04-03T21:00:04')", query.toString());
+        assertEquals("INSERT INTO person (birthdate) VALUES ('1978-04-03 21:00:04.0')", query.toString());
 
         int result = query.execute();
 
@@ -149,7 +168,7 @@ public class InsertTest extends DatabaseTestBaseClass {
     public void testInsertByteArrayValue() throws SQLException, IOException {
         byte[] file = readFileAsByteArray("files/byte-array-test-file.txt");
 
-        InsertQuery query = SQLQueryBuilder
+        InsertQuery query = sqlQueryBuilder
                 .insert()
                 .table("all_types")
                 .columns("contract")
@@ -165,7 +184,7 @@ public class InsertTest extends DatabaseTestBaseClass {
 
     @Test
     public void testInsertMultipleValues() throws SQLException {
-        InsertQuery query = SQLQueryBuilder
+        InsertQuery query = sqlQueryBuilder
                 .insert()
                 .table("person")
                     .columns("id", "birthdate", "firstname", "lastname", "age")
@@ -187,11 +206,11 @@ public class InsertTest extends DatabaseTestBaseClass {
 
     @Test
     public void testInsertQuery() throws SQLException {
-        InsertQuery query = SQLQueryBuilder
+        InsertQuery query = sqlQueryBuilder
                 .insert()
                 .table("person")
                 .columns("id", "birthdate", "firstname", "lastname", "age")
-                .sub(SQLQueryBuilder
+                .sub(sqlQueryBuilder
                         .select()
                             .column("id")
                             .column("birthdate")
@@ -213,7 +232,7 @@ public class InsertTest extends DatabaseTestBaseClass {
 
     @Test
     public void testInsertMultipleValuesWithoutSpecifyingColumns() throws SQLException {
-        InsertQuery query = SQLQueryBuilder
+        InsertQuery query = sqlQueryBuilder
                 .insert()
                 .table("person")
                 .values()
@@ -233,10 +252,10 @@ public class InsertTest extends DatabaseTestBaseClass {
 
     @Test
     public void testInsertQueryWithoutSpecifyingColumns() throws SQLException {
-        InsertQuery query = SQLQueryBuilder
+        InsertQuery query = sqlQueryBuilder
                 .insert()
                 .table("person")
-                .sub(SQLQueryBuilder
+                .sub(sqlQueryBuilder
                         .select()
                             .all()
                         .from()

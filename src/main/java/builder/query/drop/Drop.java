@@ -1,42 +1,37 @@
 package builder.query.drop;
 
-import builder.appender.StringAppender;
-import query.DropQuery;
+import query.Clause;
 
 public class Drop {
-    private DropQuery query;
+    private Clause clause;
 
-    public Drop(DropQuery query) {
-        this.query = query;
+    public Drop(Clause clause) {
+        this.clause = clause;
     }
 
     /**
-     * Validates user input and appends 'TABLE table'
-     * into 'DROP TABLE table' statement.
+     * Appends 'TABLE' into 'DROP TABLE name'
+     * statement.
      *
-     * @param table Table name to be appended
-     *
-     * @return TerminalDropOperation class which can be used
-     * to terminate DROP query building
+     * @return IfExists class which can be used
+     * to append table name and IF EXISTS clause
+     * to DROP query.
      */
-    public TerminalDropOperation table(String table) {
-        query.append("TABLE ");
-        StringAppender.validateAndAppend(query, table);
-        return new TerminalDropOperation(query);
+    public IfExists table() {
+        clause.append("TABLE ");
+        return new IfExists(clause);
     }
 
     /**
-     * Validates user input and appends 'DATABASE database'
-     * into 'DROP DATABASE database' statement.
+     * Appends 'DATABASE' into 'DROP DATABASE name'
+     * statement.
      *
-     * @param database Database name to be dropped
-     *
-     * @return TerminalDropOperation class which can be used
-     * to terminate DROP query building
+     * @return IfExists class which can be used
+     * to append database name and IF EXISTS clause
+     * to DROP query.
      */
-    public TerminalDropOperation database(String database) {
-        query.append("DATABASE ");
-        StringAppender.validateAndAppend(query, database);
-        return new TerminalDropOperation(query);
+    public IfExists database() {
+        clause.append("DATABASE ");
+        return new IfExists(clause);
     }
 }

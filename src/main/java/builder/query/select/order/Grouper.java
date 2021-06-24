@@ -1,11 +1,11 @@
 package builder.query.select.order;
 
-import query.SelectQuery;
+import query.Clause;
 
 public class Grouper extends Orderer {
 
-    public Grouper(SelectQuery query) {
-        super(query);
+    public Grouper(Clause clause) {
+        super(clause);
     }
 
     /**
@@ -15,7 +15,7 @@ public class Grouper extends Orderer {
      * append 'column(s)' in GROUP BY clause
      */
     public GroupBy groupBy() {
-        query.append(" GROUP BY ");
-        return new GroupBy(query);
+        clause.append(" GROUP BY ");
+        return new GroupBy(clause);
     }
 }

@@ -4,6 +4,7 @@ import database.column.*;
 import org.junit.Test;
 import testutils.DatabaseConnection;
 
+import java.nio.charset.StandardCharsets;
 import java.sql.*;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
@@ -15,7 +16,7 @@ public class SQLToJavaMapperTest {
     @Test
     public void testThatCharMapsToString() throws SQLException {
         int type = Types.CHAR;
-        Object value = "";
+        Object value = "a";
         assertThat(mapper.toJavaType(type, value), instanceOf(StringColumnValue.class));
     }
 
@@ -90,17 +91,17 @@ public class SQLToJavaMapperTest {
     }
 
     @Test
-    public void testThatDateMapsToLocalDate() throws SQLException {
+    public void testThatDateMapsToDate() throws SQLException {
         int type = Types.DATE;
         Object value = new Date(2020);
         assertThat(mapper.toJavaType(type, value), instanceOf(DateColumnValue.class));
     }
 
     @Test
-    public void testThatTimestampMapsToLocalDateTime() throws SQLException {
+    public void testThatTimestampMapsToTimestamp() throws SQLException {
         int type = Types.TIMESTAMP;
         Object value = Timestamp.valueOf("2020-02-02 21:00:00");
-        assertThat(mapper.toJavaType(type, value), instanceOf(DateTimeColumnValue.class));
+        assertThat(mapper.toJavaType(type, value), instanceOf(TimestampColumnValue.class));
     }
 
     @Test
@@ -116,13 +117,41 @@ public class SQLToJavaMapperTest {
         connection.close();
     }
 
-    @Test(expected = UnsupportedOperationException.class)
-    public void testThatNotImplementedThrowsException() throws SQLException {
-        int type = Types.DECIMAL;
-        Object value = "";
-        mapper.toJavaType(type, value);
+    @Test
+    public void testThatBinaryMapsToByteArray() throws SQLException {
+        int type = Types.BINARY;
+        Object value = "test String".getBytes(StandardCharsets.UTF_8);
+        assertThat(mapper.toJavaType(type, value), instanceOf(ByteArrayColumnValue.class));
     }
 
+    @Test
+    public void testThatVarbinaryMapsToByteArray() throws SQLException {
+        int type = Types.VARBINARY;
+        Object value = "test String".getBytes(StandardCharsets.UTF_8);
+        assertThat(mapper.toJavaType(type, value), instanceOf(ByteArrayColumnValue.class));
+    }
+
+    @Test
+    public void testThatLongvarBinaryMapsToByteArray() throws SQLException {
+        int type = Types.LONGVARBINARY;
+        Object value = "test String".getBytes(StandardCharsets.UTF_8);
+        assertThat(mapper.toJavaType(type, value), instanceOf(ByteArrayColumnValue.class));
+    }
+
+    /*@Test
+    public void testThatDecimalMapsToBigDecimal() throws SQLException {
+        int type = Types.DECIMAL;
+        Object value = 1234567.89;
+        assertThat(mapper.toJavaType(type, value), instanceOf(BigDecimalColumnValue.class));
+    }
+
+    @Test
+    public void testThatNumericMapsToBigDecimal() throws SQLException {
+        int type = Types.NUMERIC;
+        Object value = 1234567.89;
+        assertThat(mapper.toJavaType(type, value), instanceOf(BigDecimalColumnValue.class));
+    }
+*/
     @Test(expected = IllegalArgumentException.class)
     public void testThatUnknownTypeThrowsException() throws SQLException {
         int type = 2576897;
