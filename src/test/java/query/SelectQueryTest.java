@@ -44,8 +44,7 @@ public class SelectQueryTest extends DatabaseTestBaseClass {
         assertEquals("23", firstRow.getString("country"));
         assertEquals("Taunus", firstRow.getString("model"));
         assertEquals("Ford", firstRow.getString("brand"));
-        assertEquals("Does not work", firstRow.getString("disclaimer"));
-        assertEquals("This is car", firstRow.getString("description"));
+        assertEquals("Does not work", firstRow.getString("description"));
         assertEquals("testing some values\n", new String(firstRow.getBytes("contract"), StandardCharsets.UTF_8));
     }
 

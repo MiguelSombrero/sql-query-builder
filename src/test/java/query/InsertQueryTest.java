@@ -24,13 +24,14 @@ public class InsertQueryTest extends DatabaseTestBaseClass {
 
     @Test
     public void testExecuteAllFieldsInsert() throws SQLException {
-        StringBuilder queryString = new StringBuilder("INSERT INTO all_types VALUES (100, 8223372036854775806, 32.2, 15500.99, 1.6, '2021-03-01', '2021-05-05 20:02:01', true, 10, 'T1000', 'Saab', 'Great car', 'Buy this', '64657374696e6720736f6d652076616c7565730a')");
+        StringBuilder queryString = new StringBuilder("INSERT INTO all_types VALUES (100, 10, 8223372036854775806, 32.2, 15500.99, 1.6, '2021-03-01', '2021-05-05 20:02:01', true, 10, 'T1000', 'Saab', 'Buy this', '64657374696e6720736f6d652076616c7565730a')");
         InsertQuery query = new InsertQuery(new SQLClause(queryString), dataSource);
 
         int result = query.execute();
         assertEquals(100, result);
 
         assertThatQueryReturnsRows("SELECT * FROM all_types WHERE id = 100", 1);
+        assertThatQueryReturnsRows("SELECT * FROM all_types WHERE rating = 10", 1);
         assertThatQueryReturnsRows("SELECT * FROM all_types WHERE hash = 8223372036854775806", 1);
         assertThatQueryReturnsRows("SELECT * FROM all_types WHERE age = 32.2", 1);
         assertThatQueryReturnsRows("SELECT * FROM all_types WHERE price = 15500.99", 1);
@@ -41,7 +42,6 @@ public class InsertQueryTest extends DatabaseTestBaseClass {
         assertThatQueryReturnsRows("SELECT * FROM all_types WHERE country = 10", 1);
         assertThatQueryReturnsRows("SELECT * FROM all_types WHERE model = 'T1000'", 1);
         assertThatQueryReturnsRows("SELECT * FROM all_types WHERE brand = 'Saab'", 1);
-        assertThatQueryReturnsRows("SELECT * FROM all_types WHERE disclaimer = 'Great car'", 1);
         assertThatQueryReturnsRows("SELECT * FROM all_types WHERE description = 'Buy this'", 1);
         assertThatQueryReturnsRows("SELECT * FROM all_types WHERE contract = '64657374696e6720736f6d652076616c7565730a'", 1);
     }

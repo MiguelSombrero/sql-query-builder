@@ -5,7 +5,10 @@
 Sql-query-builder validates all user input that is comes in String format.
 Double, int, long and other primitive types is not validated.
 
-Implementation of the validators can be found in package `.../main/java/validation/`. 
+Implementation of the validators can be found in package `src/main/java/validation/`. 
+
+Validators is used by `ValueAppender` class found in package `src/main/java/builder/appender`.
+User input is validated before appending it to the query string.
 
 ## <a name="parametrized"></a>Parametrized queries
 
@@ -83,3 +86,30 @@ and might be vulnerable to SQL injection, even if the input is validated.
   
 ## Supported data types
 
+Sql-query-builder does not limit the data types when creating tables.
+It's up to your database system is the `CREATE` statements supported or not.
+
+However, sql-query-builder maps SQL data types to Java data types in `SELECT`, `INSERT` and `UPDATE` statements.
+
+Supported mappings are:
+
+- CHAR, NCHAR, LONGNVARCHAR, LONGVARCHAR, VARCHAR, NVARCHAR
+  - Is mapped to String
+- INTEGER
+  - Is mapped to Integer
+- SMALLINT
+  - Is mapped to Short
+- BIGINT
+  - Is mapped to Long
+- DOUBLE, FLOAT
+  - Is mapped to Double
+- BOOLEAN, TINYINT, BIT
+  - Is mapped to Boolean
+- DATE
+  - Is mapped to java.sql.Date
+- TIMESTAMP
+  - Is mapped to java.sql.TIMESTAMP
+- BLOB, BINARY, VARBINARY, LONGVARBINARY
+  - Is mapper to byte array
+- DECIMAL, NUMERIC
+  - Is mapped to BigDecimal

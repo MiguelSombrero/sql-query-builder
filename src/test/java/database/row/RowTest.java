@@ -93,6 +93,15 @@ public class RowTest extends DatabaseTestBaseClass {
     }
 
     @Test
+    public void testGetShort() throws SQLException {
+        List<Row> result = baseQuery.execute();
+
+        Row firstRow = result.get(0);
+
+        assertEquals(8, firstRow.getShort("rating"));
+    }
+
+    @Test
     public void testGetLong() throws SQLException {
         List<Row> result = baseQuery.execute();
 

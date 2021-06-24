@@ -56,6 +56,21 @@ public class UpdateTest extends DatabaseTestBaseClass {
     }
 
     @Test
+    public void testUpdateShortValue() throws SQLException {
+        UpdateQuery query = this.sqlQueryBuilder
+                .update()
+                .table("all_types")
+                .column("rating").setShort((short) 5)
+                .build();
+
+        assertEquals("UPDATE all_types SET rating = 5", query.toString());
+
+        int result = query.execute();
+
+        assertEquals(2, result);
+    }
+
+    @Test
     public void testUpdateLongValue() throws SQLException {
         UpdateQuery query = sqlQueryBuilder
                 .update()

@@ -39,6 +39,7 @@ CREATE TABLE course (
 );
 CREATE TABLE all_types (
     ID INT PRIMARY KEY AUTO_INCREMENT,
+    rating SMALLINT,
     hash BIGINT,
     age DOUBLE,
     price DECIMAL(8,2),
@@ -49,7 +50,6 @@ CREATE TABLE all_types (
     country CHAR,
     model VARCHAR(32),
     brand VARCHAR(64),
-    disclaimer VARCHAR(128),
     description VARCHAR(255),
     contract BLOB
 );

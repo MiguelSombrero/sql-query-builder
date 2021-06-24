@@ -15,6 +15,10 @@ public abstract class ValueTemplate extends TerminalClosingInsertOperation {
      * Validates user input and appends string 'value(s)'
      * into 'INSERT INTO table VALUE (value(s))' statement.
      *
+     * SQL types CHAR, NCHAR, LONGNVARCHAR, LONGVARCHAR,
+     * VARCHAR and NVARCHAR maps to String. Use this method
+     * for setting these values in query.
+     *
      * @param value String value to be appended
      *
      * @return Value class which can be used to append
@@ -30,6 +34,9 @@ public abstract class ValueTemplate extends TerminalClosingInsertOperation {
     /**
      * Validates user input and appends integer 'value(s)'
      * into 'INSERT INTO table VALUE (value(s))' statement.
+     *
+     * SQL type INTEGER maps to Integer. Use this method
+     * for setting these values in query.
      *
      * @param value Int value to be appended
      *
@@ -47,6 +54,28 @@ public abstract class ValueTemplate extends TerminalClosingInsertOperation {
      * Validates user input and appends integer 'value(s)'
      * into 'INSERT INTO table VALUE (value(s))' statement.
      *
+     * SQL type SMALLINT maps to Short. Use this method
+     * for setting these values in query.
+     *
+     * @param value Short value to be appended
+     *
+     * @return Value class which can be used to append
+     * value (with comma in front) into 'VALUE (value(s))'
+     * statement
+     */
+    public Value setShort(short value) {
+        addCommaAfterFirstValue();
+        ValueAppender.appendShortParam(clause, value);
+        return new Value(clause);
+    }
+
+    /**
+     * Validates user input and appends integer 'value(s)'
+     * into 'INSERT INTO table VALUE (value(s))' statement.
+     *
+     * SQL type BIGINT maps to Long. Use this method
+     * for setting these values in query.
+     *
      * @param value Long value to be appended
      *
      * @return Value class which can be used to append
@@ -62,6 +91,9 @@ public abstract class ValueTemplate extends TerminalClosingInsertOperation {
     /**
      * Validates user input and appends double 'value(s)'
      * into 'INSERT INTO table VALUE (value(s))' statement.
+     *
+     * SQL type DOUBLE and FLOAT maps to Double. Use this method
+     * for setting these values in query.
      *
      * @param value Double value to be appended
      *
@@ -79,6 +111,9 @@ public abstract class ValueTemplate extends TerminalClosingInsertOperation {
      * Validates user input and appends double 'value(s)'
      * into 'INSERT INTO table VALUE (value(s))' statement.
      *
+     * SQL types DECIMAL and NUMERIC maps to BigDecimal.
+     * Use this method for setting these values in query.
+     *
      * @param value BigDecimal value to be appended
      *
      * @return Value class which can be used to append
@@ -94,6 +129,9 @@ public abstract class ValueTemplate extends TerminalClosingInsertOperation {
     /**
      * Validates user input and appends integer 'value(s)'
      * into 'INSERT INTO table VALUE (value(s))' statement.
+     *
+     * SQL type DATE maps to Date. Use this method for
+     * setting these values in query.
      *
      * @param value Date value to be appended
      *
@@ -111,6 +149,9 @@ public abstract class ValueTemplate extends TerminalClosingInsertOperation {
      * Validates user input and appends integer 'value(s)'
      * into 'INSERT INTO table VALUE (value(s))' statement.
      *
+     * SQL type TIMESTAMP maps to Timestamp. Use this method for
+     * setting these values in query.
+     *
      * @param value DateTime value to be appended
      *
      * @return Value class which can be used to append
@@ -127,6 +168,9 @@ public abstract class ValueTemplate extends TerminalClosingInsertOperation {
      * Validates user input and appends integer 'value(s)'
      * into 'INSERT INTO table VALUE (value(s))' statement.
      *
+     * SQL types BOOLEAN, TINYINT and BIT maps to Timestamp.
+     * Use this method for setting these values in query.
+     *
      * @param value Boolean value to be appended
      *
      * @return Value class which can be used to append
@@ -142,6 +186,10 @@ public abstract class ValueTemplate extends TerminalClosingInsertOperation {
     /**
      * Validates user input and appends integer 'value(s)'
      * into 'INSERT INTO table VALUE (value(s))' statement.
+     *
+     * SQL types BLOB, BINARY, VARBINARY and LONGVARBINARY
+     * maps to Timestamp. Use this method for setting these
+     * values in query.
      *
      * @param value Byte array value to be appended
      *
