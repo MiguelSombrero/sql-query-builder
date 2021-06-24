@@ -1,15 +1,14 @@
 package query;
 
 import org.apache.commons.dbutils.QueryRunner;
-import query.SQLQuery;
 
 import javax.sql.DataSource;
 import java.sql.SQLException;
 
 public class UpdateQuery extends SQLQuery<Integer> {
 
-    public UpdateQuery(StringBuilder queryString, DataSource dataSource) {
-        super(queryString, new QueryRunner(dataSource));
+    public UpdateQuery(Clause clause, DataSource dataSource) {
+        super(clause, new QueryRunner(dataSource));
     }
 
     /**
@@ -21,6 +20,6 @@ public class UpdateQuery extends SQLQuery<Integer> {
      */
     @Override
     protected Integer run() throws SQLException {
-        return run.update(this.getQueryString(), this.getParamValues());
+        return run.update(this.clause.getQueryString(), this.getParamValues());
     }
 }

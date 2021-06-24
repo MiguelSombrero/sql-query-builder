@@ -1,12 +1,12 @@
 package builder.query.select.table;
 
 import builder.appender.StringAppender;
-import query.SelectQuery;
+import query.Clause;
 
 public class On extends AliasedOn {
 
-    public On(SelectQuery query) {
-        super(query);
+    public On(Clause clause) {
+        super(clause);
     }
 
     /**
@@ -20,8 +20,8 @@ public class On extends AliasedOn {
      * join statement and alias join table
      */
     public On alias(String alias) {
-        query.append(" AS ");
-        StringAppender.validateAndAppend(query, alias);
+        clause.append(" AS ");
+        StringAppender.validateAndAppend(clause, alias);
         return this;
     }
 }

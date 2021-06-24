@@ -1,12 +1,12 @@
 package builder.query.drop;
 
-import query.DropQuery;
+import query.Clause;
 
 public class Drop {
-    private DropQuery query;
+    private Clause clause;
 
-    public Drop(DropQuery query) {
-        this.query = query;
+    public Drop(Clause clause) {
+        this.clause = clause;
     }
 
     /**
@@ -18,8 +18,8 @@ public class Drop {
      * to DROP query.
      */
     public IfExists table() {
-        query.append("TABLE ");
-        return new IfExists(query);
+        clause.append("TABLE ");
+        return new IfExists(clause);
     }
 
     /**
@@ -31,7 +31,7 @@ public class Drop {
      * to DROP query.
      */
     public IfExists database() {
-        query.append("DATABASE ");
-        return new IfExists(query);
+        clause.append("DATABASE ");
+        return new IfExists(clause);
     }
 }

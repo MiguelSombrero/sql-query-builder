@@ -1,14 +1,16 @@
 package builder.query.delete;
 
 import builder.query.QueryBuilder;
+import builder.query.SQLQueryBuilder;
+import query.Clause;
 import query.DeleteQuery;
 
 public class TerminalDeleteOperation implements QueryBuilder {
 
-    protected DeleteQuery query;
+    protected Clause clause;
 
-    public TerminalDeleteOperation(DeleteQuery query) {
-        this.query = query;
+    public TerminalDeleteOperation(Clause clause) {
+        this.clause = clause;
     }
 
     /**
@@ -18,6 +20,7 @@ public class TerminalDeleteOperation implements QueryBuilder {
      * execute DELETE queries
      */
     public DeleteQuery build() {
-        return this.query;
+        DeleteQuery query = new DeleteQuery(clause, SQLQueryBuilder.getDataSource());
+        return query;
     }
 }

@@ -2,14 +2,14 @@ package builder.query.select.column;
 
 import builder.appender.AggregateFunctionAppender;
 import builder.appender.StringAppender;
-import query.SelectQuery;
+import query.Clause;
 
 public abstract class ColumnTemplate {
     
-    protected SelectQuery query;
+    protected Clause clause;
 
-    public ColumnTemplate(SelectQuery query) {
-        this.query = query;
+    public ColumnTemplate(Clause clause) {
+        this.clause = clause;
     }
 
     /**
@@ -20,8 +20,8 @@ public abstract class ColumnTemplate {
      * be selected to SELECT statement after this
      */
     public ToFrom all() {
-        query.append("*");
-        return new ToFrom(query);
+        clause.append("*");
+        return new ToFrom(clause);
     }
 
     /**
@@ -35,8 +35,8 @@ public abstract class ColumnTemplate {
      */
     public Column column(String column) {
         addCommaAfterFirstValue();
-        StringAppender.validateAndAppend(query, column);
-        return new Column(query);
+        StringAppender.validateAndAppend(clause, column);
+        return new Column(clause);
     }
 
     /**
@@ -50,8 +50,8 @@ public abstract class ColumnTemplate {
      */
     public Column count(String column) {
         addCommaAfterFirstValue();
-        AggregateFunctionAppender.count(query, column);
-        return new Column(query);
+        AggregateFunctionAppender.count(clause, column);
+        return new Column(clause);
     }
 
     /**
@@ -62,8 +62,8 @@ public abstract class ColumnTemplate {
      */
     public Column countAll() {
         addCommaAfterFirstValue();
-        AggregateFunctionAppender.countAll(query);
-        return new Column(query);
+        AggregateFunctionAppender.countAll(clause);
+        return new Column(clause);
     }
 
     /**
@@ -77,8 +77,8 @@ public abstract class ColumnTemplate {
      */
     public Column min(String column) {
         addCommaAfterFirstValue();
-        AggregateFunctionAppender.min(query, column);
-        return new Column(query);
+        AggregateFunctionAppender.min(clause, column);
+        return new Column(clause);
     }
 
     /**
@@ -92,8 +92,8 @@ public abstract class ColumnTemplate {
      */
     public Column max(String column) {
         addCommaAfterFirstValue();
-        AggregateFunctionAppender.max(query, column);
-        return new Column(query);
+        AggregateFunctionAppender.max(clause, column);
+        return new Column(clause);
     }
 
     /**
@@ -107,8 +107,8 @@ public abstract class ColumnTemplate {
      */
     public Column avg(String column) {
         addCommaAfterFirstValue();
-        AggregateFunctionAppender.avg(query, column);
-        return new Column(query);
+        AggregateFunctionAppender.avg(clause, column);
+        return new Column(clause);
     }
 
     /**
@@ -122,8 +122,8 @@ public abstract class ColumnTemplate {
      */
     public Column sum(String column) {
         addCommaAfterFirstValue();
-        AggregateFunctionAppender.sum(query, column);
-        return new Column(query);
+        AggregateFunctionAppender.sum(clause, column);
+        return new Column(clause);
     }
 
     protected abstract void addCommaAfterFirstValue();

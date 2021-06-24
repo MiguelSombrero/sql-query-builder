@@ -1,11 +1,11 @@
 package builder.query.select.order;
 
-import query.SelectQuery;
+import query.Clause;
 
 public class Orderer extends Limit {
 
-    public Orderer(SelectQuery query) {
-        super(query);
+    public Orderer(Clause clause) {
+        super(clause);
     }
 
     /**
@@ -15,7 +15,7 @@ public class Orderer extends Limit {
      * append 'column(s)' in ORDER BY clause
      */
     public FirstOrderBy orderBy() {
-        query.append(" ORDER BY ");
-        return new FirstOrderBy(query);
+        clause.append(" ORDER BY ");
+        return new FirstOrderBy(clause);
     }
 }

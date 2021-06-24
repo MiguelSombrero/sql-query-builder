@@ -3,12 +3,12 @@ package builder.query.select.table;
 import builder.clause.Condition;
 import builder.query.select.order.Grouper;
 import builder.appender.StringAppender;
-import query.SelectQuery;
+import query.Clause;
 
 public class JoinTable extends Grouper {
 
-    public JoinTable(SelectQuery query) {
-        super(query);
+    public JoinTable(Clause clause) {
+        super(clause);
     }
 
     /**
@@ -21,9 +21,9 @@ public class JoinTable extends Grouper {
      * GROUP BY statements or proceed further in SQL
      */
     public Grouper where(Condition condition) {
-        query.append(" WHERE ");
-        query.mergeClause(condition.build());
-        return new Grouper(query);
+        clause.append(" WHERE ");
+        clause.mergeClause(condition.build());
+        return new Grouper(clause);
     }
 
     /**
@@ -37,7 +37,7 @@ public class JoinTable extends Grouper {
      * join statement and alias join table
      */
     public On innerJoin(String table) {
-        query.append(" INNER JOIN ");
+        clause.append(" INNER JOIN ");
         return join(table);
     }
 
@@ -52,7 +52,7 @@ public class JoinTable extends Grouper {
      * join statement and alias join table
      */
     public On leftJoin(String table) {
-        query.append(" LEFT JOIN ");
+        clause.append(" LEFT JOIN ");
         return join(table);
     }
 
@@ -67,12 +67,12 @@ public class JoinTable extends Grouper {
      * join statement and alias join table
      */
     public On rightJoin(String table) {
-        query.append(" RIGHT JOIN ");
+        clause.append(" RIGHT JOIN ");
         return join(table);
     }
 
     private On join(String table) {
-        StringAppender.validateAndAppend(query, table);
-        return new On(query);
+        StringAppender.validateAndAppend(clause, table);
+        return new On(clause);
     }
 }

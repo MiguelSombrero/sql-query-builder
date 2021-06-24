@@ -1,15 +1,15 @@
 package builder.query.update;
 
 import builder.appender.ValueAppender;
-import query.UpdateQuery;
+import query.Clause;
 
 import java.math.BigDecimal;
 
 public class Value {
-    private UpdateQuery query;
+    private Clause clause;
 
-    public Value(UpdateQuery query) {
-        this.query = query;
+    public Value(Clause clause) {
+        this.clause = clause;
     }
 
     /**
@@ -23,8 +23,8 @@ public class Value {
      * clause or terminate query building
      */
     public Column setString(String value) {
-        ValueAppender.appendStringParam(query, value);
-        return new Column(query);
+        ValueAppender.appendStringParam(clause, value);
+        return new Column(clause);
     }
 
     /**
@@ -38,8 +38,8 @@ public class Value {
      * clause or terminate query building
      */
     public Column setInt(int value) {
-        ValueAppender.appendIntParam(query, value);
-        return new Column(query);
+        ValueAppender.appendIntParam(clause, value);
+        return new Column(clause);
     }
 
     /**
@@ -53,8 +53,8 @@ public class Value {
      * clause or terminate query building
      */
     public Column setLong(long value) {
-        ValueAppender.appendLongParam(query, value);
-        return new Column(query);
+        ValueAppender.appendLongParam(clause, value);
+        return new Column(clause);
     }
 
     /**
@@ -68,8 +68,8 @@ public class Value {
      * clause or terminate query building
      */
     public Column setDouble(double value) {
-        ValueAppender.appendDoubleParam(query, value);
-        return new Column(query);
+        ValueAppender.appendDoubleParam(clause, value);
+        return new Column(clause);
     }
 
     /**
@@ -83,8 +83,8 @@ public class Value {
      * clause or terminate query building
      */
     public Column setBigDecimal(BigDecimal value) {
-        ValueAppender.appendBigDecimalParam(query, value);
-        return new Column(query);
+        ValueAppender.appendBigDecimalParam(clause, value);
+        return new Column(clause);
     }
 
     /**
@@ -98,8 +98,8 @@ public class Value {
      * clause or terminate query building
      */
     public Column setDate(String value) {
-        ValueAppender.appendDateParam(query, value);
-        return new Column(query);
+        ValueAppender.appendDateParam(clause, value);
+        return new Column(clause);
     }
 
     /**
@@ -113,8 +113,8 @@ public class Value {
      * clause or terminate query building
      */
     public Column setTimestamp(String value) {
-        ValueAppender.appendTimestampParam(query, value);
-        return new Column(query);
+        ValueAppender.appendTimestampParam(clause, value);
+        return new Column(clause);
     }
 
     /**
@@ -128,8 +128,8 @@ public class Value {
      * clause or terminate query building
      */
     public Column setBoolean(boolean value) {
-        ValueAppender.appendBooleanParam(query, value);
-        return new Column(query);
+        ValueAppender.appendBooleanParam(clause, value);
+        return new Column(clause);
     }
 
     /**
@@ -143,7 +143,7 @@ public class Value {
      * clause or terminate query building
      */
     public Column setByteArray(byte[] value) {
-        ValueAppender.appendByteArrayParam(query, value);
-        return new Column(query);
+        ValueAppender.appendByteArrayParam(clause, value);
+        return new Column(clause);
     }
 }

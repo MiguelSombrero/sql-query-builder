@@ -7,8 +7,8 @@ import java.sql.SQLException;
 
 public class DeleteQuery extends SQLQuery<Integer> {
 
-    public DeleteQuery(StringBuilder queryString, DataSource dataSource) {
-        super(queryString, new QueryRunner(dataSource));
+    public DeleteQuery(Clause clause, DataSource dataSource) {
+        super(clause, new QueryRunner(dataSource));
     }
 
     /**
@@ -20,6 +20,6 @@ public class DeleteQuery extends SQLQuery<Integer> {
      */
     @Override
     protected Integer run() throws SQLException {
-        return run.update(this.getQueryString(), this.getParamValues());
+        return run.update(this.clause.getQueryString(), this.getParamValues());
     }
 }

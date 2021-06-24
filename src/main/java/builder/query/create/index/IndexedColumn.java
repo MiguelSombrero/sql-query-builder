@@ -2,13 +2,13 @@ package builder.query.create.index;
 
 import builder.query.create.TerminalCreateOperation;
 import builder.appender.StringAppender;
-import query.CreateQuery;
+import query.Clause;
 
 public class IndexedColumn {
-    private CreateQuery query;
+    private Clause clause;
 
-    public IndexedColumn(CreateQuery query) {
-        this.query = query;
+    public IndexedColumn(Clause clause) {
+        this.clause = clause;
     }
 
     /**
@@ -21,8 +21,8 @@ public class IndexedColumn {
      * to terminate query building and return CreateQuery
      */
     public TerminalCreateOperation columns(String ...listOfColumns) {
-        query.append(" ");
-        StringAppender.validateAndAppendList(query, listOfColumns);
-        return new TerminalCreateOperation(query);
+        clause.append(" ");
+        StringAppender.validateAndAppendList(clause, listOfColumns);
+        return new TerminalCreateOperation(clause);
     }
 }

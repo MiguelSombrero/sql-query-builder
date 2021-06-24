@@ -2,12 +2,12 @@ package builder.query.create.table.foreignkey;
 
 import builder.query.create.TerminalClosingCreateOperation;
 import builder.appender.StringAppender;
-import query.CreateQuery;
+import query.Clause;
 
 public class ForeignKey extends TerminalClosingCreateOperation {
 
-    public ForeignKey(CreateQuery query) {
-        super(query);
+    public ForeignKey(Clause clause) {
+        super(clause);
     }
 
     /**
@@ -20,9 +20,9 @@ public class ForeignKey extends TerminalClosingCreateOperation {
      * REFERENCE to table and column
      */
     public Reference foreignKey(String column) {
-        query.append(", FOREIGN KEY (");
-        StringAppender.validateAndAppend(query, column);
-        query.append(")");
-        return new Reference(query);
+        clause.append(", FOREIGN KEY (");
+        StringAppender.validateAndAppend(clause, column);
+        clause.append(")");
+        return new Reference(clause);
     }
 }

@@ -24,7 +24,7 @@ public class UpdateQueryTest extends DatabaseTestBaseClass {
     @Test
     public void testExecuteAllFieldsUpdate() throws SQLException {
         StringBuilder queryString = new StringBuilder("UPDATE all_types SET id = 100, hash = 8223372036854775806, age = 32.2, price = 15500.99, taxes = 1.6, newdate = '2021-03-01', created = '2021-05-05 20:02:01', active = false, country = 10, model = 'T1000', brand = 'Saab', disclaimer = 'Great car', description = 'Buy this', contract = '64657374696e6720736f6d652076616c7565730a' WHERE id = 12");
-        UpdateQuery query = new UpdateQuery(queryString, dataSource);
+        UpdateQuery query = new UpdateQuery(new SQLClause(queryString), dataSource);
 
         int result = query.execute();
         assertEquals(1, result);
@@ -48,12 +48,14 @@ public class UpdateQueryTest extends DatabaseTestBaseClass {
     @Test
     public void testExecuteParametrizedUpdate() throws SQLException {
         StringBuilder queryString = new StringBuilder("UPDATE person SET firstname = ?, lastname = ? WHERE id = 1");
-        UpdateQuery query = new UpdateQuery(queryString, dataSource);
+        Clause clause = new SQLClause(queryString);
 
         StringColumnValue param1 = new StringColumnValue("Lasse");
         StringColumnValue param2 = new StringColumnValue("Kukkonen");
-        query.addParam(param1);
-        query.addParam(param2);
+        clause.addParam(param1);
+        clause.addParam(param2);
+
+        UpdateQuery query = new UpdateQuery(clause, dataSource);
 
         int result = query.execute();
         assertEquals(1, result);

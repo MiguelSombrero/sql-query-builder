@@ -12,12 +12,12 @@ import java.util.List;
 public class SelectQuery extends SQLQuery<List<Row>> {
     private AbstractListHandler<Row> handler;
 
-    public SelectQuery(StringBuilder queryString, DataSource dataSource) {
-        this(queryString, new QueryRunner(dataSource), new RowHandler());
+    public SelectQuery(Clause clause, DataSource dataSource) {
+        this(clause, new QueryRunner(dataSource), new RowHandler());
     }
 
-    public SelectQuery(StringBuilder queryString, QueryRunner run, AbstractListHandler<Row> handler) {
-        super(queryString, run);
+    public SelectQuery(Clause clause, QueryRunner run, AbstractListHandler<Row> handler) {
+        super(clause, run);
         this.handler = handler;
     }
 
@@ -32,6 +32,6 @@ public class SelectQuery extends SQLQuery<List<Row>> {
      */
     @Override
     protected List<Row> run() throws SQLException {
-        return run.query(this.getQueryString(), handler, this.getParamValues());
+        return run.query(this.clause.getQueryString(), handler, this.getParamValues());
     }
 }

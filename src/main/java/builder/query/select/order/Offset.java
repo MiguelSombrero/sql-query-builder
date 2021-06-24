@@ -2,12 +2,12 @@ package builder.query.select.order;
 
 import builder.appender.ValueAppender;
 import builder.query.select.TerminalSelectOperation;
-import query.SelectQuery;
+import query.Clause;
 
 public class Offset extends TerminalSelectOperation {
 
-    public Offset(SelectQuery query) {
-        super(query);
+    public Offset(Clause clause) {
+        super(clause);
     }
 
     /**
@@ -19,8 +19,8 @@ public class Offset extends TerminalSelectOperation {
      * query
      */
     public TerminalSelectOperation offset(int rows) {
-        query.append(" OFFSET ");
-        ValueAppender.appendIntParam(query, rows);
-        return new TerminalSelectOperation(query);
+        clause.append(" OFFSET ");
+        ValueAppender.appendIntParam(clause, rows);
+        return new TerminalSelectOperation(clause);
     }
 }

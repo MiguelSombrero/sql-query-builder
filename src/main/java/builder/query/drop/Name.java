@@ -1,13 +1,13 @@
 package builder.query.drop;
 
 import builder.appender.StringAppender;
-import query.DropQuery;
+import query.Clause;
 
 public class Name {
-    protected DropQuery query;
+    protected Clause clause;
 
-    public Name(DropQuery query) {
-        this.query = query;
+    public Name(Clause clause) {
+        this.clause = clause;
     }
 
     /**
@@ -20,7 +20,7 @@ public class Name {
      * to terminate DROP query building
      */
     public TerminalDropOperation name(String name) {
-        StringAppender.validateAndAppend(query, name);
-        return new TerminalDropOperation(query);
+        StringAppender.validateAndAppend(clause, name);
+        return new TerminalDropOperation(clause);
     }
 }

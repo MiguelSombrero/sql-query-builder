@@ -1,13 +1,13 @@
 package builder.query.delete;
 
 import builder.appender.StringAppender;
-import query.DeleteQuery;
+import query.Clause;
 
 public class DeleteTable {
-    private DeleteQuery query;
+    private Clause clause;
 
-    public DeleteTable(DeleteQuery query) {
-        this.query = query;
+    public DeleteTable(Clause clause) {
+        this.clause = clause;
     }
 
     /**
@@ -21,7 +21,7 @@ public class DeleteTable {
      * query building
      */
     public Where table(String table) {
-        StringAppender.validateAndAppend(query, table);
-        return new Where(query);
+        StringAppender.validateAndAppend(clause, table);
+        return new Where(clause);
     }
 }

@@ -1,13 +1,13 @@
 package builder.query.create.table.column;
 
-import query.CreateQuery;
+import query.Clause;
 
 public class ColumnType {
 
-    private CreateQuery query;
+    private Clause clause;
 
-    public ColumnType(CreateQuery query) {
-        this.query = query;
+    public ColumnType(Clause clause) {
+        this.clause = clause;
     }
 
     /**
@@ -21,8 +21,8 @@ public class ColumnType {
      * create constraints in selected column
      */
     public Constraint type(String dataType) {
-        query.append(" ");
-        query.append(dataType);
-        return new Constraint(query);
+        clause.append(" ");
+        clause.append(dataType);
+        return new Constraint(clause);
     }
 }

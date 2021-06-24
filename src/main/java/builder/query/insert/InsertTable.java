@@ -1,13 +1,13 @@
 package builder.query.insert;
 
 import builder.appender.StringAppender;
-import query.InsertQuery;
+import query.Clause;
 
 public class InsertTable {
-    private InsertQuery query;
+    private Clause clause;
 
-    public InsertTable(InsertQuery query) {
-        this.query = query;
+    public InsertTable(Clause clause) {
+        this.clause = clause;
     }
 
     /**
@@ -20,8 +20,8 @@ public class InsertTable {
      * insert column(s) into INSERT INTO statement.
      */
     public Insert table(String table) {
-        StringAppender.validateAndAppend(query, table);
-        query.append(" ");
-        return new Insert(query);
+        StringAppender.validateAndAppend(clause, table);
+        clause.append(" ");
+        return new Insert(clause);
     }
 }

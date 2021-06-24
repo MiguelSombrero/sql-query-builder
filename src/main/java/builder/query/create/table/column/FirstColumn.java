@@ -1,13 +1,13 @@
 package builder.query.create.table.column;
 
 import builder.appender.StringAppender;
-import query.CreateQuery;
+import query.Clause;
 
 public class FirstColumn {
-    private CreateQuery query;
+    private Clause clause;
 
-    public FirstColumn(CreateQuery query) {
-        this.query = query;
+    public FirstColumn(Clause clause) {
+        this.clause = clause;
     }
 
     /**
@@ -21,7 +21,7 @@ public class FirstColumn {
      * append column type to selected column
      */
     public ColumnType column(String column) {
-        StringAppender.validateAndAppend(query, column);
-        return new ColumnType(query);
+        StringAppender.validateAndAppend(clause, column);
+        return new ColumnType(clause);
     }
 }

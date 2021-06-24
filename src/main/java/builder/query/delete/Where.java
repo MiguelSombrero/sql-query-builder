@@ -1,11 +1,11 @@
 package builder.query.delete;
 
 import builder.clause.Condition;
-import query.DeleteQuery;
+import query.Clause;
 
 public class Where extends TerminalDeleteOperation {
 
-    public Where(DeleteQuery query) {
+    public Where(Clause query) {
         super(query);
     }
 
@@ -19,8 +19,8 @@ public class Where extends TerminalDeleteOperation {
      * to terminate query building
      */
     public TerminalDeleteOperation where(Condition condition) {
-        query.append(" WHERE ");
-        query.mergeClause(condition.build());
-        return new TerminalDeleteOperation(query);
+        clause.append(" WHERE ");
+        clause.mergeClause(condition.build());
+        return new TerminalDeleteOperation(clause);
     }
 }
