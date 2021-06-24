@@ -47,6 +47,7 @@ public class MySQLIntegrationTest {
         CreateQuery create = sqlQueryBuilder.create()
                 .table("cars")
                 .column("ID").type("INT").primaryKey()
+                //.column("rating").type("SMALLINT")
                 .column("hash").type("BIGINT")
                 .column("age").type("DOUBLE")
                 .column("price").type("DECIMAL(8,2)")
@@ -57,7 +58,6 @@ public class MySQLIntegrationTest {
                 .column("country").type("CHAR(32)")
                 .column("model").type("VARCHAR(32)")
                 .column("brand").type("VARCHAR(64)")
-                .column("disclaimer").type("VARCHAR(128)")
                 .column("description").type("VARCHAR(255)")
                 .column("contract").type("BLOB")
                 .build();
@@ -68,6 +68,7 @@ public class MySQLIntegrationTest {
                 .table("cars")
                 .values()
                     .setInt(1)
+                    //.setShort(Short.valueOf("7"))
                     .setLong(123456789)
                     .setDouble(3.4)
                     .setBigDecimal(BigDecimal.valueOf(123456.78))
@@ -79,7 +80,6 @@ public class MySQLIntegrationTest {
                     .setString("Taunus")
                     .setString("Ford")
                     .setString("Might break")
-                    .setString("Good car")
                     .setByteArray("some file".getBytes(StandardCharsets.UTF_8))
                     .build();
 
@@ -95,6 +95,7 @@ public class MySQLIntegrationTest {
 
         assertEquals(1, result.size());
         assertEquals(1, firstRow.getInteger("id"));
+        //assertEquals(7, firstRow.getShort("rating"));
         assertEquals(123456789, firstRow.getLong("hash"));
         assertEquals(3.4, firstRow.getDouble("age"), 0.1);
         assertEquals(BigDecimal.valueOf(123456.78), firstRow.getBigDecimal("price"));
@@ -105,7 +106,6 @@ public class MySQLIntegrationTest {
         assertEquals("USA", firstRow.getString("country"));
         assertEquals("Taunus", firstRow.getString("model"));
         assertEquals("Ford", firstRow.getString("brand"));
-        assertEquals("Might break", firstRow.getString("disclaimer"));
         assertEquals("Good car", firstRow.getString("description"));
         assertEquals("some file", new String(firstRow.getBytes("contract"), StandardCharsets.UTF_8));
 

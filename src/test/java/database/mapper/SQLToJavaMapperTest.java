@@ -63,6 +63,13 @@ public class SQLToJavaMapperTest {
     }
 
     @Test
+    public void testThatSmallIntMapsToShort() throws SQLException {
+        int type = Types.SMALLINT;
+        Object value = Short.valueOf("1");
+        assertThat(mapper.toJavaType(type, value), instanceOf(ShortColumnValue.class));
+    }
+
+    @Test
     public void testThatBigIntMapsToLong() throws SQLException {
         int type = Types.BIGINT;
         Object value = 12453452L;

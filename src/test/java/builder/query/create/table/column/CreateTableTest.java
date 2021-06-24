@@ -35,12 +35,11 @@ public class CreateTableTest extends DatabaseTestBaseClass {
                 .column("country").type("CHAR(255)")
                 .column("model").type("VARCHAR(32)")
                 .column("brand").type("VARCHAR(64)")
-                .column("disclaimer").type("VARCHAR(128)")
                 .column("description").type("VARCHAR(255)")
                 .column("contract").type("BLOB")
                 .build();
 
-        assertEquals("CREATE TABLE cars (ID INT, hash BIGINT, age DOUBLE, price DECIMAL(8,2), taxes NUMERIC(4,2), date DATE, created TIMESTAMP, active BOOLEAN, country CHAR(255), model VARCHAR(32), brand VARCHAR(64), disclaimer VARCHAR(128), description VARCHAR(255), contract BLOB)", query.toString());
+        assertEquals("CREATE TABLE cars (ID INT, hash BIGINT, age DOUBLE, price DECIMAL(8,2), taxes NUMERIC(4,2), date DATE, created TIMESTAMP, active BOOLEAN, country CHAR(255), model VARCHAR(32), brand VARCHAR(64), description VARCHAR(255), contract BLOB)", query.toString());
 
         query.execute();
         assertThatQueryReturnsRows("SELECT * FROM cars", 0);

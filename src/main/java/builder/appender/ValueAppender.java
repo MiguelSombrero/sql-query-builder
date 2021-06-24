@@ -26,6 +26,11 @@ public class ValueAppender {
         clause.addParam(new IntegerColumnValue(value));
     }
 
+    public static void appendShortParam(Clause clause, short value) {
+        clause.append("?");
+        clause.addParam(new ShortColumnValue(value));
+    }
+
     public static void appendLongParam(Clause clause, long value) {
         clause.append("?");
         clause.addParam(new LongColumnValue(value));

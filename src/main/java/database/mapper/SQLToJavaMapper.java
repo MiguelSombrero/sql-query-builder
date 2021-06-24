@@ -19,6 +19,8 @@ public class SQLToJavaMapper {
                 return new StringColumnValue((String) value);
             case Types.INTEGER:
                 return new IntegerColumnValue((Integer) value);
+            case Types.SMALLINT:
+                return new ShortColumnValue((Short) value);
             case Types.BIGINT:
                 return new LongColumnValue((Long) value);
             case Types.DOUBLE, Types.FLOAT:
@@ -37,8 +39,6 @@ public class SQLToJavaMapper {
                 return new BigDecimalColumnValue((BigDecimal) value);
             case Types.CLOB, Types.NCLOB:
                 throw new UnsupportedOperationException("Should be mapped as byte array");
-            case Types.SMALLINT:
-                throw new UnsupportedOperationException("SmallInt should be mapped as short");
             case Types.ARRAY:
                 throw new UnsupportedOperationException("Array should be mapped as byte array");
             case Types.TIME:

@@ -70,7 +70,7 @@ Add Maven dependency to your project:
     <dependency>
         <groupId>com.github.miguelsombrero</groupId>
         <artifactId>sql-query-builder</artifactId>
-        <version>2.0.2</version>
+        <version>2.0.3</version>
     </dependency>
 
 Check the latest version from [GitHub Packages](https://github.com/MiguelSombrero?tab=packages&repo_name=sql-query-builder)
@@ -97,7 +97,7 @@ Check the latest version from [GitHub Packages](https://github.com/MiguelSombrer
 
 ## Not yet implemented
 - ALTER statements
-- Missing some datatype mappings (SMALLINT, REAL, TIME, ARRAY, CLOB)
+- Missing some datatype mappings (REAL, TIME, ARRAY, CLOB)
 
 ## For developers
 
@@ -115,6 +115,14 @@ Check the latest version from [GitHub Packages](https://github.com/MiguelSombrer
 #### Run unit tests
 
     mvn clean test
+
+#### Generate Javadoc
+
+    mvn javadoc:javadoc
+
+#### Create Javadoc archive for release
+
+    mvn javadoc:jar
 
 #### Create release
 

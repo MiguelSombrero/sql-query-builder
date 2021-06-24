@@ -59,6 +59,24 @@ public class InsertTest extends DatabaseTestBaseClass {
     }
 
     @Test
+    public void testInsertShortValue() throws SQLException {
+        InsertQuery query = sqlQueryBuilder
+                .insert()
+                .table("all_types")
+                .columns("rating")
+                .values()
+                .setShort((short) 4)
+                .build();
+
+        assertEquals("INSERT INTO all_types (rating) VALUES (4)", query.toString());
+
+        int result = query.execute();
+
+        assertEquals(14, result);
+        assertThatQueryReturnsRows("SELECT * FROM all_Types WHERE rating = 4", 1);
+    }
+
+    @Test
     public void testInsertLongValue() throws SQLException {
         InsertQuery query = sqlQueryBuilder
                 .insert()

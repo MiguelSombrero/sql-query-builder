@@ -22,6 +22,13 @@ public class ValueAppenderTest {
     }
 
     @Test
+    public void testAppendShortParam() {
+        SQLClause query = new SQLClause(new StringBuilder());
+        ValueAppender.appendShortParam(query, Short.valueOf("1"));
+        assertEquals("1", query.toString());
+    }
+
+    @Test
     public void testAppendDoubleParam() {
         SQLClause query = new SQLClause(new StringBuilder());
         ValueAppender.appendDoubleParam(query, 1.1);

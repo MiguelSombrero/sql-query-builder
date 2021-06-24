@@ -47,6 +47,8 @@ public class SQLQueryBuilder {
     /**
      * Creates new SELECT TOP 'rows' statement.
      *
+     * @param rows Number of rows to select
+     *
      * @return FirstColumn class which starts SELECT
      * statement builder.
      */

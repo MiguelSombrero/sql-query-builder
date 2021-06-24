@@ -163,7 +163,7 @@ public class Comparison {
     }
 
     /**
-     * Appends '> value' into 'WHERE operand > value' clause.
+     * Appends '{@literal >} value' into 'WHERE operand {@literal >} value' clause.
      *
      * @param value Value to be appended
      *
@@ -178,7 +178,7 @@ public class Comparison {
     }
 
     /**
-     * Appends '> value' into 'WHERE operand > value' clause.
+     * Appends '{@literal >} value' into 'WHERE operand {@literal >} value' clause.
      *
      * @param value Value to be appended
      *
@@ -193,7 +193,7 @@ public class Comparison {
     }
 
     /**
-     * Appends '> value' into 'WHERE operand > value' clause.
+     * Appends '{@literal >} value' into 'WHERE operand {@literal >} value' clause.
      *
      * @param value Value to be appended
      *
@@ -208,7 +208,7 @@ public class Comparison {
     }
 
     /**
-     * Appends '> value' into 'WHERE operand > value' clause.
+     * Appends '{@literal >} value' into 'WHERE operand {@literal >} value' clause.
      *
      * @param value Value to be appended
      *
@@ -223,7 +223,7 @@ public class Comparison {
     }
 
     /**
-     * Appends '> value' into 'WHERE operand > value' clause.
+     * Appends '{@literal >} value' into 'WHERE operand {@literal >} value' clause.
      *
      * @param value Value to be appended
      *
@@ -238,7 +238,7 @@ public class Comparison {
     }
 
     /**
-     * Appends '> value' into 'WHERE operand > value' clause.
+     * Appends '{@literal >} value' into 'WHERE operand {@literal >} value' clause.
      *
      * @param value Value to be appended
      *
@@ -253,8 +253,8 @@ public class Comparison {
     }
 
     /**
-     * Appends '> ANY (select sub-query)' into
-     * 'WHERE operand > ANY (select sub-query)' clause.
+     * Appends '{@literal >} ANY (select sub-query)' into
+     * 'WHERE operand {@literal >} ANY (select sub-query)' clause.
      *
      * @param subQuery SELECT sub-query to be appended. Sub-query
      * can be created with factory class QueryFactory
@@ -271,8 +271,8 @@ public class Comparison {
     }
 
     /**
-     * Appends '> ALL (select sub-query)' into
-     * 'WHERE operand > ALL (select sub-query)' clause.
+     * Appends '{@literal >} ALL (select sub-query)' into
+     * 'WHERE operand {@literal >} ALL (select sub-query)' clause.
      *
      * @param subQuery SELECT sub-query to be appended. Sub-query
      * can be created with factory class QueryFactory
@@ -289,7 +289,7 @@ public class Comparison {
     }
 
     /**
-     * Appends '>= value' into 'WHERE operand >= value' clause.
+     * Appends '{@literal >=} value' into 'WHERE operand {@literal >=} value' clause.
      *
      * @param value Value to be appended
      *
@@ -304,7 +304,7 @@ public class Comparison {
     }
 
     /**
-     * Appends '>= value' into 'WHERE operand >= value' clause.
+     * Appends '{@literal >=} value' into 'WHERE operand {@literal >=} value' clause.
      *
      * @param value Value to be appended
      *
@@ -319,7 +319,7 @@ public class Comparison {
     }
 
     /**
-     * Appends '>= value' into 'WHERE operand >= value' clause.
+     * Appends '{@literal >=} value' into 'WHERE operand {@literal >=} value' clause.
      *
      * @param value Value to be appended
      *
@@ -334,7 +334,7 @@ public class Comparison {
     }
 
     /**
-     * Appends '>= value' into 'WHERE operand >= value' clause.
+     * Appends '{@literal >=} value' into 'WHERE operand {@literal >=} value' clause.
      *
      * @param value Value to be appended
      *
@@ -349,7 +349,7 @@ public class Comparison {
     }
 
     /**
-     * Appends '>= value' into 'WHERE operand >= value' clause.
+     * Appends '{@literal >=} value' into 'WHERE operand {@literal >=} value' clause.
      *
      * @param value Value to be appended
      *
@@ -364,7 +364,7 @@ public class Comparison {
     }
 
     /**
-     * Appends '>= value' into 'WHERE operand >= value' clause.
+     * Appends '{@literal >=} value' into 'WHERE operand {@literal >=} value' clause.
      *
      * @param value Value to be appended
      *
@@ -379,8 +379,8 @@ public class Comparison {
     }
 
     /**
-     * Appends '>= ANY (select sub-query)' into
-     * 'WHERE operand >= ANY (select sub-query)' clause.
+     * Appends '{@literal >=} ANY (select sub-query)' into
+     * 'WHERE operand {@literal >=} ANY (select sub-query)' clause.
      *
      * @param subQuery SELECT sub-query to be appended. Sub-query
      * can be created with factory class QueryFactory
@@ -397,8 +397,8 @@ public class Comparison {
     }
 
     /**
-     * Appends '>= ALL (select sub-query)' into
-     * 'WHERE operand >= ALL (select sub-query)' clause.
+     * Appends '{@literal >=} ALL (select sub-query)' into
+     * 'WHERE operand {@literal >=} ALL (select sub-query)' clause.
      *
      * @param subQuery SELECT sub-query to be appended. Sub-query
      * can be created with factory class QueryFactory
@@ -415,7 +415,7 @@ public class Comparison {
     }
 
     /**
-     * Appends '< value' into 'WHERE operand < value' clause.
+     * Appends '{@literal <} value' into 'WHERE operand {@literal <} value' clause.
      *
      * @param value Value to be appended
      *
@@ -430,7 +430,7 @@ public class Comparison {
     }
 
     /**
-     * Appends '< value' into 'WHERE operand < value' clause.
+     * Appends '{@literal <} value' into 'WHERE operand {@literal <} value' clause.
      *
      * @param value Value to be appended
      *
@@ -445,7 +445,7 @@ public class Comparison {
     }
 
     /**
-     * Appends '< value' into 'WHERE operand < value' clause.
+     * Appends '{@literal <} value' into 'WHERE operand {@literal <} value' clause.
      *
      * @param value Value to be appended
      *
@@ -460,7 +460,7 @@ public class Comparison {
     }
 
     /**
-     * Appends '< value' into 'WHERE operand < value' clause.
+     * Appends '{@literal <} value' into 'WHERE operand {@literal <} value' clause.
      *
      * @param value Value to be appended
      *
@@ -475,7 +475,7 @@ public class Comparison {
     }
 
     /**
-     * Appends '< value' into 'WHERE operand < value' clause.
+     * Appends '{@literal <} value' into 'WHERE operand {@literal <} value' clause.
      *
      * @param value Value to be appended
      *
@@ -490,7 +490,7 @@ public class Comparison {
     }
 
     /**
-     * Appends '< value' into 'WHERE operand < value' clause.
+     * Appends '{@literal <} value' into 'WHERE operand {@literal <} value' clause.
      *
      * @param value Value to be appended
      *
@@ -505,8 +505,8 @@ public class Comparison {
     }
 
     /**
-     * Appends '< ANY (select sub-query)' into
-     * 'WHERE operand < ANY (select sub-query)' clause.
+     * Appends '{@literal <} ANY (select sub-query)' into
+     * 'WHERE operand {@literal <} ANY (select sub-query)' clause.
      *
      * @param subQuery SELECT sub-query to be appended. Sub-query
      * can be created with factory class QueryFactory
@@ -523,8 +523,8 @@ public class Comparison {
     }
 
     /**
-     * Appends '< ALL (select sub-query)' into
-     * 'WHERE operand < ALL (select sub-query)' clause.
+     * Appends '{@literal <} ALL (select sub-query)' into
+     * 'WHERE operand {@literal <} ALL (select sub-query)' clause.
      *
      * @param subQuery SELECT sub-query to be appended. Sub-query
      * can be created with factory class QueryFactory
@@ -541,7 +541,7 @@ public class Comparison {
     }
 
     /**
-     * Appends '<= value' into 'WHERE operand <= value' clause.
+     * Appends '{@literal <=} value' into 'WHERE operand {@literal <=} value' clause.
      *
      * @param value Value to be appended
      *
@@ -556,7 +556,7 @@ public class Comparison {
     }
 
     /**
-     * Appends '<= value' into 'WHERE operand <= value' clause.
+     * Appends '{@literal <=} value' into 'WHERE operand {@literal <=} value' clause.
      *
      * @param value Value to be appended
      *
@@ -571,7 +571,7 @@ public class Comparison {
     }
 
     /**
-     * Appends '<= value' into 'WHERE operand <= value' clause.
+     * Appends '{@literal <=} value' into 'WHERE operand {@literal <=} value' clause.
      *
      * @param value Value to be appended
      *
@@ -586,7 +586,7 @@ public class Comparison {
     }
 
     /**
-     * Appends '<= value' into 'WHERE operand <= value' clause.
+     * Appends '{@literal <=} value' into 'WHERE operand {@literal <=} value' clause.
      *
      * @param value Value to be appended
      *
@@ -601,7 +601,7 @@ public class Comparison {
     }
 
     /**
-     * Appends '<= value' into 'WHERE operand <= value' clause.
+     * Appends '{@literal <=} value' into 'WHERE operand {@literal <=} value' clause.
      *
      * @param value Value to be appended
      *
@@ -616,7 +616,7 @@ public class Comparison {
     }
 
     /**
-     * Appends '<= value' into 'WHERE operand <= value' clause.
+     * Appends '{@literal <=} value' into 'WHERE operand {@literal <=} value' clause.
      *
      * @param value Value to be appended
      *
@@ -631,8 +631,8 @@ public class Comparison {
     }
 
     /**
-     * Appends '<= ANY (select sub-query)' into
-     * 'WHERE operand <= ANY (select sub-query)' clause.
+     * Appends '{@literal <=} ANY (select sub-query)' into
+     * 'WHERE operand {@literal <=} ANY (select sub-query)' clause.
      *
      * @param subQuery SELECT sub-query to be appended. Sub-query
      * can be created with factory class QueryFactory
@@ -649,8 +649,8 @@ public class Comparison {
     }
 
     /**
-     * Appends '<= ALL (select sub-query)' into
-     * 'WHERE operand <= ALL (select sub-query)' clause.
+     * Appends '{@literal <=} ALL (select sub-query)' into
+     * 'WHERE operand {@literal <=} ALL (select sub-query)' clause.
      *
      * @param subQuery SELECT sub-query to be appended. Sub-query
      * can be created with factory class QueryFactory
