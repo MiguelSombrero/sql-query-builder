@@ -15,6 +15,6 @@ jobs:
           distribution: 'adopt'
       - name: Publish package
         run: |
-          mvn clean --batch-mode javadoc:jar deploy -s conf/settings.xml \
+          mvn clean --batch-mode source:jar deploy -s conf/settings.xml \
           -Dgithub.username=${{ secrets.PACKAGES_USER }} \
           -Dgithub.token=${{ secrets.PACKAGES_TOKEN }}

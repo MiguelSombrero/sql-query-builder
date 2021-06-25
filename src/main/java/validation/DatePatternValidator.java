@@ -1,21 +1,23 @@
 package validation;
 
-import java.util.regex.Pattern;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class DatePatternValidator implements Validator<String> {
-    private static final String VALID_DATE_PATTERN = "^(\\d{4})-(\\d{2})-(\\d{2})$";
+    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     public boolean validate(String input) {
         if (input == null) {
             return false;
         }
-        if (!matches(input)) {
+
+        try {
+            LocalDate.parse(input, formatter);
+        } catch (DateTimeParseException e) {
             return false;
         }
-        return true;
-    }
 
-    private boolean matches(String input) {
-        return Pattern.matches(VALID_DATE_PATTERN, input);
+        return true;
     }
 }
