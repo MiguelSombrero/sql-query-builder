@@ -101,7 +101,7 @@ Supported mappings are:
   - Is mapped to Short
 - BIGINT
   - Is mapped to Long
-- DOUBLE, FLOAT
+- DOUBLE, FLOAT, REAL
   - Is mapped to Double
 - BOOLEAN, TINYINT, BIT
   - Is mapped to Boolean

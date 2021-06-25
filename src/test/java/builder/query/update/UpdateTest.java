@@ -144,10 +144,10 @@ public class UpdateTest extends DatabaseTestBaseClass {
     @Test
     public void testUpdateTimestampValue() throws SQLException {
         UpdateQuery query = this.baseQuery
-                .column("birthdate").setTimestamp("1985-01-02 21:04:11.0")
+                .column("birthdate").setTimestamp("1985-01-02 21:04:11.123")
                 .build();
 
-        assertEquals("UPDATE person SET birthdate = '1985-01-02 21:04:11.0'", query.toString());
+        assertEquals("UPDATE person SET birthdate = '1985-01-02 21:04:11.123'", query.toString());
 
         int result = query.execute();
 

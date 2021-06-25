@@ -7,50 +7,50 @@ import static org.junit.Assert.assertTrue;
 
 public class TimestampPatternValidatorTest {
 
-    private TimestampPatternValidator datePatternValidator = new TimestampPatternValidator();
+    private TimestampPatternValidator timeStampPatternValidator = new TimestampPatternValidator();
 
     @Test
-    public void testDoesAcceptDateWithTime() {
-        assertTrue(datePatternValidator.validate("2021-05-15 21:00:00"));
+    public void testDoesAcceptDateTimeWithMilliseconds() {
+        assertTrue(timeStampPatternValidator.validate("2021-05-15 21:00:00.123"));
     }
 
     @Test
-    public void testDoesAcceptDateWithMilliseconds() {
-        assertTrue(datePatternValidator.validate("2021-05-15 21:00:00.5"));
+    public void testDoesNotAcceptTooLongMonths() {
+        assertFalse(timeStampPatternValidator.validate("2021-56-15 21:00:00.000"));
     }
 
     @Test
     public void testDoesNotAcceptTooLongDateWithTime() {
-        assertFalse(datePatternValidator.validate("2021-05-15 21:00:000"));
+        assertFalse(timeStampPatternValidator.validate("2021-05-15 21:00:000.000"));
     }
 
     @Test
     public void testDoesNotAcceptDateWithoutTime() {
-        assertFalse(datePatternValidator.validate("2021-05-15"));
+        assertFalse(timeStampPatternValidator.validate("2021-05-15"));
     }
 
     @Test
     public void testDoesNotAcceptSingleQuotes() {
-        assertFalse(datePatternValidator.validate("'"));
+        assertFalse(timeStampPatternValidator.validate("'"));
     }
 
     @Test
     public void testDoesNotAcceptSemicolon() {
-        assertFalse(datePatternValidator.validate(";"));
+        assertFalse(timeStampPatternValidator.validate(";"));
     }
 
     @Test
     public void testDoesNotAcceptSQLComment() {
-        assertFalse(datePatternValidator.validate("--"));
+        assertFalse(timeStampPatternValidator.validate("--"));
     }
 
     @Test
     public void testDoesNotAcceptEmptyString() {
-        assertFalse(datePatternValidator.validate(""));
+        assertFalse(timeStampPatternValidator.validate(""));
     }
 
     @Test
     public void testDoesNotAcceptNull() {
-        assertFalse(datePatternValidator.validate(null));
+        assertFalse(timeStampPatternValidator.validate(null));
     }
 }

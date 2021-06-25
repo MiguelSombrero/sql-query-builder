@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.Blob;
+import java.sql.Clob;
 import java.sql.SQLException;
 
 public class SQLToJavaConverter {

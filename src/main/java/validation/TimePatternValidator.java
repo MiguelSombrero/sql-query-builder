@@ -1,11 +1,9 @@
 package validation;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 
-public class TimestampPatternValidator implements Validator<String> {
-    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+public class TimePatternValidator implements Validator<String> {
 
     public boolean validate(String input) {
         if (input == null) {
@@ -13,7 +11,7 @@ public class TimestampPatternValidator implements Validator<String> {
         }
 
         try {
-            LocalDateTime.parse(input, formatter);
+            LocalTime.parse(input);
         } catch (DateTimeParseException e) {
             return false;
         }

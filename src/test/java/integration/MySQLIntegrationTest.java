@@ -74,7 +74,7 @@ public class MySQLIntegrationTest {
                     .setBigDecimal(BigDecimal.valueOf(123456.78))
                     .setBigDecimal(BigDecimal.valueOf(11.25))
                     .setDate("2020-02-02")
-                    .setTimestamp("2020-03-03 21:00:02.0")
+                    .setTimestamp("2020-03-03 21:00:02.123")
                     .setBoolean(true)
                     .setString("USA")
                     .setString("Taunus")
@@ -101,7 +101,7 @@ public class MySQLIntegrationTest {
         assertEquals(BigDecimal.valueOf(123456.78), firstRow.getBigDecimal("price"));
         assertEquals(BigDecimal.valueOf(11.25), firstRow.getBigDecimal("taxes"));
         assertEquals("2020-02-02", firstRow.getDate("date").toString());
-        assertEquals("2020-03-03 21:00:02.0", firstRow.getTimestamp("created").toString());
+        assertEquals("2020-03-03 21:00:02.123", firstRow.getTimestamp("created").toString());
         assertEquals(true, firstRow.getBoolean("active"));
         assertEquals("USA", firstRow.getString("country"));
         assertEquals("Taunus", firstRow.getString("model"));
