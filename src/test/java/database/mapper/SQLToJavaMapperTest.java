@@ -91,6 +91,13 @@ public class SQLToJavaMapperTest {
     }
 
     @Test
+    public void testThatRealMapsToDouble() throws SQLException {
+        int type = Types.REAL;
+        Object value = 124.12;
+        assertThat(mapper.toJavaType(type, value), instanceOf(DoubleColumnValue.class));
+    }
+
+    @Test
     public void testThatBooleanMapsToBoolean() throws SQLException {
         int type = Types.BOOLEAN;
         Object value = true;

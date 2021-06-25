@@ -2,7 +2,7 @@ package validation;
 
 import java.util.Arrays;
 
-public class OrValidator implements Validator<Object> {
+public class OrValidator implements Validator<String> {
 
     Validator[] validators;
 
@@ -11,7 +11,7 @@ public class OrValidator implements Validator<Object> {
     }
 
     @Override
-    public boolean validate(Object input) {
+    public boolean validate(String input) {
         return Arrays.stream(validators)
                 .anyMatch(validator -> validator.validate(input));
     }
