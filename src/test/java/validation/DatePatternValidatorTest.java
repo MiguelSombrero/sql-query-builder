@@ -14,6 +14,10 @@ public class DatePatternValidatorTest {
         assertTrue(datePatternValidator.validate("2021-05-15"));
     }
 
+    @Test
+    public void testDoesNotAcceptDateWithTooLongMonths() {
+        assertFalse(datePatternValidator.validate("2021-55-15"));
+    }
 
     @Test
     public void testDoesNotAcceptDateWithTime() {
