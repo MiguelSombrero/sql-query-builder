@@ -20,7 +20,7 @@ public class InsertTest extends DatabaseTestBaseClass {
     @Before
     public void setUp() throws SQLException {
         initializeDatabase();
-        sqlQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getDataSource());
+        sqlQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getH2DataSource());
     }
 
     @Test
@@ -163,6 +163,23 @@ public class InsertTest extends DatabaseTestBaseClass {
         int result = query.execute();
 
         assertEquals(4, result);
+    }
+
+    @Test
+    public void testInsertTimeValue() throws SQLException {
+        InsertQuery query = sqlQueryBuilder
+                .insert()
+                .table("all_types")
+                .columns("clock")
+                .values()
+                .setTime("21:00:04")
+                .build();
+
+        assertEquals("INSERT INTO all_types (clock) VALUES ('21:00:04')", query.toString());
+
+        int result = query.execute();
+
+        assertEquals(14, result);
     }
 
     @Test

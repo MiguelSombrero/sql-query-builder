@@ -13,7 +13,7 @@ public class ForeignKeyValidationTest extends DatabaseTestBaseClass {
     public void setUp() {
         initializeDatabase();
 
-        sqlQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getDataSource());
+        sqlQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getH2DataSource());
     }
 
     @Test(expected = IllegalArgumentException.class)

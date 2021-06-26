@@ -21,7 +21,7 @@ public class ForeignKeyTest extends DatabaseTestBaseClass {
     public void setUp() {
         initializeDatabase();
 
-        sqlQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getDataSource());
+        sqlQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getH2DataSource());
 
         this.baseQuery = sqlQueryBuilder.create()
                 .table("vehicles")

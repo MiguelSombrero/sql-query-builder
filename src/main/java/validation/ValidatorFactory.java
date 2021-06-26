@@ -18,6 +18,10 @@ public class ValidatorFactory {
         return new ExceptionThrowingValidator<>(dateValidator());
     }
 
+    public static Validator<String> exceptionThrowingTimeValidator() {
+        return new ExceptionThrowingValidator<>(timeValidator());
+    }
+
     public static Validator<String> exceptionThrowingTimestampValidator() {
         return new ExceptionThrowingValidator<>(new OrValidator(
                 timestampValidator(), dateTimeValidator()
@@ -42,6 +46,10 @@ public class ValidatorFactory {
 
     public static Validator<String> dateValidator() {
         return new DatePatternValidator();
+    }
+
+    public static Validator<String> timeValidator() {
+        return new TimePatternValidator();
     }
 
     public static Validator<String> dateTimeValidator() {

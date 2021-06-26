@@ -149,6 +149,25 @@ public abstract class ValueTemplate extends TerminalClosingInsertOperation {
      * Validates user input and appends integer 'value(s)'
      * into 'INSERT INTO table VALUE (value(s))' statement.
      *
+     * SQL type TIME maps to Time. Use this method for
+     * setting these values in query.
+     *
+     * @param value Time value to be appended
+     *
+     * @return Value class which can be used to append
+     * value (with comma in front) into 'VALUE (value(s))'
+     * statement
+     */
+    public Value setTime(String value) {
+        addCommaAfterFirstValue();
+        ValueAppender.appendTimeParam(clause, value);
+        return new Value(clause);
+    }
+
+    /**
+     * Validates user input and appends integer 'value(s)'
+     * into 'INSERT INTO table VALUE (value(s))' statement.
+     *
      * SQL type TIMESTAMP maps to Timestamp. Use this method for
      * setting these values in query.
      *

@@ -143,6 +143,24 @@ public class Value {
      * Validates user input and appends integer 'value' into
      * 'UPDATE table SET column = value, ...' statement.
      *
+     * SQL type TIME maps to Time. Use this method for
+     * setting these values in query.
+     *
+     * @param value Time value to be appended in selected column
+     *
+     * @return Column class which can be used to append more
+     * columns into UPDATE statement, proceed to WHERE
+     * clause or terminate query building
+     */
+    public Column setTime(String value) {
+        ValueAppender.appendTimeParam(clause, value);
+        return new Column(clause);
+    }
+
+    /**
+     * Validates user input and appends integer 'value' into
+     * 'UPDATE table SET column = value, ...' statement.
+     *
      * SQL type TIMESTAMP maps to Timestamp. Use this method for
      * setting these values in query.
      *

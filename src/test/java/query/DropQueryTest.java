@@ -2,7 +2,6 @@ package query;
 
 import org.junit.Before;
 import org.junit.Test;
-import query.DropQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 
@@ -15,7 +14,7 @@ public class DropQueryTest extends DatabaseTestBaseClass {
     @Before
     public void setUp() {
         initializeDatabase();
-        dataSource = DatabaseConnection.getDataSource();
+        dataSource = DatabaseConnection.getH2DataSource();
     }
 
     @Test(expected = SQLException.class)

@@ -21,7 +21,7 @@ public class SelectQueryTest extends DatabaseTestBaseClass {
     @Before
     public void setUp() {
         initializeDatabase();
-        dataSource = DatabaseConnection.getDataSource();
+        dataSource = DatabaseConnection.getH2DataSource();
     }
 
     @Test
@@ -39,7 +39,8 @@ public class SelectQueryTest extends DatabaseTestBaseClass {
         assertEquals(13200.50, firstRow.getBigDecimal("price").doubleValue(), 0.01);
         assertEquals(3.4, firstRow.getBigDecimal("taxes").doubleValue(), 0.01);
         assertEquals("2020-02-02", firstRow.getDate("newdate").toString());
-        assertEquals("2020-02-02 22:02:01.0", firstRow.getTimestamp("created").toString());
+        assertEquals("2020-02-02", firstRow.getDate("newdate").toString());
+        assertEquals("22:02:01", firstRow.getTime("clock").toString());
         assertEquals(true, firstRow.getBoolean("active"));
         assertEquals("23", firstRow.getString("country"));
         assertEquals("Taunus", firstRow.getString("model"));

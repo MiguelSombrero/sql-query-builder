@@ -24,7 +24,7 @@ public class PerformanceTest {
 
     @Before
     public void setUp() throws SQLException {
-        sqlQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getDataSource());
+        sqlQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getH2DataSource());
     }
 
     @Test

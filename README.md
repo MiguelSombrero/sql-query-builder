@@ -97,7 +97,7 @@ Check the latest version from [GitHub Packages](https://github.com/MiguelSombrer
 
 ## Not yet implemented
 - ALTER statements
-- Missing some datatype mappings (TIME, ARRAY, CLOB)
+- Missing some datatype mappings (ARRAY, CLOB)
 
 ## For developers
 

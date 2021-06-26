@@ -16,7 +16,7 @@ public class SubQueryAppenderTest {
 
     @Before
     public void setUp() throws SQLException {
-        SQLQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getDataSource());
+        SQLQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getH2DataSource());
     }
 
     @Test

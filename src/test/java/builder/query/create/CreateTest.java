@@ -17,7 +17,7 @@ public class CreateTest extends DatabaseTestBaseClass {
     @Before
     public void setUp() throws SQLException {
         initializeDatabase();
-        sqlQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getDataSource());
+        sqlQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getH2DataSource());
     }
 
     @Test

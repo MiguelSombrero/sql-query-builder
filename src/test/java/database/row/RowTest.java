@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class RowTest extends DatabaseTestBaseClass {
     @Before
     public void setUpQuery() {
         initializeDatabase();
-        sqlQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getDataSource());
+        sqlQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getH2DataSource());
 
         this.baseQuery = sqlQueryBuilder
                 .select()
@@ -40,7 +41,7 @@ public class RowTest extends DatabaseTestBaseClass {
 
         Row firstRow = result.get(0);
 
-        assertEquals(14, firstRow.getColumnCount());
+        assertEquals(15, firstRow.getColumnCount());
     }
 
     @Test
@@ -156,6 +157,15 @@ public class RowTest extends DatabaseTestBaseClass {
         Row firstRow = result.get(0);
 
         assertEquals(Date.valueOf("2020-02-02"), firstRow.getDate("newdate"));
+    }
+
+    @Test
+    public void testGetTime() throws SQLException {
+        List<Row> result = baseQuery.execute();
+
+        Row firstRow = result.get(0);
+
+        assertEquals(Time.valueOf("22:02:01"), firstRow.getTime("clock"));
     }
 
     @Test

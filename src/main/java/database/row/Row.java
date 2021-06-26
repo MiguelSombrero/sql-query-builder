@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.Map;
 
@@ -85,7 +86,7 @@ public class Row {
 
     /**
      * Get double value from column of this row. SQL types
-     * FLOAT and DOUBLE maps to Double. Use this method for fetching
+     * FLOAT, REAL and DOUBLE maps to Double. Use this method for fetching
      * these values from row.
      *
      * @param columnName Column name where value is fetched. If
@@ -155,6 +156,21 @@ public class Row {
      */
     public Date getDate(String columnName) {
         DateColumnValue value = (DateColumnValue) getColumnValue(columnName);
+        return value.getValue();
+    }
+
+    /**
+     * Get Time value from column of this row. SQL type
+     * TIME maps to java.sq.Time. Use this method for fetching
+     * these values from row.
+     *
+     * @param columnName Column name where value is fetched. If
+     * column name is aliased, use alias name instead
+     *
+     * @return java.sql.Time value from column
+     */
+    public Time getTime(String columnName) {
+        TimeColumnValue value = (TimeColumnValue) getColumnValue(columnName);
         return value.getValue();
     }
 

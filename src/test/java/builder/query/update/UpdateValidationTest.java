@@ -15,7 +15,7 @@ public class UpdateValidationTest extends DatabaseTestBaseClass {
     @Before
     public void setUp() {
         initializeDatabase();
-        SQLQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getDataSource());
+        SQLQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getH2DataSource());
 
         this.baseQuery = SQLQueryBuilder
                 .update()

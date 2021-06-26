@@ -119,10 +119,17 @@ public class SQLToJavaMapperTest {
     }
 
     @Test
+    public void testThatTimeMapsToTime() throws SQLException {
+        int type = Types.TIME;
+        Object value = Time.valueOf("21:00:00");
+        assertThat(mapper.toJavaType(type, value), instanceOf(TimeColumnValue.class));
+    }
+
+    @Test
     public void testThatBlobMapsToByteArray() throws SQLException {
         int type = Types.BLOB;
 
-        Connection connection = DatabaseConnection.getConnection();
+        Connection connection = DatabaseConnection.getH2Connection();
 
         Object value = connection.createBlob();
 

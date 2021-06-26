@@ -22,7 +22,7 @@ public class OrderByTest extends DatabaseTestBaseClass {
     public void setUpQuery() {
         initializeDatabase();
 
-        SQLQueryBuilder SQLQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getDataSource());
+        SQLQueryBuilder SQLQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getH2DataSource());
 
         this.baseQuery = SQLQueryBuilder
                 .select()
