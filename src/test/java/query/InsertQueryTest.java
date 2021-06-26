@@ -3,7 +3,6 @@ package query;
 import database.column.StringColumnValue;
 import org.junit.Before;
 import org.junit.Test;
-import query.InsertQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 
@@ -19,12 +18,12 @@ public class InsertQueryTest extends DatabaseTestBaseClass {
     @Before
     public void setUp() {
         initializeDatabase();
-        dataSource = DatabaseConnection.getDataSource();
+        dataSource = DatabaseConnection.getH2DataSource();
     }
 
     @Test
     public void testExecuteAllFieldsInsert() throws SQLException {
-        StringBuilder queryString = new StringBuilder("INSERT INTO all_types VALUES (100, 10, 8223372036854775806, 32.2, 15500.99, 1.6, '2021-03-01', '2021-05-05 20:02:01', true, 10, 'T1000', 'Saab', 'Buy this', '64657374696e6720736f6d652076616c7565730a')");
+        StringBuilder queryString = new StringBuilder("INSERT INTO all_types VALUES (100, 10, 8223372036854775806, 32.2, 15500.99, 1.6, '2021-03-01', '20:02:01', '2021-05-05 20:02:01', true, 10, 'T1000', 'Saab', 'Buy this', '64657374696e6720736f6d652076616c7565730a')");
         InsertQuery query = new InsertQuery(new SQLClause(queryString), dataSource);
 
         int result = query.execute();
@@ -37,6 +36,7 @@ public class InsertQueryTest extends DatabaseTestBaseClass {
         assertThatQueryReturnsRows("SELECT * FROM all_types WHERE price = 15500.99", 1);
         assertThatQueryReturnsRows("SELECT * FROM all_types WHERE taxes = 1.6", 1);
         assertThatQueryReturnsRows("SELECT * FROM all_types WHERE newdate = '2021-03-01'", 1);
+        assertThatQueryReturnsRows("SELECT * FROM all_types WHERE clock = '20:02:01'", 1);
         assertThatQueryReturnsRows("SELECT * FROM all_types WHERE created = '2021-05-05 20:02:01'", 1);
         assertThatQueryReturnsRows("SELECT * FROM all_types WHERE active = true", 2);
         assertThatQueryReturnsRows("SELECT * FROM all_types WHERE country = 10", 1);

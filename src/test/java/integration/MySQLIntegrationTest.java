@@ -1,13 +1,14 @@
 package integration;
 
 import builder.query.SQLQueryBuilder;
-import com.mysql.cj.jdbc.MysqlDataSource;
 import database.row.Row;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import query.*;
+import testutils.DatabaseConnection;
 
+import javax.sql.DataSource;
 import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
@@ -25,10 +26,7 @@ public class MySQLIntegrationTest {
         // Before tests start MySQL container:
         // docker run --name mysql_db -p 3306:3306 -e MYSQL_ROOT_PASSWORD=sa -e MYSQL_DATABASE=test_db -d mysql:latest
 
-        MysqlDataSource dataSource = new MysqlDataSource();
-        dataSource.setURL("jdbc:mysql://localhost:3306/test_db");
-        dataSource.setUser("root");
-        dataSource.setPassword("sa");
+        DataSource dataSource = DatabaseConnection.getMySQLDataSource();
 
         sqlQueryBuilder = new SQLQueryBuilder(dataSource);
 
@@ -47,13 +45,14 @@ public class MySQLIntegrationTest {
         CreateQuery create = sqlQueryBuilder.create()
                 .table("cars")
                 .column("ID").type("INT").primaryKey()
-                //.column("rating").type("SMALLINT")
+                .column("rating").type("SMALLINT")
                 .column("hash").type("BIGINT")
                 .column("age").type("DOUBLE")
                 .column("price").type("DECIMAL(8,2)")
                 .column("taxes").type("NUMERIC(5,2)")
                 .column("date").type("DATE")
-                .column("created").type("TIMESTAMP")
+                .column("clock").type("TIME")
+                .column("created").type("TIMESTAMP(3)")
                 .column("active").type("BOOLEAN")
                 .column("country").type("CHAR(32)")
                 .column("model").type("VARCHAR(32)")
@@ -68,12 +67,13 @@ public class MySQLIntegrationTest {
                 .table("cars")
                 .values()
                     .setInt(1)
-                    //.setShort(Short.valueOf("7"))
+                    .setShort(Short.valueOf("7"))
                     .setLong(123456789)
                     .setDouble(3.4)
                     .setBigDecimal(BigDecimal.valueOf(123456.78))
                     .setBigDecimal(BigDecimal.valueOf(11.25))
                     .setDate("2020-02-02")
+                    .setTime("20:02:02")
                     .setTimestamp("2020-03-03 21:00:02.123")
                     .setBoolean(true)
                     .setString("USA")
@@ -95,18 +95,19 @@ public class MySQLIntegrationTest {
 
         assertEquals(1, result.size());
         assertEquals(1, firstRow.getInteger("id"));
-        //assertEquals(7, firstRow.getShort("rating"));
+        assertEquals(7, firstRow.getShort("rating"));
         assertEquals(123456789, firstRow.getLong("hash"));
         assertEquals(3.4, firstRow.getDouble("age"), 0.1);
         assertEquals(BigDecimal.valueOf(123456.78), firstRow.getBigDecimal("price"));
         assertEquals(BigDecimal.valueOf(11.25), firstRow.getBigDecimal("taxes"));
         assertEquals("2020-02-02", firstRow.getDate("date").toString());
+        assertEquals("20:02:02", firstRow.getTime("clock").toString());
         assertEquals("2020-03-03 21:00:02.123", firstRow.getTimestamp("created").toString());
         assertEquals(true, firstRow.getBoolean("active"));
         assertEquals("USA", firstRow.getString("country"));
         assertEquals("Taunus", firstRow.getString("model"));
         assertEquals("Ford", firstRow.getString("brand"));
-        assertEquals("Good car", firstRow.getString("description"));
+        assertEquals("Might break", firstRow.getString("description"));
         assertEquals("some file", new String(firstRow.getBytes("contract"), StandardCharsets.UTF_8));
 
         UpdateQuery update = sqlQueryBuilder

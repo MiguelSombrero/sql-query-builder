@@ -23,7 +23,7 @@ public class LimitTest extends DatabaseTestBaseClass {
     public void setUpQuery() {
         initializeDatabase();
 
-        this.sqlQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getDataSource());
+        this.sqlQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getH2DataSource());
 
         this.baseQuery = sqlQueryBuilder
                 .select()

@@ -38,7 +38,7 @@ public class DatabaseTestBaseClass {
     }
 
     private static void runScriptFrom(String path) {
-        try (Connection conn = DatabaseConnection.getConnection()) {
+        try (Connection conn = DatabaseConnection.getH2Connection()) {
             Class.forName (dbDriver);
             String query = "RUNSCRIPT FROM '" + path + "';";
             conn.prepareStatement(query).executeLargeUpdate();
@@ -67,7 +67,7 @@ public class DatabaseTestBaseClass {
 
         int rows;
 
-        try (Connection conn = DatabaseConnection.getConnection()) {
+        try (Connection conn = DatabaseConnection.getH2Connection()) {
             statement = conn.prepareStatement(query);
             resultSet = statement.executeQuery();
             resultSet.last();

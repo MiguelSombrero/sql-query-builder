@@ -16,7 +16,7 @@ public class OrderValidationTest extends DatabaseTestBaseClass {
     public void setUpQuery() {
         initializeDatabase();
 
-        SQLQueryBuilder sQLQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getDataSource());
+        SQLQueryBuilder sQLQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getH2DataSource());
 
         this.baseQuery = sQLQueryBuilder
                 .select()

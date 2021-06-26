@@ -2,7 +2,6 @@ package query;
 
 import org.junit.Before;
 import org.junit.Test;
-import query.CreateQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 
@@ -17,7 +16,7 @@ public class CreateQueryTest extends DatabaseTestBaseClass {
     @Before
     public void setUp() {
         initializeDatabase();
-        dataSource = DatabaseConnection.getDataSource();
+        dataSource = DatabaseConnection.getH2DataSource();
     }
 
     @Test

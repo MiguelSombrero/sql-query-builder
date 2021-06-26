@@ -23,7 +23,7 @@ public class NegationTest extends DatabaseTestBaseClass {
     public void setUpQuery() {
         initializeDatabase();
 
-        SQLQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getDataSource());
+        SQLQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getH2DataSource());
 
         this.baseQuery = SQLQueryBuilder
                 .select()

@@ -7,10 +7,12 @@ import validation.ValidatorFactory;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.sql.Time;
 import java.sql.Timestamp;
 
 public class ValueAppender {
     private static Validator<String> timestampValidator = ValidatorFactory.exceptionThrowingTimestampValidator();
+    private static Validator<String> timeValidator = ValidatorFactory.exceptionThrowingTimeValidator();
     private static Validator<String> dateValidator = ValidatorFactory.exceptionThrowingDateValidator();
     private static Validator<String> stringValueValidator = ValidatorFactory.exceptionThrowingStringValueValidator();
     private static Validator<byte[]> byteArrayValidator = ValidatorFactory.exceptionThrowingByteArrayValidator();
@@ -50,6 +52,12 @@ public class ValueAppender {
         dateValidator.validate(value);
         clause.append("?");
         clause.addParam(new DateColumnValue(Date.valueOf(value)));
+    }
+
+    public static void appendTimeParam(Clause clause, String value) {
+        timeValidator.validate(value);
+        clause.append("?");
+        clause.addParam(new TimeColumnValue(Time.valueOf(value)));
     }
 
     public static void appendTimestampParam(Clause clause, String value) {

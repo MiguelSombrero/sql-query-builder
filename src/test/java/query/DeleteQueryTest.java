@@ -3,7 +3,6 @@ package query;
 import database.column.IntegerColumnValue;
 import org.junit.Before;
 import org.junit.Test;
-import query.DeleteQuery;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 
@@ -18,7 +17,7 @@ public class DeleteQueryTest extends DatabaseTestBaseClass {
     @Before
     public void setUp() {
         initializeDatabase();
-        dataSource = DatabaseConnection.getDataSource();
+        dataSource = DatabaseConnection.getH2DataSource();
     }
 
     @Test

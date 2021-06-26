@@ -17,7 +17,7 @@ public class InsertValidationTest extends DatabaseTestBaseClass {
     @Before
     public void setUp() throws SQLException {
         initializeDatabase();
-        SQLQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getDataSource());
+        SQLQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getH2DataSource());
     }
 
     @Test(expected = IllegalArgumentException.class)

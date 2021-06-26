@@ -21,7 +21,7 @@ public class UpdateTest extends DatabaseTestBaseClass {
     @Before
     public void setUp() {
         initializeDatabase();
-        sqlQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getDataSource());
+        sqlQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getH2DataSource());
 
         this.baseQuery = sqlQueryBuilder
                 .update()
@@ -152,6 +152,21 @@ public class UpdateTest extends DatabaseTestBaseClass {
         int result = query.execute();
 
         assertEquals(3, result);
+    }
+
+    @Test
+    public void testUpdateTimesValue() throws SQLException {
+        UpdateQuery query = this.sqlQueryBuilder
+                .update()
+                .table("all_types")
+                .column("clock").setTime("21:04:11")
+                .build();
+
+        assertEquals("UPDATE all_types SET clock = '21:04:11'", query.toString());
+
+        int result = query.execute();
+
+        assertEquals(2, result);
     }
 
     @Test

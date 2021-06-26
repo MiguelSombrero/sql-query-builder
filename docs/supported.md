@@ -107,6 +107,8 @@ Supported mappings are:
   - Is mapped to Boolean
 - DATE
   - Is mapped to java.sql.Date
+- TIME
+  - Is mapper to java.sql.Time
 - TIMESTAMP
   - Is mapped to java.sql.TIMESTAMP
 - BLOB, BINARY, VARBINARY, LONGVARBINARY

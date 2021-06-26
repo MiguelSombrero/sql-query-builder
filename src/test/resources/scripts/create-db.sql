@@ -45,6 +45,7 @@ CREATE TABLE all_types (
     price DECIMAL(8,2),
     taxes NUMERIC(4,2),
     newdate DATE,
+    clock TIME,
     created TIMESTAMP,
     active BOOLEAN,
     country CHAR,

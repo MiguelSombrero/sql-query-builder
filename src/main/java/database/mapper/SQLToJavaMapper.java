@@ -20,7 +20,7 @@ public class SQLToJavaMapper {
             case Types.INTEGER:
                 return new IntegerColumnValue((Integer) value);
             case Types.SMALLINT:
-                return new ShortColumnValue((Short) value);
+                return new ShortColumnValue(Short.valueOf(value.toString()));
             case Types.BIGINT:
                 return new LongColumnValue((Long) value);
             case Types.DOUBLE, Types.FLOAT, Types.REAL:
@@ -29,6 +29,8 @@ public class SQLToJavaMapper {
                 return new BooleanColumnValue((Boolean) value);
             case Types.DATE:
                 return new DateColumnValue((Date) value);
+            case Types.TIME:
+                return new TimeColumnValue((Time) value);
             case Types.TIMESTAMP:
                 return new TimestampColumnValue((Timestamp) value);
             case Types.BLOB:
@@ -41,8 +43,6 @@ public class SQLToJavaMapper {
                 throw new UnsupportedOperationException("Should be mapped as byte array");
             case Types.ARRAY:
                 throw new UnsupportedOperationException("Array should be mapped as array of obejcts");
-            case Types.TIME:
-                throw new UnsupportedOperationException("Time should be mapped as java.sql.Time");
             default:
                 throw new IllegalArgumentException("Could not map SQL type to any Java type");
         }

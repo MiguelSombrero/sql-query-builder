@@ -23,7 +23,7 @@ public class TableTest extends DatabaseTestBaseClass {
     public void setUpQuery() {
         initializeDatabase();
 
-        sqlQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getDataSource());
+        sqlQueryBuilder = new SQLQueryBuilder(DatabaseConnection.getH2DataSource());
 
         this.baseQuery = sqlQueryBuilder
                 .select()
