@@ -47,13 +47,15 @@ public class UpdateQueryTest extends DatabaseTestBaseClass {
 
     @Test
     public void testExecuteParametrizedUpdate() throws SQLException {
-        StringBuilder queryString = new StringBuilder("UPDATE person SET firstname = ?, lastname = ? WHERE id = 1");
+        StringBuilder queryString = new StringBuilder("UPDATE person SET firstname = ");
         Clause clause = new SQLClause(queryString);
 
         StringColumnValue param1 = new StringColumnValue("Lasse");
         StringColumnValue param2 = new StringColumnValue("Kukkonen");
         clause.addParam(param1);
+        clause.append(", lastname = ");
         clause.addParam(param2);
+        clause.append(" WHERE id = 1");
 
         UpdateQuery query = new UpdateQuery(clause, dataSource);
 

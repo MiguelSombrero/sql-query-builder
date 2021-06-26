@@ -30,7 +30,7 @@ Create `SelectQuery` with `SQLQueryBuilder` to execute SQL `SELECT` queries.
             .column("age")
         .from()
             .table("person")
-        .where(valueOf("age").greaterThanInteger(18))
+        .where(ConditionClauseBuilder.valueOf("age").greaterThanInteger(18))
         .build();
 
     logger.info(query.toString());

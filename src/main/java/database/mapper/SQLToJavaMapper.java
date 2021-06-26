@@ -29,9 +29,9 @@ public class SQLToJavaMapper {
                 return new BooleanColumnValue((Boolean) value);
             case Types.DATE:
                 return new DateColumnValue((Date) value);
-            case Types.TIME:
+            case Types.TIME, Types.TIME_WITH_TIMEZONE:
                 return new TimeColumnValue((Time) value);
-            case Types.TIMESTAMP:
+            case Types.TIMESTAMP, Types.TIMESTAMP_WITH_TIMEZONE:
                 return new TimestampColumnValue((Timestamp) value);
             case Types.BLOB:
                 return new ByteArrayColumnValue(convert.blobToByteArray((Blob) value));

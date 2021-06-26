@@ -8,32 +8,14 @@ import java.util.List;
 
 public class StringUtils {
     protected static Logger logger = LoggerFactory.getLogger(StringUtils.class);
-    private static final char QUESTION_MARK = 63;
+    private static final String PARAM_PLACEHOLDER = "?";
 
     public static String replaceQuestionMarksWithParams(String text, List<ColumnValue> params) {
-        StringBuilder replacedText = new StringBuilder();
-        int count = 0;
+        StringBuilder replacedText = new StringBuilder(text);
 
-        for (int i = 0; i < text.length(); i++) {
-            Character character = text.charAt(i);
-
-            if (character == QUESTION_MARK) {
-                ColumnValue value;
-
-                try {
-                    value = params.get(count);
-                } catch (IndexOutOfBoundsException e) {
-                    logger.info("Mismatch in query string and param count");
-                    logger.debug(e.getLocalizedMessage());
-                    throw e;
-                }
-
-                String param = value.toString();
-                replacedText.append(param);
-                count++;
-            } else {
-                replacedText.append(text.substring(i, i + 1));
-            }
+        for (ColumnValue columnValue : params) {
+            int position = replacedText.indexOf(PARAM_PLACEHOLDER);
+            replacedText.replace(position, position + 1, columnValue.toString());
         }
 
         return replacedText.toString();

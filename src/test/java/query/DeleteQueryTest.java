@@ -33,7 +33,7 @@ public class DeleteQueryTest extends DatabaseTestBaseClass {
 
     @Test
     public void testExecuteParametrizedDelete() throws SQLException {
-        StringBuilder queryString = new StringBuilder("DELETE FROM all_types WHERE id = ?");
+        StringBuilder queryString = new StringBuilder("DELETE FROM all_types WHERE id = ");
         Clause clause = new SQLClause(queryString);
 
         IntegerColumnValue param = new IntegerColumnValue(12);

@@ -4,6 +4,7 @@ import database.column.*;
 import org.junit.Test;
 import testutils.DatabaseConnection;
 
+import java.math.BigDecimal;
 import java.nio.charset.StandardCharsets;
 import java.sql.*;
 
@@ -119,8 +120,22 @@ public class SQLToJavaMapperTest {
     }
 
     @Test
+    public void testThatTimestampWithTimezoneMapsToTimestamp() throws SQLException {
+        int type = Types.TIMESTAMP_WITH_TIMEZONE;
+        Object value = Timestamp.valueOf("2020-02-02 21:00:00");
+        assertThat(mapper.toJavaType(type, value), instanceOf(TimestampColumnValue.class));
+    }
+
+    @Test
     public void testThatTimeMapsToTime() throws SQLException {
         int type = Types.TIME;
+        Object value = Time.valueOf("21:00:00");
+        assertThat(mapper.toJavaType(type, value), instanceOf(TimeColumnValue.class));
+    }
+
+    @Test
+    public void testThatTimeWithTimezoneMapsToTime() throws SQLException {
+        int type = Types.TIME_WITH_TIMEZONE;
         Object value = Time.valueOf("21:00:00");
         assertThat(mapper.toJavaType(type, value), instanceOf(TimeColumnValue.class));
     }
@@ -159,20 +174,20 @@ public class SQLToJavaMapperTest {
         assertThat(mapper.toJavaType(type, value), instanceOf(ByteArrayColumnValue.class));
     }
 
-    /*@Test
+    @Test
     public void testThatDecimalMapsToBigDecimal() throws SQLException {
         int type = Types.DECIMAL;
-        Object value = 1234567.89;
+        Object value = BigDecimal.valueOf(1234567.89);
         assertThat(mapper.toJavaType(type, value), instanceOf(BigDecimalColumnValue.class));
     }
 
     @Test
     public void testThatNumericMapsToBigDecimal() throws SQLException {
         int type = Types.NUMERIC;
-        Object value = 1234567.89;
+        Object value = BigDecimal.valueOf(1234567.89);
         assertThat(mapper.toJavaType(type, value), instanceOf(BigDecimalColumnValue.class));
     }
-*/
+
     @Test(expected = IllegalArgumentException.class)
     public void testThatUnknownTypeThrowsException() throws SQLException {
         int type = 2576897;

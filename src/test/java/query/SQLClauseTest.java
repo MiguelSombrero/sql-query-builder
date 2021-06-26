@@ -1,5 +1,6 @@
 package query;
 
+import database.column.ColumnValue;
 import database.column.StringColumnValue;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,7 +19,7 @@ public class SQLClauseTest {
     @Test
     public void testMergeSubQuery() {
         StringBuilder queryString = new StringBuilder("SELECT * FROM person WHERE ");
-        StringBuilder subQueryString = new StringBuilder("firstname = ?");
+        StringBuilder subQueryString = new StringBuilder("firstname = ");
 
         Clause clause = new SQLClause(queryString);
         Clause subClause = new SQLClause(subQueryString);

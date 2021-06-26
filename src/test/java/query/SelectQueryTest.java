@@ -51,7 +51,7 @@ public class SelectQueryTest extends DatabaseTestBaseClass {
 
     @Test
     public void testExecuteParametrizedQuery() throws SQLException {
-        StringBuilder queryString = new StringBuilder("SELECT * FROM person WHERE birthdate > ?");
+        StringBuilder queryString = new StringBuilder("SELECT * FROM person WHERE birthdate > ");
         Clause clause = new SQLClause(queryString);
 
         TimestampColumnValue param = new TimestampColumnValue(Timestamp.valueOf("1980-02-28 21:00:00"));
@@ -96,10 +96,4 @@ public class SelectQueryTest extends DatabaseTestBaseClass {
         assertRowCount(result3, 3);
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
-    public void testExecuteInvalidQueryThrowsSQLException() throws SQLException {
-        StringBuilder queryString = new StringBuilder("SELECT * FROM person WHERE birthdate > ?");
-        SelectQuery query = new SelectQuery(new SQLClause(queryString), dataSource);
-        query.execute();
-    }
 }

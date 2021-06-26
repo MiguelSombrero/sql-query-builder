@@ -11,6 +11,8 @@ import java.util.List;
 public class SQLClause extends SQLStatement implements Clause {
     protected static Logger logger = LoggerFactory.getLogger(SQLClause.class);
 
+    private static final String PARAM = "?";
+
     private List<ColumnValue> params;
 
     public SQLClause(StringBuilder queryString) {
@@ -19,6 +21,7 @@ public class SQLClause extends SQLStatement implements Clause {
     }
 
     public void addParam(ColumnValue param) {
+        append(PARAM);
         this.params.add(param);
     }
 

@@ -48,13 +48,15 @@ public class InsertQueryTest extends DatabaseTestBaseClass {
 
     @Test
     public void testExecuteParametrizedInsert() throws SQLException {
-        StringBuilder queryString = new StringBuilder("INSERT INTO person (firstname, lastname) VALUES (?, ?)");
+        StringBuilder queryString = new StringBuilder("INSERT INTO person (firstname, lastname) VALUES (");
         Clause clause = new SQLClause(queryString);
 
         StringColumnValue param1 = new StringColumnValue("Lasse");
         StringColumnValue param2 = new StringColumnValue("Kukkonen");
         clause.addParam(param1);
+        clause.append(", ");
         clause.addParam(param2);
+        clause.append(")");
 
         InsertQuery query = new InsertQuery(clause, dataSource);
 

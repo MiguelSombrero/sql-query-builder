@@ -19,61 +19,50 @@ public class ValueAppender {
 
     public static void appendStringParam(Clause clause, String value) {
         stringValueValidator.validate(value);
-        clause.append("?");
         clause.addParam(new StringColumnValue(value));
     }
 
     public static void appendIntParam(Clause clause, int value) {
-        clause.append("?");
         clause.addParam(new IntegerColumnValue(value));
     }
 
     public static void appendShortParam(Clause clause, short value) {
-        clause.append("?");
         clause.addParam(new ShortColumnValue(value));
     }
 
     public static void appendLongParam(Clause clause, long value) {
-        clause.append("?");
         clause.addParam(new LongColumnValue(value));
     }
 
     public static void appendDoubleParam(Clause clause, double value) {
-        clause.append("?");
         clause.addParam(new DoubleColumnValue(value));
     }
 
     public static void appendBigDecimalParam(Clause clause, BigDecimal value) {
-        clause.append("?");
         clause.addParam(new BigDecimalColumnValue(value));
     }
 
     public static void appendDateParam(Clause clause, String value) {
         dateValidator.validate(value);
-        clause.append("?");
         clause.addParam(new DateColumnValue(Date.valueOf(value)));
     }
 
     public static void appendTimeParam(Clause clause, String value) {
         timeValidator.validate(value);
-        clause.append("?");
         clause.addParam(new TimeColumnValue(Time.valueOf(value)));
     }
 
     public static void appendTimestampParam(Clause clause, String value) {
         timestampValidator.validate(value);
-        clause.append("?");
         clause.addParam(new TimestampColumnValue(Timestamp.valueOf(value)));
     }
 
     public static void appendBooleanParam(Clause clause, boolean value) {
-        clause.append("?");
         clause.addParam(new BooleanColumnValue(value));
     }
 
     public static void appendByteArrayParam(Clause clause, byte[] value) {
         byteArrayValidator.validate(value);
-        clause.append("?");
         clause.addParam(new ByteArrayColumnValue(value));
     }
 }
