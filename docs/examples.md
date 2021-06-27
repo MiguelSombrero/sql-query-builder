@@ -30,7 +30,7 @@ Create `SelectQuery` with `SQLQueryBuilder` to execute SQL `SELECT` queries.
             .column("age")
         .from()
             .table("person")
-        .where(ConditionClauseBuilder.valueOf("age").greaterThanInteger(18))
+        .where(ConditionStatementBuilder.valueOf("age").greaterThanInteger(18))
         .build();
 
     logger.info(query.toString());
@@ -54,9 +54,9 @@ Execute `SELECT` query and get the results:
 
 #### More complex example with joins
 
-You can import static factory methods from `ConditionClauseBuilder` to create `WHERE` and `HAVING` clauses inside query.
+You can import static factory methods from `ConditionStatementBuilder` to create `WHERE` and `HAVING` clauses inside query.
 
-    import static builder.clause.ConditionClauseBuilder.*;
+    import static builder.statement.ConditionStatementBuilder.*;
 
     SQLQueryBuilder sqlQueryBuilder = new SQLQueryBuilder(datasource);
 

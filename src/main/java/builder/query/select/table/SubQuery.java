@@ -1,12 +1,12 @@
 package builder.query.select.table;
 
 import builder.appender.StringAppender;
-import query.Clause;
+import query.Statement;
 
 public class SubQuery extends JoinTable {
 
-    public SubQuery(Clause clause) {
-        super(clause);
+    public SubQuery(Statement statement) {
+        super(statement);
     }
 
     /**
@@ -19,8 +19,8 @@ public class SubQuery extends JoinTable {
      * more joins or proceed to WHERE, GROUP BY, etc. clauses
      */
     public JoinTable alias(String alias) {
-        clause.append(" AS ");
-        StringAppender.validateAndAppend(clause, alias);
-        return new JoinTable(clause);
+        statement.append(" AS ");
+        StringAppender.validateAndAppend(statement, alias);
+        return new JoinTable(statement);
     }
 }

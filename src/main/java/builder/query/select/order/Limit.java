@@ -2,12 +2,12 @@ package builder.query.select.order;
 
 import builder.appender.ValueAppender;
 import builder.query.select.TerminalSelectOperation;
-import query.Clause;
+import query.Statement;
 
 public class Limit extends TerminalSelectOperation {
 
-    public Limit(Clause clause) {
-        super(clause);
+    public Limit(Statement statement) {
+        super(statement);
     }
 
     /**
@@ -19,8 +19,8 @@ public class Limit extends TerminalSelectOperation {
      * set OFFSET or terminate query
      */
     public Offset limit(int to) {
-        clause.append(" LIMIT ");
-        ValueAppender.appendIntParam(clause, to);
-        return new Offset(clause);
+        statement.append(" LIMIT ");
+        ValueAppender.appendIntParam(statement, to);
+        return new Offset(statement);
     }
 }

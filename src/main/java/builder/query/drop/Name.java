@@ -1,13 +1,13 @@
 package builder.query.drop;
 
 import builder.appender.StringAppender;
-import query.Clause;
+import query.Statement;
 
 public class Name {
-    protected Clause clause;
+    protected Statement statement;
 
-    public Name(Clause clause) {
-        this.clause = clause;
+    public Name(Statement statement) {
+        this.statement = statement;
     }
 
     /**
@@ -20,7 +20,7 @@ public class Name {
      * to terminate DROP query building
      */
     public TerminalDropOperation name(String name) {
-        StringAppender.validateAndAppend(clause, name);
-        return new TerminalDropOperation(clause);
+        StringAppender.validateAndAppend(statement, name);
+        return new TerminalDropOperation(statement);
     }
 }

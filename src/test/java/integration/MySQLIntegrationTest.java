@@ -14,7 +14,7 @@ import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.util.List;
 
-import static builder.clause.ConditionClauseBuilder.valueOf;
+import static builder.statement.ConditionStatementBuilder.valueOf;
 import static org.junit.Assert.assertEquals;
 
 @Ignore("These integration tests is run against live MySQL database container and must be executed manually")

@@ -1,13 +1,13 @@
 package builder.query.select.order;
 
 import builder.appender.StringAppender;
-import query.Clause;
+import query.Statement;
 
 public class GroupBy {
-    private Clause query;
+    private Statement query;
 
-    public GroupBy(Clause clause) {
-        this.query = clause;
+    public GroupBy(Statement statement) {
+        this.query = statement;
     }
 
     /**

@@ -1,6 +1,6 @@
 package builder.appender;
 
-import query.Clause;
+import query.Statement;
 import validation.ValidatorFactory;
 import validation.Validator;
 
@@ -9,14 +9,14 @@ import java.util.Arrays;
 public class StringAppender {
     private static Validator<String> validator = ValidatorFactory.exceptionThrowingNameValidator();
 
-    public static void validateAndAppend(Clause clause, String value) {
+    public static void validateAndAppend(Statement statement, String value) {
         validate(value);
-        clause.append(value);
+        statement.append(value);
     }
 
-    public static void validateAndAppendList(Clause clause, String ...listOfValues) {
+    public static void validateAndAppendList(Statement statement, String ...listOfValues) {
         validateList(listOfValues);
-        appendList(clause, listOfValues);
+        appendList(statement, listOfValues);
     }
 
     private static void validate(String value) {
@@ -27,15 +27,15 @@ public class StringAppender {
         Arrays.stream(columns).forEach(column -> validator.validate(column));
     }
 
-    private static void appendList(Clause clause, String ...list) {
-        clause.append("(");
-        clause.append(list[0]);
+    private static void appendList(Statement statement, String ...list) {
+        statement.append("(");
+        statement.append(list[0]);
 
         for (int i = 1; i < list.length; i++) {
-            clause.append(", ");
-            clause.append(list[i]);
+            statement.append(", ");
+            statement.append(list[i]);
         }
 
-        clause.append(")");
+        statement.append(")");
     }
 }

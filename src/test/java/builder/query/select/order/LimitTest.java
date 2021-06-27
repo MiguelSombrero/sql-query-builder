@@ -12,7 +12,7 @@ import org.junit.Test;
 import java.sql.SQLException;
 import java.util.List;
 
-import static builder.clause.ConditionClauseBuilder.*;
+import static builder.statement.ConditionStatementBuilder.*;
 import static org.junit.Assert.assertEquals;
 
 public class LimitTest extends DatabaseTestBaseClass {

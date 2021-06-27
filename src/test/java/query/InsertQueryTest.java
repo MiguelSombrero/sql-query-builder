@@ -24,7 +24,7 @@ public class InsertQueryTest extends DatabaseTestBaseClass {
     @Test
     public void testExecuteAllFieldsInsert() throws SQLException {
         StringBuilder queryString = new StringBuilder("INSERT INTO all_types VALUES (100, 10, 8223372036854775806, 32.2, 15500.99, 1.6, '2021-03-01', '20:02:01', '2021-05-05 20:02:01', true, 10, 'T1000', 'Saab', 'Buy this', '64657374696e6720736f6d652076616c7565730a')");
-        InsertQuery query = new InsertQuery(new SQLClause(queryString), dataSource);
+        InsertQuery query = new InsertQuery(new SQLStatement(queryString), dataSource);
 
         int result = query.execute();
         assertEquals(100, result);
@@ -49,16 +49,16 @@ public class InsertQueryTest extends DatabaseTestBaseClass {
     @Test
     public void testExecuteParametrizedInsert() throws SQLException {
         StringBuilder queryString = new StringBuilder("INSERT INTO person (firstname, lastname) VALUES (");
-        Clause clause = new SQLClause(queryString);
+        Statement statement = new SQLStatement(queryString);
 
         StringColumnValue param1 = new StringColumnValue("Lasse");
         StringColumnValue param2 = new StringColumnValue("Kukkonen");
-        clause.addParam(param1);
-        clause.append(", ");
-        clause.addParam(param2);
-        clause.append(")");
+        statement.addParam(param1);
+        statement.append(", ");
+        statement.addParam(param2);
+        statement.append(")");
 
-        InsertQuery query = new InsertQuery(clause, dataSource);
+        InsertQuery query = new InsertQuery(statement, dataSource);
 
         int result = query.execute();
         assertEquals(4, result);

@@ -1,10 +1,10 @@
 package builder.query.drop;
 
-import query.Clause;
+import query.Statement;
 
 public class IfExists extends Name {
 
-    public IfExists(Clause query) {
+    public IfExists(Statement query) {
         super(query);
     }
 
@@ -16,7 +16,7 @@ public class IfExists extends Name {
      * to append 'name' in DROP query
      */
     public Name ifExists() {
-        clause.append("IF EXISTS ");
-        return new Name(clause);
+        statement.append("IF EXISTS ");
+        return new Name(statement);
     }
 }

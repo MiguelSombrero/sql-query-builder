@@ -1,13 +1,13 @@
 package builder.query.select.order;
 
-import builder.clause.Condition;
+import builder.statement.Condition;
 import builder.appender.StringAppender;
-import query.Clause;
+import query.Statement;
 
 public class Having extends Orderer {
 
-    public Having(Clause clause) {
-        super(clause);
+    public Having(Statement statement) {
+        super(statement);
     }
 
     /**
@@ -20,8 +20,8 @@ public class Having extends Orderer {
      * or defining HAVING condition to GROUP BY clause
      */
     public Having column(String column) {
-        clause.append(", ");
-        StringAppender.validateAndAppend(clause, column);
+        statement.append(", ");
+        StringAppender.validateAndAppend(statement, column);
         return this;
     }
 
@@ -36,8 +36,8 @@ public class Having extends Orderer {
      * 'ORDER BY' in 'SELECT ... ORDER BY column(s)' statement
      */
     public Orderer having(Condition condition) {
-        clause.append(" HAVING ");
-        clause.mergeClause(condition.build());
-        return new Orderer(clause);
+        statement.append(" HAVING ");
+        statement.mergeStatement(condition.build());
+        return new Orderer(statement);
     }
 }

@@ -1,4 +1,4 @@
-package builder.clause;
+package builder.statement;
 
 import builder.query.SQLQueryBuilder;
 import builder.query.select.table.Table;
@@ -7,7 +7,7 @@ import org.junit.Test;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 
-import static builder.clause.ConditionClauseBuilder.*;
+import static builder.statement.ConditionStatementBuilder.*;
 import static org.junit.Assert.assertEquals;
 
 public class ComparisonValidationTest extends DatabaseTestBaseClass {

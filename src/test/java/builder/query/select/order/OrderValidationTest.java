@@ -7,7 +7,7 @@ import org.junit.Test;
 import testutils.DatabaseConnection;
 import testutils.DatabaseTestBaseClass;
 
-import static builder.clause.ConditionClauseBuilder.count;
+import static builder.statement.ConditionStatementBuilder.count;
 
 public class OrderValidationTest extends DatabaseTestBaseClass {
     private Table baseQuery;

@@ -2,13 +2,13 @@ package builder.query.select.table;
 
 import builder.query.select.SelectQueryBuilder;
 import builder.appender.StringAppender;
-import query.Clause;
+import query.Statement;
 
 public class From {
-    private Clause clause;
+    private Statement statement;
 
-    public From(Clause clause) {
-        this.clause = clause;
+    public From(Statement statement) {
+        this.statement = statement;
     }
 
     /**
@@ -22,8 +22,8 @@ public class From {
      * to WHERE, JOIN, GROUP BY etc. statements
      */
     public Table table(String table) {
-        StringAppender.validateAndAppend(clause, table);
-        return new Table(clause);
+        StringAppender.validateAndAppend(statement, table);
+        return new Table(statement);
     }
 
     /**
@@ -36,9 +36,9 @@ public class From {
      * alias sub-query or proceed to WHERE and JOIN statements
      */
     public SubQuery sub(SelectQueryBuilder subQuery) {
-        clause.append("(");
-        clause.mergeClause(subQuery.build().getClause());
-        clause.append(")");
-        return new SubQuery(clause);
+        statement.append("(");
+        statement.mergeStatement(subQuery.build().getStatement());
+        statement.append(")");
+        return new SubQuery(statement);
     }
 }

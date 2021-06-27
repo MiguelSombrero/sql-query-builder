@@ -1,78 +1,78 @@
 package builder.appender;
 
-import query.Clause;
+import query.Statement;
 
 public class ListValueAppender {
 
-    public static void appendListOfStringParams(Clause clause, String ...listOfValues) {
-        clause.append("(");
-        ValueAppender.appendStringParam(clause, listOfValues[0]);
+    public static void appendListOfStringParams(Statement statement, String ...listOfValues) {
+        statement.append("(");
+        ValueAppender.appendStringParam(statement, listOfValues[0]);
 
         for (int i = 1; i < listOfValues.length; i++) {
-            clause.append(", ");
-            ValueAppender.appendStringParam(clause, listOfValues[i]);
+            statement.append(", ");
+            ValueAppender.appendStringParam(statement, listOfValues[i]);
         }
 
-        clause.append(")");
+        statement.append(")");
     }
 
-    public static void appendListOfDateParams(Clause clause, String ...listOfValues) {
-        clause.append("(");
-        ValueAppender.appendDateParam(clause, listOfValues[0]);
+    public static void appendListOfDateParams(Statement statement, String ...listOfValues) {
+        statement.append("(");
+        ValueAppender.appendDateParam(statement, listOfValues[0]);
 
         for (int i = 1; i < listOfValues.length; i++) {
-            clause.append(", ");
-            ValueAppender.appendDateParam(clause, listOfValues[i]);
+            statement.append(", ");
+            ValueAppender.appendDateParam(statement, listOfValues[i]);
         }
 
-        clause.append(")");
+        statement.append(")");
     }
 
-    public static void appendListOfTimestampParams(Clause clause, String ...listOfValues) {
-        clause.append("(");
-        ValueAppender.appendTimestampParam(clause, listOfValues[0]);
+    public static void appendListOfTimestampParams(Statement statement, String ...listOfValues) {
+        statement.append("(");
+        ValueAppender.appendTimestampParam(statement, listOfValues[0]);
 
         for (int i = 1; i < listOfValues.length; i++) {
-            clause.append(", ");
-            ValueAppender.appendTimestampParam(clause, listOfValues[i]);
+            statement.append(", ");
+            ValueAppender.appendTimestampParam(statement, listOfValues[i]);
         }
 
-        clause.append(")");
+        statement.append(")");
     }
 
-    public static void appendListOfIntParams(Clause clause, int ...listOfValues) {
-        clause.append("(");
-        ValueAppender.appendIntParam(clause, listOfValues[0]);
+    public static void appendListOfIntParams(Statement statement, int ...listOfValues) {
+        statement.append("(");
+        ValueAppender.appendIntParam(statement, listOfValues[0]);
 
         for (int i = 1; i < listOfValues.length; i++) {
-            clause.append(", ");
-            ValueAppender.appendIntParam(clause, listOfValues[i]);
+            statement.append(", ");
+            ValueAppender.appendIntParam(statement, listOfValues[i]);
         }
 
-        clause.append(")");
+        statement.append(")");
     }
 
-    public static void appendListOfLongParams(Clause clause, long ...listOfValues) {
-        clause.append("(");
-        ValueAppender.appendLongParam(clause, listOfValues[0]);
+    public static void appendListOfLongParams(Statement statement, long ...listOfValues) {
+        statement.append("(");
+        ValueAppender.appendLongParam(statement, listOfValues[0]);
 
         for (int i = 1; i < listOfValues.length; i++) {
-            clause.append(", ");
-            ValueAppender.appendLongParam(clause, listOfValues[i]);
+            statement.append(", ");
+            ValueAppender.appendLongParam(statement, listOfValues[i]);
         }
 
-        clause.append(")");
+        statement.append(")");
     }
 
-    public static void appendListOfDoubleParams(Clause clause, double ...listOfValues) {
-        clause.append("(");
-        ValueAppender.appendDoubleParam(clause, listOfValues[0]);
+    public static void appendListOfDoubleParams(Statement statement, double ...listOfValues) {
+        statement.append("(");
+        ValueAppender.appendDoubleParam(statement, listOfValues[0]);
 
         for (int i = 1; i < listOfValues.length; i++) {
-            clause.append(", ");
-            ValueAppender.appendDoubleParam(clause, listOfValues[i]);
+            statement.append(", ");
+            ValueAppender.appendDoubleParam(statement, listOfValues[i]);
         }
 
-        clause.append(")");
+        statement.append(")");
     }
 }

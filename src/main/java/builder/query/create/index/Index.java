@@ -1,13 +1,13 @@
 package builder.query.create.index;
 
 import builder.appender.StringAppender;
-import query.Clause;
+import query.Statement;
 
 public class Index {
-    private Clause clause;
+    private Statement statement;
 
-    public Index(Clause clause) {
-        this.clause = clause;
+    public Index(Statement statement) {
+        this.statement = statement;
     }
 
     /**
@@ -21,8 +21,8 @@ public class Index {
      * table (column(s))' statement
      */
     public IndexedColumn on(String table) {
-        clause.append(" ON ");
-        StringAppender.validateAndAppend(clause, table);
-        return new IndexedColumn(clause);
+        statement.append(" ON ");
+        StringAppender.validateAndAppend(statement, table);
+        return new IndexedColumn(statement);
     }
 }

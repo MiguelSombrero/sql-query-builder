@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 
-import static builder.clause.ConditionClauseBuilder.valueOf;
+import static builder.statement.ConditionStatementBuilder.valueOf;
 import static org.junit.Assert.assertEquals;
 
 public class UpdateTest extends DatabaseTestBaseClass {

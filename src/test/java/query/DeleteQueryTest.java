@@ -23,7 +23,7 @@ public class DeleteQueryTest extends DatabaseTestBaseClass {
     @Test
     public void testExecuteDelete() throws SQLException {
         StringBuilder queryString = new StringBuilder("DELETE FROM all_types WHERE id = 12");
-        DeleteQuery query = new DeleteQuery(new SQLClause(queryString), dataSource);
+        DeleteQuery query = new DeleteQuery(new SQLStatement(queryString), dataSource);
 
         int result = query.execute();
         assertEquals(1, result);
@@ -34,12 +34,12 @@ public class DeleteQueryTest extends DatabaseTestBaseClass {
     @Test
     public void testExecuteParametrizedDelete() throws SQLException {
         StringBuilder queryString = new StringBuilder("DELETE FROM all_types WHERE id = ");
-        Clause clause = new SQLClause(queryString);
+        Statement statement = new SQLStatement(queryString);
 
         IntegerColumnValue param = new IntegerColumnValue(12);
-        clause.addParam(param);
+        statement.addParam(param);
 
-        DeleteQuery query = new DeleteQuery(clause, dataSource);
+        DeleteQuery query = new DeleteQuery(statement, dataSource);
 
         int result = query.execute();
         assertEquals(1, result);

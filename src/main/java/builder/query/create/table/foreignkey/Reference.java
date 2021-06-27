@@ -1,13 +1,13 @@
 package builder.query.create.table.foreignkey;
 
 import builder.appender.StringAppender;
-import query.Clause;
+import query.Statement;
 
 public class Reference {
-    private Clause clause;
+    private Statement statement;
 
-    public Reference(Clause clause) {
-        this.clause = clause;
+    public Reference(Statement statement) {
+        this.statement = statement;
     }
 
     /**
@@ -22,11 +22,11 @@ public class Reference {
      * assing actions on foreign key
      */
     public OnAction references(String column, String ofTable) {
-        clause.append(" REFERENCES ");
-        StringAppender.validateAndAppend(clause, ofTable);
-        clause.append("(");
-        StringAppender.validateAndAppend(clause, column);
-        clause.append(")");
-        return new OnAction(clause);
+        statement.append(" REFERENCES ");
+        StringAppender.validateAndAppend(statement, ofTable);
+        statement.append("(");
+        StringAppender.validateAndAppend(statement, column);
+        statement.append(")");
+        return new OnAction(statement);
     }
 }

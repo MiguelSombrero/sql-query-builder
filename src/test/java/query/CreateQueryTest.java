@@ -22,7 +22,7 @@ public class CreateQueryTest extends DatabaseTestBaseClass {
     @Test
     public void testExecuteAllFieldsCreateTable() throws SQLException {
         StringBuilder queryString = new StringBuilder("CREATE TABLE cars (ID INT, hash BIGINT, age DOUBLE, date DATE, datetime DATETIME, created TIMESTAMP, active BOOLEAN, country CHAR, model VARCHAR(32), brand VARCHAR(64), description VARCHAR(255), contract BLOB)");
-        CreateQuery query = new CreateQuery(new SQLClause(queryString), dataSource);
+        CreateQuery query = new CreateQuery(new SQLStatement(queryString), dataSource);
 
         query.execute();
 

@@ -1,15 +1,15 @@
 package builder.query.update;
 
 import builder.appender.ValueAppender;
-import query.Clause;
+import query.Statement;
 
 import java.math.BigDecimal;
 
 public class Value {
-    private Clause clause;
+    private Statement statement;
 
-    public Value(Clause clause) {
-        this.clause = clause;
+    public Value(Statement statement) {
+        this.statement = statement;
     }
 
     /**
@@ -27,8 +27,8 @@ public class Value {
      * clause or terminate query building
      */
     public Column setString(String value) {
-        ValueAppender.appendStringParam(clause, value);
-        return new Column(clause);
+        ValueAppender.appendStringParam(statement, value);
+        return new Column(statement);
     }
 
     /**
@@ -45,8 +45,8 @@ public class Value {
      * clause or terminate query building
      */
     public Column setInt(int value) {
-        ValueAppender.appendIntParam(clause, value);
-        return new Column(clause);
+        ValueAppender.appendIntParam(statement, value);
+        return new Column(statement);
     }
 
     /**
@@ -63,8 +63,8 @@ public class Value {
      * clause or terminate query building
      */
     public Column setShort(short value) {
-        ValueAppender.appendShortParam(clause, value);
-        return new Column(clause);
+        ValueAppender.appendShortParam(statement, value);
+        return new Column(statement);
     }
 
     /**
@@ -81,8 +81,8 @@ public class Value {
      * clause or terminate query building
      */
     public Column setLong(long value) {
-        ValueAppender.appendLongParam(clause, value);
-        return new Column(clause);
+        ValueAppender.appendLongParam(statement, value);
+        return new Column(statement);
     }
 
     /**
@@ -99,8 +99,8 @@ public class Value {
      * clause or terminate query building
      */
     public Column setDouble(double value) {
-        ValueAppender.appendDoubleParam(clause, value);
-        return new Column(clause);
+        ValueAppender.appendDoubleParam(statement, value);
+        return new Column(statement);
     }
 
     /**
@@ -117,8 +117,8 @@ public class Value {
      * clause or terminate query building
      */
     public Column setBigDecimal(BigDecimal value) {
-        ValueAppender.appendBigDecimalParam(clause, value);
-        return new Column(clause);
+        ValueAppender.appendBigDecimalParam(statement, value);
+        return new Column(statement);
     }
 
     /**
@@ -135,8 +135,8 @@ public class Value {
      * clause or terminate query building
      */
     public Column setDate(String value) {
-        ValueAppender.appendDateParam(clause, value);
-        return new Column(clause);
+        ValueAppender.appendDateParam(statement, value);
+        return new Column(statement);
     }
 
     /**
@@ -153,8 +153,8 @@ public class Value {
      * clause or terminate query building
      */
     public Column setTime(String value) {
-        ValueAppender.appendTimeParam(clause, value);
-        return new Column(clause);
+        ValueAppender.appendTimeParam(statement, value);
+        return new Column(statement);
     }
 
     /**
@@ -171,8 +171,8 @@ public class Value {
      * clause or terminate query building
      */
     public Column setTimestamp(String value) {
-        ValueAppender.appendTimestampParam(clause, value);
-        return new Column(clause);
+        ValueAppender.appendTimestampParam(statement, value);
+        return new Column(statement);
     }
 
     /**
@@ -189,8 +189,8 @@ public class Value {
      * clause or terminate query building
      */
     public Column setBoolean(boolean value) {
-        ValueAppender.appendBooleanParam(clause, value);
-        return new Column(clause);
+        ValueAppender.appendBooleanParam(statement, value);
+        return new Column(statement);
     }
 
     /**
@@ -208,7 +208,7 @@ public class Value {
      * clause or terminate query building
      */
     public Column setByteArray(byte[] value) {
-        ValueAppender.appendByteArrayParam(clause, value);
-        return new Column(clause);
+        ValueAppender.appendByteArrayParam(statement, value);
+        return new Column(statement);
     }
 }

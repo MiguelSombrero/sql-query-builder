@@ -1,14 +1,14 @@
 package builder.query.insert;
 
 import builder.appender.ValueAppender;
-import query.Clause;
+import query.Statement;
 
 import java.math.BigDecimal;
 
 public abstract class ValueTemplate extends TerminalClosingInsertOperation {
 
-    public ValueTemplate(Clause clause) {
-        super(clause);
+    public ValueTemplate(Statement statement) {
+        super(statement);
     }
 
     /**
@@ -27,8 +27,8 @@ public abstract class ValueTemplate extends TerminalClosingInsertOperation {
      */
     public Value setString(String value) {
         addCommaAfterFirstValue();
-        ValueAppender.appendStringParam(clause, value);
-        return new Value(clause);
+        ValueAppender.appendStringParam(statement, value);
+        return new Value(statement);
     }
 
     /**
@@ -46,8 +46,8 @@ public abstract class ValueTemplate extends TerminalClosingInsertOperation {
      */
     public Value setInt(int value) {
         addCommaAfterFirstValue();
-        ValueAppender.appendIntParam(clause, value);
-        return new Value(clause);
+        ValueAppender.appendIntParam(statement, value);
+        return new Value(statement);
     }
 
     /**
@@ -65,8 +65,8 @@ public abstract class ValueTemplate extends TerminalClosingInsertOperation {
      */
     public Value setShort(short value) {
         addCommaAfterFirstValue();
-        ValueAppender.appendShortParam(clause, value);
-        return new Value(clause);
+        ValueAppender.appendShortParam(statement, value);
+        return new Value(statement);
     }
 
     /**
@@ -84,8 +84,8 @@ public abstract class ValueTemplate extends TerminalClosingInsertOperation {
      */
     public Value setLong(long value) {
         addCommaAfterFirstValue();
-        ValueAppender.appendLongParam(clause, value);
-        return new Value(clause);
+        ValueAppender.appendLongParam(statement, value);
+        return new Value(statement);
     }
 
     /**
@@ -103,8 +103,8 @@ public abstract class ValueTemplate extends TerminalClosingInsertOperation {
      */
     public Value setDouble(double value) {
         addCommaAfterFirstValue();
-        ValueAppender.appendDoubleParam(clause, value);
-        return new Value(clause);
+        ValueAppender.appendDoubleParam(statement, value);
+        return new Value(statement);
     }
 
     /**
@@ -122,8 +122,8 @@ public abstract class ValueTemplate extends TerminalClosingInsertOperation {
      */
     public Value setBigDecimal(BigDecimal value) {
         addCommaAfterFirstValue();
-        ValueAppender.appendBigDecimalParam(clause, value);
-        return new Value(clause);
+        ValueAppender.appendBigDecimalParam(statement, value);
+        return new Value(statement);
     }
 
     /**
@@ -141,8 +141,8 @@ public abstract class ValueTemplate extends TerminalClosingInsertOperation {
      */
     public Value setDate(String value) {
         addCommaAfterFirstValue();
-        ValueAppender.appendDateParam(clause, value);
-        return new Value(clause);
+        ValueAppender.appendDateParam(statement, value);
+        return new Value(statement);
     }
 
     /**
@@ -160,8 +160,8 @@ public abstract class ValueTemplate extends TerminalClosingInsertOperation {
      */
     public Value setTime(String value) {
         addCommaAfterFirstValue();
-        ValueAppender.appendTimeParam(clause, value);
-        return new Value(clause);
+        ValueAppender.appendTimeParam(statement, value);
+        return new Value(statement);
     }
 
     /**
@@ -179,8 +179,8 @@ public abstract class ValueTemplate extends TerminalClosingInsertOperation {
      */
     public Value setTimestamp(String value) {
         addCommaAfterFirstValue();
-        ValueAppender.appendTimestampParam(clause, value);
-        return new Value(clause);
+        ValueAppender.appendTimestampParam(statement, value);
+        return new Value(statement);
     }
 
     /**
@@ -198,8 +198,8 @@ public abstract class ValueTemplate extends TerminalClosingInsertOperation {
      */
     public Value setBoolean(boolean value) {
         addCommaAfterFirstValue();
-        ValueAppender.appendBooleanParam(clause, value);
-        return new Value(clause);
+        ValueAppender.appendBooleanParam(statement, value);
+        return new Value(statement);
     }
 
     /**
@@ -218,8 +218,8 @@ public abstract class ValueTemplate extends TerminalClosingInsertOperation {
      */
     public Value setByteArray(byte[] value) {
         addCommaAfterFirstValue();
-        ValueAppender.appendByteArrayParam(clause, value);
-        return new Value(clause);
+        ValueAppender.appendByteArrayParam(statement, value);
+        return new Value(statement);
     }
 
     protected abstract void addCommaAfterFirstValue();

@@ -1,10 +1,10 @@
-package builder.clause;
+package builder.statement;
 
-import query.Clause;
+import query.Statement;
 
 public class Negation extends Comparison {
 
-    public Negation(Clause query) {
+    public Negation(Statement query) {
         super(query);
     }
 
@@ -16,8 +16,8 @@ public class Negation extends Comparison {
      * or terminate query building
      */
     public Comparison not() {
-        clause.appendFront("NOT ");
-        return new Comparison(clause);
+        statement.appendFront("NOT ");
+        return new Comparison(statement);
     }
 
 }

@@ -2,7 +2,7 @@
 
 ## Table of contents
 1. [About the design](#about)
-2. [Query, Clause and Statement](#query)
+2. [Query and Statement](#query)
 3. [WHERE and HAVING](#condition)
 4. [SELECT statement](#select)
 5. [INSERT statement](#insert)
@@ -20,9 +20,10 @@ This design enforces correct SQL syntax when building queries.
 
 **Notice that class diagrams below is missing some classes, methods and relations**, for the sake of simplicity.  
 
-## <a name="query"></a>Query, Clause and Statement
+## <a name="query"></a>Query and Statement
 
-Package `/src/main/java/query` contains classes of `Query`, `Clause` and `Statement` objects. These classes represent SQL statements, clauses and queries that `SQLQueryBuilder` builds.
+Package `/src/main/java/query` contains classes of `Query` and `Statement` objects. Interface `Statement` represent SQL statement, which holds query string and query parameters.
+Interface `Query` and its implementing classes represents SQL query which can be executed against database.
 
 ### Class diagram
 
@@ -30,7 +31,7 @@ Package `/src/main/java/query` contains classes of `Query`, `Clause` and `Statem
 
 ## <a name="condition"></a>WHERE and HAVING conditions
 
-Package `/src/main/java/builder/clause` contains classes of building `WHERE` and `HAVING` clauses.
+Package `/src/main/java/builder/statement` contains classes of building `WHERE` and `HAVING` clauses.
 
 Where and having clauses are used embedded in another SQL query (e.g. SelectQuery) and cannot be executed at its own.
 

@@ -1,13 +1,13 @@
 package builder.appender;
 
 import builder.query.select.SelectQueryBuilder;
-import query.Clause;
+import query.Statement;
 
 public class SubQueryAppender {
 
-    public static void appendSubQuery(Clause clause, SelectQueryBuilder subQuery) {
-        clause.append("(");
-        clause.mergeClause(subQuery.build().getClause());
-        clause.append(")");
+    public static void appendSubQuery(Statement statement, SelectQueryBuilder subQuery) {
+        statement.append("(");
+        statement.mergeStatement(subQuery.build().getStatement());
+        statement.append(")");
     }
 }

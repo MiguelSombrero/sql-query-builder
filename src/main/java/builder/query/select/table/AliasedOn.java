@@ -1,14 +1,14 @@
 package builder.query.select.table;
 
 import builder.appender.StringAppender;
-import query.Clause;
+import query.Statement;
 
 public class AliasedOn {
 
-    protected Clause clause;
+    protected Statement statement;
 
-    public AliasedOn(Clause clause) {
-        this.clause = clause;
+    public AliasedOn(Statement statement) {
+        this.statement = statement;
     }
 
     /**
@@ -23,10 +23,10 @@ public class AliasedOn {
      * more joins or proceed to WHERE, GROUP BY, etc. clauses
      */
     public JoinTable on(String column, String joinColumn) {
-        clause.append(" ON ");
-        StringAppender.validateAndAppend(clause, column);
-        clause.append(" = ");
-        StringAppender.validateAndAppend(clause, joinColumn);
-        return new JoinTable(clause);
+        statement.append(" ON ");
+        StringAppender.validateAndAppend(statement, column);
+        statement.append(" = ");
+        StringAppender.validateAndAppend(statement, joinColumn);
+        return new JoinTable(statement);
     }
 }

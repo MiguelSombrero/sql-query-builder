@@ -8,8 +8,8 @@ import java.sql.SQLException;
 
 public class InsertQuery extends SQLQuery<Integer> {
 
-    public InsertQuery(Clause clause, DataSource dataSource) {
-        super(clause, new QueryRunner(dataSource));
+    public InsertQuery(Statement statement, DataSource dataSource) {
+        super(statement, new QueryRunner(dataSource));
     }
 
     /**
@@ -21,7 +21,7 @@ public class InsertQuery extends SQLQuery<Integer> {
      */
     @Override
     protected Integer run() throws SQLException {
-        return run.insert(this.clause.getQueryString(), new ScalarHandler<Integer>(), this.getParamValues());
+        return run.insert(this.statement.getQueryString(), new ScalarHandler<Integer>(), this.getParamValues());
     }
 
 }

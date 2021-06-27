@@ -1,12 +1,12 @@
 package builder.query.select.table;
 
 import builder.appender.StringAppender;
-import query.Clause;
+import query.Statement;
 
 public class AliasedTable extends JoinTable {
 
-    public AliasedTable(Clause clause) {
-        super(clause);
+    public AliasedTable(Statement statement) {
+        super(statement);
     }
 
     /**
@@ -20,8 +20,8 @@ public class AliasedTable extends JoinTable {
      * to WHERE, JOIN, GROUP BY etc. statements
      */
     public Table table(String table) {
-        clause.append(", ");
-        StringAppender.validateAndAppend(clause, table);
-        return new Table(clause);
+        statement.append(", ");
+        StringAppender.validateAndAppend(statement, table);
+        return new Table(statement);
     }
 }

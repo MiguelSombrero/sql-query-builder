@@ -7,8 +7,8 @@ import java.sql.SQLException;
 
 public class UpdateQuery extends SQLQuery<Integer> {
 
-    public UpdateQuery(Clause clause, DataSource dataSource) {
-        super(clause, new QueryRunner(dataSource));
+    public UpdateQuery(Statement statement, DataSource dataSource) {
+        super(statement, new QueryRunner(dataSource));
     }
 
     /**
@@ -20,6 +20,6 @@ public class UpdateQuery extends SQLQuery<Integer> {
      */
     @Override
     protected Integer run() throws SQLException {
-        return run.update(this.clause.getQueryString(), this.getParamValues());
+        return run.update(this.statement.getQueryString(), this.getParamValues());
     }
 }

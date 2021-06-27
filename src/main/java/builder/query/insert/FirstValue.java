@@ -1,11 +1,11 @@
 package builder.query.insert;
 
-import query.Clause;
+import query.Statement;
 
 public class FirstValue extends ValueTemplate {
 
-    public FirstValue(Clause clause) {
-        super(clause);
+    public FirstValue(Statement statement) {
+        super(statement);
     }
 
     @Override

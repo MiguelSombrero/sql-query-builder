@@ -2,15 +2,15 @@ package builder.query.create;
 
 import builder.query.QueryBuilder;
 import builder.query.SQLQueryBuilder;
-import query.Clause;
+import query.Statement;
 import query.CreateQuery;
 
 public class TerminalClosingCreateOperation implements QueryBuilder {
 
-    protected Clause clause;
+    protected Statement statement;
 
-    public TerminalClosingCreateOperation(Clause clause) {
-        this.clause = clause;
+    public TerminalClosingCreateOperation(Statement statement) {
+        this.statement = statement;
     }
 
     /**
@@ -20,8 +20,8 @@ public class TerminalClosingCreateOperation implements QueryBuilder {
      * execute CREATE queries
      */
     public CreateQuery build() {
-        clause.append(")");
-        CreateQuery query = new CreateQuery(clause, SQLQueryBuilder.getDataSource());
+        statement.append(")");
+        CreateQuery query = new CreateQuery(statement, SQLQueryBuilder.getDataSource());
         return query;
     }
 }

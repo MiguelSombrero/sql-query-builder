@@ -1,6 +1,6 @@
 package builder.query;
 
-import builder.clause.ClauseFactory;
+import builder.statement.StatementFactory;
 import builder.query.create.Create;
 import builder.query.delete.DeleteTable;
 import builder.query.drop.Drop;
@@ -29,8 +29,8 @@ public class SQLQueryBuilder {
      * statement builder.
      */
     public FirstColumn select() {
-        Clause clause = ClauseFactory.createClause("SELECT ");
-        return new FirstColumn(clause);
+        Statement statement = StatementFactory.createStatement("SELECT ");
+        return new FirstColumn(statement);
     }
 
     /**
@@ -40,8 +40,8 @@ public class SQLQueryBuilder {
      * statement builder.
      */
     public FirstColumn selectDistinct() {
-        Clause clause = ClauseFactory.createClause("SELECT DISTINCT ");
-        return new FirstColumn(clause);
+        Statement statement = StatementFactory.createStatement("SELECT DISTINCT ");
+        return new FirstColumn(statement);
     }
 
     /**
@@ -53,8 +53,8 @@ public class SQLQueryBuilder {
      * statement builder.
      */
     public FirstColumn selectTop(int rows) {
-        Clause clause = ClauseFactory.createClause("SELECT TOP " + rows + " ");
-        return new FirstColumn(clause);
+        Statement statement = StatementFactory.createStatement("SELECT TOP " + rows + " ");
+        return new FirstColumn(statement);
     }
 
     /**
@@ -64,8 +64,8 @@ public class SQLQueryBuilder {
      * statement builder.
      */
     public InsertTable insert() {
-        Clause clause = ClauseFactory.createClause("INSERT INTO ");
-        return new InsertTable(clause);
+        Statement statement = StatementFactory.createStatement("INSERT INTO ");
+        return new InsertTable(statement);
     }
 
     /**
@@ -75,8 +75,8 @@ public class SQLQueryBuilder {
      * statement builder.
      */
     public DeleteTable delete() {
-        Clause clause = ClauseFactory.createClause("DELETE FROM ");
-        return new DeleteTable(clause);
+        Statement statement = StatementFactory.createStatement("DELETE FROM ");
+        return new DeleteTable(statement);
     }
 
     /**
@@ -86,8 +86,8 @@ public class SQLQueryBuilder {
      * statement builder.
      */
     public UpdateTable update() {
-        Clause clause = ClauseFactory.createClause("UPDATE ");
-        return new UpdateTable(clause);
+        Statement statement = StatementFactory.createStatement("UPDATE ");
+        return new UpdateTable(statement);
     }
 
     /**
@@ -97,8 +97,8 @@ public class SQLQueryBuilder {
      * statement builder.
      */
     public Create create() {
-        Clause clause = ClauseFactory.createClause("CREATE ");
-        return new Create(clause);
+        Statement statement = StatementFactory.createStatement("CREATE ");
+        return new Create(statement);
     }
 
     /**
@@ -108,7 +108,7 @@ public class SQLQueryBuilder {
      * statement builder.
      */
     public Drop drop() {
-        Clause clause = ClauseFactory.createClause("DROP ");
-        return new Drop(clause);
+        Statement statement = StatementFactory.createStatement("DROP ");
+        return new Drop(statement);
     }
 }

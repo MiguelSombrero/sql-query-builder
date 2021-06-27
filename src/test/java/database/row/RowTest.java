@@ -1,6 +1,6 @@
 package database.row;
 
-import builder.clause.ConditionClauseBuilder;
+import builder.statement.ConditionStatementBuilder;
 import builder.query.SQLQueryBuilder;
 import org.junit.Before;
 import org.junit.Test;
@@ -63,7 +63,7 @@ public class RowTest extends DatabaseTestBaseClass {
                 .from()
                     .table("person")
                 .leftJoin("course").on("person.id", "course.person_id")
-                .where(ConditionClauseBuilder.valueOf("firstname").equalsString("Miika"))
+                .where(ConditionStatementBuilder.valueOf("firstname").equalsString("Miika"))
                 .build();
 
         List<Row> result = query.execute();

@@ -27,7 +27,7 @@ public class SelectQueryTest extends DatabaseTestBaseClass {
     @Test
     public void testExecuteAllFieldsQuery() throws SQLException {
         StringBuilder queryString = new StringBuilder("SELECT * FROM all_types");
-        SelectQuery query = new SelectQuery(new SQLClause(queryString), dataSource);
+        SelectQuery query = new SelectQuery(new SQLStatement(queryString), dataSource);
 
         List<Row> result = query.execute();
 
@@ -52,12 +52,12 @@ public class SelectQueryTest extends DatabaseTestBaseClass {
     @Test
     public void testExecuteParametrizedQuery() throws SQLException {
         StringBuilder queryString = new StringBuilder("SELECT * FROM person WHERE birthdate > ");
-        Clause clause = new SQLClause(queryString);
+        Statement statement = new SQLStatement(queryString);
 
         TimestampColumnValue param = new TimestampColumnValue(Timestamp.valueOf("1980-02-28 21:00:00"));
-        clause.addParam(param);
+        statement.addParam(param);
 
-        SelectQuery query = new SelectQuery(clause, dataSource);
+        SelectQuery query = new SelectQuery(statement, dataSource);
 
         List<Row> result = query.execute();
 
@@ -72,7 +72,7 @@ public class SelectQueryTest extends DatabaseTestBaseClass {
     @Test
     public void testExecuteQueryWithNullReturnValues() throws SQLException {
         StringBuilder queryString = new StringBuilder("SELECT * FROM school WHERE id = 9");
-        SelectQuery query = new SelectQuery(new SQLClause(queryString), dataSource);
+        SelectQuery query = new SelectQuery(new SQLStatement(queryString), dataSource);
 
         List<Row> result = query.execute();
 
@@ -84,7 +84,7 @@ public class SelectQueryTest extends DatabaseTestBaseClass {
     @Test
     public void testQueryCanBeExecutedMultipleTime() throws SQLException {
         StringBuilder queryString = new StringBuilder("SELECT * FROM person");
-        SelectQuery query = new SelectQuery(new SQLClause(queryString), dataSource);
+        SelectQuery query = new SelectQuery(new SQLStatement(queryString), dataSource);
 
         List<Row> result1 = query.execute();
         assertRowCount(result1, 3);

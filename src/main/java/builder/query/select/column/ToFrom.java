@@ -1,13 +1,13 @@
 package builder.query.select.column;
 
 import builder.query.select.table.From;
-import query.Clause;
+import query.Statement;
 
 public class ToFrom {
-    private Clause clause;
+    private Statement statement;
 
-    public ToFrom(Clause clause) {
-        this.clause = clause;
+    public ToFrom(Statement statement) {
+        this.statement = statement;
     }
 
     /**
@@ -17,7 +17,7 @@ public class ToFrom {
      *  or sub-queries in 'FROM table' statement.
      */
     public From from() {
-        clause.append(" FROM ");
-        return new From(clause);
+        statement.append(" FROM ");
+        return new From(statement);
     }
 }

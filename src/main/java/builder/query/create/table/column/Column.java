@@ -2,12 +2,12 @@ package builder.query.create.table.column;
 
 import builder.appender.StringAppender;
 import builder.query.create.table.foreignkey.ForeignKey;
-import query.Clause;
+import query.Statement;
 
 public class Column extends ForeignKey {
 
-    public Column(Clause clause) {
-        super(clause);
+    public Column(Statement statement) {
+        super(statement);
     }
 
     /**
@@ -21,8 +21,8 @@ public class Column extends ForeignKey {
      * append column type to selected column
      */
     public ColumnType column(String column) {
-        clause.append(", ");
-        StringAppender.validateAndAppend(clause, column);
-        return new ColumnType(clause);
+        statement.append(", ");
+        StringAppender.validateAndAppend(statement, column);
+        return new ColumnType(statement);
     }
 }

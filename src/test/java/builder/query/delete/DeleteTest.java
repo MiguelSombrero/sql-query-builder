@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import java.sql.SQLException;
 
-import static builder.clause.ConditionClauseBuilder.valueOf;
+import static builder.statement.ConditionStatementBuilder.valueOf;
 import static org.junit.Assert.assertEquals;
 
 public class DeleteTest extends DatabaseTestBaseClass {

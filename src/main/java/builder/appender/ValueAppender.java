@@ -1,7 +1,7 @@
 package builder.appender;
 
 import database.column.*;
-import query.Clause;
+import query.Statement;
 import validation.Validator;
 import validation.ValidatorFactory;
 
@@ -17,52 +17,52 @@ public class ValueAppender {
     private static Validator<String> stringValueValidator = ValidatorFactory.exceptionThrowingStringValueValidator();
     private static Validator<byte[]> byteArrayValidator = ValidatorFactory.exceptionThrowingByteArrayValidator();
 
-    public static void appendStringParam(Clause clause, String value) {
+    public static void appendStringParam(Statement statement, String value) {
         stringValueValidator.validate(value);
-        clause.addParam(new StringColumnValue(value));
+        statement.addParam(new StringColumnValue(value));
     }
 
-    public static void appendIntParam(Clause clause, int value) {
-        clause.addParam(new IntegerColumnValue(value));
+    public static void appendIntParam(Statement statement, int value) {
+        statement.addParam(new IntegerColumnValue(value));
     }
 
-    public static void appendShortParam(Clause clause, short value) {
-        clause.addParam(new ShortColumnValue(value));
+    public static void appendShortParam(Statement statement, short value) {
+        statement.addParam(new ShortColumnValue(value));
     }
 
-    public static void appendLongParam(Clause clause, long value) {
-        clause.addParam(new LongColumnValue(value));
+    public static void appendLongParam(Statement statement, long value) {
+        statement.addParam(new LongColumnValue(value));
     }
 
-    public static void appendDoubleParam(Clause clause, double value) {
-        clause.addParam(new DoubleColumnValue(value));
+    public static void appendDoubleParam(Statement statement, double value) {
+        statement.addParam(new DoubleColumnValue(value));
     }
 
-    public static void appendBigDecimalParam(Clause clause, BigDecimal value) {
-        clause.addParam(new BigDecimalColumnValue(value));
+    public static void appendBigDecimalParam(Statement statement, BigDecimal value) {
+        statement.addParam(new BigDecimalColumnValue(value));
     }
 
-    public static void appendDateParam(Clause clause, String value) {
+    public static void appendDateParam(Statement statement, String value) {
         dateValidator.validate(value);
-        clause.addParam(new DateColumnValue(Date.valueOf(value)));
+        statement.addParam(new DateColumnValue(Date.valueOf(value)));
     }
 
-    public static void appendTimeParam(Clause clause, String value) {
+    public static void appendTimeParam(Statement statement, String value) {
         timeValidator.validate(value);
-        clause.addParam(new TimeColumnValue(Time.valueOf(value)));
+        statement.addParam(new TimeColumnValue(Time.valueOf(value)));
     }
 
-    public static void appendTimestampParam(Clause clause, String value) {
+    public static void appendTimestampParam(Statement statement, String value) {
         timestampValidator.validate(value);
-        clause.addParam(new TimestampColumnValue(Timestamp.valueOf(value)));
+        statement.addParam(new TimestampColumnValue(Timestamp.valueOf(value)));
     }
 
-    public static void appendBooleanParam(Clause clause, boolean value) {
-        clause.addParam(new BooleanColumnValue(value));
+    public static void appendBooleanParam(Statement statement, boolean value) {
+        statement.addParam(new BooleanColumnValue(value));
     }
 
-    public static void appendByteArrayParam(Clause clause, byte[] value) {
+    public static void appendByteArrayParam(Statement statement, byte[] value) {
         byteArrayValidator.validate(value);
-        clause.addParam(new ByteArrayColumnValue(value));
+        statement.addParam(new ByteArrayColumnValue(value));
     }
 }

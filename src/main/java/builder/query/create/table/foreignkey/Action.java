@@ -1,12 +1,12 @@
 package builder.query.create.table.foreignkey;
 
-import query.Clause;
+import query.Statement;
 
 public class Action {
-    private Clause clause;
+    private Statement statement;
 
-    public Action(Clause clause) {
-        this.clause = clause;
+    public Action(Statement statement) {
+        this.statement = statement;
     }
 
     /**
@@ -18,8 +18,8 @@ public class Action {
      * query building
      */
     public ForeignKey cascade() {
-        clause.append("CASCADE");
-        return new ForeignKey(clause);
+        statement.append("CASCADE");
+        return new ForeignKey(statement);
     }
 
     /**
@@ -31,8 +31,8 @@ public class Action {
      * query building
      */
     public ForeignKey restrict() {
-        clause.append("RESTRICT");
-        return new ForeignKey(clause);
+        statement.append("RESTRICT");
+        return new ForeignKey(statement);
     }
 
     /**
@@ -44,8 +44,8 @@ public class Action {
      * query building
      */
     public ForeignKey setNull() {
-        clause.append("SET NULL");
-        return new ForeignKey(clause);
+        statement.append("SET NULL");
+        return new ForeignKey(statement);
     }
 
     /**
@@ -57,7 +57,7 @@ public class Action {
      * query building
      */
     public ForeignKey setDefault() {
-        clause.append("SET DEFAULT");
-        return new ForeignKey(clause);
+        statement.append("SET DEFAULT");
+        return new ForeignKey(statement);
     }
 }

@@ -1,12 +1,12 @@
 package builder.query.insert;
 
 import builder.appender.StringAppender;
-import query.Clause;
+import query.Statement;
 
 public class Insert extends Column {
 
-    public Insert(Clause clause) {
-        super(clause);
+    public Insert(Statement statement) {
+        super(statement);
     }
 
     /**
@@ -19,8 +19,8 @@ public class Insert extends Column {
      * VALUES or SELECT sub-query to query
      */
     public Column columns(String ...listOfColumns) {
-        StringAppender.validateAndAppendList(clause, listOfColumns);
-        clause.append(" ");
-        return new Column(clause);
+        StringAppender.validateAndAppendList(statement, listOfColumns);
+        statement.append(" ");
+        return new Column(statement);
     }
 }

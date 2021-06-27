@@ -9,11 +9,11 @@ import java.sql.SQLException;
 public abstract class SQLQuery<T> implements Query<T> {
     protected static Logger logger = LoggerFactory.getLogger(SQLQuery.class);
 
-    protected Clause clause;
+    protected Statement statement;
     protected QueryRunner run;
 
-    public SQLQuery(Clause clause, QueryRunner run) {
-        this.clause = clause;
+    public SQLQuery(Statement statement, QueryRunner run) {
+        this.statement = statement;
         this.run = run;
     }
 
@@ -32,18 +32,18 @@ public abstract class SQLQuery<T> implements Query<T> {
     }
 
     protected Object[] getParamValues() {
-        return this.clause.getParams().stream()
+        return this.statement.getParams().stream()
                 .map(columnValue -> columnValue.getValue())
                 .toArray();
     }
 
-    public Clause getClause() {
-        return this.clause;
+    public Statement getStatement() {
+        return this.statement;
     }
 
     @Override
     public String toString() {
-        return this.clause.toString();
+        return this.statement.toString();
     }
 
     protected abstract T run() throws SQLException;

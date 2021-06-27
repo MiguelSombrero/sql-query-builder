@@ -1,13 +1,13 @@
 package builder.query.update;
 
 import builder.appender.StringAppender;
-import query.Clause;
+import query.Statement;
 
 public class FirstColumn {
-    private Clause clause;
+    private Statement statement;
 
-    public FirstColumn(Clause clause) {
-        this.clause = clause;
+    public FirstColumn(Statement statement) {
+        this.statement = statement;
     }
 
     /**
@@ -20,8 +20,8 @@ public class FirstColumn {
      * into selected column
      */
     public Value column(String column) {
-        StringAppender.validateAndAppend(clause, column);
-        clause.append(" = ");
-        return new Value(clause);
+        StringAppender.validateAndAppend(statement, column);
+        statement.append(" = ");
+        return new Value(statement);
     }
 }

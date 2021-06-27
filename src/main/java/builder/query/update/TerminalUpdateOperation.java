@@ -2,15 +2,15 @@ package builder.query.update;
 
 import builder.query.QueryBuilder;
 import builder.query.SQLQueryBuilder;
-import query.Clause;
+import query.Statement;
 import query.UpdateQuery;
 
 public class TerminalUpdateOperation implements QueryBuilder {
 
-    protected Clause clause;
+    protected Statement statement;
 
-    public TerminalUpdateOperation(Clause clause) {
-        this.clause = clause;
+    public TerminalUpdateOperation(Statement statement) {
+        this.statement = statement;
     }
 
     /**
@@ -20,7 +20,7 @@ public class TerminalUpdateOperation implements QueryBuilder {
      * execute UPDATE queries
      */
     public UpdateQuery build() {
-        UpdateQuery query = new UpdateQuery(clause, SQLQueryBuilder.getDataSource());
+        UpdateQuery query = new UpdateQuery(statement, SQLQueryBuilder.getDataSource());
         return query;
     }
 }

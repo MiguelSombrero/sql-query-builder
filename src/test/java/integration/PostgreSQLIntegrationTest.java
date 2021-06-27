@@ -1,12 +1,10 @@
 package integration;
 
 import builder.query.SQLQueryBuilder;
-import com.mysql.cj.jdbc.MysqlDataSource;
 import database.row.Row;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.postgresql.ds.PGSimpleDataSource;
 import query.*;
 import testutils.DatabaseConnection;
 
@@ -16,7 +14,7 @@ import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.util.List;
 
-import static builder.clause.ConditionClauseBuilder.valueOf;
+import static builder.statement.ConditionStatementBuilder.valueOf;
 import static org.junit.Assert.assertEquals;
 
 @Ignore("These integration tests is run against live Postgres database container and must be executed manually")

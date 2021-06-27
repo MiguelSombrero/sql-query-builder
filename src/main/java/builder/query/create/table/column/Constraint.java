@@ -1,10 +1,10 @@
 package builder.query.create.table.column;
 
-import query.Clause;
+import query.Statement;
 
 public class Constraint extends Column {
 
-    public Constraint(Clause query) {
+    public Constraint(Statement query) {
         super(query);
     }
 
@@ -57,7 +57,7 @@ public class Constraint extends Column {
     }
 
     private Constraint appendConstraint(String column) {
-        clause.append(column);
+        statement.append(column);
         return this;
     }
 }

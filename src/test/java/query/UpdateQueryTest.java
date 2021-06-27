@@ -23,7 +23,7 @@ public class UpdateQueryTest extends DatabaseTestBaseClass {
     @Test
     public void testExecuteAllFieldsUpdate() throws SQLException {
         StringBuilder queryString = new StringBuilder("UPDATE all_types SET id = 100, rating = 9, hash = 8223372036854775806, age = 32.2, price = 15500.99, taxes = 1.6, newdate = '2021-03-01', clock = '20:02:01', created = '2021-05-05 20:02:01', active = false, country = 10, model = 'T1000', brand = 'Saab', description = 'Buy this', contract = '64657374696e6720736f6d652076616c7565730a' WHERE id = 12");
-        UpdateQuery query = new UpdateQuery(new SQLClause(queryString), dataSource);
+        UpdateQuery query = new UpdateQuery(new SQLStatement(queryString), dataSource);
 
         int result = query.execute();
         assertEquals(1, result);
@@ -48,16 +48,16 @@ public class UpdateQueryTest extends DatabaseTestBaseClass {
     @Test
     public void testExecuteParametrizedUpdate() throws SQLException {
         StringBuilder queryString = new StringBuilder("UPDATE person SET firstname = ");
-        Clause clause = new SQLClause(queryString);
+        Statement statement = new SQLStatement(queryString);
 
         StringColumnValue param1 = new StringColumnValue("Lasse");
         StringColumnValue param2 = new StringColumnValue("Kukkonen");
-        clause.addParam(param1);
-        clause.append(", lastname = ");
-        clause.addParam(param2);
-        clause.append(" WHERE id = 1");
+        statement.addParam(param1);
+        statement.append(", lastname = ");
+        statement.addParam(param2);
+        statement.append(" WHERE id = 1");
 
-        UpdateQuery query = new UpdateQuery(clause, dataSource);
+        UpdateQuery query = new UpdateQuery(statement, dataSource);
 
         int result = query.execute();
         assertEquals(1, result);

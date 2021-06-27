@@ -1,13 +1,13 @@
 package builder.query.update;
 
-import builder.clause.Condition;
+import builder.statement.Condition;
 import builder.appender.StringAppender;
-import query.Clause;
+import query.Statement;
 
 public class Column extends TerminalUpdateOperation {
 
-    public Column(Clause clause) {
-        super(clause);
+    public Column(Statement statement) {
+        super(statement);
     }
 
     /**
@@ -20,10 +20,10 @@ public class Column extends TerminalUpdateOperation {
      * into selected column
      */
     public Value column(String column) {
-        clause.append(", ");
-        StringAppender.validateAndAppend(clause, column);
-        clause.append(" = ");
-        return new Value(clause);
+        statement.append(", ");
+        StringAppender.validateAndAppend(statement, column);
+        statement.append(" = ");
+        return new Value(statement);
     }
 
     /**
@@ -35,8 +35,8 @@ public class Column extends TerminalUpdateOperation {
      * to terminate query building
      */
     public TerminalUpdateOperation where(Condition condition) {
-        clause.append(" WHERE ");
-        clause.mergeClause(condition.build());
-        return new TerminalUpdateOperation(clause);
+        statement.append(" WHERE ");
+        statement.mergeStatement(condition.build());
+        return new TerminalUpdateOperation(statement);
     }
 }
